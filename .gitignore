@@ -1,0 +1,7 @@
+# Add files to be ignored here
+
+FMTyper.pro.user
+build*
+*.pro.user
+*.o
+Makefile
