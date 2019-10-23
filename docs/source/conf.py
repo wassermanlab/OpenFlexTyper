@@ -15,8 +15,6 @@
 # sys.path.insert(0, os.path.abspath('.'))
 import subprocess
 
-autodoc_mock_imports = ['_tkinter']
-
 # -- Project information -----------------------------------------------------
 
 project = 'OpenFlexTyper'
@@ -29,10 +27,6 @@ release = '1.0'
 
 # -- General configuration ---------------------------------------------------
 
-# Add any Sphinx extension module names here, as strings. They can be
-# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
-# ones.
-extensions = [ 'breathe' ]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -55,8 +49,13 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-subprocess.call('cd ..; doxygen openFlexTyper.cfg', shell=True)
+subprocess.call('cd ..; pip install breathe; doxygen openFlexTyper.cfg', shell=True)
 html_extra_path = ['../build/html']
 master_doc = 'index'
 breathe_projects = { "openFlexTyper": "../doxygen/xml/" }
 breathe_default_project = "openFlexTyper"
+
+# Add any Sphinx extension module names here, as strings. They can be
+# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
+# ones.
+extensions = ['breathe']
