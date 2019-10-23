@@ -11,6 +11,7 @@ Welcome to OpenFlexTyper's documentation!
    :caption: Contents:
 
 .. doxygenindex::
+.. doxygenfunction::
 
 
 
