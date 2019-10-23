@@ -58,3 +58,4 @@ html_extra_path = ['../build/html']
 master_doc = 'index'
 breathe_projects = { "openFlexTyper": "../doxygen/xml/" }
 breathe_default_project = "openFlexTyper"
+autodoc_mock_imports = ['_tkinter']
