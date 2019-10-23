@@ -56,3 +56,4 @@ html_static_path = ['_static']
 
 subprocess.call('cd ..; doxygen openFlexTyper.cfg', shell=True)
 html_extra_path = ['../build/html']
+master_doc = 'index'
