@@ -15,6 +15,8 @@
 # sys.path.insert(0, os.path.abspath('.'))
 import subprocess
 
+autodoc_mock_imports = ['_tkinter']
+
 # -- Project information -----------------------------------------------------
 
 project = 'OpenFlexTyper'
@@ -58,4 +60,3 @@ html_extra_path = ['../build/html']
 master_doc = 'index'
 breathe_projects = { "openFlexTyper": "../doxygen/xml/" }
 breathe_default_project = "openFlexTyper"
-autodoc_mock_imports = ['_tkinter']
