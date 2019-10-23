@@ -49,7 +49,7 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-subprocess.call('cd ..; pip install breathe; doxygen openFlexTyper.cfg', shell=True)
+subprocess.call('cd ..; pip install breathe sphinx; doxygen openFlexTyper.cfg', shell=True)
 html_extra_path = ['../build/html']
 master_doc = 'index'
 breathe_projects = { "openFlexTyper": "../doxygen/xml/" }
