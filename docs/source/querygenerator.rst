@@ -1,4 +1,4 @@
-openFlexTyper
+QueryGenerator
 =============
 
 QueryGenerator

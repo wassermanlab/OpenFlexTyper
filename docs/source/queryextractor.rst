@@ -1,4 +1,4 @@
-openFlexTyper
+QueryExtractor
 =============
 
 QueryExtractor
