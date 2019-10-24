@@ -1,4 +1,4 @@
-openFlexTyper
+IQueryExtractor
 =============
 
 IQueryExtractor.h

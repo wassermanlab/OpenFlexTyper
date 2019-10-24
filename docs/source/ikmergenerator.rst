@@ -1,4 +1,4 @@
-openFlexTyper
+IKmerGenerator
 =============
 
 IKmerGenerator.h

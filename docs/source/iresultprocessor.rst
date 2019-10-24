@@ -1,4 +1,4 @@
-openFlexTyper
+IResultProcessor
 =============
 
 IResultProcessor.h
