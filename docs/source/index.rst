@@ -8,19 +8,36 @@ Welcome to OpenFlexTyper's documentation!
 
 .. toctree::
    :maxdepth: 1
-   :caption: (Introduction)
    :name: sec-general
 
-   interfaces.rst
+.. toctree::
+   :maxdepth: 1
+   :caption: (Interfaces)
+   :name: sec-general
 
+   ifinder.rst
+   ikmergenerator.rst
+   iqueryextractor.rst
+   iresultprocessor.rst
+   istats.rst
+   iutils.rst
+   iwriterbridge.rst
 
-Indices and tables
-==================
+.. toctree::
+   :maxdepth: 1
+   :caption: (Application Programming Interfaces - APIs)
+   :name: sec-general
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
+   finder.rst
+   ftsearch.rst
+   kmergenerator.rst
+   querygenerator.rst
+   queryextractor.rst
+   resultprocessor.rst
+   stats.rst
+   typedefs.rst
+   utils.rst
+   writerbridge.rst
 
 FlexTyper
 =========
@@ -106,3 +123,10 @@ Please contact Project Owners for contributions.
 
 .. _Example of FlexTyper Setting file: ../extras/Setting.ini
 .. _Example of FlexTyper result file: ../extras/Benchmark.tsv
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`search`
