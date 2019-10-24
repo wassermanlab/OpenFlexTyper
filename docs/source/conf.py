@@ -25,7 +25,7 @@ author = 'Alice Kaye, Phillip Richmond, Jacques Kounkou, Tamar AvShalom'
 # The full version, including alpha/beta/rc tags
 release = '1.0'
 
-subprocess.call('doxygen openFlexTyper.cfg', shell=True)
+subprocess.call('pip install breathe sphynx; doxygen openFlexTyper.cfg', shell=True)
 
 # extensions
 
