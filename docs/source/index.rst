@@ -31,7 +31,6 @@ Welcome to OpenFlexTyper's documentation!
    finder.rst
    ftsearch.rst
    kmergenerator.rst
-   querygenerator.rst
    queryextractor.rst
    resultprocessor.rst
    stats.rst
