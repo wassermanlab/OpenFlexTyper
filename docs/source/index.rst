@@ -78,13 +78,8 @@ Getting Started
 ^^^^^^^^^^^^^^^
 
 To get you started with FlexTyper, you can start by creating a
-Setting.ini file. Setting.ini files look like the following, and are a
-convenient resource file used when running FlexTyper.
-
-`Example of FlexTyper Setting file`_
-
-As you can see, the configuration contains all information needed to run
-a search.
+Setting.ini file. An example can be found inside the extras directory
+in the github repository. https://github.com/wassermanlab/OpenFlexTyper
 
 Execution
 ^^^^^^^^^
@@ -116,8 +111,8 @@ Example of searching execution
 
 To use FlexTyper in searching mode, you need you need to create a
 configuration file containing details about the search you want to do. A
-template for the configuration file can be found here `Example of
-FlexTyper Setting file`_ To launch the search, please type de following
+template for the configuration file can be found in extras directory on the github project
+To launch the search, please type de following
 command :
 
 .. code:: bash
@@ -171,7 +166,6 @@ Contribute
 
 Please contact Project Owners for contributions.
 
-.. _Example of FlexTyper Setting file: ../extras/Setting.ini
 Indices and tables
 ==================
 
