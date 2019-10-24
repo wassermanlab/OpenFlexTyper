@@ -1,16 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-///
-/// Copyright (c) 2019, Wasserman lab
-///
-/// FILE        queryextractor.cpp
-///
-/// DESCRIPTION This file contains the definition of the query extractor
-///             class
-///
-/// Initial version @ Godfrain Jacques Kounkou
-///
-////////////////////////////////////////////////////////////////////////
-
 #include "queryextractor.h"
 
 namespace ft {

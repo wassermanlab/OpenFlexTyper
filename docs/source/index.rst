@@ -131,7 +131,7 @@ or
 
    flextyper searching --help
 
-Example of searching indexing
+Example of data indexing
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To use FlexTyper in indexing mode, you need you need to provide a FASTA

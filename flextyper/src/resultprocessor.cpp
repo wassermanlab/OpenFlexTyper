@@ -1,17 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-///
-/// Copyright (c) 2019, Wasserman lab
-///
-/// FILE         resultprocessor.cpp
-///
-/// DESCRIPTION  This file contains the implementation of the result processor
-///              class. Result processor processes results and contains functions
-///              to provide Map of read counts
-///
-/// Initial version
-///
-////////////////////////////////////////////////////////////////////////
-
 #include "resultprocessor.h"
 
 namespace ft {
