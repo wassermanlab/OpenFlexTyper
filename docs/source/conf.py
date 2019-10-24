@@ -17,7 +17,6 @@ import subprocess
 import sphinx_rtd_theme
 
 # -- Project information -----------------------------------------------------
-
 project = 'OpenFlexTyper'
 copyright = '2019, Alice Kaye, Phillip Richmond, Jacques Kounkou, Tamar AvShalom'
 author = 'Alice Kaye, Phillip Richmond, Jacques Kounkou, Tamar AvShalom'
