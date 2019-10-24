@@ -11,7 +11,7 @@ Welcome to OpenFlexTyper's documentation!
    :caption: (Introduction)
    :name: sec-general
 
-   openFlexTyper.rst
+   interfaces.rst
 
 
 Indices and tables
