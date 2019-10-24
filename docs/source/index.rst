@@ -7,12 +7,11 @@ Welcome to OpenFlexTyper's documentation!
 =========================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 1
+   :caption: (Introduction)
+   :name: sec-general
 
-.. doxygenindex::
-.. doxygenfunction::
-
+   openFlexTyper.rst
 
 
 Indices and tables
