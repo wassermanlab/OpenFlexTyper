@@ -75,4 +75,4 @@ subprocess.call('cd ..; pip install breathe sphinx; doxygen openFlexTyper.cfg', 
 # ones.
 breathe_projects = { "openFlexTyper": "./doxygen/xml"}
 breathe_default_project = "openFlexTyper"
-breathe_domain_by_extension = {"h" : "c" : "cpp"}
+breathe_domain_by_extension = {"h" : "c"}
