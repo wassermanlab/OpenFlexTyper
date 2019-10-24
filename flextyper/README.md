@@ -40,22 +40,74 @@ when running FlexTyper.
 
 As you can see, the configuration contains all information needed to run a search.
 
-#### Example of execution
+#### Execution
 
-Launching a search is very easy, just call FlexTyper with the configuration file that your populated.
+FlexTyper provides 2 main features :
+
+- searching, used to search for kmers inside an FmIndex
+- indexing,  used to creates an FmIndex from a FASTA file
 
 ```bash
-./FlexTyper ftsearch_config -c Settings.ini
+./flextyper 
+
+Usage
+ flextyper [feature] [options...]               
+                                                         
+ Features :                                              
+    searching   uses the FmIndex to search               
+    indexing    uses a fasta file to produce the FmIndex 
+                                                         
+ Options  :                                              
+    -h, --help  displays this help                       
+                                                         
+ Example :                                               
+ flextyper searching -h            
 ```
 
-#### Benchmarks
+#### Example of searching execution
 
-To ensure the FlexTyper application runs efficiently on your system, we suggest you to run the Benchmark
-test. The Benchmark test the application against a set of Perfect FmIndex reads.
-After running the Benchmark, you can compare the results and check that, in monothreaded search, the results
-match the following results :
+To use FlexTyper in searching mode, you need you need to create a configuration file containing 
+details about the search you want to do. A template for the configuration file can be found here
+[Example of FlexTyper Setting file](../extras/Setting.ini)
+To launch the search, please type de following command :
 
-[Example of FlexTyper result file](../extras/Benchmark.tsv)
+```bash
+flextyper searching -c Setting.ini
+```
+
+Help can be displayed typing :
+
+```bash
+flextyper searching -h
+```
+
+or 
+
+```bash
+flextyper searching --help
+```
+
+
+#### Example of searching indexing
+
+To use FlexTyper in indexing mode, you need you need to provide a FASTA file.
+
+
+```bash
+flextyper indexing -f input.fasta -o . -x input.fm9
+```
+
+Help can be displayed typing :
+
+```bash
+flextyper indexing -h
+```
+
+or 
+
+```bash
+flextyper indexing --help
+```
 
 #### Bug Reporting
 
@@ -66,3 +118,4 @@ To report, please provide a screenshot and a set of logs compressed, and open an
 #### Contribute
 
 Please contact Project Owners for contributions.
+
