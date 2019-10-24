@@ -25,6 +25,8 @@ author = 'Alice Kaye, Phillip Richmond, Jacques Kounkou, Tamar AvShalom'
 # The full version, including alpha/beta/rc tags
 release = '1.0'
 
+subprocess.call('doxygen openFlexTyper.cfg', shell=True)
+
 # extensions
 
 extensions = [
@@ -39,6 +41,13 @@ extensions = [
     'sphinx.ext.githubpages',
     'breathe',
 ]
+
+# Add any Sphinx extension module names here, as strings. They can be
+# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
+# ones.
+breathe_projects = { "openFlexTyper": "./doxygen/xml"}
+breathe_default_project = "openFlexTyper"
+breathe_domain_by_extension = {"h" : "c"}
 
 # -- General configuration ---------------------------------------------------
 
@@ -68,11 +77,4 @@ html_static_path = ['_static']
 html_extra_path = ['../build/html']
 master_doc = 'index'
 
-subprocess.call('cd ..; pip install breathe sphinx; doxygen openFlexTyper.cfg', shell=True)
 
-# Add any Sphinx extension module names here, as strings. They can be
-# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
-# ones.
-breathe_projects = { "openFlexTyper": "./doxygen/xml"}
-breathe_default_project = "openFlexTyper"
-breathe_domain_by_extension = {"h" : "c"}
