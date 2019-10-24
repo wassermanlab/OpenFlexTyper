@@ -30,6 +30,7 @@ subprocess.call('pip install breathe sphynx; doxygen openFlexTyper.cfg', shell=T
 # extensions
 
 extensions = [
+    'breathe',
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
@@ -39,7 +40,6 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
-    'breathe',
 ]
 
 # Add any Sphinx extension module names here, as strings. They can be
