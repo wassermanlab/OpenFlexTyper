@@ -1,4 +1,4 @@
-WriterBridge
+IWriterBridge
 =============
 
 IWriterBridge
