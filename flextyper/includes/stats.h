@@ -1,17 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-///
-/// Copyright (c) 2019, Wasserman lab
-///
-/// FILE        stats.h
-///
-/// DESCRIPTION This file contains the declaration of stats.h, it contains
-///             all functions necessary to generate some stats or related
-///             stats contents
-///
-/// Initial version @
-///
-////////////////////////////////////////////////////////////////////////
-
 #ifndef __STATS_H__
 #define __STATS_H__
 
@@ -24,6 +10,13 @@
 namespace fs = std::experimental::filesystem;
 
 namespace ft {
+////////////////////////////////////////////////////////////////////////
+/// \copyright Copyright (c) 2019, Wasserman lab
+/// \author    Godfrain Jacques Kounkou
+/// \brief This file contains the declaration of stats.h, it contains
+///             all functions necessary to generate some stats or related
+///             stats contents
+////////////////////////////////////////////////////////////////////////
 class Stats : public IStats {
 public:
     ////////////////////////////////////////////////////////////////////////

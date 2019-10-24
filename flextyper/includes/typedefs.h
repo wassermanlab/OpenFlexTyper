@@ -1,15 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-///
-/// Copyright (c) 2019, Wasserman lab
-///
-/// FILE type_definition.h
-///
-/// DESCRIPTION This file contains the type definitions
-///
-/// Initial version @ Godfrain Jacques Kounkou
-///
-////////////////////////////////////////////////////////////////////////
-
 #ifndef __TYPE_DEFS_H__
 #define __TYPE_DEFS_H__
 
