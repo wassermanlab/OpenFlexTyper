@@ -59,7 +59,7 @@ To Download and install FlexTyper, use the following commands :
 
 .. code:: bash
 
-   git clone https://github.com/wassermanlab/FlexTyper.git
+   git clone https://github.com/wassermanlab/OpenFlexTyper.git
    cd FMTyper/
    mkdir build
    cd build
@@ -70,7 +70,7 @@ or just
 
 .. code:: bash
 
-   git clone https://github.com/wassermanlab/FlexTyper.git
+   git clone https://github.com/wassermanlab/OpenFlexTyper.git
    cd FlexTyper/
    sudo bash install.sh
 
