@@ -52,8 +52,44 @@ FlexTyper requires :
 -  For increased performance on large number of queries, we recommand
    using a SSC-like machine
 
+Conda installation
+^^^^^^^^^^^^^^^^^^
+
+You can download Miniconda at : https://docs.conda.io/en/latest/miniconda.html
+    
+    To install miniconda, bash the downloaded .sh script and following the installation instructions :
+
+    .. code:: bash
+        bash Miniconda3-latest-Linux-x86_64.sh
+
+
+FlexTyper Conda installation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    .. code:: bash
+        conda create --prefix openFlexTyper
+        conda activate <path_to_created_environment>
+        git clone https://github.com/wassermanlab/OpenFlexTyper.git
+        conda install -c anaconda qt
+        conda install -c conda-forge sdsl-lite
+        cd OpenFlexTyper
+        mkdir build
+        cd build
+        qmake ..
+        make
+
+
+Conda installation with exported environment 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can install FlexTyper using an environment file
+
+    .. code:: bash
+        conda env create -f environment.yml
+
+
 Build from source
-^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
 To Download and install FlexTyper, use the following commands :
 
