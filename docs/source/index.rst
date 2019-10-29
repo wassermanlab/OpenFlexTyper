@@ -87,7 +87,7 @@ You can install FlexTyper using an environment file
 
 .. code:: bash
 
-   conda env create -f environment.yml
+   conda create --name openFlexTyper --file requirements.txt
    conda activate <path_to_created_environment>
    git clone https://github.com/wassermanlab/OpenFlexTyper.git
    cd OpenFlexTyper
