@@ -70,6 +70,7 @@ FlexTyper Conda installation
 
    conda create --prefix openFlexTyper
    conda activate <path_to_created_environment>
+   conda install git
    git clone https://github.com/wassermanlab/OpenFlexTyper.git
    conda install -c anaconda qt
    conda install -c conda-forge sdsl-lite
