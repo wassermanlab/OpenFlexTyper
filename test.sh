@@ -4,7 +4,7 @@
 ###
 ### Copyright (c) 2018, Wasserman lab
 ###
-### FILE        install.sh
+### FILE        test.sh
 ###
 ### DESCRIPTION This is the install.sh script for the project
 ###
