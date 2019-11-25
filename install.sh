@@ -17,11 +17,19 @@
 
 function install() 
 {
-	conda config --add channels conda-forge
-	conda create --prefix ../openFlexTyper_env --file requirements.txt
-	conda activate ../openFlexTyper_env
+	CURRENT_DIR=$(pwd)
+	MINI_CONDA_INSTALL_DIR=$(pwd | awk -F'/' '{print "/"$2"/"$3"/miniconda3"}')
+
+	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+	bash Miniconda3-latest-Linux-x86_64.sh
+
+	source ${MINI_CONDA_INSTALL_DIR}/etc/profile.d/conda.sh
+	conda create --prefix ../openFlexTyper
+	conda activate ${CURRENT_DIR}/../openFlexTyper
+	conda install qt
+	conda install -c conda-forge sdsl-lite
 	mkdir build
-	cd build
+	cd build/
 	qmake ..
 	make
 }

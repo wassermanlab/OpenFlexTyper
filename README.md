@@ -19,6 +19,45 @@ Contributers:
 ![](docs/images/FmTyper_Overview.png)
 
 
+## Quick start installation
+
+First clone the repo. This assume you have **git** and **conda or miniconda (recommanded)** installed :
+
+:cactus: git is by default available on cedar, on sockeye, you can load git module with module load git
+conda can be installed by downloading miniconda [here](https://docs.conda.io/en/latest/miniconda.html)
+and executing the script file.
+
+```bash
+git clone https://github.com/wassermanlab/OpenFlexTyper.git
+```
+
+Then enter the FlexTyper repository and
+with requirements.tx environment file, you can create the conda environment with the following command :
+
+:cactus: Please note that some packages are located in conda-forge channel, so we need to adding conda-forge
+
+```bash
+cd OpenFlexTyper
+conda config --add channels conda-forge
+conda create --prefix ../openFlexTyper --file requirements.txt
+```
+
+Then you can activate the repo :
+
+```bash
+conda activate ../openFlexTyper
+```
+
+Now we just need to create the build dir and build the project
+
+```bash 
+mkdir build
+cd build
+qmake ..
+make
+```
+
+
 ## A little paragraph
 
 The purpose of FlexTyper is to rapidly query an unmapped read file (fastq) for variants/kmers of interest. The core of FlexTyper relies on the FM-index of the raw reads, developed by Alice Kaye. This indexed read set is designed for rapid queries of kmers, sequence substrings of length ‘k’, against an entire set of unmapped reads. With this ability to rapidly scan for substrings against an unmapped read set, we can perform meaningful queries for a variety of applications including genotyping for presence of pathogenic variants, coverage analysis for known probes contained within the CytoscanHD chromosomal microarray set, and ancestry/ethnicity inference from population discriminating polymorphisms. The tool is designed in a flexible manner with respect to the query capabilities, making it available for extension to other organisms, genome versions, and applications. We anticipate that FlexTyper’s utility will grow as datasets cataloguing variants of interest continue to expand.
