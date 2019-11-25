@@ -1,15 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-///
-/// Copyright (c) 2018, Wasserman lab
-///
-/// FILE        fmindex.cpp
-///
-/// DESCRIPTION This file contains the implementation of the fmindex class
-///
-/// Initial version @ Godfrain Jacques KOUNKOU
-///
-////////////////////////////////////////////////////////////////////////
-
 #include "fmindex.h"
 #include <time.h>
 #include <future>

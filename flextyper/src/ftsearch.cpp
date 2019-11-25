@@ -1,17 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-///
-/// Copyright (c) 2019, Wasserman lab
-///
-/// FILE        ftsearch.cpp
-///
-/// DESCRIPTION This file contains the definition of ftsearch. The class can
-///             be summarized as the init point for the application.
-///             The init function calls other parts of the application
-///
-/// Initial version @ Godfrain Jacques Kounkou
-///
-////////////////////////////////////////////////////////////////////////
-
 #include "ftsearch.h"
 
 namespace ft {

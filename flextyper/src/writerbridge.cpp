@@ -1,16 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-///
-/// Copyright (c) 2019, Wasserman lab
-///
-/// FILE        writerbridge.h
-///
-/// DESCRIPTION This file contains the declaration of writerbridge.h, it contains
-///             all utility functions needed to writes results to result file
-///
-/// Initial version @
-///
-////////////////////////////////////////////////////////////////////////
-
 #include "writerbridge.h"
 #include <sstream>
 #include <iostream>

@@ -1,15 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-///
-/// Copyright (c) 2019, Wasserman lab
-///
-/// FILE         main.cpp
-///
-/// DESCRIPTION  This is the entry point for the application
-///
-/// Initial version
-///
-////////////////////////////////////////////////////////////////////////
-
 #include <QGuiApplication>
 #include <QCommandLineParser>
 #include <iostream>

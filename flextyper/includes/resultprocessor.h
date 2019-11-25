@@ -1,15 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-///
-/// Copyright (c) 2018, Wasserman lab
-///
-/// FILE        resultprocessor.h
-///
-/// DESCRIPTION This file contains the declaration of kmergenerator class
-///
-/// Initial version @ Godfrain Jacques Kounkou
-///
-////////////////////////////////////////////////////////////////////////
-
 #ifndef __RESULT_PROCESSOR_H__
 #define __RESULT_PROCESSOR_H__
 
@@ -22,6 +10,11 @@
 namespace fs = std::experimental::filesystem;
 
 namespace ft {
+////////////////////////////////////////////////////////////////////////
+/// \copyright Copyright (c) 2019, Wasserman lab
+/// \author    Godfrain Jacques Kounkou
+/// \brief This file contains the declaration of kmergenerator class
+////////////////////////////////////////////////////////////////////////
 class ResultProcessor : public IResultProcessor {
 public:
     ////////////////////////////////////////////////////////////////////////
