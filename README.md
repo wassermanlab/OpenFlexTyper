@@ -4,7 +4,11 @@
 
 > An FM-index based tool for rapid searching of interesting variants/sequences within unmapped short read sequences
 
-Contributers:
+## Documentation:
+
+For more information about FlexTyper, please refer to our online documentation on [readthedocs](https://flextyper.readthedocs.io/en/dev_jacques_documentation/)
+
+## Contributers:
 
 [<img alt="kounkou" src="https://avatars2.githubusercontent.com/u/7527871?s=460&v=4" width="117">](https://github.com/tixii/) |
 [<img alt="kounkou" src="https://avatars1.githubusercontent.com/u/16579982?s=460&v=4" width="117">](https://github.com/Phillip-a-richmond) |
