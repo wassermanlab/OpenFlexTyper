@@ -23,12 +23,9 @@ Contributers:
 
 First clone the repo. This assume you have **git** and **conda or miniconda (recommanded)** installed :
 
------------------------------------------
-NOTE
-git is by default available on cedar, on sockeye, you can load git module with module load git
+:cactus: git is by default available on cedar, on sockeye, you can load git module with module load git
 conda can be installed by downloading miniconda [here](https://docs.conda.io/en/latest/miniconda.html)
 and executing the script file.
------------------------------------------
 
 ```bash
 git clone https://github.com/wassermanlab/OpenFlexTyper.git
@@ -37,10 +34,7 @@ git clone https://github.com/wassermanlab/OpenFlexTyper.git
 Then enter the FlexTyper repository and
 with requirements.tx environment file, you can create the conda environment with the following command :
 
------------------------------------------
-NOTE
-Please note that some packages are located in conda-forge channel, so we need to adding conda-forge
------------------------------------------
+:cactus: Please note that some packages are located in conda-forge channel, so we need to adding conda-forge
 
 ```bash
 cd OpenFlexTyper
