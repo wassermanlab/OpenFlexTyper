@@ -31,62 +31,43 @@ To install miniconda, bash the downloaded .sh script and following the installat
    bash Miniconda3-latest-Linux-x86_64.sh
 
 
-FlexTyper Conda installation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Quick start installation
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code:: bash
+First clone the repo. This assume you have **git** and **conda or miniconda (recommanded)** installed :
 
-   conda create --prefix openFlexTyper
-   conda activate <path_to_created_environment>
-   conda install git
-   git clone https://github.com/wassermanlab/OpenFlexTyper.git
-   conda install -c anaconda qt
-   conda install -c conda-forge sdsl-lite
-   cd OpenFlexTyper
-   mkdir build
-   cd build
-   qmake ..
-   make
+:cactus: git is by default available on cedar, on sockeye, you can load git module with module load git
 
+```bash
+git clone https://github.com/wassermanlab/OpenFlexTyper.git
+```
 
-Conda installation with exported environment 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Then enter the FlexTyper repository and
+with requirements.tx environment file, you can create the conda environment with the following command :
 
-You can install FlexTyper using an environment file
+:cactus: Please note that some packages are located in conda-forge channel, so we need to adding conda-forge
 
-.. code:: bash
+```bash
+cd OpenFlexTyper
+conda config --add channels conda-forge
+conda create --prefix ../openFlexTyper --file requirements.txt
+```
 
-   conda create --name openFlexTyper --file requirements.txt
-   conda activate <path_to_created_environment>
-   git clone https://github.com/wassermanlab/OpenFlexTyper.git
-   cd OpenFlexTyper
-   mkdir build
-   cd build
-   qmake ..
-   make
+Then you can activate the repo :
 
+```bash
+conda activate ../openFlexTyper
+```
 
-Build from source
-^^^^^^^^^^^^^^^^^^
+Now we just need to create the build dir and build the project
 
-To Download and install FlexTyper, use the following commands :
+```bash 
+mkdir build
+cd build
+qmake ..
+make
+```
 
-.. code:: bash
-
-   git clone https://github.com/wassermanlab/OpenFlexTyper.git
-   cd FMTyper/
-   mkdir build
-   cd build
-   qmake ..
-   make
-
-or just
-
-.. code:: bash
-
-   git clone https://github.com/wassermanlab/OpenFlexTyper.git
-   cd FlexTyper/
-   sudo bash install.sh
 
 Getting Started
 ^^^^^^^^^^^^^^^
