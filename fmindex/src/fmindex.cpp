@@ -82,7 +82,7 @@ std::tuple<std::set<size_t>, std::set<std::pair<int, ft::QueryType>>> FmIndex::s
         _stats->printKmerSearchTimeToFile("tmp.log", query, duration.count());
     }
 
-    return {result, queryIds};
+    return std::make_tuple(result, queryIds);
 }
 
 //======================================================================
