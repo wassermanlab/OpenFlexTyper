@@ -18,8 +18,8 @@
 function install() 
 {
 	conda config --add channels conda-forge
-	conda create --prefix ../openFlexTyper --file requirements.txt
-	conda activate ../openFlexTyper
+	conda create --prefix ../openFlexTyper_env --file requirements.txt
+	conda activate ../openFlexTyper_env
 	mkdir build
 	cd build
 	qmake ..
