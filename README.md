@@ -29,7 +29,7 @@ cd OpenFlexTyper
 ./install.sh
 ```
 
-flextyper is located inside the build directory.
+Accept the packages installation, as a result, flextyper is located inside the build directory.
 
 
 ## A little paragraph
