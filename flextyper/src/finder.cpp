@@ -1,16 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-///
-/// Copyright (c) 2019, Wasserman lab
-///
-/// FILE        finder.cpp
-///
-/// DESCRIPTION This file contains the definition of finder class. It contains
-///             functions used to search for kmers inside the FmIndex
-///
-/// Initial version @ Godfrain Jacques Kounkou
-///
-////////////////////////////////////////////////////////////////////////
-
 #include "finder.h"
 #include <future>
 

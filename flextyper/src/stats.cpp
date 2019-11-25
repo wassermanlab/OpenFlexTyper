@@ -1,17 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-///
-/// Copyright (c) 2019, Wasserman lab
-///
-/// FILE        stats.cpp
-///
-/// DESCRIPTION This file contains the definition of stats.cpp, it contains
-///             all functions necessary to generate some stats or related
-///             stats contents
-///
-/// Initial version @
-///
-////////////////////////////////////////////////////////////////////////
-
 #include "stats.h"
 #include <fstream>
 

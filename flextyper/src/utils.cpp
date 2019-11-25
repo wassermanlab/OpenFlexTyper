@@ -1,16 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-///
-/// Copyright (c) 2019, Wasserman lab
-///
-/// FILE        utils.cpp
-///
-/// DESCRIPTION This file contains the definition of utils.cpp, it contains
-///             all utility functions needed to perform flextyper searches
-///
-/// Initial version @
-///
-////////////////////////////////////////////////////////////////////////
-
 #include "utils.h"
 #include <fstream>
 #include <algorithm>

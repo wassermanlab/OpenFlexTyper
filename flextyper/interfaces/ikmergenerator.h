@@ -5,10 +5,6 @@
 /// FILE        ikmergenerator.h
 ///
 /// DESCRIPTION This file contains the declaration of kmergenerator interface
-///
-/// Initial version @
-///
-////////////////////////////////////////////////////////////////////////
 
 #ifndef __IKMER_GENERATOR_H__
 #define __IKMER_GENERATOR_H__
@@ -19,7 +15,11 @@
 #include "typedefs.h"
 
 namespace ft {
-
+////////////////////////////////////////////////////////////////////////
+/// \copyright Copyright (c) 2019, Wasserman lab
+/// \author    Godfrain Jacques Kounkou
+/// \brief This file contains the declaration of kmergenerator interface
+////////////////////////////////////////////////////////////////////////
 class IKmerGenerator {
 public:
     ////////////////////////////////////////////////////////////////////////

@@ -1,17 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-///
-/// Copyright (c) 2018, Wasserman lab
-///
-/// FILE        kmergenerator.h
-///
-/// DESCRIPTION This file contains the definition of the kmergenerator class
-///             It contains functions to generate kmers depending on the
-///             requirements
-///
-/// Initial version @
-///
-////////////////////////////////////////////////////////////////////////
-
 #include "kmergenerator.h"
 #include <cmath>
 
