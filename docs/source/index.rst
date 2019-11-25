@@ -36,7 +36,7 @@ Quick start installation
 
 First clone the repo. This assume you have **git** and **conda or miniconda (recommanded)** installed :
 
-:cactus: git is by default available on cedar, on sockeye, you can load git module with module load git
+! git is by default available on cedar, on sockeye, you can load git module with module load git
 
 .. code:: bash
 
@@ -45,7 +45,7 @@ First clone the repo. This assume you have **git** and **conda or miniconda (rec
 Then enter the FlexTyper repository and
 with requirements.tx environment file, you can create the conda environment with the following command :
 
-:cactus: Please note that some packages are located in conda-forge channel, so we need to adding conda-forge
+! Please note that some packages are located in conda-forge channel, so we need to adding conda-forge
 
 .. code:: bash
   
