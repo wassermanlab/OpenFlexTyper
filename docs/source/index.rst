@@ -38,35 +38,35 @@ First clone the repo. This assume you have **git** and **conda or miniconda (rec
 
 :cactus: git is by default available on cedar, on sockeye, you can load git module with module load git
 
-```bash
-git clone https://github.com/wassermanlab/OpenFlexTyper.git
-```
+.. code:: bash
+
+   git clone https://github.com/wassermanlab/OpenFlexTyper.git
 
 Then enter the FlexTyper repository and
 with requirements.tx environment file, you can create the conda environment with the following command :
 
 :cactus: Please note that some packages are located in conda-forge channel, so we need to adding conda-forge
 
-```bash
-cd OpenFlexTyper
-conda config --add channels conda-forge
-conda create --prefix ../openFlexTyper --file requirements.txt
-```
+.. code:: bash
+  
+   cd OpenFlexTyper
+   conda config --add channels conda-forge
+   conda create --prefix ../openFlexTyper --file requirements.txt
 
 Then you can activate the repo :
 
-```bash
-conda activate ../openFlexTyper
-```
+.. code:: bash
+   
+   conda activate ../openFlexTyper
 
 Now we just need to create the build dir and build the project
 
-```bash 
-mkdir build
-cd build
-qmake ..
-make
-```
+.. code:: bash
+
+   mkdir build
+   cd build
+   qmake ..
+   make
 
 
 Getting Started
