@@ -12,7 +12,7 @@ QueryExtractor::QueryExtractor()
 void QueryExtractor::getInputQueriesRoutine(const std::string& refSequence, const std::string& altSequence, uint fileIndex, std::set<Query>& inputQueries)
 {
     int queryIndex = _utils->fileIndexToQueryIndex(fileIndex);
-    inputQueries.insert({queryIndex, refSequence, altSequence, "" /* is empty */});
+    inputQueries.insert(std::make_tuple(queryIndex, refSequence, altSequence, "" /* is empty */));
 }
 
 //======================================================================
@@ -24,7 +24,7 @@ void QueryExtractor::getStartAndEndPointSequences(const std::string& startPointR
     std::string endPointSeq   = endPointRef.substr(0);
     std::string crossoverSeq  = startPointRef.substr(0, startPointRef.length() / 2) + endPointRef.substr(endPointRef.length() / 2);
 
-    inputQueries.insert({queryIndex, startPointSeq, endPointSeq, crossoverSeq});
+    inputQueries.insert(std::make_tuple(queryIndex, startPointSeq, endPointSeq, crossoverSeq));
 }
 
 //======================================================================
