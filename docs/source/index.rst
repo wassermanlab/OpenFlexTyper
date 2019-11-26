@@ -171,7 +171,7 @@ Code source documentation
 
 .. toctree::
    :maxdepth: 1
-   :caption: (Application Programming Interfaces - APIs)
+   :caption: (APIs)
    :name: sec-general
 
    finder.rst
