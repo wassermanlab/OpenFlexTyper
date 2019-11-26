@@ -119,7 +119,7 @@ int main(int argc, char** argv)
         std::cout << "readLength                    : " << readLength <<  std::endl;
         std::cout << "indexFileLocation             : " << indexFileLocation.string() <<  std::endl;
         std::cout << "outputFolder                  : " << outputFolder.string() <<  std::endl;
-        std::cout << "refOnly                      : " << refOnly <<  std::endl;
+        std::cout << "refOnly                       : " << refOnly <<  std::endl;
         std::cout << "searchType                    : " << searchType <<  std::endl;
         std::cout << "multithread                   : " << multithread <<  std::endl;
         std::cout << "ignore_multi_hits             : " << ignore_multi_hits <<  std::endl;
