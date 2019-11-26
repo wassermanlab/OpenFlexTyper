@@ -67,6 +67,11 @@ qmake ..
 make
 ```
 
+## Demo
+
+![](docs/FlexTyper_test.gif)
+
+
 ## License
 
 The MIT License (MIT)
