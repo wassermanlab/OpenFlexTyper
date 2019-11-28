@@ -1,0 +1,47 @@
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: linux-64
+name: openFlexTyper 
+channels:
+        - conda-forge 
+dependencies:
+        - _libgcc_mutex=0.1
+        - binutils_impl_linux-64=2.33.1
+        - binutils_linux-64=2.33.1
+        - ca-certificates=2019.9.11
+        - dbus=1.13.12
+        - expat=2.2.6
+        - fontconfig=2.13.0
+        - freetype=2.9.1
+        - gcc_impl_linux-64=7.3.0
+        - gcc_linux-64=7.3.0
+        - git=2.23.0
+        - glib=2.63.1
+        - gst-plugins-base=1.14.0
+        - gstreamer=1.14.0
+        - gxx_impl_linux-64=7.3.0
+        - gxx_linux-64=7.3.0
+        - icu=58.2
+        - jpeg=9b
+        - krb5=1.16.1
+        - ld_impl_linux-64=2.33.1
+        - libcurl=7.67.0
+        - libedit=3.1.20181209
+        - libffi=3.2.1
+        - libgcc-ng=9.1.0
+        - libpng=1.6.37
+        - libssh2=1.8.2
+        - libstdcxx-ng=9.1.0
+        - libuuid=1.0.3
+        - libxcb=1.13
+        - libxml2=2.9.9
+        - ncurses=6.1
+        - openssl=1.1.1d
+        - pcre=8.43
+        - perl=5.26.2
+        - qt=5.9.7
+        - sdsl-lite=2.1.1
+        - sqlite=3.30.1
+        - tk=8.6.8
+        - xz=5.2.4
+        - zlib=1.2.11
