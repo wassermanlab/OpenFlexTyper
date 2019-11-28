@@ -21,10 +21,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 DEFINES += QT_NO_VERSION_TAGGING
 
 INCLUDEPATH += flextyper/includes                     \
+	       opt/openFlexTyper/include 	      \
+	       opt/miniconda3/include                 \
                fmindex/includes                       \
                flextyper/interfaces                   \
-	       /home/gkounkou/miniconda3/include/     \ 
-	       ../../openFlexTyper/include            \
 
 HEADERS    += flextyper/includes/utils.h              \
               flextyper/includes/ftsearch.h           \
