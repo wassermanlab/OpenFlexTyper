@@ -28,9 +28,9 @@ function install()
 	bash Miniconda3-latest-Linux-x86_64.sh -b -p $MINI_CONDA_INSTALL_DIR 
 
 	source ${MINI_CONDA_INSTALL_DIR}/etc/profile.d/conda.sh
-	conda env create --prefix $OPT_DIR/openFlexTyper -f $DIR/OpenFlexTyper_CondaEnv.yml 
-	conda activate $OPT_DIR/openFlexTyper
+	conda env create --prefix ${OPT_DIR}/openFlexTyper -f $DIR/OpenFlexTyper_CondaEnv.yml 
 	cd $DIR
+	conda activate opt/openFlexTyper
 	mkdir -p build
 	cd build/
 	qmake ..
