@@ -1,5 +1,5 @@
 # Add files to be ignored here
-
+opt/
 FMTyper.pro.user
 build*
 *.pro.user
