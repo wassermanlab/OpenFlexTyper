@@ -23,6 +23,7 @@ DEFINES += QT_NO_VERSION_TAGGING
 INCLUDEPATH += flextyper/includes                     \
                fmindex/includes                       \
                flextyper/interfaces                   \
+	       opt/openFlexTyper/include	      \
 
 HEADERS    += flextyper/includes/utils.h              \
               flextyper/includes/ftsearch.h           \
