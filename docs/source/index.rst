@@ -10,7 +10,7 @@ FlexTyper
 =========
 
 Requirements
-^^^^^^^^^^^^
+-------------
 
 FlexTyper requires :
 
@@ -22,7 +22,7 @@ FlexTyper requires :
 
 
 Quick start installation
-^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 OpenFlexTyper is installed with the install.sh script provided in the repository. 
 The installation assumes that you have git installed.
@@ -44,14 +44,14 @@ That's it !
 
 
 Getting Started
-^^^^^^^^^^^^^^^
+----------------
 
 To get you started with FlexTyper, you can start by creating a
 Setting.ini file. An example can be found inside the extras directory
 in the github repository. https://github.com/wassermanlab/OpenFlexTyper
 
 Execution
-^^^^^^^^^
+----------
 
 FlexTyper provides 2 main features :
 
@@ -101,7 +101,7 @@ or
    flextyper searching --help
 
 Example of data indexing
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 To use FlexTyper in indexing mode, you need you need to provide a FASTA
 file.
@@ -123,8 +123,9 @@ or
    flextyper indexing --help
    
 
+
 Code source documentation
-^^^^^^^^
+===========================
 
 .. toctree::
    :maxdepth: 1
@@ -160,17 +161,13 @@ Code source documentation
 
 
 Bug Reporting
-^^^^^^^^^^^^^
+---------------
 
 While you’re using FlexTyper, you might still discover issues. Please
 feel free to report any problems you may experience. We thank you in
 advance for your contributions. To report, please provide a screenshot
 and a set of logs compressed, and open an issue on github.
 
-Contribute
-^^^^^^^^^^
-
-Please contact Project Owners for contributions.
 
 Indices and tables
 ==================
