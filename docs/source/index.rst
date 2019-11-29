@@ -8,7 +8,7 @@ OpenFlexTyper
 .. toctree::
    :maxdepth: 2
 
-    quick_start_installation
+   quick_start_installation
  
 .. toctree::
    :maxdepth: 2
