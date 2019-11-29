@@ -12,7 +12,7 @@ We anticipate that FlexTyper’s utility will grow as datasets cataloguing varia
 
 ## Documentation
 
-For more information about FlexTyper, please refer to our online documentation on [readthedocs](https://flextyper.readthedocs.io/en/dev_jacques_documentation/)
+For more information about FlexTyper, please refer to our online documentation on [readthedocs](https://flextyper.readthedocs.io/en/latest/)
 
 ## Contributers
 
