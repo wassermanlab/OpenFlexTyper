@@ -20,53 +20,25 @@ FlexTyper requires :
 -  For increased performance on large number of queries, we recommand
    using a SSC-like machine
 
-Conda installation
-^^^^^^^^^^^^^^^^^^
-
-You can download Miniconda at : https://docs.conda.io/en/latest/miniconda.html
-To install miniconda, bash the downloaded .sh script and following the installation instructions :
-
-.. code:: bash
-
-   bash Miniconda3-latest-Linux-x86_64.sh
-
 
 Quick start installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-First clone the repo. This assume you have **git** and **conda or miniconda (recommanded)** installed :
-
-! git is by default available on cedar, on sockeye, you can load git module with module load git
+OpenFlexTyper is installed with the install.sh script provided in the repository. 
+The installation assumes that you have **git** installed.
+git is by default available on cedar. On sockeye, you can load git module with 
 
 .. code:: bash
+   module load git
 
+Open a terminal and enter :
+
+.. code:: bash
    git clone https://github.com/wassermanlab/OpenFlexTyper.git
-
-Then enter the FlexTyper repository and
-with requirements.tx environment file, you can create the conda environment with the following command :
-
-! Please note that some packages are located in conda-forge channel, so we need to adding conda-forge
-
-.. code:: bash
-  
    cd OpenFlexTyper
-   conda config --add channels conda-forge
-   conda create --prefix ../openFlexTyper --file requirements.txt
+   bash install.sh
 
-Then you can activate the repo :
-
-.. code:: bash
-   
-   conda activate ../openFlexTyper
-
-Now we just need to create the build dir and build the project
-
-.. code:: bash
-
-   mkdir build
-   cd build
-   qmake ..
-   make
+That's it !
 
 
 Getting Started
