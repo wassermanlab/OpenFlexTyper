@@ -10,11 +10,11 @@ The tool is designed in a flexible manner with respect to the query capabilities
 We anticipate that FlexTyper’s utility will grow as datasets cataloguing variants of interest continue to expand.
 
 
-## Documentation:
+## Documentation
 
 For more information about FlexTyper, please refer to our online documentation on [readthedocs](https://flextyper.readthedocs.io/en/dev_jacques_documentation/)
 
-## Contributers:
+## Contributers
 
 [<img alt="kounkou" src="https://avatars2.githubusercontent.com/u/7527871?s=460&v=4" width="117">](https://github.com/tixii/) |
 [<img alt="kounkou" src="https://avatars1.githubusercontent.com/u/16579982?s=460&v=4" width="117">](https://github.com/Phillip-a-richmond) |
@@ -31,41 +31,24 @@ For more information about FlexTyper, please refer to our online documentation o
 
 ## Quick start installation
 
-First clone the repo. This assume you have **git** and **conda or miniconda (recommanded)** installed :
+OpenFlexTyper is installed with the install.sh script provided in the repository. 
+The installation assumes that you have **git** installed.
+git is by default available on cedar. On sockeye, you can load git module with 
 
-git is by default available on cedar, on sockeye, you can load git module with module load git
-conda can be installed by downloading miniconda [here](https://docs.conda.io/en/latest/miniconda.html)
-and executing the script file.
+```bash
+module load git
+```
+
+Open a terminal and enter :
 
 ```bash
 git clone https://github.com/wassermanlab/OpenFlexTyper.git
-```
-
-Then enter the FlexTyper repository and
-with requirements.tx environment file, you can create the conda environment with the following command :
-
-Please note that some packages are located in conda-forge channel, so we need to adding conda-forge
-
-```bash
 cd OpenFlexTyper
-conda config --add channels conda-forge
-conda create --prefix ../openFlexTyper --file requirements.txt
+bash install.sh
 ```
 
-Then you can activate the repo :
+That's it !
 
-```bash
-conda activate ../openFlexTyper
-```
-
-Now we just need to create the build dir and build the project
-
-```bash 
-mkdir build
-cd build
-qmake ..
-make
-```
 
 ## Demo
 
