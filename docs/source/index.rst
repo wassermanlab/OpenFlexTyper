@@ -3,9 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Welcome to OpenFlexTyper's documentation!
+Welcome to OpenFlexTyper's documentation!
+=========================================
 
 FlexTyper
 =========
@@ -130,7 +129,15 @@ Code source documentation
 
 .. toctree::
    :maxdepth: 2
-   :name: sec-general
+
+   FlexTyper
+   Requirements
+   Quick start installation
+   Getting Started
+   Execution
+   Example of searching execution
+   Example of data indexing
+   Code source documentation
 
 .. toctree::
    :maxdepth: 2
