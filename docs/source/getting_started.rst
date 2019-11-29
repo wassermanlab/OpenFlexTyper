@@ -77,3 +77,13 @@ or
 .. code:: bash
 
    flextyper indexing --help
+
+
+Demo
+======
+
+A little demo using OpenFlexTyper
+
+.. only:: html
+
+   .. figure:: ../../docs/FlexTyper_test.gif
