@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/wassermanlab/OpenFlexTyper.svg?style=svg)](https://circleci.com/gh/wassermanlab/OpenFlexTyper) [![Documentation Status](https://readthedocs.org/projects/flextyper/badge/?version=latest)](https://flextyper.readthedocs.io/en/latest/?badge=latest)
 [![GitHub release](https://img.shields.io/github/release/wassermanlab/openflextyper/all?logo=GitHub)](https://github.com/wassermanlab/openflextyper/releases/latest)
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 The purpose of FlexTyper is to rapidly query an unmapped read file (fastq) for variants/kmers of interest. 
 The core of FlexTyper relies on the FM-index of the raw reads, developed by Alice Kaye. 
