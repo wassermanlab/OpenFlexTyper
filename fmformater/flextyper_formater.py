@@ -19,14 +19,14 @@ def parse_arguments():
 	return args
 
 def flextyper_2_vcf(infilename, name, minSuppReads):
-"""
-This function creates a VCF from output query file.
+	"""
+	This function creates a VCF from output query file.
 
-It determines genotypes as follows:
- het site: alt>minSuppReads and ref>minSuppReads
- homo alt: alt>minSuppReads and ref<minSuppReads
- homo ref: alt<minSuppReads and ref>minSuppReads
-"""
+	It determines genotypes as follows:
+		het site: alt>minSuppReads and ref>minSuppReads
+		homo alt: alt>minSuppReads and ref<minSuppReads
+		homo ref: alt<minSuppReads and ref>minSuppReads
+	"""
 	infile = open(infilename,'r')
 	outfile = open("%s.vcf"%name,'w')
 	# write the header
