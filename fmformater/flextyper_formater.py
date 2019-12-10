@@ -18,13 +18,15 @@ def parse_arguments():
 	args = parser.parse_args()
 	return args
 
-# Phil modifying this function to hard-code some values for what you consider a het vs. homo site
-# het site: alt>minSuppReads and ref>minSuppReads
-# homo alt: alt>minSuppReads and ref<minSuppReads
-# homo ref: alt<minSuppReads and ref>minSuppReads
+def flextyper_2_vcf(infilename, name, minSuppReads):
+"""
+This function creates a VCF from output query file.
 
-# Phil re-write because of odd behaviour dropping sites
-def flextyper_2_vcf_par(infilename, name, minSuppReads):
+It determines genotypes as follows:
+ het site: alt>minSuppReads and ref>minSuppReads
+ homo alt: alt>minSuppReads and ref<minSuppReads
+ homo ref: alt<minSuppReads and ref>minSuppReads
+"""
 	infile = open(infilename,'r')
 	outfile = open("%s.vcf"%name,'w')
 	# write the header
@@ -55,62 +57,6 @@ def flextyper_2_vcf_par(infilename, name, minSuppReads):
 			zygosity = '0/0'
 		outfile.write("%s\t%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s:%d:%d:%d\n"%(chrom,pos,ID,ref,alt,'.','.','.','GT:RO:AO:DP',zygosity,ref_count,alt_count,depth))
 		
-
-def flextyper_2_vcf(data, name, minSuppReads):
-	new = open(name + ".vcf", "w+")
-	new.write("##fileformat=VCFv4.2\n")
-	new.write("##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n")
-	new.write("##FORMAT=<ID=AD,Number=R,Type=Integer,Description=\"Allelic depths for the ref and alt alleles in the order listed\">\n")
-	new.write("##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Read depth\">\n")
-	new.write("#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\t" +
-			  name + "\n")
-
-#   amount = []
-#	with open(data) as f:
-#		for line in f:
-#			if not line.startswith("#"):
-#				ln = line.split("\t")
-#				ref = int(ln[9])
-#				alt = int(ln[10])
-#				if (ref == 0 and alt != 0) or (ref != 0 and alt == 0):
-#					amount.append(max([ref,alt]))
-#
-	#mean = statistics.mean(amount)
-	#std = statistics.stdev(amount)
-	#UB = mean + std
-	#LB = mean - std
-
-	with open(data) as f:
-		for line in f:
-			if not line.startswith("#"):
-				ln = line.split("\t")
-				ln[-1] = ln[-1].rstrip()
-				if int(ln[10]) > 0:
-					chrom = ln[3]
-					pos = str(int(ln[4]) + 1)  # making 1 based
-					ID = ln[7]
-					ref = ln[5]
-					alt = ln[6]
-					ref_count = int(ln[9])
-					alt_count = int(ln[10])
-					depth = ref_count + alt_count
-					print(ln)
-					print(ref_count)
-					print(alt_count)
-					print(depth)
-					# call genotype based on minimum supporting reads
-					print(zygosity)
-#					if LB < int(alt_count) < UB: # hom
-#						zygosity = "1/1"
-#					else:  # het
-#						zygosity = "0/1"
-#
-					output = "\t".join([chrom, pos, ID, ref, alt,
-										".", ".", ".",
-										"GT:AD:DP", zygosity+":"+str(ref_count) + "," + str(alt_count) + ':' + str(depth)])
-					new.write(output + "\n")
-	new.close()
-
 
 def flextyper_2_array(data, name, format):
 	if format == "23_and_me":
@@ -157,7 +103,7 @@ def main():
 	name = args.name
 
 	if Format == "VCF":
-		flextyper_2_vcf_par(Input, name, minSuppReads)
+		flextyper_2_vcf(Input, name, minSuppReads)
 	if Format == "23_and_me":
 		flextyper_2_array(Input, name, "23_and_me")
 	if Format == "ancestry":
