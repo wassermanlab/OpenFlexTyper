@@ -39,7 +39,7 @@ def flextyper_2_vcf_par(infilename, name, minSuppReads):
 			continue
 		cols = line.strip('\n').split('\t')
 		chrom = cols[3]
-		pos = int(cols[4])
+		pos = int(cols[4]) + 1 # fixed for 0-based FlexTyper query file format
 		ref = cols[5]
 		alt = cols[6]
 		ID = cols[7]
