@@ -31,7 +31,7 @@ def ParseSitesGetQuery(SitesInfile,Fasta,QueryOutfile,Source):
 		line = line.strip('\n')
 		cols=line.split(':')
 		chrom = cols[0]
-		pos = int(cols[1])
+		pos = int(cols[1]) - 1 # 1-based transition
 		ref = cols[2]
 		alt = cols[3]
 		Source='PeddySitesGRCh37'
