@@ -47,7 +47,7 @@ dependencies:
         - xz=5.2.4
         - zlib=1.2.11
         - git-lfs=2.9.1
-        - biopython
-        - pysam
-        - pybedtools
-        - cyvcf2
+        - biopython=1.74
+        - pysam=0.15.3
+        - pybedtools=0.8.0
+        - cyvcf2=0.11.5
