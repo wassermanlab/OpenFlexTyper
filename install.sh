@@ -31,10 +31,10 @@ function install()
 	conda env create --prefix ${OPT_DIR}/openFlexTyper -f $DIR/OpenFlexTyper_CondaEnv.yml 
 	cd $DIR
 	conda activate opt/openFlexTyper
-	mkdir -p build
-	cd build/
-	qmake ..
-	make
+#	mkdir -p build
+#	cd build/
+#	qmake ..
+#	make
 }
 
 install
