@@ -3,6 +3,7 @@ import datetime
 from configurator import Configurator
 from kmerretriever import KmerRetriever
 
+
 # config (could be exported to json file)
 S = [150,125,100,75,50,31,25]    # kmer sizes
 X = 3                            # number of kmers
