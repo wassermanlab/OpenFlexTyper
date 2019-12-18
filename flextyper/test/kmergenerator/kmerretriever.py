@@ -1,6 +1,7 @@
 import subprocess
 import math
 
+# global variable
 X = 3
 
 class KmerRetriever(object):

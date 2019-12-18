@@ -1,5 +1,6 @@
 import json
 
+
 class Configurator(object):
     # default constructor
     def __init__(self):
