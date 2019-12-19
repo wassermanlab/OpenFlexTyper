@@ -19,15 +19,17 @@ class KmerRetriever(object):
         f = open(queryFile,  "r")
         g = open(outputFile, "w")
 
-        l = 1
+        l = -1
         for line in f:
-            if l == 5:
+            if l == queryNbr:
                 break
             g.write(line)
             l += 1
 
         f.close()
         f.close()
+
+        print('file generated in : ', outputFile)
 
     # generate kmers using FlexTyper and return them
     def generateKmers(self, kmerNbr, queryFile, settingFile):
