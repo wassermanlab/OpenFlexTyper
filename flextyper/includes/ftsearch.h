@@ -9,6 +9,7 @@
 #include "finder.h"
 #include "resultprocessor.h"
 #include "queryextractor.h"
+#include <climits>
 
 namespace fs = std::experimental::filesystem;
 
@@ -47,23 +48,25 @@ public:
     /// \param extract_matching_reads
     ////////////////////////////////////////////////////////////////////////
     void init(const fs::path& pathToQueryFile     ,
-              uint kmerSize                      ,
-              uint readLength                    ,
+              uint kmerSize                       ,
+              uint readLength                     ,
               const fs::path& indexLocation       ,
               const fs::path& outputFile          ,
-              bool refOnly                       ,
+              bool refOnly                        ,
               SearchType searchType               ,
-              bool multithread = false            ,
+              bool multithread            = false ,
               const fs::path& inputFastQ  = ""    ,
-              uint overlap               = 0     ,
-              bool returnMatchesOnly    = false ,
+              uint overlap                = 0     ,
+              bool returnMatchesOnly      = false ,
               bool kmerCounts             = false ,
-              uint stride                = 10    ,
-              uint maxOccurences         = 200   ,
-              uint threadNumber          = 1     ,
+              uint stride                 = 10    ,
+              uint maxOccurences          = 200   ,
+              uint threadNumber           = 1     ,
               bool ignoreNonUniqueKmers   = true  ,
               bool crossover              = false ,
-              bool printSearchTime        = false);
+              bool printSearchTime        = false,
+              uint maxKmers               = UINT_MAX,
+              uint totalKmers             = UINT_MAX);
 
     void overrideUtils(std::shared_ptr<IUtils> utils);
     void overrideStats(std::shared_ptr<IStats> stats);

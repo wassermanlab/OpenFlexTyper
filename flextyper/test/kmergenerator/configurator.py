@@ -19,6 +19,7 @@ class Configurator(object):
         self.conf["multithread"] = True
         self.conf["ignoreNonUniqueKmers"] = False
         self.conf["kmerCounts"] = True
+        self.conf["maxKmersPerQuery"] = 3
 
     # initialization with values, (pass in a dictionary)
     def initWithParams(self, **kwargs):
