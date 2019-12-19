@@ -5,9 +5,7 @@ from kmerretriever import KmerRetriever
 
 
 # config (could be exported to json file)
-S = [150,125,100,75,50,31,25]    # kmer sizes
-X = 3                            # number of kmers
-# N = [1,35000]                    # number of queries (range)
+S = [150,125,100,75,50,31,25]      # kmer sizes
 L = [1, 10 ,100,1000,10000,100000] # number of kmers
 
 # static function
@@ -36,7 +34,7 @@ if __name__ == '__main__':
             kmerRetriever.getQueries(querynbr, queryFile, "tmpQueryFile.tsv")
             kmerRetriever.generateKmers(kmernbr, "tmpQueryFile.tsv", settingFile)
 
-            # open generated kmer file and grab 1,  
+            # open generated kmer file and grab kmernbr
             kmerRetriever.retrieveKmers(kmernbr)
 
 

@@ -1,8 +1,7 @@
 import subprocess
 import math
 
-# global variable
-X = 3
+X = 3 # number of kmers per query 
 
 class KmerRetriever(object):
     # default constructor
@@ -39,7 +38,7 @@ class KmerRetriever(object):
         self.getQueries(queryNbr, queryFile, out)
         # create Setting.ini corresponding to our testcase
         # call subprocess
-        subprocess.call(["./flextyper", "searching", "-c", settingFile])
+        subprocess.call(["time", "./flextyper", "searching", "-c", settingFile])
 
     # retrieve kmers from flexTyper output
     def retrieveKmers(self, kmernbr):
