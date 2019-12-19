@@ -38,7 +38,10 @@ class KmerRetriever(object):
         self.getQueries(queryNbr, queryFile, out)
         # create Setting.ini corresponding to our testcase
         # call subprocess
-        subprocess.call(["time", "./flextyper", "searching", "-c", settingFile])
+        try:
+            subprocess.call(["time", "./flextyper", "searching", "-c", settingFile])
+        except getopt.GetoptError:
+            print("Calling FlexTyper didn't succeed")
 
     # retrieve kmers from flexTyper output
     def retrieveKmers(self, kmernbr):
