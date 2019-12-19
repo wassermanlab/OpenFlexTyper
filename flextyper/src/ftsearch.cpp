@@ -20,7 +20,7 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
                     bool refOnly, SearchType searchType, bool multithread, const fs::path& inputFastQ,
                     uint overlap, bool returnMatchesOnly, bool kmerCounts,
                     uint stride, uint maxOccurences, uint threadNumber, bool ignoreNonUniqueKmers, bool crossover,
-                    bool printSearchTime)
+                    bool printSearchTime, uint maxKmers, uint totalKmers)
 {
     fs::path readFile;
 
@@ -38,7 +38,7 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     std::set<Query> inputQueries    = _queryExtractor->getInputQueries(refOnly, crossover, pathToQueryFile);
 
     KmerMap kmerMap;
-    _kmerGenerator->genKmerMap(inputQueries, kmerSize, refOnly, searchType, kmerMap, overlap, stride, crossover, ignoreNonUniqueKmers, kmerCounts);
+    _kmerGenerator->genKmerMap(inputQueries, kmerSize, refOnly, searchType, kmerMap, overlap, stride, crossover, ignoreNonUniqueKmers, kmerCounts, maxKmers, totalKmers);
     std::cout << "kmerMap size                  : " << kmerMap.size() << std::endl;
 
     std::cout << "\nsearching..." << std::endl;
