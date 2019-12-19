@@ -13,6 +13,7 @@
 #include <gtest/gtest.h>
 #include "kmergenerator.cpp"
 #include "queryextractor.h"
+#include <climits>
 
 using namespace std;
 
@@ -61,7 +62,7 @@ TEST_F(TestKmerGenerator, TestCrossOver_0)
     ft::KmerGenerator kmerGeneratorObj;
     Query myQuery = *results.begin();
 
-    SearchKmers ret = kmerGeneratorObj.genQueryKmers(myQuery, kmerSize, refOnly, searchType, overlap, stride, crossover, kmerCounts);
+    SearchKmers ret = kmerGeneratorObj.genQueryKmers(myQuery, kmerSize, refOnly, searchType, overlap, stride, crossover, kmerCounts, INT_MAX);
 
     SearchKmers expectedRet {{{QueryType::REF, 2}, { "AAACC", "AACCG" }},
                              {{QueryType::ALT, 2}, { "TTTTT" }},
@@ -101,7 +102,7 @@ TEST_F(TestKmerGenerator, TestCrossOver_1)
     ft::KmerGenerator kmerGeneratorObj;
     Query myQuery = *results.begin();
 
-    SearchKmers ret = kmerGeneratorObj.genQueryKmers(myQuery, kmerSize, refOnly, searchType, overlap, stride, crossover, kmerCounts);
+    SearchKmers ret = kmerGeneratorObj.genQueryKmers(myQuery, kmerSize, refOnly, searchType, overlap, stride, crossover, kmerCounts, INT_MAX);
 
     SearchKmers expectedRet {{{QueryType::REF, 2}, { "TTCCCCCCCC", "TTTCCCCCCC", "TTTTCCCCCC", "TTTTTCCCCC", "TTTTTTCCCC", "TTTTTTTCCC", "TTTTTTTTCC" }},
                              {{QueryType::ALT, 2}, { "CCCCCCCCGG", "CCCCCCCGGG", "CCCCCCGGGG", "CCCCCGGGGG", "CCCCGGGGGG", "CCCGGGGGGG", "CCGGGGGGGG" }},
@@ -141,7 +142,7 @@ TEST_F(TestKmerGenerator, TestCrossOverBiggerStride)
     ft::KmerGenerator kmerGeneratorObj;
     Query myQuery = *results.begin();
 
-    SearchKmers ret = kmerGeneratorObj.genQueryKmers(myQuery, kmerSize, refOnly, searchType, overlap, stride, crossover, kmerCounts);
+    SearchKmers ret = kmerGeneratorObj.genQueryKmers(myQuery, kmerSize, refOnly, searchType, overlap, stride, crossover, kmerCounts, INT_MAX);
 
     SearchKmers expectedRet {{{QueryType::REF, 2}, { "TTCCCCCCCC", "TTTTTCCCCC", "TTTTTTTTCC" }},
                              {{QueryType::ALT, 2}, { "CCCCCCCCGG", "CCCCCGGGGG", "CCGGGGGGGG" }},
@@ -181,7 +182,7 @@ TEST_F(TestKmerGenerator, TestCrossOverBiggerOverlap_0)
     ft::KmerGenerator kmerGeneratorObj;
     Query myQuery = *results.begin();
 
-    SearchKmers ret = kmerGeneratorObj.genQueryKmers(myQuery, kmerSize, refOnly, searchType, overlap, stride, crossover, kmerCounts);
+    SearchKmers ret = kmerGeneratorObj.genQueryKmers(myQuery, kmerSize, refOnly, searchType, overlap, stride, crossover, kmerCounts, INT_MAX);
 
     SearchKmers expectedRet {{{QueryType::REF, 2}, { "TTTTCCCCCC", "TTTTTCCCCC", "TTTTTTCCCC" }},
                              {{QueryType::ALT, 2}, { "CCCCCCGGGG", "CCCCCGGGGG", "CCCCGGGGGG" }},
@@ -221,7 +222,7 @@ TEST_F(TestKmerGenerator, TestCrossOverBiggerOverlap_1)
     ft::KmerGenerator kmerGeneratorObj;
     Query myQuery = *results.begin();
 
-    SearchKmers ret = kmerGeneratorObj.genQueryKmers(myQuery, kmerSize, refOnly, searchType, overlap, stride, crossover, kmerCounts);
+    SearchKmers ret = kmerGeneratorObj.genQueryKmers(myQuery, kmerSize, refOnly, searchType, overlap, stride, crossover, kmerCounts, INT_MAX);
 
     SearchKmers expectedRet {{{QueryType::REF, 2}, { "TTCCCCCCCC", "TTTCCCCCCC", "TTTTCCCCCC", "TTTTTCCCCC", "TTTTTTCCCC", "TTTTTTTCCC", "TTTTTTTTCC" }},
                              {{QueryType::ALT, 2}, { "CCCCCCCCGG", "CCCCCCCGGG", "CCCCCCGGGG", "CCCCCGGGGG", "CCCCGGGGGG", "CCCGGGGGGG", "CCGGGGGGGG" }},
@@ -277,7 +278,7 @@ TEST_F(TestKmerGenerator, TestGenCenteredSearchStrings_overlap_00) {
     unsigned int stride   = 1;
     bool         kmerCounts = false;
 
-    auto result = obj.genCenteredSearchStrings(queryString, kmerSize, overlap, stride, kmerCounts);
+    auto result = obj.genCenteredSearchStrings(queryString, kmerSize, overlap, stride, kmerCounts, INT_MAX);
     set<string> expectedResult { "AAATC",
                                  "AATCG",
                                  "ATCGG",
@@ -300,7 +301,7 @@ TEST_F(TestKmerGenerator, TestGenCenteredSearchStrings_overlap_01) {
     unsigned int stride   = 1;
     bool         kmerCounts = false;
 
-    auto result = obj.genCenteredSearchStrings(queryString, kmerSize, overlap, stride, kmerCounts);
+    auto result = obj.genCenteredSearchStrings(queryString, kmerSize, overlap, stride, kmerCounts, INT_MAX);
     set<string> expectedResult {
                                  "AAAAT",
                                  "AAATC",
@@ -325,7 +326,7 @@ TEST_F(TestKmerGenerator, TestGenCenteredSearchStrings_overlap_10) {
     unsigned int stride   = 1;
     bool         kmerCounts = false;
 
-    auto result = obj.genCenteredSearchStrings(queryString, kmerSize, overlap, stride, kmerCounts);
+    auto result = obj.genCenteredSearchStrings(queryString, kmerSize, overlap, stride, kmerCounts, INT_MAX);
     set<string> expectedResult { "AATCG",
                                  "ATCGG"
                                };
@@ -379,7 +380,7 @@ TEST_F(TestKmerGenerator, TestProbabilisticParamDisabled) {
     bool         kmerCounts   = false;
 
     KmerGenerator obj;
-    obj.genKmerMap(inputQueries, kmerSize, refOnly, searchType, kmerMap, overlap, stride, crossover, ignoreNonUniqueKmers, kmerCounts);
+    obj.genKmerMap(inputQueries, kmerSize, refOnly, searchType, kmerMap, overlap, stride, crossover, ignoreNonUniqueKmers, kmerCounts, INT_MAX, INT_MAX);
     KmerMap expectedKmerMap {{"AAAAAC", {{2, ft::QueryType::REF}}},
                              {"AAAAAG", {{3, ft::QueryType::REF}}},
                              {"AAAAAT", {{1, ft::QueryType::REF}}}};
@@ -406,7 +407,7 @@ TEST_F(TestKmerGenerator, TestProbabilisticParamEnabled) {
     bool         kmerCounts   = false;
 
     KmerGenerator obj;
-    obj.genKmerMap(inputQueries, kmerSize, refOnly, searchType, kmerMap, overlap, stride, crossover, ignoreNonUniqueKmers, kmerCounts);
+    obj.genKmerMap(inputQueries, kmerSize, refOnly, searchType, kmerMap, overlap, stride, crossover, ignoreNonUniqueKmers, kmerCounts, INT_MAX, INT_MAX);
 
     KmerMap expectedKmerMap {{"AAAAAT", {{1, ft::QueryType::REF}}},
                              {"AAAAAC", {{2, ft::QueryType::REF}}},
@@ -432,7 +433,7 @@ TEST_F(TestKmerGenerator, TestProbabilisticParamEnabledLongQuery) {
     bool         kmerCounts   = false;
 
     KmerGenerator obj;
-    obj.genKmerMap(inputQueries, kmerSize, refOnly, searchType, kmerMap, overlap, stride, crossover, ignoreNonUniqueKmers, kmerCounts);
+    obj.genKmerMap(inputQueries, kmerSize, refOnly, searchType, kmerMap, overlap, stride, crossover, ignoreNonUniqueKmers, kmerCounts, INT_MAX, INT_MAX);
 
     // notice that kmers are appearing as they are created
     // They are ordered lexicographycally.
