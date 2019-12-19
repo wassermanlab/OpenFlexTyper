@@ -32,7 +32,7 @@ if __name__ == '__main__':
             queryFile = "Benchmark.tsv"
             querynbr  = kmerRetriever.getNbrQueries(kmernbr) 
             kmerRetriever.getQueries(querynbr, queryFile, "tmpQueryFile.tsv")
-            kmerRetriever.generateKmers(kmernbr, "tmpQueryFile.tsv", settingFile)
+            kmerRetriever.generateKmers(kmernbr, kmersize, "tmpQueryFile.tsv", settingFile)
 
             # open generated kmer file and grab kmernbr
             kmerRetriever.retrieveKmers(kmernbr)

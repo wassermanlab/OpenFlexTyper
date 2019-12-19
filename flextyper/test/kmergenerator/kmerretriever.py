@@ -1,5 +1,6 @@
 import subprocess
 import math
+import time
 
 X = 3 # number of kmers per query 
 
@@ -31,7 +32,7 @@ class KmerRetriever(object):
         print('file generated in : ', outputFile)
 
     # generate kmers using FlexTyper and return them
-    def generateKmers(self, kmerNbr, queryFile, settingFile):
+    def generateKmers(self, kmerNbr, kmersize, queryFile, settingFile):
         queryNbr = self.getNbrQueries(kmerNbr)
         print(int(queryNbr), ' queries required')
         out = "oqueries.tsv"
@@ -39,7 +40,16 @@ class KmerRetriever(object):
         # create Setting.ini corresponding to our testcase
         # call subprocess
         try:
-            subprocess.call(["time", "./flextyper", "searching", "-c", settingFile])
+            start_time = time.time()
+            subprocess.call(["./flextyper", "searching", "-c", settingFile])
+            elapse_time = time.time() - start_time
+            print('elapse time : ', elapse_time)
+
+            # csv_file.write('number of kmers, kmer length, time taken')
+            with open('performances.csv', mode = 'a') as csv_file:
+                csv_file.write(str(kmerNbr) + ', ' + str(kmersize) + ', ' + str(elapse_time) + '\n')
+            csv_file.close()
+
         except getopt.GetoptError:
             print("Calling FlexTyper didn't succeed")
 
