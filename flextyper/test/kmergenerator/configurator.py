@@ -5,7 +5,7 @@ class Configurator(object):
     # default constructor
     def __init__(self):
         self.conf = {}
-        self.conf["queryFile"] = "Benchmark.tsv"
+        self.conf["queryFile"] = "tmpQueryFile.tsv"
         self.conf["kmerSize"] = 0
         self.conf["overlap"] = 0
         self.conf["stride"] = 1
@@ -14,12 +14,13 @@ class Configurator(object):
         self.conf["readLength"] = 100
         self.conf["indexFileLocation"] = "PerfectReads.fm9"
         self.conf["outputFolder"] = ""
-        self.conf["refOnly"] = False
+        self.conf["refOnly"] = True
         self.conf["searchType"] = "CENTERED"
-        self.conf["multithread"] = True
+        self.conf["multithread"] = False
         self.conf["ignoreNonUniqueKmers"] = False
         self.conf["kmerCounts"] = True
         self.conf["maxKmersPerQuery"] = 3
+        self.conf["maxTotalKmers"] = 0 
 
     # initialization with values, (pass in a dictionary)
     def initWithParams(self, **kwargs):
@@ -29,6 +30,10 @@ class Configurator(object):
     # setter for kmerSize field, add others if needed
     def setKmerSize(self, kmerSize):
         self.conf["kmerSize"] = kmerSize
+
+    # setter for the max Total kmers
+    def setMaxTotalKmers(self, maxTotalKmers):
+        self.conf["maxTotalKmers"] = maxTotalKmers
 
     # json file configuration creator
     def createConf(self):
