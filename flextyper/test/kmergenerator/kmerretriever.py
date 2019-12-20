@@ -12,7 +12,7 @@ class KmerRetriever(object):
     # provides the number of queries needed to generate
     # expected number of kmers
     def getNbrQueries(self, kmerNbr):        
-        return math.ceil(kmerNbr / X)
+        return kmerNbr # return math.ceil(kmerNbr / X) # this not true !
 
     # retrieve given number of queries in query file
     def getQueries(self, queryNbr, queryFile, outputFile):

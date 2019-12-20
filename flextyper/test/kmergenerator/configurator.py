@@ -11,12 +11,12 @@ class Configurator(object):
         self.conf["stride"] = 1
         self.conf["maxOccurences"] = 200
         self.conf["threadNumber"] = 30
-        self.conf["readLength"] = 100
-        self.conf["indexFileLocation"] = "PerfectReads.fm9"
+        self.conf["readLength"] = 150
+        self.conf["indexFileLocation"] = "ERR1955491_nodp_nons/" # "PerfectReads.fm9"
         self.conf["outputFolder"] = ""
         self.conf["refOnly"] = True
         self.conf["searchType"] = "CENTERED"
-        self.conf["multithread"] = False
+        self.conf["multithread"] = True
         self.conf["ignoreNonUniqueKmers"] = False
         self.conf["kmerCounts"] = True
         self.conf["maxKmersPerQuery"] = 3

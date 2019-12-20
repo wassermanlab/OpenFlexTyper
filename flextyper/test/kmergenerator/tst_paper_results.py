@@ -29,7 +29,7 @@ if __name__ == '__main__':
             conf.createSettingFile(settingFile)
     
             kmerRetriever = KmerRetriever()
-            queryFile = "Benchmark.tsv"
+            queryFile = "ERR1955491_CProbe.BamQueryOutput.tsv" # "Benchmark.tsv"
             querynbr  = kmerRetriever.getNbrQueries(kmernbr) 
             kmerRetriever.getQueries(querynbr, queryFile, "tmpQueryFile.tsv")
             kmerRetriever.generateKmers(kmernbr, kmersize, "tmpQueryFile.tsv", settingFile)
