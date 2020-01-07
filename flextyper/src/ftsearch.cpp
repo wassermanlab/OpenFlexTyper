@@ -20,7 +20,7 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
                     bool refOnly, SearchType searchType, bool multithread, const fs::path& inputFastQ,
                     uint overlap, bool returnMatchesOnly, bool kmerCounts,
                     uint stride, uint maxOccurences, uint threadNumber, bool ignoreNonUniqueKmers, bool crossover,
-                    bool printSearchTime, uint maxKmers, uint totalKmers)
+                    bool printSearchTime, uint maxKmers, uint totalKmers, const fs::path& matchingReads)
 {
     fs::path readFile;
 
@@ -63,7 +63,7 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     fs::path indexMapFile = indexFile;
     indexMapFile += ".map";
 
-    indexCounts = _resultProcessor->processResults(indexPosResults, readLength);
+    indexCounts = _resultProcessor->processResults(indexPosResults, readLength, matchingReads);
     _writerBridge->saveQueryOutput(indexCounts, returnMatchesOnly, crossover, pathToQueryFile, queryOutputFile);
 }
 
