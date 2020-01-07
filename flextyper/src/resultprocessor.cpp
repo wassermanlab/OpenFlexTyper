@@ -4,6 +4,7 @@ namespace ft {
 //======================================================================
 ResultProcessor::ResultProcessor()
     : _utils(&_ownedUtils)
+    , _stats(&_ownedStats)
 {
 }
 
@@ -42,10 +43,22 @@ ResultsMap ResultProcessor::processIndexPos(ResultsMap& indexPosResults, uint re
 }
 
 //======================================================================
-MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint readLen)
+MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint readLen, const fs::path& matchingReads)
 {
     // convert index positions to read ids
-    auto res = processIndexPos(indexPosResults, readLen);
+    ResultsMap res = processIndexPos(indexPosResults, readLen);
+
+    // ResultsMap is :
+    // <<QueryId, QueryType>, <set of reads>>
+
+    if (!matchingReads.empty()) {
+        for (auto e : res) {
+            for (auto f : e.second) {
+                // std::cout << "Read : " << f << std::endl;
+                _stats->printMatchingReadsToFile("test_output.fa", matchingReads, f);
+            }
+        }
+    }
 
     // return index Counts <query ID, number of read hits>
     return getIndexCounts(res);
@@ -55,6 +68,12 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
 void ResultProcessor::overrideUtils(std::shared_ptr<IUtils> utils)
 {
     _utils = utils.get();
+}
+
+//======================================================================
+void ResultProcessor::overrideStats(std::shared_ptr<IStats> stats)
+{
+    _stats = stats.get();
 }
 
 //======================================================================

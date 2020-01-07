@@ -43,6 +43,13 @@ public:
     /// \param time
     ////////////////////////////////////////////////////////////////////////
     void printKmerSearchTimeToFile(const fs::path& outputFile, const std::string& kmer, uint time) const;
+
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief printMatchingReadsToFile
+    /// \param outputFile
+    /// \param read
+    ////////////////////////////////////////////////////////////////////////
+    void  printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, size_t line) const;
 };
 }
 

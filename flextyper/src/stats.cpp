@@ -39,6 +39,23 @@ void Stats::printKmerSearchTimeToFile(const fs::path& outputFile, const std::str
 }
 
 //======================================================================
+void Stats::printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, size_t line) const
+{
+    std::ofstream file;
+    file.open(outputFile, std::ios_base::app);
+    std::string s;
+    std::ifstream f(read);
+
+    if (file.is_open()) {
+        for (int i = 1; i <= line; i++)
+            std::getline(f, s);
+        file << s << "\n";
+    }
+
+    file.close();
+}
+
+//======================================================================
 Stats::~Stats()
 {
 }

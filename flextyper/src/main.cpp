@@ -101,7 +101,7 @@ int main(int argc, char** argv)
         ft::SearchType searchType             = static_cast<ft::SearchType>(settings.value("searchType").toString().toStdString()) ;
         bool           multithread            = settings.value("multithread").toBool();
         bool           ignore_multi_hits      = settings.value("ignore_multi_hits").toBool();
-        bool           extract_matching_reads = settings.value("extract_matching_reads").toBool();
+        fs::path       matchingReads          = settings.value("matchingReads").toString().toStdString();
         fs::path       inputFastQ             = settings.value("inputFastQ").toString().toStdString();
         uint           overlap                = settings.value("overlap").toInt();
         bool           returnMatchesOnly      = settings.value("return_only_positive_matches").toBool();
@@ -134,6 +134,7 @@ int main(int argc, char** argv)
         std::cout << "printSearchTime               : " << printSearchTime << std::endl;
 		std::cout << "maxKmersPerQuery              : " << maxKmersPerQuery << std::endl;
         std::cout << "maxTotalKmers                 : " << maxTotalKmers << std::endl;
+        std::cout << "matchinReads                  : " << matchingReads << std::endl;
 
         createdIndexRepo(indexFileLocation);
 
@@ -142,10 +143,8 @@ int main(int argc, char** argv)
                                outputFolder, refOnly, searchType, multithread, inputFastQ,
                                overlap, returnMatchesOnly, kmerCounts,
                                stride, maxOccurences, threadNumber, ignoreNonUniqueKmers, crossover,
-                               printSearchTime, maxKmersPerQuery, maxTotalKmers);
-    }
-    else if (command == "indexing")
-    {
+                               printSearchTime, maxKmersPerQuery, maxTotalKmers, matchingReads);
+    } else if (command == "indexing") {
         parser.clearPositionalArguments();
         parser.addHelpOption();
 
