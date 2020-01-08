@@ -11,14 +11,6 @@ ResultProcessor::ResultProcessor()
 //======================================================================
 MapOfCounts ResultProcessor::getIndexCounts(ResultsMap readIDResults)
 {
-    /*
-     multi hit = when a read matches to multiple different queries.
-     if ignore_multi_hits is true then we want to keep track of the observed reads and discount any
-     that have been observed as a match for multiple queries
-
-     iterate over readIDResults, count number of reads,
-     ignore multi hits
-    */
     MapOfCounts indexCounts;
 
     for (auto e : readIDResults) {
@@ -55,7 +47,7 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
         for (auto e : res) {
             for (auto f : e.second) {
                 // std::cout << "Read : " << f << std::endl;
-                _stats->printMatchingReadsToFile("test_output.fa", matchingReads, f);
+                _stats->printMatchingReadsToFile("extracted_reads.fa", matchingReads, f);
             }
         }
     }
