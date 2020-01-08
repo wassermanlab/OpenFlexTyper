@@ -47,7 +47,7 @@ void Stats::printMatchingReadsToFile(const fs::path& outputFile, const std::stri
     std::ifstream f(read);
 
     if (file.is_open()) {
-        for (int i = 1; i <= line; i++)
+        for (int i = 1; i <= line + 1; i++)
             std::getline(f, s);
         file << s << "\n";
     }
