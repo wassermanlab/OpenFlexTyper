@@ -53,7 +53,7 @@ public:
     /// \param readLen
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    MapOfCounts processResults(ResultsMap& indexPosResults, uint readLen, const fs::path& matchingReads);
+    MapOfCounts processResults(ResultsMap& indexPosResults, uint readLen, const fs::path& matchingReads = "");
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief overrideUtils
