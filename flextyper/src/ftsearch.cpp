@@ -41,6 +41,12 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     _kmerGenerator->genKmerMap(inputQueries, kmerSize, refOnly, searchType, kmerMap, overlap, stride, crossover, ignoreNonUniqueKmers, kmerCounts, maxKmers, totalKmers);
     std::cout << "kmerMap size                  : " << kmerMap.size() << std::endl;
 
+    /*
+    for (auto e : kmerMap) {
+        std::cout << e.first << std::endl;
+    }
+    */
+
     std::cout << "\nsearching..." << std::endl;
     MapOfCounts indexCounts;
 
