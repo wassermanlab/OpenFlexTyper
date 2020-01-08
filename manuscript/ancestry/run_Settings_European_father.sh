@@ -11,4 +11,4 @@ export QT_QPA_PLATFORM='offscreen'
 cd $PBS_O_WORKDIR
 
 FLEX_BIN='/scratch/st-wasserww-1/FLEXTYPER/OpenFlexTyper/build'
-$FLEX_BIN/flextyper searching -c Settings_European_father.ini
+time $FLEX_BIN/flextyper searching -c Settings_European_father.ini
