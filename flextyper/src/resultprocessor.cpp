@@ -40,6 +40,14 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
     // convert index positions to read ids
     ResultsMap res = processIndexPos(indexPosResults, readLen);
 
+    /*
+    for (auto e : res) {
+        for (auto f : e.second)
+            std::cout << f << " ";
+        std::cout << std::endl;
+    }
+    */
+
     // ResultsMap is :
     // <<QueryId, QueryType>, <set of reads>>
 
