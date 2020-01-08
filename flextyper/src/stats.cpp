@@ -1,5 +1,6 @@
 #include "stats.h"
 #include <fstream>
+#include <iostream>
 
 namespace ft {
 //======================================================================
@@ -39,17 +40,28 @@ void Stats::printKmerSearchTimeToFile(const fs::path& outputFile, const std::str
 }
 
 //======================================================================
-void Stats::printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, size_t line) const
+void Stats::printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, std::set<size_t>& lines) const
 {
     std::ofstream file;
     file.open(outputFile, std::ios_base::app);
-    std::string s;
+    std::string line;
     std::ifstream f(read);
 
+    /*
+    std::cout << "display elements" << std::endl;
+    for (auto e : lines) {
+        std::cout << e << std::endl;
+    }
+    */
+
     if (file.is_open()) {
-        for (int i = 1; i <= line + 1; i++)
-            std::getline(f, s);
-        file << s << "\n";
+        for (int i = 0; i <= *(lines.end())+1; i++) {
+            std::getline(f, line);
+            if (lines.find(i) != lines.end()) {
+                // std::cout << "taking line : " << i+1 << std::endl;
+                file << line << "\n";
+            }
+        }
     }
 
     file.close();

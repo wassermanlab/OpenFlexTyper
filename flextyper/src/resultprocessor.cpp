@@ -45,10 +45,8 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
 
     if (!matchingReads.empty()) {
         for (auto e : res) {
-            for (auto f : e.second) {
-                // std::cout << "Read : " << f << std::endl;
-                _stats->printMatchingReadsToFile("extracted_reads.fa", matchingReads, f);
-            }
+            _stats->printMatchingReadsToFile("extracted_reads.fa", matchingReads, e.second);
+
         }
     }
 

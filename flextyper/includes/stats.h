@@ -49,7 +49,7 @@ public:
     /// \param outputFile
     /// \param read
     ////////////////////////////////////////////////////////////////////////
-    void  printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, size_t line) const;
+    void  printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, std::set<size_t>& line) const;
 };
 }
 

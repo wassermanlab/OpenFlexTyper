@@ -38,7 +38,7 @@ public:
     /// \param outputFile
     /// \param read
     ////////////////////////////////////////////////////////////////////////
-    virtual void  printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, size_t line) const = 0;
+    virtual void  printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, std::set<size_t>& line) const = 0;
 };
 }
 
