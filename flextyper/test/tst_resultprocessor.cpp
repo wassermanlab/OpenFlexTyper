@@ -282,4 +282,35 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_4)
     EXPECT_NO_THROW();
 	EXPECT_EQ(areFileIdentical("expectedFile.fa", "extracted_reads.fa"), true);
 }
+
+//======================================================================
+TEST_F(TestResultProcessor, processResults_extract_matching_reads_5)
+{
+    TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
+
+    std::remove("extracted_reads.fa");
+    ResultsMap indexPosResults {{{1, QueryType::REF}, {6}}};
+    uint readLen = 59;
+    ofstream outputFile("index.fa");
+    if (outputFile.is_open()) {
+        outputFile << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n"; // 0 -> 59
+        outputFile << "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTATTTTTTTTTTTTTTTTTTTTTTTTTTTT\n";
+        outputFile << "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCGCCCCCCCCCCCCCCCCCCCCCCCCCCCC\n";
+        outputFile << "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGCGGGGGGGGGGGGGGGGGGGGGGGGGGGG\n";
+    }
+    outputFile.close();
+    _resultProcessor.processResults(indexPosResults, readLen, "index.fa");
+
+    // expected output
+    ofstream expectedFile("expectedFile.fa");
+    if (expectedFile.is_open()) {
+        expectedFile << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n";
+    }
+    expectedFile.close();
+
+    EXPECT_NO_FATAL_FAILURE();
+    EXPECT_NO_THROW();
+    EXPECT_EQ(areFileIdentical("expectedFile.fa", "extracted_reads.fa"), true);
+}
+
 }
