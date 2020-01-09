@@ -6,6 +6,7 @@
 #include <set>
 #include <experimental/filesystem>
 #include "istats.h"
+#include <iostream>
 
 namespace fs = std::experimental::filesystem;
 
