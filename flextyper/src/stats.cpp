@@ -47,6 +47,9 @@ void Stats::printMatchingReadsToFile(const fs::path& outputFile, const std::stri
     std::string line;
     std::ifstream f(read);
 
+    if (lines.size() == 0)
+        return;
+
     /*
     std::cout << "display elements" << std::endl;
     for (auto e : lines) {
