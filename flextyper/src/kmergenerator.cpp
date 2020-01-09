@@ -240,10 +240,16 @@ void KmerGenerator::genKmerMap(std::set<Query>& inputQueries, uint kmerSize, boo
 
     if (ignoreNonUniqueKmers) {
         std::cout << "probabilistic search" << std::endl;
-        for (auto e : kmerMap) {
-            if (kmerMap[e.first].size() > 1)
-                kmerMap.erase(e.first);
+        std::cout << "initial size : " << kmerMap.size() << std::endl;
+        for (auto it = kmerMap.begin(); it != kmerMap.end();) {
+            if (kmerMap[(*it).first].size() > 1) {
+                // std::cout << "removing  " << (*it).first << std::endl;
+                kmerMap.erase(it++);
+            } else {
+                ++it;
+            }
         }
+        std::cout << "final   size : " << kmerMap.size() << std::endl;
     }
 }
 
