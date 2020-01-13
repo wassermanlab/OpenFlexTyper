@@ -38,7 +38,7 @@ ResultsMap ResultProcessor::processIndexPos(ResultsMap& indexPosResults, uint re
 MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint readLen, const fs::path& matchingReads)
 {
     // convert index positions to read ids
-    ResultsMap res = processIndexPos(indexPosResults, readLen);
+    ResultsMap tmp = processIndexPos(indexPosResults, readLen);
 
     /*
     for (auto e : res) {
@@ -47,6 +47,18 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
         std::cout << std::endl;
     }
     */
+
+	ResultsMap res;
+	for (const auto& e : tmp) {
+		for (const auto& f : e.second) {
+			if (f >= int(readLen / 2)) {
+				res[e.first].insert(int(f / (readLen / 2)));
+			} else {
+				res[e.first].insert(f);
+			}
+		}
+	}
+
 
     // ResultsMap is :
     // <<QueryId, QueryType>, <set of reads>>
