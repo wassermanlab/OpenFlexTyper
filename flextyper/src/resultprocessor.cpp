@@ -35,7 +35,7 @@ ResultsMap ResultProcessor::processIndexPos(ResultsMap& indexPosResults, uint re
 }
 
 //======================================================================
-MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint readLen, const fs::path& matchingReads)
+MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint readLen, uint readlines, const fs::path& matchingReads)
 {
     // convert index positions to read ids
     ResultsMap tmp = processIndexPos(indexPosResults, readLen);
@@ -51,8 +51,8 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
 	ResultsMap res;
 	for (const auto& e : tmp) {
 		for (const auto& f : e.second) {
-			if (f >= int(readLen / 2)) {
-				res[e.first].insert(int(f / (readLen / 2)));
+            if (f >= int(readlines / 2)) {
+                res[e.first].insert(int(f / (readlines / 2)));
 			} else {
 				res[e.first].insert(f);
 			}
