@@ -54,7 +54,7 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
     }
     */
 
-    std::cout << "lines : " << readlines << std::endl;
+    // std::cout << "lines : " << readlines << std::endl;
 
     if (readlines % 2 != 0) {
         std::cout << "error with the number of reads\n";
@@ -80,7 +80,7 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
         }
     }
 
-    /**/
+    /*
     std::cout << "read Ids processed : \n";
     for (const auto& e : res) {
         for (const auto& f : e.second)
@@ -89,7 +89,7 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
     }
 
     std::cout << "res.size() : " << res.size() << std::endl;
-    /**/
+    */
 
     // ResultsMap is :
     // <<QueryId, QueryType>, <set of reads>>
