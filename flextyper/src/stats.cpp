@@ -50,12 +50,12 @@ void Stats::printMatchingReadsToFile(const fs::path& outputFile, const std::stri
     if (lines.size() == 0)
         return;
 
-    /*
+	/*
     std::cout << "display elements" << std::endl;
     for (auto e : lines) {
         std::cout << e << std::endl;
     }
-    */
+	*/
 
     std::cout << "max line : " << *(lines.end())+1 << std::endl;
 
