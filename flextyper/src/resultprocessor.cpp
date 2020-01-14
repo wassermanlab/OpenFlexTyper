@@ -13,9 +13,14 @@ MapOfCounts ResultProcessor::getIndexCounts(ResultsMap readIDResults)
 {
     MapOfCounts indexCounts;
 
+    int count = 0;
+
     for (auto e : readIDResults) {
-        // std::cout << e.first.first << " " << e.second.size() << std::endl;
-        indexCounts.insert({{e.first.first, e.first.second}, e.second.size()});
+        count  = 0;
+        for (auto f : e.second) {
+            count++;
+        }
+        indexCounts.insert({{e.first.first, e.first.second}, count});
     }
 
     return indexCounts;
@@ -49,36 +54,48 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
     }
     */
 
-	ResultsMap res;
-	for (const auto& e : tmp) {
-		for (const auto& f : e.second) {
-            if (f == readlines / 2) {
-                res[e.first].insert(int(f / readlines / 2));
-            } else if (f > int(readlines / 2)) {
-                res[e.first].insert(int(f / (readlines / 2)));
-			} else {
-                res[e.first].insert(f);
-			}
-		}
-	}
+    std::cout << "lines : " << readlines << std::endl;
 
-    /*
+    if (readlines % 2 != 0) {
+        std::cout << "error with the number of reads\n";
+        exit(-1);
+    }
+
+    ResultsMap res;
+
+    int rcMin = (readlines / 2) + 1; // readid >= 1
+    for (auto e : tmp) {
+        for (auto f : e.second) {
+            if (f >= rcMin) {
+                if (e.second.find(f - (readlines / 2)) == e.second.end()) {
+                    res[e.first].insert(f);
+                }
+            } else {
+                std::set<size_t>::iterator it = e.second.find(f + (readlines / 2));
+                if (it != e.second.end()) {
+                    res[e.first].erase(it);
+                }
+                res[e.first].insert(f);
+            }
+        }
+    }
+
+    /**/
     std::cout << "read Ids processed : \n";
-    for (auto e : res) {
-        for (auto f : e.second)
-            std::cout << f << " ";
+    for (const auto& e : res) {
+        for (const auto& f : e.second)
+            std::cout << "element : " << f << " ";
         std::cout << std::endl;
     }
-    */
 
+    std::cout << "res.size() : " << res.size() << std::endl;
+    /**/
 
     // ResultsMap is :
     // <<QueryId, QueryType>, <set of reads>>
 
     if (!matchingReads.empty()) {
-        for (auto e : res) {
-            _stats->printMatchingReadsToFile("extracted_reads.fa", matchingReads, e.second);
-        }
+        _stats->printMatchingReadsToFile("extracted_reads.fa", matchingReads, res);
     }
 
     // return index Counts <query ID, number of read hits>
