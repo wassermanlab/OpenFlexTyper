@@ -41,7 +41,8 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
     ResultsMap tmp = processIndexPos(indexPosResults, readLen);
 
     /*
-    for (auto e : res) {
+    std::cout << "read Ids : \n";
+    for (auto e : tmp) {
         for (auto f : e.second)
             std::cout << f << " ";
         std::cout << std::endl;
@@ -51,13 +52,24 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
 	ResultsMap res;
 	for (const auto& e : tmp) {
 		for (const auto& f : e.second) {
-            if (f >= int(readlines / 2)) {
+            if (f == readlines / 2) {
+                res[e.first].insert(int(f / readlines / 2));
+            } else if (f > int(readlines / 2)) {
                 res[e.first].insert(int(f / (readlines / 2)));
 			} else {
-				res[e.first].insert(f);
+                res[e.first].insert(f);
 			}
 		}
 	}
+
+    /*
+    std::cout << "read Ids processed : \n";
+    for (auto e : res) {
+        for (auto f : e.second)
+            std::cout << f << " ";
+        std::cout << std::endl;
+    }
+    */
 
 
     // ResultsMap is :
@@ -66,7 +78,6 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
     if (!matchingReads.empty()) {
         for (auto e : res) {
             _stats->printMatchingReadsToFile("extracted_reads.fa", matchingReads, e.second);
-
         }
     }
 
