@@ -59,7 +59,7 @@ std::set<size_t> Utils::convertIndexPositionsToReadIDs(std::set<size_t> indexPos
     // std::remove("occurences.txt");
     for (auto indexPos : indexPositions) {
         auto r = (size_t) std::ceil(indexPos / (readLength + 1));
-        std::cout << indexPos << " -> " << r << std::endl;
+        // std::cout << indexPos << " -> " << r << std::endl;
         readIDs.insert(r);
     }
 
