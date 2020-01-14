@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <set>
+#include "iutils.h"
 #include <experimental/filesystem>
 
 namespace fs = std::experimental::filesystem;
@@ -38,7 +39,7 @@ public:
     /// \param outputFile
     /// \param read
     ////////////////////////////////////////////////////////////////////////
-    virtual void  printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, std::set<size_t>& line) const = 0;
+    virtual void  printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, ResultsMap& line) const = 0;
 };
 }
 

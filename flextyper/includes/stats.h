@@ -7,6 +7,7 @@
 #include <experimental/filesystem>
 #include "istats.h"
 #include <iostream>
+#include "iutils.h"
 
 namespace fs = std::experimental::filesystem;
 
@@ -50,7 +51,7 @@ public:
     /// \param outputFile
     /// \param read
     ////////////////////////////////////////////////////////////////////////
-    void  printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, std::set<size_t>& line) const;
+    void  printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, ResultsMap& res) const;
 };
 }
 
