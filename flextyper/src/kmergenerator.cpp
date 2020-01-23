@@ -16,7 +16,7 @@ std::set<std::string> KmerGenerator::genSlidingSearchStrings(const std::string& 
     if (queryString.length() < kmerSize)
         return searchStrings;
 
-    int count = 0;
+    uint count = 0;
 
     for (uint i = 0; i <= queryString.length() - kmerSize; i += stride) {
         if (maxKmers > 0 && count >= maxKmers)
@@ -43,7 +43,7 @@ std::set<std::string> KmerGenerator::genCenteredSearchStrings(const std::string&
 {
     std::set<std::string> searchStrings;
 
-    int count = 0;
+    uint count = 0;
 
     if (queryString.length() < kmerSize)
         return searchStrings;
@@ -155,7 +155,7 @@ SearchKmers KmerGenerator::genQueryKmers(Query inputQuery, uint kmerSize, bool r
     if (!refSearchStrings.empty()) {
         results[{QueryType::REF, queryID}] = refSearchStrings;
     } else {
-        std::cout << "no ref kmers generated" << std::endl;
+        std::cerr << "no ref kmers generated" << std::endl;
     }
 
     // if refOnly = false, gen alt search queries
@@ -173,7 +173,7 @@ SearchKmers KmerGenerator::genQueryKmers(Query inputQuery, uint kmerSize, bool r
         if (!altSearchStrings.empty()) {
             results[{QueryType::ALT, queryID}] = altSearchStrings;
         } else {
-            std::cout << "no alt kmers generated" << std::endl;
+            std::cerr << "no alt kmers generated" << std::endl;
         }
 
         // if crossover is enabled, then generates crossover data
@@ -229,7 +229,7 @@ void KmerGenerator::genKmerMap(std::set<Query>& inputQueries, uint kmerSize, boo
     if (maxTotalKmers > 0 && kmerMap.size() > maxTotalKmers) {
         KmerMap tmp = kmerMap;
         kmerMap.clear();
-        int l = 0;
+        uint l = 0;
         for (auto e : tmp) {
             if (l == maxTotalKmers)
                 break;

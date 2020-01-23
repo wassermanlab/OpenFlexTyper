@@ -100,7 +100,6 @@ int main(int argc, char** argv)
         bool           refOnly                = settings.value("refOnly").toBool();
         ft::SearchType searchType             = static_cast<ft::SearchType>(settings.value("searchType").toString().toStdString()) ;
         bool           multithread            = settings.value("multithread").toBool();
-        bool           ignore_multi_hits      = settings.value("ignore_multi_hits").toBool();
         fs::path       matchingReads          = settings.value("matchingReads").toString().toStdString();
         fs::path       inputFastQ             = settings.value("inputFastQ").toString().toStdString();
         uint           overlap                = settings.value("overlap").toInt();
@@ -130,7 +129,6 @@ int main(int argc, char** argv)
         std::cout << "maxOccurences                 : " << maxOccurences << std::endl;
         std::cout << "threadNumber                  : " << threadNumber << std::endl;
         std::cout << "ignoreNonUniqueKmers          : " << ignoreNonUniqueKmers << std::endl;
-        std::cout << "crossover                     : " << crossover << std::endl;
         std::cout << "printSearchTime               : " << printSearchTime << std::endl;
 		std::cout << "maxKmersPerQuery              : " << maxKmersPerQuery << std::endl;
         std::cout << "maxTotalKmers                 : " << maxTotalKmers << std::endl;

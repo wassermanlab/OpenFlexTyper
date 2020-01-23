@@ -31,6 +31,10 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
         lines++;
     file.close();
 
+    std::ifstream in(matchingReads, std::ifstream::ate | std::ifstream::binary);
+    uint offset = in.tellg();
+    std::cout << "offset : " << offset << std::endl;
+
     fs::path readFile;
 
     if (inputFastQ.empty()) {
@@ -72,7 +76,8 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     } else if (setOfIndexes.size() > 1) {
         std::cout << "searching with " << setOfIndexes.size() << " indexes" << std::endl;
         _finder->searchMultipleIndexes(indexPosResults, kmerMap, setOfIndexes, indexFileLocation,
-                                       maxOccurences, multithread, threadNumber, printSearchTime);
+                                       maxOccurences, multithread, threadNumber, printSearchTime,
+                                       offset);
     }
 
     fs::path indexMapFile = indexFile;
