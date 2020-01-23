@@ -54,7 +54,7 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
     }
     */
 
-    std::cout << "lines : " << readlines << std::endl;
+    // std::cout << "lines : " << readlines << std::endl;
 
     if (readlines % 2 != 0) {
         std::cout << "error with the number of reads\n";
@@ -65,11 +65,8 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
 
     int rcMin = (readlines / 2) + 1; // readid >= 1
 
-    /*
     for (auto e : tmp) {
         for (auto f : e.second) {
-            // std::cout << "processing : " << f << std::endl;
-
             if (f >= rcMin) {
                 if (e.second.find(f - (readlines / 2)) == e.second.end()) {
                     res[e.first].insert(f);
@@ -78,33 +75,6 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
                 std::set<size_t>::iterator it = e.second.find(f + (readlines / 2));
                 if (it != e.second.end()) {
                     e.second.erase(it);
-                }
-                res[e.first].insert(f);
-            }
-        }
-    }
-    */
-
-    std::cout << "rcMin : " << rcMin << std::endl;
-
-    for (auto e : tmp) {
-        for (auto f : e.second) {
-            // std::cout << "processing : " << f << std::endl;
-            if (f < rcMin) {
-                res[e.first].insert(f);
-            }
-        }
-    }
-
-    for (auto e : tmp) {
-        for (auto f : e.second) {
-            // std::cout << "processing : " << f << std::endl;
-            if (f >= rcMin) {
-                size_t fw = f - (readlines / 2);
-
-                if (res[e.first].find(fw) != res[e.first].end()) {
-                    // std::cout << "readId " << f << " -> " << fw << " exists !!!\n";
-                    continue;
                 }
                 res[e.first].insert(f);
             }
