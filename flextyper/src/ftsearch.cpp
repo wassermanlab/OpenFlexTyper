@@ -33,8 +33,6 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
 
     std::ifstream in(matchingReads, std::ifstream::ate | std::ifstream::binary);
     uint offset = in.tellg();
-    std::cout << "offset : " << offset << std::endl;
-
     fs::path readFile;
 
     if (inputFastQ.empty()) {
@@ -70,10 +68,14 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     // selecting the correct strategy depending on the size of the index size set
     if (setOfIndexes.size() == 1) {
         std::cout << "searching with " << setOfIndexes.size() << " indexes" << std::endl;
+        std::cout << "offset : " << offset << std::endl;
         _finder->searchMonoIndex(indexPosResults, kmerMap, indexFile, indexFileLocation, maxOccurences,
                                  multithread, threadNumber, printSearchTime);
 
     } else if (setOfIndexes.size() > 1) {
+
+        offset /= setOfIndexes.size();
+        std::cout << "offset : " << offset << std::endl;
         std::cout << "searching with " << setOfIndexes.size() << " indexes" << std::endl;
         _finder->searchMultipleIndexes(indexPosResults, kmerMap, setOfIndexes, indexFileLocation,
                                        maxOccurences, multithread, threadNumber, printSearchTime,
