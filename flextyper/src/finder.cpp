@@ -5,7 +5,6 @@ namespace ft {
 //======================================================================
 Finder::Finder()
     : _fmIndex(&_ownedFmIndex)
-    , _flag(false)
 {
 }
 
@@ -47,14 +46,11 @@ void Finder::parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFi
 
     _fmIndex->setKmerMapSize(kmerMap.size());
 
-    if (!_flag) {
         try {
             _fmIndex->loadIndexFromFile(indexPath);
         } catch (std::exception& e) {
             std::cout << "Error ! " << indexPath << " " << e.what() << std::endl;
         }
-        _flag = true;
-    }
 
     // create a vector of futures
     std::vector<std::future<std::tuple<std::set<size_t>, std::set<std::pair<int, QueryType>>>>> op;
@@ -141,13 +137,30 @@ void Finder::multipleIndexesParallelSearch(ResultsMap& indexPosResults, const fs
      */
 
     ResultsMap tmpResult;
-    uint OFFSET = 392600;
+    std::ifstream in("U21941_100/output_0", std::ifstream::ate | std::ifstream::binary);
+    uint OFFSET = in.tellg();
+    std::cout << "offset : " << OFFSET << std::endl;
     uint curr = 0;
 
     for (auto e : indexPath) {
+
+        std::cout << "searching : " << e << std::endl;
+
         parallelSearch(tmpResult, indexFileLocation, kmerMap, e, maxOcc, threadNumber, printSearchTime, curr * OFFSET);
 
-		/*
+        for (auto f : tmpResult) {
+            std::cout << "tmpResults " << f.first.first << " " << f.second.size() << " " << std::endl;
+
+            int c = 0;
+            for (auto g : f.second) {
+                std::cout << g << " ";
+                c++;
+                if (c == 2)
+                    break;
+            }
+            std::cout << "\n";
+        }
+
         for (auto& f : tmpResult) { // or kmers.second
             if (indexPosResults.find(f.first) != indexPosResults.end()) {
                 for (auto g : f.second) {
@@ -157,26 +170,15 @@ void Finder::multipleIndexesParallelSearch(ResultsMap& indexPosResults, const fs
                 indexPosResults.insert(f);
 			}
         }
-		*/
 
         /*
         for (auto& g : indexPosResults) {
             std::cout << g.first.first << " : " << g.second.size() << std::endl;
         }
         */
+        tmpResult.clear();
         curr++;
     }
-
-        for (auto& f : tmpResult) { // or kmers.second
-            if (indexPosResults.find(f.first) != indexPosResults.end()) {
-                for (auto g : f.second) {
-                    indexPosResults[f.first].insert(g);
-				}
-			} else {
-                indexPosResults.insert(f);
-			}
-        }
-
 }
 
 //======================================================================
@@ -196,15 +198,12 @@ void Finder::sequentialSearch(ResultsMap& indexPosResults, const fs::path& index
 
     // std::cout << "elements to be processed : " << kmerMap.size() << std::endl;
 
-    if (!_flag) {
         try {
             _fmIndex->loadIndexFromFile(indexPath);
             // std::cout << "index " << indexPath << " loaded" << std::endl;
         } catch (std::exception& e) {
             std::cout << "Error ! " << indexPath << " " << e.what() << std::endl;
         }
-        _flag = true;
-    }
 
     for (auto kmers : kmerMap) {
         auto tmpResult = _fmIndex->search(kmers.first,
@@ -238,21 +237,19 @@ void Finder::multipleIndexesSequentialSearch(ResultsMap& indexPosResults, const 
 
     ResultsMap tmpResult;
 	int curr = 0;
-	uint OFFSET = 392600;
+
+    std::ifstream in("U21941_100/output_0", std::ifstream::ate | std::ifstream::binary);
+    uint OFFSET = in.tellg();
+    std::cout << "offset : " << OFFSET << std::endl;
 
     for (auto e : indexPath) {
         sequentialSearch(tmpResult, indexFileLocation, kmerMap, e, maxOcc, printSearchTime, curr * OFFSET);
 
-		/*
         for (auto& f : tmpResult) { // or kmers.second
             indexPosResults.insert(f);
         }
-		*/
 		curr++;
     }
-        for (auto& f : tmpResult) { // or kmers.second
-            indexPosResults.insert(f);
-        }
 }
 
 //======================================================================
