@@ -33,7 +33,7 @@ public:
     /// \param stride
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual std::set<std::string> genSlidingSearchStrings(const std::string& queryString, uint kmerSize, uint stride, bool kmerCounts);
+    virtual std::set<std::string> genSlidingSearchStrings(const std::string& queryString, uint kmerSize, uint stride, bool kmerCounts, uint maxKmers);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief genCenteredSearchStrings
@@ -43,7 +43,7 @@ public:
     /// \param stride
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual std::set<std::string> genCenteredSearchStrings(const std::string& queryString, uint kmerSize, uint overlap, uint stride, bool kmerCounts);
+    virtual std::set<std::string> genCenteredSearchStrings(const std::string& queryString, uint kmerSize, uint overlap, uint stride, bool kmerCounts, uint maxKmers);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief KmerGenerator::genQueryKmers
@@ -56,7 +56,7 @@ public:
     /// \param crossover
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual SearchKmers genQueryKmers(Query inputQuery, uint kmerSize, bool refOnly, SearchType searchType, uint overlap, uint stride, bool crossover, bool kmerCounts);
+    virtual SearchKmers genQueryKmers(Query inputQuery, uint kmerSize, bool refOnly, SearchType searchType, uint overlap, uint stride, bool crossover, bool kmerCounts, uint maxKmers);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief genSearchKmers
@@ -68,7 +68,7 @@ public:
     /// \param stride
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual SearchKmers genSearchKmers(std::set<Query> inputQueries, uint kmerSize, bool refOnly, SearchType searchType, uint overlap,  uint stride, bool kmerCounts);
+    virtual SearchKmers genSearchKmers(std::set<Query> inputQueries, uint kmerSize, bool refOnly, SearchType searchType, uint overlap,  uint stride, bool kmerCounts, uint maxKmers);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief KmerGenerator::addtoKmerMap
@@ -90,7 +90,7 @@ public:
     /// \param ignoreNonUniqueKmers
     ////////////////////////////////////////////////////////////////////////
     void genKmerMap(std::set<Query>& inputQueries, uint kmerSize, bool refOnly, const SearchType& searchType, KmerMap& kmerMap, uint overlap, uint stride,
-                              bool crossover, bool ignoreNonUniqueKmers, bool kmerCounts);
+                              bool crossover, bool ignoreNonUniqueKmers, bool kmerCounts, uint maxKmers, uint maxTotalKmers);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief overrideStats

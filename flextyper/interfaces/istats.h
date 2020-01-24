@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <set>
+#include "iutils.h"
 #include <experimental/filesystem>
 
 namespace fs = std::experimental::filesystem;
@@ -32,6 +33,13 @@ public:
     /// \param time
     ////////////////////////////////////////////////////////////////////////
     virtual void printKmerSearchTimeToFile(const fs::path& outputFile, const std::string& kmer, uint time) const = 0;
+
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief printMatchingReadsToFile
+    /// \param outputFile
+    /// \param read
+    ////////////////////////////////////////////////////////////////////////
+    virtual void  printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, ResultsMap& line) const = 0;
 };
 }
 
