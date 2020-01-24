@@ -269,3 +269,7 @@ elif [ $3 == multi ]; then
 else
         echo 'not supported, provide indexing type'
 fi
+<<<<<<< HEAD
+=======
+
+>>>>>>> 988ec19ee345e276c2c541e178ee770308d6421a
