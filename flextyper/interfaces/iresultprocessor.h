@@ -40,7 +40,7 @@ public:
     /// \param readLen
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual MapOfCounts processResults(ResultsMap& indexPosResults, uint readLen) = 0;
+    virtual MapOfCounts processResults(ResultsMap& indexPosResults, uint readLen, uint readlines, const fs::path& matchingReads = "") = 0;
 };
 }
 

@@ -1,0 +1,18 @@
+{
+  "ERR2322364": {
+    "index": "/scratch/st-wasserww-1/FLEXTYPER/INDEXES/RNA/NewSimulations/ERR2322364/ERR2322364/output_1.fasta.fm9",
+    "read": "/scratch/st-wasserww-1/FLEXTYPER/INDEXES/RNA/NewSimulations/ERR2322364/ERR2322364/output_1.fasta"
+  },
+  "stride": 5,
+  "kmerSize": [
+    15
+  ],
+  "maxOccurrences": 2000,
+  "threadNumber": 30,
+  "readLength": 150,
+  "multithread": true,
+  "ignoreNonUniqueKmers": false,
+  "id" : "ERR2322364",
+  "flextyperBin": "/scratch/st-wasserww-1/FLEXTYPER/OpenFlexTyper/build/generating_pathogen_results/flextyper",
+  "queryPath": "/scratch/st-wasserww-1/FLEXTYPER/OpenFlexTyper/build/generating_pathogen_results/path.query.tsv"
+}
