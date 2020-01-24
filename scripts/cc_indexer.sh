@@ -2,6 +2,8 @@
 
 export QT_QPA_PLATFORM='offscreen'
 
+cd $PBS_O_WORKDIR
+
 if [ $# -ne 4 ]; then
         echo 'brief : cc_indexer.sh indexes the files given in a text file as parameter'
         echo '        each file to be indexed corresponds to a line inside file.txt'
