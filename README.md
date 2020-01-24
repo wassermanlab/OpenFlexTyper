@@ -1,6 +1,6 @@
 # FlexTyper
 
-[![CircleCI](https://circleci.com/gh/wassermanlab/OpenFlexTyper.svg?style=svg)](https://circleci.com/gh/wassermanlab/OpenFlexTyper) [![Documentation Status](https://readthedocs.org/projects/flextyper/badge/?version=latest)](https://flextyper.readthedocs.io/en/latest/?badge=latest)
+[![CircleCI](https://circleci.com/gh/wassermanlab/OpenFlexTyper.svg?style=svg)](https://circleci.com/gh/wassermanlab/OpenFlexTyper)[![Documentation Status](https://readthedocs.org/projects/openflextyper/badge/?version=latest)](https://openflextyper.readthedocs.io/en/latest/?badge=latest)
 [![GitHub release](https://img.shields.io/github/release/wassermanlab/openflextyper/all?logo=GitHub)](https://github.com/wassermanlab/openflextyper/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
