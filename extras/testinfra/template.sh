@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#PBS -A st-wasserww-1
+#PBS -A xxx
 #PBS -N ERR2322364 
 #PBS -V
-#PBS -M gkounkou@cmmt.ubc.ca
+#PBS -M xxx@xxx
 #PBS -l select=1:ncpus=32:mem=100gb
 #PBS -l walltime=5:0:0
 
