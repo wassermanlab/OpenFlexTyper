@@ -5,7 +5,6 @@ namespace ft {
 //======================================================================
 Finder::Finder()
     : _fmIndex(&_ownedFmIndex)
-    , _flag(false)
 {
 }
 
@@ -15,30 +14,30 @@ void Finder::searchMonoIndex(ResultsMap& indexPosResults, const KmerMap &kmerMap
                              bool printSearchTime)
 {
     if (parallel) {
-        parallelSearch(indexPosResults, indexFileLocation, kmerMap, indexPath, maxOccurences, threadNumber, printSearchTime);
+        parallelSearch(indexPosResults, indexFileLocation, kmerMap, indexPath, maxOccurences, threadNumber, printSearchTime, 0);
     } else {
-        sequentialSearch(indexPosResults, indexFileLocation, kmerMap, indexPath, maxOccurences, printSearchTime);
+        sequentialSearch(indexPosResults, indexFileLocation, kmerMap, indexPath, maxOccurences, printSearchTime, 0);
     }
 }
 
 //======================================================================
 void Finder::searchMultipleIndexes(ResultsMap& indexPosResults, const KmerMap &kmerMap, const std::set<fs::path>& indexPaths,
                                    const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
-                                   bool printSearchTime)
+                                   bool printSearchTime, uint offset)
 {
     if (parallel) {
         multipleIndexesParallelSearch(indexPosResults, indexFileLocation, kmerMap, indexPaths, maxOccurences, threadNumber,
-                                      printSearchTime);
+                                      printSearchTime, offset);
     } else {
         multipleIndexesSequentialSearch(indexPosResults, indexFileLocation, kmerMap, indexPaths, maxOccurences,
-                                        printSearchTime);
+                                        printSearchTime, offset);
     }
 }
 
 //======================================================================
 void Finder::parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
                             fs::path indexPath, uint maxOcc, uint threadNumber,
-                            bool printSearchTime)
+                            bool printSearchTime, uint offset)
 {
     std::cout << "running search in a multi thread" << std::endl;
 
@@ -47,14 +46,11 @@ void Finder::parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFi
 
     _fmIndex->setKmerMapSize(kmerMap.size());
 
-    if (!_flag) {
         try {
             _fmIndex->loadIndexFromFile(indexPath);
         } catch (std::exception& e) {
             std::cout << "Error ! " << indexPath << " " << e.what() << std::endl;
         }
-        _flag = true;
-    }
 
     // create a vector of futures
     std::vector<std::future<std::tuple<std::set<size_t>, std::set<std::pair<int, QueryType>>>>> op;
@@ -111,9 +107,9 @@ void Finder::parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFi
         for (auto& e : op) {
             auto tmpResult = e.get();
             elts++;
-            for (auto e : std::get<1>(tmpResult)) {
-                for (auto f : std::get<0>(tmpResult)) {
-                    indexPosResults[e].insert(f);
+            for (auto f : std::get<1>(tmpResult)) {
+                for (auto g : std::get<0>(tmpResult)) {
+                    indexPosResults[f].insert(g + offset);
                 }
             }
         }
@@ -127,9 +123,9 @@ void Finder::parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFi
 }
 
 //======================================================================
-void Finder::multipleIndexesParallelSearch(ResultsMap &indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
+void Finder::multipleIndexesParallelSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
                                            const std::set<fs::path>& indexPath, uint maxOcc, uint threadNumber,
-                                           bool printSearchTime)
+                                           bool printSearchTime, uint offset)
 {
     std::cout << "Multi Indexes Parallel Search" << std::endl;
 
@@ -141,19 +137,52 @@ void Finder::multipleIndexesParallelSearch(ResultsMap &indexPosResults, const fs
      */
 
     ResultsMap tmpResult;
+    uint curr = 0;
 
     for (auto e : indexPath) {
-        parallelSearch(tmpResult, indexFileLocation, kmerMap, e, maxOcc, threadNumber, printSearchTime);
+
+        std::cout << "searching : " << e << std::endl;
+
+        parallelSearch(tmpResult, indexFileLocation, kmerMap, e, maxOcc, threadNumber, printSearchTime, curr * offset);
+
+        /*
+        for (auto f : tmpResult) {
+            std::cout << "tmpResults " << f.first.first << " " << f.second.size() << " " << std::endl;
+            int c = 0;
+            for (auto g : f.second) {
+                std::cout << g << " ";
+                c++;
+                if (c == 2)
+                    break;
+            }
+            std::cout << "\n";
+
+        }
+        */
 
         for (auto& f : tmpResult) { // or kmers.second
-            indexPosResults.insert(f);
+            if (indexPosResults.find(f.first) != indexPosResults.end()) {
+                for (auto g : f.second) {
+                    indexPosResults[f.first].insert(g);
+				}
+			} else {
+                indexPosResults.insert(f);
+			}
         }
+
+        /*
+        for (auto& g : indexPosResults) {
+            std::cout << g.first.first << " : " << g.second.size() << std::endl;
+        }
+        */
+        tmpResult.clear();
+        curr++;
     }
 }
 
 //======================================================================
 void Finder::sequentialSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                              fs::path indexPath, uint maxOcc, bool printSearchTime)
+                              fs::path indexPath, uint maxOcc, bool printSearchTime, uint offset)
 {
     std::cout << "running search in a single thread" << std::endl;
 
@@ -168,15 +197,12 @@ void Finder::sequentialSearch(ResultsMap& indexPosResults, const fs::path& index
 
     // std::cout << "elements to be processed : " << kmerMap.size() << std::endl;
 
-    if (!_flag) {
         try {
             _fmIndex->loadIndexFromFile(indexPath);
             // std::cout << "index " << indexPath << " loaded" << std::endl;
         } catch (std::exception& e) {
             std::cout << "Error ! " << indexPath << " " << e.what() << std::endl;
         }
-        _flag = true;
-    }
 
     for (auto kmers : kmerMap) {
         auto tmpResult = _fmIndex->search(kmers.first,
@@ -189,7 +215,7 @@ void Finder::sequentialSearch(ResultsMap& indexPosResults, const fs::path& index
 
         for (auto e : kmers.second) {
             for (auto f : std::get<0>(tmpResult)) {
-                indexPosResults[e].insert(f);
+                indexPosResults[e].insert(f + offset);
             }
         }
     }
@@ -199,7 +225,7 @@ void Finder::sequentialSearch(ResultsMap& indexPosResults, const fs::path& index
 
 //======================================================================
 void Finder::multipleIndexesSequentialSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                                             std::set<fs::path> indexPath, uint maxOcc, bool printSearchTime)
+                                             std::set<fs::path> indexPath, uint maxOcc, bool printSearchTime, uint offset)
 {
     std::cout << "Multi Indexes Sequential Search" << std::endl;
 
@@ -209,13 +235,15 @@ void Finder::multipleIndexesSequentialSearch(ResultsMap& indexPosResults, const 
     // The search of kmers is done sequentially.
 
     ResultsMap tmpResult;
+    int curr = 0;
 
     for (auto e : indexPath) {
-        sequentialSearch(tmpResult, indexFileLocation, kmerMap, e, maxOcc, printSearchTime);
+        sequentialSearch(tmpResult, indexFileLocation, kmerMap, e, maxOcc, printSearchTime, curr * offset);
 
         for (auto& f : tmpResult) { // or kmers.second
             indexPosResults.insert(f);
         }
+		curr++;
     }
 }
 
