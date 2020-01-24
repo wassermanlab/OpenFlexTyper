@@ -11,7 +11,7 @@
 ### qsub -A st-wasserww-1 -M gkounkou@cmmt.ubc.ca -l select=1:ncpus=1:mem=600gb -l walltime=10:00:00 -- /project/st-wasserww-1/TOOLS/OpenFlexTyper/tools/cc_indexer.sh file.txt 1 mono
 
 export QT_QPA_PLATFORM='offscreen'
-cd $PBS_O_WORKDIR
+# cd $PBS_O_WORKDIR
 
 SCRIPTS='/project/st-wasserww-1/TOOLS/OpenFlexTyper/tools'
 
