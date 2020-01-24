@@ -6,4 +6,3 @@ build*
 *.o
 Makefile
 .DS_Store
-cc_indexer.sh
