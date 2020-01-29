@@ -40,7 +40,7 @@ public:
     /// \param  readLength
     /// \return returns a set of ReadID's corresponding to Index Positions
     ////////////////////////////////////////////////////////////////////////
-    virtual std::set<size_t> convertIndexPositionsToReadIDs(std::set<size_t> indexPositions, uint readLength) = 0;
+    virtual std::set<size_t> convertIndexPositionsToReadIDs(std::set<long long> indexPositions, uint readLength) = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief  convertReadIDsToReadNames

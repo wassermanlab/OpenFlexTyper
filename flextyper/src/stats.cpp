@@ -41,7 +41,7 @@ void Stats::printKmerSearchTimeToFile(const fs::path& outputFile, const std::str
 }
 
 //======================================================================
-void Stats::printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, ResultsMap& res) const
+void Stats::printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, ReaIDsMap &res) const
 {
     std::ofstream file;
     file.open(outputFile, std::ios_base::app);

@@ -87,7 +87,7 @@ TEST_F(TestUtils, convertIndexPositionsToReadIDs)
 {
     TEST_DESCRIPTION("This test tests the capacity to convert Index position to readID");
 
-    set<size_t> input {1, 2, 878, 55465, 5456, 56654};
+    set<long long> input {1, 2, 878, 55465, 5456, 56654};
     uint readLen = 100;
     set<size_t> expectedPositions {0, 8, 54, 549, 560};
 
@@ -101,7 +101,7 @@ TEST_F(TestUtils, convertIndexPositionsToReadIDsWithRepeatedPositions)
 {
     TEST_DESCRIPTION("This test tests the capacity to convert Index position to readID");
 
-    set<size_t> input {1, 2, 878, 55465, 5456, 56654, 56654, 56654};
+    set<long long> input {1, 2, 878, 55465, 5456, 56654, 56654, 56654};
     uint readLen = 100;
     set<size_t> expectedPositions {0, 8, 54, 549, 560};
 
