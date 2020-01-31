@@ -90,7 +90,7 @@ public:
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
     void parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                        fs::path indexPath, uint maxOcc, uint threadNumber, bool printSearchTime, uint offset);
+                        fs::path indexPath, uint maxOcc, uint threadNumber, bool printSearchTime, long long offset);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief sequentialSearch searches for kmers inside a single FmIndex

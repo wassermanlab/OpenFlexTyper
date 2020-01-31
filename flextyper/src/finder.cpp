@@ -37,7 +37,7 @@ void Finder::searchMultipleIndexes(ResultsMap& indexPosResults, const KmerMap &k
 //======================================================================
 void Finder::parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
                             fs::path indexPath, uint maxOcc, uint threadNumber,
-                            bool printSearchTime, uint offset)
+                            bool printSearchTime, long long offset)
 {
     std::cout << "running search in a multi thread" << std::endl;
 
@@ -137,7 +137,7 @@ void Finder::multipleIndexesParallelSearch(ResultsMap& indexPosResults, const fs
      */
 
     ResultsMap tmpResult;
-    uint curr = 0;
+    long long curr = 0;
 
     for (auto e : indexPath) {
 
