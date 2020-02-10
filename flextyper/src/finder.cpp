@@ -23,7 +23,7 @@ void Finder::searchMonoIndex(ResultsMap& indexPosResults, const KmerMap &kmerMap
 //======================================================================
 void Finder::searchMultipleIndexes(ResultsMap& indexPosResults, const KmerMap &kmerMap, const std::set<fs::path>& indexPaths,
                                    const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
-                                   bool printSearchTime, uint offset)
+                                   bool printSearchTime, long long offset)
 {
     if (parallel) {
         multipleIndexesParallelSearch(indexPosResults, indexFileLocation, kmerMap, indexPaths, maxOccurences, threadNumber,
@@ -37,7 +37,7 @@ void Finder::searchMultipleIndexes(ResultsMap& indexPosResults, const KmerMap &k
 //======================================================================
 void Finder::parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
                             fs::path indexPath, uint maxOcc, uint threadNumber,
-                            bool printSearchTime, uint offset)
+                            bool printSearchTime, long long offset)
 {
     std::cout << "running search in a multi thread" << std::endl;
 
@@ -125,7 +125,7 @@ void Finder::parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFi
 //======================================================================
 void Finder::multipleIndexesParallelSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
                                            const std::set<fs::path>& indexPath, uint maxOcc, uint threadNumber,
-                                           bool printSearchTime, uint offset)
+                                           bool printSearchTime, long long offset)
 {
     std::cout << "Multi Indexes Parallel Search" << std::endl;
 
@@ -137,7 +137,7 @@ void Finder::multipleIndexesParallelSearch(ResultsMap& indexPosResults, const fs
      */
 
     ResultsMap tmpResult;
-    uint curr = 0;
+    long long curr = 0;
 
     for (auto e : indexPath) {
 
@@ -182,7 +182,7 @@ void Finder::multipleIndexesParallelSearch(ResultsMap& indexPosResults, const fs
 
 //======================================================================
 void Finder::sequentialSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                              fs::path indexPath, uint maxOcc, bool printSearchTime, uint offset)
+                              fs::path indexPath, uint maxOcc, bool printSearchTime, long long offset)
 {
     std::cout << "running search in a single thread" << std::endl;
 
@@ -225,7 +225,7 @@ void Finder::sequentialSearch(ResultsMap& indexPosResults, const fs::path& index
 
 //======================================================================
 void Finder::multipleIndexesSequentialSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                                             std::set<fs::path> indexPath, uint maxOcc, bool printSearchTime, uint offset)
+                                             std::set<fs::path> indexPath, uint maxOcc, bool printSearchTime, long long offset)
 {
     std::cout << "Multi Indexes Sequential Search" << std::endl;
 

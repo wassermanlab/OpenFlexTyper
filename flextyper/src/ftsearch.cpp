@@ -22,18 +22,11 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
                     uint stride, uint maxOccurences, uint threadNumber, bool ignoreNonUniqueKmers, bool crossover,
                     bool printSearchTime, uint maxKmers, uint totalKmers, const fs::path& matchingReads)
 {
-
-    uint lines = 0;
-    std::string line;
-
-    std::ifstream file(matchingReads);
-    while (getline(file, line))
-        lines++;
-    file.close();
-
     std::ifstream in(matchingReads, std::ifstream::ate | std::ifstream::binary);
-    uint offset = in.tellg();
+    long long offset = in.tellg();
     fs::path readFile;
+
+    uint lines = offset / (readLength + 1);
 
     if (inputFastQ.empty()) {
         readFile.stem() = _utils->trimmedReadFileName(indexFileLocation); // want to remove the "Indexes_" at the beginning

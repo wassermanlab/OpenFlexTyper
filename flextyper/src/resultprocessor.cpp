@@ -9,7 +9,7 @@ ResultProcessor::ResultProcessor()
 }
 
 //======================================================================
-MapOfCounts ResultProcessor::getIndexCounts(ResultsMap readIDResults)
+MapOfCounts ResultProcessor::getIndexCounts(ReaIDsMap &readIDResults)
 {
     MapOfCounts indexCounts;
 
@@ -27,9 +27,9 @@ MapOfCounts ResultProcessor::getIndexCounts(ResultsMap readIDResults)
 }
 
 //======================================================================
-ResultsMap ResultProcessor::processIndexPos(ResultsMap& indexPosResults, uint readLen)
+ReaIDsMap ResultProcessor::processIndexPos(ResultsMap& indexPosResults, uint readLen)
 {
-    ResultsMap readIDResults; // map< query ID, set<read ID>>
+    ReaIDsMap readIDResults; // map< query ID, set<read ID>>
 
     for (auto e : indexPosResults) {
         auto result = _utils->convertIndexPositionsToReadIDs(e.second, readLen);
@@ -43,7 +43,7 @@ ResultsMap ResultProcessor::processIndexPos(ResultsMap& indexPosResults, uint re
 MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint readLen, uint readlines, const fs::path& matchingReads)
 {
     // convert index positions to read ids
-    ResultsMap tmp = processIndexPos(indexPosResults, readLen);
+    ReaIDsMap tmp = processIndexPos(indexPosResults, readLen);
 
     /*
     std::cout << "read Ids : \n";
@@ -61,7 +61,7 @@ MapOfCounts ResultProcessor::processResults(ResultsMap& indexPosResults, uint re
         exit(-1);
     }
 
-    ResultsMap res;
+    ReaIDsMap res;
 
     int rcMin = (readlines / 2) + 1; // readid >= 1
 

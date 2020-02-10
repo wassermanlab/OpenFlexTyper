@@ -53,7 +53,7 @@ public:
     /// \param  readLength
     /// \return returns a set of ReadID's corresponding to Index Positions
     ////////////////////////////////////////////////////////////////////////
-    std::set<size_t> convertIndexPositionsToReadIDs(std::set<size_t> indexPositions, uint readLength);
+    std::set<size_t> convertIndexPositionsToReadIDs(std::set<long long> indexPositions, uint readLength);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief  convertReadIDsToReadNames

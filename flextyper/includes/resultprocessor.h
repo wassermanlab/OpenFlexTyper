@@ -33,7 +33,7 @@ public:
     /// \param readIDResults
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    MapOfCounts getIndexCounts(ResultsMap readIDResults);
+    MapOfCounts getIndexCounts(ReaIDsMap& readIDResults);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief ResultProcessor::processIndexPos
@@ -42,7 +42,7 @@ public:
     /// \param readLen
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    ResultsMap processIndexPos(ResultsMap& indexPosResults, uint readLen);
+    ReaIDsMap processIndexPos(ResultsMap& indexPosResults, uint readLen);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief ResultProcessor::processResults
