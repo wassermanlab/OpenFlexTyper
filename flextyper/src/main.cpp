@@ -135,6 +135,11 @@ int main(int argc, char** argv)
         std::cout << "matchinReads                  : " << matchingReads << std::endl;
 
         createdIndexRepo(indexFileLocation);
+	    
+	if (matchingReads.empty()) {
+		std::cerr << "you need to provide the read file location\n";
+		return 1;
+	}
 
         ft::FTSearch flexTyperInstance;
         flexTyperInstance.init(pathToQueryFile, kmerSize, readLength, indexFileLocation,
