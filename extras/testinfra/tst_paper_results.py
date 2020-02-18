@@ -1,3 +1,10 @@
+# Copyright (c) Wasserman lab 2020
+# Author Godfrain Jacques Kounkou
+# Description 
+# This file is the entry file for the FlexTyper TestInfra
+# It will enable testing the application in different cases
+# All details are given within the data.json file
+
 import json
 import datetime
 from configurator import Configurator
@@ -32,15 +39,16 @@ if __name__ == '__main__':
 			conf.setMultithread(inputData["multithread"])
 			conf.setIgnoreNonUniqueKmers(inputData["ignoreNonUniqueKmers"])
 			conf.setStride(inputData["stride"])
+			conf.setSearchType(inputData["searchType"])
 			conf.createConf()
 			settingFile = datetime.date.today().strftime("Setting_%B%d%Y.ini")
 			conf.createSettingFile(settingFile)
 
 			kmerRetriever = KmerRetriever()
 			queryFile = inputData["queryPath"]
-			querynbr  = kmerRetriever.getNbrQueries(4) 
+			querynbr  = kmerRetriever.getNbrQueries(inputData["numberOfQueries"]) 
 			kmerRetriever.getQueries(querynbr, queryFile, "tmpQueryFile.tsv")
-			kmerRetriever.generateKmers(index, 4, kmersize, "tmpQueryFile.tsv", settingFile)
+			kmerRetriever.generateKmers(index, inputData["numberOfQueries"], kmersize, "tmpQueryFile.tsv", settingFile)
 
 			# open generated kmer file and grab kmernbr
 			# kmerRetriever.retrieveKmers(kmernbr)
