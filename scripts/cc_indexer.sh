@@ -9,12 +9,11 @@
 #SBATCH --array=1-1%1
 
 export QT_QPA_PLATFORM='offscreen'
-# cd $PBS_O_WORKDIR
-# echo working dir : $PBS_O_WORKDIR
 
-# SCRIPTS='/project/st-wasserww-1/TOOLS/OpenFlexTyper/tools'
-SCRIPTS='/home/gkounkou/scratch/scripts/'
+SCRIPTS='path to utilities, seqtk and flextyper'
 
+#---------------------------------------------------------------------------------------
+# Uncomment if working on a local machine
 # if [ $# -ne 3 ]; then
 #	echo 'brief : cc_indexer.sh indexes the files given in a text file as parameter'
 #	echo '        each file to be indexed corresponds to a line inside file.txt'
@@ -23,10 +22,11 @@ SCRIPTS='/home/gkounkou/scratch/scripts/'
 #	echo "sbatch cc_indexer_job.sh files.txt 1 mono"
 #	exit 0
 # fi
-
 # FILES=$1
-FILES='file.txt'
 # LINE=$2
+#---------------------------------------------------------------------------------------
+
+FILES='file.txt'
 LINE=1
 FMIND="${SCRIPTS}/flextyper indexing "
 SEQTK=${SCRIPTS}/seqtk
@@ -119,27 +119,6 @@ function removingDuplicates()
 	fi
 	echo 'removing duplicates'
 	time awk '!a[$0]++' output.fasta > "output_${TASK_ID}.fasta"
-
-	# check the size of resulting file
-	# initialFileSize=$(cat $1 | wc -l)
-	# finalFileSize=$(cat output.fasta | wc -l)
-	# declare -A arr
-	# count=0
-	# while read line; do
-	#	arr[$line]=$((${arr[$line]} + 1))
-	#	# echo $line ${arr[$line]}
-	#	if [ ${arr[$line]} -gt 1 ]; then
-	#		count=$(($count + 1))
-	#	fi
-	# done < $1
-	# echo "duplicates count : $count"
-	# echo "initialFileSize  : $initialFileSize"
-	# echo "finalFileSize    : $finalFileSize"
-	# diff=$(($initialFileSize - $finalFileSize - $count))
-	# echo "diff             : $diff"
-	# if [ $diff -ne 0 ]; then
-	#	echo 'An error happened while generating output.fasta'
-	# fi
 }
 
 #______________________________________________________________
@@ -218,17 +197,12 @@ function generateCheckSum()
 }
 
 # --- generate one index out of R1 and R2 files without Ns nor duplicates ---
-function generateOneIndexOutOfR1AndR2WithoutNsNorDuplicates()
+function generateOneIndexOutOfR1AndR2WithNsAndDuplicates()
 {
 	# uncompress R1 and R2
 	time uncompress $FILES
 
 	SPE=$(cat $FILES | sed -n "$TASK_ID"p)
-
-	# remove Ns
-	# echo "remove Ns -> output_${TASK_ID}.fasta"
-	# time removeNs ${SPE}.fq temp.fq
-	# mv temp.fq ${SPE}.fq
 
 	# create fw and rc
 	time createForwardAndReverseComplement ${SPE}.fq
@@ -249,11 +223,6 @@ function generateIndexesForOneR1AndR2()
 	time uncompress $FILES
 
 	SPE=$(cat $FILES | sed -n "$TASK_ID"p)
-
-	# remove Ns
-	# echo "remove Ns -> output_${TASK_ID}.fasta"
-	# time removeNs ${SPE}.fq temp.fq
-	# time mv temp.fq ${SPE}.fq 
 
 	# create fw and rc
 	time createForwardAndReverseComplement ${SPE}.fq
@@ -276,17 +245,20 @@ TASK_ID=$LINE
 echo "setting TASK_ID to ${TASK_ID} by default"
 
 # echo 'generating one index'
-# generateOneIndexOutOfR1AndR2WithoutNsNorDuplicates file.txt 1 mono 
+# generateOneIndexOutOfR1AndR2WithNsAndDuplicates file.txt 1 mono 
 echo 'generating multiple indexes'
 generateIndexesForOneR1AndR2 8
 
 
+#---------------------------------------------------------------------------------------
+# Uncomment if working on a local machine
 # if [ $3 == mono ]; then 
 #	echo 'generating one index'
-#	generateOneIndexOutOfR1AndR2WithoutNsNorDuplicates
+#	generateOneIndexOutOfR1AndR2WithNsAndDuplicates
 # elif [ $3 == multi ]; then
 #	echo 'generating multiple indexes'
 #	generateIndexesForOneR1AndR2 8
 # else
 #	echo 'not supported, provide indexing type'
 # fi
+#---------------------------------------------------------------------------------------
