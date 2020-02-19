@@ -95,7 +95,7 @@ function filterFastaByLastTwoCharacters()
 
 	start_time=$( date +%s.%N )
 
-	PATTERNS=(AA AT AC AG CA CC CT CG GA GC GG GT TA TC TG TT)
+	PATTERNS=(AA AC AG AT CA CC CG CT GA GC GG GT TA TC TG TT)
 	for e in ${PATTERNS[@]}; do
 		grep ${e}$ tmp_output.fasta | sort -rn --parallel=30 > temp_${e}.fasta
 	done
