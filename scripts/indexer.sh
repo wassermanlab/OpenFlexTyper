@@ -10,7 +10,7 @@
 
 export QT_QPA_PLATFORM='offscreen'
 
-SCRIPTS='path to utilities, seqtk and flextyper'
+SCRIPTS='path to utilities seqtk, flextyper binary'
 
 #---------------------------------------------------------------------------------------
 # Uncomment if working on a local machine
@@ -112,19 +112,16 @@ function filterFastaByLastTwoCharacters()
 }
 
 #______________________________________________________________
-function removingDuplicates() 
+function removeDuplicates() 
 {
-	if [ -f "output_${TASK_ID}.fasta" ]; then
-		mv "output_${TASK_ID}.fasta" output.fasta
-	fi
 	echo 'removing duplicates'
-	time awk '!a[$0]++' output.fasta > "output_${TASK_ID}.fasta"
+	time awk '!a[$0]++' $1 > $2
 }
 
 #______________________________________________________________
 function removeNs()
 {
-	# remove N's 'not' inplace
+	echo 'removing Ns'
 	sed '/N/d' $1  > $2
 }
 
@@ -196,28 +193,8 @@ function generateCheckSum()
 	md5sum $1 > md5.txt
 }
 
-# --- generate one index out of R1 and R2 files with Ns and duplicates ---
-function generateOneIndexOutOfR1AndR2WithNsAndDuplicates()
-{
-	# uncompress R1 and R2
-	time uncompress $FILES
-
-	SPE=$(cat $FILES | sed -n "$TASK_ID"p)
-
-	# create fw and rc
-	time createForwardAndReverseComplement ${SPE}.fq
-
-	# create index
-	time createIndex "output_${TASK_ID}.fasta"
-
-	mkdir "${FILES}_dir"
-	mv *.fq    "${FILES}_dir"
-	mv *.fasta "${FILES}_dir"
-	mv *.fm9   "${FILES}_dir"
-}
-
 # --- generate indexes for one R1  and R2 files ---
-function generateIndexesForOneR1AndR2()
+function generateIndex()
 {
 	# uncompress R1 and R2
 	time uncompress $FILES
@@ -226,6 +203,20 @@ function generateIndexesForOneR1AndR2()
 
 	# create fw and rc
 	time createForwardAndReverseComplement ${SPE}.fq
+
+	# remove Ns if the parameter is set
+	if [ "$2" = true ]; then
+		echo 'removing Ns'
+		removeNs "output_${TASK_ID}.fasta" temp.fasta
+		mv temp.fasta "output_${TASK_ID}.fasta"
+	fi
+
+	# remove duplicates if the parameter is set
+	if [ "$3" = true ]; then
+		echo 'removing duplicates'
+		removeDuplicates "output_${TASK_ID}.fasta" temp.fasta
+		mv temp.fasta "output_${TASK_ID}.fasta"
+	fi
 	
 	# split reads
 	time splitReads "output_${TASK_ID}.fasta" $1
@@ -245,19 +236,19 @@ TASK_ID=$LINE
 echo "setting TASK_ID to ${TASK_ID} by default"
 
 # echo 'generating one index'
-# generateOneIndexOutOfR1AndR2WithNsAndDuplicates readname.txt 1 mono 
+# generateIndex 1 false false
 echo 'generating multiple indexes'
-generateIndexesForOneR1AndR2 8
+generateIndex 8 false false
 
 
 #---------------------------------------------------------------------------------------
 # Uncomment if working on a local machine
 # if [ $3 == mono ]; then 
 #	echo 'generating one index'
-#	generateOneIndexOutOfR1AndR2WithNsAndDuplicates
+#	generateIndex 1 false false
 # elif [ $3 == multi ]; then
 #	echo 'generating multiple indexes'
-#	generateIndexesForOneR1AndR2 8
+#	generateIndex 8 false false
 # else
 #	echo 'not supported, provide indexing type'
 # fi
