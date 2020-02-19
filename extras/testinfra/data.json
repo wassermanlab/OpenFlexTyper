@@ -1,6 +1,6 @@
 {
   "Read_Label": {
-    "index": "path to read",
+    "index": "path to indexed read",
     "read" : "path to the corresponding global fasta file"
   },
   "stride": 10,
