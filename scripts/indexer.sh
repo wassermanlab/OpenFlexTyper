@@ -16,7 +16,7 @@ SCRIPTS='path to utilities, seqtk and flextyper'
 # Uncomment if working on a local machine
 # if [ $# -ne 3 ]; then
 #	echo 'brief : indexer.sh indexes the files given in a text file as parameter'
-#	echo '        each file to be indexed corresponds to a line inside file.txt'
+#	echo '        each file to be indexed corresponds to a line inside readname.txt'
 #	echo "Usage : $0 <filesToTransform>"
 #	echo "Eg :"
 #	echo "sbatch indexer.sh files.txt 1 mono"
@@ -26,7 +26,7 @@ SCRIPTS='path to utilities, seqtk and flextyper'
 # LINE=$2
 #---------------------------------------------------------------------------------------
 
-FILES='file.txt'
+FILES='readname.txt'
 LINE=1
 FMIND="${SCRIPTS}/flextyper indexing "
 SEQTK=${SCRIPTS}/seqtk
@@ -245,7 +245,7 @@ TASK_ID=$LINE
 echo "setting TASK_ID to ${TASK_ID} by default"
 
 # echo 'generating one index'
-# generateOneIndexOutOfR1AndR2WithNsAndDuplicates file.txt 1 mono 
+# generateOneIndexOutOfR1AndR2WithNsAndDuplicates readname.txt 1 mono 
 echo 'generating multiple indexes'
 generateIndexesForOneR1AndR2 8
 
