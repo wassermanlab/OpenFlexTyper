@@ -200,7 +200,7 @@ function moveFileToCorrectName()
 }
 
 #______________________________________________________________
-function cleanFiles()
+function archiveFiles()
 {
 	if [ -d garbage_${TASK_ID} ]; then
 		echo 'directory exists'
