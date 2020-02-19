@@ -15,11 +15,11 @@ SCRIPTS='path to utilities, seqtk and flextyper'
 #---------------------------------------------------------------------------------------
 # Uncomment if working on a local machine
 # if [ $# -ne 3 ]; then
-#	echo 'brief : cc_indexer.sh indexes the files given in a text file as parameter'
+#	echo 'brief : indexer.sh indexes the files given in a text file as parameter'
 #	echo '        each file to be indexed corresponds to a line inside file.txt'
 #	echo "Usage : $0 <filesToTransform>"
 #	echo "Eg :"
-#	echo "sbatch cc_indexer_job.sh files.txt 1 mono"
+#	echo "sbatch indexer.sh files.txt 1 mono"
 #	exit 0
 # fi
 # FILES=$1
