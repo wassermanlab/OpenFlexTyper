@@ -196,7 +196,7 @@ function generateCheckSum()
 	md5sum $1 > md5.txt
 }
 
-# --- generate one index out of R1 and R2 files without Ns nor duplicates ---
+# --- generate one index out of R1 and R2 files with Ns and duplicates ---
 function generateOneIndexOutOfR1AndR2WithNsAndDuplicates()
 {
 	# uncompress R1 and R2
