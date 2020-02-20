@@ -13,26 +13,25 @@ export QT_QPA_PLATFORM='offscreen'
 SCRIPTS='path to utilities seqtk, flextyper binary'
 
 #---------------------------------------------------------------------------------------
-# Uncomment if working on a local machine
-# if [ $# -ne 3 ]; then
-#	echo 'brief : indexer.sh indexes the files given in a text file as parameter'
-#	echo '        each file to be indexed corresponds to a line inside readname.txt'
-#	echo "Usage : $0 <filesToTransform>"
-#	echo "Eg :"
-#	echo "sbatch indexer.sh files.txt 1 mono"
-#	exit 0
-# fi
-# FILES=$1
-# LINE=$2
+if [ $# -ne 3 ]; then
+	echo 'brief : indexer.sh takes 3 parameters'
+      	echo '        the number of indexes to produce'
+      	echo '        a flag to tell the application if we should remove Ns'
+	echo '        a flag to tell the application if we should remove duplicates'
+	echo '        each pair of file to be indexed corresponds to a line inside readname.txt'
+	echo "Usage : $0 8 false false"
+	echo "Eg :"
+	echo "sbatch indexer.sh 1 false false"
+	exit 0
+fi
 #---------------------------------------------------------------------------------------
 
 FILES='readname.txt'
 LINE=1
 FMIND="${SCRIPTS}/flextyper indexing "
 SEQTK=${SCRIPTS}/seqtk
-THREADS=30
 
-#______________________________________________________________
+# function that uncompresses read files
 function uncompress() 
 {
 	echo 'uncompress files'
@@ -53,7 +52,7 @@ function uncompress()
 	echo uncommpress took : $elapsed_time
 }
 
-#______________________________________________________________
+# function that creates forward and reverse complement reads
 function createForwardAndReverseComplement()
 {
 	mv $1 temp.fq 
@@ -84,10 +83,10 @@ function createForwardAndReverseComplement()
 	cat fw_pre_tmp_output.fasta rc_pre_tmp_output.fasta > "output_${TASK_ID}.fasta"
 }
 
-#______________________________________________________________
+# function that filters provided fasta file by the last 2 nucleotides
 function filterFastaByLastTwoCharacters()
 {
-	echo 'filter by last 2 chars'
+	echo 'filter by last 2 nucleotides'
         if [ -f output.fasta ]; then
 		echo 'output.fasta exists'
 		return
@@ -111,34 +110,35 @@ function filterFastaByLastTwoCharacters()
 	echo filter fasta by 2 last chars took : $elapsed_time
 }
 
-#______________________________________________________________
+# function that removes duplicates inside a file
 function removeDuplicates() 
 {
 	echo 'removing duplicates'
 	time awk '!a[$0]++' $1 > $2
 }
 
-#______________________________________________________________
+# function that removes Ns inside a file
 function removeNs()
 {
 	echo 'removing Ns'
 	sed '/N/d' $1  > $2
 }
 
-#______________________________________________________________
+# function that concatenates provided inputs and save the result
+# inside a provided output file
 function concatenate()
 {
 	cat $1 $2 > $3 
 }
 
-#______________________________________________________________
+# function that splits reads in a given number of smaller read files
 function splitReads()
 {
 	echo 'split reads'
 	split $1 -n "l/$2" -a 1 -d output_
 }
 
-#______________________________________________________________
+# function that creates an FM-Index from the given read file
 function createIndex()
 {
 	echo 'create index'
@@ -150,7 +150,7 @@ function createIndex()
 	echo creating index took : $elapsed_time
 }
 
-#______________________________________________________________
+# function that creates multiple indexes from a given set of read files
 function createMultipleIndexes() 
 {
 	echo 'creating multiple indexes'
@@ -164,18 +164,7 @@ function createMultipleIndexes()
 	done
 }
 
-#______________________________________________________________
-function moveFileToCorrectName()
-{
-	echo 'moving files'
-	mv output.fasta.fm9 "${1}.fm9"
-	# rm *.fq 
-	# rm *.fasta
-	# rm -rf tmp_output
-	rm -rf *.sdsl
-}
-
-#______________________________________________________________
+# function that archives files into a specific directory
 function archiveFiles()
 {
 	if [ -d garbage_${TASK_ID} ]; then
@@ -187,13 +176,13 @@ function archiveFiles()
 	mv *.fq garbage_${TASK_ID}/
 }
 
-#______________________________________________________________
+# function that generates the checksum for a file provided as argument
 function generateCheckSum()
 {
 	md5sum $1 > md5.txt
 }
 
-# --- generate indexes for one R1  and R2 files ---
+# function that generates indexes for one R1  and R2 paired read files
 function generateIndex()
 {
 	# uncompress R1 and R2
@@ -236,27 +225,14 @@ function generateIndex()
 	done
 }
 
+#----------------------------------------------------------------------------------------
 # main call
+#---------------------------------------------------------------------------------------
 
 TASK_ID=$LINE
-
 echo "setting TASK_ID to ${TASK_ID} by default"
 
 # echo 'generating one index'
 # generateIndex 1 false false
 echo 'generating multiple indexes'
-generateIndex 8 false false
-
-
-#---------------------------------------------------------------------------------------
-# Uncomment if working on a local machine
-# if [ $3 == mono ]; then 
-#	echo 'generating one index'
-#	generateIndex 1 false false
-# elif [ $3 == multi ]; then
-#	echo 'generating multiple indexes'
-#	generateIndex 8 false false
-# else
-#	echo 'not supported, provide indexing type'
-# fi
-#---------------------------------------------------------------------------------------
+generateIndex $1 $2 $3
