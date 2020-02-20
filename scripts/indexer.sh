@@ -189,6 +189,10 @@ function generateCheckSum()
 # function that generates indexes for one R1  and R2 paired read files
 function generateIndex()
 {
+        local numIndexes=$1
+        local removeAmb=$2
+        local removeDups=$3
+
 	# uncompress R1 and R2
 	time uncompress $FILES
 
@@ -197,27 +201,27 @@ function generateIndex()
 	# create fw and rc
 	time createForwardAndReverseComplement ${SPE}.fq
 
-	# remove Ns if the parameter is set
-	if [ "$2" = true ]; then
-		echo 'removing Ns'
+	# remove ambiguous characters (N) if the parameter is set
+	if [ "$removeAmb" = true ]; then
+		echo 'removing ambiguous characters'
 		removeNs "output_${TASK_ID}.fasta" temp.fasta
 		mv temp.fasta "output_${TASK_ID}.fasta"
 	fi
 
 	# remove duplicates if the parameter is set
-	if [ "$3" = true ]; then
+	if [ "$removeDups" = true ]; then
 		echo 'removing duplicates'
 		removeDuplicates "output_${TASK_ID}.fasta" temp.fasta
 		mv temp.fasta "output_${TASK_ID}.fasta"
 	fi
 	
 	# split reads if requested
-	if [ "$1" -gt 1 ]; then
-	        time splitReads "output_${TASK_ID}.fasta" $1
-	elif [ "$1" -eq 1 ]; then
+	if [ "$numIndexes" -gt 1 ]; then
+	        time splitReads "output_${TASK_ID}.fasta" $numIndexes
+	elif [ "$numIndexes" -eq 1 ]; then
 		time mv "output_${TASK_ID}.fasta" output_0
 	else
-		echo "$1" ' indexes requested, terminating the application'
+		echo "$numIndexes" ' indexes requested, terminating the application'
 		exit 0
 	fi
 	
@@ -234,12 +238,7 @@ function generateIndex()
 #---------------------------------------------------------------------------------------
 
 TASK_ID=$LINE
-numIndexes=$1
-removeNs=$2
-removeDups=$3
 echo "setting TASK_ID to ${TASK_ID} by default"
 
-# echo 'generating one index'
-# generateIndex 1 false false
-echo 'generating multiple indexes'
-generateIndex ${numIndexes} ${removeNs} ${removeDups}
+echo 'generating index'
+generateIndex ${numOfIndexes} ${removeAmbiguous} ${removeDuplicates}
