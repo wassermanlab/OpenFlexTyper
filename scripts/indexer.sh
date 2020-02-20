@@ -63,6 +63,9 @@ function createForwardAndReverseComplement()
 		return
 	fi
 
+	# during the fw and rc generation, we check that 
+	# the generated read file are consitent by making sure the difference is 
+	# isnt too important
 	if [ $# -eq 1 ]; then
 		start_time=$( date +%s.%N )
 		${SEQTK} seq -A -C -U    temp.fq | egrep -v '[>]' > fw_pre_tmp_output.fasta
@@ -94,6 +97,8 @@ function filterFastaByLastTwoCharacters()
 
 	start_time=$( date +%s.%N )
 
+	# Here are all the possible combinations for the 2 nucleotides
+	# our alphabet contains {A,C,G,T}
 	PATTERNS=(AA AC AG AT CA CC CG CT GA GC GG GT TA TC TG TT)
 	for e in ${PATTERNS[@]}; do
 		grep ${e}$ tmp_output.fasta | sort -rn --parallel=30 > temp_${e}.fasta
@@ -145,7 +150,6 @@ function createIndex()
 	start_time=$( date +%s.%N )
 	cmd="${FMIND} -f $1 -o . -x ${1}.fm9"
 	eval $cmd
-	echo ${SLURM_ARRAY_JOB_ID}_$TASK_ID >> jobs.log
 	elapsed_time=$( date +%s.%N --date="$start_time seconds ago" )
 	echo creating index took : $elapsed_time
 }
