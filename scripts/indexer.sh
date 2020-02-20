@@ -234,9 +234,12 @@ function generateIndex()
 #---------------------------------------------------------------------------------------
 
 TASK_ID=$LINE
+numIndexes=$1
+removeNs=$2
+removeDups=$3
 echo "setting TASK_ID to ${TASK_ID} by default"
 
 # echo 'generating one index'
 # generateIndex 1 false false
 echo 'generating multiple indexes'
-generateIndex $1 $2 $3
+generateIndex ${numIndexes} ${removeNs} ${removeDups}
