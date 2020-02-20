@@ -218,8 +218,15 @@ function generateIndex()
 		mv temp.fasta "output_${TASK_ID}.fasta"
 	fi
 	
-	# split reads
-	time splitReads "output_${TASK_ID}.fasta" $1
+	# split reads if requested
+	if [ "$1" -gt 1 ]; then
+	        time splitReads "output_${TASK_ID}.fasta" $1
+	elif [ "$1" -eq 1 ]; then
+		time mv "output_${TASK_ID}.fasta" output_0
+	else
+		echo "$1" ' indexes requested, terminating the application'
+		exit 0
+	fi
 	
 	# create index
 	outputs=($(ls output_[0-9]))
