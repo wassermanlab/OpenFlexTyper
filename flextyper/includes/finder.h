@@ -68,7 +68,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     void searchMultipleIndexes(ResultsMap& indexPosResults, const KmerMap& kmerMap, const std::set<fs::path>& indexPaths,
                                const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
-                               bool printSearchTime);
+                               bool printSearchTime, long long offset);
 
 
     ////////////////////////////////////////////////////////////////////////
@@ -90,7 +90,7 @@ public:
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
     void parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                        fs::path indexPath, uint maxOcc, uint threadNumber, bool printSearchTime);
+                        fs::path indexPath, uint maxOcc, uint threadNumber, bool printSearchTime, long long offset);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief sequentialSearch searches for kmers inside a single FmIndex
@@ -102,7 +102,7 @@ public:
     /// \param maxOcc
     ////////////////////////////////////////////////////////////////////////
     void sequentialSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                          fs::path indexPath, uint maxOcc, bool printSearchTime);
+                          fs::path indexPath, uint maxOcc, bool printSearchTime, long long offset);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief multipleIndexesParallelSearch searches for kmers inside multiple
@@ -115,7 +115,7 @@ public:
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
     void multipleIndexesParallelSearch(ResultsMap &indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                                       const std::set<fs::path>& indexPath, uint maxOcc, uint threadNumber, bool printSearchTime);
+                                       const std::set<fs::path>& indexPath, uint maxOcc, uint threadNumber, bool printSearchTime, long long offset);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief multipleIndexesSequentialSearch searches for kmers inside a multiple
@@ -127,7 +127,7 @@ public:
     /// \param maxOcc
     ////////////////////////////////////////////////////////////////////////
     void multipleIndexesSequentialSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                                         std::set<fs::path> indexPath, uint maxOcc, bool printSearchTime);
+                                         std::set<fs::path> indexPath, uint maxOcc, bool printSearchTime, long long offset);
 
 private:
     ////////////////////////////////////////////////////////////////////////
@@ -139,11 +139,6 @@ private:
     /// \brief fmIndex
     ////////////////////////////////////////////////////////////////////////
     algo::FmIndex _ownedFmIndex;
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief _flag
-    ////////////////////////////////////////////////////////////////////////
-    bool _flag;
 };
 }
 

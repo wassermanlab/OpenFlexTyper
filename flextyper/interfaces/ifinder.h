@@ -48,7 +48,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     virtual void searchMultipleIndexes(ResultsMap& indexPosResults, const KmerMap& kmerMap, const std::set<fs::path>& indexPaths,
                                        const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
-                                       bool printSearchTime) = 0;
+                                       bool printSearchTime, long long offset) = 0;
 };
 }
 

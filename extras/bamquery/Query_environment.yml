@@ -1,0 +1,17 @@
+name: Query_environment
+channels:
+        - bioconda
+        - conda-forge
+dependencies:
+        - bwa
+        - samtools=1.9
+        - htslib=1.9
+        - python=2.7
+        - numpy
+        - pip
+        - pandas
+        - pysam
+        - pybedtools
+        - bedtools
+        - art
+prefix: ~/.conda/envs/

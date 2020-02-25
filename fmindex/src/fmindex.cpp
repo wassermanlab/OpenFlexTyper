@@ -70,7 +70,7 @@ std::tuple<std::set<size_t>, std::set<std::pair<int, ft::QueryType>>> FmIndex::s
     if (occs > 0  && occs <= maxOcc) {
         auto locations = sdsl::locate(_fmindex, query.begin(), query.begin() + query.length());
         for (auto e : locations) {
-            // std::cout << e << std::endl;
+            // std::cout << e << " --> " << (e / 59) + 1 << std::endl;
             result.insert(e);
         }
     }
