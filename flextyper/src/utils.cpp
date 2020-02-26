@@ -49,7 +49,7 @@ std::set<fs::path> Utils::getSetOfIndexes(const fs::path& indexList)
 }
 
 //======================================================================
-std::set<size_t> Utils::convertIndexPositionsToReadIDs(std::set<size_t> indexPositions, uint readLength)
+std::set<size_t> Utils::convertIndexPositionsToReadIDs(std::set<long long> indexPositions, uint readLength)
 {
     // takes a set of index positions and converts each element to the readID
     // my concern is that we need to know which index it is to know whether its 5100000 or what

@@ -57,6 +57,6 @@ TEST_F(TestFinder, searchSequentially)
     uint maxOccurrences = 200;
     bool printSearchTime = false;
 
-    EXPECT_NO_THROW(_finder.sequentialSearch(indexPosResults, indexFileLocation, kmerMap, indexPath, maxOccurrences, printSearchTime));
+    EXPECT_NO_THROW(_finder.sequentialSearch(indexPosResults, indexFileLocation, kmerMap, indexPath, maxOccurrences, printSearchTime, 0));
 }
 }
