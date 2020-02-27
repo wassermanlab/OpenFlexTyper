@@ -1,0 +1,20 @@
+{
+  "Read_Label": {
+    "index": "path to indexed read",
+    "read" : "path to the corresponding global fasta file"
+  },
+  "stride": 10,
+  "kmerSize": [
+    31
+  ],
+  "searchType": "CENTERED",
+  "maxOccurrences": 200,
+  "threadNumber": 1000,
+  "readLength": 150,
+  "multithread": true,
+  "ignoreNonUniqueKmers": false,
+  "id" : "Read_Label",
+  "flextyperBin": "path to flextyper",
+  "queryPath": "path to the .tsv file"
+}
+

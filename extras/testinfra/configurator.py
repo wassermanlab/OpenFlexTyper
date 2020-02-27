@@ -1,5 +1,12 @@
-import json
+# Copyright (c) Wasserman lab 2020
+# Author Godfrain Jacques Kounkou
+# Description 
+# This file is the configurator file of the testinfra framework
+# It will contain the configuration of our test case
+# The configuration of our test case contains information about
+# the queryFile, the kmersize, the overlap, ...
 
+import json
 
 class Configurator(object):
     # default constructor
@@ -14,7 +21,7 @@ class Configurator(object):
         self.conf["readLength"]           = 0
         self.conf["indexFileLocation"]    = ""
         self.conf["outputFolder"]         = ""
-        self.conf["refOnly"] 	          = True
+        self.conf["refOnly"] 	          = False
         self.conf["searchType"]           = "SLIDING"
         self.conf["multithread"]       	  = True
         self.conf["ignoreNonUniqueKmers"] = True
@@ -31,6 +38,10 @@ class Configurator(object):
     # setter for kmerSize field, add others if needed
     def setKmerSize(self, kmerSize):
         self.conf["kmerSize"] = kmerSize
+
+    # search type
+    def setSearchType(self, searchType): 
+        self.conf["searchType"] = searchType
 
     # setter for the max Total kmers
     def setMaxTotalKmers(self, maxTotalKmers):

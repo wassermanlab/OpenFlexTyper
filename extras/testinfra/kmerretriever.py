@@ -1,3 +1,11 @@
+# Copyright (c) Wasserman lab 2020
+# Author Godfrain Jacques Kounkou
+# Description 
+# This file is the kmer retriever file.
+# It contains the code necessary to retrieve kmers.
+# There is a tight coupling between the kmer retriever and the 
+# and the flextyper binary launcher. This can be improved
+
 import subprocess
 import math
 import time
