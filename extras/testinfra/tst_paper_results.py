@@ -5,6 +5,7 @@
 # It will enable testing the application in different cases
 # All details are given within the data.json file
 
+
 import json
 import datetime
 from configurator import Configurator
