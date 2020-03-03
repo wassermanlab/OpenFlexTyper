@@ -243,7 +243,7 @@ function main() {
 
 	processInputs ${readFile}
 	uncompress ${readFile}
-	createFastaReadFile ${readFile} ${reverseComplement} ${utilsPath} # generate reverse complement = true | false
+	createFastaReadFile ${readFile} ${reverseComplement} ${utilsPath}
 	splitReadFiles ${readFile} ${nbreIndexes}
 	createIndex ${readFile} ${utilsPath}
 	search ${settingFile} ${utilsPath}
