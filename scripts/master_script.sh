@@ -233,6 +233,20 @@ function search() {
 	"${utilsPath}/flextyper" searching -c ${settingfile}
 }
 
+##########################################
+# DESC this function moves generated files to the final directory
+# ARGS this function takes the location of the reads
+# RSLT this function cleans up the current dir with generated data
+##########################################
+function moveFiles() {
+	local readname=$1
+
+	readdir=$(dirname $readname)
+	mv *__Results.tsv ${readdir}
+	mv indices.txt ${readdir}
+	mv extracted_reads.fa ${readdir}
+}
+
 # main function call
 function main() {
 	local readFile=$1
@@ -247,20 +261,6 @@ function main() {
 	splitReadFiles ${readFile} ${nbreIndexes}
 	createIndex ${readFile} ${utilsPath}
 	search ${settingFile} ${utilsPath}
-}
-
-##########################################
-# DESC this function moves generated files to the final directory
-# ARGS this function takes the location of the reads
-# RSLT this function cleans up the current dir with generated data
-##########################################
-function moveFiles() {
-	local readname=$1
-
-	readdir=$(dirname $readname)
-	mv *__Results.tsv ${readdir}
-	mv indices.txt ${readdir}
-	mv extracted_reads.fa ${readdir}
 }
 
 ##########################################
