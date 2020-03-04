@@ -55,9 +55,6 @@ function processReads() {
 	local read_1Size=$(getFileSize ${read_1})
 	local read_2Size=$(getFileSize ${read_2})
 
-	echo 'read 1 : ' $read_1Size
-	echo 'read 2 : ' $read_2Size
-	
 	if [[ $read_1Size == 0 ]] || [[ $read_2Size == 0 ]]; then
 		echo '==== ERROR : wrong read file'
 		exit 0
@@ -110,6 +107,11 @@ function uncompress()
 
 	if [ -f "${readname}.fq" ]; then
 		echo 'uncompressed file exists'
+		return
+	fi
+
+	if [[ -f "${readname}_1.fq" ]] && [[ -f "${readname}_2.fq" ]]; then
+		cat "${readname}_1.fq" "${readname}_2.fq" > "${readname}.fq"
 		return
 	fi
 
@@ -242,9 +244,12 @@ function moveFiles() {
 	local readname=$1
 
 	readdir=$(dirname $readname)
-	mv *__Results.tsv ${readdir}
-	mv indices.txt ${readdir}
-	mv extracted_reads.fa ${readdir}
+
+	if [ ${readdir} != '.' ]; then
+		mv *__Results.tsv ${readdir}
+		mv indices.txt ${readdir}
+		mv extracted_reads.fa ${readdir}
+	fi
 }
 
 # main function call
