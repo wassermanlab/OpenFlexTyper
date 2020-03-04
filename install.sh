@@ -61,14 +61,16 @@ function buildSeqTk() {
 # ARGS This function takes no arguments
 # RSLT The side effect is the new utils directory
 ##########################################
-function createUtilsDirectory() {
-        if [ ! -d utils ]; then
-                mkdir utils
-                cp seqtk/seqtk utils/seqtk
-                cp flextyper utils/flextyper
+function createBinDirectory() {
+	local bindir='bin'
+
+        if [ ! -d ${bindir} ]; then
+                mkdir ${bindir}
+                cp seqtk/seqtk ${bindir}/seqtk
+                cp flextyper ${bindir}/flextyper
         fi
 }
 
 buildFlexTyper
 buildSeqTk
-createUtilsDirectory
+createBinDirectory
