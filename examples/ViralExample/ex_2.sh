@@ -16,7 +16,7 @@
 export QT_QPA_PLATFORM='offscreen'
 
 bash ../../scripts/master_script.sh -r MixedVirus_100 \
-                                    -s setting.ini    \
+                                    -s setting_2.ini    \
                                     -n 1              \
                                     -c 1              \
                                     -p ../../build/bin/

@@ -4,30 +4,30 @@
 
 These examples will guide the usage of FlexTyper, and can be adapted for larger datasets in an applied setting.
 
-They incude ViralExample/ and WGSExample/
+They incude Viral\_Example/ and WGS\_Example/.
 
 
 ## Example 1 - Viral detection
 
-This is an example of ways to detect pathogenic virus reads from a raw fastq file. 
+This is an example of ways to detect pathogenic virus reads from raw fastq files. 
 
-This dataset includes a pre-made viral query file (pathogen\_query.txt), and a paired-end RNA-seq fastq file (Mixed\_virus\_1.fastq and Mixed\_virus\_2.fastq).
+This dataset includes a pre-made viral query file (pathogen\_query.txt), and paired-end RNA-seq fastq files (Mixed\_virus\_1.fastq and Mixed\_virus\_2.fastq).
 
 ~To generate your own query file, go to the fmformatter/ directory in the main repository.~ 
 
-It also includes two different execution scripts (ex1.sh and ex2.sh), which refer to different settings files (settings.ini, settings2.ini)
+It also includes two different execution scripts (ex\_1.sh and ex\_2.sh), which refer to different settings files (settings\_1.ini, settings\_2.ini)
 
 ### Execution
 
 To execute, simply type:
 ```
-bash ex.sh
+sh ex_1.sh
 ```
 
 ### Input files
 
 This script relies upon these input files:
-- Fastq data (in FASTQ or FASTQ.GZ format)
+- Fastq data (in fastq or fastq.gz format)
 - Settings File (settings.ini), which defines search parameters
 - Query file (in .tsv/.txt format)
 - A master script to call the tool, located in scripts/ from main repository
@@ -40,18 +40,27 @@ You will have these output files:
 - Output matching reads: extracted\_reads.fa 
 
 There are additional files created during processing:
-- rc_MixedVirus_100.fasta
-- output_0
-- MixedVirus_100.fq
-- MixedVirus_100.fasta
-- fw_MixedVirus_100.fasta
-- indices.txt
+- Combined fastq together: MixedVirus_100.fq
+- Forward (non-reverse complement) fasta file fw_MixedVirus_100.fasta
+- Reverse Complement of fasta file: rc_MixedVirus_100.fasta
+- Combined fasta file from fastq data: MixedVirus_100.fasta
+- Temporary file which stores fasta files per-index when multiple indexes are used: output_0
+- Text file which lists the indices created for the read set: indices.txt
 
-There is another script in this directory, which will run a separate set of indexing and querying with slightly different parameters. Before running, execute the clean-up function
+There is another script in this directory, which will run a separate set of indexing and querying with slightly different parameters. 
+
+Before running, execute the clean-up function
 
 ```
 sh clean.sh
 ```
+
+Then run the second script:
+
+```
+sh ex_2.sh
+```
+
 
 ## Example 2 - SNV detection
 *Under construction*
