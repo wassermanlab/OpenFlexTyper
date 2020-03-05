@@ -12,8 +12,8 @@
 #
 ##########################################
 
-bash ../scripts/master_script.sh -r MixedVirus_100 \
-                                 -s setting.ini    \
-                                 -n 1              \
-                                 -c 1              \
-                                 -p ../build/bin/
+bash ../../scripts/master_script.sh -r MixedVirus_100 \
+                                    -s setting.ini    \
+                                    -n 1              \
+                                    -c 1              \
+                                    -p ../../build/bin/
