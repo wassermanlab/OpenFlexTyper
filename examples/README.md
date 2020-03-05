@@ -4,7 +4,7 @@
 
 These examples will guide the usage of FlexTyper, and can be adapted for larger datasets in an applied setting.
 
-They incude Viral\_Example/ and WGS\_Example/.
+They include Viral\_Example/ and WGS\_Example/.
 
 
 ## Example 1 - Viral detection
