@@ -37,6 +37,15 @@ This repository comes with an example to test-run your installation and familiar
 
 You can learn more about examples [here](https://github.com/wassermanlab/OpenFlexTyper/tree/master/examples)
 
+## Customizing Query Files
+
+To design query files, follow the instructions in the fmformatter directory [here](https://github.com/wassermanlab/OpenFlexTyper/tree/master/fmformatter)
+
+## Downstream Processing
+
+The output files from FlexTyper can be formatted into commonly used formats, e.g. VCF format with a basic genotyping methods.
+
+To learn more, see the fmformatter directory [here](https://github.com/wassermanlab/OpenFlexTyper/tree/master/fmformatter)
 
 ## Demo
 
