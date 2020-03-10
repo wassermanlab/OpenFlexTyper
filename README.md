@@ -4,31 +4,17 @@
 [![GitHub release](https://img.shields.io/github/release/wassermanlab/openflextyper/all?logo=GitHub)](https://github.com/wassermanlab/openflextyper/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-The purpose of FlexTyper is to rapidly query an unmapped read file (fastq) for variants/kmers of interest. 
-The core of FlexTyper relies on the FM-index of the raw reads, developed by Alice Kaye. 
-This indexed read set is designed for rapid queries of kmers, sequence substrings of length ‘k’, against an entire set of unmapped reads. 
-With this ability to rapidly scan for substrings against an unmapped read set, we can perform meaningful queries for a variety of applications including genotyping for presence of pathogenic variants, coverage analysis for known probes contained within the CytoscanHD chromosomal microarray set, and ancestry/ethnicity inference from population discriminating polymorphisms. 
-The tool is designed in a flexible manner with respect to the query capabilities, making it available for extension to other organisms, genome versions, and applications. 
-We anticipate that FlexTyper’s utility will grow as datasets cataloguing variants of interest continue to expand.
-
-
-## Documentation
-
-For more information about FlexTyper, please refer to our online documentation on [readthedocs](https://flextyper.readthedocs.io/en/latest/)
-
-## Contributers
-
-[<img alt="tixii" src="https://avatars2.githubusercontent.com/u/7527871?s=460&v=4" width="117">](https://github.com/tixii/) |
-[<img alt="Phil" src="https://avatars1.githubusercontent.com/u/16579982?s=460&v=4" width="117">](https://github.com/Phillip-a-richmond) |
-[<img alt="kounkou" src="https://avatars0.githubusercontent.com/u/2589171?s=460&v=4" width="117">](https://github.com/kounkou) |
-[<img alt="tamario" src="https://avatars2.githubusercontent.com/u/15660317?s=460&v=4" width="117">](https://github.com/tamario) |
-:---: | :---: | :---: | :---: | 
-[Alice Kaye](https://github.com/tixii) | [Phillip Richmond](https://github.com/Phillip-a-richmond) | [Jacques Kounkou](https://github.com/kounkou) | [Tamar Av-Shalom](https://github.com/tamario)
-
 
 ## Overview
 
-![](docs/images/FmTyper_Overview.png)
+> FlexTyper is a tool which enables the creation of an FM-index of raw, next generation sequencing data to enable rapid and flexible sequence queries.
+
+We demonstrate the utility of these flexible queries performed as kmer (sequence substrings of length 'k') searches for two applications including SNP genotyping from whole genome sequencing, and viral detection from RNA-seq. 
+
+To learn more about FlexTyper, see our preprint on bioRxiv:
+
+[Demonstrating the utility of flexible sequence queries against indexed short reads with FlexTyper](https://www.biorxiv.org/content/10.1101/2020.03.02.973750v1)
+
 
 
 ## Quick start installation
@@ -51,10 +37,31 @@ bash install.sh
 
 That's it !
 
+## Example
+
+This repository comes with an example to test-run your installation and familiarize yourself with the usage of FlexTyper. 
+
+You can learn more about examples [here](https://github.com/wassermanlab/OpenFlexTyper/tree/master/examples)
+
 
 ## Demo
 
 ![](docs/FlexTyper_test.gif)
+
+
+## Contributers
+
+[<img alt="tixii" src="https://avatars2.githubusercontent.com/u/7527871?s=460&v=4" width="117">](https://github.com/tixii/) |
+[<img alt="Phil" src="https://avatars1.githubusercontent.com/u/16579982?s=460&v=4" width="117">](https://github.com/Phillip-a-richmond) |
+[<img alt="kounkou" src="https://avatars0.githubusercontent.com/u/2589171?s=460&v=4" width="117">](https://github.com/kounkou) |
+[<img alt="tamario" src="https://avatars2.githubusercontent.com/u/15660317?s=460&v=4" width="117">](https://github.com/tamario) |
+:---: | :---: | :---: | :---: | 
+[Alice Kaye](https://github.com/tixii) | [Phillip Richmond](https://github.com/Phillip-a-richmond) | [Jacques Kounkou](https://github.com/kounkou) | [Tamar Av-Shalom](https://github.com/tamario)
+
+
+## Full Documentation
+
+For more information about FlexTyper, please refer to our online documentation on [readthedocs](https://flextyper.readthedocs.io/en/latest/)
 
 
 ## License
