@@ -19,13 +19,8 @@ To learn more about FlexTyper, see our preprint on bioRxiv:
 
 ## Quick start installation
 
-OpenFlexTyper is installed with the install.sh script provided in the repository. 
+OpenFlexTyper is installed with the install.sh script provided in the repository. Installation is currently supported for Linux operating systems. 
 The installation assumes that you have **git** installed.
-git is by default available on cedar. On sockeye, you can load git module with 
-
-```bash
-module load git
-```
 
 Open a terminal and enter :
 
@@ -34,8 +29,6 @@ git clone https://github.com/wassermanlab/OpenFlexTyper.git
 cd OpenFlexTyper
 bash install.sh
 ```
-
-That's it !
 
 ## Example
 
