@@ -20,6 +20,7 @@ To learn more about FlexTyper, see our preprint on bioRxiv:
 ## Quick start installation
 
 OpenFlexTyper is installed with the install.sh script provided in the repository. Installation is currently supported for Linux operating systems. 
+ 
 The installation assumes that you have **git** installed.
 
 Open a terminal and enter :
