@@ -13,7 +13,7 @@ This is an example of ways to detect pathogenic virus reads from raw fastq files
 
 This dataset includes a pre-made viral query file (pathogen\_query.txt), and paired-end RNA-seq fastq files (Mixed\_virus\_1.fastq and Mixed\_virus\_2.fastq).
 
-~To generate your own query file, go to the fmformatter/ directory in the main repository.~ 
+*To generate your own query file, go to the fmformatter/ directory in the main repository.*
 
 It also includes two different execution scripts (ex\_1.sh and ex\_2.sh), which refer to different settings files (settings\_1.ini, settings\_2.ini)
 
