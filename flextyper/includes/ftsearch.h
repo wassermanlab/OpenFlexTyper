@@ -1,3 +1,10 @@
+////////////////////////////////////////////////////////////////////////
+/// \copyright Copyright (c) 2019, Wasserman lab
+/// \brief This file contains the definition of ftsearch. The class can
+///             be summarized as the init point for the application.
+///             The init function calls other parts of the application
+////////////////////////////////////////////////////////////////////////
+
 #ifndef __FM_SEARCH_H__
 #define __FM_SEARCH_H__
 
@@ -14,13 +21,7 @@
 namespace fs = std::experimental::filesystem;
 
 namespace ft {
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2019, Wasserman lab
-/// \author    Godfrain Jacques Kounkou
-/// \brief This file contains the definition of ftsearch. The class can
-///             be summarized as the init point for the application.
-///             The init function calls other parts of the application
-////////////////////////////////////////////////////////////////////////
+
 class FTSearch {
 public:
     ////////////////////////////////////////////////////////////////////////

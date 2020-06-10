@@ -1,3 +1,9 @@
+////////////////////////////////////////////////////////////////////////
+/// \copyright Copyright (c) 2019, Wasserman lab
+/// \brief This file contains the declaration of utils.h, it contains
+///             all utility functions needed to perform fast typer searches
+////////////////////////////////////////////////////////////////////////
+
 #ifndef __IUTILS_H__
 #define __IUTILS_H__
 
@@ -11,12 +17,7 @@
 namespace fs = std::experimental::filesystem;
 
 namespace ft {
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2019, Wasserman lab
-/// \author    Godfrain Jacques Kounkou
-/// \brief This file contains the declaration of utils.h, it contains
-///             all utility functions needed to perform fast typer searches
-////////////////////////////////////////////////////////////////////////
+
 class IUtils {
 public:
     ////////////////////////////////////////////////////////////////////////

@@ -1,3 +1,9 @@
+////////////////////////////////////////////////////////////////////////
+/// \copyright Copyright (c) 2019, Wasserman lab
+/// \brief This file contains the declaration of finder class. It contains
+///             functions used to search for kmers inside the FmIndex
+////////////////////////////////////////////////////////////////////////
+
 #ifndef __IFINDER_H__
 #define __IFINDER_H__
 
@@ -11,12 +17,7 @@
 namespace fs = std::experimental::filesystem;
 
 namespace ft {
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2019, Wasserman lab
-/// \author    Godfrain Jacques Kounkou
-/// \brief This file contains the declaration of finder class. It contains
-///             functions used to search for kmers inside the FmIndex
-////////////////////////////////////////////////////////////////////////
+
 class IFinder {
 public:
 

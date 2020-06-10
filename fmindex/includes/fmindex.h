@@ -1,13 +1,6 @@
 ////////////////////////////////////////////////////////////////////////
-///
-/// Copyright (c) 2018, Wasserman lab
-///
-/// FILE        fmindex.h
-///
-/// DESCRIPTION This file contains the implementation of the fmindex class
-///
-/// Initial version @ Godfrain Jacques KOUNKOU
-///
+/// \copyright Copyright (c) 2019, Wasserman lab
+/// \brief This file contains the implementation of the fmindex class
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef __FM_INDEX_H__

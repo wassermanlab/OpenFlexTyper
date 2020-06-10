@@ -1,3 +1,9 @@
+////////////////////////////////////////////////////////////////////////
+/// \copyright Copyright (c) 2019, Wasserman lab
+/// \brief This file contains the declaration of writerbridge.h, it contains
+///             all utility functions needed to writes results to result file
+////////////////////////////////////////////////////////////////////////
+
 #ifndef __WRITER_BRIDGE_H__
 #define __WRITER_BRIDGE_H__
 
@@ -9,12 +15,7 @@
 namespace fs = std::experimental::filesystem;
 
 namespace ft {
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2019, Wasserman lab
-/// \author    Godfrain Jacques Kounkou
-/// \brief This file contains the declaration of writerbridge.h, it contains
-///             all utility functions needed to writes results to result file
-/// ////////////////////////////////////////////////////////////////////////
+
 class WriterBridge : public IWriterBridge {
 public:
     ////////////////////////////////////////////////////////////////////////
