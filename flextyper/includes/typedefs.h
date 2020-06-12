@@ -20,6 +20,7 @@ typedef std::map<std::pair<int, QueryType>, std::set<size_t>>        ReaIDsMap; 
 typedef std::map<std::pair<int, QueryType>, uint>                    MapOfCounts;            // int is the query ID, uint = count
 typedef std::tuple<uint, std::string, std::string, std::string>      Query;                  // query id, ref, alt, crossover
 typedef std::map<std::string, std::set<std::pair<int, QueryType>>>   KmerMap;                // kmer, queryID
+typedef std::map<std::pair<int, QueryType>, std::set<std::string>>   QueryKmers;             // query id, query type, set kmers
 }
 
 #endif // TYPE_DEFINITION

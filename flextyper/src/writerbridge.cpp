@@ -11,7 +11,9 @@ WriterBridge::WriterBridge()
 }
 
 //======================================================================
-void WriterBridge::saveQueryOutput(MapOfCounts allCounts, bool returnMatchesOnly, bool crossover,
+void WriterBridge::saveQueryOutput(MapOfCounts allCounts, QueryKmers nonUniqueKmers, QueryKmers overCountedKmers,
+                                   bool returnMatchesOnly, bool includeOverCountedKmers,
+                                   bool ignoreNonUniqueKmers, bool crossover,
                                    const fs::path& inputQueryFile,
                                    const fs::path& outputQueryFile)
 {
@@ -38,10 +40,29 @@ void WriterBridge::saveQueryOutput(MapOfCounts allCounts, bool returnMatchesOnly
         if (line[0] == '#') {
             std::string header;
             if (crossover) {
-                header = '\t' + std::string("start_point_count") + '\t' + std::string("crossover_count") + '\t' + std::string("endpoint_count") + '\n';
+                header = '\t' + std::string("start_point_count") + '\t' + std::string("crossover_count") + '\t' + std::string("endpoint_count");
+                if (ignoreNonUniqueKmers) {
+                    header += '\t' + std::string("Start_Non_Unique_Kmers") + '\t' + std::string("Crossover_Non_Unique_Kmers") + '\t' + std::string("Endpoint_Non_Unique_Kmers");
+                }
+                if (includeOverCountedKmers) {
+                    header += '\t' + std::string("Start_Over_Counted_Kmers") + '\t' + std::string("Crossover_Over_Counted_Kmers") + '\t' + std::string("Endpoint_Over_Counted_Kmers");
+                }
+
             } else {
-                header = '\t' + std::string("Ref_count") + '\t'+ std::string("Alt_count") + '\n';
+                header = '\t' + std::string("Ref_count") + '\t' + std::string("Alt_count") ;
+
+                if (ignoreNonUniqueKmers) {
+                    header += '\t' + std::string("Ref_Non_Unique_Kmers") + '\t' + std::string("Alt_Non_Unique_Kmers");
+                }
+                if (includeOverCountedKmers) {
+                    header += '\t' + std::string("Ref_Over_Counted_Kmers") + '\t' + std::string("Alt_Over_Counted_Kmers");
+                }
             }
+
+            header += '\n';
+
+            std::cout << header << std::endl;
+
             line.append(header);
             outputFileStream << line;
             continue;
@@ -52,6 +73,13 @@ void WriterBridge::saveQueryOutput(MapOfCounts allCounts, bool returnMatchesOnly
         uint ref_count = 0;
         uint alt_count = 0;
         uint cro_count = 0;
+        std::string ref_NUK = "";
+        std::string alt_NUK = "";
+        std::string cro_NUK = "";
+        std::string ref_OCK = "";
+        std::string alt_OCK = "";
+        std::string cro_OCK = "";
+
 
         if (allCounts.count({queryIndex, QueryType::REF}) > 0){
             ref_count = allCounts[{queryIndex, QueryType::REF}];
@@ -63,12 +91,62 @@ void WriterBridge::saveQueryOutput(MapOfCounts allCounts, bool returnMatchesOnly
             cro_count = allCounts[{queryIndex, QueryType::CRO}];
         }
 
+        if (nonUniqueKmers.count({queryIndex, QueryType::REF}) > 0){
+            std::set<std::string> ref_NUKs = nonUniqueKmers[{queryIndex, QueryType::REF}];
+            for (auto it=ref_NUKs.begin(); it != ref_NUKs.end(); ++it)
+                ref_NUK += *it + ',' ;
+        }
+        if (nonUniqueKmers.count({queryIndex, QueryType::ALT}) > 0){
+            std::set<std::string> alt_NUKs = nonUniqueKmers[{queryIndex, QueryType::ALT}];
+            for (auto it=alt_NUKs.begin(); it != alt_NUKs.end(); ++it)
+                alt_NUK += *it + ',' ;
+        }
+        if (nonUniqueKmers.count({queryIndex, QueryType::CRO}) > 0){
+            std::set<std::string> cro_NUKs = nonUniqueKmers[{queryIndex, QueryType::CRO}];
+            for (auto it=cro_NUKs.begin(); it != cro_NUKs.end(); ++it)
+                cro_NUK += *it + ',' ;
+        }
+        if (overCountedKmers.count({queryIndex, QueryType::REF}) > 0){
+            std::set<std::string> ref_OCKs = overCountedKmers[{queryIndex, QueryType::REF}];
+            for (auto it=ref_OCKs.begin(); it != ref_OCKs.end(); ++it)
+                ref_OCK += *it + ',' ;
+        }
+        if (overCountedKmers.count({queryIndex, QueryType::ALT}) > 0){
+            std::set<std::string> alt_OCKs = overCountedKmers[{queryIndex, QueryType::ALT}];
+            for (auto it=alt_OCKs.begin(); it != alt_OCKs.end(); ++it)
+                alt_OCK += *it + ',' ;
+        }
+        if (overCountedKmers.count({queryIndex, QueryType::CRO}) > 0){
+            std::set<std::string> cro_OCKs = overCountedKmers[{queryIndex, QueryType::CRO}];
+            for (auto it=cro_OCKs.begin(); it != cro_OCKs.end(); ++it)
+                cro_OCK += *it + ',' ;
+        }
+
         std::string counts;
         if (crossover) {
-            counts = '\t' + std::to_string(ref_count) + '\t' + std::to_string(cro_count) + '\t' + std::to_string(alt_count) + '\n';
+            counts = '\t' + std::to_string(ref_count) + '\t' + std::to_string(cro_count) + '\t' + std::to_string(alt_count) ;
+            if (ignoreNonUniqueKmers) {
+                counts += '\t' + ref_NUK + '\t' + cro_NUK + '\t' + alt_NUK ;
+            }
+            if (includeOverCountedKmers) {
+               counts += '\t' + ref_OCK + '\t' + cro_OCK + '\t' + alt_OCK ;
+            }
+
         } else {
-            counts = '\t' + std::to_string(ref_count) + '\t' + std::to_string(alt_count) + '\n';
+            counts = '\t' + std::to_string(ref_count) + '\t' + std::to_string(alt_count) ;
+            if (ignoreNonUniqueKmers) {
+                counts += '\t' + ref_NUK + '\t' + alt_NUK ;
+            }
+            if (includeOverCountedKmers) {
+               counts += '\t' + ref_OCK + '\t' + alt_OCK ;
+            }
+
         }
+
+        counts += '\n';
+        // returnMatchesOnly doesnt work as we are just appending the lines, not creating a new file
+
+
         if (returnMatchesOnly){
             line.append(counts);
             //std::cout << line; //<< std::endl;
@@ -78,6 +156,8 @@ void WriterBridge::saveQueryOutput(MapOfCounts allCounts, bool returnMatchesOnly
             // std::cout << line; //<< std::endl;
             outputFileStream << line;
         }
+
+
     }
 }
 

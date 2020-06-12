@@ -9,7 +9,7 @@ Finder::Finder()
 }
 
 //======================================================================
-void Finder::searchMonoIndex(ResultsMap& indexPosResults, const KmerMap &kmerMap, const fs::path& indexPath,
+void Finder::searchMonoIndex(ResultsMap& indexPosResults, QueryKmers& nonUniqueKmers, QueryKmers& overCountedKmers, const KmerMap &kmerMap, const fs::path& indexPath,
                              const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
                              bool printSearchTime)
 {
@@ -21,7 +21,7 @@ void Finder::searchMonoIndex(ResultsMap& indexPosResults, const KmerMap &kmerMap
 }
 
 //======================================================================
-void Finder::searchMultipleIndexes(ResultsMap& indexPosResults, const KmerMap &kmerMap, const std::set<fs::path>& indexPaths,
+void Finder::searchMultipleIndexes(ResultsMap& indexPosResults, QueryKmers& nonUniqueKmers, QueryKmers& overCountedKmers, const KmerMap &kmerMap, const std::set<fs::path>& indexPaths,
                                    const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
                                    bool printSearchTime, long long offset)
 {

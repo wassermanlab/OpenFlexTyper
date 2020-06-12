@@ -28,7 +28,7 @@ public:
     /// \param allCounts
     /// \param returnMatchesOnly
     ////////////////////////////////////////////////////////////////////////
-    void saveQueryOutput(MapOfCounts allCounts, bool returnMatchesOnly, bool crossover, const fs::path& pathToQueryFile, const fs::path& queryOutputFile);
+    void saveQueryOutput(MapOfCounts allCounts, QueryKmers nonUniqueKmers, QueryKmers overCountedKmers, bool returnMatchesOnly, bool includeOverCountedKmers, bool ignoreNonUniqueKmers, bool crossover, const fs::path& pathToQueryFile, const fs::path& queryOutputFile);
 
     ////////////////////////////////////////////////////////////////////////
     /// `brief destructor
