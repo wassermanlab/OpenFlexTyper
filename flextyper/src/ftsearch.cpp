@@ -19,7 +19,7 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
                     const fs::path& indexFileLocation, const fs::path& outputFolder,
                     bool refOnly, SearchType searchType, bool multithread, const fs::path& inputFastQ,
                     uint overlap, bool returnMatchesOnly, bool kmerCounts,
-                    uint stride, uint maxOccurences, uint threadNumber, bool includeOverCountedKmers, bool ignoreNonUniqueKmers, bool crossover,
+                    uint stride, uint maxOccurences, uint threadNumber, bool flagOverCountedKmers, bool ignoreNonUniqueKmers, bool crossover,
                     bool printSearchTime, uint maxKmers, uint totalKmers, const fs::path& matchingReads)
 {
     std::ifstream in(matchingReads, std::ifstream::ate | std::ifstream::binary);
@@ -63,16 +63,16 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     if (setOfIndexes.size() == 1) {
         std::cout << "searching with " << setOfIndexes.size() << " indexes" << std::endl;
         std::cout << "offset : " << offset << std::endl;
-        _finder->searchMonoIndex(indexPosResults, nonUniqueKmers, overCountedKmers, kmerMap, indexFile, indexFileLocation, maxOccurences,
-                                 multithread, threadNumber, printSearchTime);
+        _finder->searchMonoIndex(indexPosResults, kmerMap, indexFile, indexFileLocation, maxOccurences,
+                                 multithread, threadNumber, flagOverCountedKmers, printSearchTime);
 
     } else if (setOfIndexes.size() > 1) {
 
         offset /= setOfIndexes.size();
         std::cout << "offset : " << offset << std::endl;
         std::cout << "searching with " << setOfIndexes.size() << " indexes" << std::endl;
-        _finder->searchMultipleIndexes(indexPosResults, nonUniqueKmers, overCountedKmers, kmerMap, setOfIndexes, indexFileLocation,
-                                       maxOccurences, multithread, threadNumber, printSearchTime,
+        _finder->searchMultipleIndexes(indexPosResults, kmerMap, setOfIndexes, indexFileLocation,
+                                       maxOccurences, multithread, threadNumber, flagOverCountedKmers, printSearchTime,
                                        offset);
     }
 
@@ -80,7 +80,7 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     indexMapFile += ".map";
 
     indexCounts = _resultProcessor->processResults(indexPosResults, readLength, lines, matchingReads);
-    _writerBridge->saveQueryOutput(indexCounts, nonUniqueKmers, overCountedKmers, returnMatchesOnly, includeOverCountedKmers, ignoreNonUniqueKmers, crossover, pathToQueryFile, queryOutputFile);
+    _writerBridge->saveQueryOutput(indexCounts, nonUniqueKmers, overCountedKmers, returnMatchesOnly, flagOverCountedKmers, ignoreNonUniqueKmers, crossover, pathToQueryFile, queryOutputFile);
 }
 
 //======================================================================

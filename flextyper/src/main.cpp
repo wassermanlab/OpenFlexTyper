@@ -108,7 +108,7 @@ int main(int argc, char** argv)
         uint           stride                  = settings.value("stride").toInt();
         uint           maxOccurences           = settings.value("maxOccurences").toInt();
         uint           threadNumber            = settings.value("threadNumber").toInt();
-        bool           includeOverCountedKmers = settings.value("includeOverCountedKmers").toBool();
+        bool           flagOverCountedKmers = settings.value("flagOverCountedKmers").toBool();
         bool           ignoreNonUniqueKmers    = settings.value("ignoreNonUniqueKmers").toBool();
         bool           crossover               = settings.value("crossover").toBool();
         bool           printSearchTime         = settings.value("printSearchTime").toBool();
@@ -129,7 +129,7 @@ int main(int argc, char** argv)
         std::cout << "stride                        : " << stride << std::endl;
         std::cout << "maxOccurences                 : " << maxOccurences << std::endl;
         std::cout << "threadNumber                  : " << threadNumber << std::endl;
-        std::cout << "includeOverCountedKmers       : " << includeOverCountedKmers << std::endl;
+        std::cout << "flagOverCountedKmers          : " << flagOverCountedKmers << std::endl;
         std::cout << "ignoreNonUniqueKmers          : " << ignoreNonUniqueKmers << std::endl;
         std::cout << "printSearchTime               : " << printSearchTime << std::endl;
 		std::cout << "maxKmersPerQuery              : " << maxKmersPerQuery << std::endl;
@@ -147,7 +147,7 @@ int main(int argc, char** argv)
         flexTyperInstance.init(pathToQueryFile, kmerSize, readLength, indexFileLocation,
                                outputFolder, refOnly, searchType, multithread, inputFastQ,
                                overlap, returnMatchesOnly, kmerCounts,
-                               stride, maxOccurences, threadNumber, includeOverCountedKmers, ignoreNonUniqueKmers, crossover,
+                               stride, maxOccurences, threadNumber, flagOverCountedKmers, ignoreNonUniqueKmers, crossover,
                                printSearchTime, maxKmersPerQuery, maxTotalKmers, matchingReads);
     } else if (command == "indexing") {
         parser.clearPositionalArguments();

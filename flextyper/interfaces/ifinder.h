@@ -33,8 +33,8 @@ public:
     /// \param parallel
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
-    virtual void searchMonoIndex(ResultsMap& indexPosResults, QueryKmers& nonUniqueKmers, QueryKmers& overCountedKmers,const KmerMap &kmerMap, const fs::path& indexPath,
-                                 const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
+    virtual void searchMonoIndex(ResultsMap& indexPosResults, const KmerMap &kmerMap, const fs::path& indexPath,
+                                 const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber, bool flagOverCountedKmers,
                                  bool printSearchTime) = 0;
 
     ////////////////////////////////////////////////////////////////////////
@@ -47,8 +47,8 @@ public:
     /// \param parallel
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
-    virtual void searchMultipleIndexes(ResultsMap& indexPosResults, QueryKmers& nonUniqueKmers, QueryKmers& overCountedKmers, const KmerMap& kmerMap, const std::set<fs::path>& indexPaths,
-                                       const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
+    virtual void searchMultipleIndexes(ResultsMap& indexPosResults, const KmerMap& kmerMap, const std::set<fs::path>& indexPaths,
+                                       const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber, bool flagOverCountedKmers,
                                        bool printSearchTime, long long offset) = 0;
 };
 }

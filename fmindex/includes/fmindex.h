@@ -49,10 +49,11 @@ public:
     /// \param queryString
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    std::tuple<std::set<size_t>, std::set<std::pair<int, ft::QueryType> > > search(const std::string& queryString,
+    std::tuple<std::set<size_t>, std::set<std::pair<int, ft::QueryType>>> search(const std::string& queryString,
                                                                                    const std::set<std::pair<int, ft::QueryType>> &queryIds,
                                                                                    const std::string& = "indexFile",
                                                                                    const std::string& = "/tmp/", u_int maxOcc = 200, size_t i = 0,
+                                                                                   bool flagOverCountedKmers = false,
                                                                                    bool printSearchTime = false);
 
     ////////////////////////////////////////////////////////////////////////

@@ -63,7 +63,7 @@ public:
               uint stride                   = 10    ,
               uint maxOccurences            = 200   ,
               uint threadNumber             = 1     ,
-              bool includeOverCountedKmers  = false ,
+              bool flagOverCountedKmers     = false ,
               bool ignoreNonUniqueKmers     = true  ,
               bool crossover                = false ,
               bool printSearchTime          = false,

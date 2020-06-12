@@ -53,8 +53,8 @@ public:
     /// \param parallel
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
-    void searchMonoIndex(ResultsMap& indexPosResults, QueryKmers& nonUniqueKmers, QueryKmers& overCountedKmers, const KmerMap &kmerMap, const fs::path& indexPath,
-                         const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
+    void searchMonoIndex(ResultsMap& indexPosResults, const KmerMap &kmerMap, const fs::path& indexPath,
+                         const std::string& indexFileLocation, uint maxOccurences, bool flagOverCountedKmers, bool parallel, uint threadNumber,
                          bool printSearchTime);
 
     ////////////////////////////////////////////////////////////////////////
@@ -67,8 +67,8 @@ public:
     /// \param parallel
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
-    void searchMultipleIndexes(ResultsMap& indexPosResults, QueryKmers& nonUniqueKmers, QueryKmers& overCountedKmers, const KmerMap& kmerMap, const std::set<fs::path>& indexPaths,
-                               const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
+    void searchMultipleIndexes(ResultsMap& indexPosResults, const KmerMap& kmerMap, const std::set<fs::path>& indexPaths,
+                               const std::string& indexFileLocation, uint maxOccurences, bool flagOverCountedKmers, bool parallel, uint threadNumber,
                                bool printSearchTime, long long offset);
 
 
@@ -91,7 +91,7 @@ public:
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
     void parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                        fs::path indexPath, uint maxOcc, uint threadNumber, bool printSearchTime, long long offset);
+                        fs::path indexPath, uint maxOcc, uint threadNumber, bool flagOverCountedKmers, bool printSearchTime, long long offset);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief sequentialSearch searches for kmers inside a single FmIndex
@@ -103,7 +103,7 @@ public:
     /// \param maxOcc
     ////////////////////////////////////////////////////////////////////////
     void sequentialSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                          fs::path indexPath, uint maxOcc, bool printSearchTime, long long offset);
+                          fs::path indexPath, uint maxOcc, bool flagOverCountedKmers, bool printSearchTime, long long offset);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief multipleIndexesParallelSearch searches for kmers inside multiple
@@ -116,7 +116,7 @@ public:
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
     void multipleIndexesParallelSearch(ResultsMap &indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                                       const std::set<fs::path>& indexPath, uint maxOcc, uint threadNumber, bool printSearchTime, long long offset);
+                                       const std::set<fs::path>& indexPath, uint maxOcc, uint threadNumber, bool flagOverCountedKmers, bool printSearchTime, long long offset);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief multipleIndexesSequentialSearch searches for kmers inside a multiple
@@ -128,7 +128,7 @@ public:
     /// \param maxOcc
     ////////////////////////////////////////////////////////////////////////
     void multipleIndexesSequentialSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                                         std::set<fs::path> indexPath, uint maxOcc, bool printSearchTime, long long offset);
+                                         std::set<fs::path> indexPath, uint maxOcc, bool flagOverCountedKmers, bool printSearchTime, long long offset);
 
 private:
     ////////////////////////////////////////////////////////////////////////

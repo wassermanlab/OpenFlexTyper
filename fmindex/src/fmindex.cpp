@@ -52,12 +52,13 @@ void FmIndex::generateReadsMap(const std::string& filename)
 //======================================================================
 std::tuple<std::set<size_t>, std::set<std::pair<int, ft::QueryType>>> FmIndex::search(const std::string& query, const std::set<std::pair<int, ft::QueryType> > &queryIds,
                                                             const std::string& /* filename */, const std::string& /* indexDirectory */,
-                                                            u_int maxOcc, size_t i, bool printSearchTime)
+                                                            u_int maxOcc, size_t i, bool flagOverCountedKmers, bool printSearchTime)
 {
     // This code is executed in a different thread for multithreaded
     // executions and in main thread for monothreaded applications
 
     std::set<size_t> result;
+    bool overCounted = false;
 
     auto start = high_resolution_clock::now();
 
@@ -66,6 +67,11 @@ std::tuple<std::set<size_t>, std::set<std::pair<int, ft::QueryType>>> FmIndex::s
     _mtx.lock();
     std::cout << '\r' << float(((float)i * 100) / _kmerMapSize) << " % " << std::flush;
     _mtx.unlock();
+
+    //if overcounted add flag
+    if (occs > maxOcc && flagOverCountedKmers) {
+        overCounted = true;
+    }
 
     if (occs > 0  && occs <= maxOcc) {
         auto locations = sdsl::locate(_fmindex, query.begin(), query.begin() + query.length());
