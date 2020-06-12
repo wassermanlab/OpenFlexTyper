@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
         - image: "ubuntu:latest"
+          environment:
+           TZ: "America/Vancouver"
     steps:
       - checkout
       - run:
@@ -20,3 +22,5 @@ workflows:
   build_and_test:
     jobs:
       - build
+        environment:
+          TZ: "America/Vancouver"
