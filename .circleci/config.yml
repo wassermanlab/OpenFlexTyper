@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
         - image: "ubuntu:latest"
+          environment:
+           TZ: "America/Vancouver"
     steps:
       - checkout
       - run:
