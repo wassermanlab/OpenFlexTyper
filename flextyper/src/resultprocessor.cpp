@@ -32,7 +32,7 @@ ReaIDsMap ResultProcessor::processIndexPos(ResultsMap& indexPosResults, uint rea
     ReaIDsMap readIDResults; // map< query ID, set<read ID>>
 
     for (auto e : indexPosResults) {
-        auto result = _utils->convertIndexPositionsToReadIDs(e.second, readLen);
+        auto result = _utils->convertIndexPositionsToReadIDs(e.second.first, readLen);
         readIDResults.insert({e.first, result});
     }
 

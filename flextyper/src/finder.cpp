@@ -10,8 +10,8 @@ Finder::Finder()
 
 //======================================================================
 void Finder::searchMonoIndex(ResultsMap& indexPosResults, const KmerMap &kmerMap, const fs::path& indexPath,
-                             const std::string& indexFileLocation, uint maxOccurences, bool flagOverCountedKmers, bool parallel, uint threadNumber,
-                             bool printSearchTime)
+                             const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
+                             bool flagOverCountedKmers, bool printSearchTime)
 {
     if (parallel) {
         parallelSearch(indexPosResults, indexFileLocation, kmerMap, indexPath, maxOccurences, threadNumber, flagOverCountedKmers, printSearchTime, 0);
@@ -22,8 +22,8 @@ void Finder::searchMonoIndex(ResultsMap& indexPosResults, const KmerMap &kmerMap
 
 //======================================================================
 void Finder::searchMultipleIndexes(ResultsMap& indexPosResults, const KmerMap &kmerMap, const std::set<fs::path>& indexPaths,
-                                   const std::string& indexFileLocation, uint maxOccurences, bool flagOverCountedKmers, bool parallel, uint threadNumber,
-                                   bool printSearchTime, long long offset)
+                                   const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
+                                   bool flagOverCountedKmers, bool printSearchTime, long long offset)
 {
     if (parallel) {
         multipleIndexesParallelSearch(indexPosResults, indexFileLocation, kmerMap, indexPaths, maxOccurences, threadNumber, flagOverCountedKmers,
@@ -53,7 +53,7 @@ void Finder::parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFi
         }
 
     // create a vector of futures
-    std::vector<std::future<std::tuple<std::set<size_t>, std::set<std::pair<int, QueryType>>>>> op;
+    std::vector<std::future<std::tuple<ResultsFuture, std::set<std::pair<int, QueryType>>>>> op;
     size_t j = 0;
     size_t k = kmerMap.size();
 
@@ -107,11 +107,17 @@ void Finder::parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFi
         }
 
         for (auto& e : op) {
-            auto tmpResult = e.get();
+            auto tmpResultMap = e.get();
             elts++;
-            for (auto f : std::get<1>(tmpResult)) {
-                for (auto g : std::get<0>(tmpResult)) {
-                    indexPosResults[f].insert(g + offset);
+            for (auto f : std::get<1>(tmpResultMap)) {
+                for (auto g : std::get<0>(tmpResultMap).first) {
+                    indexPosResults[f].first.insert(g + offset);
+                    //update flags:
+                    for (auto h : std::get<0>(tmpResultMap).second){
+                        if (h.second) {
+                        indexPosResults[f].second[h.first] = h.second;
+                        }
+                    }
                 }
             }
         }
@@ -138,14 +144,15 @@ void Finder::multipleIndexesParallelSearch(ResultsMap& indexPosResults, const fs
      * The search of kmers is done in parallel.
      */
 
-    ResultsMap tmpResult;
+    ResultsMap tmpResultMap;
+
     long long curr = 0;
 
     for (auto e : indexPath) {
 
         std::cout << "searching : " << e << std::endl;
 
-        parallelSearch(tmpResult, indexFileLocation, kmerMap, e, maxOcc, threadNumber, flagOverCountedKmers, printSearchTime, curr * offset);
+        parallelSearch(tmpResultMap, indexFileLocation, kmerMap, e, maxOcc, threadNumber, flagOverCountedKmers, printSearchTime, curr * offset);
 
         /*
         for (auto f : tmpResult) {
@@ -162,13 +169,22 @@ void Finder::multipleIndexesParallelSearch(ResultsMap& indexPosResults, const fs
         }
         */
 
-        for (auto& f : tmpResult) { // or kmers.second
+        for (auto& f : tmpResultMap) { // or kmers.second
+            std::set< long long> tmppositions = f.second.first;
             if (indexPosResults.find(f.first) != indexPosResults.end()) {
-                for (auto g : f.second) {
-                    indexPosResults[f.first].insert(g);
+                for (auto g : tmppositions) {
+                    indexPosResults[f.first].first.insert(g);
+                    //update flags:
+                    for (auto h : f.second.second){
+                        if (h.second) {
+                        indexPosResults[f.first].second[h.first] = h.second;
+                        }
+                    }
 				}
 			} else {
                 indexPosResults.insert(f);
+                //update flags:
+                // indexPosResults[e].second;
 			}
         }
 
@@ -177,7 +193,8 @@ void Finder::multipleIndexesParallelSearch(ResultsMap& indexPosResults, const fs
             std::cout << g.first.first << " : " << g.second.size() << std::endl;
         }
         */
-        tmpResult.clear();
+        tmpResultMap.clear();
+
         curr++;
     }
 }
@@ -207,7 +224,7 @@ void Finder::sequentialSearch(ResultsMap& indexPosResults, const fs::path& index
         }
 
     for (auto kmers : kmerMap) {
-        auto tmpResult = _fmIndex->search(kmers.first,
+        auto tmpResultMap = _fmIndex->search(kmers.first,
                                           kmers.second,
                                           indexPath.stem().string(),
                                           indexFileLocation,
@@ -217,8 +234,14 @@ void Finder::sequentialSearch(ResultsMap& indexPosResults, const fs::path& index
                                           printSearchTime);
 
         for (auto e : kmers.second) {
-            for (auto f : std::get<0>(tmpResult)) {
-                indexPosResults[e].insert(f + offset);
+            for (auto f : std::get<0>(tmpResultMap).first) {
+                indexPosResults[e].first.insert(f + offset);
+                //update flags:
+                for (auto h : std::get<0>(tmpResultMap).second){
+                    if (h.second) {
+                    indexPosResults[e].second[h.first] = h.second;
+                    }
+                }
             }
         }
     }

@@ -54,8 +54,8 @@ public:
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
     void searchMonoIndex(ResultsMap& indexPosResults, const KmerMap &kmerMap, const fs::path& indexPath,
-                         const std::string& indexFileLocation, uint maxOccurences, bool flagOverCountedKmers, bool parallel, uint threadNumber,
-                         bool printSearchTime);
+                         const std::string& indexFileLocation, uint maxOccurences,  bool parallel, uint threadNumber,
+                         bool flagOverCountedKmers, bool printSearchTime);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief searchMultipleIndexes
@@ -68,8 +68,8 @@ public:
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
     void searchMultipleIndexes(ResultsMap& indexPosResults, const KmerMap& kmerMap, const std::set<fs::path>& indexPaths,
-                               const std::string& indexFileLocation, uint maxOccurences, bool flagOverCountedKmers, bool parallel, uint threadNumber,
-                               bool printSearchTime, long long offset);
+                               const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
+                               bool flagOverCountedKmers, bool printSearchTime, long long offset);
 
 
     ////////////////////////////////////////////////////////////////////////

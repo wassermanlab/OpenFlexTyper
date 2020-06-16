@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 
+
 using namespace std::chrono;
 
 namespace algo {
@@ -50,7 +51,7 @@ void FmIndex::generateReadsMap(const std::string& filename)
 }
 
 //======================================================================
-std::tuple<std::set<size_t>, std::set<std::pair<int, ft::QueryType>>> FmIndex::search(const std::string& query, const std::set<std::pair<int, ft::QueryType> > &queryIds,
+std::tuple<ft::ResultsFuture, std::set<std::pair<int, ft::QueryType>>> FmIndex::search(const std::string& query, const std::set<std::pair<int, ft::QueryType> > &queryIds,
                                                             const std::string& /* filename */, const std::string& /* indexDirectory */,
                                                             u_int maxOcc, size_t i, bool flagOverCountedKmers, bool printSearchTime)
 {
@@ -58,7 +59,8 @@ std::tuple<std::set<size_t>, std::set<std::pair<int, ft::QueryType>>> FmIndex::s
     // executions and in main thread for monothreaded applications
 
     std::set<size_t> result;
-    bool overCounted = false;
+    std::map<ft::FlagType, bool> flags;
+    ft::FlagType overCounted;
 
     auto start = high_resolution_clock::now();
 
@@ -70,7 +72,7 @@ std::tuple<std::set<size_t>, std::set<std::pair<int, ft::QueryType>>> FmIndex::s
 
     //if overcounted add flag
     if (occs > maxOcc && flagOverCountedKmers) {
-        overCounted = true;
+        flags[overCounted] = true;
     }
 
     if (occs > 0  && occs <= maxOcc) {
@@ -88,7 +90,8 @@ std::tuple<std::set<size_t>, std::set<std::pair<int, ft::QueryType>>> FmIndex::s
         _stats->printKmerSearchTimeToFile("tmp.log", query, duration.count());
     }
 
-    return std::make_tuple(result, queryIds);
+    ft::ResultsFuture resultsfutures = std::make_pair(result, flags);
+    return std::make_tuple( resultsfutures, queryIds);
 }
 
 //======================================================================

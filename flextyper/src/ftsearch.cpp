@@ -56,7 +56,7 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
 
     auto indexFile = setOfIndexes.begin()->c_str();
     QueryKmers nonUniqueKmers;
-    QueryKmers overCountedKmers;
+
     ResultsMap indexPosResults;
 
     // selecting the correct strategy depending on the size of the index size set
@@ -80,7 +80,7 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     indexMapFile += ".map";
 
     indexCounts = _resultProcessor->processResults(indexPosResults, readLength, lines, matchingReads);
-    _writerBridge->saveQueryOutput(indexCounts, nonUniqueKmers, overCountedKmers, returnMatchesOnly, flagOverCountedKmers, ignoreNonUniqueKmers, crossover, pathToQueryFile, queryOutputFile);
+    _writerBridge->saveQueryOutput(indexCounts, nonUniqueKmers, returnMatchesOnly, flagOverCountedKmers, ignoreNonUniqueKmers, crossover, pathToQueryFile, queryOutputFile);
 }
 
 //======================================================================

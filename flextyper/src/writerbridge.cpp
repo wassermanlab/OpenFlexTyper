@@ -11,7 +11,7 @@ WriterBridge::WriterBridge()
 }
 
 //======================================================================
-void WriterBridge::saveQueryOutput(MapOfCounts allCounts, QueryKmers nonUniqueKmers, QueryKmers overCountedKmers,
+void WriterBridge::saveQueryOutput(MapOfCounts allCounts, QueryKmers nonUniqueKmers,
                                    bool returnMatchesOnly, bool includeOverCountedKmers,
                                    bool ignoreNonUniqueKmers, bool crossover,
                                    const fs::path& inputQueryFile,
@@ -106,6 +106,7 @@ void WriterBridge::saveQueryOutput(MapOfCounts allCounts, QueryKmers nonUniqueKm
             for (auto it=cro_NUKs.begin(); it != cro_NUKs.end(); ++it)
                 cro_NUK += *it + ',' ;
         }
+        /*
         if (overCountedKmers.count({queryIndex, QueryType::REF}) > 0){
             std::set<std::string> ref_OCKs = overCountedKmers[{queryIndex, QueryType::REF}];
             for (auto it=ref_OCKs.begin(); it != ref_OCKs.end(); ++it)
@@ -121,6 +122,7 @@ void WriterBridge::saveQueryOutput(MapOfCounts allCounts, QueryKmers nonUniqueKm
             for (auto it=cro_OCKs.begin(); it != cro_OCKs.end(); ++it)
                 cro_OCK += *it + ',' ;
         }
+        */
 
         std::string counts;
         if (crossover) {
