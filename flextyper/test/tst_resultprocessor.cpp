@@ -91,7 +91,9 @@ TEST_F(TestResultProcessor, processIndexPos)
 {
     TEST_DESCRIPTION("This test tests the method process index pos");
 
-    ResultsMap inputs {{{1, QueryType::REF}, {1000, 5444, 421, 74, 1021}}};
+    std::map<FlagType, bool> flags;
+    Results results = {{1000, 5444, 421, 74, 1021}, flags};
+    ResultsMap inputs {{{1, QueryType::REF}, results}};
     uint readLen = 100;
 
     ReaIDsMap output = _resultProcessor.processIndexPos(inputs, readLen);
@@ -106,8 +108,10 @@ TEST_F(TestResultProcessor, processIndexPos)
 TEST_F(TestResultProcessor, processIndexPosNoInput)
 {
     TEST_DESCRIPTION("This test tests the method process index pos");
+    std::map<FlagType, bool> flags;
+    Results results = {{}, flags};
+    ResultsMap inputs {{{1, QueryType::REF}, results}};
 
-    ResultsMap inputs {{{1, QueryType::REF}, {}}};
     uint readLen = 100;
 
     ReaIDsMap output = _resultProcessor.processIndexPos(inputs, readLen);
@@ -123,7 +127,10 @@ TEST_F(TestResultProcessor, processResults)
 {
     TEST_DESCRIPTION("This test tests the method processResults");
 
-    ResultsMap indexPosResults {{{1, QueryType::REF}, {1, 4, 85, 395, 140, 54, 66}}};;
+    std::map<FlagType, bool> flags;
+    Results results = { {1, 4, 85, 395, 140, 54, 66}, flags};
+    ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
+
     uint readLen = 100;
     MapOfCounts expectedOutput {{{1, QueryType::REF}, 2}};
 
@@ -140,7 +147,10 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_0)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    ResultsMap indexPosResults {{{1, QueryType::REF}, {60}}};
+    std::map<FlagType, bool> flags;
+    Results results = { {60}, flags};
+    ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
+
     uint readLen = 59;
     ofstream outputFile("index.fa");
     if (outputFile.is_open()) {
@@ -170,7 +180,10 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_1)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    ResultsMap indexPosResults {{{1, QueryType::REF}, {60, 61, 62}}};
+    std::map<FlagType, bool> flags;
+    Results results = {{60, 61, 62}, flags};
+    ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
+
     uint readLen = 59;
     ofstream outputFile("index.fa");
     if (outputFile.is_open()) {
@@ -200,7 +213,10 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_2)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    ResultsMap indexPosResults {{{1, QueryType::REF}, {68, 61, 62, 206, 209}}};
+    std::map<FlagType, bool> flags;
+    Results results = {{68, 61, 62, 206, 209}, flags};
+    ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
+
     uint readLen = 59;
     ofstream outputFile("index.fa");
     if (outputFile.is_open()) {
@@ -230,7 +246,10 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_3)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    ResultsMap indexPosResults {{{1, QueryType::REF}, {}}};
+    std::map<FlagType, bool> flags;
+    Results results = {{}, flags};
+    ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
+
     uint readLen = 59;
     ofstream outputFile("index.fa");
     if (outputFile.is_open()) {
@@ -259,7 +278,10 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_4)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    ResultsMap indexPosResults {{{1, QueryType::REF}, {10000, 349320}}};
+    std::map<FlagType, bool> flags;
+    Results results = {{10000, 349320}, flags};
+    ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
+
     uint readLen = 59;
     ofstream outputFile("index.fa");
     if (outputFile.is_open()) {
@@ -288,7 +310,10 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_5)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    ResultsMap indexPosResults {{{1, QueryType::REF}, {6}}};
+    std::map<FlagType, bool> flags;
+    Results results = {{6}, flags};
+    ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
+
     uint readLen = 59;
     ofstream outputFile("index.fa");
     if (outputFile.is_open()) {
@@ -318,7 +343,10 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_6)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    ResultsMap indexPosResults {{{1, QueryType::REF}, {6, 150}}};
+    std::map<FlagType, bool> flags;
+    Results results = {{6, 150}, flags};
+    ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
+
     uint readLen = 59;
     ofstream outputFile("index.fa");
     if (outputFile.is_open()) {
@@ -348,7 +376,10 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_7)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    ResultsMap indexPosResults {{{1, QueryType::REF}, {6, 200}}};
+    std::map<FlagType, bool> flags;
+    Results results = {{6,200}, flags};
+    ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
+
     uint readLen = 59;
     ofstream outputFile("index.fa");
     if (outputFile.is_open()) {
@@ -379,7 +410,10 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_8)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    ResultsMap indexPosResults {{{1, QueryType::REF}, {68, 120}}};
+    std::map<FlagType, bool> flags;
+    Results results = {{68,128}, flags};
+    ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
+
     uint readLen = 59;
     ofstream outputFile("index.fa");
     if (outputFile.is_open()) {

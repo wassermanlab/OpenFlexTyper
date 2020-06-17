@@ -61,7 +61,7 @@ public:
     /// \param queryString
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual std::tuple<ft::ResultsFuture, std::set<std::pair<int, ft::QueryType>>>  search(const std::string& queryString, const std::set<std::pair<int, ft::QueryType> > &queryIds,
+    virtual std::tuple<ft::ResultsFuture, std::set<std::pair<int, ft::QueryType>>> search(const std::string& queryString, const std::set<std::pair<int, ft::QueryType> > &queryIds,
                                                                                          const std::string& filename = "indexFile",
                                                                                          const std::string& outputFolder = "./", u_int maxOccurences = 200,
                                                                                          size_t i = 0,

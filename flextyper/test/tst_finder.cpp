@@ -55,8 +55,9 @@ TEST_F(TestFinder, searchSequentially)
     fs::path indexPath ("./test.fm9");
     std::string indexFileLocation ("test.fm9");
     uint maxOccurrences = 200;
+    bool flagOverCountedKmers = false;
     bool printSearchTime = false;
 
-    EXPECT_NO_THROW(_finder.sequentialSearch(indexPosResults, indexFileLocation, kmerMap, indexPath, maxOccurrences, printSearchTime, 0));
+    EXPECT_NO_THROW(_finder.sequentialSearch(indexPosResults, indexFileLocation, kmerMap, indexPath, maxOccurrences, flagOverCountedKmers, printSearchTime, 0));
 }
 }
