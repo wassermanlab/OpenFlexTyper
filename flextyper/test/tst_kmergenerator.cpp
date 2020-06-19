@@ -64,9 +64,9 @@ TEST_F(TestKmerGenerator, TestCrossOver_0)
 
     SearchKmers ret = kmerGeneratorObj.genQueryKmers(myQuery, kmerSize, refOnly, searchType, overlap, stride, crossover, kmerCounts, INT_MAX);
 
-    SearchKmers expectedRet {{{QueryType::REF, 2}, { "AAACC", "AACCG" }},
-                             {{QueryType::ALT, 2}, { "TTTTT" }},
-                             {{QueryType::CRO, 2}, { "AAATT", "AATTT" }}};
+    SearchKmers expectedRet {{{2, QueryType::REF}, { "AAACC", "AACCG" }},
+                             {{2, QueryType::ALT}, { "TTTTT" }},
+                             {{2, QueryType::CRO}, { "AAATT", "AATTT" }}};
 
     EXPECT_EQ(ret, expectedRet);
 }
@@ -104,9 +104,9 @@ TEST_F(TestKmerGenerator, TestCrossOver_1)
 
     SearchKmers ret = kmerGeneratorObj.genQueryKmers(myQuery, kmerSize, refOnly, searchType, overlap, stride, crossover, kmerCounts, INT_MAX);
 
-    SearchKmers expectedRet {{{QueryType::REF, 2}, { "TTCCCCCCCC", "TTTCCCCCCC", "TTTTCCCCCC", "TTTTTCCCCC", "TTTTTTCCCC", "TTTTTTTCCC", "TTTTTTTTCC" }},
-                             {{QueryType::ALT, 2}, { "CCCCCCCCGG", "CCCCCCCGGG", "CCCCCCGGGG", "CCCCCGGGGG", "CCCCGGGGGG", "CCCGGGGGGG", "CCGGGGGGGG" }},
-                             {{QueryType::CRO, 2}, { "TTGGGGGGGG", "TTTGGGGGGG", "TTTTGGGGGG", "TTTTTGGGGG", "TTTTTTGGGG", "TTTTTTTGGG", "TTTTTTTTGG" }}};
+    SearchKmers expectedRet {{{2, QueryType::REF}, { "TTCCCCCCCC", "TTTCCCCCCC", "TTTTCCCCCC", "TTTTTCCCCC", "TTTTTTCCCC", "TTTTTTTCCC", "TTTTTTTTCC" }},
+                             {{2, QueryType::ALT}, { "CCCCCCCCGG", "CCCCCCCGGG", "CCCCCCGGGG", "CCCCCGGGGG", "CCCCGGGGGG", "CCCGGGGGGG", "CCGGGGGGGG" }},
+                             {{2, QueryType::CRO}, { "TTGGGGGGGG", "TTTGGGGGGG", "TTTTGGGGGG", "TTTTTGGGGG", "TTTTTTGGGG", "TTTTTTTGGG", "TTTTTTTTGG" }}};
 
     EXPECT_EQ(ret, expectedRet);
 }
@@ -144,9 +144,9 @@ TEST_F(TestKmerGenerator, TestCrossOverBiggerStride)
 
     SearchKmers ret = kmerGeneratorObj.genQueryKmers(myQuery, kmerSize, refOnly, searchType, overlap, stride, crossover, kmerCounts, INT_MAX);
 
-    SearchKmers expectedRet {{{QueryType::REF, 2}, { "TTCCCCCCCC", "TTTTTCCCCC", "TTTTTTTTCC" }},
-                             {{QueryType::ALT, 2}, { "CCCCCCCCGG", "CCCCCGGGGG", "CCGGGGGGGG" }},
-                             {{QueryType::CRO, 2}, { "TTGGGGGGGG", "TTTTTGGGGG", "TTTTTTTTGG" }}};
+    SearchKmers expectedRet {{{2, QueryType::REF}, { "TTCCCCCCCC", "TTTTTCCCCC", "TTTTTTTTCC" }},
+                             {{2, QueryType::ALT}, { "CCCCCCCCGG", "CCCCCGGGGG", "CCGGGGGGGG" }},
+                             {{2, QueryType::CRO}, { "TTGGGGGGGG", "TTTTTGGGGG", "TTTTTTTTGG" }}};
 
     EXPECT_EQ(ret, expectedRet);
 }
@@ -184,9 +184,9 @@ TEST_F(TestKmerGenerator, TestCrossOverBiggerOverlap_0)
 
     SearchKmers ret = kmerGeneratorObj.genQueryKmers(myQuery, kmerSize, refOnly, searchType, overlap, stride, crossover, kmerCounts, INT_MAX);
 
-    SearchKmers expectedRet {{{QueryType::REF, 2}, { "TTTTCCCCCC", "TTTTTCCCCC", "TTTTTTCCCC" }},
-                             {{QueryType::ALT, 2}, { "CCCCCCGGGG", "CCCCCGGGGG", "CCCCGGGGGG" }},
-                             {{QueryType::CRO, 2}, { "TTTTGGGGGG", "TTTTTGGGGG", "TTTTTTGGGG" }}};
+    SearchKmers expectedRet {{{2, QueryType::REF}, { "TTTTCCCCCC", "TTTTTCCCCC", "TTTTTTCCCC" }},
+                             {{2, QueryType::ALT}, { "CCCCCCGGGG", "CCCCCGGGGG", "CCCCGGGGGG" }},
+                             {{2, QueryType::CRO}, { "TTTTGGGGGG", "TTTTTGGGGG", "TTTTTTGGGG" }}};
 
     EXPECT_EQ(ret, expectedRet);
 }
@@ -224,9 +224,9 @@ TEST_F(TestKmerGenerator, TestCrossOverBiggerOverlap_1)
 
     SearchKmers ret = kmerGeneratorObj.genQueryKmers(myQuery, kmerSize, refOnly, searchType, overlap, stride, crossover, kmerCounts, INT_MAX);
 
-    SearchKmers expectedRet {{{QueryType::REF, 2}, { "TTCCCCCCCC", "TTTCCCCCCC", "TTTTCCCCCC", "TTTTTCCCCC", "TTTTTTCCCC", "TTTTTTTCCC", "TTTTTTTTCC" }},
-                             {{QueryType::ALT, 2}, { "CCCCCCCCGG", "CCCCCCCGGG", "CCCCCCGGGG", "CCCCCGGGGG", "CCCCGGGGGG", "CCCGGGGGGG", "CCGGGGGGGG" }},
-                             {{QueryType::CRO, 2}, { "TTGGGGGGGG", "TTTGGGGGGG", "TTTTGGGGGG", "TTTTTGGGGG", "TTTTTTGGGG", "TTTTTTTGGG", "TTTTTTTTGG" }}};
+    SearchKmers expectedRet {{{2, QueryType::REF}, { "TTCCCCCCCC", "TTTCCCCCCC", "TTTTCCCCCC", "TTTTTCCCCC", "TTTTTTCCCC", "TTTTTTTCCC", "TTTTTTTTCC" }},
+                             {{2, QueryType::ALT}, { "CCCCCCCCGG", "CCCCCCCGGG", "CCCCCCGGGG", "CCCCCGGGGG", "CCCCGGGGGG", "CCCGGGGGGG", "CCGGGGGGGG" }},
+                             {{2, QueryType::CRO}, { "TTGGGGGGGG", "TTTGGGGGGG", "TTTTGGGGGG", "TTTTTGGGGG", "TTTTTTGGGG", "TTTTTTTGGG", "TTTTTTTTGG" }}};
 
     EXPECT_EQ(ret, expectedRet);
 }
@@ -381,9 +381,12 @@ TEST_F(TestKmerGenerator, TestProbabilisticParamDisabled) {
 
     KmerGenerator obj;
     obj.genKmerMap(inputQueries, kmerSize, refOnly, searchType, kmerMap, overlap, stride, crossover, ignoreNonUniqueKmers, kmerCounts, INT_MAX, INT_MAX);
-    KmerMap expectedKmerMap {{"AAAAAC", {{2, ft::QueryType::REF}}},
-                             {"AAAAAG", {{3, ft::QueryType::REF}}},
-                             {"AAAAAT", {{1, ft::QueryType::REF}}}};
+
+    std::pair<std::set<ft::QIdT>,std::set<ft::FlagType>> result = {{{3, ft::QueryType::REF}}, {{}}};
+
+    KmerMap expectedKmerMap {{"AAAAAC", {{{2, ft::QueryType::REF}}, {{}}}},
+                             {"AAAAAG", {{{3, ft::QueryType::REF}}, {{}}}},
+                            {"AAAAAT", {{{1, ft::QueryType::REF}}, {{}}}}};
     EXPECT_EQ(kmerMap, expectedKmerMap);
 }
 
@@ -409,9 +412,9 @@ TEST_F(TestKmerGenerator, TestProbabilisticParamEnabled) {
     KmerGenerator obj;
     obj.genKmerMap(inputQueries, kmerSize, refOnly, searchType, kmerMap, overlap, stride, crossover, ignoreNonUniqueKmers, kmerCounts, INT_MAX, INT_MAX);
 
-    KmerMap expectedKmerMap {{"AAAAAT", {{1, ft::QueryType::REF}}},
-                             {"AAAAAC", {{2, ft::QueryType::REF}}},
-                             {"AAAAAG", {{3, ft::QueryType::REF}}}};
+    KmerMap expectedKmerMap {{"AAAAAC", {{{2, ft::QueryType::REF}}, {{}}}},
+                             {"AAAAAG", {{{3, ft::QueryType::REF}}, {{}}}},
+                            {"AAAAAT", {{{1, ft::QueryType::REF}}, {{}}}}};
     EXPECT_EQ(kmerMap, expectedKmerMap);
 }
 
@@ -437,30 +440,33 @@ TEST_F(TestKmerGenerator, TestProbabilisticParamEnabledLongQuery) {
 
     // notice that kmers are appearing as they are created
     // They are ordered lexicographycally.
-    KmerMap expectedKmerMap {{ {"AAAAAA", { {1, ft::QueryType::REF} }},
-                               {"AAAAAC", { {1, ft::QueryType::REF} }},
-                               {"AAAATA", { {1, ft::QueryType::REF} }},
-                               {"AAATGG", { {1, ft::QueryType::REF} }},
-                               {"AACAAA", { {1, ft::QueryType::REF} }},
-                               {"ATAAAA", { {1, ft::QueryType::REF} }},
-                               {"ATCGAT", { {1, ft::QueryType::REF} }},
-                               {"CAAAAA", { {1, ft::QueryType::REF} }},
-                               {"CCCTTT", { {1, ft::QueryType::REF} }},
-                               {"CGATCG", { {1, ft::QueryType::REF} }},
-                               {"CTAGCT", { {1, ft::QueryType::REF} }},
-                               {"GAAAAA", { {1, ft::QueryType::REF} }},
-                               {"GATCGA", { {1, ft::QueryType::REF} }},
-                               {"GCATCG", { {1, ft::QueryType::REF} }},
-                               {"GCTGCA", { {1, ft::QueryType::REF} }},
-                               {"GGGCCC", { {1, ft::QueryType::REF} }},
-                               {"GGTTGT", { {1, ft::QueryType::REF} }},
-                               {"TACGAA", { {1, ft::QueryType::REF} }},
-                               {"TCGATC", { {1, ft::QueryType::REF} }},
-                               {"TCGTAC", { {1, ft::QueryType::REF} }},
-                               {"TGGGGG", { {1, ft::QueryType::REF} }},
-                               {"TGGGGT", { {1, ft::QueryType::REF} }},
-                               {"TTACAA", { {1, ft::QueryType::REF} }},
-                               {"TTTTTA", { {1, ft::QueryType::REF} }} }};
+
+
+
+    KmerMap expectedKmerMap {{ {"AAAAAA", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"AAAAAC", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"AAAATA", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"AAATGG", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"AACAAA", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"ATAAAA", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"ATCGAT", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"CAAAAA", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"CCCTTT", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"CGATCG", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"CTAGCT", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"GAAAAA", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"GATCGA", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"GCATCG", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"GCTGCA", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"GGGCCC", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"GGTTGT", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"TACGAA", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"TCGATC", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"TCGTAC", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"TGGGGG", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"TGGGGT", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"TTACAA", { {{1, ft::QueryType::REF}},{{}} } },
+                               {"TTTTTA", { {{1, ft::QueryType::REF}},{{}} } }}};
 
     EXPECT_EQ(kmerMap, expectedKmerMap);
 }

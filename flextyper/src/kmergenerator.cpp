@@ -96,7 +96,7 @@ SearchKmers KmerGenerator::genSearchKmers(std::set<Query> inputQueries, uint kme
 
         // add ref search queries to searchKmers map
         if (!refSearchStrings.empty()) {
-            results[{QueryType::REF, queryID}] = refSearchStrings;
+            results[std::make_pair(queryID, QueryType::REF)] = refSearchStrings;
         } else {
             std::cout << "Error during the ID creation !" << std::endl;
         }
@@ -114,7 +114,7 @@ SearchKmers KmerGenerator::genSearchKmers(std::set<Query> inputQueries, uint kme
 
             // add alt search queries to searchKmers map
             if (!altSearchStrings.empty()) {
-                results[{QueryType::ALT, queryID}] = altSearchStrings;
+                results[{queryID, QueryType::ALT}] = altSearchStrings;
             } else {
                 std::cout << "Error during the ID creation !" << std::endl;
             }
@@ -153,7 +153,7 @@ SearchKmers KmerGenerator::genQueryKmers(Query inputQuery, uint kmerSize, bool r
 
     // add ref search queries to searchKmers map
     if (!refSearchStrings.empty()) {
-        results[{QueryType::REF, queryID}] = refSearchStrings;
+        results[{queryID, QueryType::REF}] = refSearchStrings;
     } else {
         std::cerr << "no ref kmers generated" << std::endl;
     }
@@ -171,7 +171,7 @@ SearchKmers KmerGenerator::genQueryKmers(Query inputQuery, uint kmerSize, bool r
 
         // add alt search queries to searchKmers map
         if (!altSearchStrings.empty()) {
-            results[{QueryType::ALT, queryID}] = altSearchStrings;
+            results[{queryID, QueryType::ALT}] = altSearchStrings;
         } else {
             std::cerr << "no alt kmers generated" << std::endl;
         }
@@ -187,7 +187,7 @@ SearchKmers KmerGenerator::genQueryKmers(Query inputQuery, uint kmerSize, bool r
                 throw 1;
             }
 
-            results[{QueryType::CRO, queryID}] = crossoverStrings;
+            results[{queryID, QueryType::CRO}] = crossoverStrings;
         }
     }
 
@@ -207,11 +207,10 @@ SearchKmers KmerGenerator::genQueryKmers(Query inputQuery, uint kmerSize, bool r
 void KmerGenerator::addtoKmerMap(KmerMap& kmerMap, const SearchKmers& queryKmers)
 {
     for (auto query : queryKmers) {
-        QueryType queryType = query.first.first;
-        int queryID = query.first.second;
+        ft::QIdT queryIDT = query.first;
         std::set<std::string> kmers = query.second;
         for (auto kmer : kmers) {
-            kmerMap[kmer].insert({queryID, queryType});
+            kmerMap[kmer].first.insert(queryIDT);
         }
     }
 }
@@ -242,7 +241,7 @@ void KmerGenerator::genKmerMap(std::set<Query>& inputQueries, uint kmerSize, boo
         std::cout << "probabilistic search" << std::endl;
         std::cout << "initial size : " << kmerMap.size() << std::endl;
         for (auto it = kmerMap.begin(); it != kmerMap.end();) {
-            if (kmerMap[(*it).first].size() > 1) {
+            if (kmerMap[(*it).first].first.size() > 1) {
                 // std::cout << "removing  " << (*it).first << std::endl;
                 kmerMap.erase(it++);
             } else {

@@ -53,13 +53,14 @@ void Finder::parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFi
         }
 
     // create a vector of futures
-    std::vector<std::future<std::tuple<ResultsFuture, std::set<std::pair<int, QueryType>>>>> op;
+    std::vector<std::future<std::tuple<ResultsFuture, std::set<QIdT>>>> op;
     size_t j = 0;
     size_t k = kmerMap.size();
 
     // using a queue to easily control the flow of kmers
-    std::queue<std::pair<std::string, std::set<std::pair<int, QueryType>>>> q;
-    for (auto& kmers : kmerMap) {
+    std::queue<std::pair<std::string, std::set<QIdT>>> q;
+    for (auto& kmer : kmerMap) {
+        std::pair<std::string, std::set<QIdT>> kmers = std::make_pair(kmer.first, kmer.second.first);
         q.push(kmers);
     }
 
@@ -107,17 +108,17 @@ void Finder::parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFi
         }
 
         for (auto& e : op) {
+
             auto tmpResultMap = e.get();
+            std::set<QIdT> queryID_Types = std::get<1>(tmpResultMap);
+            ft::ResultsFuture tmpResult = std::get<0>(tmpResultMap);
+
             elts++;
-            for (auto f : std::get<1>(tmpResultMap)) {
-                for (auto g : std::get<0>(tmpResultMap).first) {
-                    indexPosResults[f].first.insert(g + offset);
-                    //update flags:
-                    for (auto h : std::get<0>(tmpResultMap).second){
-                        if (h.second) {
-                        indexPosResults[f].second[h.first] = h.second;
-                        }
-                    }
+            for (auto queryID_Type : queryID_Types) {
+                for (auto position : tmpResult.first) {
+                    indexPosResults[queryID_Type].first.insert(position + offset);
+                    indexPosResults[queryID_Type].second.insert(tmpResult.second.begin(), tmpResult.second.end());
+
                 }
             }
         }
@@ -125,7 +126,6 @@ void Finder::parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFi
         j = 0;
         op.clear();
     }
-
 
     std::cout << "Finished\n";
 }
@@ -169,23 +169,23 @@ void Finder::multipleIndexesParallelSearch(ResultsMap& indexPosResults, const fs
         }
         */
 
-        for (auto& f : tmpResultMap) { // or kmers.second
-            std::set< long long> tmppositions = f.second.first;
-            if (indexPosResults.find(f.first) != indexPosResults.end()) {
-                for (auto g : tmppositions) {
-                    indexPosResults[f.first].first.insert(g);
-                    //update flags:
-                    for (auto h : f.second.second){
-                        if (h.second) {
-                        indexPosResults[f.first].second[h.first] = h.second;
-                        }
-                    }
+
+        for (auto& queryResults : tmpResultMap) { // or kmers.second
+
+            ft::QIdT queryID_Type = std::get<0>(queryResults);
+            Results tmpQueryResult = std::get<1>(queryResults);
+
+            std::set< long long> tmppositions = tmpQueryResult.first;
+            std::set<ft::FlagType> tmpflags = tmpQueryResult.second;
+            if (indexPosResults.find(queryID_Type) != indexPosResults.end()) {
+                for (auto pos : tmppositions) {
+                    indexPosResults[queryID_Type].first.insert(pos);
 				}
 			} else {
-                indexPosResults.insert(f);
-                //update flags:
-                // indexPosResults[e].second;
-			}
+                indexPosResults.insert(queryResults);
+            }
+            indexPosResults[queryID_Type].second.insert(tmpflags.begin(), tmpflags.end());
+
         }
 
         /*
@@ -223,7 +223,10 @@ void Finder::sequentialSearch(ResultsMap& indexPosResults, const fs::path& index
             std::cout << "Error ! " << indexPath << " " << e.what() << std::endl;
         }
 
-    for (auto kmers : kmerMap) {
+    for (auto kmer : kmerMap) {
+        std::pair<std::string, std::set<QIdT>> kmers = std::make_pair(kmer.first, kmer.second.first);
+
+        // tmpResultMap std::tuple<ft::ResultsFuture, std::set<std::pair<int, ft::QueryType>>>
         auto tmpResultMap = _fmIndex->search(kmers.first,
                                           kmers.second,
                                           indexPath.stem().string(),
@@ -233,15 +236,15 @@ void Finder::sequentialSearch(ResultsMap& indexPosResults, const fs::path& index
                                           flagOverCountedKmers,
                                           printSearchTime);
 
-        for (auto e : kmers.second) {
-            for (auto f : std::get<0>(tmpResultMap).first) {
-                indexPosResults[e].first.insert(f + offset);
-                //update flags:
-                for (auto h : std::get<0>(tmpResultMap).second){
-                    if (h.second) {
-                    indexPosResults[e].second[h.first] = h.second;
-                    }
-                }
+
+
+        std::set<QIdT> queryID_Types = std::get<1>(tmpResultMap);
+        ft::ResultsFuture tmpResult = std::get<0>(tmpResultMap);
+
+        for (auto queryID_Type : queryID_Types) {
+            for (auto position : tmpResult.first) {
+                indexPosResults[queryID_Type].first.insert(position + offset);
+                indexPosResults[queryID_Type].second.insert(tmpResult.second.begin(), tmpResult.second.end());
             }
         }
     }

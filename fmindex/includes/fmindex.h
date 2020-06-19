@@ -49,7 +49,7 @@ public:
     /// \param queryString
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    std::tuple<ft::ResultsFuture, std::set<std::pair<int, ft::QueryType>> > search(const std::string& queryString,
+    std::tuple<ft::ResultsFuture, std::set<std::pair<int, ft::QueryType>> > search(const std::string& kmerString,
                                                                                    const std::set<std::pair<int, ft::QueryType>> &queryIds,
                                                                                    const std::string& = "indexFile",
                                                                                    const std::string& = "/tmp/", u_int maxOcc = 200, size_t i = 0,
@@ -62,7 +62,7 @@ public:
     /// \param queryString
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    std::map<std::string, std::set<size_t> > searchmany(const std::vector<std::string>& queryString,
+    std::map<std::string, std::set<size_t> > searchmany(const std::vector<std::string>& kmers,
                                                         const std::string& = "indexFile",
                                                         const std::string& = "/tmp/");
 

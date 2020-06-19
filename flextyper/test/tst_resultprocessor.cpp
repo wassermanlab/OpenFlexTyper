@@ -91,8 +91,8 @@ TEST_F(TestResultProcessor, processIndexPos)
 {
     TEST_DESCRIPTION("This test tests the method process index pos");
 
-    std::map<FlagType, bool> flags;
-    Results results = {{1000, 5444, 421, 74, 1021}, flags};
+
+    Results results = {{1000, 5444, 421, 74, 1021}, {}};
     ResultsMap inputs {{{1, QueryType::REF}, results}};
     uint readLen = 100;
 
@@ -108,8 +108,8 @@ TEST_F(TestResultProcessor, processIndexPos)
 TEST_F(TestResultProcessor, processIndexPosNoInput)
 {
     TEST_DESCRIPTION("This test tests the method process index pos");
-    std::map<FlagType, bool> flags;
-    Results results = {{}, flags};
+
+    Results results = {{}, {}};
     ResultsMap inputs {{{1, QueryType::REF}, results}};
 
     uint readLen = 100;
@@ -127,8 +127,7 @@ TEST_F(TestResultProcessor, processResults)
 {
     TEST_DESCRIPTION("This test tests the method processResults");
 
-    std::map<FlagType, bool> flags;
-    Results results = { {1, 4, 85, 395, 140, 54, 66}, flags};
+    Results results = { {1, 4, 85, 395, 140, 54, 66}, {}};
     ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
 
     uint readLen = 100;
@@ -147,8 +146,8 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_0)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    std::map<FlagType, bool> flags;
-    Results results = { {60}, flags};
+
+    Results results = { {60}, {}};
     ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
 
     uint readLen = 59;
@@ -180,8 +179,7 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_1)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    std::map<FlagType, bool> flags;
-    Results results = {{60, 61, 62}, flags};
+    Results results = {{60, 61, 62}, {}};
     ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
 
     uint readLen = 59;
@@ -213,8 +211,7 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_2)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    std::map<FlagType, bool> flags;
-    Results results = {{68, 61, 62, 206, 209}, flags};
+    Results results = {{68, 61, 62, 206, 209}, {}};
     ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
 
     uint readLen = 59;
@@ -246,8 +243,7 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_3)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    std::map<FlagType, bool> flags;
-    Results results = {{}, flags};
+    Results results = {{}, {}};
     ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
 
     uint readLen = 59;
@@ -278,8 +274,7 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_4)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    std::map<FlagType, bool> flags;
-    Results results = {{10000, 349320}, flags};
+    Results results = {{10000, 349320}, {}};
     ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
 
     uint readLen = 59;
@@ -310,8 +305,7 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_5)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    std::map<FlagType, bool> flags;
-    Results results = {{6}, flags};
+    Results results = {{6}, {}};
     ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
 
     uint readLen = 59;
@@ -343,8 +337,7 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_6)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    std::map<FlagType, bool> flags;
-    Results results = {{6, 150}, flags};
+    Results results = {{6, 150}, {}};
     ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
 
     uint readLen = 59;
@@ -376,8 +369,7 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_7)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    std::map<FlagType, bool> flags;
-    Results results = {{6,200}, flags};
+    Results results = {{6,200}, {}};
     ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
 
     uint readLen = 59;
@@ -410,8 +402,7 @@ TEST_F(TestResultProcessor, processResults_extract_matching_reads_8)
     TEST_DESCRIPTION("This test tests the method processResults with extract matching reads activated");
 
     std::remove("extracted_reads.fa");
-    std::map<FlagType, bool> flags;
-    Results results = {{68,128}, flags};
+    Results results = {{68,128}, {}};
     ResultsMap indexPosResults {{{1, QueryType::REF}, results}};
 
     uint readLen = 59;

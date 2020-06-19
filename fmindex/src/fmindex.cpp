@@ -51,32 +51,33 @@ void FmIndex::generateReadsMap(const std::string& filename)
 }
 
 //======================================================================
-std::tuple<ft::ResultsFuture, std::set<std::pair<int, ft::QueryType>>> FmIndex::search(const std::string& query, const std::set<std::pair<int, ft::QueryType> > &queryIds,
+std::tuple<ft::ResultsFuture, std::set<ft::QIdT>> FmIndex::search(const std::string& kmer, const std::set<std::pair<int, ft::QueryType> > &queryIds,
                                                             const std::string& /* filename */, const std::string& /* indexDirectory */,
                                                             u_int maxOcc, size_t i, bool flagOverCountedKmers, bool printSearchTime)
 {
     // This code is executed in a different thread for multithreaded
     // executions and in main thread for monothreaded applications
 
+    // the query string is a single kmer
+
     std::set<size_t> result;
-    std::map<ft::FlagType, bool> flags;
-    ft::FlagType overCounted;
+    std::set<ft::FlagType> flags;
 
     auto start = high_resolution_clock::now();
 
-    size_t occs = count(_fmindex, query.begin(), query.end());
+    size_t occs = count(_fmindex, kmer.begin(), kmer.end());
 
     _mtx.lock();
     std::cout << '\r' << float(((float)i * 100) / _kmerMapSize) << " % " << std::flush;
     _mtx.unlock();
 
-    //if overcounted add flag
+    // if number kmers > max, flag kmer as "abundant"
     if (occs > maxOcc && flagOverCountedKmers) {
-        flags[overCounted] = true;
+        flags.insert(ft::FlagType::ABK);
     }
 
     if (occs > 0  && occs <= maxOcc) {
-        auto locations = sdsl::locate(_fmindex, query.begin(), query.begin() + query.length());
+        auto locations = sdsl::locate(_fmindex, kmer.begin(), kmer.begin() + kmer.length());
         for (auto e : locations) {
             // std::cout << e << " --> " << (e / 59) + 1 << std::endl;
             result.insert(e);
@@ -87,23 +88,23 @@ std::tuple<ft::ResultsFuture, std::set<std::pair<int, ft::QueryType>>> FmIndex::
     auto duration = duration_cast<microseconds>(stop - start);
 
     if (printSearchTime) {
-        _stats->printKmerSearchTimeToFile("tmp.log", query, duration.count());
+        _stats->printKmerSearchTimeToFile("tmp.log", kmer, duration.count());
     }
 
     ft::ResultsFuture resultsfutures = std::make_pair(result, flags);
-    return std::make_tuple( resultsfutures, queryIds);
+    return std::make_tuple(resultsfutures, queryIds);
 }
 
 //======================================================================
-std::map<std::string, std::set<size_t>> FmIndex::searchmany(const std::vector<std::string>& queries,
+std::map<std::string, std::set<size_t>> FmIndex::searchmany(const std::vector<std::string>& kmers,
                                                             const std::string& /* filename */,
                                                             const std::string& /* indexDirectory */)
 {
     std::map<std::string, std::set<size_t>> results;
 
-    for (auto queryString : queries) {
+    for (auto kmerString : kmers) {
         std::set<size_t> r;
-        results.insert(std::make_pair(queryString, r));
+        results.insert(std::make_pair(kmerString, r));
     }
 
     return results;

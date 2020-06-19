@@ -51,7 +51,7 @@ TEST_F(TestFinder, searchSequentially)
     _finder.overrideFmIndex(fmIndex);
 
     ResultsMap indexPosResults;
-    KmerMap kmerMap {{"ATATTATATAT", {{1, QueryType::REF}}}};
+    KmerMap kmerMap {{"ATATTATATAT", {{{1, QueryType::REF}}, {}}}};
     fs::path indexPath ("./test.fm9");
     std::string indexFileLocation ("test.fm9");
     uint maxOccurrences = 200;
