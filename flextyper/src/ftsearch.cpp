@@ -1,4 +1,6 @@
 #include "ftsearch.h"
+#include "kmerClass.h"
+#include "queryClass.h"
 
 namespace ft {
 
@@ -41,7 +43,8 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     std::set<fs::path> setOfIndexes = _utils->getSetOfIndexes();
     std::set<Query> inputQueries    = _queryExtractor->getInputQueries(refOnly, crossover, pathToQueryFile);
 
-    KmerMap kmerMap;
+    std::set<KmerClass> kmerMap;
+
     _kmerGenerator->genKmerMap(inputQueries, kmerSize, refOnly, searchType, kmerMap, overlap, stride, crossover, ignoreNonUniqueKmers, kmerCounts, maxKmers, totalKmers);
     std::cout << "kmerMap size                  : " << kmerMap.size() << std::endl;
 
@@ -52,12 +55,13 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     */
 
     std::cout << "\nsearching..." << std::endl;
-    MapOfCounts indexCounts;
-
     auto indexFile = setOfIndexes.begin()->c_str();
-    QueryKmers nonUniqueKmers;
 
-    ResultsMap indexPosResults;
+
+    std::map<QueryClass, std::set<KmerClass>> indexPosResults;
+    std::set<QueryClass> queryResults;
+    //ResultsMap indexPosResults;
+    // MapOfCounts indexCounts;   <- REPLACED WITH queryMap and kmerMap
 
     // selecting the correct strategy depending on the size of the index size set
     if (setOfIndexes.size() == 1) {
@@ -79,8 +83,8 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     fs::path indexMapFile = indexFile;
     indexMapFile += ".map";
 
-    indexCounts = _resultProcessor->processResults(indexPosResults, readLength, lines, matchingReads);
-    _writerBridge->saveQueryOutput(indexCounts, nonUniqueKmers, returnMatchesOnly, flagOverCountedKmers, ignoreNonUniqueKmers, crossover, pathToQueryFile, queryOutputFile);
+    queryResults = _resultProcessor->processResults(indexPosResults, readLength, lines, matchingReads);
+    _writerBridge->saveQueryOutput(queryResults, returnMatchesOnly, flagOverCountedKmers, ignoreNonUniqueKmers, crossover, pathToQueryFile, queryOutputFile);
 }
 
 //======================================================================

@@ -11,7 +11,7 @@
 #include "ifmindex.h"
 #include <sdsl/suffix_arrays.hpp>
 #include <mutex>
-#include "typedefs.h"
+#include "FTMapClass.h"
 #include "stats.h"
 
 namespace algo {

@@ -9,7 +9,7 @@
 #include <set>
 #include <string>
 #include <map>
-#include "typedefs.h"
+#include "FTMapClass.h"
 #include "ikmergenerator.h"
 #include "stats.h"
 
@@ -46,8 +46,9 @@ public:
     ////////////////////////////////////////////////////////////////////////
     virtual std::set<std::string> genCenteredSearchStrings(const std::string& queryString, uint kmerSize, uint overlap, uint stride, bool kmerCounts, uint maxKmers);
 
+
     ////////////////////////////////////////////////////////////////////////
-    /// \brief KmerGenerator::genQueryKmers
+    /// \brief genCenteredSearchStrings
     /// \param inputQuery
     /// \param kmerSize
     /// \param refOnly
@@ -57,7 +58,8 @@ public:
     /// \param crossover
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual SearchKmers genQueryKmers(Query inputQuery, uint kmerSize, bool refOnly, SearchType searchType, uint overlap, uint stride, bool crossover, bool kmerCounts, uint maxKmers);
+    QueryClass genQueryClassKmers(int queryID, std::string querystring, ft::QueryType queryType, SearchType searchType, uint kmerSize, uint overlap,
+                                                 uint stride, bool kmerCounts, uint maxKmers);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief genSearchKmers
@@ -69,7 +71,8 @@ public:
     /// \param stride
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual SearchKmers genSearchKmers(std::set<Query> inputQueries, uint kmerSize, bool refOnly, SearchType searchType, uint overlap,  uint stride, bool kmerCounts, uint maxKmers);
+    virtual std::set<QueryClass> genSearchKmers(std::set<Query> inputQueries, uint kmerSize, bool refOnly, SearchType searchType, uint overlap,
+                                               uint stride, bool crossover, bool kmerCounts, uint maxKmers);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief KmerGenerator::addtoKmerMap

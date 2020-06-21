@@ -9,7 +9,7 @@
 #include <set>
 #include <string>
 #include <map>
-#include "typedefs.h"
+#include "FTMapClass.h"
 
 namespace ft {
 

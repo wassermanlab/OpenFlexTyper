@@ -7,7 +7,7 @@
 #ifndef __FINDER_H__
 #define __FINDER_H__
 
-#include "typedefs.h"
+#include "FTMapClass.h"
 #include <experimental/filesystem>
 #include "fmindex.h"
 #include "ifmindex.h"

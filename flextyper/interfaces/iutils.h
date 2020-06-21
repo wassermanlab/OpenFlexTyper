@@ -11,7 +11,7 @@
 #include <string>
 #include <experimental/filesystem>
 #include <set>
-#include "typedefs.h"
+#include "FTMapClass.h"
 #include <cmath>
 
 namespace fs = std::experimental::filesystem;

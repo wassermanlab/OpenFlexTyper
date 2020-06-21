@@ -76,141 +76,87 @@ std::set<std::string> KmerGenerator::genCenteredSearchStrings(const std::string&
 }
 
 //======================================================================
-SearchKmers KmerGenerator::genSearchKmers(std::set<Query> inputQueries, uint kmerSize, bool refOnly, SearchType searchType, uint overlap,
-                                          uint stride, bool kmerCounts, uint maxKmers)
+QueryClass KmerGenerator::genQueryClassKmers(int queryID, std::string querystring, ft::QueryType queryType, SearchType searchType, uint kmerSize, uint overlap,
+                                             uint stride, bool kmerCounts, uint maxKmers)
 {
-    SearchKmers results;
-    for (auto inputQuery : inputQueries) {
+    QueryClass tmpQuery;
+    tmpQuery._ID = queryID;
+    tmpQuery._String = querystring;
+    tmpQuery._Type = queryType;
 
-        int queryID                = std::get<0>(inputQuery);
-        std::string refQueryString = std::get<1>(inputQuery);
-        //std::cout << "ref Query String " << refQueryString << std::endl;
+    // generate search queries
+    std::set<std::string> searchStrings;
+    if (searchType == CENTERED) {
+        searchStrings = genCenteredSearchStrings(tmpQuery._String, kmerSize, overlap, stride, kmerCounts, maxKmers);
+    } else {
 
-        // generate ref search queries
-        std::set<std::string> refSearchStrings;
-        if (searchType == CENTERED) {
-            refSearchStrings = genCenteredSearchStrings(refQueryString, kmerSize, overlap, stride, kmerCounts, maxKmers);
-        } else {
-            refSearchStrings = genSlidingSearchStrings(refQueryString, kmerSize, stride, kmerCounts, maxKmers);
-        }
-
-        // add ref search queries to searchKmers map
-        if (!refSearchStrings.empty()) {
-            results[std::make_pair(queryID, QueryType::REF)] = refSearchStrings;
-        } else {
-            std::cout << "Error during the ID creation !" << std::endl;
-        }
-
-        // if refOnly = false, gen alt search queries
-        if (!refOnly) {
-            std::string altQueryString = std::get<2>(inputQuery);
-            //std::cout << "alt Query String " << altQueryString << std::endl;
-            std::set<std::string> altSearchStrings;
-            if (searchType == CENTERED) {
-                altSearchStrings = genCenteredSearchStrings(altQueryString, kmerSize, overlap, stride, kmerCounts, maxKmers);
-            } else {
-                altSearchStrings = genSlidingSearchStrings(altQueryString, kmerSize, stride, kmerCounts, maxKmers);
-            }
-
-            // add alt search queries to searchKmers map
-            if (!altSearchStrings.empty()) {
-                results[{queryID, QueryType::ALT}] = altSearchStrings;
-            } else {
-                std::cout << "Error during the ID creation !" << std::endl;
-            }
-        }
+        searchStrings = genSlidingSearchStrings(tmpQuery._String, kmerSize, stride, kmerCounts, maxKmers);
     }
-
-    return results;
-}
-
-//======================================================================
-SearchKmers KmerGenerator::genQueryKmers(Query inputQuery, uint kmerSize, bool refOnly, SearchType searchType, uint overlap, uint stride, bool crossover, bool kmerCounts, uint maxKmers)
-{
-    SearchKmers results;
-
-    int queryID                = std::get<0>(inputQuery);
-    // std::cout << "QueryID : " << queryID << std::endl;
-    std::string refQueryString = std::get<1>(inputQuery);
-    //std::cout << "ref Query String " << refQueryString << std::endl;
-
-    /*
-    std::cout << "QueryId : " << queryID << std::endl;
-    std::cout << "ref     : " << std::get<1>(inputQuery) << std::endl;
-    std::cout << "alt     : " << std::get<2>(inputQuery) << std::endl;
-    std::cout << "crO     : " << std::get<3>(inputQuery) << std::endl;
-    */
-
-    // generate ref search queries
-    std::set<std::string> refSearchStrings;
-    if (searchType == CENTERED && !refQueryString.empty()) {
-        refSearchStrings = genCenteredSearchStrings(refQueryString, kmerSize, overlap, stride, kmerCounts, maxKmers);
-    } else if (searchType == SLIDING && !refQueryString.empty()) {
-        refSearchStrings = genSlidingSearchStrings(refQueryString, kmerSize, stride, kmerCounts, maxKmers);
-    }
-
-    // std::cout << "queryID : " << queryID << std::endl;
 
     // add ref search queries to searchKmers map
-    if (!refSearchStrings.empty()) {
-        results[{queryID, QueryType::REF}] = refSearchStrings;
+    if (!searchStrings.empty()) {
+        tmpQuery._kmers = searchStrings;
     } else {
-        std::cerr << "no ref kmers generated" << std::endl;
+        std::cout << "Error during the ID creation !" << std::endl;
     }
 
-    // if refOnly = false, gen alt search queries
-    if (!refOnly) {
-        std::string altQueryString = std::get<2>(inputQuery);
-        // std::cout << "alt Query String " << altQueryString << std::endl;
-        std::set<std::string> altSearchStrings;
-        if (searchType == CENTERED) {
-            altSearchStrings = genCenteredSearchStrings(altQueryString, kmerSize, overlap, stride, kmerCounts, maxKmers);
-        } else {
-            altSearchStrings = genSlidingSearchStrings(altQueryString, kmerSize, stride, kmerCounts, maxKmers);
+    return tmpQuery;
+}
+
+
+
+
+
+//======================================================================
+std::set<QueryClass> KmerGenerator::genSearchKmers(std::set<Query> inputQueries, uint kmerSize, bool refOnly, SearchType searchType, uint overlap,
+                                          uint stride, bool crossover, bool kmerCounts, uint maxKmers)
+{
+    std::set<QueryClass> results;
+    for (auto inputQuery : inputQueries) {
+
+        //Create Ref Query
+        QueryClass tmpRefQuery = genQueryClassKmers(std::get<0>(inputQuery), std::get<1>(inputQuery), ft::QueryType::REF, searchType, kmerSize, overlap,
+                                                     stride, kmerCounts, maxKmers);
+
+        //std::cout << "ref Query String " << tmpRefQuery._String << std::endl;
+
+        results.insert(tmpRefQuery);
+
+        // Create Alt Query
+        if (!refOnly) {
+            QueryClass tmpAltQuery = genQueryClassKmers(std::get<0>(inputQuery), std::get<2>(inputQuery), ft::QueryType::ALT, searchType, kmerSize, overlap,
+                                                         stride, kmerCounts, maxKmers);
+            //std::cout << "alt Query String " << tmpAltQuery._String << std::endl;
+            results.insert(tmpAltQuery);
         }
 
-        // add alt search queries to searchKmers map
-        if (!altSearchStrings.empty()) {
-            results[{queryID, QueryType::ALT}] = altSearchStrings;
-        } else {
-            std::cerr << "no alt kmers generated" << std::endl;
-        }
-
-        // if crossover is enabled, then generates crossover data
-        std::set<std::string> crossoverStrings;
-        if (crossover && !refSearchStrings.empty() && !altSearchStrings.empty()) {
-            std::string crossoverQueryString = std::get<3>(inputQuery);
-            if (searchType == CENTERED) {
-                crossoverStrings = genCenteredSearchStrings(crossoverQueryString, kmerSize, overlap, stride, kmerCounts, maxKmers);
+        // Create Crossover Query
+        if (crossover && !tmpRefQuery._String.empty() && !std::get<2>(inputQuery).empty()) {
+            if (searchType == CENTERED){
+                QueryClass tmpCroQuery = genQueryClassKmers(std::get<0>(inputQuery), std::get<3>(inputQuery), ft::QueryType::CRO, searchType, kmerSize, overlap,
+                                                         stride, kmerCounts, maxKmers);
+                results.insert(tmpCroQuery);
             } else {
                 std::cout << "Crossover feature only works with CENTERED search" << std::endl;
                 throw 1;
             }
 
-            results[{queryID, QueryType::CRO}] = crossoverStrings;
-        }
-    }
 
-    /*
-    for (auto e : results) {
-        std::cout << e.first << std::endl;
-        for (auto f : e.second) {
-            std::cout << f << std::endl;
         }
     }
-    */
 
     return results;
 }
 
+
 //======================================================================
-void KmerGenerator::addtoKmerMap(KmerMap& kmerMap, const SearchKmers& queryKmers)
+void KmerGenerator::addtoKmerMap(std::set<KmerClass>& kmerMap, const std::set<QueryClass>& queryKmers)
 {
     for (auto query : queryKmers) {
-        ft::QIdT queryIDT = query.first;
-        std::set<std::string> kmers = query.second;
+        ft::QIdT queryIDT = std::make_pair(query._ID, query._Type);
+        std::set<std::string> kmers = query._kmers;
         for (auto kmer : kmers) {
-            kmerMap[kmer].first.insert(queryIDT);
+            kmerMap.first.insert(queryIDT);
         }
     }
 }

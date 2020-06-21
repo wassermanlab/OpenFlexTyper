@@ -12,7 +12,7 @@
 
 #include "gmock/gmock.h"
 #include "ifmindex.h"
-#include "typedefs.h"
+#include "FTMapClass.h"
 #include <iostream>
 #include <set>
 #include <tuple>

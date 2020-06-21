@@ -7,7 +7,7 @@
 #define __IQUERY_EXTRACTOR_H__
 
 #include <set>
-#include "typedefs.h"
+#include "FTMapClass.h"
 #include <experimental/filesystem>
 #include "utils.h"
 #include <fstream>

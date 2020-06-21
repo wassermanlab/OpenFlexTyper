@@ -131,6 +131,9 @@ private:
     ////////////////////////////////////////////////////////////////////////
     QueryExtractor   _ownedQueryExtractor;
     IQueryExtractor* _queryExtractor;
+
+
+
 };
 }
 
