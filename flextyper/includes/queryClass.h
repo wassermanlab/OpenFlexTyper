@@ -64,6 +64,7 @@ public:
     std::set<int> _readIDs;
     int _count;
     std::map<ft::FlagType, std::set<std::string>> _qFlags;
+
 private:
 };
 }

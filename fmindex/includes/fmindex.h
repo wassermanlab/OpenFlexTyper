@@ -13,7 +13,8 @@
 #include <mutex>
 #include "FTMapClass.h"
 #include "stats.h"
-
+#include "typedefs.h"
+#include "resultsClass.h"
 namespace algo {
 
 using namespace sdsl;
@@ -49,12 +50,11 @@ public:
     /// \param queryString
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    std::tuple<ft::ResultsFuture, std::set<std::pair<int, ft::QueryType>> > search(const std::string& kmerString,
-                                                                                   const std::set<std::pair<int, ft::QueryType>> &queryIds,
-                                                                                   const std::string& = "indexFile",
-                                                                                   const std::string& = "/tmp/", u_int maxOcc = 200, size_t i = 0,
-                                                                                   bool flagOverCountedKmers = false,
-                                                                                   bool printSearchTime = false);
+    ft::FTResults search(ft::KmerClass kmerClass,
+                         const std::string& = "indexFile",
+                         const std::string& = "/tmp/", u_int maxOcc = 200, size_t i = 0,
+                         bool flagOverCountedKmers = false,
+                         bool printSearchTime = false);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief search
@@ -62,7 +62,7 @@ public:
     /// \param queryString
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    std::map<std::string, std::set<size_t> > searchmany(const std::vector<std::string>& kmers,
+    std::map<ft::KmerClass, std::set<size_t> > searchmany(std::set<ft::KmerClass>& kmerSet,
                                                         const std::string& = "indexFile",
                                                         const std::string& = "/tmp/");
 

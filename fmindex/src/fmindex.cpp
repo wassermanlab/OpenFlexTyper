@@ -4,6 +4,7 @@
 #include <chrono>
 #include <iostream>
 #include <fstream>
+#include "resultsClass.h"
 
 
 using namespace std::chrono;
@@ -51,17 +52,17 @@ void FmIndex::generateReadsMap(const std::string& filename)
 }
 
 //======================================================================
-std::tuple<ft::ResultsFuture, std::set<ft::QIdT>> FmIndex::search(const std::string& kmer, const std::set<std::pair<int, ft::QueryType> > &queryIds,
-                                                            const std::string& /* filename */, const std::string& /* indexDirectory */,
-                                                            u_int maxOcc, size_t i, bool flagOverCountedKmers, bool printSearchTime)
+ft::FTResults FmIndex::search(ft::KmerClass kmerClass,
+                              const std::string& /* filename */,
+                              const std::string& /* indexDirectory */,
+                              u_int maxOcc, size_t i,
+                              bool flagOverCountedKmers, bool printSearchTime)
 {
     // This code is executed in a different thread for multithreaded
     // executions and in main thread for monothreaded applications
 
-    // the query string is a single kmer
-
-    std::set<size_t> result;
-    std::set<ft::FlagType> flags;
+    std::string kmer= kmerClass.getKmer();
+    ft::FTResults resultsfutures(kmer);
 
     auto start = high_resolution_clock::now();
 
@@ -73,14 +74,14 @@ std::tuple<ft::ResultsFuture, std::set<ft::QIdT>> FmIndex::search(const std::str
 
     // if number kmers > max, flag kmer as "abundant"
     if (occs > maxOcc && flagOverCountedKmers) {
-        flags.insert(ft::FlagType::ABK);
+        resultsfutures.addFlag(ft::FlagType::ABK);
     }
 
     if (occs > 0  && occs <= maxOcc) {
         auto locations = sdsl::locate(_fmindex, kmer.begin(), kmer.begin() + kmer.length());
         for (auto e : locations) {
             // std::cout << e << " --> " << (e / 59) + 1 << std::endl;
-            result.insert(e);
+            resultsfutures.addPosition(e);
         }
     }
 
@@ -91,16 +92,16 @@ std::tuple<ft::ResultsFuture, std::set<ft::QIdT>> FmIndex::search(const std::str
         _stats->printKmerSearchTimeToFile("tmp.log", kmer, duration.count());
     }
 
-    ft::ResultsFuture resultsfutures = std::make_pair(result, flags);
-    return std::make_tuple(resultsfutures, queryIds);
+
+    return resultsfutures;
 }
 
 //======================================================================
-std::map<std::string, std::set<size_t>> FmIndex::searchmany(const std::vector<std::string>& kmers,
+std::map<ft::KmerClass, std::set<size_t>> FmIndex::searchmany(std::set<ft::KmerClass>& kmers,
                                                             const std::string& /* filename */,
                                                             const std::string& /* indexDirectory */)
 {
-    std::map<std::string, std::set<size_t>> results;
+    std::map<ft::KmerClass, std::set<size_t>> results;
 
     for (auto kmerString : kmers) {
         std::set<size_t> r;

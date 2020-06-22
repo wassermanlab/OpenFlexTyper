@@ -27,9 +27,9 @@ MapOfCounts ResultProcessor::getIndexCounts(ReaIDsMap &readIDResults)
 }
 
 //======================================================================
-ReaIDsMap ResultProcessor::processIndexPos(ResultsMap& indexPosResults, uint readLen)
+std::set<ft::QueryClass> ResultProcessor::processIndexPos(ResultsMap& indexPosResults, uint readLen)
 {
-    ReaIDsMap readIDResults; // map< query ID, set<read ID>>
+    std::set<ft::QueryClass> readIDResults; // map< query ID, set<read ID>>
 
     for (auto e : indexPosResults) {
         auto result = _utils->convertIndexPositionsToReadIDs(e.second.first, readLen);

@@ -9,130 +9,117 @@ Finder::Finder()
 }
 
 //======================================================================
-void Finder::searchMonoIndex(ResultsMap& indexPosResults, const KmerMap &kmerMap, const fs::path& indexPath,
-                             const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
-                             bool flagOverCountedKmers, bool printSearchTime)
+void Finder::searchMonoIndex(FTMap ftMap, const fs::path& indexPath,
+                             const std::string& indexFileLocation, bool parallel, uint threadNumber,
+                             bool printSearchTime)
 {
+    const std::map<ft::QueryClass, std::set<KmerClass>> indexResults = ftMap.getResultsMap();
+
     if (parallel) {
-        parallelSearch(indexPosResults, indexFileLocation, kmerMap, indexPath, maxOccurences, threadNumber, flagOverCountedKmers, printSearchTime, 0);
+        parallelSearch(ftMap, indexFileLocation, indexPath, threadNumber, printSearchTime, 0);
     } else {
-        sequentialSearch(indexPosResults, indexFileLocation, kmerMap, indexPath, maxOccurences, flagOverCountedKmers, printSearchTime, 0);
+        sequentialSearch(ftMap, indexFileLocation, indexPath, printSearchTime, 0);
     }
 }
 
 //======================================================================
-void Finder::searchMultipleIndexes(ResultsMap& indexPosResults, const KmerMap &kmerMap, const std::set<fs::path>& indexPaths,
-                                   const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
-                                   bool flagOverCountedKmers, bool printSearchTime, long long offset)
+void Finder::searchMultipleIndexes(FTMap ftMap, const std::set<fs::path>& indexPaths,
+                                   const std::string& indexFileLocation, bool parallel, uint threadNumber,
+                                   bool printSearchTime, long long offset)
 {
     if (parallel) {
-        multipleIndexesParallelSearch(indexPosResults, indexFileLocation, kmerMap, indexPaths, maxOccurences, threadNumber, flagOverCountedKmers,
-                                      printSearchTime, offset);
+        multipleIndexesParallelSearch(ftMap, indexFileLocation, indexPaths, threadNumber, printSearchTime, offset);
     } else {
-        multipleIndexesSequentialSearch(indexPosResults, indexFileLocation, kmerMap, indexPaths, maxOccurences, flagOverCountedKmers,
-                                        printSearchTime, offset);
+        multipleIndexesSequentialSearch(ftMap, indexFileLocation, indexPaths, printSearchTime, offset);
     }
 }
 
 //======================================================================
-void Finder::parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                            fs::path indexPath, uint maxOcc, uint threadNumber, bool flagOverCountedKmers,
+void Finder::parallelSearch(FTMap ftMap, const fs::path& indexFileLocation,
+                            fs::path indexPath, uint threadNumber,
                             bool printSearchTime, long long offset)
 {
     std::cout << "running search in a multi thread" << std::endl;
-
+    uint maxOcc = ftMap.getMaxOcc();
+    bool flagOverCountedKmers= ftMap.getOverCountedFlag();
+    std::set<ft::KmerClass> kmerMap = ftMap.getKmerMap();
     size_t i = 1;
     std::cout << "working on : " << indexPath << std::endl;
 
     _fmIndex->setKmerMapSize(kmerMap.size());
 
-        try {
-            _fmIndex->loadIndexFromFile(indexPath);
-        } catch (std::exception& e) {
-            std::cout << "Error ! " << indexPath << " " << e.what() << std::endl;
-        }
+    try {
+        _fmIndex->loadIndexFromFile(indexPath);
+    } catch (std::exception& e) {
+        std::cout << "Error ! " << indexPath << " " << e.what() << std::endl;
+    }
 
     // create a vector of futures
-    std::vector<std::future<std::tuple<ResultsFuture, std::set<QIdT>>>> op;
+    std::vector<std::future<ft::FTResults>> resultsFutures;
     size_t j = 0;
     size_t k = kmerMap.size();
 
     // using a queue to easily control the flow of kmers
-    std::queue<std::pair<std::string, std::set<QIdT>>> q;
-    for (auto& kmer : kmerMap) {
-        std::pair<std::string, std::set<QIdT>> kmers = std::make_pair(kmer.first, kmer.second.first);
-        q.push(kmers);
+    std::queue<ft::KmerClass> kmerQueue;
+    for (ft::KmerClass kmer : kmerMap) {
+        kmerQueue.push(kmer);
     }
 
     std::atomic<int> elts;
     elts = 0;
 
-    while (!q.empty()) {
+    while (!kmerQueue.empty()) {
         if (j < threadNumber) {
-            const auto& kmers = q.front();
-            op.push_back(std::async(std::launch::async, &algo::FmIndex::search, dynamic_cast<algo::FmIndex*>(_fmIndex),
-                                    kmers.first,
-                                    kmers.second,
+            const auto& kmer = kmerQueue.front();
+            resultsFutures.push_back(std::async(std::launch::async, &algo::FmIndex::search, dynamic_cast<algo::FmIndex*>(_fmIndex),
+                                    kmer,
                                     indexPath.stem().string(),
                                     indexFileLocation.string(),
                                     maxOcc,
                                     i++,
                                     flagOverCountedKmers,
                                     printSearchTime));
-            q.pop();
+            kmerQueue.pop();
             j++;
             k--;
             continue;
         }
 
         while (1) {
-            if (q.size() > 0 && q.size() < threadNumber) {
-                const auto& kmers = q.front();
-                op.push_back(std::async(std::launch::async, &algo::FmIndex::search, dynamic_cast<algo::FmIndex*>(_fmIndex),
-                                        kmers.first,
-                                        kmers.second,
+            if (kmerQueue.size() > 0 && kmerQueue.size() < threadNumber) {
+                const auto& kmers = kmerQueue.front();
+                resultsFutures.push_back(std::async(std::launch::async, &algo::FmIndex::search, dynamic_cast<algo::FmIndex*>(_fmIndex),
+                                        kmers,
                                         indexPath.stem().string(),
                                         indexFileLocation,
                                         maxOcc,
                                         i++,
                                         flagOverCountedKmers,
                                         printSearchTime));
-                q.pop();
+                kmerQueue.pop();
             } else {
                 break;
             }
         }
 
-        for (auto& e : op) {
+        for (auto& e : resultsFutures) {
             e.wait();
         }
-
-        for (auto& e : op) {
-
-            auto tmpResultMap = e.get();
-            std::set<QIdT> queryID_Types = std::get<1>(tmpResultMap);
-            ft::ResultsFuture tmpResult = std::get<0>(tmpResultMap);
-
+        for (auto& e : resultsFutures) {
+            ft::FTResults tmpResultMap = e.get();
+            ftMap.addResultsFuture(tmpResultMap, offset);
             elts++;
-            for (auto queryID_Type : queryID_Types) {
-                for (auto position : tmpResult.first) {
-                    indexPosResults[queryID_Type].first.insert(position + offset);
-                    indexPosResults[queryID_Type].second.insert(tmpResult.second.begin(), tmpResult.second.end());
-
-                }
             }
-        }
-
         j = 0;
-        op.clear();
     }
+        resultsFutures.clear();
 
     std::cout << "Finished\n";
 }
 
 //======================================================================
-void Finder::multipleIndexesParallelSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                                           const std::set<fs::path>& indexPath, uint maxOcc, uint threadNumber, bool flagOverCountedKmers,
+void Finder::multipleIndexesParallelSearch(FTMap ftMap, const fs::path& indexFileLocation,
+                                           const std::set<fs::path>& indexPath, uint threadNumber,
                                            bool printSearchTime, long long offset)
 {
     std::cout << "Multi Indexes Parallel Search" << std::endl;
@@ -143,65 +130,32 @@ void Finder::multipleIndexesParallelSearch(ResultsMap& indexPosResults, const fs
      * We will then search inside the indexes one by one.
      * The search of kmers is done in parallel.
      */
-
-    ResultsMap tmpResultMap;
+    uint maxOcc = ftMap.getMaxOcc();
+    bool flagOverCountedKmers= ftMap.getOverCountedFlag();
+    std::set<ft::KmerClass> kmerMap = ftMap.getKmerMap();
 
     long long curr = 0;
 
-    for (auto e : indexPath) {
+    for (auto index : indexPath) {
 
-        std::cout << "searching : " << e << std::endl;
+        std::cout << "searching : " << index << std::endl;
 
-        parallelSearch(tmpResultMap, indexFileLocation, kmerMap, e, maxOcc, threadNumber, flagOverCountedKmers, printSearchTime, curr * offset);
-
-        /*
-        for (auto f : tmpResult) {
-            std::cout << "tmpResults " << f.first.first << " " << f.second.size() << " " << std::endl;
-            int c = 0;
-            for (auto g : f.second) {
-                std::cout << g << " ";
-                c++;
-                if (c == 2)
-                    break;
-            }
-            std::cout << "\n";
-
-        }
-        */
-
-
-        for (auto& queryResults : tmpResultMap) { // or kmers.second
-
-            ft::QIdT queryID_Type = std::get<0>(queryResults);
-            Results tmpQueryResult = std::get<1>(queryResults);
-
-            std::set< long long> tmppositions = tmpQueryResult.first;
-            std::set<ft::FlagType> tmpflags = tmpQueryResult.second;
-            if (indexPosResults.find(queryID_Type) != indexPosResults.end()) {
-                for (auto pos : tmppositions) {
-                    indexPosResults[queryID_Type].first.insert(pos);
-				}
-			} else {
-                indexPosResults.insert(queryResults);
-            }
-            indexPosResults[queryID_Type].second.insert(tmpflags.begin(), tmpflags.end());
-
-        }
-
-        /*
-        for (auto& g : indexPosResults) {
-            std::cout << g.first.first << " : " << g.second.size() << std::endl;
-        }
-        */
-        tmpResultMap.clear();
-
+        parallelSearch(ftMap, indexFileLocation, index, threadNumber, printSearchTime, curr * offset);
         curr++;
     }
 }
 
 //======================================================================
-void Finder::sequentialSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                              fs::path indexPath, uint maxOcc, bool flagOverCountedKmers, bool printSearchTime, long long offset)
+
+void Finder::combineIndexResults(const std::map<ft::QueryClass, std::set<KmerClass>>& indexResults, ft::FTResults tmpResultMap, uint offset){
+
+}
+
+
+//======================================================================
+void Finder::sequentialSearch(ft::FTMap ftMap,
+                              const fs::path& indexFileLocation,
+                              fs::path indexPath, bool printSearchTime, long long offset)
 {
     std::cout << "running search in a single thread" << std::endl;
 
@@ -209,52 +163,34 @@ void Finder::sequentialSearch(ResultsMap& indexPosResults, const fs::path& index
     // returns indexPosResults for a single index
     // std::thread::id this_id = std::this_thread::get_id();
 
-    // ResultsMap indexPosResults;
+    uint maxOcc = ftMap.getMaxOcc();
+    bool flagOverCountedKmers= ftMap.getOverCountedFlag();
+    std::set<ft::KmerClass> kmerMap = ftMap.getKmerMap();
     size_t i = 0;
     std::cout << "working on : " << indexPath << std::endl;
     _fmIndex->setKmerMapSize(kmerMap.size());
 
     // std::cout << "elements to be processed : " << kmerMap.size() << std::endl;
 
-        try {
-            _fmIndex->loadIndexFromFile(indexPath);
-            // std::cout << "index " << indexPath << " loaded" << std::endl;
-        } catch (std::exception& e) {
-            std::cout << "Error ! " << indexPath << " " << e.what() << std::endl;
-        }
-
-    for (auto kmer : kmerMap) {
-        std::pair<std::string, std::set<QIdT>> kmers = std::make_pair(kmer.first, kmer.second.first);
-
-        // tmpResultMap std::tuple<ft::ResultsFuture, std::set<std::pair<int, ft::QueryType>>>
-        auto tmpResultMap = _fmIndex->search(kmers.first,
-                                          kmers.second,
-                                          indexPath.stem().string(),
-                                          indexFileLocation,
-                                          maxOcc,
-                                          i++,
-                                          flagOverCountedKmers,
-                                          printSearchTime);
-
-
-
-        std::set<QIdT> queryID_Types = std::get<1>(tmpResultMap);
-        ft::ResultsFuture tmpResult = std::get<0>(tmpResultMap);
-
-        for (auto queryID_Type : queryID_Types) {
-            for (auto position : tmpResult.first) {
-                indexPosResults[queryID_Type].first.insert(position + offset);
-                indexPosResults[queryID_Type].second.insert(tmpResult.second.begin(), tmpResult.second.end());
-            }
-        }
+    try {
+        _fmIndex->loadIndexFromFile(indexPath);
+        // std::cout << "index " << indexPath << " loaded" << std::endl;
+    } catch (std::exception& e) {
+        std::cout << "Error ! " << indexPath << " " << e.what() << std::endl;
     }
 
+    for (ft::KmerClass kmer : kmerMap) {
+        ft::FTResults tmpResultMap = _fmIndex->search(kmer, indexPath.stem().string(),
+                                          indexFileLocation, maxOcc, i++,
+                                          flagOverCountedKmers, printSearchTime);
+        ftMap.addResultsFuture(tmpResultMap, offset);
+    }
     std::cout << "Finished\n";
 }
 
 //======================================================================
-void Finder::multipleIndexesSequentialSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                                             std::set<fs::path> indexPath, uint maxOcc, bool flagOverCountedKmers, bool printSearchTime, long long offset)
+void Finder::multipleIndexesSequentialSearch(FTMap ftMap, const fs::path& indexFileLocation,
+                                             std::set<fs::path> indexPaths, bool printSearchTime, long long offset)
 {
     std::cout << "Multi Indexes Sequential Search" << std::endl;
 
@@ -263,18 +199,15 @@ void Finder::multipleIndexesSequentialSearch(ResultsMap& indexPosResults, const 
     // We will then search inside the indexes one by one.
     // The search of kmers is done sequentially.
 
-    ResultsMap tmpResult;
     int curr = 0;
 
-    for (auto e : indexPath) {
-        sequentialSearch(tmpResult, indexFileLocation, kmerMap, e, maxOcc, flagOverCountedKmers, printSearchTime, curr * offset);
-
-        for (auto& f : tmpResult) { // or kmers.second
-            indexPosResults.insert(f);
-        }
-		curr++;
+    for (auto indexPath : indexPaths) {
+        sequentialSearch(ftMap, indexFileLocation, indexPath, printSearchTime, curr * offset);
+        curr++;
     }
 }
+
+
 
 //======================================================================
 void Finder::overrideFmIndex(std::shared_ptr<algo::IFmIndex> fmIndex)

@@ -26,6 +26,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
+    std::string getKmer();
     std::set<ft::QIdT> getQueryIDs();
     std::set<ft::FlagType> getKFlags();
 
@@ -38,6 +39,7 @@ public:
     void addQuery(ft::QIdT query);
     void addKFlag(ft::FlagType kFlag);
 
+    uint getKmerMapSize();
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief properties

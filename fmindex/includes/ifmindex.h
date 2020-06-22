@@ -11,6 +11,7 @@
 #include <iostream>
 #include <experimental/filesystem>
 #include "FTMapClass.h"
+#include "resultsClass.h"
 
 namespace fs = std::experimental::filesystem;
 
@@ -61,12 +62,12 @@ public:
     /// \param queryString
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual std::tuple<ft::ResultsFuture, std::set<std::pair<int, ft::QueryType>>> search(const std::string& queryString, const std::set<std::pair<int, ft::QueryType> > &queryIds,
-                                                                                         const std::string& filename = "indexFile",
-                                                                                         const std::string& outputFolder = "./", u_int maxOccurences = 200,
-                                                                                         size_t i = 0,
-                                                                                         bool flagOverCountedKmers = false,
-                                                                                         bool printSearchTime = false) = 0;
+    virtual ft::FTResults search(ft::KmerClass kmerClass,
+                                 const std::string& filename = "indexFile",
+                                 const std::string& outputFolder = "./", u_int maxOccurences = 200,
+                                 size_t i = 0,
+                                 bool flagOverCountedKmers = false,
+                                 bool printSearchTime = false) = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief generate the Reads Mapping

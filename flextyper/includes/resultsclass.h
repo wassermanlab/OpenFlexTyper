@@ -1,4 +1,0 @@
-#ifndef RESULTSCLASS_H
-#define RESULTSCLASS_H
-
-#endif // RESULTSCLASS_H

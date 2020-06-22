@@ -71,30 +71,19 @@ public:
     /// \param stride
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual std::set<QueryClass> genSearchKmers(std::set<Query> inputQueries, uint kmerSize, bool refOnly, SearchType searchType, uint overlap,
-                                               uint stride, bool crossover, bool kmerCounts, uint maxKmers);
+    virtual std::set<QueryClass> genSearchKmers(std::set<Query> inputQueries, ft::FTMap ftMap);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief KmerGenerator::addtoKmerMap
-    /// \param kmerMap
     /// \param queryKmers
     ////////////////////////////////////////////////////////////////////////
-    void addtoKmerMap(KmerMap& kmerMap, const SearchKmers& queryKmers);
+    void addQueriestoKmerMap(ft::FTMap& resultsMap, const std::set<QueryClass>& queryKmers);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief KmerGenerator::genKmerMap
     /// \param inputQueries
-    /// \param kmerSize
-    /// \param refOnly
-    /// \param searchType
-    /// \param kmerMap
-    /// \param overlap
-    /// \param stride
-    /// \param crossover
-    /// \param ignoreNonUniqueKmers
     ////////////////////////////////////////////////////////////////////////
-    void genKmerMap(std::set<Query>& inputQueries, uint kmerSize, bool refOnly, const SearchType& searchType, KmerMap& kmerMap, uint overlap, uint stride,
-                              bool crossover, bool ignoreNonUniqueKmers, bool kmerCounts, uint maxKmers, uint maxTotalKmers);
+    void genKmerMap(std::set<Query>& inputQueries, ft::FTMap& ftMap);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief overrideStats

@@ -15,15 +15,21 @@ KmerClass::KmerClass(std::string kmer)
 }
 
 //======================================================
+std::string KmerClass::getKmer()
+{
+    return this->_kmer;
+}
+
+//======================================================
 std::set<ft::QIdT> KmerClass::getQueryIDs()
 {
-    return _queryIDs;
+    return this->_queryIDs;
 }
 
 //======================================================
 std::set<ft::FlagType> KmerClass::getKFlags()
 {
-    return _kFlags;
+    return this->_kFlags;
 }
 
 //======================================================
@@ -49,6 +55,8 @@ void KmerClass::addKFlag(ft::FlagType flag)
 {
 
 }
+
+uint KmerClass::getKmerMapSize(){return this->_kmer.size();}
 
 KmerClass::~KmerClass()
 {

@@ -24,6 +24,21 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
                     uint stride, uint maxOccurences, uint threadNumber, bool flagOverCountedKmers, bool ignoreNonUniqueKmers, bool crossover,
                     bool printSearchTime, uint maxKmers, uint totalKmers, const fs::path& matchingReads)
 {
+    ft::FTMap ftMap;
+    ftMap.setProperties(kmerSize,
+                         refOnly,
+                         searchType,
+                         overlap,
+                         stride,
+                         crossover,
+                         ignoreNonUniqueKmers,
+                         kmerCounts,
+                         maxKmers,
+                         totalKmers);
+    ftMap.setMaxOcc(maxOccurences);
+    ftMap.setOverCountedFlag(flagOverCountedKmers);
+
+
     std::ifstream in(matchingReads, std::ifstream::ate | std::ifstream::binary);
     long long offset = in.tellg();
     fs::path readFile;
@@ -43,10 +58,10 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     std::set<fs::path> setOfIndexes = _utils->getSetOfIndexes();
     std::set<Query> inputQueries    = _queryExtractor->getInputQueries(refOnly, crossover, pathToQueryFile);
 
-    std::set<KmerClass> kmerMap;
 
-    _kmerGenerator->genKmerMap(inputQueries, kmerSize, refOnly, searchType, kmerMap, overlap, stride, crossover, ignoreNonUniqueKmers, kmerCounts, maxKmers, totalKmers);
-    std::cout << "kmerMap size                  : " << kmerMap.size() << std::endl;
+
+    _kmerGenerator->genKmerMap(inputQueries, ftMap);
+    //std::cout << "kmerMap size                  : " << kmerMap.size() << std::endl;
 
     /*
     for (auto e : kmerMap) {
@@ -58,7 +73,7 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     auto indexFile = setOfIndexes.begin()->c_str();
 
 
-    std::map<QueryClass, std::set<KmerClass>> indexPosResults;
+
     std::set<QueryClass> queryResults;
     //ResultsMap indexPosResults;
     // MapOfCounts indexCounts;   <- REPLACED WITH queryMap and kmerMap
@@ -67,23 +82,21 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     if (setOfIndexes.size() == 1) {
         std::cout << "searching with " << setOfIndexes.size() << " indexes" << std::endl;
         std::cout << "offset : " << offset << std::endl;
-        _finder->searchMonoIndex(indexPosResults, kmerMap, indexFile, indexFileLocation, maxOccurences,
-                                 multithread, threadNumber, flagOverCountedKmers, printSearchTime);
+        _finder->searchMonoIndex(ftMap, indexFile, indexFileLocation, multithread, threadNumber, printSearchTime);
 
     } else if (setOfIndexes.size() > 1) {
 
         offset /= setOfIndexes.size();
         std::cout << "offset : " << offset << std::endl;
         std::cout << "searching with " << setOfIndexes.size() << " indexes" << std::endl;
-        _finder->searchMultipleIndexes(indexPosResults, kmerMap, setOfIndexes, indexFileLocation,
-                                       maxOccurences, multithread, threadNumber, flagOverCountedKmers, printSearchTime,
-                                       offset);
+        _finder->searchMultipleIndexes(ftMap, setOfIndexes, indexFileLocation, multithread, threadNumber,
+                                       printSearchTime, offset);
     }
 
     fs::path indexMapFile = indexFile;
     indexMapFile += ".map";
 
-    queryResults = _resultProcessor->processResults(indexPosResults, readLength, lines, matchingReads);
+    queryResults = _resultProcessor->processResults(ftMap.getResultsMap(), readLength, lines, matchingReads);
     _writerBridge->saveQueryOutput(queryResults, returnMatchesOnly, flagOverCountedKmers, ignoreNonUniqueKmers, crossover, pathToQueryFile, queryOutputFile);
 }
 
