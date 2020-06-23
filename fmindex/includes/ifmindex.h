@@ -62,7 +62,7 @@ public:
     /// \param queryString
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual ft::FTResults search(ft::KmerClass kmerClass,
+    virtual ft::FTKResult search(ft::KmerClass kmerClass,
                                  const std::string& filename = "indexFile",
                                  const std::string& outputFolder = "./", u_int maxOccurences = 200,
                                  size_t i = 0,

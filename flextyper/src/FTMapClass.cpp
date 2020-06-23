@@ -4,7 +4,6 @@
 #include "FTMapClass.h"
 #include "kmerClass.h"
 #include "queryClass.h"
-#include "resultsClass.h"
 
 namespace ft {
 
@@ -48,6 +47,7 @@ uint FTMap::getStride(){return this->_stride;}
 uint FTMap::getMaxKmers(){return this->_maxKmers;}
 uint FTMap::getMaxTotalKmers(){return this->_maxTotalKmers;}
 uint FTMap::getMaxOcc(){return this->_maxOcc;}
+uint FTMap::getReadLength(){return this->_readLen;}
 
 //=============== SETTERS ==============================
 void FTMap::setKmers(std::set<ft::KmerClass>){}
@@ -59,6 +59,7 @@ void FTMap::setStride(uint stride){}
 void FTMap::setMaxKmers(uint maxKmers){}
 void FTMap::setMaxTotalKmers(uint maxTotalKmers){}
 void FTMap::setMaxOcc(uint maxOcc){}
+void FTMap::setReadLength(uint readLength){}
 
 //=============== FLAGS ==============================
 bool FTMap::getRefOnlyFlag(){return this->_refOnly;}
@@ -104,8 +105,25 @@ void FTMap::addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryIDTyp
 
 }
 
-//void FTMap::addtmpResults(ft::FTResults tmpResults, uint offset){
 
+//======================================================
+void FTMap::addIndexResults(std::set<ft::KmerClass> indexResults)
+{
+    // std::map<std::string, std::set<readID>>
+// convert index positions to read ids
+//    auto r = (size_t) std::ceil(indexPos / (readLength + 1));
+// add read ids to queryMap
+
+}
+
+//======================================================
+void FTMap::processIndexResults(std::set<ft::KmerClass> indexResult, uint readLength)
+{
+    for (ft::KmerClass kmerResult : indexResult){
+       kmerResult.convertPosToReadID(readLength);
+    }
+
+}
 //    for (auto queryID_Type : queryID_Types) {
 //        for (auto position : tmpResult.first) {
 //            indexResults.addIndexResults()  (position + offset);
@@ -113,13 +131,8 @@ void FTMap::addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryIDTyp
 //        }
 //    }
 
-//}
 
-//======================================================
-void FTMap::addResults(std::map<ft::QueryClass, std::set<KmerClass>> tmpResults)
-{
 
-}
 
 
 

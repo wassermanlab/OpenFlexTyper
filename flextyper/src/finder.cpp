@@ -13,8 +13,6 @@ void Finder::searchMonoIndex(FTMap ftMap, const fs::path& indexPath,
                              const std::string& indexFileLocation, bool parallel, uint threadNumber,
                              bool printSearchTime)
 {
-    const std::map<ft::QueryClass, std::set<KmerClass>> indexResults = ftMap.getResultsMap();
-
     if (parallel) {
         parallelSearch(ftMap, indexFileLocation, indexPath, threadNumber, printSearchTime, 0);
     } else {
@@ -35,6 +33,25 @@ void Finder::searchMultipleIndexes(FTMap ftMap, const std::set<fs::path>& indexP
 }
 
 //======================================================================
+
+void Finder::addResultsFutures(std::set<ft::KmerClass> indexResults, ft::KmerClass tmpResult, uint offset)
+{
+    for (auto it = indexResults.begin(); it != indexResults.end();)
+    {
+        std::string indexkmer = (*it)._kmer;
+        std::string resultkmer = tmpResult.getKmer();
+        if ( indexkmer.compare(resultkmer)) {
+            for (auto pos = tmpResult.getKPositions().begin(); pos !=tmpResult.getKPositions().end();)
+            {
+                ft::KmerClass result = (*it);
+                result.addKPosition((*pos), offset);
+            }
+
+        }
+    }
+}
+
+//======================================================================
 void Finder::parallelSearch(FTMap ftMap, const fs::path& indexFileLocation,
                             fs::path indexPath, uint threadNumber,
                             bool printSearchTime, long long offset)
@@ -45,6 +62,7 @@ void Finder::parallelSearch(FTMap ftMap, const fs::path& indexFileLocation,
     std::set<ft::KmerClass> kmerMap = ftMap.getKmerMap();
     size_t i = 1;
     std::cout << "working on : " << indexPath << std::endl;
+    std::set<ft::KmerClass> indexResults;
 
     _fmIndex->setKmerMapSize(kmerMap.size());
 
@@ -55,7 +73,7 @@ void Finder::parallelSearch(FTMap ftMap, const fs::path& indexFileLocation,
     }
 
     // create a vector of futures
-    std::vector<std::future<ft::FTResults>> resultsFutures;
+    std::vector<std::future<ft::KmerClass>> resultsFutures;
     size_t j = 0;
     size_t k = kmerMap.size();
 
@@ -106,13 +124,16 @@ void Finder::parallelSearch(FTMap ftMap, const fs::path& indexFileLocation,
             e.wait();
         }
         for (auto& e : resultsFutures) {
-            ft::FTResults tmpResultMap = e.get();
-            ftMap.addResultsFuture(tmpResultMap, offset);
+            ft::KmerClass tmpResult = e.get();
+            addResultsFutures(indexResults,tmpResult, offset);
             elts++;
             }
         j = 0;
     }
         resultsFutures.clear();
+
+    ftMap.addIndexResults(indexResults);
+    indexResults.clear();
 
     std::cout << "Finished\n";
 }
@@ -145,12 +166,6 @@ void Finder::multipleIndexesParallelSearch(FTMap ftMap, const fs::path& indexFil
     }
 }
 
-//======================================================================
-
-void Finder::combineIndexResults(const std::map<ft::QueryClass, std::set<KmerClass>>& indexResults, ft::FTResults tmpResultMap, uint offset){
-
-}
-
 
 //======================================================================
 void Finder::sequentialSearch(ft::FTMap ftMap,
@@ -170,6 +185,8 @@ void Finder::sequentialSearch(ft::FTMap ftMap,
     std::cout << "working on : " << indexPath << std::endl;
     _fmIndex->setKmerMapSize(kmerMap.size());
 
+    std::set<ft::FTKResult> indexResults;
+
     // std::cout << "elements to be processed : " << kmerMap.size() << std::endl;
 
     try {
@@ -180,11 +197,16 @@ void Finder::sequentialSearch(ft::FTMap ftMap,
     }
 
     for (ft::KmerClass kmer : kmerMap) {
-        ft::FTResults tmpResultMap = _fmIndex->search(kmer, indexPath.stem().string(),
+        ft::FTKResult tmpResult = _fmIndex->search(kmer, indexPath.stem().string(),
                                           indexFileLocation, maxOcc, i++,
                                           flagOverCountedKmers, printSearchTime);
-        ftMap.addResultsFuture(tmpResultMap, offset);
+        addResultsFutures(indexResults,tmpResult, offset);
     }
+
+    ftMap.addIndexResults(indexResults);
+
+    indexResults.clear();
+
     std::cout << "Finished\n";
 }
 

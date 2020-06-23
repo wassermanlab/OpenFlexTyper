@@ -29,17 +29,25 @@ public:
     std::string getKmer();
     std::set<ft::QIdT> getQueryIDs();
     std::set<ft::FlagType> getKFlags();
+    std::set<size_t> getKPositions();
+    std::set<uint> getReadIDs();
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief setters
     ////////////////////////////////////////////////////////////////////////
     void setQueryIDs(std::set<ft::QIdT> queries);
     void setKFlags(std::set<ft::FlagType> kFlags);
+    void setKPositions(std::set<size_t> kPositions, uint offset);
+    void setReadIDs(std::set<uint> readIDs);
 
     void addQuery(ft::QIdT query);
     void addKFlag(ft::FlagType kFlag);
+    void addKPosition(size_t kPosition, uint offset);
+    void addReadID(uint readID);
 
     uint getKmerMapSize();
+
+    void convertPosToReadID(uint readlength);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief properties
@@ -47,6 +55,9 @@ public:
     std::string _kmer;
     std::set<ft::QIdT> _queryIDs;
     std::set<ft::FlagType> _kFlags;
+    std::set<size_t> _positions;
+    std::set<uint> _readIDs;
+
 private:
 };
 }

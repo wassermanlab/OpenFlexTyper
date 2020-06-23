@@ -52,7 +52,7 @@ void FmIndex::generateReadsMap(const std::string& filename)
 }
 
 //======================================================================
-ft::FTResults FmIndex::search(ft::KmerClass kmerClass,
+ft::FTKResult FmIndex::search(ft::KmerClass kmerClass,
                               const std::string& /* filename */,
                               const std::string& /* indexDirectory */,
                               u_int maxOcc, size_t i,
@@ -62,7 +62,7 @@ ft::FTResults FmIndex::search(ft::KmerClass kmerClass,
     // executions and in main thread for monothreaded applications
 
     std::string kmer= kmerClass.getKmer();
-    ft::FTResults resultsfutures(kmer);
+    ft::FTKResult resultsfutures(kmer);
 
     auto start = high_resolution_clock::now();
 

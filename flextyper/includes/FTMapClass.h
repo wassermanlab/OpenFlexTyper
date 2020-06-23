@@ -4,9 +4,11 @@
 #include <set>
 #include <iostream>
 #include <map>
+#include <future>
+
 #include "kmerClass.h"
 #include "queryClass.h"
-#include "resultsClass.h"
+
 
 namespace ft {
 
@@ -14,7 +16,7 @@ typedef std::string     SearchType;             // SearchType declaration
 const   std::string     CENTERED = "CENTERED";  // search type centered approach
 const   std::string     SLIDING  = "SLIDING";   // search type sliding approach
 typedef std::tuple<uint, std::string, std::string, std::string>         Query;    // query id, ref, alt, crossover
-
+typedef std::map<ft::QueryClass, std::set<KmerClass>> Results;
 
 
 class FTMap
@@ -35,7 +37,8 @@ public:
     ////////////////////////////////////////////////////////////////////////
     std::set<ft::KmerClass> _kmerMap;
     std::set<ft::QueryClass> _queryMap;
-    std::map<ft::QueryClass, std::set<KmerClass>> _results;
+    std::set<std::set<ft::KmerClass>> _resultsMap;
+
     uint _kmerSize;
     bool _refOnly;
     SearchType _searchType;
@@ -48,6 +51,7 @@ public:
     uint _maxTotalKmers;
     uint _maxOcc;
     bool _overcounted;
+    uint _readLen;
 
 
 
@@ -72,7 +76,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     std::set<ft::KmerClass> getKmerMap();
     std::set<ft::QueryClass> getQueryMap();
-    std::map<ft::QueryClass, std::set<KmerClass>> getResultsMap();
+    std::set<std::set<ft::KmerClass>> getResultsMap();
     uint getKmerSize();
     SearchType getSearchType();
     uint getOverlap();
@@ -80,6 +84,7 @@ public:
     uint getMaxKmers();
     uint getMaxTotalKmers();
     uint getMaxOcc();
+    uint getReadLength();
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
@@ -93,6 +98,7 @@ public:
     void setMaxKmers(uint maxKmers);
     void setMaxTotalKmers(uint maxTotalKmers);
     void setMaxOcc(uint maxOcc);
+    void setReadLength(uint readlength);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Flags
@@ -119,9 +125,16 @@ public:
     void addQuery(ft::QueryClass query);
 
     void addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryIDType);
-    void addResultsFuture(ft::FTResults tmpResults, uint offset);
 
-    void addResults(std::map<ft::QueryClass, std::set<KmerClass>> tmpResults);
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief Adds results from parallel search
+    /// All kmer results from a single index
+    ////////////////////////////////////////////////////////////////////////
+    void addIndexResults(std::set<ft::KmerClass> indexResults);
+
+
+    void processIndexResults(std::set<ft::KmerClass> indexResults, uint readLength);
+
 };
 
 //typedef std::map<QIdT, std::set<std::string>>                                   SearchKmers;            // int is the query ID

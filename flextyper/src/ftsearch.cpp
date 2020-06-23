@@ -58,8 +58,6 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     std::set<fs::path> setOfIndexes = _utils->getSetOfIndexes();
     std::set<Query> inputQueries    = _queryExtractor->getInputQueries(refOnly, crossover, pathToQueryFile);
 
-
-
     _kmerGenerator->genKmerMap(inputQueries, ftMap);
     //std::cout << "kmerMap size                  : " << kmerMap.size() << std::endl;
 
@@ -71,12 +69,6 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
 
     std::cout << "\nsearching..." << std::endl;
     auto indexFile = setOfIndexes.begin()->c_str();
-
-
-
-    std::set<QueryClass> queryResults;
-    //ResultsMap indexPosResults;
-    // MapOfCounts indexCounts;   <- REPLACED WITH queryMap and kmerMap
 
     // selecting the correct strategy depending on the size of the index size set
     if (setOfIndexes.size() == 1) {
@@ -96,8 +88,8 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     fs::path indexMapFile = indexFile;
     indexMapFile += ".map";
 
-    queryResults = _resultProcessor->processResults(ftMap.getResultsMap(), readLength, lines, matchingReads);
-    _writerBridge->saveQueryOutput(queryResults, returnMatchesOnly, flagOverCountedKmers, ignoreNonUniqueKmers, crossover, pathToQueryFile, queryOutputFile);
+    _resultProcessor->processResults(ftMap, readLength, lines, matchingReads);
+    _writerBridge->saveQueryOutput(ftMap.getQueryMap(), returnMatchesOnly, flagOverCountedKmers, ignoreNonUniqueKmers, crossover, pathToQueryFile, queryOutputFile);
 }
 
 //======================================================================

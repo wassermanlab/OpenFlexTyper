@@ -53,7 +53,7 @@ public:
     /// \param parallel
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
-    void searchMonoIndex(FTMap ftMap, const fs::path& indexPath,
+    void searchMonoIndex(ft::FTMap ftMap, const fs::path& indexPath,
                          const std::string& indexFileLocation, bool parallel, uint threadNumber,
                          bool printSearchTime);
 
@@ -67,15 +67,12 @@ public:
     /// \param parallel
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
-    void searchMultipleIndexes(FTMap ftMap, const std::set<fs::path>& indexPaths,
+    void searchMultipleIndexes(ft::FTMap ftMap, const std::set<fs::path>& indexPaths,
                                const std::string& indexFileLocation, bool parallel, uint threadNumber,
                                bool printSearchTime, long long offset);
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief combineIndexResults
-    /// \param
-    ////////////////////////////////////////////////////////////////////////
-    void combineIndexResults(const std::map<ft::QueryClass, std::set<KmerClass>>& indexResults, ft::FTResults tmpResultMap, uint offset);
+
+    void addResultsFutures( std::set<ft::KmerClass> indexResults, ft::KmerClass tmpResult, uint offset);
 
 
     ////////////////////////////////////////////////////////////////////////
@@ -122,7 +119,7 @@ public:
     /// \param maxOcc
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
-    void multipleIndexesParallelSearch(FTMap ftMap, const fs::path& indexFileLocation,
+    void multipleIndexesParallelSearch(ft::FTMap ftMap, const fs::path& indexFileLocation,
                                        const std::set<fs::path>& indexPath, uint threadNumber, bool printSearchTime, long long offset);
 
     ////////////////////////////////////////////////////////////////////////
@@ -134,7 +131,7 @@ public:
     /// \param indexPath
     /// \param maxOcc
     ////////////////////////////////////////////////////////////////////////
-    void multipleIndexesSequentialSearch(FTMap ftMap, const fs::path& indexFileLocation,
+    void multipleIndexesSequentialSearch(ft::FTMap ftMap, const fs::path& indexFileLocation,
                                          std::set<fs::path> indexPath, bool printSearchTime, long long offset);
 
 private:
