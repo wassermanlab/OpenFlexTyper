@@ -69,7 +69,7 @@ void KmerClass::addKFlag(ft::FlagType flag)
 }
 
 //======================================================
-void KmerClass::addKPosition(size_t kPosition, uint offset)
+void KmerClass::addKPosition(size_t kPosition, uint offset =0)
 {
 
 }
