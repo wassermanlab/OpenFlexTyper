@@ -53,8 +53,6 @@ public:
     bool _overcounted;
     uint _readLen;
 
-
-
     ////////////////////////////////////////////////////////////////////////
     /// \brief set properties
     ////////////////////////////////////////////////////////////////////////
@@ -68,8 +66,6 @@ public:
                             bool _kmerCounts,
                             uint _maxKmers,
                             uint _maxTotalKmers);
-
-
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
@@ -137,10 +133,10 @@ public:
 
 };
 
-//typedef std::map<QIdT, std::set<std::string>>                                   SearchKmers;            // int is the query ID
+//typedef std::map<QIdT, std::set<std::string>>                  SearchKmers;            // int is the query ID
 
-//typedef std::pair<std::set<long long>, std::set<FlagType>>        Results;                // set of positions and flags
-//typedef std::pair<std::set<size_t>, std::set<FlagType>>           ResultsFuture;          // set of positions and flags
+//typedef std::pair<std::set<long long>, std::set<FlagType>>     Results;                // set of positions and flags
+//typedef std::pair<std::set<size_t>, std::set<FlagType>>                       ResultsFuture;          // set of positions and flags
 //typedef std::map<QIdT, Results>                                                 ResultsMap;             // int is the query ID
 
 //typedef std::map<QIdT, std::set<size_t>>                                        ReaIDsMap;              // int is the query ID

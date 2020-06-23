@@ -55,7 +55,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     void searchMonoIndex(ft::FTMap ftMap, const fs::path& indexPath,
                          const std::string& indexFileLocation, bool parallel, uint threadNumber,
-                         bool printSearchTime);
+                         bool printSearchTime, long long offset);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief searchMultipleIndexes

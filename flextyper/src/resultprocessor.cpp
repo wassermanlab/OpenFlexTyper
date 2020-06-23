@@ -1,4 +1,5 @@
 #include "resultprocessor.h"
+#include "FTMapClass.h"
 
 namespace ft {
 //======================================================================
@@ -9,9 +10,9 @@ ResultProcessor::ResultProcessor()
 }
 
 //======================================================================
-MapOfCounts ResultProcessor::getIndexCounts(ReaIDsMap &readIDResults)
+void ResultProcessor::getIndexCounts(std::set<ft::KmerClass> readIDResults)
 {
-    MapOfCounts indexCounts;
+    std::set<ft::QueryClass> _queryMap;
 
     int count = 0;
 
@@ -21,9 +22,7 @@ MapOfCounts ResultProcessor::getIndexCounts(ReaIDsMap &readIDResults)
             count++;
         }
         indexCounts.insert({{e.first.first, e.first.second}, count});
-    }
-
-    return indexCounts;
+    } 
 }
 
 //======================================================================
@@ -40,20 +39,20 @@ std::set<ft::QueryClass> ResultProcessor::processIndexPos(std::set<ft::KmerClass
 }
 
 //======================================================================
-MapOfCounts ResultProcessor::processResults(ft::FTMap ftMap, uint readLen, uint readlines, const fs::path& matchingReads)
+void ResultProcessor::processResults(ft::FTMap ftMap, uint readLen, uint readlines, const fs::path& matchingReads)
 {
 
     // convert index positions to read ids
     // save to
     ftMap.setReadLength(readLen);
-    std::set<std::set<ft::KmerClass>> indexResults = ftMap.getResultsMap();
+    std::set<std::set<ft::KmerClass>> resultsMap = ftMap.getResultsMap();
 
-    for (auto indexResult : indexResults)
+    for (auto indexResult : resultsMap)
     {
         ftMap.processIndexResults(indexResult, ftMap.getReadLength());
     }
 
-    processIndexPos(ftMap, readLen);
+    //processIndexPos(ftMap, readLen);
 
     /*
     std::cout << "read Ids : \n";

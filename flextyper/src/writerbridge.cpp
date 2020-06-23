@@ -11,9 +11,7 @@ WriterBridge::WriterBridge()
 }
 
 //======================================================================
-void WriterBridge::saveQueryOutput(MapOfCounts allCounts, QueryKmers nonUniqueKmers,
-                                   bool returnMatchesOnly, bool includeOverCountedKmers,
-                                   bool ignoreNonUniqueKmers, bool crossover,
+void WriterBridge::saveQueryOutput(ft::FTMap ftMap,
                                    const fs::path& inputQueryFile,
                                    const fs::path& outputQueryFile)
 {
@@ -39,22 +37,22 @@ void WriterBridge::saveQueryOutput(MapOfCounts allCounts, QueryKmers nonUniqueKm
         }
         if (line[0] == '#') {
             std::string header;
-            if (crossover) {
+            if (ftMap.getCrossoverFlag()) {
                 header = '\t' + std::string("start_point_count") + '\t' + std::string("crossover_count") + '\t' + std::string("endpoint_count");
-                if (ignoreNonUniqueKmers) {
+                if (ftMap.getIgnoreNonUniqueKmersFlag()) {
                     header += '\t' + std::string("Start_Non_Unique_Kmers") + '\t' + std::string("Crossover_Non_Unique_Kmers") + '\t' + std::string("Endpoint_Non_Unique_Kmers");
                 }
-                if (includeOverCountedKmers) {
+                if (ftMap.getOverCountedFlag()) {
                     header += '\t' + std::string("Start_Over_Counted_Kmers") + '\t' + std::string("Crossover_Over_Counted_Kmers") + '\t' + std::string("Endpoint_Over_Counted_Kmers");
                 }
 
             } else {
                 header = '\t' + std::string("Ref_count") + '\t' + std::string("Alt_count") ;
 
-                if (ignoreNonUniqueKmers) {
+                if (ftMap.getIgnoreNonUniqueKmersFlag()) {
                     header += '\t' + std::string("Ref_Non_Unique_Kmers") + '\t' + std::string("Alt_Non_Unique_Kmers");
                 }
-                if (includeOverCountedKmers) {
+                if (ftMap.getOverCountedFlag()) {
                     header += '\t' + std::string("Ref_Over_Counted_Kmers") + '\t' + std::string("Alt_Over_Counted_Kmers");
                 }
             }

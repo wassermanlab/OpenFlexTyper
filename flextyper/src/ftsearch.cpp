@@ -74,7 +74,8 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     if (setOfIndexes.size() == 1) {
         std::cout << "searching with " << setOfIndexes.size() << " indexes" << std::endl;
         std::cout << "offset : " << offset << std::endl;
-        _finder->searchMonoIndex(ftMap, indexFile, indexFileLocation, multithread, threadNumber, printSearchTime);
+        offset = 0;
+        _finder->searchMonoIndex(ftMap, indexFile, indexFileLocation, multithread, threadNumber, printSearchTime, offset);
 
     } else if (setOfIndexes.size() > 1) {
 

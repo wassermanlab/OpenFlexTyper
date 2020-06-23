@@ -14,7 +14,7 @@
 #include "FTMapClass.h"
 #include "stats.h"
 #include "typedefs.h"
-#include "resultsClass.h"
+
 namespace algo {
 
 using namespace sdsl;
@@ -50,7 +50,7 @@ public:
     /// \param queryString
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    ft::FTKResult search(ft::KmerClass kmerClass,
+    ft::KmerClass search(ft::KmerClass kmerClass,
                          const std::string& = "indexFile",
                          const std::string& = "/tmp/", u_int maxOcc = 200, size_t i = 0,
                          bool flagOverCountedKmers = false,

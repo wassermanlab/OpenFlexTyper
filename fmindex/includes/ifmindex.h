@@ -11,7 +11,6 @@
 #include <iostream>
 #include <experimental/filesystem>
 #include "FTMapClass.h"
-#include "resultsClass.h"
 
 namespace fs = std::experimental::filesystem;
 
@@ -62,7 +61,7 @@ public:
     /// \param queryString
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual ft::FTKResult search(ft::KmerClass kmerClass,
+    virtual ft::KmerClass search(ft::KmerClass kmerClass,
                                  const std::string& filename = "indexFile",
                                  const std::string& outputFolder = "./", u_int maxOccurences = 200,
                                  size_t i = 0,

@@ -1,6 +1,7 @@
 #include <set>
 #include <iostream>
 #include <map>
+#include <math.h>
 #include "typedefs.h"
 #include "kmerClass.h"
 
@@ -73,18 +74,20 @@ void KmerClass::addKPosition(size_t kPosition, uint offset)
 
 }
 
-
-uint KmerClass::getKmerMapSize(){return this->_kmer.size();}
 //======================================================
-void convertPosToReadID(uint readlength)
+uint KmerClass::getKmerMapSize(){return this->_kmer.size();}
+
+
+//======================================================
+void KmerClass::convertPosToReadID(uint readLength)
 {
     std::set<size_t> positions = this->_positions;
 
     for (auto pos : positions) {
-        auto r = (size_t) std::ceil(indexPos / (readLength + 1));
-
+        auto r = (size_t) std::ceil(pos / (readLength + 1));
+    }
 }
-
+//======================================================
 KmerClass::~KmerClass()
 {
 }

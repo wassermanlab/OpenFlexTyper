@@ -11,12 +11,12 @@ Finder::Finder()
 //======================================================================
 void Finder::searchMonoIndex(FTMap ftMap, const fs::path& indexPath,
                              const std::string& indexFileLocation, bool parallel, uint threadNumber,
-                             bool printSearchTime)
+                             bool printSearchTime, long long offset)
 {
     if (parallel) {
-        parallelSearch(ftMap, indexFileLocation, indexPath, threadNumber, printSearchTime, 0);
+        parallelSearch(ftMap, indexFileLocation, indexPath, threadNumber, printSearchTime, offset);
     } else {
-        sequentialSearch(ftMap, indexFileLocation, indexPath, printSearchTime, 0);
+        sequentialSearch(ftMap, indexFileLocation, indexPath, printSearchTime, offset);
     }
 }
 
@@ -185,7 +185,7 @@ void Finder::sequentialSearch(ft::FTMap ftMap,
     std::cout << "working on : " << indexPath << std::endl;
     _fmIndex->setKmerMapSize(kmerMap.size());
 
-    std::set<ft::FTKResult> indexResults;
+    std::set<ft::KmerClass> indexResults;
 
     // std::cout << "elements to be processed : " << kmerMap.size() << std::endl;
 
@@ -197,7 +197,7 @@ void Finder::sequentialSearch(ft::FTMap ftMap,
     }
 
     for (ft::KmerClass kmer : kmerMap) {
-        ft::FTKResult tmpResult = _fmIndex->search(kmer, indexPath.stem().string(),
+        ft::KmerClass tmpResult = _fmIndex->search(kmer, indexPath.stem().string(),
                                           indexFileLocation, maxOcc, i++,
                                           flagOverCountedKmers, printSearchTime);
         addResultsFutures(indexResults,tmpResult, offset);

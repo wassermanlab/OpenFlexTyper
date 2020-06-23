@@ -4,8 +4,6 @@
 #include <chrono>
 #include <iostream>
 #include <fstream>
-#include "resultsClass.h"
-
 
 using namespace std::chrono;
 
@@ -52,7 +50,7 @@ void FmIndex::generateReadsMap(const std::string& filename)
 }
 
 //======================================================================
-ft::FTKResult FmIndex::search(ft::KmerClass kmerClass,
+ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
                               const std::string& /* filename */,
                               const std::string& /* indexDirectory */,
                               u_int maxOcc, size_t i,
@@ -62,7 +60,7 @@ ft::FTKResult FmIndex::search(ft::KmerClass kmerClass,
     // executions and in main thread for monothreaded applications
 
     std::string kmer= kmerClass.getKmer();
-    ft::FTKResult resultsfutures(kmer);
+    ft::KmerClass resultsfutures(kmer);
 
     auto start = high_resolution_clock::now();
 
@@ -74,14 +72,14 @@ ft::FTKResult FmIndex::search(ft::KmerClass kmerClass,
 
     // if number kmers > max, flag kmer as "abundant"
     if (occs > maxOcc && flagOverCountedKmers) {
-        resultsfutures.addFlag(ft::FlagType::ABK);
+        resultsfutures.addKFlag(ft::FlagType::ABK);
     }
 
     if (occs > 0  && occs <= maxOcc) {
         auto locations = sdsl::locate(_fmindex, kmer.begin(), kmer.begin() + kmer.length());
         for (auto e : locations) {
             // std::cout << e << " --> " << (e / 59) + 1 << std::endl;
-            resultsfutures.addPosition(e);
+            resultsfutures.addKPosition(e);
         }
     }
 
