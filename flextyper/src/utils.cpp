@@ -15,6 +15,19 @@ Utils::~Utils()
 }
 
 //======================================================================
+std::string Utils::joinString(const std::set<std::string>& setOfStr, std::string delimeter)
+{
+    std::string output;
+    std::set<std::string>::iterator it = setOfStr.begin();
+
+    while (it != setOfStr.end())
+    {
+        output += (*it++) + delimeter;
+    }
+    return output;
+}
+
+//======================================================================
 std::vector<std::string> Utils::split(const std::string& strToSplit, char delimeter)
 {
     std::stringstream ss(strToSplit);

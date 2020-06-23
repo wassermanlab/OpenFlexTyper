@@ -1,6 +1,7 @@
 #include <set>
 #include <iostream>
 #include <map>
+#include <algorithm>
 #include "FTMapClass.h"
 #include "kmerClass.h"
 #include "queryClass.h"
@@ -76,35 +77,89 @@ void FTMap::setOverCountedFlag(bool overcounted){}
 
 
 //======================================================
-ft::KmerClass FTMap::getKmer(std::string kmer)
+bool FTMap::checkKmer(ft::KmerClass testKmerObject)
 {
+    std::set<ft::KmerClass> kmerMap = this->getKmerMap();
 
+    auto it = std::find_if(std::begin(kmerMap), std::end(kmerMap),
+        [&] (ft::KmerClass k) {return k.isKmerEqual(testKmerObject);});
+    if (it != kmerMap.end())
+    {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//======================================================
+bool FTMap::checkQIDT(ft::QIdT testQIDTObject)
+{
+    std::set<ft::QueryClass> queryMap = this->getQueryMap();
+
+    auto it = std::find_if(std::begin(queryMap), std::end(queryMap),
+        [&] (ft::QueryClass k) {return k.isQIdTEqual(testQIDTObject);});
+    if (it != queryMap.end())
+    {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//======================================================
+auto FTMap::findKmer(std::string testkmer)
+{
+    std::set<ft::KmerClass> kmerMap = this->getKmerMap();
+    auto it = std::find_if(std::begin(kmerMap), std::end(kmerMap),
+        [&] (ft::KmerClass k) {return k.hasKmer(testkmer);});
+    return it;
 }
 
 //======================================================
 ft::QueryClass FTMap::getQuery(ft::QIdT qIDT)
 {
+    std::set<ft::QueryClass> queryMap = this->getQueryMap();
 
+    auto it = std::find_if(std::begin(queryMap), std::end(queryMap),
+        [&] (ft::QueryClass k) {return k.isQIdTEqual(qIDT);});
+    return (*it);
 }
 
 //======================================================
 void FTMap::addKmer(ft::KmerClass kmer)
 {
-
+    if (!checkKmer(kmer)){
+        this->_kmerMap.insert(kmer);
+    } else {
+        std::cout << "Kmer not added, kmer already exists" << std::endl;
+    }
 }
 
 //======================================================
 void FTMap::addQuery(ft::QueryClass query)
 {
-
+    ft::QIdT testQIDT = query.getQIdT();
+    if (!checkQIDT(testQIDT)){
+        this->_queryMap.insert(query);
+    } else {
+        std::cout << "Query not added, query already exists" << std::endl;
+    }
 }
 
 //======================================================
 void FTMap::addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryIDType)
 {
+    ft::KmerClass _kmer(kmer);
+    ft::QIdT qIDT = std::make_pair(queryID, queryIDType);
+    if (checkKmer(_kmer)){
+        auto k = findKmer(kmer);
+        (*k).addQuery(qIDT);
+    } else {
+        _kmer.addQuery(qIDT);
+        this->addKmer(_kmer);
+    }
 
 }
-
 
 //======================================================
 void FTMap::addIndexResults(std::set<ft::KmerClass> indexResults)
@@ -122,6 +177,11 @@ void FTMap::processIndexResults(std::set<ft::KmerClass> indexResult, uint readLe
     for (ft::KmerClass kmerResult : indexResult){
        kmerResult.convertPosToReadID(readLength);
     }
+
+    for (ft::KmerClass kmerResult : indexResult){
+
+    }
+
 
 }
 //    for (auto queryID_Type : queryID_Types) {

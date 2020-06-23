@@ -40,7 +40,7 @@ public:
     /// \param outputFile
     /// \param read
     ////////////////////////////////////////////////////////////////////////
-    virtual void  printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, ReaIDsMap& line) const = 0;
+    //virtual void  printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, ReaIDsMap& line) const = 0;
 };
 }
 

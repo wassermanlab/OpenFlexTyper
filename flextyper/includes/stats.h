@@ -52,7 +52,7 @@ public:
     /// \param outputFile
     /// \param read
     ////////////////////////////////////////////////////////////////////////
-    void  printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, ReaIDsMap& res) const;
+    //void  printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, ReaIDsMap& res) const;
 };
 }
 

@@ -35,6 +35,7 @@ public:
     int getCount();
     std::map<ft::FlagType, std::set<std::string>> getQFlags();
 
+    ft::QIdT getQIdT();
     ////////////////////////////////////////////////////////////////////////
     /// \brief setters
     ////////////////////////////////////////////////////////////////////////
@@ -50,9 +51,12 @@ public:
     ////////////////////////////////////////////////////////////////////////
     void addKmer(std::string kmer);
     void addFlag(ft::FlagType flagType, std::set<std::string> kmers);
+    void addReadID(int readID);
 
 
+    bool isQIdTEqual(ft::QIdT test);
 
+    std::set<std::string> getFlagKmers(ft::FlagType);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief properties

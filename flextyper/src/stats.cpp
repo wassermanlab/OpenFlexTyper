@@ -41,43 +41,43 @@ void Stats::printKmerSearchTimeToFile(const fs::path& outputFile, const std::str
 }
 
 //======================================================================
-void Stats::printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, ReaIDsMap &res) const
-{
-    std::ofstream file;
-    file.open(outputFile, std::ios_base::app);
-    std::string line;
-    std::ifstream f(read);
+//void Stats::printMatchingReadsToFile(const fs::path& outputFile, const std::string& read, ReaIDsMap &res) const
+//{
+//    std::ofstream file;
+//    file.open(outputFile, std::ios_base::app);
+//    std::string line;
+//    std::ifstream f(read);
 
-    if (res.size() == 0) {
-        std::cout << "lines is empty at this point\n";
-        return;
-    }
+//    if (res.size() == 0) {
+//        std::cout << "lines is empty at this point\n";
+//        return;
+//    }
 
-    std::set<size_t> lines;
+//    std::set<size_t> lines;
 
-    // std::cout << "display elements" << std::endl;
-    for (auto e : res) {
-        for (auto f : e.second)
-            lines.insert(f);
-    }
+//    // std::cout << "display elements" << std::endl;
+//    for (auto e : res) {
+//        for (auto f : e.second)
+//            lines.insert(f);
+//    }
 
-    /*
-    std::cout << "lines size : " << lines.size()   << std::endl;
-    std::cout << "max line : " << *(lines.end())+1 << std::endl;
-    */
+//    /*
+//    std::cout << "lines size : " << lines.size()   << std::endl;
+//    std::cout << "max line : " << *(lines.end())+1 << std::endl;
+//    */
 
-    if (file.is_open()) {
-        for (int i = 0; i <= *lines.rbegin() + 1; i++) {
-            std::getline(f, line);
-            if (lines.find(i) != lines.end()) {
-                // std::cout << "taking line : " << i+1 << std::endl;
-                file << line << "\n";
-            }
-        }
-    }
+//    if (file.is_open()) {
+//        for (int i = 0; i <= *lines.rbegin() + 1; i++) {
+//            std::getline(f, line);
+//            if (lines.find(i) != lines.end()) {
+//                // std::cout << "taking line : " << i+1 << std::endl;
+//                file << line << "\n";
+//            }
+//        }
+//    }
 
-    file.close();
-}
+//    file.close();
+//}
 
 //======================================================================
 Stats::~Stats()

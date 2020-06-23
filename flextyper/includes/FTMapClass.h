@@ -5,10 +5,8 @@
 #include <iostream>
 #include <map>
 #include <future>
-
 #include "kmerClass.h"
 #include "queryClass.h"
-
 
 namespace ft {
 
@@ -17,7 +15,6 @@ const   std::string     CENTERED = "CENTERED";  // search type centered approach
 const   std::string     SLIDING  = "SLIDING";   // search type sliding approach
 typedef std::tuple<uint, std::string, std::string, std::string>         Query;    // query id, ref, alt, crossover
 typedef std::map<ft::QueryClass, std::set<KmerClass>> Results;
-
 
 class FTMap
 {
@@ -114,7 +111,9 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief Access functions for single kmer and queries
     ////////////////////////////////////////////////////////////////////////
-    ft::KmerClass getKmer(std::string kmer);
+    bool checkKmer(ft::KmerClass testKmerObject);
+    bool checkQIDT(ft::QIdT testQueryObject);
+    auto findKmer(std::string kmer);
     ft::QueryClass getQuery(ft::QIdT qIDT);
 
     void addKmer(ft::KmerClass kmer);

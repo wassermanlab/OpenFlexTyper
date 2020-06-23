@@ -45,8 +45,9 @@ public:
     void addKPosition(size_t kPosition, uint offset);
     void addReadID(uint readID);
 
+    bool isKmerEqual(KmerClass test);
+    bool hasKmer(std::string test);
     uint getKmerMapSize();
-
     void convertPosToReadID(uint readlength);
 
     ////////////////////////////////////////////////////////////////////////

@@ -77,6 +77,15 @@ void KmerClass::addKPosition(size_t kPosition, uint offset)
 //======================================================
 uint KmerClass::getKmerMapSize(){return this->_kmer.size();}
 
+//======================================================
+bool KmerClass::isKmerEqual(KmerClass test) {
+    return this->getKmer() == test.getKmer();
+}
+
+//======================================================
+bool KmerClass::hasKmer(std::string test) {
+    return this->getKmer() == test;
+}
 
 //======================================================
 void KmerClass::convertPosToReadID(uint readLength)

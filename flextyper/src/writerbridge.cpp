@@ -68,9 +68,28 @@ void WriterBridge::saveQueryOutput(ft::FTMap ftMap,
         std::vector<std::string> splitline = _utils->split(line, '\t');
         uint fileIndex = atoi(splitline[0].c_str());
         int queryIndex = _utils->fileIndexToQueryIndex(fileIndex);
-        uint ref_count = 0;
-        uint alt_count = 0;
-        uint cro_count = 0;
+
+        ft::QueryClass refQuery = ftMap.checkQuery(std::make_pair(queryIndex, QueryType::REF));
+        if (refQuery) {
+            u_int ref_count = refQuery.getCount();
+            std::string ref_NUK =  _utils->joinString(refQuery.getFlagKmers(FlagType::NUK));
+        } else {
+            u_int ref_count = 0;
+        }
+
+        ft::QueryClass altQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::ALT));
+        if (altQuery) {
+            u_int ref_count = refQuery.getCount();
+        } else {
+            u_int ref_count = 0;
+        }
+        ft::QueryClass croQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::CRO));
+        if (croQuery) {
+            u_int cro_count = croQuery.getCount();
+        } else {
+            u_int ref_count = 0;
+        }
+
         std::string ref_NUK = "";
         std::string alt_NUK = "";
         std::string cro_NUK = "";
@@ -78,6 +97,10 @@ void WriterBridge::saveQueryOutput(ft::FTMap ftMap,
         std::string alt_OCK = "";
         std::string cro_OCK = "";
 
+
+
+
+        int QueryClass::getCount(){return _count;}
 
         if (allCounts.count({queryIndex, QueryType::REF}) > 0){
             ref_count = allCounts[{queryIndex, QueryType::REF}];

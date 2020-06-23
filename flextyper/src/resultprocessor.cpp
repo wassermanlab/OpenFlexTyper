@@ -9,59 +9,51 @@ ResultProcessor::ResultProcessor()
 {
 }
 
-//======================================================================
-void ResultProcessor::getIndexCounts(std::set<ft::KmerClass> readIDResults)
-{
-    std::set<ft::QueryClass> _queryMap;
+////======================================================================
+//void ResultProcessor::getIndexCounts(std::set<ft::KmerClass> readIDResults)
+//{
+//    std::set<ft::QueryClass> _queryMap;
 
-    int count = 0;
+//    int count = 0;
 
-    for (auto e : readIDResults) {
-        count  = 0;
-        for (auto f : e.second) {
-            count++;
-        }
-        indexCounts.insert({{e.first.first, e.first.second}, count});
-    } 
-}
+//    for (auto e : readIDResults) {
+//        count  = 0;
+//        for (auto f : e.second) {
+//            count++;
+//        }
+//        indexCounts.insert({{e.first.first, e.first.second}, count});
+//    }
+//}
 
-//======================================================================
-std::set<ft::QueryClass> ResultProcessor::processIndexPos(std::set<ft::KmerClass> indexResults, uint readLen)
-{
-    std::set<ft::QueryClass> readIDResults; // map< query ID, set<read ID>>
+////======================================================================
+//std::set<ft::QueryClass> ResultProcessor::processIndexPos(std::set<ft::KmerClass> indexResults, uint readLen)
+//{
+//    std::set<ft::QueryClass> readIDResults; // map< query ID, set<read ID>>
 
-    for (auto e : indexResults) {
-        auto result = _utils->convertIndexPositionsToReadIDs(e.second.first, readLen);
-        readIDResults.insert({e.first, result});
-    }
+//    for (auto e : indexResults) {
+//        auto result = _utils->convertIndexPositionsToReadIDs(e.second.first, readLen);
+//        readIDResults.insert({e.first, result});
+//    }
 
-    return readIDResults;
-}
+//    return readIDResults;
+//}
 
 //======================================================================
 void ResultProcessor::processResults(ft::FTMap ftMap, uint readLen, uint readlines, const fs::path& matchingReads)
 {
 
-    // convert index positions to read ids
-    // save to
     ftMap.setReadLength(readLen);
     std::set<std::set<ft::KmerClass>> resultsMap = ftMap.getResultsMap();
 
+    //for each set of results:
+        // covertPosToReadID
+        // Add ReadIDs to QueryMap
     for (auto indexResult : resultsMap)
     {
         ftMap.processIndexResults(indexResult, ftMap.getReadLength());
     }
 
     //processIndexPos(ftMap, readLen);
-
-    /*
-    std::cout << "read Ids : \n";
-    for (auto e : tmp) {
-        for (auto f : e.second)
-            std::cout << f << " ";
-        std::cout << std::endl;
-    }
-    */
 
     // std::cout << "lines : " << readlines << std::endl;
 
@@ -70,46 +62,32 @@ void ResultProcessor::processResults(ft::FTMap ftMap, uint readLen, uint readlin
         exit(-1);
     }
 
-    ReaIDsMap res;
+//    ReaIDsMap res;
 
-    int rcMin = (readlines / 2) + 1; // readid >= 1
+//    int rcMin = (readlines / 2) + 1; // readid >= 1
 
-    for (auto e : tmp) {
-        for (auto f : e.second) {
-            if (f >= rcMin) {
-                if (e.second.find(f - (readlines / 2)) == e.second.end()) {
-                    res[e.first].insert(f);
-                }
-            } else {
-                std::set<size_t>::iterator it = e.second.find(f + (readlines / 2));
-                if (it != e.second.end()) {
-                    e.second.erase(it);
-                }
-                res[e.first].insert(f);
-            }
-        }
-    }
+//    for (auto e : tmp) {
+//        for (auto f : e.second) {
+//            if (f >= rcMin) {
+//                if (e.second.find(f - (readlines / 2)) == e.second.end()) {
+//                    res[e.first].insert(f);
+//                }
+//            } else {
+//                std::set<size_t>::iterator it = e.second.find(f + (readlines / 2));
+//                if (it != e.second.end()) {
+//                    e.second.erase(it);
+//                }
+//                res[e.first].insert(f);
+//            }
+//        }
+//    }
 
-    /*
-    std::cout << "read Ids processed : \n";
-    for (const auto& e : res) {
-        for (const auto& f : e.second)
-            std::cout << "element : " << f << " ";
-        std::cout << std::endl;
-    }
-
-    std::cout << "res.size() : " << res.size() << std::endl;
-    */
-
-    // ResultsMap is :
-    // <<QueryId, QueryType>, <set of reads>>
-
-    if (!matchingReads.empty()) {
-        _stats->printMatchingReadsToFile("extracted_reads.fa", matchingReads, res);
-    }
+//    if (!matchingReads.empty()) {
+//        _stats->printMatchingReadsToFile("extracted_reads.fa", matchingReads, res);
+//    }
 
     // return index Counts <query ID, number of read hits>
-    return getIndexCounts(res);
+
 }
 
 //======================================================================

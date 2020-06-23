@@ -21,7 +21,7 @@ public:
     /// \param readIDResults
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual MapOfCounts getIndexCounts(ReaIDsMap& readIDResults) = 0;
+    //virtual MapOfCounts getIndexCounts(ReaIDsMap& readIDResults) = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief ResultProcessor::processIndexPos
@@ -30,7 +30,7 @@ public:
     /// \param readLen
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual ReaIDsMap processIndexPos(ResultsMap& indexPosResults, uint readLen) = 0;
+    //virtual ReaIDsMap processIndexPos(ResultsMap& indexPosResults, uint readLen) = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief ResultProcessor::processResults
@@ -41,7 +41,7 @@ public:
     /// \param readLen
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual MapOfCounts processResults(ResultsMap& indexPosResults, uint readLen, uint readlines, const fs::path& matchingReads = "") = 0;
+    virtual void processResults(ft::FTMap ftMap, uint readLen, uint readlines, const fs::path& matchingReads = "") = 0;
 };
 }
 

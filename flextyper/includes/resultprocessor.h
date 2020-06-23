@@ -34,7 +34,7 @@ public:
     /// \param readIDResults
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    void getIndexCounts(std::set<ft::KmerClass> readIDResults);
+    //void getIndexCounts(std::set<ft::KmerClass> readIDResults);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief ResultProcessor::processIndexPos

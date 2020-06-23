@@ -22,7 +22,7 @@ public:
     /// \param allCounts
     /// \param returnMatchesOnly
     ////////////////////////////////////////////////////////////////////////
-    virtual void saveQueryOutput(MapOfCounts allCounts, QueryKmers nonUniqueKmers, bool returnMatchesOnly, bool includeOverCountedKmers, bool ignoreNonUniqueKmers, bool crossover, const fs::path& pathToQueryFile, const fs::path& queryOutputFile) = 0;
+    virtual void saveQueryOutput(ft::FTMap ftMap, const fs::path& pathToQueryFile, const fs::path& queryOutputFile) = 0;
 };
 }
 
