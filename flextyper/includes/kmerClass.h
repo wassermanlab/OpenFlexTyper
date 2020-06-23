@@ -37,12 +37,12 @@ public:
     ////////////////////////////////////////////////////////////////////////
     void setQueryIDs(std::set<ft::QIdT> queries);
     void setKFlags(std::set<ft::FlagType> kFlags);
-    void setKPositions(std::set<size_t> kPositions, uint offset);
+    void setKPositions(std::set<size_t> kPositions, uint offset = 0);
     void setReadIDs(std::set<uint> readIDs);
 
     void addQuery(ft::QIdT query);
     void addKFlag(ft::FlagType kFlag);
-    void addKPosition(size_t kPosition, uint offset);
+    void addKPosition(size_t kPosition, uint offset = 0);
     void addReadID(uint readID);
 
     bool isKmerEqual(KmerClass test);

@@ -110,12 +110,12 @@ bool FTMap::checkQIDT(ft::QIdT testQIDTObject)
 }
 
 //======================================================
-auto FTMap::findKmer(std::string testkmer)
+ft::KmerClass FTMap::findKmer(std::string testkmer)
 {
     std::set<ft::KmerClass> kmerMap = this->getKmerMap();
     auto it = std::find_if(std::begin(kmerMap), std::end(kmerMap),
         [&] (ft::KmerClass k) {return k.hasKmer(testkmer);});
-    return it;
+    return (*it);
 }
 
 //======================================================
@@ -155,13 +155,12 @@ void FTMap::addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryIDTyp
     ft::KmerClass _kmer(kmer);
     ft::QIdT qIDT = std::make_pair(queryID, queryIDType);
     if (checkKmer(_kmer)){
-        auto k = findKmer(kmer);
-        (*k).addQuery(qIDT);
+        ft::KmerClass k = findKmer(kmer);
+        k.addQuery(qIDT);
     } else {
         _kmer.addQuery(qIDT);
         this->addKmer(_kmer);
     }
-
 }
 
 //======================================================

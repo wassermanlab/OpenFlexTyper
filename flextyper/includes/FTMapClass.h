@@ -117,7 +117,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     bool checkKmer(ft::KmerClass testKmerObject);
     bool checkQIDT(ft::QIdT testQueryObject);
-    auto findKmer(std::string kmer);
+    ft::KmerClass findKmer(std::string kmer);
     ft::QueryClass getQuery(ft::QIdT qIDT);
 
     void addKmer(ft::KmerClass kmer);
