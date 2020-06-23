@@ -49,20 +49,22 @@ public:
     uint _maxOcc;
     bool _overcounted;
     uint _readLen;
+    bool _matchesOnly;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief set properties
     ////////////////////////////////////////////////////////////////////////
     void setProperties(uint _kmerSize,
-                            bool _refOnly,
-                            SearchType _searchType,
-                            uint _overlap,
-                            uint _stride,
-                            bool _crossover,
-                            bool _ignoreNonUniqueKmers,
-                            bool _kmerCounts,
-                            uint _maxKmers,
-                            uint _maxTotalKmers);
+                        bool _refOnly,
+                        SearchType _searchType,
+                        uint _overlap,
+                        uint _stride,
+                        bool _crossover,
+                        bool _ignoreNonUniqueKmers,
+                        bool _kmerCounts,
+                        uint _maxKmers,
+                        uint _maxTotalKmers,
+                       bool _returnMatchesOnly);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
@@ -101,12 +103,14 @@ public:
     bool getKmerCountsFlag();
     bool getCrossoverFlag();
     bool getOverCountedFlag();
+    bool getMatchesOnlyFlag();
 
     void setRefOnlyFlag(bool refOnly);
     void setIgnoreNonUniqueKmersFlag(bool ignoreNonUnique);
     void setKmerCountsFlag(bool kmerCounts);
     void setCrossoverFlag(bool crossover);
     void setOverCountedFlag(bool overcounted);
+    void setMatchesOnlyFlag(bool matchesOnly);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Access functions for single kmer and queries

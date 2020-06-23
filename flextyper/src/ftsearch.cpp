@@ -34,7 +34,8 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
                          ignoreNonUniqueKmers,
                          kmerCounts,
                          maxKmers,
-                         totalKmers);
+                         totalKmers,
+                         returnMatchesOnly);
     ftMap.setMaxOcc(maxOccurences);
     ftMap.setOverCountedFlag(flagOverCountedKmers);
 
@@ -90,7 +91,7 @@ void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLen
     indexMapFile += ".map";
 
     _resultProcessor->processResults(ftMap, readLength, lines, matchingReads);
-    _writerBridge->saveQueryOutput(ftMap.getQueryMap(), returnMatchesOnly, flagOverCountedKmers, ignoreNonUniqueKmers, crossover, pathToQueryFile, queryOutputFile);
+    _writerBridge->saveQueryOutput(ftMap, pathToQueryFile, queryOutputFile);
 }
 
 //======================================================================

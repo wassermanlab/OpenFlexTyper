@@ -69,98 +69,58 @@ void WriterBridge::saveQueryOutput(ft::FTMap ftMap,
         uint fileIndex = atoi(splitline[0].c_str());
         int queryIndex = _utils->fileIndexToQueryIndex(fileIndex);
 
-        ft::QueryClass refQuery = ftMap.checkQuery(std::make_pair(queryIndex, QueryType::REF));
-        if (refQuery) {
+        u_int ref_count =0;
+        std::string ref_NUK;
+        std::string ref_OCK;
+        u_int alt_count =0;
+        std::string alt_NUK;
+        std::string alt_OCK;
+        u_int cro_count =0;
+        std::string cro_NUK;
+        std::string cro_OCK;
+
+        if (ftMap.checkQIDT(std::make_pair(queryIndex, QueryType::REF))) {
+            ft::QueryClass refQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::REF));
             u_int ref_count = refQuery.getCount();
             std::string ref_NUK =  _utils->joinString(refQuery.getFlagKmers(FlagType::NUK));
         } else {
             u_int ref_count = 0;
         }
 
-        ft::QueryClass altQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::ALT));
-        if (altQuery) {
-            u_int ref_count = refQuery.getCount();
+        if (ftMap.checkQIDT(std::make_pair(queryIndex, QueryType::ALT))) {
+            ft::QueryClass altQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::ALT));
+            u_int alt_count = altQuery.getCount();
+            std::string alt_NUK =  _utils->joinString(altQuery.getFlagKmers(FlagType::NUK));
+            std::string alt_OCK =  _utils->joinString(altQuery.getFlagKmers(FlagType::OCK));
         } else {
-            u_int ref_count = 0;
+            u_int alt_count = 0;
         }
-        ft::QueryClass croQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::CRO));
-        if (croQuery) {
+
+        if (ftMap.checkQIDT(std::make_pair(queryIndex, QueryType::CRO))) {
+            ft::QueryClass croQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::CRO));
             u_int cro_count = croQuery.getCount();
+            std::string cro_NUK =  _utils->joinString(croQuery.getFlagKmers(FlagType::NUK));
+            std::string cro_OCK =  _utils->joinString(croQuery.getFlagKmers(FlagType::OCK));
         } else {
-            u_int ref_count = 0;
+            u_int cro_count = 0;
         }
-
-        std::string ref_NUK = "";
-        std::string alt_NUK = "";
-        std::string cro_NUK = "";
-        std::string ref_OCK = "";
-        std::string alt_OCK = "";
-        std::string cro_OCK = "";
-
-
-
-
-        int QueryClass::getCount(){return _count;}
-
-        if (allCounts.count({queryIndex, QueryType::REF}) > 0){
-            ref_count = allCounts[{queryIndex, QueryType::REF}];
-        }
-        if (allCounts.count({queryIndex, QueryType::ALT}) > 0){
-            alt_count = allCounts[{queryIndex, QueryType::ALT}];
-        }
-        if (allCounts.count({queryIndex, QueryType::CRO}) > 0) {
-            cro_count = allCounts[{queryIndex, QueryType::CRO}];
-        }
-
-        if (nonUniqueKmers.count({queryIndex, QueryType::REF}) > 0){
-            std::set<std::string> ref_NUKs = nonUniqueKmers[{queryIndex, QueryType::REF}];
-            for (auto it=ref_NUKs.begin(); it != ref_NUKs.end(); ++it)
-                ref_NUK += *it + ',' ;
-        }
-        if (nonUniqueKmers.count({queryIndex, QueryType::ALT}) > 0){
-            std::set<std::string> alt_NUKs = nonUniqueKmers[{queryIndex, QueryType::ALT}];
-            for (auto it=alt_NUKs.begin(); it != alt_NUKs.end(); ++it)
-                alt_NUK += *it + ',' ;
-        }
-        if (nonUniqueKmers.count({queryIndex, QueryType::CRO}) > 0){
-            std::set<std::string> cro_NUKs = nonUniqueKmers[{queryIndex, QueryType::CRO}];
-            for (auto it=cro_NUKs.begin(); it != cro_NUKs.end(); ++it)
-                cro_NUK += *it + ',' ;
-        }
-        /*
-        if (overCountedKmers.count({queryIndex, QueryType::REF}) > 0){
-            std::set<std::string> ref_OCKs = overCountedKmers[{queryIndex, QueryType::REF}];
-            for (auto it=ref_OCKs.begin(); it != ref_OCKs.end(); ++it)
-                ref_OCK += *it + ',' ;
-        }
-        if (overCountedKmers.count({queryIndex, QueryType::ALT}) > 0){
-            std::set<std::string> alt_OCKs = overCountedKmers[{queryIndex, QueryType::ALT}];
-            for (auto it=alt_OCKs.begin(); it != alt_OCKs.end(); ++it)
-                alt_OCK += *it + ',' ;
-        }
-        if (overCountedKmers.count({queryIndex, QueryType::CRO}) > 0){
-            std::set<std::string> cro_OCKs = overCountedKmers[{queryIndex, QueryType::CRO}];
-            for (auto it=cro_OCKs.begin(); it != cro_OCKs.end(); ++it)
-                cro_OCK += *it + ',' ;
-        }
-        */
 
         std::string counts;
-        if (crossover) {
+        if (ftMap.getCrossoverFlag()) {
             counts = '\t' + std::to_string(ref_count) + '\t' + std::to_string(cro_count) + '\t' + std::to_string(alt_count) ;
-            if (ignoreNonUniqueKmers) {
+            if (ftMap.getIgnoreNonUniqueKmersFlag()) {
                 counts += '\t' + ref_NUK + '\t' + cro_NUK + '\t' + alt_NUK ;
             }
-            if (includeOverCountedKmers) {
+            if (ftMap.getOverCountedFlag()) {
                counts += '\t' + ref_OCK + '\t' + cro_OCK + '\t' + alt_OCK ;
             }
 
         } else {
             counts = '\t' + std::to_string(ref_count) + '\t' + std::to_string(alt_count) ;
-            if (ignoreNonUniqueKmers) {
+            if (ftMap.getIgnoreNonUniqueKmersFlag()) {
                 counts += '\t' + ref_NUK + '\t' + alt_NUK ;
             }
-            if (includeOverCountedKmers) {
+            if (ftMap.getOverCountedFlag()) {
                counts += '\t' + ref_OCK + '\t' + alt_OCK ;
             }
 
@@ -170,7 +130,7 @@ void WriterBridge::saveQueryOutput(ft::FTMap ftMap,
         // returnMatchesOnly doesnt work as we are just appending the lines, not creating a new file
 
 
-        if (returnMatchesOnly){
+        if (ftMap.getMatchesOnlyFlag()){
             line.append(counts);
             //std::cout << line; //<< std::endl;
             outputFileStream << line;
