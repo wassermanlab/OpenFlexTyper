@@ -94,20 +94,20 @@ ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
     return resultsfutures;
 }
 
-//======================================================================
-std::map<ft::KmerClass, std::set<size_t>> FmIndex::searchmany(std::set<ft::KmerClass>& kmers,
-                                                            const std::string& /* filename */,
-                                                            const std::string& /* indexDirectory */)
-{
-    std::map<ft::KmerClass, std::set<size_t>> results;
+////======================================================================
+//std::vector<ft::KmerClass> FmIndex::searchmany(std::set<ft::KmerClass>& kmers,
+//                                               const std::string& /* filename */,
+//                                               const std::string& /* indexDirectory */)
+//{
+//    std::vector<ft::KmerClass> results;
 
-    for (auto kmerString : kmers) {
-        std::set<size_t> r;
-        results.insert(std::make_pair(kmerString, r));
-    }
+//    for (auto kmerString : kmers) {
+//        std::set<size_t> r;
+//        ;
+//    }
 
-    return results;
-}
+//    return results;
+//}
 
 //======================================================================
 fs::path FmIndex::createFMIndex(const fs::path& fileToIndex, const fs::path& output, const fs::path& indexList)

@@ -43,7 +43,7 @@ public:
     /// \param readLen
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    std::set<ft::QueryClass> processIndexPos(std::set<ft::KmerClass> indexPosResults, uint readLen);
+    std::set<ft::QueryClass> processIndexPos(std::set<ft::KmerClass>& indexPosResults, uint readLen);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief ResultProcessor::processResults
@@ -54,7 +54,7 @@ public:
     /// \param readLen
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    void processResults(ft::FTMap ftMap, uint readLen, uint readlines, const fs::path& matchingReads = "");
+    void processResults(ft::FTMap& ftMap, uint readLen, uint readlines, const fs::path& matchingReads = "");
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief overrideUtils
@@ -82,7 +82,7 @@ private:
     ////////////////////////////////////////////////////////////////////////
     /// \brief _utils
     ////////////////////////////////////////////////////////////////////////
-    Stats* _ownedStats;
+    Stats _ownedStats;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief _stats

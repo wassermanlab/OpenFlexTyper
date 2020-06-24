@@ -97,7 +97,7 @@ QueryClass KmerGenerator::genQueryClassKmers(int queryID, std::string querystrin
 }
 
 //======================================================================
-std::set<QueryClass> KmerGenerator::genSearchKmers(std::set<Query> inputQueries, ft::FTMap ftMap)
+std::set<QueryClass> KmerGenerator::genSearchKmers(std::set<Query>& inputQueries, ft::FTMap& ftMap)
 {
     uint kmerSize = ftMap.getKmerSize();
     bool refOnly = ftMap.getRefOnlyFlag();

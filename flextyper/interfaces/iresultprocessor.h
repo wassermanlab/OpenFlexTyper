@@ -41,7 +41,7 @@ public:
     /// \param readLen
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual void processResults(ft::FTMap ftMap, uint readLen, uint readlines, const fs::path& matchingReads = "") = 0;
+    virtual void processResults(ft::FTMap& ftMap, uint readLen, uint readlines, const fs::path& matchingReads = "") = 0;
 };
 }
 

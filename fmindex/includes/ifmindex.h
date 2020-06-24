@@ -43,9 +43,9 @@ public:
     /// \param queryString
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual std::map<std::string, std::set<size_t> > searchmany(const std::vector<std::string>& queryString,
-                                                                const std::string& = "indexFile",
-                                                                const std::string& = "/tmp/") = 0;
+    //virtual std::map<std::string, std::set<size_t>> searchmany(std::set<ft::KmerClass>& kmerSet,
+                                                                //const std::string& = "indexFile",
+                                                                //const std::string& = "/tmp/") = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief parallelFmIndex

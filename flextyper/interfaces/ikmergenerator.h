@@ -58,7 +58,7 @@ public:
     /// \param stride
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual std::set<QueryClass> genSearchKmers(std::set<Query> inputQueries,  ft::FTMap ftMap) = 0;
+    virtual std::set<QueryClass> genSearchKmers(std::set<Query>& inputQueries, ft::FTMap& ftMap) = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief KmerGenerator::addtoKmerMap
@@ -79,7 +79,7 @@ public:
     /// \param crossover
     /// \param ignoreNonUniqueKmers
     ////////////////////////////////////////////////////////////////////////
-    virtual void genKmerMap(std::set<Query>& inputQueries,  ft::FTMap ftMap) = 0;
+    virtual void genKmerMap(std::set<Query>& inputQueries,  ft::FTMap& ftMap) = 0;
 };
 }
 

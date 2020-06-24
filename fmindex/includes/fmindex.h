@@ -62,9 +62,9 @@ public:
     /// \param queryString
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    std::map<ft::KmerClass, std::set<size_t> > searchmany(std::set<ft::KmerClass>& kmerSet,
-                                                        const std::string& = "indexFile",
-                                                        const std::string& = "/tmp/");
+    //std::map<ft::KmerClass, std::set<size_t>> searchmany(std::set<ft::KmerClass>& kmerSet,
+                                                        //const std::string& = "indexFile",
+                                                        //const std::string& = "/tmp/");
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief parallelFmIndex

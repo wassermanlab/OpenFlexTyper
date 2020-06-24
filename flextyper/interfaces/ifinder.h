@@ -33,7 +33,7 @@ public:
     /// \param parallel
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
-    virtual void searchMonoIndex(ft::FTMap ftMap, const fs::path& indexPath,
+    virtual void searchMonoIndex(ft::FTMap& ftMap, const fs::path& indexPath,
                                  const std::string& indexFileLocation, bool parallel, uint threadNumber,
                                  bool printSearchTime, long long offset) = 0;
 
@@ -47,7 +47,7 @@ public:
     /// \param parallel
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
-    virtual void searchMultipleIndexes(ft::FTMap ftMap, const std::set<fs::path>& indexPaths,
+    virtual void searchMultipleIndexes(ft::FTMap& ftMap, const std::set<fs::path>& indexPaths,
                                        const std::string& indexFileLocation, bool parallel, uint threadNumber,
                                        bool printSearchTime, long long offset) = 0;
 };

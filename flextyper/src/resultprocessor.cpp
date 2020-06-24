@@ -39,7 +39,7 @@ ResultProcessor::ResultProcessor()
 //}
 
 //======================================================================
-void ResultProcessor::processResults(ft::FTMap ftMap, uint readLen, uint readlines, const fs::path& matchingReads)
+void ResultProcessor::processResults(ft::FTMap& ftMap, uint readLen, uint readlines, const fs::path& matchingReads)
 {
 
     ftMap.setReadLength(readLen);

@@ -41,9 +41,50 @@ public:
 #define TEST_DESCRIPTION(desc) RecordProperty("description", desc)
 
 //======================================================================
+TEST_F(TestUtils, joinStringWithDelimiter)
+{
+    TEST_DESCRIPTION("Tests whether a string is join correctly ");
+    std::set<std::string> inputSetOfStr= {"A", "B", "C"};
+    std::string inputDelimeter = "+";
+    std::string expectedOutput ("A+B+C");
+    string output = _utils.joinString(inputSetOfStr, inputDelimeter);
+    EXPECT_EQ(output, expectedOutput);
+}
+//======================================================================
+TEST_F(TestUtils, joinStringNoDelimiter)
+{
+    TEST_DESCRIPTION("Tests whether a string is join correctly ");
+    std::set<std::string> inputSetOfStr= {"A", "B", "C"};
+    std::string expectedOutput ("A, B, C");
+    string output = _utils.joinString(inputSetOfStr);
+    EXPECT_EQ(output, expectedOutput);
+}
+
+//======================================================================
 TEST_F(TestUtils, split)
 {
-    TEST_DESCRIPTION("This test tests the capacity to split the given string,"
+    TEST_DESCRIPTION("Tests whether a string is split correctly");
+    char delimiter = '+';
+    string input ("A+B+C");
+    std::vector<std::string> expectedOutput ={"A", "B", "C"};
+    std::vector<std::string> output = _utils.split(input, delimiter);
+    EXPECT_EQ(output, expectedOutput);
+}
+//======================================================================
+TEST_F(TestUtils, splitWrongDelimiter)
+{
+    TEST_DESCRIPTION("Tests whether a string is split correctly");
+    char delimiter = ',';
+    string input ("A+B+C");
+    std::vector<std::string> expectedOutput ={};
+    std::vector<std::string> output = _utils.split(input, delimiter);
+    EXPECT_EQ(output, expectedOutput);
+}
+
+//======================================================================
+TEST_F(TestUtils, reverseCompliment)
+{
+    TEST_DESCRIPTION("Tests the capacity to find the reverse compliment"
                      "The result was checked with : "
                      "https://www.bioinformatics.org/sms/rev_comp.html");
 
@@ -55,9 +96,9 @@ TEST_F(TestUtils, split)
 }
 
 //======================================================================
-TEST_F(TestUtils, splitWithWeirdNucleotide)
+TEST_F(TestUtils, reverseComplimentWithBadNucleotide)
 {
-    TEST_DESCRIPTION("This test tests the capacity to split the given string,"
+    TEST_DESCRIPTION("Tests the capacity to find the reverse compliment"
                      "The result was checked with : "
                      "https://www.bioinformatics.org/sms/rev_comp.html");
 
@@ -71,7 +112,7 @@ TEST_F(TestUtils, splitWithWeirdNucleotide)
 //======================================================================
 TEST_F(TestUtils, getSetOfIndexes)
 {
-    TEST_DESCRIPTION("This test tests the capacity to get the set of indexes");
+    TEST_DESCRIPTION("Tests the capacity to get the set of indexes");
 
     fs::path input ("indices.txt");
     set<fs::path> expectedPaths { "test_index_1.fm9",
@@ -99,7 +140,7 @@ TEST_F(TestUtils, convertIndexPositionsToReadIDs)
 //======================================================================
 TEST_F(TestUtils, convertIndexPositionsToReadIDsWithRepeatedPositions)
 {
-    TEST_DESCRIPTION("This test tests the capacity to convert Index position to readID");
+    TEST_DESCRIPTION("Tests the capacity to convert Index position to readID");
 
     set<long long> input {1, 2, 878, 55465, 5456, 56654, 56654, 56654};
     uint readLen = 100;
@@ -113,7 +154,7 @@ TEST_F(TestUtils, convertIndexPositionsToReadIDsWithRepeatedPositions)
 //======================================================================
 TEST_F(TestUtils, fileIndexToQueryIndex)
 {
-    TEST_DESCRIPTION("This test test that the method findIndexToQueryIndex translates the index");
+    TEST_DESCRIPTION("Tests that the method findIndexToQueryIndex translates the index");
 
     vector<int> input {1, 5, 2, 6, 3, 1, 4, 2, 1};
     vector<int> expectedOutputVector {2, 6, 3, 7, 4, 2, 5, 3, 2};
@@ -129,7 +170,7 @@ TEST_F(TestUtils, fileIndexToQueryIndex)
 //======================================================================
 TEST_F(TestUtils, fileIndexToQueryIndexWithWeirdCases)
 {
-    TEST_DESCRIPTION("This test test that in case of weird cases, the program exits correctly");
+    TEST_DESCRIPTION("Tests that in case of bad inputs, the program exits correctly");
 
     int input = -15;
 
@@ -139,7 +180,7 @@ TEST_F(TestUtils, fileIndexToQueryIndexWithWeirdCases)
 //======================================================================
 TEST_F(TestUtils, fileIndexToQueryIndexWithAnotherWeirdCases)
 {
-    TEST_DESCRIPTION("This test test that in case of weird cases, the program exits correctly");
+    TEST_DESCRIPTION("Tests that in case of bad inputs, the program exits correctly");
 
     int input = -1;
 
@@ -149,7 +190,7 @@ TEST_F(TestUtils, fileIndexToQueryIndexWithAnotherWeirdCases)
 //======================================================================
 TEST_F(TestUtils, trimmedReadFileName)
 {
-    TEST_DESCRIPTION("This test trimmes the read filename");
+    TEST_DESCRIPTION("This test trims the read filename");
 
     fs::path input ("Indexes_ERR123456.fasta");
     string expectedOutput("ERR123456.fasta");
@@ -161,7 +202,7 @@ TEST_F(TestUtils, trimmedReadFileName)
 //======================================================================
 TEST_F(TestUtils, trimmedReadFileNameWithoutNeedToRoRemovePattern)
 {
-    TEST_DESCRIPTION("This test makes sure the readname is not changes if there is no need to trim");
+    TEST_DESCRIPTION("This test makes sure the read filename is not changes if there is no need to trim");
 
     fs::path input ("ERR123456.fasta");
     string expectedOutput("ERR123456.fasta");

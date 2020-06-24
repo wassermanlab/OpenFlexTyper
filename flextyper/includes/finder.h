@@ -53,7 +53,7 @@ public:
     /// \param parallel
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
-    void searchMonoIndex(ft::FTMap ftMap, const fs::path& indexPath,
+    void searchMonoIndex(ft::FTMap& ftMap, const fs::path& indexPath,
                          const std::string& indexFileLocation, bool parallel, uint threadNumber,
                          bool printSearchTime, long long offset);
 
@@ -67,12 +67,12 @@ public:
     /// \param parallel
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
-    void searchMultipleIndexes(ft::FTMap ftMap, const std::set<fs::path>& indexPaths,
+    void searchMultipleIndexes(ft::FTMap& ftMap, const std::set<fs::path>& indexPaths,
                                const std::string& indexFileLocation, bool parallel, uint threadNumber,
                                bool printSearchTime, long long offset);
 
 
-    void addResultsFutures( std::set<ft::KmerClass> indexResults, ft::KmerClass tmpResult, uint offset);
+    void addResultsFutures( std::set<ft::KmerClass>& indexResults, ft::KmerClass& tmpResult, uint offset);
 
 
     ////////////////////////////////////////////////////////////////////////
@@ -93,7 +93,7 @@ public:
     /// \param maxOcc
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
-    void parallelSearch(FTMap ftMap, const fs::path& indexFileLocation,
+    void parallelSearch(FTMap& ftMap, const fs::path& indexFileLocation,
                         fs::path indexPath, uint threadNumber, bool printSearchTime, long long offset);
 
     ////////////////////////////////////////////////////////////////////////
@@ -105,7 +105,7 @@ public:
     /// \param indexPath
     /// \param maxOcc
     ////////////////////////////////////////////////////////////////////////
-    void sequentialSearch(ft::FTMap ftMap,
+    void sequentialSearch(ft::FTMap& ftMap,
                           const fs::path& indexFileLocation,
                           fs::path indexPath, bool printSearchTime, long long offset);
 
@@ -119,7 +119,7 @@ public:
     /// \param maxOcc
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
-    void multipleIndexesParallelSearch(ft::FTMap ftMap, const fs::path& indexFileLocation,
+    void multipleIndexesParallelSearch(ft::FTMap& ftMap, const fs::path& indexFileLocation,
                                        const std::set<fs::path>& indexPath, uint threadNumber, bool printSearchTime, long long offset);
 
     ////////////////////////////////////////////////////////////////////////
@@ -131,7 +131,7 @@ public:
     /// \param indexPath
     /// \param maxOcc
     ////////////////////////////////////////////////////////////////////////
-    void multipleIndexesSequentialSearch(ft::FTMap ftMap, const fs::path& indexFileLocation,
+    void multipleIndexesSequentialSearch(ft::FTMap& ftMap, const fs::path& indexFileLocation,
                                          std::set<fs::path> indexPath, bool printSearchTime, long long offset);
 
 private:

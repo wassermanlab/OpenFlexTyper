@@ -9,7 +9,7 @@ Finder::Finder()
 }
 
 //======================================================================
-void Finder::searchMonoIndex(FTMap ftMap, const fs::path& indexPath,
+void Finder::searchMonoIndex(FTMap& ftMap, const fs::path& indexPath,
                              const std::string& indexFileLocation, bool parallel, uint threadNumber,
                              bool printSearchTime, long long offset)
 {
@@ -21,7 +21,7 @@ void Finder::searchMonoIndex(FTMap ftMap, const fs::path& indexPath,
 }
 
 //======================================================================
-void Finder::searchMultipleIndexes(FTMap ftMap, const std::set<fs::path>& indexPaths,
+void Finder::searchMultipleIndexes(FTMap& ftMap, const std::set<fs::path>& indexPaths,
                                    const std::string& indexFileLocation, bool parallel, uint threadNumber,
                                    bool printSearchTime, long long offset)
 {
@@ -34,7 +34,7 @@ void Finder::searchMultipleIndexes(FTMap ftMap, const std::set<fs::path>& indexP
 
 //======================================================================
 
-void Finder::addResultsFutures(std::set<ft::KmerClass> indexResults, ft::KmerClass tmpResult, uint offset)
+void Finder::addResultsFutures(std::set<ft::KmerClass>& indexResults, ft::KmerClass& tmpResult, uint offset)
 {
     for (auto it = indexResults.begin(); it != indexResults.end();)
     {
@@ -52,7 +52,7 @@ void Finder::addResultsFutures(std::set<ft::KmerClass> indexResults, ft::KmerCla
 }
 
 //======================================================================
-void Finder::parallelSearch(FTMap ftMap, const fs::path& indexFileLocation,
+void Finder::parallelSearch(FTMap& ftMap, const fs::path& indexFileLocation,
                             fs::path indexPath, uint threadNumber,
                             bool printSearchTime, long long offset)
 {
@@ -139,7 +139,7 @@ void Finder::parallelSearch(FTMap ftMap, const fs::path& indexFileLocation,
 }
 
 //======================================================================
-void Finder::multipleIndexesParallelSearch(FTMap ftMap, const fs::path& indexFileLocation,
+void Finder::multipleIndexesParallelSearch(FTMap& ftMap, const fs::path& indexFileLocation,
                                            const std::set<fs::path>& indexPath, uint threadNumber,
                                            bool printSearchTime, long long offset)
 {
@@ -168,7 +168,7 @@ void Finder::multipleIndexesParallelSearch(FTMap ftMap, const fs::path& indexFil
 
 
 //======================================================================
-void Finder::sequentialSearch(ft::FTMap ftMap,
+void Finder::sequentialSearch(ft::FTMap& ftMap,
                               const fs::path& indexFileLocation,
                               fs::path indexPath, bool printSearchTime, long long offset)
 {
@@ -211,7 +211,7 @@ void Finder::sequentialSearch(ft::FTMap ftMap,
 }
 
 //======================================================================
-void Finder::multipleIndexesSequentialSearch(FTMap ftMap, const fs::path& indexFileLocation,
+void Finder::multipleIndexesSequentialSearch(FTMap& ftMap, const fs::path& indexFileLocation,
                                              std::set<fs::path> indexPaths, bool printSearchTime, long long offset)
 {
     std::cout << "Multi Indexes Sequential Search" << std::endl;

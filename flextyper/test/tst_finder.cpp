@@ -50,14 +50,23 @@ TEST_F(TestFinder, searchSequentially)
     Finder _finder;
     _finder.overrideFmIndex(fmIndex);
 
-    ResultsMap indexPosResults;
-    KmerMap kmerMap {{"ATATTATATAT", {{{1, QueryType::REF}}, {}}}};
+    ft::FTMap ftMap;
+    ftMap.setMaxOcc(200);
+    ftMap.setOverCountedFlag(false);
+    ft::KmerClass kmer("ATATTATATAT");
+    kmer.addQuery(std::make_pair(1, ft::QueryType::REF));
+    ftMap.addKmer(kmer);
     fs::path indexPath ("./test.fm9");
     std::string indexFileLocation ("test.fm9");
     uint maxOccurrences = 200;
     bool flagOverCountedKmers = false;
     bool printSearchTime = false;
 
-    EXPECT_NO_THROW(_finder.sequentialSearch(indexPosResults, indexFileLocation, kmerMap, indexPath, maxOccurrences, flagOverCountedKmers, printSearchTime, 0));
+//    void Finder::sequentialSearch(ft::FTMap& ftMap,
+//                                  const fs::path& indexFileLocation,
+//                                  fs::path indexPath, bool printSearchTime, long long offset)
+
+
+    EXPECT_NO_THROW(_finder.sequentialSearch(ftMap, indexFileLocation, indexPath, printSearchTime, 0));
 }
 }

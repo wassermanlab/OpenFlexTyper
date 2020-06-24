@@ -71,7 +71,7 @@ public:
     /// \param stride
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual std::set<QueryClass> genSearchKmers(std::set<Query> inputQueries, ft::FTMap ftMap);
+    virtual std::set<QueryClass> genSearchKmers(std::set<Query>& inputQueries, ft::FTMap& ftMap);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief KmerGenerator::addtoKmerMap

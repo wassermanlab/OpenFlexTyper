@@ -83,30 +83,32 @@ void FTMap::setMatchesOnlyFlag(bool matchesOnly){if (matchesOnly != this->getMat
 bool FTMap::checkKmer(ft::KmerClass testKmerObject)
 {
     std::set<ft::KmerClass> kmerMap = this->getKmerMap();
-
+    bool result;
     auto it = std::find_if(std::begin(kmerMap), std::end(kmerMap),
         [&] (ft::KmerClass k) {return k.isKmerEqual(testKmerObject);});
     if (it != kmerMap.end())
     {
-        return true;
+        result = true;
     } else {
-        return false;
+        result = false;
     }
+    return result;
 }
 
 //======================================================
 bool FTMap::checkQIDT(ft::QIdT testQIDTObject)
 {
     std::set<ft::QueryClass> queryMap = this->getQueryMap();
-
+    bool result;
     auto it = std::find_if(std::begin(queryMap), std::end(queryMap),
         [&] (ft::QueryClass k) {return k.isQIdTEqual(testQIDTObject);});
     if (it != queryMap.end())
     {
-        return true;
+        result = true;
     } else {
-        return false;
+        result = false;
     }
+    return result;
 }
 
 //======================================================
@@ -131,7 +133,7 @@ ft::QueryClass FTMap::getQuery(ft::QIdT qIDT)
 //======================================================
 void FTMap::addKmer(ft::KmerClass kmer)
 {
-    if (!checkKmer(kmer)){
+    if (checkKmer(kmer)){
         this->_kmerMap.insert(kmer);
     } else {
         std::cout << "Kmer not added, kmer already exists" << std::endl;
@@ -142,7 +144,7 @@ void FTMap::addKmer(ft::KmerClass kmer)
 void FTMap::addQuery(ft::QueryClass query)
 {
     ft::QIdT testQIDT = query.getQIdT();
-    if (!checkQIDT(testQIDT)){
+    if (checkQIDT(testQIDT)==false){
         this->_queryMap.insert(query);
     } else {
         std::cout << "Query not added, query already exists" << std::endl;
@@ -154,7 +156,7 @@ void FTMap::addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryIDTyp
 {
     ft::KmerClass _kmer(kmer);
     ft::QIdT qIDT = std::make_pair(queryID, queryIDType);
-    if (checkKmer(_kmer)){
+    if (checkKmer(_kmer)==true){
         ft::KmerClass k = findKmer(kmer);
         k.addQuery(qIDT);
     } else {
