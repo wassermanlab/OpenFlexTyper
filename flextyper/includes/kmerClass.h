@@ -59,7 +59,12 @@ public:
     std::set<size_t> _positions;
     std::set<uint> _readIDs;
 
+    bool operator< (const ft::KmerClass &k);
+
 private:
+
+
+
 };
 }
 

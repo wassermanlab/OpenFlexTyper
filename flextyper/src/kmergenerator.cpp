@@ -107,14 +107,14 @@ std::set<QueryClass> KmerGenerator::genSearchKmers(std::set<Query>& inputQueries
     bool kmerCounts = ftMap.getKmerCountsFlag();
     uint maxKmers = ftMap.getMaxKmers();
 
-    std::set<QueryClass> results;
+    std::set<ft::QueryClass> results;
 
     for (auto inputQuery : inputQueries) {
         std::string refString = std::get<1>(inputQuery);
         int qID = std::get<0>(inputQuery);
 
         //Create Ref Query
-        QueryClass tmpRefQuery = genQueryClassKmers(qID, refString, ft::QueryType::REF, searchType, kmerSize, overlap,
+        ft::QueryClass tmpRefQuery = genQueryClassKmers(qID, refString, ft::QueryType::REF, searchType, kmerSize, overlap,
                                                      stride, kmerCounts, maxKmers);
         results.insert(tmpRefQuery);
 

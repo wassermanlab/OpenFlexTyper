@@ -68,12 +68,18 @@ void QueryClass::addFlag(ft::FlagType flagType, std::set<std::string> kmers){
     }
 }
 
+//======================================================
 bool QueryClass::isQIdTEqual(ft::QIdT test){
     return this->getQIdT() == test;
 }
 
+//======================================================
 std::set<std::string> QueryClass::getFlagKmers(ft::FlagType flag){
     return this->getQFlags()[flag];
 }
+
+//======================================================
+bool QueryClass::operator< (const ft::QueryClass &q){return this->getQIdT() < std::make_pair(q._qID, q._qType); }
+
 
 }

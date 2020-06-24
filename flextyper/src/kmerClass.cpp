@@ -72,6 +72,9 @@ void KmerClass::convertPosToReadID(uint readLength)
         auto r = (size_t) std::ceil(pos / (readLength + 1));
     }
 }
+
+
+bool KmerClass::operator< (const ft::KmerClass &k){return this->getKmer() < k._kmer;}
 //======================================================
 KmerClass::~KmerClass()
 {
