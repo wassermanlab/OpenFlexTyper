@@ -13,7 +13,7 @@ QueryClass::QueryClass(int queryID, ft::QueryType queryType)
 {
 }
 //======================================================
-int QueryClass::getqID(){ return _qID;}
+int QueryClass::getqID(){return _qID;}
 QueryType QueryClass::getqType(){return _qType;}
 std::string QueryClass::getQueryString(){return _string;}
 std::set<std::string> QueryClass::getKmers(){return _kmers;}
@@ -68,12 +68,19 @@ void QueryClass::addFlag(ft::FlagType flagType, std::set<std::string> kmers){
     }
 }
 
+//======================================================
 bool QueryClass::isQIdTEqual(ft::QIdT test){
     return this->getQIdT() == test;
 }
 
+//======================================================
 std::set<std::string> QueryClass::getFlagKmers(ft::FlagType flag){
     return this->getQFlags()[flag];
 }
+
+//======================================================
+bool QueryClass::operator< (const ft::QueryClass &q) const {
+    return std::make_pair(_qID, _qType) < std::make_pair(q._qID, q._qType); }
+
 
 }

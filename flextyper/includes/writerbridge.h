@@ -28,7 +28,7 @@ public:
     /// \param allCounts
     /// \param returnMatchesOnly
     ////////////////////////////////////////////////////////////////////////
-    void saveQueryOutput(ft::FTMap ftMap, const fs::path& pathToQueryFile, const fs::path& queryOutputFile);
+    void saveQueryOutput(ft::FTMap& ftMap, const fs::path& pathToQueryFile, const fs::path& queryOutputFile);
 
     ////////////////////////////////////////////////////////////////////////
     /// `brief destructor

@@ -26,7 +26,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
-    std::string getKmer();
+    std::string getKmer() const;
     std::set<ft::QIdT> getQueryIDs();
     std::set<ft::FlagType> getKFlags();
     std::set<size_t> getKPositions();
@@ -45,8 +45,8 @@ public:
     void addKPosition(size_t kPosition, uint offset = 0);
     void addReadID(uint readID);
 
-    bool isKmerEqual(KmerClass test);
-    bool hasKmer(std::string test);
+    bool isKmerEqual(KmerClass test) const;
+    bool hasKmer(std::string test) const;
     uint getKmerMapSize();
     void convertPosToReadID(uint readlength);
 
@@ -59,7 +59,12 @@ public:
     std::set<size_t> _positions;
     std::set<uint> _readIDs;
 
+    bool operator< (const ft::KmerClass &k) const;
+
 private:
+
+
+
 };
 }
 

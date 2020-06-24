@@ -9,8 +9,6 @@
 
 namespace ft {
 
-
-
 class QueryClass
 {
 public:
@@ -68,6 +66,8 @@ public:
     std::set<int> _readIDs;
     int _count;
     std::map<ft::FlagType, std::set<std::string>> _qFlags;
+
+    bool operator< (const ft::QueryClass &q) const;
 
 private:
 };

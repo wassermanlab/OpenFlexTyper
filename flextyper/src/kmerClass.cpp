@@ -17,7 +17,7 @@ KmerClass::KmerClass(std::string kmer)
 }
 
 //======================================================
-std::string KmerClass::getKmer(){return this->_kmer;}
+std::string KmerClass::getKmer() const{return this->_kmer;}
 std::set<ft::QIdT> KmerClass::getQueryIDs(){return this->_queryIDs;}
 std::set<ft::FlagType> KmerClass::getKFlags(){return this->_kFlags;}
 std::set<size_t> KmerClass::getKPositions(){return this->_positions;}
@@ -55,13 +55,13 @@ void KmerClass::addKPosition(size_t kPosition, uint offset)
 uint KmerClass::getKmerMapSize(){return this->_kmer.size();}
 
 //======================================================
-bool KmerClass::isKmerEqual(KmerClass test) {
-    return this->getKmer() == test.getKmer();
+bool KmerClass::isKmerEqual(KmerClass test) const {
+    return _kmer == test.getKmer();
 }
 
 //======================================================
-bool KmerClass::hasKmer(std::string test) {
-    return this->getKmer() == test;
+bool KmerClass::hasKmer(std::string test) const {
+    return this->_kmer == test;
 }
 
 //======================================================
@@ -72,6 +72,8 @@ void KmerClass::convertPosToReadID(uint readLength)
         auto r = (size_t) std::ceil(pos / (readLength + 1));
     }
 }
+
+bool KmerClass::operator< (const ft::KmerClass &k) const {return _kmer < k._kmer;}
 //======================================================
 KmerClass::~KmerClass()
 {

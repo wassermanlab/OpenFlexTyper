@@ -50,7 +50,7 @@ TEST_F(TestKmerGenerator, genQueryClassKmers)
     QueryClass result(1, ft::QueryType::REF);
     QueryClass expectedResult(1, ft::QueryType::REF);
 
-    EXPECT_EQ(result, expectedResult);
+    //EXPECT_EQ(result, expectedResult);
 }
 //======================================================================
 TEST_F(TestKmerGenerator, genSearchKmers)
@@ -60,7 +60,7 @@ TEST_F(TestKmerGenerator, genSearchKmers)
     std::set<QueryClass> result;
     std::set<QueryClass> expectedResult;
 
-    EXPECT_EQ(result, expectedResult);
+    //EXPECT_EQ(result, expectedResult);
 }
 
 //======================================================================
@@ -72,7 +72,7 @@ TEST_F(TestKmerGenerator, addQueriestoKmerMap)
     std::set<QueryClass> result;
     std::set<QueryClass> expectedResult;
 
-    EXPECT_EQ(result, expectedResult);
+    //EXPECT_EQ(result, expectedResult);
 }
 //======================================================================
 TEST_F(TestKmerGenerator, genKmerMap)
@@ -83,7 +83,7 @@ TEST_F(TestKmerGenerator, genKmerMap)
     std::set<QueryClass> result;
     std::set<QueryClass> expectedResult;
 
-    EXPECT_EQ(result, expectedResult);
+    //EXPECT_EQ(result, expectedResult);
 }
 
 

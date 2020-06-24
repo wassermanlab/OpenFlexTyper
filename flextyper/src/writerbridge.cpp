@@ -11,7 +11,7 @@ WriterBridge::WriterBridge()
 }
 
 //======================================================================
-void WriterBridge::saveQueryOutput(ft::FTMap ftMap,
+void WriterBridge::saveQueryOutput(ft::FTMap& ftMap,
                                    const fs::path& inputQueryFile,
                                    const fs::path& outputQueryFile)
 {
@@ -68,6 +68,7 @@ void WriterBridge::saveQueryOutput(ft::FTMap ftMap,
         std::vector<std::string> splitline = _utils->split(line, '\t');
         uint fileIndex = atoi(splitline[0].c_str());
         int queryIndex = _utils->fileIndexToQueryIndex(fileIndex);
+
 
         u_int ref_count =0;
         std::string ref_NUK;
