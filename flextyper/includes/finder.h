@@ -71,7 +71,10 @@ public:
                                const std::string& indexFileLocation, bool parallel, uint threadNumber,
                                bool printSearchTime, long long offset);
 
-
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief Finder::addResultsFutures
+    /// \param fmIndex
+    ////////////////////////////////////////////////////////////////////////
     void addResultsFutures( std::set<ft::KmerClass>& indexResults, ft::KmerClass& tmpResult, uint offset);
 
 

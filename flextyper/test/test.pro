@@ -29,6 +29,7 @@ INCLUDEPATH += ../includes                  \
 
 # Input
 SOURCES += tst_queryextractor.cpp           \
+    tst_FTMapClass.cpp \
            tst_resultsflags.cpp             \
            tst_writerbridge.cpp             \
            tst_resultprocessor.cpp          \

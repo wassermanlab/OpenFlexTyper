@@ -37,21 +37,11 @@ public:
     WriterBridge _writerBridge;
 };
 
-#define TEST_DESCRIPTION(desc) RecordProperty("description", desc)
+#define TEST_DESCRIPTION(desc) RecordPro perty("description", desc)
 
 //======================================================================
 TEST_F(TestWriterBridge, saveQueryOutput)
 {
-    MapOfCounts allCounts {};
-    QueryKmers nonUniqueKmers;
-    bool returnMatchesOnly = false;
-    bool includeOverCountedKmers = false;
-    bool ignoreNonUniqueKmers = false;
-    bool crossover = false;
-    const fs::path inputQueryFile ("temp.tsv");
-    const fs::path outputQueryFile("output_result.tsv");
-
-    _writerBridge.saveQueryOutput(allCounts, nonUniqueKmers, returnMatchesOnly, includeOverCountedKmers, ignoreNonUniqueKmers, crossover, inputQueryFile, outputQueryFile);
 
     EXPECT_NO_FATAL_FAILURE();
     EXPECT_NO_THROW();

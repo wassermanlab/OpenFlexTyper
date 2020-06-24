@@ -58,14 +58,7 @@ TEST_F(TestFinder, searchSequentially)
     ftMap.addKmer(kmer);
     fs::path indexPath ("./test.fm9");
     std::string indexFileLocation ("test.fm9");
-    uint maxOccurrences = 200;
-    bool flagOverCountedKmers = false;
     bool printSearchTime = false;
-
-//    void Finder::sequentialSearch(ft::FTMap& ftMap,
-//                                  const fs::path& indexFileLocation,
-//                                  fs::path indexPath, bool printSearchTime, long long offset)
-
 
     EXPECT_NO_THROW(_finder.sequentialSearch(ftMap, indexFileLocation, indexPath, printSearchTime, 0));
 }
