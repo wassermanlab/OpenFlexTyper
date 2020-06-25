@@ -58,7 +58,7 @@ public:
     /// \param crossover
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    QueryClass genQueryClassKmers(int queryID, std::string querystring, ft::QueryType queryType, SearchType searchType, uint kmerSize, uint overlap,
+    std::set<std::string> genQueryClassKmers(ft::QueryClass queryObj, SearchType searchType, uint kmerSize, uint overlap,
                                                  uint stride, bool kmerCounts, uint maxKmers);
 
     ////////////////////////////////////////////////////////////////////////
@@ -71,7 +71,7 @@ public:
     /// \param stride
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual std::set<QueryClass> genSearchKmers(std::set<Query>& inputQueries, ft::FTMap& ftMap);
+    virtual std::map<ft::QueryClass, std::set<KmerClass>> genSearchKmers(std::set<Query>& inputQueries, ft::FTMap& ftMap);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief KmerGenerator::addtoKmerMap

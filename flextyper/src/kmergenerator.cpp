@@ -75,30 +75,25 @@ std::set<std::string> KmerGenerator::genCenteredSearchStrings(const std::string&
 }
 
 //======================================================================
-QueryClass KmerGenerator::genQueryClassKmers(int queryID, std::string querystring, ft::QueryType queryType, SearchType searchType, uint kmerSize, uint overlap,
+std::set<std::string> KmerGenerator::genQueryClassKmers(ft::QueryClass queryObj, SearchType searchType, uint kmerSize, uint overlap,
                                              uint stride, bool kmerCounts, uint maxKmers)
-{
-    ft::QueryClass tmpQuery(queryID, queryType);
-    tmpQuery.setQueryString(querystring);
-
+{    
     // generate search queries
     std::set<std::string> searchStrings;
     if (searchType == CENTERED) {
-        searchStrings = genCenteredSearchStrings(tmpQuery.getQueryString(), kmerSize, overlap, stride, kmerCounts, maxKmers);
+        searchStrings = genCenteredSearchStrings(queryObj.getQueryString(), kmerSize, overlap, stride, kmerCounts, maxKmers);
     } else {
-        searchStrings = genSlidingSearchStrings(tmpQuery.getQueryString(), kmerSize, stride, kmerCounts, maxKmers);
+        searchStrings = genSlidingSearchStrings(queryObj.getQueryString(), kmerSize, stride, kmerCounts, maxKmers);
     }
 
-    if (!searchStrings.empty()) {
-        tmpQuery.setKmers(searchStrings);
-    } else {
+    if (searchStrings.empty()) {
         std::cout << "Error during the ID creation !" << std::endl;
     }
-    return tmpQuery;
+    return searchStrings;
 }
 
 //======================================================================
-std::set<QueryClass> KmerGenerator::genSearchKmers(std::set<Query>& inputQueries, ft::FTMap& ftMap)
+void KmerGenerator::genSearchKmers(std::set<Query>& inputQueries, ft::FTMap& ftMap)
 {
     uint kmerSize = ftMap.getKmerSize();
     bool refOnly = ftMap.getRefOnlyFlag();
@@ -108,37 +103,13 @@ std::set<QueryClass> KmerGenerator::genSearchKmers(std::set<Query>& inputQueries
     bool kmerCounts = ftMap.getKmerCountsFlag();
     uint maxKmers = ftMap.getMaxKmers();
 
-    std::set<ft::QueryClass> results;
+    QKMAP _qkMap = ftMap.getQKMap();
 
-    for (auto inputQuery : inputQueries) {
-        std::string refString = std::get<1>(inputQuery);
-        int qID = std::get<0>(inputQuery);
 
-        //Create Ref Query
-        ft::QueryClass tmpRefQuery = genQueryClassKmers(qID, refString, ft::QueryType::REF, searchType, kmerSize, overlap,
-                                                     stride, kmerCounts, maxKmers);
-        results.insert(tmpRefQuery);
 
-        // Create Alt Query
-        if (!refOnly) {
-            std::string altString = std::get<2>(inputQuery);
-            QueryClass tmpAltQuery = genQueryClassKmers(qID, altString, ft::QueryType::ALT, searchType, kmerSize, overlap,
-                                                         stride, kmerCounts, maxKmers);
-            results.insert(tmpAltQuery);
-        }
 
-        // Create Crossover Query
-        if (ftMap.getCrossoverFlag() && !tmpRefQuery.getQueryString().empty() && !std::get<2>(inputQuery).empty()) {
-            std::string croString = std::get<3>(inputQuery);
-            if (searchType == CENTERED){
-                QueryClass tmpCroQuery = genQueryClassKmers(qID, croString, ft::QueryType::CRO, searchType, kmerSize, overlap,
-                                                         stride, kmerCounts, maxKmers);
-                results.insert(tmpCroQuery);
-            } else {
-                std::cout << "Crossover feature only works with CENTERED search" << std::endl;
-                throw 1;
-            }
-        }
+
+
     }
     return results;
 }
@@ -155,10 +126,14 @@ void KmerGenerator::addQueriestoKmerMap(ft::FTMap& ftMap, const std::set<QueryCl
 }
 
 //======================================================================
-void KmerGenerator::genKmerMap(std::set<Query>& inputQueries, ft::FTMap& ftMap)
+std::set<std::string> KmerGenerator::genKmers(std::set<ft::QueryClass>& inputQueries, ft::FTMap& ftMap)
 {
 
+    ftMap.
+
     std::set<QueryClass> queryMap = genSearchKmers(inputQueries, ftMap);
+
+
     addQueriestoKmerMap(ftMap, queryMap);
     uint maxTotalKmers = ftMap.getMaxTotalKmers();
     std::set<ft::KmerClass> kmerMap = ftMap.getKmerSet();

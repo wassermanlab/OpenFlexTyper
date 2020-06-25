@@ -40,6 +40,60 @@ void FTMap::setProperties(uint kmerSize,
     FTMap::setMatchesOnlyFlag(returnMatchesOnly);
 }
 
+KmerProperties FTMap::getKmerProperties(){
+    KmerProperties kmerProperties;
+    kmerProperties.setKmerSize(this->getKmerSize());
+    kmerProperties.setRefOnly(this->getRefOnlyFlag());
+    kmerProperties.setSearchType(this->getSearchType());
+    kmerProperties.setOverlap(this->getOverlap());
+    kmerProperties.setStride(this->getStride());
+    kmerProperties.setKmerCountsFlag(this->getKmerCountsFlag());
+    kmerProperties.setMaxKmers(this->getMaxKmers());
+    return kmerProperties;
+}
+
+//======================================================
+void FTMap::addInputQueries(std::set<Query> inputQueries){
+    for (auto inputQuery : inputQueries) {
+        std::string refString = std::get<1>(inputQuery);
+        int qID = std::get<0>(inputQuery);
+
+        //Create Ref Query
+        ft::QueryClass tmpRefQuery(qID, ft::QueryType::REF);
+        tmpRefQuery.setQueryString(refString);
+        this->addQuery(tmpRefQuery);
+
+        // Create Alt Query
+        if (!this->getRefOnlyFlag()) {
+            std::string altString = std::get<2>(inputQuery);
+            ft::QueryClass tmpAltQuery(qID, ft::QueryType::ALT);
+            tmpAltQuery.setQueryString(altString);
+            this->addQuery(tmpAltQuery);
+        }
+
+        // Create Crossover Query
+        if (this->getCrossoverFlag() && !tmpRefQuery.getQueryString().empty() && !std::get<2>(inputQuery).empty()) {
+            std::string croString = std::get<3>(inputQuery);
+            ft::QueryClass tmpCroQuery(qID, ft::QueryType::CRO);
+            tmpCroQuery.setQueryString(croString);
+            this->addQuery(tmpCroQuery);
+        }
+    }
+}
+
+//======================================================
+void FTMap::genQKMap(std::set<ft::QueryClass> queries){
+
+    for (ft::QueryClass query : queries){
+        std::set<std::string> kmers = KmerGenerator.genKmers(query, this->getKmerProperties());
+
+
+
+        //std::set<ft::KmerClass> kmerObjs = getKmerObjFromKmerString(kmers);
+        //this->addQKSet(query, kmerObjs);
+    }
+}
+
 //=============== GETTERS ==============================
 std::set<ft::KmerClass> FTMap::getKmerSet(){return this->_kmerSet;}
 std::set<ft::QueryClass> FTMap::getQuerySet(){return this->_querySet;}
@@ -169,6 +223,28 @@ void FTMap::addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryIDTyp
     ft::QIdT qIDT = std::make_pair(queryID, queryIDType);
 
 }
+
+//==================== QKMAP ============================
+std::set<ft::QueryClass> FTMap::retrieveQueries(ft::KmerClass){
+     std::set<ft::QueryClass> _matchingQueries;
+     return _matchingQueries;
+}
+std::set<ft::KmerClass> FTMap::retrieveKmers(ft::QueryClass){
+    std::set<ft::KmerClass> _matchingKmers;
+    return _matchingKmers;
+}
+bool FTMap::checkForMatch(ft::KmerClass, ft::QueryClass){
+    return false;
+}
+
+void FTMap::addQKPair(ft::QueryClass query, ft::KmerClass kmer){
+
+}
+
+void FTMap::addQKSet(ft::QueryClass query, std::set<ft::KmerClass> kmers){
+
+}
+
 
 //======================================================
 void FTMap::addIndexResults(std::set<ft::KmerClass> indexResults)

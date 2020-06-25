@@ -8,14 +8,17 @@
 #include <vector>
 #include "kmerClass.h"
 #include "queryClass.h"
+#include "typedefs.h"
+#include "kmergenerator.h"
 
 
 namespace ft {
 
-typedef std::string     SearchType;             // SearchType declaration
-const   std::string     CENTERED = "CENTERED";  // search type centered approach
-const   std::string     SLIDING  = "SLIDING";   // search type sliding approach
+
+
 typedef std::tuple<uint, std::string, std::string, std::string>  Query;    // query id, ref, alt, crossover
+
+typedef std::map<ft::QueryClass, std::set<KmerClass>> QKMAP;
 
 class FTMap
 {
@@ -68,6 +71,12 @@ public:
                         uint _maxTotalKmers,
                        bool _returnMatchesOnly);
 
+
+    KmerProperties getKmerProperties();
+
+    void addInputQueries(std::set<Query> inputQueries);
+    void genQKMap(std::set<ft::QueryClass> queries);
+
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
@@ -77,7 +86,6 @@ public:
     std::vector<std::set<ft::KmerClass>> getResults();
     SearchType getSearchType();
     uint getKmerSize();
-
     uint getOverlap();
     uint getStride();
     uint getMaxKmers();
@@ -130,6 +138,15 @@ public:
     void addQuery(ft::QueryClass queryObject);
 
     void addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryType);
+
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief Access functions for _qkMap
+    ////////////////////////////////////////////////////////////////////////
+    std::set<ft::QueryClass> retrieveQueries(ft::KmerClass);
+    std::set<ft::KmerClass> retrieveKmers(ft::QueryClass);
+    bool checkForMatch(ft::KmerClass, ft::QueryClass);
+    void addQKPair(ft::QueryClass query, ft::KmerClass kmer);
+    void addQKSet(ft::QueryClass query, std::set<ft::KmerClass> kmers);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Adds results from parallel search
