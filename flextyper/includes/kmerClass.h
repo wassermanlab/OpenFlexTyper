@@ -4,7 +4,7 @@
 #include <set>
 #include <iostream>
 #include <map>
-#include "typedefs.h"
+#include "propertiesClass.h"
 
 namespace ft {
 

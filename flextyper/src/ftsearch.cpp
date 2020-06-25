@@ -15,57 +15,49 @@ FTSearch::FTSearch()
 {
 }
 
+
 //======================================================================
-void FTSearch::init(const fs::path& pathToQueryFile, uint kmerSize, uint readLength,
-                    const fs::path& indexFileLocation, const fs::path& outputFolder,
-                    bool refOnly, SearchType searchType, bool multithread, const fs::path& inputFastQ,
-                    uint overlap, bool returnMatchesOnly, bool kmerCounts,
-                    uint stride, uint maxOccurences, uint threadNumber, bool flagOverCountedKmers, bool ignoreNonUniqueKmers, bool crossover,
-                    bool printSearchTime, uint maxKmers, uint totalKmers, const fs::path& matchingReads)
+void FTSearch::checkInputFastQ(FTProp ftProps){
+
+    // want to remove the "Indexes_" at the beginning
+
+if (ftProps.getInputFastQ().empty()) {
+    ftProps.getInputFastQ().stem() = _utils->trimmedReadFileName(ftProps.getIndexFileLocation());
+}
+}
+
+//======================================================================
+void FTSearch::checkOutputFile(FTProp ftProps){
+
+    fs::path queryOutputFile = ftProps.getOutputFolder();
+    queryOutputFile /= ftProps.getPathToQueryFile().stem() += std::string("_") += ftProps.getInputFastQ().stem() += "_Results.tsv";
+    ftProps.setOutputFile(queryOutputFile);
+}
+
+
+//======================================================================
+void FTSearch::init(FTProp ftProps)
 {
-    ft::FTMap ftMap;
-    ftMap.setProperties(kmerSize,
-                         refOnly,
-                         searchType,
-                         overlap,
-                         stride,
-                         crossover,
-                         ignoreNonUniqueKmers,
-                         kmerCounts,
-                         maxKmers,
-                         totalKmers,
-                         returnMatchesOnly);
-    ftMap.setMaxOcc(maxOccurences);
-    ftMap.setOverCountedFlag(flagOverCountedKmers);
+    ft::FTMap ftMap(ftProps);
+    checkInputFastQ(ftProps);
 
-
-    std::ifstream in(matchingReads, std::ifstream::ate | std::ifstream::binary);
+    std::ifstream in(ftProps.getMatchingReads(), std::ifstream::ate | std::ifstream::binary);
     long long offset = in.tellg();
-    fs::path readFile;
+    uint lines = offset / (ftProps.getReadLength() + 1);
 
-    uint lines = offset / (readLength + 1);
+    checkOutputFile(ftProps);
 
-    if (inputFastQ.empty()) {
-        readFile.stem() = _utils->trimmedReadFileName(indexFileLocation); // want to remove the "Indexes_" at the beginning
-    } else {
-        readFile = inputFastQ;
-    }
-
-    fs::path queryOutputFile;
-
-    queryOutputFile  = outputFolder;
-    queryOutputFile /= pathToQueryFile.stem() += std::string("_") += readFile.stem() += "_Results.tsv";
     std::set<fs::path> setOfIndexes = _utils->getSetOfIndexes();
-    std::set<Query> inputQueries    = _queryExtractor->getInputQueries(refOnly, crossover, pathToQueryFile);
+    ftProps.setSetOfIndexes(setOfIndexes);
+
+    std::set<Query> inputQueries = _queryExtractor->getInputQueries(ftProps.getRefOnlyFlag(), ftProps.getCrossoverFlag(), ftProps.getPathToQueryFile());
+    ftMap.addInputQueries(inputQueries);
+    inputQueries.clear();
+
+    ftMap.getQKMap();
 
     _kmerGenerator->genKmerMap(inputQueries, ftMap);
-    //std::cout << "kmerMap size                  : " << kmerMap.size() << std::endl;
 
-    /*
-    for (auto e : kmerMap) {
-        std::cout << e.first << std::endl;
-    }
-    */
 
     std::cout << "\nsearching..." << std::endl;
     auto indexFile = setOfIndexes.begin()->c_str();

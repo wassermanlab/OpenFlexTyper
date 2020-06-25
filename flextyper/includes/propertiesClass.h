@@ -1,7 +1,7 @@
 #ifndef PROPERTIESCLASS_H
 #define PROPERTIESCLASS_H
 
-
+#include <climits>
 #include <set>
 #include <iostream>
 #include <map>
@@ -30,14 +30,42 @@ enum FlagType {
 class FTProp {
 public:
     ////////////////////////////////////////////////////////////////////////
-    /// \brief QueryClass
+    /// \brief FTProp
     ////////////////////////////////////////////////////////////////////////
     FTProp();
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief ~QueryClass
+    /// \brief ~FTProp
     ////////////////////////////////////////////////////////////////////////
     virtual ~FTProp();
+
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief Init
+    ////////////////////////////////////////////////////////////////////////
+    void init(const fs::path& pathToQueryFile       ,
+              uint kmerSize                         ,
+              uint readLength                       ,
+              const fs::path& indexLocation         ,
+              const fs::path& outputFile            ,
+              bool refOnly                          ,
+              SearchType searchType                 ,
+              bool multithread              = false ,
+              const fs::path& inputFastQ    = ""    ,
+              uint overlap                  = 0     ,
+              bool returnMatchesOnly        = false ,
+              bool kmerCounts               = false ,
+              uint stride                   = 10    ,
+              uint maxOccurences            = 200   ,
+              uint threadNumber             = 1     ,
+              bool flagOverCountedKmers     = false ,
+              bool ignoreNonUniqueKmers     = true  ,
+              bool crossover                = false ,
+              bool printSearchTime          = false,
+              uint maxKmers                 = UINT_MAX,
+              uint totalKmers               = UINT_MAX,
+              const fs::path& matchingReads = "");
+
+
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief properties
@@ -57,7 +85,7 @@ public:
     bool _kmerCounts;
     bool _multithread;
     bool _refOnly;
-    bool _returnMatchesOnly;
+    bool _matchesOnly;
     bool _overcounted;
     bool _ignoreNonUniqueKmers;
     bool _crossover;
@@ -68,6 +96,27 @@ public:
     fs::path _outputFolder;
     fs::path _matchingReads;
     fs::path _inputFastQ;
+    fs::path _outputFile;
+    std::set<fs::path> _indexesSet;
+
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief File getters and setters
+    ////////////////////////////////////////////////////////////////////////
+    void setPathToQueryFile( fs::path pathToQueryFile);
+    void setIndexFileLocation(fs::path indexFileLocation);
+    void setOutputFolder(fs::path outputFolder);
+    void setMatchingReads(fs::path matchingReads);
+    void setInputFastQ(fs::path inputFastQ);
+    void setOutputFile(fs::path outputFile);
+    void setSetOfIndexes(std::set<fs::path>);
+
+    fs::path getPathToQueryFile();
+    fs::path getIndexFileLocation();
+    fs::path getOutputFolder();
+    fs::path getMatchingReads();
+    fs::path getInputFastQ();
+    fs::path getPathToOutputFile();
+    std::set<fs::path> getSetOfIndexes(){return this->_indexesSet;}
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Parameter getters and setters

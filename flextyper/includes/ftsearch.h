@@ -35,43 +35,14 @@ public:
     ////////////////////////////////////////////////////////////////////////
     virtual ~FTSearch();
 
-public:
     ////////////////////////////////////////////////////////////////////////
-    /// \brief search
-    /// \param pathToQueryFile
-    /// \param kmerSize
-    /// \param readLength
-    /// \param listIndexFiles
-    /// \param outputFile
-    /// \param refOnly
-    /// \param searchType
-    /// \param multithread
-    /// \param ignore_multi_hits
-    /// \param extract_matching_reads
+    /// \brief init
     ////////////////////////////////////////////////////////////////////////
-    void init(const fs::path& pathToQueryFile       ,
-              uint kmerSize                         ,
-              uint readLength                       ,
-              const fs::path& indexLocation         ,
-              const fs::path& outputFile            ,
-              bool refOnly                          ,
-              SearchType searchType                 ,
-              bool multithread              = false ,
-              const fs::path& inputFastQ    = ""    ,
-              uint overlap                  = 0     ,
-              bool returnMatchesOnly        = false ,
-              bool kmerCounts               = false ,
-              uint stride                   = 10    ,
-              uint maxOccurences            = 200   ,
-              uint threadNumber             = 1     ,
-              bool flagOverCountedKmers     = false ,
-              bool ignoreNonUniqueKmers     = true  ,
-              bool crossover                = false ,
-              bool printSearchTime          = false,
-              uint maxKmers                 = UINT_MAX,
-              uint totalKmers               = UINT_MAX,
-              const fs::path& matchingReads = "");
+    void init(FTProp ftProp);
 
+public:
+    void checkInputFastQ(FTProp ftProps);
+    void checkOutputFile(FTProp ftProps);
     void overrideUtils(std::shared_ptr<IUtils> utils);
     void overrideStats(std::shared_ptr<IStats> stats);
     void overrideWriterBridge(std::shared_ptr<IWriterBridge> writerBridge);

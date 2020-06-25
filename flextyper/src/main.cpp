@@ -144,6 +144,14 @@ int main(int argc, char** argv)
 		return 1;
 	}
         ft::FTProp props;
+        props.init(pathToQueryFile, kmerSize, readLength,
+                   indexFileLocation, outputFolder, refOnly,
+                   searchType, multithread, inputFastQ, overlap,
+                   returnMatchesOnly, kmerCounts, stride,
+                   maxOccurences, threadNumber, flagOverCountedKmers,
+                   ignoreNonUniqueKmers, crossover, printSearchTime,
+                   maxKmersPerQuery, maxTotalKmers, matchingReads);
+
         ft::FTSearch flexTyperInstance;
         flexTyperInstance.init(props);
 

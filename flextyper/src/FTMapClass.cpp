@@ -6,11 +6,12 @@
 
 namespace ft {
 
-FTMap::FTMap()
+FTMap::FTMap(FTProp ftProps)
     : _kmerSet(),
       _querySet(),
       _qkMap(),
       _searchResults()
+
 {
 }
 
@@ -27,7 +28,7 @@ void FTMap::addInputQueries(std::set<Query> inputQueries){
         this->addQuery(tmpRefQuery);
 
         // Create Alt Query
-        if (!this->getRefOnlyFlag()) {
+        if (!ftProps.getetRefOnlyFlag()) {
             std::string altString = std::get<2>(inputQuery);
             ft::QueryClass tmpAltQuery(qID, ft::QueryType::ALT);
             tmpAltQuery.setQueryString(altString);

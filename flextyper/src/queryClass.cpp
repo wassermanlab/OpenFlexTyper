@@ -3,7 +3,7 @@
 #include <map>
 
 #include "queryClass.h"
-#include "typedefs.h"
+#include "propertiesClass.h"
 
 namespace ft {
 
