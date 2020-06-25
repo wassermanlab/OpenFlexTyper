@@ -5,6 +5,9 @@
 #include <set>
 #include <iostream>
 #include <map>
+#include <experimental/filesystem>
+
+namespace fs = std::experimental::filesystem;
 
 namespace ft {
 
@@ -39,55 +42,79 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief properties
     ////////////////////////////////////////////////////////////////////////
-    uint _kmerSize;
-    bool _refOnly;
     SearchType _searchType;
+
+    uint _kmerSize;
     uint _overlap;
     uint _stride;
-    bool _kmerCounts;
     uint _maxKmers;
+    uint _readLength;
+    uint _maxOccurences ;
+    uint _threadNumber;
+    uint _maxKmersPerQuery;
+    uint _maxTotalKmers;
+
+    bool _kmerCounts;
+    bool _multithread;
+    bool _refOnly;
+    bool _returnMatchesOnly;
+    bool _overcounted;
+    bool _ignoreNonUniqueKmers;
+    bool _crossover;
+    bool _printSearchTime;
+
+    fs::path _pathToQueryFile;
+    fs::path _indexFileLocation;
+    fs::path _outputFolder;
+    fs::path _matchingReads;
+    fs::path _inputFastQ;
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief getters
+    /// \brief Parameter getters and setters
     ////////////////////////////////////////////////////////////////////////
     SearchType getSearchType();
+    void setSearchType(ft::SearchType searchType);
+
     uint getKmerSize();
     uint getOverlap();
     uint getStride();
     uint getMaxKmers();
-    uint getMaxTotalKmers();
-    uint getMaxOcc();
     uint getReadLength();
+    uint getMaxOcc();
+    uint getThreadNumber();
+    uint getMaxKmersPerQuery();
+    uint getMaxTotalKmers();
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief setters
-    ////////////////////////////////////////////////////////////////////////
     void setKmerSize(uint kmerSize);
-    void setSearchType(ft::SearchType searchType);
     void setOverlap(uint overlap);
     void setStride(uint stride);
     void setMaxKmers(uint maxKmers);
-    void setMaxTotalKmers(uint maxTotalKmers);
-    void setMaxOcc(uint maxOcc);
     void setReadLength(uint readlength);
-
+    void setMaxOcc(uint maxOcc);
+    void setThreadNumber(uint threadNumber);
+    void setMaxKmersPerQuery(uint maxKmersPerQ);
+    void setMaxTotalKmers(uint maxTotalKmers);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Flag getters and setters
     ////////////////////////////////////////////////////////////////////////
-    bool getRefOnlyFlag();
-    bool getIgnoreNonUniqueKmersFlag();
     bool getKmerCountsFlag();
-    bool getCrossoverFlag();
-    bool getOverCountedFlag();
+    bool getMultithreadFlag();
+    bool getRefOnlyFlag();
     bool getMatchesOnlyFlag();
+    bool getOverCountedFlag();
+    bool getIgnoreNonUniqueKmersFlag();
+    bool getCrossoverFlag();
+    bool getPrintSearchTimeFlag();
 
-    void setRefOnlyFlag(bool refOnly);
-    void setIgnoreNonUniqueKmersFlag(bool ignoreNonUnique);
     void setKmerCountsFlag(bool kmerCounts);
-    void setCrossoverFlag(bool crossover);
-    void setOverCountedFlag(bool overcounted);
+    void setMultithreadFlag(bool multithread);
+    void setRefOnlyFlag(bool refOnly);
     void setMatchesOnlyFlag(bool matchesOnly);
+    void setOverCountedFlag(bool overcounted);
+    void setIgnoreNonUniqueKmersFlag(bool ignoreNonUnique);
+    void setCrossoverFlag(bool crossover);
+    void setPrintSearchTimeFlag(bool printSearchTime);
 
 
 };

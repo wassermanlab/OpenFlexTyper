@@ -27,18 +27,18 @@ uint FTProp::getMaxOcc(){return this->_maxOcc;}
 uint FTProp::getReadLength(){return this->_readLen;}
 
 //=============== FLAGS ==============================
-bool FTMap::getRefOnlyFlag(){return this->_refOnly;}
-bool FTMap::getIgnoreNonUniqueKmersFlag(){return this->_ignoreNonUniqueKmers;}
-bool FTMap::getKmerCountsFlag(){return this->_kmerCounts;}
-bool FTMap::getCrossoverFlag(){return this->_crossover;}
-bool FTMap::getOverCountedFlag(){return this->_overcounted;}
-bool FTMap::getMatchesOnlyFlag(){return this->_matchesOnly;}
-void FTMap::setRefOnlyFlag(bool refOnly){if (refOnly != this->getRefOnlyFlag()){ _refOnly = refOnly;}}
-void FTMap::setIgnoreNonUniqueKmersFlag(bool ignoreNonUnique){if (ignoreNonUnique != this->getIgnoreNonUniqueKmersFlag()){ _ignoreNonUniqueKmers = ignoreNonUnique;}}
-void FTMap::setKmerCountsFlag(bool kmerCounts){if (kmerCounts != this->getKmerCountsFlag()){ _kmerCounts = kmerCounts;}}
-void FTMap::setCrossoverFlag(bool crossover){if (crossover != this->getCrossoverFlag()){ _crossover = crossover;}}
-void FTMap::setOverCountedFlag(bool overcounted){if (overcounted != this->getOverCountedFlag()){ _overcounted = overcounted;}}
-void FTMap::setMatchesOnlyFlag(bool matchesOnly){if (matchesOnly != this->getMatchesOnlyFlag()){ _matchesOnly = matchesOnly;}}
+bool FTProp::getRefOnlyFlag(){return this->_refOnly;}
+bool FTProp::getIgnoreNonUniqueKmersFlag(){return this->_ignoreNonUniqueKmers;}
+bool FTProp::getKmerCountsFlag(){return this->_kmerCounts;}
+bool FTProp::getCrossoverFlag(){return this->_crossover;}
+bool FTProp::getOverCountedFlag(){return this->_overcounted;}
+bool FTProp::getMatchesOnlyFlag(){return this->_matchesOnly;}
+void FTProp::setRefOnlyFlag(bool refOnly){if (refOnly != this->getRefOnlyFlag()){ _refOnly = refOnly;}}
+void FTProp::setIgnoreNonUniqueKmersFlag(bool ignoreNonUnique){if (ignoreNonUnique != this->getIgnoreNonUniqueKmersFlag()){ _ignoreNonUniqueKmers = ignoreNonUnique;}}
+void FTProp::setKmerCountsFlag(bool kmerCounts){if (kmerCounts != this->getKmerCountsFlag()){ _kmerCounts = kmerCounts;}}
+void FTProp::setCrossoverFlag(bool crossover){if (crossover != this->getCrossoverFlag()){ _crossover = crossover;}}
+void FTProp::setOverCountedFlag(bool overcounted){if (overcounted != this->getOverCountedFlag()){ _overcounted = overcounted;}}
+void FTProp::setMatchesOnlyFlag(bool matchesOnly){if (matchesOnly != this->getMatchesOnlyFlag()){ _matchesOnly = matchesOnly;}}
 
 
 

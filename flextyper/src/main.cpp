@@ -143,13 +143,11 @@ int main(int argc, char** argv)
 		std::cerr << "you need to provide the read file location\n";
 		return 1;
 	}
-        ft::FTProp properties;
+        ft::FTProp props;
         ft::FTSearch flexTyperInstance;
-        flexTyperInstance.init(pathToQueryFile, kmerSize, readLength, indexFileLocation,
-                               outputFolder, refOnly, searchType, multithread, inputFastQ,
-                               overlap, returnMatchesOnly, kmerCounts,
-                               stride, maxOccurences, threadNumber, flagOverCountedKmers, ignoreNonUniqueKmers, crossover,
-                               printSearchTime, maxKmersPerQuery, maxTotalKmers, matchingReads);
+        flexTyperInstance.init(props);
+
+
     } else if (command == "indexing") {
         parser.clearPositionalArguments();
         parser.addHelpOption();
