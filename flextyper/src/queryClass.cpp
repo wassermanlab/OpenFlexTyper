@@ -75,9 +75,51 @@ void QueryClass::addFlag(ft::FlagType flagType, std::set<std::string> kmers){
     }
 }
 
+//===================== REMOVERS ==========================
+void QueryClass::removeKmer(std::string kmer){
+    this->getKmers().erase(kmer);
+}
+void QueryClass::removeReadID(int readID){
+    this->getReadIDs().erase(readID);
+}
+void QueryClass::removeFlag(ft::FlagType flagType){
+    this->getQFlags().erase(flagType);
+}
+void QueryClass::removeKmerFlag(ft::FlagType flagType, std::string kmers){
+    _qFlags[flagType].erase(kmers);
+}
+void QueryClass::removeCount(){
+     this->setCount(0);
+}
+
 //==================== CHECKERS =========================
 bool QueryClass::isQIdTEqual(ft::QIdT test){
     return this->getQIdT() == test;
+}
+bool QueryClass::hasQueryID(int qid) const {
+    return _qID == qid;
+}
+bool QueryClass::hasQueryType(ft::QueryType qType) const{
+    return this->_qType == qType;
+}
+bool QueryClass::hasKmer(std::string kmer) {
+    std::set<std::string> kmers = this->getKmers();
+    const bool is_in = kmers.find(kmer) != kmers.end();
+    return is_in;
+}
+bool QueryClass::hasKmerFlag(ft::FlagType flag, std::string kmer) {
+    std::set<std::string> flagKmers = this->getFlagKmers(flag);
+    const bool is_in = flagKmers.find(kmer) != flagKmers.end();
+    return is_in;
+}
+bool QueryClass::hasReadID(int readID) const{
+    std::set<int> readIDs = this->_readIDs;
+    const bool is_in = readIDs.find(readID) != readIDs.end();
+    return is_in;
+}
+bool QueryClass::hasNonZeroCount() {
+
+    return this->getCount()>0;
 }
 
 //===================== OVERLOAD ========================

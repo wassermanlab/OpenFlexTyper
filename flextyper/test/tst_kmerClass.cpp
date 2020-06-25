@@ -24,7 +24,7 @@ public:
 TEST_F(TestKmerClass, getKmer)
 {
     TEST_DESCRIPTION("get Kmer string");
-    ft::KmerClass testKmerClass("AAAA")
+    ft::KmerClass testKmerClass("AAAA");
 
     EXPECT_EQ(testKmerClass.getKmer(), "AAAA");
 }
@@ -155,7 +155,7 @@ TEST_F(TestKmerClass, ReadID)
     ft::KmerClass testKmerClass("AAAA");
 
 
-    testKmerClass.setReadIDs(){1000, 2340});
+    testKmerClass.setReadIDs({1000, 2340});
     EXPECT_TRUE(testKmerClass.hasReadID(1000));
     EXPECT_FALSE(testKmerClass.hasReadID(666));
 
@@ -205,7 +205,7 @@ TEST_F(TestKmerClass, convertPosToReadIDNoOffset)
     testKmerClass.convertPosToReadID(100);
     std::set<int> expectedReadIDs = {1, 2};
 
-    EXPECT_EQ(expectedReadIDs, testKmerClass.getReadIDs())
+    EXPECT_EQ(expectedReadIDs, testKmerClass.getReadIDs());
 }
 
 //======================================================================
@@ -217,7 +217,7 @@ TEST_F(TestKmerClass, convertPosToReadIDWithOffset)
     testKmerClass.convertPosToReadID(100);
     std::set<int> expectedReadIDs = {1, 2};
 
-    EXPECT_EQ(expectedReadIDs, testKmerClass.getReadIDs())
+    EXPECT_EQ(expectedReadIDs, testKmerClass.getReadIDs());
 }
 
 
@@ -225,9 +225,13 @@ TEST_F(TestKmerClass, convertPosToReadIDWithOffset)
 TEST_F(TestKmerClass, testOverloadOperator)
 {
     TEST_DESCRIPTION("check the overload operator ");
+    ft::KmerClass testKmerClass("AATT");
+    ft::KmerClass higherKmerClass("ATTT");
+    ft::KmerClass equalKmerClass("AATT");
+    ft::KmerClass lowerKmerClass("AAAA");
 
-    ft::KmerClass testKmer("AAAA");
-    EXPECT_EQ(testKmer.getKmer(), "AAAA")
+
+
 }
 
 }

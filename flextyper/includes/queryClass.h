@@ -65,9 +65,24 @@ public:
     void addReadIDs(std::set<int> readIDs);
 
     ////////////////////////////////////////////////////////////////////////
+    /// \brief removers
+    ////////////////////////////////////////////////////////////////////////
+    void removeKmer(std::string kmer);
+    void removeFlag(ft::FlagType flagType);
+    void removeKmerFlag(ft::FlagType flagTyper, std::string kmers);
+    void removeReadID(int readID);
+    void removeCount();
+
+    ////////////////////////////////////////////////////////////////////////
     /// \brief checkers
     ////////////////////////////////////////////////////////////////////////
     bool isQIdTEqual(ft::QIdT test);
+    bool hasQueryID(int qid) const;
+    bool hasQueryType(ft::QueryType qType) const;
+    bool hasKmer(std::string kmer) const;
+    bool hasKmerFlag(ft::FlagType flag, std::string kmer);
+    bool hasReadID(int readID) const;
+    bool hasNonZeroCount();
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief overload
