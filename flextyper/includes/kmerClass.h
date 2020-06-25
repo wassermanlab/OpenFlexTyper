@@ -25,7 +25,6 @@ public:
     /// \brief properties
     ////////////////////////////////////////////////////////////////////////
     std::string _kmer;
-    std::set<ft::QIdT> _queryIDs;
     std::set<ft::FlagType> _kFlags;
     std::set<size_t> _positions;
     std::set<int> _readIDs;
@@ -34,7 +33,6 @@ public:
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
     std::string getKmer() const;
-    std::set<ft::QIdT> getQueryIDs();
     std::set<ft::FlagType> getKFlags();
     std::set<size_t> getKPositions();
     std::set<int> getReadIDs();
@@ -43,7 +41,6 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief setters
     ////////////////////////////////////////////////////////////////////////
-    void setQueryIDs(std::set<ft::QIdT> queries);
     void setKFlags(std::set<ft::FlagType> kFlags);
     void setKPositions(std::set<size_t> kPositions, uint offset = 0);
     void setReadIDs(std::set<int> readIDs);
@@ -51,7 +48,6 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief adders
     ////////////////////////////////////////////////////////////////////////
-    void addQuery(ft::QIdT query);
     void addKFlag(ft::FlagType kFlag);
     void addKPosition(size_t kPosition, uint offset = 0);
     void addReadID(int readID);
@@ -59,7 +55,6 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief removers
     ////////////////////////////////////////////////////////////////////////
-    void removeQuery(ft::QIdT query);
     void removeKFlag(ft::FlagType kFlag);
     void removeKPosition(size_t kPosition, uint offset = 0);
     void removeReadID(int readID);
@@ -69,7 +64,6 @@ public:
     ////////////////////////////////////////////////////////////////////////
     bool isKmerEqual(KmerClass test) const;
     bool hasKmer(std::string test) const;
-    bool hasQuery(ft::QIdT query) const;
     bool hasFlag(ft::FlagType flag) const;
     bool hasKPosition(size_t position) const;
     bool hasReadID(int readID) const;

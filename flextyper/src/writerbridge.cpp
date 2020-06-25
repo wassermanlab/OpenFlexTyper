@@ -80,7 +80,7 @@ void WriterBridge::saveQueryOutput(ft::FTMap& ftMap,
         std::string cro_NUK;
         std::string cro_OCK;
 
-        if (ftMap.checkQIDT(std::make_pair(queryIndex, QueryType::REF))) {
+        if (ftMap.checkForQIDT(std::make_pair(queryIndex, QueryType::REF))) {
             ft::QueryClass refQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::REF));
             u_int ref_count = refQuery.getCount();
             std::string ref_NUK =  _utils->joinString(refQuery.getFlagKmers(FlagType::NUK));
@@ -88,7 +88,7 @@ void WriterBridge::saveQueryOutput(ft::FTMap& ftMap,
             u_int ref_count = 0;
         }
 
-        if (ftMap.checkQIDT(std::make_pair(queryIndex, QueryType::ALT))) {
+        if (ftMap.checkForQIDT(std::make_pair(queryIndex, QueryType::ALT))) {
             ft::QueryClass altQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::ALT));
             u_int alt_count = altQuery.getCount();
             std::string alt_NUK =  _utils->joinString(altQuery.getFlagKmers(FlagType::NUK));
@@ -97,7 +97,7 @@ void WriterBridge::saveQueryOutput(ft::FTMap& ftMap,
             u_int alt_count = 0;
         }
 
-        if (ftMap.checkQIDT(std::make_pair(queryIndex, QueryType::CRO))) {
+        if (ftMap.checkForQIDT(std::make_pair(queryIndex, QueryType::CRO))) {
             ft::QueryClass croQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::CRO));
             u_int cro_count = croQuery.getCount();
             std::string cro_NUK =  _utils->joinString(croQuery.getFlagKmers(FlagType::NUK));

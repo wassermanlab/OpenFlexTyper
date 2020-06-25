@@ -15,8 +15,7 @@ namespace ft {
 typedef std::string     SearchType;             // SearchType declaration
 const   std::string     CENTERED = "CENTERED";  // search type centered approach
 const   std::string     SLIDING  = "SLIDING";   // search type sliding approach
-typedef std::tuple<uint, std::string, std::string, std::string>         Query;    // query id, ref, alt, crossover
-typedef std::map<ft::QueryClass, std::set<KmerClass>> Results;
+typedef std::tuple<uint, std::string, std::string, std::string>  Query;    // query id, ref, alt, crossover
 
 class FTMap
 {
@@ -34,9 +33,10 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief properties
     ////////////////////////////////////////////////////////////////////////
-    std::set<ft::KmerClass> _kmerMap;
-    std::set<ft::QueryClass> _queryMap;
-    std::vector<std::set<ft::KmerClass>> _resultsMap;
+    std::set<ft::KmerClass> _kmerSet;
+    std::set<ft::QueryClass> _querySet;
+    std::map<ft::QueryClass, std::set<KmerClass>> _qkMap;
+    std::vector<std::set<ft::KmerClass>> _searchResults;
 
     uint _kmerSize;
     bool _refOnly;
@@ -71,11 +71,13 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
-    std::set<ft::KmerClass> getKmerMap();
-    std::set<ft::QueryClass> getQueryMap();
-    std::vector<std::set<ft::KmerClass>> getResultsMap();
-    uint getKmerSize();
+    std::set<ft::KmerClass> getKmerSet();
+    std::set<ft::QueryClass> getQuerySet();
+    std::map<ft::QueryClass, std::set<KmerClass>> getQKMap();
+    std::vector<std::set<ft::KmerClass>> getResults();
     SearchType getSearchType();
+    uint getKmerSize();
+
     uint getOverlap();
     uint getStride();
     uint getMaxKmers();
@@ -117,16 +119,17 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief Access functions for single kmer and queries
     ////////////////////////////////////////////////////////////////////////
-    bool checkKmer(ft::KmerClass testKmerObject);
-    bool checkQIDT(ft::QIdT testQueryObject);
+    bool checkForKmer(ft::KmerClass testKmerObject);
+    bool checkForQIDT(ft::QIdT testQueryObject);
 
     ft::KmerClass findKmer(std::string kmer);
+    ft::KmerClass getKmer(ft::KmerClass kmerObject);
     ft::QueryClass getQuery(ft::QIdT qIDT);
 
-    void addKmer(ft::KmerClass kmer);
-    void addQuery(ft::QueryClass query);
+    void addKmer(ft::KmerClass kmerObject);
+    void addQuery(ft::QueryClass queryObject);
 
-    void addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryIDType);
+    void addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryType);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Adds results from parallel search

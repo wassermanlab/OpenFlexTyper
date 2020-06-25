@@ -9,7 +9,6 @@ namespace ft {
 
 KmerClass::KmerClass(std::string kmer)
     : _kmer(kmer),
-    _queryIDs(),
     _kFlags(),
     _positions(),
     _readIDs()
@@ -18,17 +17,12 @@ KmerClass::KmerClass(std::string kmer)
 
 //=================== GETTERS =========================
 std::string KmerClass::getKmer() const{return this->_kmer;}
-std::set<ft::QIdT> KmerClass::getQueryIDs(){return this->_queryIDs;}
 std::set<ft::FlagType> KmerClass::getKFlags(){return this->_kFlags;}
 std::set<size_t> KmerClass::getKPositions(){return this->_positions;}
 uint KmerClass::getKmerMapSize(){return this->_kmer.size();}
 std::set<int> KmerClass::getReadIDs(){return this->_readIDs;}
 
 //================== SETTERS ===========================
-void KmerClass::setQueryIDs(std::set<ft::QIdT> queries)
-{
-    for (auto qIDT : queries){addQuery(qIDT);}
-}
 void KmerClass::setKFlags( std::set<ft::FlagType> flags)
 {
     for (auto kFlag : flags){addKFlag(kFlag);}
@@ -43,7 +37,6 @@ void KmerClass::setReadIDs(std::set<int> readIDs)
 }
 
 //===================== ADDERS ==========================
-void KmerClass::addQuery(ft::QIdT query){this->getQueryIDs().insert(query);}
 void KmerClass::addKFlag(ft::FlagType flag){this->getKFlags().insert(flag);}
 void KmerClass::addKPosition(size_t kPosition, uint offset)
 {
@@ -54,7 +47,6 @@ void KmerClass::addKPosition(size_t kPosition, uint offset)
 void KmerClass::addReadID(int readID){this->getReadIDs().insert(readID);}
 
 //===================== REMOVERS =======================+
-void KmerClass::removeQuery(ft::QIdT query){this->getQueryIDs().erase(query);}
 void KmerClass::removeKFlag(ft::FlagType flag){this->getKFlags().erase(flag);}
 void KmerClass::removeKPosition(size_t kPosition, uint offset)
 {
@@ -70,11 +62,6 @@ bool KmerClass::isKmerEqual(KmerClass test) const {
 }
 bool KmerClass::hasKmer(std::string test) const {
     return this->_kmer == test;
-}
-bool KmerClass::hasQuery(ft::QIdT query) const {
-    std::set<ft::QIdT> queries = this->_queryIDs;
-    const bool is_in = queries.find(query) != queries.end();
-    return is_in;
 }
 bool KmerClass::hasFlag(ft::FlagType flag) const{
     std::set<ft::FlagType> flags = this->_kFlags;

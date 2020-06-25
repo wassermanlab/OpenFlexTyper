@@ -161,7 +161,7 @@ void KmerGenerator::genKmerMap(std::set<Query>& inputQueries, ft::FTMap& ftMap)
     std::set<QueryClass> queryMap = genSearchKmers(inputQueries, ftMap);
     addQueriestoKmerMap(ftMap, queryMap);
     uint maxTotalKmers = ftMap.getMaxTotalKmers();
-    std::set<ft::KmerClass> kmerMap = ftMap.getKmerMap();
+    std::set<ft::KmerClass> kmerMap = ftMap.getKmerSet();
 
     if (maxTotalKmers > 0 && kmerMap.size() > maxTotalKmers) {
         kmerMap.clear();

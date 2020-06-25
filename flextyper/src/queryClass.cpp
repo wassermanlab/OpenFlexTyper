@@ -16,9 +16,7 @@ QueryClass::QueryClass(int queryID, ft::QueryType queryType)
 //=================== GETTERS =============================
 int QueryClass::getqID(){return _qID;}
 QueryType QueryClass::getqType(){return _qType;}
-std::string QueryClass::getQueryString(){return _string;}
-std::set<std::string> QueryClass::getKmers(){return _kmers;}
-std::set<int> QueryClass::getReadIDs(){return _readIDs;}
+std::string QueryClass::getQueryString(){return _qstring;}
 int QueryClass::getCount(){return _count;}
 std::map<ft::FlagType, std::set<std::string>> QueryClass::getQFlags(){return _qFlags;}
 ft::QIdT QueryClass::getQIdT(){return std::make_pair(_qID, _qType);}
@@ -39,17 +37,12 @@ void QueryClass::setqType(QueryType queryType){
 }
 void QueryClass::setQueryString(std::string queryString){
     if (queryString != this->getQueryString()) {
-        _string = queryString;
+        _qstring = queryString;
     }
 }
 void QueryClass::setCount(int count){
     if (count != this->getCount()) {
         _count = count;
-    }
-}
-void QueryClass::setKmers(std::set<std::string> kmers){
-    if (kmers != this->getKmers()) {
-        _kmers = kmers;
     }
 }
 void QueryClass::setFlags(std::map<ft::FlagType, std::set<std::string>> flags){
@@ -59,15 +52,6 @@ void QueryClass::setFlags(std::map<ft::FlagType, std::set<std::string>> flags){
 }
 
 //===================== ADDERS ==========================
-void QueryClass::addKmer(std::string kmer){
-    this->getKmers().insert(kmer);
-}
-void QueryClass::addReadID(int readID){
-    this->getReadIDs().insert(readID);
-}
-void QueryClass::addReadIDs(std::set<int> readIDs){
-    this->getReadIDs().insert(readIDs.begin(), readIDs.end());
-}
 void QueryClass::addFlag(ft::FlagType flagType, std::set<std::string> kmers){
     std::map<ft::FlagType, std::set<std::string>> queryFlags = this->getQFlags();
     for (auto kmer :kmers){
@@ -76,12 +60,6 @@ void QueryClass::addFlag(ft::FlagType flagType, std::set<std::string> kmers){
 }
 
 //===================== REMOVERS ==========================
-void QueryClass::removeKmer(std::string kmer){
-    this->getKmers().erase(kmer);
-}
-void QueryClass::removeReadID(int readID){
-    this->getReadIDs().erase(readID);
-}
 void QueryClass::removeFlag(ft::FlagType flagType){
     this->getQFlags().erase(flagType);
 }
@@ -102,19 +80,9 @@ bool QueryClass::hasQueryID(int qid) const {
 bool QueryClass::hasQueryType(ft::QueryType qType) const{
     return this->_qType == qType;
 }
-bool QueryClass::hasKmer(std::string kmer) {
-    std::set<std::string> kmers = this->getKmers();
-    const bool is_in = kmers.find(kmer) != kmers.end();
-    return is_in;
-}
 bool QueryClass::hasKmerFlag(ft::FlagType flag, std::string kmer) {
     std::set<std::string> flagKmers = this->getFlagKmers(flag);
     const bool is_in = flagKmers.find(kmer) != flagKmers.end();
-    return is_in;
-}
-bool QueryClass::hasReadID(int readID) const{
-    std::set<int> readIDs = this->_readIDs;
-    const bool is_in = readIDs.find(readID) != readIDs.end();
     return is_in;
 }
 bool QueryClass::hasNonZeroCount() {
