@@ -22,6 +22,7 @@ std::set<ft::QIdT> KmerClass::getQueryIDs(){return this->_queryIDs;}
 std::set<ft::FlagType> KmerClass::getKFlags(){return this->_kFlags;}
 std::set<size_t> KmerClass::getKPositions(){return this->_positions;}
 uint KmerClass::getKmerMapSize(){return this->_kmer.size();}
+std::set<int> KmerClass::getReadIDs(){return this->_readIDs;}
 
 //================== SETTERS ===========================
 void KmerClass::setQueryIDs(std::set<ft::QIdT> queries)
@@ -97,6 +98,7 @@ void KmerClass::convertPosToReadID(uint readLength)
     std::set<size_t> positions = this->_positions;
     for (auto pos : positions) {
         auto r = (size_t) std::ceil(pos / (readLength + 1));
+        this->addReadID(r);
     }
 }
 

@@ -5,8 +5,10 @@
 #include <iostream>
 #include <map>
 #include <future>
+#include <vector>
 #include "kmerClass.h"
 #include "queryClass.h"
+
 
 namespace ft {
 
@@ -34,7 +36,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     std::set<ft::KmerClass> _kmerMap;
     std::set<ft::QueryClass> _queryMap;
-    std::set<std::set<ft::KmerClass>> _resultsMap;
+    std::vector<std::set<ft::KmerClass>> _resultsMap;
 
     uint _kmerSize;
     bool _refOnly;
@@ -71,7 +73,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     std::set<ft::KmerClass> getKmerMap();
     std::set<ft::QueryClass> getQueryMap();
-    std::set<std::set<ft::KmerClass>> getResultsMap();
+    std::vector<std::set<ft::KmerClass>> getResultsMap();
     uint getKmerSize();
     SearchType getSearchType();
     uint getOverlap();

@@ -49,7 +49,7 @@ uint FTMap::getMaxKmers(){return this->_maxKmers;}
 uint FTMap::getMaxTotalKmers(){return this->_maxTotalKmers;}
 uint FTMap::getMaxOcc(){return this->_maxOcc;}
 uint FTMap::getReadLength(){return this->_readLen;}
-
+std::vector<std::set<ft::KmerClass>> FTMap::getResultsMap(){return this->_resultsMap;}
 //=============== SETTERS ==============================
 void FTMap::setKmers(std::set<ft::KmerClass> kmerMap){if (this->getKmerMap().empty()){_kmerMap = kmerMap;}}
 void FTMap::setQueries(std::set<ft::QueryClass> queryMap){if (this->getQueryMap().empty()){_queryMap = queryMap;}}
