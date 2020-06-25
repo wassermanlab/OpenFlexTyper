@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QCommandLineParser>
 #include <iostream>
+#include "propertiesClass.h"
 #include "ftsearch.h"
 #include <QSettings>
 #include "fmindex.h"
@@ -142,7 +143,7 @@ int main(int argc, char** argv)
 		std::cerr << "you need to provide the read file location\n";
 		return 1;
 	}
-
+        ft::FTProp properties;
         ft::FTSearch flexTyperInstance;
         flexTyperInstance.init(pathToQueryFile, kmerSize, readLength, indexFileLocation,
                                outputFolder, refOnly, searchType, multithread, inputFastQ,

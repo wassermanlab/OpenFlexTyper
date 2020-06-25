@@ -30,8 +30,8 @@ HEADERS    += flextyper/includes/utils.h              \
     flextyper/includes/FTMapClass.h \
               flextyper/includes/ftsearch.h           \
     flextyper/includes/kmerClass.h \
+    flextyper/includes/propertiesClass.h \
     flextyper/includes/queryClass.h \
-    flextyper/includes/typedefs.h \
               fmindex/includes/ifmindex.h             \
               fmindex/includes/fmindex.h              \
               flextyper/includes/stats.h              \
@@ -53,6 +53,7 @@ HEADERS    += flextyper/interfaces/ikmergenerator.h   \
 SOURCES     += flextyper/src/stats.cpp                \
     flextyper/src/FTMapClass.cpp \
     flextyper/src/kmerClass.cpp \
+    flextyper/src/propertiesClass.cpp \
     flextyper/src/queryClass.cpp \
                flextyper/src/utils.cpp                \
                fmindex/src/fmindex.cpp                \

@@ -8,13 +8,13 @@
 #include <vector>
 #include "kmerClass.h"
 #include "queryClass.h"
-#include "typedefs.h"
+#include "propertiesClass.h"
 #include "kmergenerator.h"
 
 
 namespace ft {
 
-typedef std::tuple<uint, std::string, std::string, std::string>  Query;    // query id, ref, alt, crossover
+  // query id, ref, alt, crossover
 
 typedef std::map<ft::QueryClass, std::set<KmerClass>> QKMAP;
 
@@ -39,42 +39,6 @@ public:
     std::map<ft::QueryClass, std::set<KmerClass>> _qkMap;
     std::vector<std::set<ft::KmerClass>> _searchResults;
 
-    uint _kmerSize;
-    bool _refOnly;
-    SearchType _searchType;
-    uint _overlap;
-    uint _stride;
-    bool _crossover;
-    bool _ignoreNonUniqueKmers;
-    bool _kmerCounts;
-    uint _maxKmers;
-    uint _maxTotalKmers;
-    uint _maxOcc;
-    bool _overcounted;
-    uint _readLen;
-    bool _matchesOnly;
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief set properties
-    ////////////////////////////////////////////////////////////////////////
-    void setProperties(uint _kmerSize,
-                        bool _refOnly,
-                        SearchType _searchType,
-                        uint _overlap,
-                        uint _stride,
-                        bool _crossover,
-                        bool _ignoreNonUniqueKmers,
-                        bool _kmerCounts,
-                        uint _maxKmers,
-                        uint _maxTotalKmers,
-                       bool _returnMatchesOnly);
-
-
-    KmerProperties getKmerProperties();
-
-    void addInputQueries(std::set<Query> inputQueries);
-    void genQKMap(std::set<ft::QueryClass> queries);
-
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
@@ -82,45 +46,12 @@ public:
     std::set<ft::QueryClass> getQuerySet();
     std::map<ft::QueryClass, std::set<KmerClass>> getQKMap();
     std::vector<std::set<ft::KmerClass>> getResults();
-    SearchType getSearchType();
-    uint getKmerSize();
-    uint getOverlap();
-    uint getStride();
-    uint getMaxKmers();
-    uint getMaxTotalKmers();
-    uint getMaxOcc();
-    uint getReadLength();
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief setters
     ////////////////////////////////////////////////////////////////////////
     void setKmers(std::set<ft::KmerClass>);
     void setQueries(std::set<ft::QueryClass>);
-    void setKmerSize(uint kmerSize);
-    void setSearchType(ft::SearchType searchType);
-    void setOverlap(uint overlap);
-    void setStride(uint stride);
-    void setMaxKmers(uint maxKmers);
-    void setMaxTotalKmers(uint maxTotalKmers);
-    void setMaxOcc(uint maxOcc);
-    void setReadLength(uint readlength);
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief Flag getters and setters
-    ////////////////////////////////////////////////////////////////////////
-    bool getRefOnlyFlag();
-    bool getIgnoreNonUniqueKmersFlag();
-    bool getKmerCountsFlag();
-    bool getCrossoverFlag();
-    bool getOverCountedFlag();
-    bool getMatchesOnlyFlag();
-
-    void setRefOnlyFlag(bool refOnly);
-    void setIgnoreNonUniqueKmersFlag(bool ignoreNonUnique);
-    void setKmerCountsFlag(bool kmerCounts);
-    void setCrossoverFlag(bool crossover);
-    void setOverCountedFlag(bool overcounted);
-    void setMatchesOnlyFlag(bool matchesOnly);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Access functions for single kmer and queries
@@ -140,6 +71,8 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief Access functions for _qkMap
     ////////////////////////////////////////////////////////////////////////
+    void addInputQueries(std::set<Query> inputQueries);
+    void genQKMap(std::set<ft::QueryClass> queries);
     std::set<ft::QueryClass> retrieveQueries(ft::KmerClass);
     std::set<ft::KmerClass> retrieveKmers(ft::QueryClass);
     bool checkForMatch(ft::KmerClass, ft::QueryClass);
@@ -153,8 +86,11 @@ public:
     void addIndexResults(std::set<ft::KmerClass> indexResults);
     void processIndexResults(std::set<ft::KmerClass> indexResults, uint readLength);
 
+
+
+
 private:
-    KmerGenerator* _kmerGenerator;
+
 };
 
 //typedef std::map<QIdT, std::set<std::string>>                  SearchKmers;            // int is the query ID

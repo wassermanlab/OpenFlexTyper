@@ -14,43 +14,6 @@ FTMap::FTMap()
 {
 }
 
-//======================================================
-void FTMap::setProperties(uint kmerSize,
-                          bool refOnly,
-                          SearchType searchType,
-                          uint overlap,
-                          uint stride,
-                          bool crossover,
-                          bool ignoreNonUniqueKmers,
-                          bool kmerCounts,
-                          uint maxKmers,
-                          uint maxTotalKmers,
-                          bool returnMatchesOnly)
-{
-    FTMap::setKmerSize(kmerSize);
-    FTMap::setSearchType(searchType);
-    FTMap::setOverlap(overlap);
-    FTMap::setStride(stride);
-    FTMap::setMaxKmers(maxKmers);
-    FTMap::setMaxTotalKmers(maxTotalKmers);
-    FTMap::setRefOnlyFlag(refOnly);
-    FTMap::setIgnoreNonUniqueKmersFlag(ignoreNonUniqueKmers);
-    FTMap::setKmerCountsFlag(kmerCounts);
-    FTMap::setCrossoverFlag(crossover);
-    FTMap::setMatchesOnlyFlag(returnMatchesOnly);
-}
-
-KmerProperties FTMap::getKmerProperties(){
-    KmerProperties kmerProperties;
-    kmerProperties.setKmerSize(this->getKmerSize());
-    kmerProperties.setRefOnly(this->getRefOnlyFlag());
-    kmerProperties.setSearchType(this->getSearchType());
-    kmerProperties.setOverlap(this->getOverlap());
-    kmerProperties.setStride(this->getStride());
-    kmerProperties.setKmerCountsFlag(this->getKmerCountsFlag());
-    kmerProperties.setMaxKmers(this->getMaxKmers());
-    return kmerProperties;
-}
 
 //======================================================
 void FTMap::addInputQueries(std::set<Query> inputQueries){
@@ -97,40 +60,11 @@ std::set<ft::KmerClass> FTMap::getKmerSet(){return this->_kmerSet;}
 std::set<ft::QueryClass> FTMap::getQuerySet(){return this->_querySet;}
 std::map<ft::QueryClass, std::set<KmerClass>> FTMap::getQKMap(){return this->_qkMap;}
 std::vector<std::set<ft::KmerClass>> FTMap::getResults(){return this->_searchResults;}
-SearchType FTMap::getSearchType(){return this->_searchType;}
-uint FTMap::getKmerSize(){return this->_kmerSize;}
-uint FTMap::getOverlap(){return this->_overlap;}
-uint FTMap::getStride(){return this->_stride;}
-uint FTMap::getMaxKmers(){return this->_maxKmers;}
-uint FTMap::getMaxTotalKmers(){return this->_maxTotalKmers;}
-uint FTMap::getMaxOcc(){return this->_maxOcc;}
-uint FTMap::getReadLength(){return this->_readLen;}
+
 
 //=============== SETTERS ==============================
 void FTMap::setKmers(std::set<ft::KmerClass> kmerSet){if (this->getKmerSet().empty()){_kmerSet = kmerSet;}}
 void FTMap::setQueries(std::set<ft::QueryClass> querySet){if (this->getQuerySet().empty()){_querySet = querySet;}}
-void FTMap::setKmerSize(uint kmerSize){if (kmerSize != this->getKmerSize()){_kmerSize = kmerSize;}}
-void FTMap::setSearchType(ft::SearchType searchType){if (searchType != this->getSearchType()){_searchType = searchType;}}
-void FTMap::setOverlap(uint overlap){if (overlap != this->getOverlap()){_overlap = overlap;}}
-void FTMap::setStride(uint stride){if (stride != this->getStride()){_stride = stride;}}
-void FTMap::setMaxKmers(uint maxKmers){if (maxKmers != this->getMaxKmers()){_maxKmers = maxKmers;}}
-void FTMap::setMaxTotalKmers(uint maxTotalKmers){if (maxTotalKmers != this->getMaxTotalKmers()){_maxTotalKmers = maxTotalKmers;}}
-void FTMap::setMaxOcc(uint maxOcc){if (maxOcc != this->getMaxOcc()){_maxOcc = maxOcc;}}
-void FTMap::setReadLength(uint readLength){if (readLength != this->getReadLength()){_readLen = readLength;}}
-
-//=============== FLAGS ==============================
-bool FTMap::getRefOnlyFlag(){return this->_refOnly;}
-bool FTMap::getIgnoreNonUniqueKmersFlag(){return this->_ignoreNonUniqueKmers;}
-bool FTMap::getKmerCountsFlag(){return this->_kmerCounts;}
-bool FTMap::getCrossoverFlag(){return this->_crossover;}
-bool FTMap::getOverCountedFlag(){return this->_overcounted;}
-bool FTMap::getMatchesOnlyFlag(){return this->_matchesOnly;}
-void FTMap::setRefOnlyFlag(bool refOnly){if (refOnly != this->getRefOnlyFlag()){ _refOnly = refOnly;}}
-void FTMap::setIgnoreNonUniqueKmersFlag(bool ignoreNonUnique){if (ignoreNonUnique != this->getIgnoreNonUniqueKmersFlag()){ _ignoreNonUniqueKmers = ignoreNonUnique;}}
-void FTMap::setKmerCountsFlag(bool kmerCounts){if (kmerCounts != this->getKmerCountsFlag()){ _kmerCounts = kmerCounts;}}
-void FTMap::setCrossoverFlag(bool crossover){if (crossover != this->getCrossoverFlag()){ _crossover = crossover;}}
-void FTMap::setOverCountedFlag(bool overcounted){if (overcounted != this->getOverCountedFlag()){ _overcounted = overcounted;}}
-void FTMap::setMatchesOnlyFlag(bool matchesOnly){if (matchesOnly != this->getMatchesOnlyFlag()){ _matchesOnly = matchesOnly;}}
 
 
 //======================================================

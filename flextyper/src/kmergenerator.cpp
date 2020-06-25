@@ -93,7 +93,7 @@ std::set<std::string> KmerGenerator::genQueryClassKmers(ft::QueryClass queryObj,
 
 
 //======================================================================
-std::set<std::string> KmerGenerator::genSearchKmers(ft::QueryClass queryObj, KmerProperties kmerProperties)
+std::set<std::string> KmerGenerator::genSearchKmers(ft::QueryClass queryObj)
 {
 
     SearchType searchType = kmerProperties.getSearchType();
