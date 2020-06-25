@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "kmergenerator.cpp"
+#include "FTMapClass.h"
 #include "queryextractor.h"
 #include <climits>
 

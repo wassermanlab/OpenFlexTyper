@@ -49,7 +49,7 @@ uint FTMap::getMaxKmers(){return this->_maxKmers;}
 uint FTMap::getMaxTotalKmers(){return this->_maxTotalKmers;}
 uint FTMap::getMaxOcc(){return this->_maxOcc;}
 uint FTMap::getReadLength(){return this->_readLen;}
-
+std::vector<std::set<ft::KmerClass>> FTMap::getResultsMap(){return this->_resultsMap;}
 //=============== SETTERS ==============================
 void FTMap::setKmers(std::set<ft::KmerClass> kmerMap){if (this->getKmerMap().empty()){_kmerMap = kmerMap;}}
 void FTMap::setQueries(std::set<ft::QueryClass> queryMap){if (this->getQueryMap().empty()){_queryMap = queryMap;}}
@@ -166,11 +166,7 @@ void FTMap::addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryIDTyp
 //======================================================
 void FTMap::addIndexResults(std::set<ft::KmerClass> indexResults)
 {
-    // std::map<std::string, std::set<readID>>
-// convert index positions to read ids
-//    auto r = (size_t) std::ceil(indexPos / (readLength + 1));
-// add read ids to queryMap
-
+    this->getResultsMap().push_back(indexResults);
 }
 
 //======================================================

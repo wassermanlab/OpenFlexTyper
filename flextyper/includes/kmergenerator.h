@@ -9,6 +9,7 @@
 #include <set>
 #include <string>
 #include <map>
+#include "FTMapClass.h"
 #include "ikmergenerator.h"
 #include "stats.h"
 

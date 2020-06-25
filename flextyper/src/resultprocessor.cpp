@@ -1,5 +1,4 @@
 #include "resultprocessor.h"
-#include "FTMapClass.h"
 
 namespace ft {
 //======================================================================
@@ -43,7 +42,7 @@ void ResultProcessor::processResults(ft::FTMap& ftMap, uint readLen, uint readli
 {
 
     ftMap.setReadLength(readLen);
-    std::set<std::set<ft::KmerClass>> resultsMap = ftMap.getResultsMap();
+    std::vector<std::set<ft::KmerClass>> resultsMap = ftMap.getResultsMap();
 
     //for each set of results:
         // covertPosToReadID

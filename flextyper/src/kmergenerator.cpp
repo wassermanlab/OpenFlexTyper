@@ -1,3 +1,4 @@
+
 #include "kmergenerator.h"
 #include <cmath>
 
@@ -77,7 +78,7 @@ std::set<std::string> KmerGenerator::genCenteredSearchStrings(const std::string&
 QueryClass KmerGenerator::genQueryClassKmers(int queryID, std::string querystring, ft::QueryType queryType, SearchType searchType, uint kmerSize, uint overlap,
                                              uint stride, bool kmerCounts, uint maxKmers)
 {
-    QueryClass tmpQuery(queryID, queryType);
+    ft::QueryClass tmpQuery(queryID, queryType);
     tmpQuery.setQueryString(querystring);
 
     // generate search queries
