@@ -85,9 +85,7 @@ void FTMap::addInputQueries(std::set<Query> inputQueries){
 void FTMap::genQKMap(std::set<ft::QueryClass> queries){
 
     for (ft::QueryClass query : queries){
-        std::set<std::string> kmers = KmerGenerator.genKmers(query, this->getKmerProperties());
-
-
+        std::set<std::string> kmers = (_kmerGenerator->genSearchKmers(query, this->getKmerProperties()));
 
         //std::set<ft::KmerClass> kmerObjs = getKmerObjFromKmerString(kmers);
         //this->addQKSet(query, kmerObjs);

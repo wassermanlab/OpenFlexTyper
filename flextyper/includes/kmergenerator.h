@@ -11,6 +11,7 @@
 #include <map>
 #include "FTMapClass.h"
 #include "ikmergenerator.h"
+#include "typedefs.h"
 #include "stats.h"
 
 namespace ft {
@@ -58,32 +59,28 @@ public:
     /// \param crossover
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    std::set<std::string> genQueryClassKmers(ft::QueryClass queryObj, SearchType searchType, uint kmerSize, uint overlap,
+    virtual std::set<std::string> genQueryClassKmers(ft::QueryClass queryObj, SearchType searchType, uint kmerSize, uint overlap,
                                                  uint stride, bool kmerCounts, uint maxKmers);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief genSearchKmers
-    /// \param inputQueries
-    /// \param kmerSize
-    /// \param refOnly
-    /// \param searchType
-    /// \param overlap
-    /// \param stride
+    /// \param inputQuery
+    /// \param Kmer Properties
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual std::map<ft::QueryClass, std::set<KmerClass>> genSearchKmers(std::set<Query>& inputQueries, ft::FTMap& ftMap);
+    virtual std::set<std::string> genSearchKmers(ft::QueryClass queryObj, KmerProperties kmerProperties);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief KmerGenerator::addtoKmerMap
     /// \param queryKmers
     ////////////////////////////////////////////////////////////////////////
-    void addQueriestoKmerMap(ft::FTMap& resultsMap, const std::set<QueryClass>& queryKmers);
+    //void addQueriestoKmerMap(ft::FTMap& resultsMap, const std::set<QueryClass>& queryKmers);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief KmerGenerator::genKmerMap
     /// \param inputQueries
     ////////////////////////////////////////////////////////////////////////
-    void genKmerMap(std::set<Query>& inputQueries, ft::FTMap& ftMap);
+    //void genKmerMap(std::set<Query>& inputQueries, ft::FTMap& ftMap);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief overrideStats

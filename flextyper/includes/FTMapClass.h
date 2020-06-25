@@ -14,8 +14,6 @@
 
 namespace ft {
 
-
-
 typedef std::tuple<uint, std::string, std::string, std::string>  Query;    // query id, ref, alt, crossover
 
 typedef std::map<ft::QueryClass, std::set<KmerClass>> QKMAP;
@@ -155,6 +153,8 @@ public:
     void addIndexResults(std::set<ft::KmerClass> indexResults);
     void processIndexResults(std::set<ft::KmerClass> indexResults, uint readLength);
 
+private:
+    KmerGenerator* _kmerGenerator;
 };
 
 //typedef std::map<QIdT, std::set<std::string>>                  SearchKmers;            // int is the query ID

@@ -1,4 +1,3 @@
-
 #include "kmergenerator.h"
 #include <cmath>
 
@@ -92,68 +91,37 @@ std::set<std::string> KmerGenerator::genQueryClassKmers(ft::QueryClass queryObj,
     return searchStrings;
 }
 
-//======================================================================
-void KmerGenerator::genSearchKmers(std::set<Query>& inputQueries, ft::FTMap& ftMap)
-{
-    uint kmerSize = ftMap.getKmerSize();
-    bool refOnly = ftMap.getRefOnlyFlag();
-    ft::SearchType searchType = ftMap.getSearchType();
-    uint overlap = ftMap.getOverlap();
-    uint stride = ftMap.getStride();
-    bool kmerCounts = ftMap.getKmerCountsFlag();
-    uint maxKmers = ftMap.getMaxKmers();
-
-    QKMAP _qkMap = ftMap.getQKMap();
-
-
-
-
-
-
-    }
-    return results;
-}
 
 //======================================================================
-void KmerGenerator::addQueriestoKmerMap(ft::FTMap& ftMap, const std::set<QueryClass>& queryMap)
-{
-    for (auto query : queryMap) {
-        std::set<std::string> kmers = query.getKmers();
-        for (auto kmer : kmers) {
-            ftMap.addQIDtoKmer(kmer, query.getqID(), query.getqType());
-        }
-    }
-}
-
-//======================================================================
-std::set<std::string> KmerGenerator::genKmers(std::set<ft::QueryClass>& inputQueries, ft::FTMap& ftMap)
+std::set<std::string> KmerGenerator::genSearchKmers(ft::QueryClass queryObj, KmerProperties kmerProperties)
 {
 
-    ftMap.
+    SearchType searchType = kmerProperties.getSearchType();
+    uint kmerSize = kmerProperties.getKmerSize();
+    uint overlap = kmerProperties.getOverlap();
+    uint stride = kmerProperties.getStride();
+    bool kmerCounts = kmerProperties.getKmerCountsFlag();
+    uint maxKmers = kmerProperties.getMaxKmers();
 
-    std::set<QueryClass> queryMap = genSearchKmers(inputQueries, ftMap);
+    std::set<std::string> searchKmers = genQueryClassKmers(queryObj, searchType, kmerSize, overlap,
+                                                 stride, kmerCounts, maxKmers);
+//    if (maxTotalKmers > 0 && kmerMap.size() > maxTotalKmers) {
+//        kmerMap.clear();
+//        std::cout << "Error: Too many kmers generated" << std::endl;
+//    }
 
-
-    addQueriestoKmerMap(ftMap, queryMap);
-    uint maxTotalKmers = ftMap.getMaxTotalKmers();
-    std::set<ft::KmerClass> kmerMap = ftMap.getKmerSet();
-
-    if (maxTotalKmers > 0 && kmerMap.size() > maxTotalKmers) {
-        kmerMap.clear();
-        std::cout << "Error: Too many kmers generated" << std::endl;
-    }
-
-    if (ftMap.getIgnoreNonUniqueKmersFlag()) {
-        std::cout << "initial size : " << kmerMap.size() << std::endl;
-        for (auto it = kmerMap.begin(); it != kmerMap.end();) {
-            if ((*it)._queryIDs.size() > 1){
-                kmerMap.erase(it++);
-            } else {
-                ++it;
-            }
-        }
-        std::cout << "final size : " << kmerMap.size() << std::endl;
-    }
+//    if (ftMap.getIgnoreNonUniqueKmersFlag()) {
+//        std::cout << "initial size : " << kmerMap.size() << std::endl;
+//        for (auto it = kmerMap.begin(); it != kmerMap.end();) {
+//            if ((*it)._queryIDs.size() > 1){
+//                kmerMap.erase(it++);
+//            } else {
+//                ++it;
+//            }
+//        }
+//        std::cout << "final size : " << kmerMap.size() << std::endl;
+//    }
+    return searchKmers;
 }
 
 //======================================================================
