@@ -197,13 +197,29 @@ TEST_F(TestKmerClass, isKmerEqual)
 }
 
 //======================================================================
-TEST_F(TestKmerClass, convertPosToReadID)
+TEST_F(TestKmerClass, convertPosToReadIDNoOffset)
 {
     TEST_DESCRIPTION("see if a kmer class has a specific QIdT ");
     ft::KmerClass testKmerClass("AAAA");
+    testKmerClass.setKPositions({100, 200, 251});
+    testKmerClass.convertPosToReadID(100);
+    std::set<int> expectedReadIDs = {1, 2};
 
-    EXPECT_EQ(testKmer.getKmer(), "AAAA")
+    EXPECT_EQ(expectedReadIDs, testKmerClass.getReadIDs())
 }
+
+//======================================================================
+TEST_F(TestKmerClass, convertPosToReadIDWithOffset)
+{
+    TEST_DESCRIPTION("see if a kmer class has a specific QIdT ");
+    ft::KmerClass testKmerClass("AAAA");
+    testKmerClass.setKPositions({100, 200, 251}, 10);
+    testKmerClass.convertPosToReadID(100);
+    std::set<int> expectedReadIDs = {1, 2};
+
+    EXPECT_EQ(expectedReadIDs, testKmerClass.getReadIDs())
+}
+
 
 //======================================================================
 TEST_F(TestKmerClass, testOverloadOperator)
