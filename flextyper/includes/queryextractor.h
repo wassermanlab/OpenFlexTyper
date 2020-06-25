@@ -7,7 +7,7 @@
 #define __QUERY_EXTRACTOR_H__
 
 #include <set>
-#include "FTMapClass.h"
+#include "ftMapClass.h"
 #include <experimental/filesystem>
 #include "utils.h"
 #include "iutils.h"

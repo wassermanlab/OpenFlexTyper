@@ -6,7 +6,7 @@
 #ifndef __RESULT_PROCESSOR_H__
 #define __RESULT_PROCESSOR_H__
 
-#include "FTMapClass.h"
+#include "ftMapClass.h"
 #include <experimental/filesystem>
 #include "utils.h"
 #include "iutils.h"

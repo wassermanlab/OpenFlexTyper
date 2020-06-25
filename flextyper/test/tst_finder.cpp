@@ -15,7 +15,7 @@
 #include "fmindex.cpp"
 #include "mock/mock_fmindex.cpp"
 #include "ifmindex.h"
-#include "FTMapClass.h"
+#include "ftMapClass.h"
 
 using namespace std;
 using namespace ft;

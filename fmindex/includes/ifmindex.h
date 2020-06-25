@@ -10,7 +10,7 @@
 #include <set>
 #include <iostream>
 #include <experimental/filesystem>
-#include "FTMapClass.h"
+#include "ftMapClass.h"
 
 namespace fs = std::experimental::filesystem;
 

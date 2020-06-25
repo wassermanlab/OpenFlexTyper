@@ -34,7 +34,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief properties
     ////////////////////////////////////////////////////////////////////////
-    FTProp _ftProp;
+    FTProp _ftProps;
     std::set<ft::KmerClass> _kmerSet;
     std::set<ft::QueryClass> _querySet;
     std::map<ft::QueryClass, std::set<KmerClass>> _qkMap;
@@ -87,8 +87,6 @@ public:
     ////////////////////////////////////////////////////////////////////////
     void addIndexResults(std::set<ft::KmerClass> indexResults);
     void processIndexResults(std::set<ft::KmerClass> indexResults, uint readLength);
-
-
 
 
 private:

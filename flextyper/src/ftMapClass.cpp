@@ -7,14 +7,14 @@
 namespace ft {
 
 FTMap::FTMap(FTProp ftProps)
-    : _kmerSet(),
+    : _ftProps(ftProps),
+      _kmerSet(),
       _querySet(),
       _qkMap(),
       _searchResults()
 
 {
 }
-
 
 //======================================================
 void FTMap::addInputQueries(std::set<Query> inputQueries){
@@ -28,7 +28,7 @@ void FTMap::addInputQueries(std::set<Query> inputQueries){
         this->addQuery(tmpRefQuery);
 
         // Create Alt Query
-        if (!ftProps.getetRefOnlyFlag()) {
+        if (!_ftProps.getRefOnlyFlag()) {
             std::string altString = std::get<2>(inputQuery);
             ft::QueryClass tmpAltQuery(qID, ft::QueryType::ALT);
             tmpAltQuery.setQueryString(altString);
@@ -36,7 +36,7 @@ void FTMap::addInputQueries(std::set<Query> inputQueries){
         }
 
         // Create Crossover Query
-        if (this->getCrossoverFlag() && !tmpRefQuery.getQueryString().empty() && !std::get<2>(inputQuery).empty()) {
+        if (_ftProps.getCrossoverFlag() && !tmpRefQuery.getQueryString().empty() && !std::get<2>(inputQuery).empty()) {
             std::string croString = std::get<3>(inputQuery);
             ft::QueryClass tmpCroQuery(qID, ft::QueryType::CRO);
             tmpCroQuery.setQueryString(croString);

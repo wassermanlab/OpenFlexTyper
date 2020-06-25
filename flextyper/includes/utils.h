@@ -11,7 +11,7 @@
 #include <string>
 #include <experimental/filesystem>
 #include <set>
-#include "FTMapClass.h"
+#include "ftMapClass.h"
 #include <cmath>
 #include "iutils.h"
 

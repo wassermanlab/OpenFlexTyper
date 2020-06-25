@@ -11,7 +11,7 @@
 #include "ifmindex.h"
 #include <sdsl/suffix_arrays.hpp>
 #include <mutex>
-#include "FTMapClass.h"
+#include "ftMapClass.h"
 #include "stats.h"
 #include "typedefs.h"
 
