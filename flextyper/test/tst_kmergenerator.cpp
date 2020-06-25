@@ -24,6 +24,7 @@ public:
 TEST_F(TestKmerGenerator, genSlidingSearchStrings)
 {
     TEST_DESCRIPTION("genSlidingSearchStrings");
+
     std::string queryString = "AAAAATCCCCC";
     uint kmerSize = 5;
     uint stride = 1;
@@ -39,6 +40,7 @@ TEST_F(TestKmerGenerator, genSlidingSearchStrings)
 TEST_F(TestKmerGenerator, genCenteredSearchStrings)
 {
     TEST_DESCRIPTION("genCenteredSearchStrings");
+
     //input: const std::string& queryString, uint kmerSize, uint overlap, uint stride, bool kmerCounts, uint maxKmers
     std::string queryString = "AAAAATCCCCC";
     uint kmerSize = 5;
@@ -48,13 +50,14 @@ TEST_F(TestKmerGenerator, genCenteredSearchStrings)
     uint maxKmers = 30;
     std::set<std::string> expectedResults = {"AAAAT", "AAATC", "AATCC", "ATCCC", "TCCCC"};
     std::set<std::string> results = _kmerGenerator.genCenteredSearchStrings(queryString, kmerSize, overlap, stride, kmerCounts, maxKmers);
-
+;
     EXPECT_EQ(results, expectedResults);
 }
 //======================================================================
 TEST_F(TestKmerGenerator, genQueryClassKmersCentered)
 {
     TEST_DESCRIPTION("genQueryClassKmers");
+
     //input: QueryClass KmerGenerator::genQueryClassKmers(
     int queryID;
     std::string querystring = "AAAAATCCCCC";
@@ -70,12 +73,14 @@ TEST_F(TestKmerGenerator, genQueryClassKmersCentered)
     expectedResult.setKmers({"AAAAA", "AAAAT", "AAATC", "AATCC", "ATCCC", "TCCCC", "CCCCC"});
 
     QueryClass result = _kmerGenerator.genQueryClassKmers(queryID, querystring, queryType, searchType, kmerSize, overlap, stride, kmerCounts, maxKmers);
+
     //EXPECT_EQ(result, expectedResult);
 }
 //======================================================================
 TEST_F(TestKmerGenerator, genQueryClassKmersSliding)
 {
     TEST_DESCRIPTION("genQueryClassKmers");
+
     //input: QueryClass KmerGenerator::genQueryClassKmers(
     int queryID;
     std::string querystring = "AAAAATCCCCC";
@@ -91,12 +96,14 @@ TEST_F(TestKmerGenerator, genQueryClassKmersSliding)
     expectedResult.setKmers({"AAAAA", "AAAAT", "AAATC", "AATCC", "ATCCC", "TCCCC", "CCCCC"});
 
     QueryClass result = _kmerGenerator.genQueryClassKmers(queryID, querystring, queryType, searchType, kmerSize, overlap, stride, kmerCounts, maxKmers);
+
     //EXPECT_EQ(result, expectedResult);
 }
 //======================================================================
 TEST_F(TestKmerGenerator, genSearchKmers)
 {
     TEST_DESCRIPTION("genSearchKmers");
+
     //input: std::set<QueryClass> KmerGenerator::genSearchKmers(std::set<Query>& inputQueries, ft::FTMap& ftMap)
     std::set<QueryClass> result;
     std::set<QueryClass> expectedResult;
@@ -109,6 +116,7 @@ TEST_F(TestKmerGenerator, genSearchKmers)
 TEST_F(TestKmerGenerator, genKmerMap)
 {
     TEST_DESCRIPTION("genKmerMap");
+
     //void KmerGenerator::genKmerMap(std::set<Query>& inputQueries, ft::FTMap& ftMap)
 
     std::set<QueryClass> result;

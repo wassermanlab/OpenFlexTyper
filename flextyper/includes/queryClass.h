@@ -79,7 +79,7 @@ public:
     bool isQIdTEqual(ft::QIdT test);
     bool hasQueryID(int qid) const;
     bool hasQueryType(ft::QueryType qType) const;
-    bool hasKmer(std::string kmer) const;
+    bool hasKmer(std::string kmer) ;
     bool hasKmerFlag(ft::FlagType flag, std::string kmer);
     bool hasReadID(int readID) const;
     bool hasNonZeroCount();

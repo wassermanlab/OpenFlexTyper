@@ -29,7 +29,7 @@ public:
     MOCK_METHOD3(parallelFmIndex,      void(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList));
     MOCK_METHOD1(generateReadsMap,     void(const std::string&));
     MOCK_METHOD1(setKmerMapSize,       void(size_t));
-    MOCK_METHOD8(search,               std::tuple<ft::KmerClass>(const std::string&, const std::set<std::pair<int, ft::QueryType>>&, const std::string&, const std::string&, u_int, size_t, bool, bool));
+    MOCK_METHOD7(search,               ft::KmerClass(ft::KmerClass, const std::string&, const std::string&, u_int, size_t, bool, bool));
     MOCK_METHOD1(loadIndexFromFile,    void(const std::string&));
 };
 }

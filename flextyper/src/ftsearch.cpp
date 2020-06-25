@@ -1,6 +1,5 @@
 #include "ftsearch.h"
-#include "kmerClass.h"
-#include "queryClass.h"
+
 
 namespace ft {
 
