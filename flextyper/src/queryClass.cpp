@@ -12,7 +12,8 @@ QueryClass::QueryClass(int queryID, ft::QueryType queryType)
       _qType(queryType)
 {
 }
-//======================================================
+
+//=================== GETTERS =============================
 int QueryClass::getqID(){return _qID;}
 QueryType QueryClass::getqType(){return _qType;}
 std::string QueryClass::getQueryString(){return _string;}
@@ -20,10 +21,12 @@ std::set<std::string> QueryClass::getKmers(){return _kmers;}
 std::set<int> QueryClass::getReadIDs(){return _readIDs;}
 int QueryClass::getCount(){return _count;}
 std::map<ft::FlagType, std::set<std::string>> QueryClass::getQFlags(){return _qFlags;}
-
 ft::QIdT QueryClass::getQIdT(){return std::make_pair(_qID, _qType);}
+std::set<std::string> QueryClass::getFlagKmers(ft::FlagType flag){
+    return this->getQFlags()[flag];
+}
 
-//======================================================
+//================== SETTERS ===========================
 void QueryClass::setqID(int qID){
     if (qID != this->getqID()) {
         _qID = qID;
@@ -54,12 +57,16 @@ void QueryClass::setFlags(std::map<ft::FlagType, std::set<std::string>> flags){
         _qFlags = flags;
     }
 }
-//======================================================
+
+//===================== ADDERS ==========================
 void QueryClass::addKmer(std::string kmer){
     this->getKmers().insert(kmer);
 }
 void QueryClass::addReadID(int readID){
     this->getReadIDs().insert(readID);
+}
+void QueryClass::addReadIDs(std::set<int> readIDs){
+    this->getReadIDs().insert(readIDs.begin(), readIDs.end());
 }
 void QueryClass::addFlag(ft::FlagType flagType, std::set<std::string> kmers){
     std::map<ft::FlagType, std::set<std::string>> queryFlags = this->getQFlags();
@@ -68,17 +75,12 @@ void QueryClass::addFlag(ft::FlagType flagType, std::set<std::string> kmers){
     }
 }
 
-//======================================================
+//==================== CHECKERS =========================
 bool QueryClass::isQIdTEqual(ft::QIdT test){
     return this->getQIdT() == test;
 }
 
-//======================================================
-std::set<std::string> QueryClass::getFlagKmers(ft::FlagType flag){
-    return this->getQFlags()[flag];
-}
-
-//======================================================
+//===================== OVERLOAD ========================
 bool QueryClass::operator< (const ft::QueryClass &q) const {
     return std::make_pair(_qID, _qType) < std::make_pair(q._qID, q._qType); }
 

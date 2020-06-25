@@ -165,19 +165,9 @@ void KmerGenerator::genKmerMap(std::set<Query>& inputQueries, ft::FTMap& ftMap)
     if (maxTotalKmers > 0 && kmerMap.size() > maxTotalKmers) {
         kmerMap.clear();
         std::cout << "Error: Too many kmers generated" << std::endl;
-//        KmerMap tmp = kmerMap;
-//        kmerMap.clear();
-//        uint l = 0;
-//        for (auto e : tmp) {
-//            if (l == maxTotalKmers)
-//                break;
-//            kmerMap.insert(e);
-//            l++;
-//        }
     }
 
     if (ftMap.getIgnoreNonUniqueKmersFlag()) {
-        std::cout << "probabilistic search" << std::endl;
         std::cout << "initial size : " << kmerMap.size() << std::endl;
         for (auto it = kmerMap.begin(); it != kmerMap.end();) {
             if ((*it)._queryIDs.size() > 1){
@@ -186,7 +176,7 @@ void KmerGenerator::genKmerMap(std::set<Query>& inputQueries, ft::FTMap& ftMap)
                 ++it;
             }
         }
-        std::cout << "final   size : " << kmerMap.size() << std::endl;
+        std::cout << "final size : " << kmerMap.size() << std::endl;
     }
 }
 

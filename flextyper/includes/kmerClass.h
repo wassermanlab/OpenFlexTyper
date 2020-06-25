@@ -6,9 +6,7 @@
 #include <map>
 #include "typedefs.h"
 
-
 namespace ft {
-
 
 class KmerClass
 {
@@ -24,13 +22,23 @@ public:
     virtual ~KmerClass();
 
     ////////////////////////////////////////////////////////////////////////
+    /// \brief properties
+    ////////////////////////////////////////////////////////////////////////
+    std::string _kmer;
+    std::set<ft::QIdT> _queryIDs;
+    std::set<ft::FlagType> _kFlags;
+    std::set<size_t> _positions;
+    std::set<int> _readIDs;
+
+    ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
     std::string getKmer() const;
     std::set<ft::QIdT> getQueryIDs();
     std::set<ft::FlagType> getKFlags();
     std::set<size_t> getKPositions();
-    std::set<uint> getReadIDs();
+    std::set<int> getReadIDs();
+    uint getKmerMapSize();
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief setters
@@ -38,35 +46,47 @@ public:
     void setQueryIDs(std::set<ft::QIdT> queries);
     void setKFlags(std::set<ft::FlagType> kFlags);
     void setKPositions(std::set<size_t> kPositions, uint offset = 0);
-    void setReadIDs(std::set<uint> readIDs);
+    void setReadIDs(std::set<int> readIDs);
 
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief adders
+    ////////////////////////////////////////////////////////////////////////
     void addQuery(ft::QIdT query);
     void addKFlag(ft::FlagType kFlag);
     void addKPosition(size_t kPosition, uint offset = 0);
-    void addReadID(uint readID);
+    void addReadID(int readID);
 
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief removers
+    ////////////////////////////////////////////////////////////////////////
+    void removeQuery(ft::QIdT query);
+    void removeKFlag(ft::FlagType kFlag);
+    void removeKPosition(size_t kPosition, uint offset = 0);
+    void removeReadID(int readID);
+
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief checkers
+    ////////////////////////////////////////////////////////////////////////
     bool isKmerEqual(KmerClass test) const;
     bool hasKmer(std::string test) const;
-    uint getKmerMapSize();
+    bool hasQuery(ft::QIdT query) const;
+    bool hasFlag(ft::FlagType flag) const;
+    bool hasKPosition(size_t position) const;
+    bool hasReadID(int readID) const;
+
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief convert
+    ////////////////////////////////////////////////////////////////////////
     void convertPosToReadID(uint readlength);
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief properties
+    /// \brief overload
     ////////////////////////////////////////////////////////////////////////
-    std::string _kmer;
-    std::set<ft::QIdT> _queryIDs;
-    std::set<ft::FlagType> _kFlags;
-    std::set<size_t> _positions;
-    std::set<uint> _readIDs;
-
     bool operator< (const ft::KmerClass &k) const;
 
 private:
 
-
-
 };
 }
-
 
 #endif // KMERCLASS_H

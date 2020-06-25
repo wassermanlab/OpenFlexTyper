@@ -181,8 +181,18 @@ void FTMap::processIndexResults(std::set<ft::KmerClass> indexResult, uint readLe
     for (ft::KmerClass kmerResult : indexResult){
        kmerResult.convertPosToReadID(readLength);
     }
-
+    // iterate over results from a single index
     for (ft::KmerClass kmerResult : indexResult){
+        std::set<ft::FlagType> kFlags = kmerResult.getKFlags();
+
+        for (ft::QIdT qIDT : kmerResult.getQueryIDs()){
+            ft::QueryClass query = this->getQuery(qIDT);
+            query.addReadIDs(kmerResult.getReadIDs());
+            for (ft::FlagType flag : kFlags)
+            {
+                query.addFlag(flag, {kmerResult.getKmer()});
+            }
+        }
 
     }
 

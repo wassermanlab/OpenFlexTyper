@@ -23,6 +23,17 @@ public:
     virtual ~QueryClass();
 
     ////////////////////////////////////////////////////////////////////////
+    /// \brief properties
+    ////////////////////////////////////////////////////////////////////////
+    int _qID;
+    QueryType _qType;
+    std::string _string;
+    std::set<std::string> _kmers;
+    std::set<int> _readIDs;
+    int _count;
+    std::map<ft::FlagType, std::set<std::string>> _qFlags;
+
+    ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
     int getqID();
@@ -32,8 +43,9 @@ public:
     std::set<int> getReadIDs();
     int getCount();
     std::map<ft::FlagType, std::set<std::string>> getQFlags();
-
     ft::QIdT getQIdT();
+    std::set<std::string> getFlagKmers(ft::FlagType);
+
     ////////////////////////////////////////////////////////////////////////
     /// \brief setters
     ////////////////////////////////////////////////////////////////////////
@@ -50,23 +62,16 @@ public:
     void addKmer(std::string kmer);
     void addFlag(ft::FlagType flagType, std::set<std::string> kmers);
     void addReadID(int readID);
+    void addReadIDs(std::set<int> readIDs);
 
-
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief checkers
+    ////////////////////////////////////////////////////////////////////////
     bool isQIdTEqual(ft::QIdT test);
 
-    std::set<std::string> getFlagKmers(ft::FlagType);
-
     ////////////////////////////////////////////////////////////////////////
-    /// \brief properties
+    /// \brief overload
     ////////////////////////////////////////////////////////////////////////
-    int _qID;
-    QueryType _qType;
-    std::string _string;
-    std::set<std::string> _kmers;
-    std::set<int> _readIDs;
-    int _count;
-    std::map<ft::FlagType, std::set<std::string>> _qFlags;
-
     bool operator< (const ft::QueryClass &q) const;
 
 private:

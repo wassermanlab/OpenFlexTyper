@@ -82,7 +82,7 @@ public:
     uint getReadLength();
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief getters
+    /// \brief setters
     ////////////////////////////////////////////////////////////////////////
     void setKmers(std::set<ft::KmerClass>);
     void setQueries(std::set<ft::QueryClass>);
@@ -96,7 +96,7 @@ public:
     void setReadLength(uint readlength);
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief Flags
+    /// \brief Flag getters and setters
     ////////////////////////////////////////////////////////////////////////
     bool getRefOnlyFlag();
     bool getIgnoreNonUniqueKmersFlag();
@@ -117,6 +117,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     bool checkKmer(ft::KmerClass testKmerObject);
     bool checkQIDT(ft::QIdT testQueryObject);
+
     ft::KmerClass findKmer(std::string kmer);
     ft::QueryClass getQuery(ft::QIdT qIDT);
 
@@ -130,8 +131,6 @@ public:
     /// All kmer results from a single index
     ////////////////////////////////////////////////////////////////////////
     void addIndexResults(std::set<ft::KmerClass> indexResults);
-
-
     void processIndexResults(std::set<ft::KmerClass> indexResults, uint readLength);
 
 };
