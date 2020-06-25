@@ -5,6 +5,7 @@
 #include <iostream>
 #include <map>
 #include "typedefs.h"
+#include "queryClass.h"
 
 namespace ft {
 

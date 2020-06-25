@@ -88,15 +88,16 @@ void Finder::parallelSearch(FTMap& ftMap, const fs::path& indexFileLocation,
 
     while (!kmerQueue.empty()) {
         if (j < threadNumber) {
-            const auto& kmer = kmerQueue.front();
-            resultsFutures.push_back(std::async(std::launch::async, &algo::FmIndex::search, dynamic_cast<algo::FmIndex*>(_fmIndex),
-                                    kmer,
-                                    indexPath.stem().string(),
-                                    indexFileLocation.string(),
-                                    maxOcc,
-                                    i++,
-                                    flagOverCountedKmers,
-                                    printSearchTime));
+            ft::KmerClass kmer = kmerQueue.front();
+            resultsFutures.push_back(std::async(std::launch::async, &algo::FmIndex::search,
+                                                dynamic_cast<algo::FmIndex*>(_fmIndex),
+                                                        kmer,
+                                                        indexPath.stem().string(),
+                                                        indexFileLocation.string(),
+                                                        maxOcc,
+                                                        i++,
+                                                        flagOverCountedKmers,
+                                                        printSearchTime));
             kmerQueue.pop();
             j++;
             k--;
@@ -105,9 +106,9 @@ void Finder::parallelSearch(FTMap& ftMap, const fs::path& indexFileLocation,
 
         while (1) {
             if (kmerQueue.size() > 0 && kmerQueue.size() < threadNumber) {
-                const auto& kmers = kmerQueue.front();
+                ft::KmerClass kmer = kmerQueue.front();
                 resultsFutures.push_back(std::async(std::launch::async, &algo::FmIndex::search, dynamic_cast<algo::FmIndex*>(_fmIndex),
-                                        kmers,
+                                        kmer,
                                         indexPath.stem().string(),
                                         indexFileLocation,
                                         maxOcc,

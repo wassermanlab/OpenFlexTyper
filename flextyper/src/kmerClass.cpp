@@ -2,7 +2,6 @@
 #include <iostream>
 #include <map>
 #include <math.h>
-#include "typedefs.h"
 #include "kmerClass.h"
 
 
