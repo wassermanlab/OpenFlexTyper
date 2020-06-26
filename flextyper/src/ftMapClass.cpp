@@ -7,13 +7,12 @@
 namespace ft {
 
 FTMap::FTMap(FTProp ftProps)
-    : _ftProps(),
+    : _ftProps(ftProps),
       _kmerSet(),
       _querySet(),
       _qkMap(),
       _searchResults()
 {
-    _ftProps=ftProps;
 }
 
 //======================================================

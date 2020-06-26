@@ -7,7 +7,6 @@ KmerGenerator::KmerGenerator(KmerProperties *_kProperties)
     : _kProps(*_kProperties),
       _stats(&_ownedStats)
 {
-    _kProps = *_kProperties;
 }
 
 //======================================================================
