@@ -8,7 +8,7 @@
 #include <vector>
 #include "kmerClass.h"
 #include "queryClass.h"
-#include "propertiesClass.h"
+#include "ftPropsClass.h"
 #include "kmergenerator.h"
 
 
@@ -40,6 +40,8 @@ public:
     std::map<ft::QueryClass, std::set<KmerClass>> _qkMap;
     std::vector<std::set<ft::KmerClass>> _searchResults;
 
+
+    KmerProperties genKProps();
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
@@ -90,6 +92,7 @@ public:
 
 
 private:
+
 
 };
 

@@ -7,7 +7,7 @@
 #ifndef __IWRITER_BRIDGE_H__
 #define __IWRITER_BRIDGE_H__
 
-#include "FTMapClass.h"
+#include "ftMapClass.h"
 #include <experimental/filesystem>
 #include "utils.h"
 

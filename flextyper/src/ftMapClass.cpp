@@ -2,7 +2,7 @@
 #include <iostream>
 #include <map>
 #include <algorithm>
-#include "FTMapClass.h"
+#include "ftMapClass.h"
 
 namespace ft {
 
@@ -14,6 +14,19 @@ FTMap::FTMap(FTProp ftProps)
       _searchResults()
 
 {
+}
+
+//======================================================
+
+KmerProperties FTMap::genKProps(){
+    KmerProperties _kProps;
+    _kProps.setKmerSize(_ftProps.getKmerSize());
+    _kProps.setRefOnly(_ftProps.getRefOnlyFlag());
+    _kProps.setSearchType(_ftProps.getSearchType());
+    _kProps.setOverlap(_ftProps.getOverlap());
+    _kProps.setKmerCountsFlag(_ftProps.getKmerCountsFlag());
+    _kProps.setMaxKmers(_ftProps.getMaxKmers());
+    return _kProps;
 }
 
 //======================================================
@@ -48,8 +61,10 @@ void FTMap::addInputQueries(std::set<Query> inputQueries){
 //======================================================
 void FTMap::genQKMap(std::set<ft::QueryClass> queries){
 
+    KmerProperties _kProps = genKProps();
+    KmerGenerator _kmerGenerator(_kProps);
     for (ft::QueryClass query : queries){
-        std::set<std::string> kmers = (_kmerGenerator->genSearchKmers(query, this->getKmerProperties()));
+        std::set<std::string> kmers = (_kmerGenerator->genSearchKmers(query));
 
         //std::set<ft::KmerClass> kmerObjs = getKmerObjFromKmerString(kmers);
         //this->addQKSet(query, kmerObjs);

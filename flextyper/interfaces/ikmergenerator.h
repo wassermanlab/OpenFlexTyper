@@ -15,6 +15,7 @@ namespace ft {
 
 class IKmerGenerator {
 public:
+
     ////////////////////////////////////////////////////////////////////////
     /// \brief genSlidingSearchStrings
     /// \param queryString

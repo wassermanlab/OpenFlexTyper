@@ -23,6 +23,7 @@ const   std::string     SLIDING  = "SLIDING";   // search type sliding approach
 typedef std::pair<int, QueryType>  QIdT; // int is the query ID
 typedef std::tuple<uint, std::string, std::string, std::string>  Query;
 
+
 enum FlagType {
     ABK = 1, OCK, NUK // abundant, overcounted, non-unique
 };
@@ -64,6 +65,7 @@ public:
               uint maxKmers                 = UINT_MAX,
               uint totalKmers               = UINT_MAX,
               const fs::path& matchingReads = "");
+
 
 
 

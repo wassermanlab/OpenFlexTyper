@@ -1,7 +1,7 @@
 #include <set>
 #include <iostream>
 #include <map>
-#include "propertiesClass.h"
+#include "ftPropsClass.h"
 
 namespace ft {
 

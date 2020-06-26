@@ -3,7 +3,7 @@
 #include <map>
 
 #include "queryClass.h"
-#include "propertiesClass.h"
+#include "ftPropsClass.h"
 
 namespace ft {
 

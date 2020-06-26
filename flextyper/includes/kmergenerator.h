@@ -9,19 +9,50 @@
 #include <set>
 #include <string>
 #include <map>
-#include "FTMapClass.h"
+
 #include "ikmergenerator.h"
-#include "typedefs.h"
+
 #include "stats.h"
 
 namespace ft {
+
+class KmerProperties {
+public:
+    /// Properties ///
+    uint _kmerSize;
+    bool _refOnly;
+    SearchType _searchType;
+    uint _overlap;
+    uint _stride;
+    bool _kmerCounts;
+    uint _maxKmers;
+
+    /// Getters ///
+    uint getKmerSize(){return this->getKmerSize();};
+    bool getRefOnly(){return this->_refOnly;};
+    SearchType getSearchType(){return this->_searchType;};
+    uint getOverlap(){return this->_overlap;};
+    uint getStride(){return this->_stride;};
+    bool getKmerCountsFlag(){return this->_kmerCounts;};
+    uint getMaxKmers(){return this->getMaxKmers();};
+
+    /// Setters ///
+    void setKmerSize(uint kmerSize){if (kmerSize != this->getOverlap()){_kmerSize = kmerSize;}};
+    void setRefOnly(bool refOnly){if (refOnly != this->getRefOnly()){_refOnly = refOnly;}};
+    void setSearchType(SearchType searchType){if (searchType != this->getSearchType()){_searchType = searchType;}};
+    void setOverlap(uint overlap){if (overlap != this->getOverlap()){_overlap = overlap;}};
+    void setStride(uint stride){if (stride != this->getStride()){_stride = stride;}};
+    void setKmerCountsFlag(bool kmerCounts){if (kmerCounts != this->getKmerCountsFlag()){_kmerCounts = kmerCounts;}};
+    void setMaxKmers(uint maxKmers){if (maxKmers != this->getMaxKmers()){_maxKmers = maxKmers;}};
+};
 
 class KmerGenerator : public IKmerGenerator {
 public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief KmerGenerator
     ////////////////////////////////////////////////////////////////////////
-    KmerGenerator();
+    KmerGenerator(KmerProperties _kProps);
+    KmerProperties _kProps;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief ~KmerGenerator
@@ -35,7 +66,7 @@ public:
     /// \param stride
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual std::set<std::string> genSlidingSearchStrings(const std::string& queryString, uint kmerSize, uint stride, bool kmerCounts, uint maxKmers);
+    virtual std::set<std::string> genSlidingSearchStrings(const std::string& queryString);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief genCenteredSearchStrings
@@ -45,7 +76,7 @@ public:
     /// \param stride
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual std::set<std::string> genCenteredSearchStrings(const std::string& queryString, uint kmerSize, uint overlap, uint stride, bool kmerCounts, uint maxKmers);
+    virtual std::set<std::string> genCenteredSearchStrings(const std::string& queryString);
 
 
     ////////////////////////////////////////////////////////////////////////
@@ -59,8 +90,7 @@ public:
     /// \param crossover
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual std::set<std::string> genQueryClassKmers(ft::QueryClass queryObj, SearchType searchType, uint kmerSize, uint overlap,
-                                                 uint stride, bool kmerCounts, uint maxKmers);
+    virtual std::set<std::string> genQueryClassKmers(ft::QueryClass queryObj);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief genSearchKmers
@@ -68,19 +98,8 @@ public:
     /// \param Kmer Properties
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual std::set<std::string> genSearchKmers(ft::QueryClass queryObj, KmerProperties kmerProperties);
+    virtual std::set<std::string> genSearchKmers(ft::QueryClass queryObj);
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief KmerGenerator::addtoKmerMap
-    /// \param queryKmers
-    ////////////////////////////////////////////////////////////////////////
-    //void addQueriestoKmerMap(ft::FTMap& resultsMap, const std::set<QueryClass>& queryKmers);
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief KmerGenerator::genKmerMap
-    /// \param inputQueries
-    ////////////////////////////////////////////////////////////////////////
-    //void genKmerMap(std::set<Query>& inputQueries, ft::FTMap& ftMap);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief overrideStats

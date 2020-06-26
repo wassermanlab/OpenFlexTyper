@@ -1,8 +1,8 @@
 #include <QGuiApplication>
 #include <QCommandLineParser>
 #include <iostream>
-#include "propertiesClass.h"
-#include "ftsearch.h"
+#include "ftPropsClass.h"
+#include "ftSearch.h"
 #include <QSettings>
 #include "fmindex.h"
 

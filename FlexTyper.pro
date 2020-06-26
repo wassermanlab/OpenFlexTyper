@@ -28,9 +28,9 @@ INCLUDEPATH += flextyper/includes                     \
 
 HEADERS    += flextyper/includes/utils.h              \
     flextyper/includes/ftMapClass.h \
-              flextyper/includes/ftsearch.h           \
+    flextyper/includes/ftPropsClass.h \
+    flextyper/includes/ftSearch.h \
     flextyper/includes/kmerClass.h \
-    flextyper/includes/propertiesClass.h \
     flextyper/includes/queryClass.h \
               fmindex/includes/ifmindex.h             \
               fmindex/includes/fmindex.h              \
@@ -52,12 +52,12 @@ HEADERS    += flextyper/interfaces/ikmergenerator.h   \
 
 SOURCES     += flextyper/src/stats.cpp                \
     flextyper/src/ftMapClass.cpp \
+    flextyper/src/ftPropsClass.cpp \
+    flextyper/src/ftSearch.cpp \
     flextyper/src/kmerClass.cpp \
-    flextyper/src/propertiesClass.cpp \
     flextyper/src/queryClass.cpp \
                flextyper/src/utils.cpp                \
                fmindex/src/fmindex.cpp                \
-               flextyper/src/ftsearch.cpp             \
                flextyper/src/main.cpp                 \
                flextyper/src/writerbridge.cpp         \
                flextyper/src/kmergenerator.cpp        \

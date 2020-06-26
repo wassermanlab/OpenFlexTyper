@@ -3,14 +3,20 @@
 
 namespace ft {
 //======================================================================
-KmerGenerator::KmerGenerator()
-    : _stats(&_ownedStats)
+KmerGenerator::KmerGenerator(KmerProperties _kProps)
+    : _kProps(_kProps),
+      _stats(&_ownedStats)
 {
 }
 
 //======================================================================
-std::set<std::string> KmerGenerator::genSlidingSearchStrings(const std::string& queryString, uint kmerSize, uint stride, bool kmerCounts, uint maxKmers)
+std::set<std::string> KmerGenerator::genSlidingSearchStrings(const std::string& queryString)
 {
+
+    uint kmerSize = _kProps.getKmerSize();
+    uint stride = _kProps.getStride();
+    bool kmerCounts = _kProps.getKmerCountsFlag();
+    uint maxKmers = _kProps.getMaxKmers();
     std::set<std::string> searchStrings;
     if (queryString.length() < kmerSize)
         return searchStrings;
@@ -38,9 +44,14 @@ std::set<std::string> KmerGenerator::genSlidingSearchStrings(const std::string& 
 }
 
 //======================================================================
-std::set<std::string> KmerGenerator::genCenteredSearchStrings(const std::string& queryString, uint kmerSize, uint overlap, uint stride, bool kmerCounts, uint maxKmers)
+std::set<std::string> KmerGenerator::genCenteredSearchStrings(const std::string& queryString)
 {
     std::set<std::string> searchStrings;
+    uint kmerSize = _kProps.getKmerSize();
+    uint stride = _kProps.getStride();
+    bool kmerCounts = _kProps.getKmerCountsFlag();
+    uint maxKmers = _kProps.getMaxKmers();
+    uint overlap = _kProps.getOverlap();
     uint count = 0;
 
     if (queryString.length() < kmerSize)
@@ -74,15 +85,14 @@ std::set<std::string> KmerGenerator::genCenteredSearchStrings(const std::string&
 }
 
 //======================================================================
-std::set<std::string> KmerGenerator::genQueryClassKmers(ft::QueryClass queryObj, SearchType searchType, uint kmerSize, uint overlap,
-                                             uint stride, bool kmerCounts, uint maxKmers)
+std::set<std::string> KmerGenerator::genQueryClassKmers(ft::QueryClass queryObj)
 {    
     // generate search queries
     std::set<std::string> searchStrings;
-    if (searchType == CENTERED) {
-        searchStrings = genCenteredSearchStrings(queryObj.getQueryString(), kmerSize, overlap, stride, kmerCounts, maxKmers);
+    if (_kProps.getSearchType() == CENTERED) {
+        searchStrings = genCenteredSearchStrings(queryObj.getQueryString());
     } else {
-        searchStrings = genSlidingSearchStrings(queryObj.getQueryString(), kmerSize, stride, kmerCounts, maxKmers);
+        searchStrings = genSlidingSearchStrings(queryObj.getQueryString());
     }
 
     if (searchStrings.empty()) {
@@ -96,15 +106,14 @@ std::set<std::string> KmerGenerator::genQueryClassKmers(ft::QueryClass queryObj,
 std::set<std::string> KmerGenerator::genSearchKmers(ft::QueryClass queryObj)
 {
 
-    SearchType searchType = kmerProperties.getSearchType();
-    uint kmerSize = kmerProperties.getKmerSize();
-    uint overlap = kmerProperties.getOverlap();
-    uint stride = kmerProperties.getStride();
-    bool kmerCounts = kmerProperties.getKmerCountsFlag();
-    uint maxKmers = kmerProperties.getMaxKmers();
+    SearchType searchType = _kProps.getSearchType();
+    uint kmerSize = _kProps.getKmerSize();
+    uint overlap = _kProps.getOverlap();
+    uint stride = _kProps.getStride();
+    bool kmerCounts = _kProps.getKmerCountsFlag();
+    uint maxKmers = _kProps.getMaxKmers();
 
-    std::set<std::string> searchKmers = genQueryClassKmers(queryObj, searchType, kmerSize, overlap,
-                                                 stride, kmerCounts, maxKmers);
+    std::set<std::string> searchKmers = genQueryClassKmers(queryObj);
 //    if (maxTotalKmers > 0 && kmerMap.size() > maxTotalKmers) {
 //        kmerMap.clear();
 //        std::cout << "Error: Too many kmers generated" << std::endl;

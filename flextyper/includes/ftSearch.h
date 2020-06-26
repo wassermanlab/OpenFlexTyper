@@ -9,7 +9,7 @@
 #define __FM_SEARCH_H__
 
 #include <experimental/filesystem>
-#include "FTMapClass.h"
+#include "ftMapClass.h"
 #include "utils.h"
 #include "stats.h"
 #include "writerbridge.h"
