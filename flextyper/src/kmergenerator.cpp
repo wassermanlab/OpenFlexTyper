@@ -3,11 +3,11 @@
 
 namespace ft {
 //======================================================================
-KmerGenerator::KmerGenerator(KmerProperties _kProperties)
-    : _kProps(_kProperties),
+KmerGenerator::KmerGenerator(KmerProperties *_kProperties)
+    : _kProps(*_kProperties),
       _stats(&_ownedStats)
 {
-    _kProps = _kProperties;
+    _kProps = *_kProperties;
 }
 
 //======================================================================
@@ -87,15 +87,15 @@ std::set<std::string> KmerGenerator::genCenteredSearchStrings(const std::string&
 
 
 //======================================================================
-std::set<std::string> KmerGenerator::genSearchKmers(ft::QueryClass queryObj)
+std::set<std::string> KmerGenerator::genSearchKmers(ft::QueryClass* queryObj)
 {
     std::set<std::string> searchKmers;
     // generate search queries
 
     if (_kProps.getSearchType() == CENTERED) {
-        searchKmers = genCenteredSearchStrings(queryObj.getQueryString());
+        searchKmers = genCenteredSearchStrings(queryObj->getQueryString());
     } else {
-        searchKmers = genSlidingSearchStrings(queryObj.getQueryString());
+        searchKmers = genSlidingSearchStrings(queryObj->getQueryString());
     }
 
     if (searchKmers.empty()) {

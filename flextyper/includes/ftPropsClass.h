@@ -67,9 +67,6 @@ public:
               uint totalKmers               = UINT_MAX,
               const fs::path& matchingReads = "");
 
-
-
-
     ////////////////////////////////////////////////////////////////////////
     /// \brief properties
     ////////////////////////////////////////////////////////////////////////
@@ -97,29 +94,12 @@ public:
     fs::path _pathToQueryFile;
     fs::path _indexFileLocation;
     fs::path _outputFolder;
-    fs::path _matchingReads;
+    fs::path _matchingReadFQ;
     fs::path _inputFastQ;
     fs::path _outputFile;
     std::set<fs::path> _indexSet;
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief File getters and setters
-    ////////////////////////////////////////////////////////////////////////
-    void setPathToQueryFile( fs::path pathToQueryFile);
-    void setIndexFileLocation(fs::path indexFileLocation);
-    void setOutputFolder(fs::path outputFolder);
-    void setMatchingReads(fs::path matchingReads);
-    void setInputFastQ(fs::path inputFastQ);
-    void setOutputFile(fs::path outputFile);
-    void setIndexSet(std::set<fs::path>);
 
-    fs::path getPathToQueryFile();
-    fs::path getIndexFileLocation();
-    fs::path getOutputFolder();
-    fs::path getMatchingReads();
-    fs::path getInputFastQ();
-    fs::path getPathToOutputFile();
-    std::set<fs::path> getIndexSet();
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Parameter getters and setters
@@ -168,7 +148,24 @@ public:
     void setCrossoverFlag(bool crossover);
     void setPrintSearchTimeFlag(bool printSearchTime);
 
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief File getters and setters
+    ////////////////////////////////////////////////////////////////////////
+    void setPathToQueryFile( fs::path pathToQueryFile);
+    void setIndexFileLocation(fs::path indexFileLocation);
+    void setOutputFolder(fs::path outputFolder);
+    void setMatchingReadFQ(fs::path matchingReadFQ);
+    void setInputFastQ(fs::path inputFastQ);
+    void setOutputFile(fs::path outputFile);
+    void setIndexSet(std::set<fs::path>);
 
+    fs::path getPathToQueryFile();
+    fs::path getIndexFileLocation();
+    fs::path getOutputFolder();
+    fs::path getMatchingReadFQ();
+    fs::path getInputFastQ();
+    fs::path getOutputFile();
+    std::set<fs::path> getIndexSet();
 };
 
 

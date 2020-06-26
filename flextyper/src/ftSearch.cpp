@@ -41,7 +41,7 @@ void FTSearch::init(FTProp ftProps)
     ft::FTMap ftMap(ftProps);
     checkInputFastQ(ftProps);
 
-    std::ifstream in(ftProps.getMatchingReads(), std::ifstream::ate | std::ifstream::binary);
+    std::ifstream in(ftProps.getMatchingReadFQ(), std::ifstream::ate | std::ifstream::binary);
     long long offset = in.tellg();
     uint lines = offset / (ftProps.getReadLength() + 1);
 
@@ -53,7 +53,7 @@ void FTSearch::init(FTProp ftProps)
     std::set<Query> inputQueries = _queryExtractor->getInputQueries(ftProps.getRefOnlyFlag(), ftProps.getCrossoverFlag(), ftProps.getPathToQueryFile());
 
     ftMap.addInputQueries(inputQueries);
-    inputQueries.clear();
+
 
     ftMap.getQKMap();
 

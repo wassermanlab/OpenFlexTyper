@@ -6,7 +6,6 @@
 #include <map>
 #include "ftPropsClass.h"
 
-
 namespace ft {
 
 class QueryClass

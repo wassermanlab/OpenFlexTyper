@@ -8,6 +8,7 @@
 #define __IWRITER_BRIDGE_H__
 
 #include "ftMapClass.h"
+#include "queryClass.h"
 #include <experimental/filesystem>
 #include "stats.h"
 #include "utils.h"

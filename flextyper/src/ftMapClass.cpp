@@ -30,28 +30,29 @@ KmerProperties* FTMap::genKProps(){
 
 //======================================================
 void FTMap::addInputQueries(std::set<Query> inputQueries){
+
     for (auto inputQuery : inputQueries) {
         std::string refString = std::get<1>(inputQuery);
         int qID = std::get<0>(inputQuery);
 
         //Create Ref Query
-        ft::QueryClass tmpRefQuery(qID, ft::QueryType::REF);
-        tmpRefQuery.setQueryString(refString);
+        ft::QueryClass *tmpRefQuery = new ft::QueryClass(qID, ft::QueryType::REF);
+        tmpRefQuery->setQueryString(refString);
         this->addQuery(tmpRefQuery);
 
         // Create Alt Query
         if (!_ftProps.getRefOnlyFlag()) {
             std::string altString = std::get<2>(inputQuery);
-            ft::QueryClass tmpAltQuery(qID, ft::QueryType::ALT);
-            tmpAltQuery.setQueryString(altString);
+            ft::QueryClass *tmpAltQuery = new ft::QueryClass(qID, ft::QueryType::ALT);
+            tmpAltQuery->setQueryString(altString);
             this->addQuery(tmpAltQuery);
         }
 
         // Create Crossover Query
-        if (_ftProps.getCrossoverFlag() && !tmpRefQuery.getQueryString().empty() && !std::get<2>(inputQuery).empty()) {
+        if (_ftProps.getCrossoverFlag() && !tmpRefQuery->getQueryString().empty() && !std::get<2>(inputQuery).empty()) {
             std::string croString = std::get<3>(inputQuery);
-            ft::QueryClass tmpCroQuery(qID, ft::QueryType::CRO);
-            tmpCroQuery.setQueryString(croString);
+            ft::QueryClass *tmpCroQuery= new ft::QueryClass(qID, ft::QueryType::CRO);
+            tmpCroQuery->setQueryString(croString);
             this->addQuery(tmpCroQuery);
         }
     }
@@ -61,7 +62,7 @@ void FTMap::addInputQueries(std::set<Query> inputQueries){
 void FTMap::genQKMap(std::set<ft::QueryClass> queries){
 
     KmerProperties* _kProps = genKProps();
-    KmerGenerator  _kmerGenerator(*_kProps);
+    KmerGenerator  _kmerGenerator(_kProps);
     for (ft::QueryClass query : queries){
         std::set<std::string> kmers = (_kmerGenerator.genSearchKmers(query));
 
@@ -152,11 +153,11 @@ void FTMap::addKmer(ft::KmerClass kmer)
 }
 
 //======================================================
-void FTMap::addQuery(ft::QueryClass query)
+void FTMap::addQuery(ft::QueryClass *query)
 {
-    ft::QIdT testQIDT = query.getQIdT();
-    if (checkForQIDT(testQIDT)==false){
-        this->_querySet.insert(query);
+    ft::QIdT testQIDT = query->getQIdT();
+    if (this->checkForQIDT(testQIDT)==false){
+        this->_querySet.insert(*query);
     } else {
         std::cout << "Query not added, query already exists" << std::endl;
     }

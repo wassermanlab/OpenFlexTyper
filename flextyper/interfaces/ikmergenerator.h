@@ -10,6 +10,8 @@
 #include <string>
 #include <map>
 #include "ftMapClass.h"
+#include "stats.h"
+#include "istats.h"
 
 namespace ft {
 
@@ -45,7 +47,7 @@ public:
     /// \param stride
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual std::set<std::string> genSearchKmers(ft::QueryClass queryObj) = 0;
+    virtual std::set<std::string> genSearchKmers(const ft::QueryClass& queryObj) = 0;
 
 };
 }

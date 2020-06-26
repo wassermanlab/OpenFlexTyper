@@ -57,6 +57,7 @@ void ResultProcessor::processResults(ft::FTMap& ftMap)
     //processIndexPos(ftMap, readLen);
 
     // std::cout << "lines : " << readlines << std::endl;
+    uint readlines;
 
     if (readlines % 2 != 0) {
         std::cout << "error with the number of reads\n";

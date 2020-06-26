@@ -34,7 +34,7 @@ std::set<Query> QueryExtractor::getInputQueries(bool refOnly, bool crossover, co
     // query id, ref, alt, var pos
     //typedef std::tuple<uint, std::string, std::string, uint> query;
 
-    std::set<Query> inputQueries;
+    std::set<Query> *inputQueries = new std::set<Query> ;
 
     // std::cout << "path to query file : " << _inputQueryFile << std::endl;
     std::ifstream queryFileStream(pathToQueryFile);
@@ -60,14 +60,14 @@ std::set<Query> QueryExtractor::getInputQueries(bool refOnly, bool crossover, co
         }
 
         if (!crossover) {
-            getInputQueriesRoutine(refSequence, altSequence, fileIndex, inputQueries);
+            getInputQueriesRoutine(refSequence, altSequence, fileIndex, *inputQueries);
         } else {
-            getStartAndEndPointSequences(refSequence, altSequence, fileIndex, inputQueries);
+            getStartAndEndPointSequences(refSequence, altSequence, fileIndex, *inputQueries);
         }
     }
 
     queryFileStream.close();
-    return inputQueries;
+    return (*inputQueries);
 }
 
 //======================================================================

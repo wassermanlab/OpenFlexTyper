@@ -1,9 +1,7 @@
 #include <set>
 #include <iostream>
 #include <map>
-
 #include "queryClass.h"
-#include "ftPropsClass.h"
 
 namespace ft {
 
@@ -11,6 +9,8 @@ QueryClass::QueryClass(int queryID, ft::QueryType queryType)
     : _qID(queryID),
       _qType(queryType)
 {
+    _qID = queryID;
+    _qType = queryType;
 }
 
 //=================== GETTERS =============================
