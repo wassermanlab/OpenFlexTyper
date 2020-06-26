@@ -143,8 +143,8 @@ int main(int argc, char** argv)
 		std::cerr << "you need to provide the read file location\n";
 		return 1;
 	}
-        ft::FTProp props;
-        props.init(pathToQueryFile, kmerSize, readLength,
+        ft::FTProp *props = new ft::FTProp();
+        props->init(pathToQueryFile, kmerSize, readLength,
                    indexFileLocation, outputFolder, refOnly,
                    searchType, multithread, inputFastQ, overlap,
                    returnMatchesOnly, kmerCounts, stride,
@@ -152,8 +152,8 @@ int main(int argc, char** argv)
                    ignoreNonUniqueKmers, crossover, printSearchTime,
                    maxKmersPerQuery, maxTotalKmers, matchingReads);
 
-        ft::FTSearch flexTyperInstance;
-        flexTyperInstance.init(props);
+        ft::FTSearch *flexTyperInstance = new ft::FTSearch();
+        flexTyperInstance->init(*props);
 
 
     } else if (command == "indexing") {

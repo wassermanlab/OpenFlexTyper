@@ -8,6 +8,7 @@
 #include <vector>
 #include "kmerClass.h"
 #include "queryClass.h"
+#include "ftKPropsClass.h"
 #include "ftPropsClass.h"
 #include "kmergenerator.h"
 
@@ -34,22 +35,22 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief properties
     ////////////////////////////////////////////////////////////////////////
-    FTProp _ftProps;
+    FTProp   _ftProps;
     std::set<ft::KmerClass> _kmerSet;
     std::set<ft::QueryClass> _querySet;
     std::map<ft::QueryClass, std::set<KmerClass>> _qkMap;
     std::vector<std::set<ft::KmerClass>> _searchResults;
 
 
-    KmerProperties genKProps();
+    ft::KmerProperties* genKProps();
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
-
     std::set<ft::KmerClass> getKmerSet();
     std::set<ft::QueryClass> getQuerySet();
     std::map<ft::QueryClass, std::set<KmerClass>> getQKMap();
     std::vector<std::set<ft::KmerClass>> getResults();
+    FTProp getFTProps();
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief setters
@@ -92,6 +93,7 @@ public:
 
 
 private:
+
 
 
 };

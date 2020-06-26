@@ -13,7 +13,7 @@
 #include <mutex>
 #include "ftMapClass.h"
 #include "stats.h"
-#include "typedefs.h"
+#include "ftPropsClass.h"
 
 namespace algo {
 

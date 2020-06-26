@@ -3,10 +3,11 @@
 
 namespace ft {
 //======================================================================
-KmerGenerator::KmerGenerator(KmerProperties _kProps)
-    : _kProps(_kProps),
+KmerGenerator::KmerGenerator(KmerProperties _kProperties)
+    : _kProps(_kProperties),
       _stats(&_ownedStats)
 {
+    _kProps = _kProperties;
 }
 
 //======================================================================
@@ -84,52 +85,23 @@ std::set<std::string> KmerGenerator::genCenteredSearchStrings(const std::string&
     return searchStrings;
 }
 
-//======================================================================
-std::set<std::string> KmerGenerator::genQueryClassKmers(ft::QueryClass queryObj)
-{    
-    // generate search queries
-    std::set<std::string> searchStrings;
-    if (_kProps.getSearchType() == CENTERED) {
-        searchStrings = genCenteredSearchStrings(queryObj.getQueryString());
-    } else {
-        searchStrings = genSlidingSearchStrings(queryObj.getQueryString());
-    }
-
-    if (searchStrings.empty()) {
-        std::cout << "Error during the ID creation !" << std::endl;
-    }
-    return searchStrings;
-}
-
 
 //======================================================================
 std::set<std::string> KmerGenerator::genSearchKmers(ft::QueryClass queryObj)
 {
+    std::set<std::string> searchKmers;
+    // generate search queries
 
-    SearchType searchType = _kProps.getSearchType();
-    uint kmerSize = _kProps.getKmerSize();
-    uint overlap = _kProps.getOverlap();
-    uint stride = _kProps.getStride();
-    bool kmerCounts = _kProps.getKmerCountsFlag();
-    uint maxKmers = _kProps.getMaxKmers();
+    if (_kProps.getSearchType() == CENTERED) {
+        searchKmers = genCenteredSearchStrings(queryObj.getQueryString());
+    } else {
+        searchKmers = genSlidingSearchStrings(queryObj.getQueryString());
+    }
 
-    std::set<std::string> searchKmers = genQueryClassKmers(queryObj);
-//    if (maxTotalKmers > 0 && kmerMap.size() > maxTotalKmers) {
-//        kmerMap.clear();
-//        std::cout << "Error: Too many kmers generated" << std::endl;
-//    }
+    if (searchKmers.empty()) {
+        std::cout << "Error during the ID creation !" << std::endl;
+    }
 
-//    if (ftMap.getIgnoreNonUniqueKmersFlag()) {
-//        std::cout << "initial size : " << kmerMap.size() << std::endl;
-//        for (auto it = kmerMap.begin(); it != kmerMap.end();) {
-//            if ((*it)._queryIDs.size() > 1){
-//                kmerMap.erase(it++);
-//            } else {
-//                ++it;
-//            }
-//        }
-//        std::cout << "final size : " << kmerMap.size() << std::endl;
-//    }
     return searchKmers;
 }
 

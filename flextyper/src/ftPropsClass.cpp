@@ -16,10 +16,12 @@ void FTProp::setMaxKmers(uint maxKmers){if (maxKmers != this->getMaxKmers()){_ma
 void FTProp::setMaxTotalKmers(uint maxTotalKmers){if (maxTotalKmers != this->getMaxTotalKmers()){_maxTotalKmers = maxTotalKmers;}}
 void FTProp::setMaxOcc(uint maxOcc){if (maxOcc != this->getMaxOcc()){_maxOccurences = maxOcc;}}
 void FTProp::setReadLength(uint readLength){if (readLength != this->getReadLength()){_readLength = readLength;}}
+void FTProp::setIndexSet(std::set<fs::path> indexes){if (indexes != this->getIndexSet()){_indexSet = indexes;}}
+void FTProp::setMaxThreads(uint maxThreads){if (maxThreads != this->getMaxThreads()){_maxThreads = maxThreads;}}
 
 SearchType FTProp::getSearchType(){return this->_searchType;}
 
-std::set<fs::path> FTProp::getSetOfIndexes(){return this->_IndexesSet;}
+std::set<fs::path> FTProp::getIndexSet(){return this->_indexSet;}
 
 uint FTProp::getKmerSize(){return this->_kmerSize;}
 uint FTProp::getOverlap(){return this->_overlap;}
@@ -28,6 +30,7 @@ uint FTProp::getMaxKmers(){return this->_maxKmers;}
 uint FTProp::getMaxTotalKmers(){return this->_maxTotalKmers;}
 uint FTProp::getMaxOcc(){return this->_maxOccurences;}
 uint FTProp::getReadLength(){return this->_readLength;}
+uint FTProp::getMaxThreads(){return this->_maxThreads;}
 
 //=============== FLAGS ==============================
 bool FTProp::getRefOnlyFlag(){return this->_refOnly;}
@@ -60,7 +63,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
                   bool kmerCounts,
                   uint stride,
                   uint maxOccurences,
-                  uint threadNumber,
+                  uint maxThreads,
                   bool flagOverCountedKmers,
                   bool ignoreNonUniqueKmers,
                   bool crossover,
@@ -83,7 +86,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
     this->setKmerCountsFlag(kmerCounts);
     this->setStride(stride);
     this->setMaxOcc(maxOccurences);
-    this->setThreadNumber(threadNumber);
+    this->setMaxThreads(maxThreads);
     this->setOverCountedFlag(flagOverCountedKmers);
     this->setIgnoreNonUniqueKmersFlag(ignoreNonUniqueKmers);
     this->setCrossoverFlag(crossover);

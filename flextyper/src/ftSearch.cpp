@@ -48,7 +48,7 @@ void FTSearch::init(FTProp ftProps)
     checkOutputFile(ftProps);
 
     std::set<fs::path> setOfIndexes = _utils->getSetOfIndexes();
-    ftProps.setSetOfIndexes(setOfIndexes);
+    ftProps.setIndexSet(setOfIndexes);
 
     std::set<Query> inputQueries = _queryExtractor->getInputQueries(ftProps.getRefOnlyFlag(), ftProps.getCrossoverFlag(), ftProps.getPathToQueryFile());
     ftMap.addInputQueries(inputQueries);
@@ -56,7 +56,7 @@ void FTSearch::init(FTProp ftProps)
 
     ftMap.getQKMap();
 
-    _kmerGenerator->genKmerMap(inputQueries, ftMap);
+
 
 
     std::cout << "\nsearching..." << std::endl;
@@ -67,22 +67,21 @@ void FTSearch::init(FTProp ftProps)
         std::cout << "searching with " << setOfIndexes.size() << " indexes" << std::endl;
         std::cout << "offset : " << offset << std::endl;
         offset = 0;
-        _finder->searchMonoIndex(ftMap, indexFile, indexFileLocation, multithread, threadNumber, printSearchTime, offset);
+        _finder->searchMonoIndex(ftMap, indexFile, offset);
 
     } else if (setOfIndexes.size() > 1) {
 
         offset /= setOfIndexes.size();
         std::cout << "offset : " << offset << std::endl;
         std::cout << "searching with " << setOfIndexes.size() << " indexes" << std::endl;
-        _finder->searchMultipleIndexes(ftMap, setOfIndexes, indexFileLocation, multithread, threadNumber,
-                                       printSearchTime, offset);
+        _finder->searchMultipleIndexes(ftMap, setOfIndexes, offset);
     }
 
     fs::path indexMapFile = indexFile;
     indexMapFile += ".map";
 
-    _resultProcessor->processResults(ftMap, readLength, lines, matchingReads);
-    _writerBridge->saveQueryOutput(ftMap, pathToQueryFile, queryOutputFile);
+    _resultProcessor->processResults(ftMap);
+    _writerBridge->saveQueryOutput(ftMap);
 }
 
 //======================================================================

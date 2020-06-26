@@ -28,6 +28,7 @@ enum FlagType {
     ABK = 1, OCK, NUK // abundant, overcounted, non-unique
 };
 
+
 class FTProp {
 public:
     ////////////////////////////////////////////////////////////////////////
@@ -57,7 +58,7 @@ public:
               bool kmerCounts               = false ,
               uint stride                   = 10    ,
               uint maxOccurences            = 200   ,
-              uint threadNumber             = 1     ,
+              uint maxThreads             = 1     ,
               bool flagOverCountedKmers     = false ,
               bool ignoreNonUniqueKmers     = true  ,
               bool crossover                = false ,
@@ -80,7 +81,7 @@ public:
     uint _maxKmers;
     uint _readLength;
     uint _maxOccurences ;
-    uint _threadNumber;
+    uint _maxThreads;
     uint _maxKmersPerQuery;
     uint _maxTotalKmers;
 
@@ -99,7 +100,7 @@ public:
     fs::path _matchingReads;
     fs::path _inputFastQ;
     fs::path _outputFile;
-    std::set<fs::path> _indexesSet;
+    std::set<fs::path> _indexSet;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief File getters and setters
@@ -110,7 +111,7 @@ public:
     void setMatchingReads(fs::path matchingReads);
     void setInputFastQ(fs::path inputFastQ);
     void setOutputFile(fs::path outputFile);
-    void setSetOfIndexes(std::set<fs::path>);
+    void setIndexSet(std::set<fs::path>);
 
     fs::path getPathToQueryFile();
     fs::path getIndexFileLocation();
@@ -118,7 +119,7 @@ public:
     fs::path getMatchingReads();
     fs::path getInputFastQ();
     fs::path getPathToOutputFile();
-    std::set<fs::path> getSetOfIndexes(){return this->_indexesSet;}
+    std::set<fs::path> getIndexSet();
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Parameter getters and setters
@@ -132,7 +133,7 @@ public:
     uint getMaxKmers();
     uint getReadLength();
     uint getMaxOcc();
-    uint getThreadNumber();
+    uint getMaxThreads();
     uint getMaxKmersPerQuery();
     uint getMaxTotalKmers();
 
@@ -142,7 +143,7 @@ public:
     void setMaxKmers(uint maxKmers);
     void setReadLength(uint readlength);
     void setMaxOcc(uint maxOcc);
-    void setThreadNumber(uint threadNumber);
+    void setMaxThreads(uint maxThreads);
     void setMaxKmersPerQuery(uint maxKmersPerQ);
     void setMaxTotalKmers(uint maxTotalKmers);
 
@@ -170,10 +171,8 @@ public:
 
 };
 
+
+
 }
-
-
-
-
 
 #endif // PROPERTIESCLASS_H

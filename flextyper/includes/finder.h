@@ -53,8 +53,7 @@ public:
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
     void searchMonoIndex(ft::FTMap& ftMap, const fs::path& indexPath,
-                         const std::string& indexFileLocation, bool parallel, uint threadNumber,
-                         bool printSearchTime, long long offset);
+                          long long offset);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief searchMultipleIndexes
@@ -67,8 +66,7 @@ public:
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
     void searchMultipleIndexes(ft::FTMap& ftMap, const std::set<fs::path>& indexPaths,
-                               const std::string& indexFileLocation, bool parallel, uint threadNumber,
-                               bool printSearchTime, long long offset);
+                               long long offset);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Finder::addResultsFutures
@@ -95,8 +93,8 @@ public:
     /// \param maxOcc
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
-    void parallelSearch(FTMap& ftMap, const fs::path& indexFileLocation,
-                        fs::path indexPath, uint threadNumber, bool printSearchTime, long long offset);
+    void parallelSearch(FTMap& ftMap,
+                        fs::path indexPath, long long offset);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief sequentialSearch searches for kmers inside a single FmIndex
@@ -108,8 +106,7 @@ public:
     /// \param maxOcc
     ////////////////////////////////////////////////////////////////////////
     void sequentialSearch(ft::FTMap& ftMap,
-                          const fs::path& indexFileLocation,
-                          fs::path indexPath, bool printSearchTime, long long offset);
+                          fs::path indexPath,long long offset);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief multipleIndexesParallelSearch searches for kmers inside multiple
@@ -121,8 +118,8 @@ public:
     /// \param maxOcc
     /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
-    void multipleIndexesParallelSearch(ft::FTMap& ftMap, const fs::path& indexFileLocation,
-                                       const std::set<fs::path>& indexPath, uint threadNumber, bool printSearchTime, long long offset);
+    void multipleIndexesParallelSearch(ft::FTMap& ftMap,
+                                       const std::set<fs::path>& indexPath,  long long offset);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief multipleIndexesSequentialSearch searches for kmers inside a multiple
@@ -133,8 +130,8 @@ public:
     /// \param indexPath
     /// \param maxOcc
     ////////////////////////////////////////////////////////////////////////
-    void multipleIndexesSequentialSearch(ft::FTMap& ftMap, const fs::path& indexFileLocation,
-                                         std::set<fs::path> indexPath, bool printSearchTime, long long offset);
+    void multipleIndexesSequentialSearch(ft::FTMap& ftMap,
+                                         std::set<fs::path> indexPath, long long offset);
 
 private:
     ////////////////////////////////////////////////////////////////////////

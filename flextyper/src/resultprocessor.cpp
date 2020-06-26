@@ -1,4 +1,5 @@
 #include "resultprocessor.h"
+#include "ftPropsClass.h"
 
 namespace ft {
 //======================================================================
@@ -38,18 +39,19 @@ ResultProcessor::ResultProcessor()
 //}
 
 //======================================================================
-void ResultProcessor::processResults(ft::FTMap& ftMap, uint readLen, uint readlines, const fs::path& matchingReads)
+void ResultProcessor::processResults(ft::FTMap& ftMap)
 {
 
-    ftMap.setReadLength(readLen);
-    std::vector<std::set<ft::KmerClass>> resultsMap = ftMap.getResultsMap();
+    FTProp _ftProps = ftMap.getFTProps();
+
+    std::vector<std::set<ft::KmerClass>> resultsMap = ftMap.getResults();
 
     //for each set of results:
         // covertPosToReadID
         // Add ReadIDs to QueryMap
     for (auto indexResult : resultsMap)
     {
-        ftMap.processIndexResults(indexResult, ftMap.getReadLength());
+        ftMap.processIndexResults(indexResult, _ftProps.getReadLength());
     }
 
     //processIndexPos(ftMap, readLen);

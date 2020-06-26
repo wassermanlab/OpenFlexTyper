@@ -27,6 +27,7 @@ INCLUDEPATH += flextyper/includes                     \
                flextyper/interfaces                   \
 
 HEADERS    += flextyper/includes/utils.h              \
+    flextyper/includes/ftKPropsClass.h \
     flextyper/includes/ftMapClass.h \
     flextyper/includes/ftPropsClass.h \
     flextyper/includes/ftSearch.h \

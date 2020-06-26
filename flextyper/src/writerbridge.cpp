@@ -11,10 +11,13 @@ WriterBridge::WriterBridge()
 }
 
 //======================================================================
-void WriterBridge::saveQueryOutput(ft::FTMap& ftMap,
-                                   const fs::path& inputQueryFile,
-                                   const fs::path& outputQueryFile)
+void WriterBridge::saveQueryOutput(ft::FTMap& ftMap)
+
 {
+    FTProp ftProps = ftMap.getFTProps();
+    fs::path inputQueryFile = ftProps.getPathToQueryFile();
+    fs::path outputQueryFile = ftProps.getOutputFolder();
+
     // save counts to output tsv
     std::fstream outputFileStream;
     outputFileStream.open(outputQueryFile, std::ios::out);
@@ -37,22 +40,22 @@ void WriterBridge::saveQueryOutput(ft::FTMap& ftMap,
         }
         if (line[0] == '#') {
             std::string header;
-            if (ftMap.getCrossoverFlag()) {
+            if (ftProps.getCrossoverFlag()) {
                 header = '\t' + std::string("start_point_count") + '\t' + std::string("crossover_count") + '\t' + std::string("endpoint_count");
-                if (ftMap.getIgnoreNonUniqueKmersFlag()) {
+                if (ftProps.getIgnoreNonUniqueKmersFlag()) {
                     header += '\t' + std::string("Start_Non_Unique_Kmers") + '\t' + std::string("Crossover_Non_Unique_Kmers") + '\t' + std::string("Endpoint_Non_Unique_Kmers");
                 }
-                if (ftMap.getOverCountedFlag()) {
+                if (ftProps.getOverCountedFlag()) {
                     header += '\t' + std::string("Start_Over_Counted_Kmers") + '\t' + std::string("Crossover_Over_Counted_Kmers") + '\t' + std::string("Endpoint_Over_Counted_Kmers");
                 }
 
             } else {
                 header = '\t' + std::string("Ref_count") + '\t' + std::string("Alt_count") ;
 
-                if (ftMap.getIgnoreNonUniqueKmersFlag()) {
+                if (ftProps.getIgnoreNonUniqueKmersFlag()) {
                     header += '\t' + std::string("Ref_Non_Unique_Kmers") + '\t' + std::string("Alt_Non_Unique_Kmers");
                 }
-                if (ftMap.getOverCountedFlag()) {
+                if (ftProps.getOverCountedFlag()) {
                     header += '\t' + std::string("Ref_Over_Counted_Kmers") + '\t' + std::string("Alt_Over_Counted_Kmers");
                 }
             }
@@ -107,21 +110,21 @@ void WriterBridge::saveQueryOutput(ft::FTMap& ftMap,
         }
 
         std::string counts;
-        if (ftMap.getCrossoverFlag()) {
+        if (ftProps.getCrossoverFlag()) {
             counts = '\t' + std::to_string(ref_count) + '\t' + std::to_string(cro_count) + '\t' + std::to_string(alt_count) ;
-            if (ftMap.getIgnoreNonUniqueKmersFlag()) {
+            if (ftProps.getIgnoreNonUniqueKmersFlag()) {
                 counts += '\t' + ref_NUK + '\t' + cro_NUK + '\t' + alt_NUK ;
             }
-            if (ftMap.getOverCountedFlag()) {
+            if (ftProps.getOverCountedFlag()) {
                counts += '\t' + ref_OCK + '\t' + cro_OCK + '\t' + alt_OCK ;
             }
 
         } else {
             counts = '\t' + std::to_string(ref_count) + '\t' + std::to_string(alt_count) ;
-            if (ftMap.getIgnoreNonUniqueKmersFlag()) {
+            if (ftProps.getIgnoreNonUniqueKmersFlag()) {
                 counts += '\t' + ref_NUK + '\t' + alt_NUK ;
             }
-            if (ftMap.getOverCountedFlag()) {
+            if (ftProps.getOverCountedFlag()) {
                counts += '\t' + ref_OCK + '\t' + alt_OCK ;
             }
 
@@ -131,7 +134,7 @@ void WriterBridge::saveQueryOutput(ft::FTMap& ftMap,
         // returnMatchesOnly doesnt work as we are just appending the lines, not creating a new file
 
 
-        if (ftMap.getMatchesOnlyFlag()){
+        if (ftProps.getMatchesOnlyFlag()){
             line.append(counts);
             //std::cout << line; //<< std::endl;
             outputFileStream << line;

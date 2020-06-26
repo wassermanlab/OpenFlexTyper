@@ -54,7 +54,7 @@ public:
     /// \param readLen
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    void processResults(ft::FTMap& ftMap, uint readLen, uint readlines, const fs::path& matchingReads = "");
+    void processResults(ft::FTMap& ftMap);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief overrideUtils
