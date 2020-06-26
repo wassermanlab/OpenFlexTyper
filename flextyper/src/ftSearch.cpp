@@ -8,7 +8,7 @@ FTSearch::FTSearch()
     : _utils(&_ownedUtils)
     , _stats(&_ownedStats)
     , _writerBridge(&_ownedWriterBridge)
-    , _kmerGenerator(&_ownedKmerGenerator)
+    //, _kmerGenerator(&_ownedKmerGenerator)
     , _finder(&_ownedFinder)
     , _resultProcessor(&_ownedResultProcessor)
     , _queryExtractor(&_ownedQueryExtractor)
@@ -51,6 +51,7 @@ void FTSearch::init(FTProp ftProps)
     ftProps.setIndexSet(setOfIndexes);
 
     std::set<Query> inputQueries = _queryExtractor->getInputQueries(ftProps.getRefOnlyFlag(), ftProps.getCrossoverFlag(), ftProps.getPathToQueryFile());
+
     ftMap.addInputQueries(inputQueries);
     inputQueries.clear();
 
@@ -103,10 +104,10 @@ void FTSearch::overrideWriterBridge(std::shared_ptr<IWriterBridge> writerBridge)
 }
 
 //======================================================================
-void FTSearch::overrideKmerGenerator(std::shared_ptr<IKmerGenerator> kmerGenerator)
-{
-    _kmerGenerator = kmerGenerator.get();
-}
+//void FTSearch::overrideKmerGenerator(std::shared_ptr<IKmerGenerator> kmerGenerator)
+//{
+//    _kmerGenerator = kmerGenerator.get();
+//}
 
 //======================================================================
 void FTSearch::overrideFinder(std::shared_ptr<IFinder> finder)

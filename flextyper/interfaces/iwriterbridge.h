@@ -9,6 +9,7 @@
 
 #include "ftMapClass.h"
 #include <experimental/filesystem>
+#include "stats.h"
 #include "utils.h"
 
 namespace fs = std::experimental::filesystem;

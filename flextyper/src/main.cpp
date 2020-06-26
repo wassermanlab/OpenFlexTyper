@@ -1,9 +1,9 @@
 #include <QGuiApplication>
 #include <QCommandLineParser>
+#include <QSettings>
 #include <iostream>
 #include "ftPropsClass.h"
 #include "ftSearch.h"
-#include <QSettings>
 #include "fmindex.h"
 
 static void usage()

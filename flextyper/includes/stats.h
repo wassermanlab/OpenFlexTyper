@@ -7,14 +7,12 @@
 
 #ifndef __STATS_H__
 #define __STATS_H__
-
+#include <iostream>
 #include <map>
 #include <string>
 #include <set>
 #include <experimental/filesystem>
 #include "istats.h"
-#include <iostream>
-#include "iutils.h"
 
 namespace fs = std::experimental::filesystem;
 

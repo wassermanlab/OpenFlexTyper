@@ -12,7 +12,7 @@
 #include "fmindex.h"
 #include "ifmindex.h"
 #include <algorithm>
-#include "ifinder.h"
+
 
 namespace fs = std::experimental::filesystem;
 

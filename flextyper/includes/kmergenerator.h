@@ -9,10 +9,9 @@
 #include <set>
 #include <string>
 #include <map>
-#include "ftKPropsClass.h"
 #include "ikmergenerator.h"
-
 #include "stats.h"
+#include "istats.h"
 
 namespace ft {
 

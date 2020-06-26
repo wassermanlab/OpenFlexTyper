@@ -12,8 +12,6 @@
 #include "utils.h"
 #include "iwriterbridge.h"
 
-
-
 namespace ft {
 
 class WriterBridge : public IWriterBridge {
