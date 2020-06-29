@@ -18,6 +18,8 @@ namespace ft {
 
 class IQueryExtractor {
 public:
+    virtual ~IQueryExtractor() {}
+
     ////////////////////////////////////////////////////////////////////////
     /// \brief getInputQueriesRoutine
     /// \param refSequence

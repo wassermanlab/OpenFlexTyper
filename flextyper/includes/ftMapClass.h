@@ -64,14 +64,14 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief Access functions for single kmer and queries
     ////////////////////////////////////////////////////////////////////////
-    bool checkForKmer(ft::KmerClass testKmerObject);
+    bool checkForKmer(std::string testKmer);
     bool checkForQIDT(ft::QIdT testQueryObject);
 
     ft::KmerClass* findKmer(std::string kmer);
     ft::KmerClass* getKmer(ft::KmerClass kmerObject);
     ft::QueryClass* getQuery(ft::QIdT qIDT);
 
-    void addKmer(ft::KmerClass kmerObject);
+    void addKmer(const ft::KmerClass& kmerObject);
     void addQuery(const ft::QueryClass& queryObject);
 
     void addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryType);

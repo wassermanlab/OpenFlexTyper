@@ -17,6 +17,7 @@ namespace ft {
 
 class IKmerGenerator {
 public:
+    virtual ~IKmerGenerator() {}
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief genSlidingSearchStrings

@@ -20,6 +20,7 @@ namespace ft {
 
 class IUtils {
 public:
+        virtual ~IUtils() {}
     ////////////////////////////////////////////////////////////////////////
     /// \brief  join
     /// \param  setOfStr

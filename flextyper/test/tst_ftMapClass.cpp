@@ -1,8 +1,9 @@
 #include <gtest/gtest.h>
+#include "queryClass.h"
 #include "ftMapClass.cpp"
 #include "ftPropsClass.cpp"
 #include "kmergenerator.cpp"
-#include "queryextractor.cpp"
+#include <fstream>
 #include <climits>
 
 using namespace std;
@@ -12,7 +13,7 @@ class TestFTMap : public ::testing::Test {
 protected:
     static void SetUpTestSuite()
     {
-        ofstream tmpFile ("tempConfig.ini");
+        ofstream tmpFile("tempConfig.ini");
         if (tmpFile.is_open()) {
             tmpFile <<  "queryFile 		= path_query.txt"
                         "kmerSize 		= 30"
@@ -62,8 +63,8 @@ TEST_F(TestFTMap, TestCheckKmer)
 
     ftMap.setKmers({ft::KmerClass("AAAA"),ft::KmerClass("TTTT")});
 
-    EXPECT_TRUE(ftMap.checkForKmer(ft::KmerClass("AAAA")));
-    EXPECT_FALSE(ftMap.checkForKmer(ft::KmerClass("AAAC")));
+    EXPECT_TRUE(ftMap.checkForKmer("AAAA"));
+    EXPECT_FALSE(ftMap.checkForKmer("AAAC"));
 }
 
 //======================================================================
@@ -72,7 +73,11 @@ TEST_F(TestFTMap, TestCheckQIDT)
     TEST_DESCRIPTION("check QIdT");
     //bool checkQIDT(ft::QIdT testQueryObject);
     ft::FTMap ftMap(*_ftProps);
-    ftMap.setQueries({ft::QueryClass(1, ft::QueryType::REF),ft::QueryClass(1, ft::QueryType::ALT), ft::QueryClass(2, ft::QueryType::REF)});
+    ft::QueryClass* testQuery1Ref = new ft::QueryClass(1, ft::QueryType::REF);
+    ft::QueryClass* testQuery1Alt = new ft::QueryClass(1, ft::QueryType::ALT);
+    ft::QueryClass* testQuery2Ref = new ft::QueryClass(2, ft::QueryType::REF);
+
+    ftMap.setQueries({*testQuery1Alt, *testQuery1Ref, *testQuery2Ref});
     ft::QIdT truetest = std::make_pair(1, ft::QueryType::REF);
     ft::QIdT truetest2 = std::make_pair(1, ft::QueryType::ALT);
     ft::QIdT truetest3 = std::make_pair(2, ft::QueryType::REF);
@@ -125,8 +130,8 @@ TEST_F(TestFTMap, TestAddKmer)
     ft::KmerClass testGoodKmer("AAAA");
     ft::KmerClass testBadKmer("AAAC");
     ftMap.addKmer(testGoodKmer);
-    EXPECT_TRUE(ftMap.checkForKmer(testGoodKmer));
-    EXPECT_FALSE(ftMap.checkForKmer(testBadKmer));
+    EXPECT_TRUE(ftMap.checkForKmer(testGoodKmer.getKmer()));
+    EXPECT_FALSE(ftMap.checkForKmer(testBadKmer.getKmer()));
 }
 //======================================================================
 TEST_F(TestFTMap, TestAddQuery)

@@ -15,6 +15,8 @@ namespace ft {
 
 class IResultProcessor {
 public:
+        virtual ~IResultProcessor() {}
+
     ////////////////////////////////////////////////////////////////////////
     /// \brief ResultProcessor::getIndexCounts
     /// \param readIDResults

@@ -10,17 +10,24 @@
 
 #include <experimental/filesystem>
 #include <climits>
+
 #include "finder.h"
 #include "ifinder.h"
+
 #include "ftMapClass.h"
+
 #include "utils.h"
 #include "iutils.h"
+
 #include "stats.h"
 #include "istats.h"
+
 #include "writerbridge.h"
 #include "iwriterbridge.h"
+
 #include "resultprocessor.h"
 #include "iresultprocessor.h"
+
 #include "queryextractor.h"
 #include "iqueryextractor.h"
 

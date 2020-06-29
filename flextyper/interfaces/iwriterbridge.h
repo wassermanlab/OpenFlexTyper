@@ -19,6 +19,7 @@ namespace ft {
 
 class IWriterBridge {
 public:
+        virtual ~IWriterBridge() {}
     ////////////////////////////////////////////////////////////////////////
     /// \brief saveQueryOutput
     /// \param allCounts

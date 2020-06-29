@@ -7,12 +7,12 @@
 #ifndef __WRITER_BRIDGE_H__
 #define __WRITER_BRIDGE_H__
 
-#include "ftMapClass.h"
+
 #include <experimental/filesystem>
 #include "utils.h"
 #include "iutils.h"
 #include "iwriterbridge.h"
-#include "queryClass.h"
+#include "ftMapClass.h"
 
 namespace ft {
 

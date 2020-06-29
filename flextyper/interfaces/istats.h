@@ -19,6 +19,7 @@ namespace ft {
 
 class IStats {
 public:
+    virtual ~IStats() {}
     ////////////////////////////////////////////////////////////////////////
     /// \brief printKmerCountToFile
     /// \param outputFile
