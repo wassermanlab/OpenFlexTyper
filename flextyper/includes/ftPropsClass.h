@@ -6,6 +6,7 @@
 #include <iostream>
 #include <map>
 #include <experimental/filesystem>
+#include <QSettings>
 
 namespace fs = std::experimental::filesystem;
 
@@ -66,6 +67,9 @@ public:
               uint maxKmers                 = UINT_MAX,
               uint totalKmers               = UINT_MAX,
               const fs::path& matchingReads = "");
+
+
+    void initFromQSettings (std::string configFile, bool printInputs);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief properties

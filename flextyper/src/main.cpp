@@ -79,7 +79,6 @@ int main(int argc, char** argv)
         QCommandLineOption config = QCommandLineOption(QStringList() << "c" << "config",   QCoreApplication::translate("main", "Please provide configuration file"));
         config.setValueName("config");
         parser.addOption(config);
-
         parser.process(aps);
 
         if (!parser.isSet(config))   {
@@ -90,67 +89,17 @@ int main(int argc, char** argv)
         // file locations
         std::string configFile    = parser.value(config).toStdString();
         std::cout << "\nconfig File                   : " << configFile   << std::endl;
-        QString m_sSettingsFile(configFile.c_str());
-        QSettings settings(m_sSettingsFile, QSettings::NativeFormat);
+        bool printInputs = true;
 
-        fs::path       pathToQueryFile         = settings.value("queryFile").toString().toStdString();
-        uint           kmerSize                = settings.value("kmerSize").toInt();
-        uint           readLength              = settings.value("readLength").toInt();
-        fs::path       indexFileLocation       = settings.value("indexFileLocation").toString().toStdString();
-        fs::path       outputFolder            = settings.value("outputFolder").toString().toStdString();
-        bool           refOnly                 = settings.value("refOnly").toBool();
-        ft::SearchType searchType              = static_cast<ft::SearchType>(settings.value("searchType").toString().toStdString()) ;
-        bool           multithread             = settings.value("multithread").toBool();
-        fs::path       matchingReads           = settings.value("matchingReads").toString().toStdString();
-        fs::path       inputFastQ              = settings.value("inputFastQ").toString().toStdString();
-        uint           overlap                 = settings.value("overlap").toInt();
-        bool           returnMatchesOnly       = settings.value("return_only_positive_matches").toBool();
-        bool           kmerCounts              = settings.value("kmerCounts").toBool();
-        uint           stride                  = settings.value("stride").toInt();
-        uint           maxOccurences           = settings.value("maxOccurences").toInt();
-        uint           threadNumber            = settings.value("threadNumber").toInt();
-        bool           flagOverCountedKmers = settings.value("flagOverCountedKmers").toBool();
-        bool           ignoreNonUniqueKmers    = settings.value("ignoreNonUniqueKmers").toBool();
-        bool           crossover               = settings.value("crossover").toBool();
-        bool           printSearchTime         = settings.value("printSearchTime").toBool();
-        uint           maxKmersPerQuery        = settings.value("maxKmersPerQuery").toInt();
-        uint           maxTotalKmers           = settings.value("maxTotalKmers").toInt();
-
-        std::cout << "pathToQueryFile               : " << pathToQueryFile.string() <<  std::endl;
-        std::cout << "kmerSize                      : " << kmerSize <<  std::endl;
-        std::cout << "readLength                    : " << readLength <<  std::endl;
-        std::cout << "indexFileLocation             : " << indexFileLocation.string() <<  std::endl;
-        std::cout << "outputFolder                  : " << outputFolder.string() <<  std::endl;
-        std::cout << "refOnly                       : " << refOnly <<  std::endl;
-        std::cout << "searchType                    : " << searchType <<  std::endl;
-        std::cout << "multithread                   : " << multithread <<  std::endl;
-        std::cout << "overlap                       : " << overlap <<  std::endl;
-        std::cout << "return_only_positive_matches  : " << returnMatchesOnly <<  std::endl;
-        std::cout << "kmerCounts                    : " << kmerCounts << std::endl;
-        std::cout << "stride                        : " << stride << std::endl;
-        std::cout << "maxOccurences                 : " << maxOccurences << std::endl;
-        std::cout << "threadNumber                  : " << threadNumber << std::endl;
-        std::cout << "flagOverCountedKmers          : " << flagOverCountedKmers << std::endl;
-        std::cout << "ignoreNonUniqueKmers          : " << ignoreNonUniqueKmers << std::endl;
-        std::cout << "printSearchTime               : " << printSearchTime << std::endl;
-		std::cout << "maxKmersPerQuery              : " << maxKmersPerQuery << std::endl;
-        std::cout << "maxTotalKmers                 : " << maxTotalKmers << std::endl;
-        std::cout << "matchinReads                  : " << matchingReads << std::endl;
-
-        createdIndexRepo(indexFileLocation);
-	    
-	if (matchingReads.empty()) {
-		std::cerr << "you need to provide the read file location\n";
-		return 1;
-	}
         ft::FTProp *props = new ft::FTProp();
-        props->init(pathToQueryFile, kmerSize, readLength,
-                   indexFileLocation, outputFolder, refOnly,
-                   searchType, multithread, inputFastQ, overlap,
-                   returnMatchesOnly, kmerCounts, stride,
-                   maxOccurences, threadNumber, flagOverCountedKmers,
-                   ignoreNonUniqueKmers, crossover, printSearchTime,
-                   maxKmersPerQuery, maxTotalKmers, matchingReads);
+        props->initFromQSettings(configFile, printInputs);
+
+        createdIndexRepo(props->getIndexFileLocation());
+	    
+        if (props->getMatchingReadFQ().empty()) {
+            std::cerr << "you need to provide the read file location\n";
+            return 1;
+        }
 
         ft::FTSearch *flexTyperInstance = new ft::FTSearch();
         flexTyperInstance->init(*props);

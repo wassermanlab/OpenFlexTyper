@@ -22,7 +22,7 @@ protected:
 //    virtual void SetUp() {
 //    }
 
-//    virtual void TeadDown() {
+//    virtual void TearDown() {
 //    }
 
 //    bool areFileIdentical(const string& f1, const string& f2) {

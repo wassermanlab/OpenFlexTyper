@@ -28,12 +28,33 @@ protected:
         ofstream index("test.fm9");
         if (index.is_open()) {}
         index.close();
+        ofstream tmpFile ("tempConfig.ini");
+        if (tmpFile.is_open()) {
+            tmpFile <<  "queryFile 		= path_query.txt"
+                        "kmerSize 		= 30"
+                        "overlap 		= 0"
+                        "stride 			= 5"
+                        "maxOccurences 		= 2000"
+                        "threadNumber 		= 512"
+                        "readLength 		= 150"
+                        "indexFileLocation 	= ."
+                        "outputFolder 		= ."
+                        "refOnly 		= False"
+                        "searchType 		= SLIDING"
+                        "multithread 		= True"
+                        "ignoreNonUniqueKmers 	= False"
+                        "kmerCounts 		= False"
+                        "matchingReads 		= MixedVirus_100.fasta";
+            tmpFile.close();
+        }
+        _props->initFromQSettings("tempConfig.ini", false);
     }
 
-    virtual void TeadDown() {
+    virtual void TearDown() {
     }
 
 public:
+    ft::FTProp* _props = new FTProp();
 };
 
 #define TEST_DESCRIPTION(desc) RecordProperty("description", desc)
@@ -51,16 +72,16 @@ TEST_F(TestFinder, searchSequentially)
     Finder _finder;
     _finder.overrideFmIndex(fmIndex);
 
-    ft::FTMap ftMap;
-    ftMap.setMaxOcc(200);
-    ftMap.setOverCountedFlag(false);
+    ft::FTMap ftMap(*_props);
+    _props->setMaxOcc(200);
+    _props->setOverCountedFlag(false);
     ft::KmerClass kmer("ATATTATATAT");
-    kmer.addQuery(std::make_pair(1, ft::QueryType::REF));
+
     ftMap.addKmer(kmer);
     fs::path indexPath ("./test.fm9");
     std::string indexFileLocation ("test.fm9");
     bool printSearchTime = false;
 
-    EXPECT_NO_THROW(_finder.sequentialSearch(ftMap, indexFileLocation, indexPath, printSearchTime, 0));
+    EXPECT_NO_THROW(_finder.sequentialSearch(ftMap, indexPath, 0));
 }
 }

@@ -34,7 +34,7 @@ protected:
         output_expected.close();
     }
 
-    virtual void TeadDown() {
+    virtual void TearDown() {
         // std::remove("output_expected.log");
     }
 

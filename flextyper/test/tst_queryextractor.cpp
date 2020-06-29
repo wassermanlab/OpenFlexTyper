@@ -30,7 +30,7 @@ protected:
         }
     }
 
-    virtual void TeadDown() {
+    virtual void TearDown() {
     }
 
 public:

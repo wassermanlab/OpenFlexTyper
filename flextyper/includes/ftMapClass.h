@@ -72,7 +72,7 @@ public:
     ft::QueryClass* getQuery(ft::QIdT qIDT);
 
     void addKmer(ft::KmerClass kmerObject);
-    void addQuery(ft::QueryClass queryObject);
+    void addQuery(const ft::QueryClass& queryObject);
 
     void addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryType);
 

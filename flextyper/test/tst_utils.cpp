@@ -31,7 +31,7 @@ protected:
         indexes.close();
     }
 
-    virtual void TeadDown() {
+    virtual void TearDown() {
     }
 
 public:
