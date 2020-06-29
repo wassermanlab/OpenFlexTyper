@@ -84,27 +84,28 @@ void WriterBridge::saveQueryOutput(ft::FTMap& ftMap)
         std::string cro_OCK;
 
         if (ftMap.checkForQIDT(std::make_pair(queryIndex, QueryType::REF))) {
-            QueryClass refQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::REF));
-            u_int ref_count = refQuery.getCount();
-            std::string ref_NUK =  _utils->joinString(refQuery.getFlagKmers(FlagType::NUK));
+            QueryClass *refQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::REF));
+            u_int ref_count = refQuery->getCount();
+            std::string ref_NUK =  _utils->joinString(refQuery->getFlagKmers(FlagType::NUK));
+            std::string ref_OCK =  _utils->joinString(refQuery->getFlagKmers(FlagType::OCK));
         } else {
             u_int ref_count = 0;
         }
 
         if (ftMap.checkForQIDT(std::make_pair(queryIndex, QueryType::ALT))) {
-            QueryClass altQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::ALT));
-            u_int alt_count = altQuery.getCount();
-            std::string alt_NUK =  _utils->joinString(altQuery.getFlagKmers(FlagType::NUK));
-            std::string alt_OCK =  _utils->joinString(altQuery.getFlagKmers(FlagType::OCK));
+            QueryClass *altQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::ALT));
+            u_int alt_count = altQuery->getCount();
+            std::string alt_NUK =  _utils->joinString(altQuery->getFlagKmers(FlagType::NUK));
+            std::string alt_OCK =  _utils->joinString(altQuery->getFlagKmers(FlagType::OCK));
         } else {
             u_int alt_count = 0;
         }
 
         if (ftMap.checkForQIDT(std::make_pair(queryIndex, QueryType::CRO))) {
-            QueryClass croQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::CRO));
-            u_int cro_count = croQuery.getCount();
-            std::string cro_NUK =  _utils->joinString(croQuery.getFlagKmers(FlagType::NUK));
-            std::string cro_OCK =  _utils->joinString(croQuery.getFlagKmers(FlagType::OCK));
+            QueryClass *croQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::CRO));
+            u_int cro_count = croQuery->getCount();
+            std::string cro_NUK =  _utils->joinString(croQuery->getFlagKmers(FlagType::NUK));
+            std::string cro_OCK =  _utils->joinString(croQuery->getFlagKmers(FlagType::OCK));
         } else {
             u_int cro_count = 0;
         }

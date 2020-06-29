@@ -9,7 +9,7 @@ Finder::Finder()
 }
 
 //======================================================================
-void Finder::searchMonoIndex(FTMap& ftMap, const fs::path& indexPath,
+void Finder::searchMonoIndex(FTMap &ftMap, const fs::path &indexPath,
                              long long offset)
 {
     if (ftMap.getFTProps().getMultithreadFlag()) {
@@ -20,7 +20,7 @@ void Finder::searchMonoIndex(FTMap& ftMap, const fs::path& indexPath,
 }
 
 //======================================================================
-void Finder::searchMultipleIndexes(FTMap& ftMap, const std::set<fs::path>& indexPaths,
+void Finder::searchMultipleIndexes(FTMap &ftMap, const std::set<fs::path> &indexPaths,
                                    long long offset)
 {
     if (ftMap.getFTProps().getMultithreadFlag()) {
@@ -32,7 +32,7 @@ void Finder::searchMultipleIndexes(FTMap& ftMap, const std::set<fs::path>& index
 
 //======================================================================
 
-void Finder::addResultsFutures(std::set<ft::KmerClass>& indexResults, ft::KmerClass& tmpResult, uint offset)
+void Finder::addResultsFutures(std::set<ft::KmerClass> &indexResults, ft::KmerClass &tmpResult, uint offset)
 {
     for (auto it = indexResults.begin(); it != indexResults.end();)
     {
@@ -50,19 +50,19 @@ void Finder::addResultsFutures(std::set<ft::KmerClass>& indexResults, ft::KmerCl
 }
 
 //======================================================================
-void Finder::parallelSearch(FTMap& ftMap, fs::path indexPath,
+void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
                             long long offset)
 {
     FTProp ftProps = ftMap.getFTProps();
     std::cout << "running search in a multi thread" << std::endl;
 
-    std::set<ft::KmerClass> kmerMap = ftMap.getKmerSet();
+    std::set<ft::KmerClass> *kmerMap = ftMap.getKmerSet();
 
     size_t i = 1;
     std::cout << "working on : " << indexPath << std::endl;
     std::set<ft::KmerClass> indexResults;
 
-    _fmIndex->setKmerMapSize(kmerMap.size());
+    _fmIndex->setKmerMapSize(kmerMap->size());
 
     try {
         _fmIndex->loadIndexFromFile(indexPath);
@@ -73,11 +73,11 @@ void Finder::parallelSearch(FTMap& ftMap, fs::path indexPath,
     // create a vector of futures
     std::vector<std::future<ft::KmerClass>> resultsFutures;
     size_t j = 0;
-    size_t k = kmerMap.size();
+    size_t k = kmerMap->size();
 
     // using a queue to easily control the flow of kmers
     std::queue<ft::KmerClass> kmerQueue;
-    for (ft::KmerClass kmer : kmerMap) {
+    for (ft::KmerClass kmer : *kmerMap) {
         kmerQueue.push(kmer);
     }
 
@@ -139,8 +139,8 @@ void Finder::parallelSearch(FTMap& ftMap, fs::path indexPath,
 }
 
 //======================================================================
-void Finder::multipleIndexesParallelSearch(FTMap& ftMap,
-                                           const std::set<fs::path>& indexPath,  long long offset)
+void Finder::multipleIndexesParallelSearch(FTMap &ftMap,
+                                           const std::set<fs::path> &indexPath,  long long offset)
 {
     std::cout << "Multi Indexes Parallel Search" << std::endl;
     FTProp ftProps = ftMap.getFTProps();
@@ -153,7 +153,7 @@ void Finder::multipleIndexesParallelSearch(FTMap& ftMap,
 
 
 
-    std::set<ft::KmerClass> kmerMap = ftMap.getKmerSet();
+    std::set<ft::KmerClass> *kmerMap = ftMap.getKmerSet();
 
     long long curr = 0;
 
@@ -168,8 +168,8 @@ void Finder::multipleIndexesParallelSearch(FTMap& ftMap,
 
 
 //======================================================================
-void Finder::sequentialSearch(ft::FTMap& ftMap,                              
-                              fs::path indexPath, long long offset)
+void Finder::sequentialSearch(ft::FTMap &ftMap,
+                              const fs::path &indexPath, long long offset)
 {
     std::cout << "running search in a single thread" << std::endl;
 
@@ -179,10 +179,10 @@ void Finder::sequentialSearch(ft::FTMap& ftMap,
     FTProp ftProps = ftMap.getFTProps();
 
 
-    std::set<ft::KmerClass> kmerMap = ftMap.getKmerSet();
+    std::set<ft::KmerClass> *kmerMap = ftMap.getKmerSet();
     size_t i = 0;
     std::cout << "working on : " << indexPath << std::endl;
-    _fmIndex->setKmerMapSize(kmerMap.size());
+    _fmIndex->setKmerMapSize(kmerMap->size());
 
     std::set<ft::KmerClass> indexResults;
 
@@ -195,7 +195,7 @@ void Finder::sequentialSearch(ft::FTMap& ftMap,
         std::cout << "Error ! " << indexPath << " " << e.what() << std::endl;
     }
 
-    for (ft::KmerClass kmer : kmerMap) {
+    for (ft::KmerClass kmer : *kmerMap) {
         ft::KmerClass tmpResult = _fmIndex->search(kmer,
                                                    indexPath.stem().string(),
                                                    ftProps.getIndexFileLocation(),
@@ -214,8 +214,8 @@ void Finder::sequentialSearch(ft::FTMap& ftMap,
 }
 
 //======================================================================
-void Finder::multipleIndexesSequentialSearch(FTMap& ftMap,
-                                             std::set<fs::path> indexPaths, long long offset)
+void Finder::multipleIndexesSequentialSearch(FTMap &ftMap,
+                                             const std::set<fs::path> &indexPaths, long long offset)
 {
     std::cout << "Multi Indexes Sequential Search" << std::endl;
 

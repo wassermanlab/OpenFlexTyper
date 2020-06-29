@@ -17,7 +17,7 @@ FTMap::FTMap(FTProp ftProps)
 
 //======================================================
 KmerProperties* FTMap::genKProps(){
-    ft::KmerProperties *_kProps = new KmerProperties();
+    ft::KmerProperties* _kProps = new KmerProperties();
     _kProps->setKmerSize(_ftProps.getKmerSize());
     _kProps->setRefOnly(_ftProps.getRefOnlyFlag());
     _kProps->setSearchType(_ftProps.getSearchType());
@@ -28,7 +28,7 @@ KmerProperties* FTMap::genKProps(){
 }
 
 //======================================================
-void FTMap::addInputQueries(std::set<Query> inputQueries){
+void FTMap::addInputQueries(const std::set<Query> &inputQueries){
 
     for (auto inputQuery : inputQueries) {
         std::string refString = std::get<1>(inputQuery);
@@ -37,14 +37,14 @@ void FTMap::addInputQueries(std::set<Query> inputQueries){
         //Create Ref Query
         ft::QueryClass *tmpRefQuery = new ft::QueryClass(qID, ft::QueryType::REF);
         tmpRefQuery->setQueryString(refString);
-        this->addQuery(tmpRefQuery);
+        this->addQuery(*tmpRefQuery);
 
         // Create Alt Query
         if (!_ftProps.getRefOnlyFlag()) {
             std::string altString = std::get<2>(inputQuery);
             ft::QueryClass *tmpAltQuery = new ft::QueryClass(qID, ft::QueryType::ALT);
             tmpAltQuery->setQueryString(altString);
-            this->addQuery(tmpAltQuery);
+            this->addQuery(*tmpAltQuery);
         }
 
         // Create Crossover Query
@@ -52,17 +52,17 @@ void FTMap::addInputQueries(std::set<Query> inputQueries){
             std::string croString = std::get<3>(inputQuery);
             ft::QueryClass *tmpCroQuery= new ft::QueryClass(qID, ft::QueryType::CRO);
             tmpCroQuery->setQueryString(croString);
-            this->addQuery(tmpCroQuery);
+            this->addQuery(*tmpCroQuery);
         }
     }
 }
 
 //======================================================
-void FTMap::genQKMap(std::set<ft::QueryClass> queries){
+void FTMap::genQKMap(const std::set<ft::QueryClass>& queries){
 
     KmerProperties* _kProps = genKProps();
-    KmerGenerator  _kmerGenerator(_kProps);
-    for (ft::QueryClass query : queries){
+    KmerGenerator  _kmerGenerator(*_kProps);
+    for (const ft::QueryClass& query : queries){
         std::set<std::string> kmers = (_kmerGenerator.genSearchKmers(query));
 
         //std::set<ft::KmerClass> kmerObjs = getKmerObjFromKmerString(kmers);
@@ -71,23 +71,24 @@ void FTMap::genQKMap(std::set<ft::QueryClass> queries){
 }
 
 //=============== GETTERS ==============================
-std::set<ft::KmerClass> FTMap::getKmerSet(){return this->_kmerSet;}
-std::set<ft::QueryClass> FTMap::getQuerySet(){return this->_querySet;}
-std::map<ft::QueryClass, std::set<KmerClass>> FTMap::getQKMap(){return this->_qkMap;}
+std::set<ft::KmerClass>* FTMap::getKmerSet(){return &(this->_kmerSet);}
+std::set<ft::QueryClass>* FTMap::getQuerySet(){return &(this->_querySet);}
+std::map<ft::QueryClass*, std::set<KmerClass*>> FTMap::getQKMap(){return this->_qkMap;}
 std::vector<std::set<ft::KmerClass>> FTMap::getResults(){return this->_searchResults;}
 FTProp FTMap::getFTProps(){return this->_ftProps;}
+
 //=============== SETTERS ==============================
-void FTMap::setKmers(std::set<ft::KmerClass> kmerSet){if (this->getKmerSet().empty()){_kmerSet = kmerSet;}}
-void FTMap::setQueries(std::set<ft::QueryClass> querySet){if (this->getQuerySet().empty()){_querySet = querySet;}}
+void FTMap::setKmers(std::set<ft::KmerClass> kmerSet){if (this->_kmerSet.empty()){_kmerSet = kmerSet;}}
+void FTMap::setQueries(std::set<ft::QueryClass> querySet){if (this->_querySet.empty()){_querySet = querySet;}}
 
 //======================================================
 bool FTMap::checkForKmer(ft::KmerClass testKmerObject)
 {
-    std::set<ft::KmerClass> kmerMap = this->getKmerSet();
+    std::set<ft::KmerClass> *kmerSet = this->getKmerSet();
     bool result;
-    auto it = std::find_if(std::begin(kmerMap), std::end(kmerMap),
+    auto it = std::find_if(std::begin(*kmerSet), std::end(*kmerSet),
         [&] (ft::KmerClass k) {return k.isKmerEqual(testKmerObject);});
-    if (it != kmerMap.end())
+    if (it != kmerSet->end())
     {
         result = true;
     } else {
@@ -99,11 +100,11 @@ bool FTMap::checkForKmer(ft::KmerClass testKmerObject)
 //======================================================
 bool FTMap::checkForQIDT(ft::QIdT testQIDTObject)
 {
-    std::set<ft::QueryClass> queryMap = this->getQuerySet();
+    std::set<ft::QueryClass> *querySet = this->getQuerySet();
     bool result;
-    auto it = std::find_if(std::begin(queryMap), std::end(queryMap),
+    auto it = std::find_if(std::begin(*querySet ), std::end(*querySet ),
         [&] (ft::QueryClass k) {return k.isQIdTEqual(testQIDTObject);});
-    if (it != queryMap.end())
+    if (it != querySet->end())
     {
         result = true;
     } else {
@@ -113,32 +114,33 @@ bool FTMap::checkForQIDT(ft::QIdT testQIDTObject)
 }
 
 //======================================================
-ft::KmerClass FTMap::findKmer(std::string testkmer)
+ft::KmerClass* FTMap::findKmer(std::string testkmer)
 {
-    std::set<ft::KmerClass> kmerMap = this->getKmerSet();
-    auto it = std::find_if(std::begin(kmerMap), std::end(kmerMap),
+    std::set<ft::KmerClass>* kmerSet = this->getKmerSet();
+    auto it = std::find_if(std::begin(*kmerSet), std::end(*kmerSet),
         [&] (ft::KmerClass k) {return k.hasKmer(testkmer);});
-    return (*it);
+    return &(*it);
 }
 
 //======================================================
-ft::KmerClass FTMap::getKmer(ft::KmerClass kmerObject)
+ft::KmerClass* FTMap::getKmer(ft::KmerClass kmerObject)
 {
-    std::set<ft::KmerClass> _kmerSet = this->getKmerSet();
+    std::set<ft::KmerClass>* _kmerSet = this->getKmerSet();
 
-    auto it = std::find_if(std::begin(_kmerSet), std::end(_kmerSet),
+    auto it = std::find_if(std::begin(*_kmerSet), std::end(*_kmerSet),
         [&] (ft::KmerClass k) {return k.isKmerEqual(kmerObject);});
-    return (*it);
+    return it;
 }
 
 //======================================================
-ft::QueryClass FTMap::getQuery(ft::QIdT qIDT)
+ft::QueryClass* FTMap::getQuery(ft::QIdT qIDT)
 {
-    std::set<ft::QueryClass> queryMap = this->getQuerySet();
+    std::set<ft::QueryClass>* querySet = this->getQuerySet();
 
-    auto it = std::find_if(std::begin(queryMap), std::end(queryMap),
-        [&] (ft::QueryClass k) {return k.isQIdTEqual(qIDT);});
-    return (*it);
+    std::set<ft::QueryClass>::iterator it = std::find_if(std::begin(*querySet), std::end(*querySet),
+        [&] (ft::QueryClass q) {return q.isQIdTEqual(qIDT);});
+
+    return &(*it);
 }
 
 //======================================================
@@ -152,11 +154,11 @@ void FTMap::addKmer(ft::KmerClass kmer)
 }
 
 //======================================================
-void FTMap::addQuery(ft::QueryClass *query)
+void FTMap::addQuery(ft::QueryClass query)
 {
-    ft::QIdT testQIDT = query->getQIdT();
+    ft::QIdT testQIDT = std::make_pair(query._qID, query._qType);
     if (this->checkForQIDT(testQIDT)==false){
-        this->_querySet.insert(*query);
+        this->_querySet.insert(query);
     } else {
         std::cout << "Query not added, query already exists" << std::endl;
     }
@@ -171,15 +173,15 @@ void FTMap::addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryIDTyp
 }
 
 //==================== QKMAP ============================
-std::set<ft::QueryClass> FTMap::retrieveQueries(ft::KmerClass){
-     std::set<ft::QueryClass> _matchingQueries;
+std::set<ft::QueryClass>* FTMap::retrieveQueries(ft::KmerClass *kmer){
+     std::set<ft::QueryClass>* _matchingQueries;
      return _matchingQueries;
 }
-std::set<ft::KmerClass> FTMap::retrieveKmers(ft::QueryClass){
-    std::set<ft::KmerClass> _matchingKmers;
+std::set<ft::KmerClass>* FTMap::retrieveKmers(ft::QueryClass *query){
+    std::set<ft::KmerClass>* _matchingKmers;
     return _matchingKmers;
 }
-bool FTMap::checkForMatch(ft::KmerClass, ft::QueryClass){
+bool FTMap::checkForMatch(ft::KmerClass *kmer, ft::QueryClass *query){
     return false;
 }
 void FTMap::addQKPair(ft::QueryClass query, ft::KmerClass kmer){
