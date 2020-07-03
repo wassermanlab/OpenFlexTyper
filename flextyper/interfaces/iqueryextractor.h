@@ -1,13 +1,7 @@
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2019, Wasserman lab
-/// \brief This file contains the declaration of kmergenerator interface
-////////////////////////////////////////////////////////////////////////
-
 #ifndef __IQUERY_EXTRACTOR_H__
 #define __IQUERY_EXTRACTOR_H__
 
 #include <set>
-
 #include <experimental/filesystem>
 #include "utils.h"
 #include <fstream>

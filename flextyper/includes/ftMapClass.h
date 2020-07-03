@@ -11,13 +11,9 @@
 #include "queryClass.h"
 #include "ftKPropsClass.h"
 #include "ftPropsClass.h"
-
 #include "kmergenerator.h"
 
-
 namespace ft {
-
-  // query id, ref, alt, crossover
 
 typedef std::map<ft::QueryClass, std::set<KmerClass>> QKMAP;
 
@@ -43,17 +39,20 @@ public:
     std::map<ft::QueryClass*, std::set<KmerClass*>> _qkMap;
     std::vector<std::set<ft::KmerClass>> _searchResults;
 
-    ft::KmerProperties* genKProps();
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief init
+    ////////////////////////////////////////////////////////////////////////
+    void addInputQueries(const std::set<Query> &inputQueries);
+    void genQKMap(const std::set<ft::QueryClass> &queries);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
-    std::set<ft::KmerClass>* getKmerSet();
-    std::set<ft::QueryClass>* getQuerySet();
+    std::set<ft::KmerClass> getKmerSet();
+    std::set<ft::QueryClass> getQuerySet();
     std::map<ft::QueryClass*, std::set<KmerClass*>> getQKMap();
     std::vector<std::set<ft::KmerClass>> getResults();
     FTProp getFTProps();
-
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief setters
@@ -72,20 +71,18 @@ public:
     ft::QueryClass* getQuery(ft::QIdT qIDT);
 
     void addKmer(const ft::KmerClass& kmerObject);
-    void addQuery(const ft::QueryClass& queryObject);
 
+    void addQuery(const ft::QueryClass& queryObject);
     void addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryType);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Access functions for _qkMap
     ////////////////////////////////////////////////////////////////////////
-    void addInputQueries(const std::set<Query> &inputQueries);
-    void genQKMap(const std::set<ft::QueryClass> &queries);
-    std::set<ft::QueryClass>* retrieveQueries(ft::KmerClass *kmer);
-    std::set<ft::KmerClass>* retrieveKmers(ft::QueryClass *query);
-    bool checkForMatch(ft::KmerClass *kmer, ft::QueryClass *query);
-    void addQKPair(ft::QueryClass query, ft::KmerClass kmer);
-    void addQKSet(ft::QueryClass query, std::set<ft::KmerClass> kmers);
+    std::set<ft::QueryClass*> retrieveQueries(ft::KmerClass& kmer);
+    std::set<ft::KmerClass*> retrieveKmers(ft::QueryClass *query);
+    bool checkForMatch(ft::QueryClass *query, ft::KmerClass &kmer);
+    void addQKPair(ft::QueryClass* query, ft::KmerClass* kmer);
+    void addQKSet(ft::QueryClass* query, std::set<ft::KmerClass*> kmers);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Adds results from parallel search
@@ -94,21 +91,11 @@ public:
     void addIndexResults(std::set<ft::KmerClass> indexResults);
     void processIndexResults(std::set<ft::KmerClass> indexResults, uint readLength);
 
-
 private:
 
 
+
 };
-
-//typedef std::map<QIdT, std::set<std::string>>                  SearchKmers;            // int is the query ID
-
-//typedef std::pair<std::set<long long>, std::set<FlagType>>     Results;                // set of positions and flags
-//typedef std::pair<std::set<size_t>, std::set<FlagType>>                       ResultsFuture;          // set of positions and flags
-//typedef std::map<QIdT, Results>                                                 ResultsMap;             // int is the query ID
-
-//typedef std::map<QIdT, std::set<size_t>>                                        ReaIDsMap;              // int is the query ID
-//typedef std::map<QIdT, uint>                                                    MapOfCounts;            // int is the query ID, uint = count
-
 
 }
 

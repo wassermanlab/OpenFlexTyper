@@ -27,10 +27,8 @@
 
 #include "resultprocessor.h"
 #include "iresultprocessor.h"
-
 #include "queryextractor.h"
 #include "iqueryextractor.h"
-
 
 namespace fs = std::experimental::filesystem;
 
@@ -56,7 +54,6 @@ public:
 public:
     void checkInputFastQ(FTProp ftProps);
     void checkOutputFile(FTProp ftProps);
-
     void overrideUtils(std::shared_ptr<IUtils> utils);
     void overrideStats(std::shared_ptr<IStats> stats);
     void overrideWriterBridge(std::shared_ptr<IWriterBridge> writerBridge);

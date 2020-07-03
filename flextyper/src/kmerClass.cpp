@@ -17,73 +17,78 @@ KmerClass::KmerClass(std::string kmer)
 
 //=================== GETTERS =========================
 std::string KmerClass::getKmer() const{return this->_kmer;}
-std::set<ft::FlagType> KmerClass::getKFlags(){return this->_kFlags;}
-std::set<size_t> KmerClass::getKPositions(){return this->_positions;}
-uint KmerClass::getKmerMapSize(){return this->_kmer.size();}
-std::set<int> KmerClass::getReadIDs(){return this->_readIDs;}
+std::map<ft::FlagType, bool> KmerClass::getKFlags() const {return this->_kFlags;}
+std::set<size_t> KmerClass::getKPositions() const {return this->_positions;}
+uint KmerClass::getKmerMapSize() const {return this->_kmer.size();}
+std::set<int> KmerClass::getReadIDs() const {return this->_readIDs;}
 
 //================== SETTERS ===========================
 void KmerClass::setKFlags( std::set<ft::FlagType> flags)
 {
-    for (auto kFlag : flags){addKFlag(kFlag);}
+    for (auto flag: flags){
+        this->_kFlags[flag] = true;
+    }
 }
 void KmerClass::setKPositions( std::set<size_t> kPositions, uint offset)
 {
-    for (auto kPosition : kPositions){addKPosition(kPosition, offset);}
+    for (auto kPosition : kPositions){
+        size_t kPos = kPosition + offset;
+        _positions.insert(kPos);
+       }
 }
 void KmerClass::setReadIDs(std::set<int> readIDs)
 {
-    for (auto readID : readIDs){addReadID(readID);}
+        _readIDs = readIDs;
 }
 
 //===================== ADDERS ==========================
-void KmerClass::addKFlag(ft::FlagType flag){this->getKFlags().insert(flag);}
-void KmerClass::addKPosition(size_t kPosition, uint offset)
+void KmerClass::addKFlag(const ft::FlagType& flag)
+{
+    _kFlags[flag] = true;
+}
+void KmerClass::addKPosition(const size_t& kPosition, const uint& offset)
 {
     size_t kPos = kPosition + offset;
-    std::set<size_t> positions = this->_positions;
-    positions.insert(kPos);
+    _positions.insert(kPos);
+
 }
-void KmerClass::addReadID(int readID){this->getReadIDs().insert(readID);}
+void KmerClass::addReadID(const int& readID){_readIDs.insert(readID);}
 
 //===================== REMOVERS =======================+
-void KmerClass::removeKFlag(ft::FlagType flag){this->getKFlags().erase(flag);}
+void KmerClass::removeKFlag(ft::FlagType flag){
+    this->_kFlags[flag] = false;
+    }
 void KmerClass::removeKPosition(size_t kPosition, uint offset)
 {
     size_t kPos = kPosition + offset;
-    std::set<size_t> positions = this->_positions;
-    positions.erase(kPos);
+    _positions.erase(kPos);
 }
-void KmerClass::removeReadID(int readID){this->getReadIDs().erase(readID);}
+void KmerClass::removeReadID(int readID){_readIDs.erase(readID);}
 
 //==================== CHECKERS =========================
 bool KmerClass::isKmerEqual(KmerClass test) const {
     return _kmer == test.getKmer();
 }
 bool KmerClass::hasKmer(std::string test) const {
-    return this->_kmer == test;
+    return _kmer == test;
 }
 bool KmerClass::hasFlag(ft::FlagType flag) const{
-    std::set<ft::FlagType> flags = this->_kFlags;
-    const bool is_in = flags.find(flag) != flags.end();
-    return is_in;
+    return this->getKFlags()[flag];
 }
 bool KmerClass::hasKPosition(size_t kPosition) const{
-    std::set<size_t> kPositions = this->_positions;
-    const bool is_in = kPositions.find(kPosition) != kPositions.end();
+    const bool is_in = _positions.find(kPosition) != _positions.end();
     return is_in;
 }
 bool KmerClass::hasReadID(int read) const {
-    std::set<int> reads = this->_readIDs;
-    const bool is_in = reads.find(read) != reads.end();
+
+    const bool is_in = _readIDs.find(read) != _readIDs.end();
     return is_in;
 }
 
 //====================== CONVERT ========================
 void KmerClass::convertPosToReadID(uint readLength)
 {
-    std::set<size_t> positions = this->_positions;
-    for (auto pos : positions) {
+    for (auto pos : _positions) {
         auto r = (size_t) std::ceil(pos / (readLength + 1));
         this->addReadID(r);
     }
@@ -91,6 +96,7 @@ void KmerClass::convertPosToReadID(uint readLength)
 
 //===================== OVERLOAD ========================
 bool KmerClass::operator< (const ft::KmerClass &k) const {return _kmer < k._kmer;}
+
 
 KmerClass::~KmerClass()
 {

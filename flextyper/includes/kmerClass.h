@@ -25,7 +25,7 @@ public:
     /// \brief properties
     ////////////////////////////////////////////////////////////////////////
     std::string _kmer;
-    std::set<ft::FlagType> _kFlags;
+    std::map<ft::FlagType, bool> _kFlags;
     std::set<size_t> _positions;
     std::set<int> _readIDs;
 
@@ -33,10 +33,10 @@ public:
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
     std::string getKmer() const;
-    std::set<ft::FlagType> getKFlags();
-    std::set<size_t> getKPositions();
-    std::set<int> getReadIDs();
-    uint getKmerMapSize();
+    std::map<ft::FlagType, bool> getKFlags()const;
+    std::set<size_t> getKPositions()const;
+    std::set<int> getReadIDs()const;
+    uint getKmerMapSize()const;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief setters
@@ -48,9 +48,9 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief adders
     ////////////////////////////////////////////////////////////////////////
-    void addKFlag(ft::FlagType kFlag);
-    void addKPosition(size_t kPosition, uint offset = 0);
-    void addReadID(int readID);
+    void addKFlag(const ft::FlagType& kFlag);
+    void addKPosition(const size_t& kPosition, const uint& offset = 0);
+    void addReadID(const int& readID);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief removers

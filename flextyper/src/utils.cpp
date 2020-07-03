@@ -9,10 +9,6 @@ Utils::Utils()
 {
 }
 
-//======================================================================
-Utils::~Utils()
-{
-}
 
 //======================================================================
 std::string Utils::joinString(const std::set<std::string>& setOfStr, std::string delimeter)
@@ -166,4 +162,10 @@ uint Utils::queryIndexToFileIndex(int queryIndex)
     uint fileIndex = abs(queryIndex) -1;
     return fileIndex;
 }
+
+//======================================================================
+Utils::~Utils()
+{
+}
+
 }

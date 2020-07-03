@@ -1,8 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2019, Wasserman lab
-/// \brief This file contains the implementation of the fmindex class
-////////////////////////////////////////////////////////////////////////
-
 #ifndef __FM_INDEX_H__
 #define __FM_INDEX_H__
 
@@ -56,16 +51,6 @@ public:
                          const std::string& = "/tmp/", u_int maxOcc = 200, size_t i = 0,
                          bool flagOverCountedKmers = false,
                          bool printSearchTime = false);
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief search
-    /// \param filename
-    /// \param queryString
-    /// \return
-    ////////////////////////////////////////////////////////////////////////
-    //std::map<ft::KmerClass, std::set<size_t>> searchmany(std::set<ft::KmerClass>& kmerSet,
-                                                        //const std::string& = "indexFile",
-                                                        //const std::string& = "/tmp/");
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief parallelFmIndex

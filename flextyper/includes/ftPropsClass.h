@@ -12,10 +12,7 @@ namespace fs = std::experimental::filesystem;
 
 namespace ft {
 
-
-enum QueryType {
-    REF = 1, ALT, CRO
-};
+enum QueryType {REF = 1, ALT, CRO};
 
 typedef std::string     SearchType;             // SearchType declaration
 const   std::string     CENTERED = "CENTERED";  // search type centered approach
@@ -24,11 +21,7 @@ const   std::string     SLIDING  = "SLIDING";   // search type sliding approach
 typedef std::pair<int, QueryType>  QIdT; // int is the query ID
 typedef std::tuple<uint, std::string, std::string, std::string>  Query;
 
-
-enum FlagType {
-    ABK = 1, OCK, NUK // abundant, overcounted, non-unique
-};
-
+enum FlagType { ABK = 1, OCK, NUK}; // abundant, overcounted, non-unique
 
 class FTProp {
 public:
@@ -68,7 +61,6 @@ public:
               uint totalKmers               = UINT_MAX,
               const fs::path& matchingReads = "");
 
-
     void initFromQSettings (std::string configFile, bool printInputs);
 
     ////////////////////////////////////////////////////////////////////////
@@ -102,8 +94,6 @@ public:
     fs::path _inputFastQ;
     fs::path _outputFile;
     std::set<fs::path> _indexSet;
-
-
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Parameter getters and setters
@@ -171,8 +161,6 @@ public:
     fs::path getOutputFile();
     std::set<fs::path> getIndexSet();
 };
-
-
 
 }
 

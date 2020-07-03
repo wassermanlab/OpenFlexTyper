@@ -1,9 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2019, Wasserman lab
-/// \brief This file contains the declaration of writerbridge.h, it contains
-///             all utility functions needed to writes results to result file
-////////////////////////////////////////////////////////////////////////
-
 #ifndef __IWRITER_BRIDGE_H__
 #define __IWRITER_BRIDGE_H__
 
@@ -19,11 +13,10 @@ namespace ft {
 
 class IWriterBridge {
 public:
-        virtual ~IWriterBridge() {}
+    virtual ~IWriterBridge() {}
+
     ////////////////////////////////////////////////////////////////////////
     /// \brief saveQueryOutput
-    /// \param allCounts
-    /// \param returnMatchesOnly
     ////////////////////////////////////////////////////////////////////////
     virtual void saveQueryOutput(ft::FTMap& ftMap) = 0;
 };

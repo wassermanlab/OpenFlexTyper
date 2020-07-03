@@ -52,6 +52,7 @@ HEADERS    += flextyper/interfaces/ikmergenerator.h   \
 
 
 SOURCES     += flextyper/src/stats.cpp                \
+    flextyper/src/ftKPropsClass.cpp \
     flextyper/src/ftMapClass.cpp \
     flextyper/src/ftPropsClass.cpp \
     flextyper/src/ftSearch.cpp \

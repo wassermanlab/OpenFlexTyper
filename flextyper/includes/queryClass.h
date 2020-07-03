@@ -33,13 +33,13 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
-    int getqID();
-    QueryType getqType();
-    std::string getQueryString();
-    int getCount();
-    std::map<ft::FlagType, std::set<std::string>> getQFlags();
-    ft::QIdT getQIdT();
-    std::set<std::string> getFlagKmers(ft::FlagType);
+    int getqID() const;
+    QueryType getqType() const;
+    std::string getQueryString() const;
+    int getCount() const;
+    std::map<ft::FlagType, std::set<std::string>> getQFlags() const;
+    ft::QIdT getQIdT() const;
+    std::set<std::string> getFlagKmers(const ft::FlagType& flag) const;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief setters
@@ -65,16 +65,17 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief checkers
     ////////////////////////////////////////////////////////////////////////
-    bool isQIdTEqual(ft::QIdT test);
-    bool hasQueryID(int qid) const;
-    bool hasQueryType(ft::QueryType qType) const;
-    bool hasKmerFlag(ft::FlagType flag, std::string kmer);
-    bool hasNonZeroCount();
+    bool isQIdTEqual(const ft::QIdT& test) const;
+    bool hasQueryID(const int& qid) const;
+    bool hasQueryType(const ft::QueryType& qType) const;
+    bool hasKmerFlag(const ft::FlagType& flag, const std::string& kmer) const;
+    bool hasNonZeroCount() const;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief overload
     ////////////////////////////////////////////////////////////////////////
     bool operator< (const ft::QueryClass &q) const;
+    bool operator== (const ft::QueryClass &q) const;
 
 private:
 };

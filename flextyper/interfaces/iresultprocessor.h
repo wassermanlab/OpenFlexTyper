@@ -1,8 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2018, Wasserman lab
-/// \brief This file contains the declaration of kmergenerator
-////////////////////////////////////////////////////////////////////////
-
 #ifndef __IRESULT_PROCESSOR_H__
 #define __IRESULT_PROCESSOR_H__
 
@@ -15,7 +10,7 @@ namespace ft {
 
 class IResultProcessor {
 public:
-        virtual ~IResultProcessor() {}
+    virtual ~IResultProcessor() {}
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief ResultProcessor::getIndexCounts
@@ -34,13 +29,7 @@ public:
     //virtual ReaIDsMap processIndexPos(ResultsMap& indexPosResults, uint readLen) = 0;
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief ResultProcessor::processResults
-    /// \param indexPosResults
-    /// \param indexMapFile
-    /// \param extract_matching_reads
-    /// \param ignore_multi_hits
-    /// \param readLen
-    /// \return
+    /// \brief processResults
     ////////////////////////////////////////////////////////////////////////
     virtual void processResults(ft::FTMap& ftMap) = 0;
 };

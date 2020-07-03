@@ -1,13 +1,7 @@
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2019, Wasserman lab
-/// \brief This file contains the declaration of queryextractor class
-////////////////////////////////////////////////////////////////////////
-
 #ifndef __QUERY_EXTRACTOR_H__
 #define __QUERY_EXTRACTOR_H__
 
 #include <set>
-
 #include <experimental/filesystem>
 #include "utils.h"
 #include "iutils.h"

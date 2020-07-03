@@ -1,8 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2019, Wasserman lab
-/// \brief This file contains the implementation of the ifmindex class
-////////////////////////////////////////////////////////////////////////
-
 #ifndef __I_FM_INDEX_H__
 #define __I_FM_INDEX_H__
 
@@ -36,16 +31,6 @@ public:
     /// \param indexname
     ////////////////////////////////////////////////////////////////////////
     virtual void loadIndexFromFile(const std::string& indexname) = 0;
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief search
-    /// \param filename
-    /// \param queryString
-    /// \return
-    ////////////////////////////////////////////////////////////////////////
-    //virtual std::map<std::string, std::set<size_t>> searchmany(std::set<ft::KmerClass>& kmerSet,
-                                                                //const std::string& = "indexFile",
-                                                                //const std::string& = "/tmp/") = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief parallelFmIndex

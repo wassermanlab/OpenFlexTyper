@@ -1,10 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2019, Wasserman lab
-/// \brief This file contains the declaration of stats.h, it contains
-///             all functions necessary to generate some stats or related
-///             stats contents
-////////////////////////////////////////////////////////////////////////
-
 #ifndef __ISTATS_H__
 #define __ISTATS_H__
 

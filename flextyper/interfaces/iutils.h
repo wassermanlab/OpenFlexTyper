@@ -20,13 +20,15 @@ namespace ft {
 
 class IUtils {
 public:
-        virtual ~IUtils() {}
+
+    virtual ~IUtils() {}
+
     ////////////////////////////////////////////////////////////////////////
     /// \brief  join
     /// \param  setOfStr
     /// \param  delimeter
     ////////////////////////////////////////////////////////////////////////
-    virtual std::string joinString(const std::set<std::string>& setOfStr, std::string delimeter = ", ");
+    virtual std::string joinString(const std::set<std::string>& setOfStr, std::string delimeter = ", ") = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief  split
