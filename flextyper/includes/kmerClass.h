@@ -32,7 +32,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
-    std::string getKmer() const;
+    const std::string& getKmer() const;
     std::map<ft::FlagType, bool> getKFlags()const;
     std::set<size_t> getKPositions()const;
     std::set<int> getReadIDs()const;
@@ -62,8 +62,8 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief checkers
     ////////////////////////////////////////////////////////////////////////
-    bool isKmerEqual(KmerClass test) const;
-    bool hasKmer(std::string test) const;
+    bool isKmerEqual(const KmerClass& test) const;
+    bool hasKmer(const std::string& test) const;
     bool hasFlag(ft::FlagType flag) const;
     bool hasKPosition(size_t position) const;
     bool hasReadID(int readID) const;

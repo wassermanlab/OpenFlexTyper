@@ -42,9 +42,9 @@ ResultProcessor::ResultProcessor()
 void ResultProcessor::processResults(ft::FTMap& ftMap)
 {
 
-    FTProp _ftProps = ftMap.getFTProps();
+    const FTProp& _ftProps = ftMap.getFTProps();
 
-    std::vector<std::set<ft::KmerClass>> resultsMap = ftMap.getResults();
+    const std::vector<std::set<ft::KmerClass>>& resultsMap = ftMap.getResults();
 
     //for each set of results:
         // covertPosToReadID
@@ -55,7 +55,7 @@ void ResultProcessor::processResults(ft::FTMap& ftMap)
     }
 
     //processIndexPos(ftMap, readLen);
-
+#if 0    //NOTE Alice: readlines is not initialized
     // std::cout << "lines : " << readlines << std::endl;
     uint readlines;
 
@@ -63,6 +63,7 @@ void ResultProcessor::processResults(ft::FTMap& ftMap)
         std::cout << "error with the number of reads\n";
         exit(-1);
     }
+#endif
 
 //    ReaIDsMap res;
 
