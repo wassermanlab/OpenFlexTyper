@@ -32,7 +32,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
-    const std::string & getKmer() const;
+    const std::string& getKmer() const;
     std::map<ft::FlagType, bool> getKFlags()const;
     std::set<size_t> getKPositions()const;
     std::set<int> getReadIDs()const;

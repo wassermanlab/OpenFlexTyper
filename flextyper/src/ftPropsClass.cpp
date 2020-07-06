@@ -151,6 +151,7 @@ bool FTProp::getOverCountedFlag() const {return _overcounted;}
 bool FTProp::getMatchesOnlyFlag() const {return _matchesOnly;}
 bool FTProp::getPrintSearchTimeFlag() const {return _matchesOnly;}
 bool FTProp::getMultithreadFlag() const {return _multithread;}
+
 //====================== FLAG SETTERS ======================
 void FTProp::setRefOnlyFlag(bool refOnly){if (refOnly != getRefOnlyFlag()){ _refOnly = refOnly;}}
 void FTProp::setIgnoreNonUniqueKmersFlag(bool ignoreNonUnique){if (ignoreNonUnique != getIgnoreNonUniqueKmersFlag()){ _ignoreNonUniqueKmers = ignoreNonUnique;}}

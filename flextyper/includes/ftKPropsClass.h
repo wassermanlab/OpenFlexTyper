@@ -23,13 +23,13 @@ public:
     uint _maxKmers;
 
     /// Getters ///
-    uint getKmerSize();
-    bool getRefOnly();
-    SearchType getSearchType();
-    uint getOverlap();
-    uint getStride();
-    bool getKmerCountsFlag();
-    uint getMaxKmers();
+    uint getKmerSize() const;
+    bool getRefOnly() const;
+    SearchType getSearchType() const;
+    uint getOverlap() const;
+    uint getStride() const;
+    bool getKmerCountsFlag() const;
+    uint getMaxKmers() const;
 
     /// Setters ///
     void setKmerSize(uint kmerSize);
