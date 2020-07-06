@@ -184,6 +184,9 @@ TEST_F(TestFTMap, TestRetrieveQueries)
 
     ft::FTMap ftMap(*_ftProps);
 
+
+
+
 }
 //======================================================================
 TEST_F(TestFTMap, TestRetrieveKmers)
@@ -202,6 +205,8 @@ TEST_F(TestFTMap, TestCheckForMatch)
 
     ft::FTMap ftMap(*_ftProps);
 
+
+
 }
 //======================================================================
 TEST_F(TestFTMap, TestAddQKPair)
@@ -218,6 +223,9 @@ TEST_F(TestFTMap, TestAddQKSet)
     TEST_DESCRIPTION("Add QK Set");
     //void addQKSet(ft::QueryClass* query, std::set<ft::KmerClass*> kmers);
     ft::FTMap ftMap(*_ftProps);
+    ft::QueryClass query1 (1, ft::QueryType::REF);
+
+
 
 }
 

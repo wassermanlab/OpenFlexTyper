@@ -40,7 +40,8 @@ HEADERS    += flextyper/includes/utils.h              \
               flextyper/includes/kmergenerator.h      \
               flextyper/includes/finder.h             \
               flextyper/includes/resultprocessor.h    \
-              flextyper/includes/queryextractor.h     \
+              flextyper/includes/queryextractor.h     \ \
+    fmindex/includes/indexPropsClass.h
 
 HEADERS    += flextyper/interfaces/ikmergenerator.h   \
               flextyper/interfaces/iqueryextractor.h  \
@@ -65,4 +66,6 @@ SOURCES     += flextyper/src/stats.cpp                \
                flextyper/src/kmergenerator.cpp        \
                flextyper/src/finder.cpp               \
                flextyper/src/resultprocessor.cpp      \
-               flextyper/src/queryextractor.cpp       \
+               flextyper/src/queryextractor.cpp       \ \
+    fmindex/src/indexPropsClass.cpp \
+    fmindex/src/indexPropsClass.cpp
