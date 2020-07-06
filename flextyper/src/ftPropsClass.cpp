@@ -153,14 +153,14 @@ bool FTProp::getPrintSearchTimeFlag() const {return _matchesOnly;}
 bool FTProp::getMultithreadFlag() const {return _multithread;}
 
 //====================== FLAG SETTERS ======================
-void FTProp::setRefOnlyFlag(bool refOnly){if (refOnly != getRefOnlyFlag()){ _refOnly = refOnly;}}
-void FTProp::setIgnoreNonUniqueKmersFlag(bool ignoreNonUnique){if (ignoreNonUnique != getIgnoreNonUniqueKmersFlag()){ _ignoreNonUniqueKmers = ignoreNonUnique;}}
-void FTProp::setKmerCountsFlag(bool kmerCounts){if (kmerCounts != getKmerCountsFlag()){ _kmerCounts = kmerCounts;}}
-void FTProp::setCrossoverFlag(bool crossover){if (crossover != getCrossoverFlag()){ _crossover = crossover;}}
-void FTProp::setOverCountedFlag(bool overcounted){if (overcounted != getOverCountedFlag()){ _overcounted = overcounted;}}
-void FTProp::setMatchesOnlyFlag(bool matchesOnly){if (matchesOnly != getMatchesOnlyFlag()){ _matchesOnly = matchesOnly;}}
-void FTProp::setPrintSearchTimeFlag(bool printSearchTime){if (printSearchTime != getPrintSearchTimeFlag()){ _printSearchTime = printSearchTime;}}
-void FTProp::setMultithreadFlag(bool multithread){if (multithread!= getMultithreadFlag()){_multithread = multithread;}}
+void FTProp::setRefOnlyFlag(bool refOnly){ _refOnly = refOnly;}
+void FTProp::setIgnoreNonUniqueKmersFlag(bool ignoreNonUnique){_ignoreNonUniqueKmers = ignoreNonUnique;}
+void FTProp::setKmerCountsFlag(bool kmerCounts){ _kmerCounts = kmerCounts;}
+void FTProp::setCrossoverFlag(bool crossover){ _crossover = crossover;}
+void FTProp::setOverCountedFlag(bool overcounted){_overcounted = overcounted;}
+void FTProp::setMatchesOnlyFlag(bool matchesOnly){ _matchesOnly = matchesOnly;}
+void FTProp::setPrintSearchTimeFlag(bool printSearchTime){_printSearchTime = printSearchTime;}
+void FTProp::setMultithreadFlag(bool multithread){_multithread = multithread;}
 
 //====================== FILE SETTERS ======================
 void FTProp::setPathToQueryFile(const fs::path& pathToQueryFile)
