@@ -2,6 +2,11 @@
 
 #include "ftMapClass.cpp"
 
+#include "ftPropsClass.cpp"
+#include "kmergenerator.cpp"
+#include "ftKPropsClass.cpp"
+#include "stats.cpp"
+
 #include <fstream>
 #include <climits>
 
