@@ -84,9 +84,11 @@ bool FTMap::checkForKmer(const std::string &testKmer)
     auto it = std::find_if(std::begin(_kmerSet), std::end(_kmerSet),
         [&] (const ft::KmerClass& k) {return k.hasKmer(testKmer);});
     if (it != _kmerSet.end()) {
+        //std::cout << "Kmer found" << std::endl;
         return true;
     }
     else {
+        //std::cout << "Kmer not found" << std::endl;
         return false;
     }
 }
@@ -110,7 +112,7 @@ ft::KmerClass& FTMap::getKmer(const ft::KmerClass& kmerObject)
 //======================================================
 void FTMap::addKmer(const ft::KmerClass& kmer)
 {
-    if (checkForKmer(kmer.getKmer())){
+    if (!checkForKmer(kmer.getKmer())){
         _kmerSet.insert(kmer);
     } else {
         std::cout << "Kmer not added, kmer already exists" << std::endl;
@@ -120,8 +122,7 @@ void FTMap::addKmer(const ft::KmerClass& kmer)
 //======================================================
 //================= QUERIES ============================
 //======================================================
-
-bool FTMap::checkForQIDT(ft::QIdT testQIDTObject)
+bool FTMap::checkForQIDT(const ft::QIdT& testQIDTObject)
 {
     auto it = std::find_if(std::begin(_querySet ), std::end(_querySet ),
         [&] (ft::QueryClass k) {return k.isQIdTEqual(testQIDTObject);});
@@ -129,11 +130,18 @@ bool FTMap::checkForQIDT(ft::QIdT testQIDTObject)
     else { return false; }
 }
 //======================================================
-ft::QueryClass* FTMap::getQuery(ft::QIdT qIDT)
+ft::QueryClass* FTMap::findQuery(const ft::QIdT& qIDT)
 {
     std::set<ft::QueryClass>::iterator it = std::find_if(std::begin(_querySet), std::end(_querySet),
       [&] (ft::QueryClass q) {return q.isQIdTEqual(qIDT);});
     return (ft::QueryClass *) &(*it);
+}
+//======================================================
+ft::QueryClass& FTMap::getQuery(const ft::QIdT& qIDT)
+{
+    std::set<ft::QueryClass>::iterator it = std::find_if(std::begin(_querySet), std::end(_querySet),
+      [&] (ft::QueryClass q) {return q.isQIdTEqual(qIDT);});
+    return (ft::QueryClass &) (*it);
 }
 //======================================================
 void FTMap::addQuery(const ft::QueryClass& query)
@@ -171,7 +179,6 @@ bool FTMap::checkForMatch(ft::QueryClass *query, const ft::KmerClass& kmer){
     if (it != _qkMap[query].end()) {return true;}
     else {return false;}
 }
-
 //=======================================================
 void FTMap::addQKPair(ft::QueryClass* query, ft::KmerClass* kmer){
     _qkMap[query].insert(kmer);

@@ -64,16 +64,14 @@ public:
     /// \brief Access functions for single kmer and queries
     ////////////////////////////////////////////////////////////////////////
     bool checkForKmer(const std::string &testKmer);
-    bool checkForQIDT(ft::QIdT testQueryObject);
-
     ft::KmerClass* findKmer(const std::string& kmer);
     ft::KmerClass& getKmer(const ft::KmerClass& kmerObject);
-    ft::QueryClass* getQuery(ft::QIdT qIDT);
-
     void addKmer(const ft::KmerClass& kmerObject);
 
+    bool checkForQIDT(const ft::QIdT& testQueryObject);
+    ft::QueryClass* findQuery(const ft::QIdT& qIDT);
+    ft::QueryClass& getQuery(const ft::QIdT& qIDT);
     void addQuery(const ft::QueryClass& queryObject);
-    void addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryType);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Access functions for _qkMap
