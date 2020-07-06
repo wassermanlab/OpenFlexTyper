@@ -20,13 +20,13 @@ void KmerProperties::genKProps(FTProp _ftProps){
 }
 
 //================= PARAMETER GETTERS ========================
-uint KmerProperties::getKmerSize() const{return _kmerSize;}
-bool KmerProperties::getRefOnly() const {return _refOnly;}
-SearchType KmerProperties::getSearchType() const {return _searchType;}
-uint KmerProperties::getOverlap() const {return _overlap;}
-uint KmerProperties::getStride() const {return _stride;}
-bool KmerProperties::getKmerCountsFlag() const {return _kmerCounts;}
-uint KmerProperties::getMaxKmers() const {return _maxKmers;}
+uint KmerProperties::getKmerSize(){return this->getKmerSize();}
+bool KmerProperties::getRefOnly(){return this->_refOnly;}
+SearchType KmerProperties::getSearchType(){return this->_searchType;}
+uint KmerProperties::getOverlap(){return this->_overlap;}
+uint KmerProperties::getStride(){return this->_stride;}
+bool KmerProperties::getKmerCountsFlag(){return this->_kmerCounts;}
+uint KmerProperties::getMaxKmers(){return this->getMaxKmers();}
 
 //==================== PARAMETER SETTERS ===================
 void KmerProperties::setKmerSize(uint kmerSize){if (kmerSize != this->getOverlap()){_kmerSize = kmerSize;}}
