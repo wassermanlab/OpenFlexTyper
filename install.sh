@@ -29,10 +29,8 @@ function buildFlexTyper()
 	pushd ${OPT_DIR}
 	MINI_CONDA_INSTALL_DIR=$OPT_DIR/miniconda3
 
-    if [ ! -d opt/miniconda3 ]; then
-	    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-	    bash Miniconda3-latest-Linux-x86_64.sh -b -p $MINI_CONDA_INSTALL_DIR
-    fi 
+	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+	bash Miniconda3-latest-Linux-x86_64.sh -b -p $MINI_CONDA_INSTALL_DIR 
 
 	source ${MINI_CONDA_INSTALL_DIR}/etc/profile.d/conda.sh
 	conda env create --prefix ${OPT_DIR}/openFlexTyper -f $DIR/OpenFlexTyper_CondaEnv.yml 

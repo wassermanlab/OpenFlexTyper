@@ -95,7 +95,6 @@ int main(int argc, char** argv)
 
         ft::FTProp *props = new ft::FTProp();
         props->initFromQSettings(configFile, printInputs);
-            std::cerr << "getIndexFileLocation " << props->getIndexFileLocation() << "\n";
 
         createdIndexRepo(props->getIndexFileLocation());
 	    

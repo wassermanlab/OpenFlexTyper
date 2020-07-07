@@ -15,7 +15,7 @@
 
 namespace ft {
 
-typedef std::map<ft::QueryClass, std::set<ft::KmerClass>> QKMAP;
+typedef std::map<ft::QueryClass, std::set<KmerClass>> QKMAP;
 
 class FTMap
 {
@@ -48,11 +48,11 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
-    const std::set<ft::KmerClass>& getKmerSet();
-    const std::set<ft::QueryClass>& getQuerySet();
-    const std::map<ft::QueryClass*, std::set<KmerClass*>>& getQKMap();
-    const std::vector<std::set<ft::KmerClass>>& getResults();
-    const FTProp& getFTProps();
+    std::set<ft::KmerClass> getKmerSet();
+    std::set<ft::QueryClass> getQuerySet();
+    std::map<ft::QueryClass*, std::set<KmerClass*>> getQKMap();
+    std::vector<std::set<ft::KmerClass>> getResults();
+    FTProp getFTProps();
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief setters
@@ -63,22 +63,24 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief Access functions for single kmer and queries
     ////////////////////////////////////////////////////////////////////////
-    bool checkForKmer(const std::string &testKmer);
-    ft::KmerClass* findKmer(const std::string& kmer);
-    ft::KmerClass& getKmer(const ft::KmerClass& kmerObject);
+    bool checkForKmer(std::string testKmer);
+    bool checkForQIDT(ft::QIdT testQueryObject);
+
+    ft::KmerClass* findKmer(std::string kmer);
+    ft::KmerClass* getKmer(ft::KmerClass kmerObject);
+    ft::QueryClass* getQuery(ft::QIdT qIDT);
+
     void addKmer(const ft::KmerClass& kmerObject);
 
-    bool checkForQIDT(const ft::QIdT& testQueryObject);
-    ft::QueryClass* findQuery(const ft::QIdT& qIDT);
-    ft::QueryClass& getQuery(const ft::QIdT& qIDT);
     void addQuery(const ft::QueryClass& queryObject);
+    void addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryType);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Access functions for _qkMap
     ////////////////////////////////////////////////////////////////////////
-    std::set<ft::QueryClass*> retrieveQueries(const ft::KmerClass& kmer);
+    std::set<ft::QueryClass*> retrieveQueries(ft::KmerClass& kmer);
     std::set<ft::KmerClass*> retrieveKmers(ft::QueryClass *query);
-    bool checkForMatch(ft::QueryClass *query, const ft::KmerClass &kmer);
+    bool checkForMatch(ft::QueryClass *query, ft::KmerClass &kmer);
     void addQKPair(ft::QueryClass* query, ft::KmerClass* kmer);
     void addQKSet(ft::QueryClass* query, std::set<ft::KmerClass*> kmers);
 

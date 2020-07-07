@@ -126,7 +126,7 @@ TEST_F(TestKmerClass,  convertPosToReadIDNoOffset)
 {
     TEST_DESCRIPTION("see if a kmer class has a specific QIdT ");
     ft::KmerClass* testKmerClass = new ft::KmerClass("AAAA");
-    testKmerClass->setKPositions({101, 200, 251});
+    testKmerClass->setKPositions({100, 200, 251});
     testKmerClass->convertPosToReadID(100);
     std::set<int> expectedReadIDs = {1, 2};
 

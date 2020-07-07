@@ -2,11 +2,6 @@
 
 #include "ftMapClass.cpp"
 
-#include "ftPropsClass.cpp"
-#include "kmergenerator.cpp"
-#include "ftKPropsClass.cpp"
-#include "stats.cpp"
-
 #include <fstream>
 #include <climits>
 
@@ -15,37 +10,37 @@ using namespace std;
 namespace ft {
 class TestFTMap : public ::testing::Test {
 protected:
-    ft::FTProp* _ftProps;
+//    static void SetUpTestSuite()
+//    {
+//        //ft::FTProp* _ftProps;
+//        ofstream tmpFile("tempConfig.ini");
+//        if (tmpFile.is_open()) {
+//            tmpFile <<  "queryFile 		= path_query.txt"
+//                        "kmerSize 		= 30"
+//                        "overlap 		= 0"
+//                        "stride 			= 5"
+//                        "maxOccurences 		= 2000"
+//                        "threadNumber 		= 512"
+//                        "readLength 		= 150"
+//                        "indexFileLocation 	= ."
+//                        "outputFolder 		= ."
+//                        "refOnly 		= False"
+//                        "searchType 		= SLIDING"
+//                        "multithread 		= True"
+//                        "ignoreNonUniqueKmers 	= False"
+//                        "kmerCounts 		= False"
+//                        "matchingReads 		= MixedVirus_100.fasta";
+//            tmpFile.close();
+//        }
+        //_ftProps->initFromQSettings("tempConfig.ini", false);
+
+//    };
+//    static void TearDownTestSuite() {
+//         // _ftProps= nullptr;
+//    }
 
     virtual void SetUp() {
-        _ftProps = new FTProp();
-        fs::path pathToQueryFile = "path_query.tsv";
-        uint kmerSize = 30;
-        uint readLength =150;
-        fs::path indexLocation;
-        fs::path outputFolder;
-        bool refOnly;
-        SearchType searchType;
-        bool multithread;
-        fs::path inputFastQ;
-        uint overlap;
-        bool returnMatchesOnly;
-        bool kmerCounts;
-        uint stride;
-        uint maxOccurences;
-        uint maxThreads;
-        bool flagOverCountedKmers;
-        bool ignoreNonUniqueKmers;
-        bool crossover;
-        bool printSearchTime;
-        uint maxKmers;
-        uint totalKmers;
-        fs::path matchingReadFQ;
 
-        _ftProps->init(pathToQueryFile,  kmerSize,readLength,indexLocation,outputFolder,refOnly,searchType,
-                       multithread,inputFastQ,overlap, returnMatchesOnly,kmerCounts, stride,maxOccurences,
-                       maxThreads,flagOverCountedKmers, ignoreNonUniqueKmers,crossover, printSearchTime,
-                       maxKmers, totalKmers, matchingReadFQ);
     }
 
     virtual void TearDown() {
@@ -53,60 +48,24 @@ protected:
 
 public:
 
-
+//static ft::FTProp* _ftProps;
 
 };
 
 #define TEST_DESCRIPTION(desc) RecordProperty("description", desc)
 //ft::FTProp* TestFTMap::_ftProps = new ft::FTProp();
-
-//====================== KMER TESTS ====================================
+/*
 //======================================================================
-TEST_F(TestFTMap, TestCheckForKmer)
+TEST_F(TestFTMap, TestCheckKmer)
 {
     TEST_DESCRIPTION("Check Kmer");
     ft::FTMap ftMap(*_ftProps);
-
     ft::KmerClass testKmer1("AAAA");
-    EXPECT_FALSE(ftMap.checkForKmer("AAAA"));
-    EXPECT_FALSE(ftMap.checkForKmer("AAAC"));
-
     ftMap.addKmer(testKmer1);
     EXPECT_TRUE(ftMap.checkForKmer("AAAA"));
     EXPECT_FALSE(ftMap.checkForKmer("AAAC"));
 }
-//======================================================================
-TEST_F(TestFTMap, TestFindKmer)
-{
-    TEST_DESCRIPTION("Find Kmer");
-    //ft::KmerClass findKmer(std::string kmer);
 
-    ft::FTMap ftMap(*_ftProps);
-    ftMap.setKmers({ft::KmerClass("AAAA"),ft::KmerClass("TTTT")});
-
-    EXPECT_EQ("AAAA", ftMap.findKmer("AAAA")->getKmer());
-    EXPECT_EQ("TTTT", ftMap.findKmer("TTTT")->getKmer());
-}
-//======================================================================
-TEST_F(TestFTMap, TestGetKmer)
-{
-    TEST_DESCRIPTION("Get Kmer");
-
-}
-//======================================================================
-TEST_F(TestFTMap, TestAddKmer)
-{
-    TEST_DESCRIPTION("Add Kmer");
-    //void addKmer(ft::KmerClass kmer);
-    ft::FTMap ftMap(*_ftProps);
-    ft::KmerClass testGoodKmer("AAAA");
-    ft::KmerClass testBadKmer("AAAC");
-    ftMap.addKmer(testGoodKmer);
-    EXPECT_TRUE(ftMap.checkForKmer(testGoodKmer.getKmer()));
-    EXPECT_FALSE(ftMap.checkForKmer(testBadKmer.getKmer()));
-}
-
-//====================== QUERY TESTS ===================================
 //======================================================================
 TEST_F(TestFTMap, TestCheckQIDT)
 {
@@ -130,17 +89,21 @@ TEST_F(TestFTMap, TestCheckQIDT)
     EXPECT_FALSE(ftMap.checkForQIDT(falsetest2));
 
 }
+
 //======================================================================
-TEST_F(TestFTMap, TestFindQuery)
+TEST_F(TestFTMap, TestFindKmer)
 {
-    TEST_DESCRIPTION("Find Query");
-    //ft::QueryClass getQuery(ft::QIdT qIDT);
+    TEST_DESCRIPTION("Find Kmer");
+    //ft::KmerClass findKmer(std::string kmer);
 
     ft::FTMap ftMap(*_ftProps);
+    ftMap.setKmers({ft::KmerClass("AAAA"),ft::KmerClass("TTTT")});
 
+    EXPECT_EQ("AAAA", ftMap.findKmer("AAAA")->getKmer());
+    EXPECT_EQ("TTTT", ftMap.findKmer("TTTT")->getKmer());
 }
 //======================================================================
-TEST_F(TestFTMap, DISABLED_TestGetQuery)
+TEST_F(TestFTMap, TestGetQuery)
 {
     TEST_DESCRIPTION("Get Query");
     //ft::QueryClass getQuery(ft::QIdT qIDT);
@@ -157,10 +120,23 @@ TEST_F(TestFTMap, DISABLED_TestGetQuery)
     ft::QIdT truetest2 = std::make_pair(1, ft::QueryType::ALT);
     ft::QIdT truetest3 = std::make_pair(2, ft::QueryType::REF);
 
-    //EXPECT_EQ(testQuery1Ref, ftMap.getQuery(truetest));
-    //EXPECT_EQ(testQuery1Alt, ftMap.getQuery(truetest2));
-    //EXPECT_EQ(testQuery2Ref, ftMap.getQuery(truetest3));
+    EXPECT_EQ(testQuery1Ref, ftMap.getQuery(truetest));
+    EXPECT_EQ(testQuery1Alt, ftMap.getQuery(truetest2));
+    EXPECT_EQ(testQuery2Ref, ftMap.getQuery(truetest3));
 
+}
+
+//======================================================================
+TEST_F(TestFTMap, TestAddKmer)
+{
+    TEST_DESCRIPTION("Add Kmer");
+    //void addKmer(ft::KmerClass kmer);
+    ft::FTMap ftMap(*_ftProps);
+    ft::KmerClass testGoodKmer("AAAA");
+    ft::KmerClass testBadKmer("AAAC");
+    ftMap.addKmer(testGoodKmer);
+    EXPECT_TRUE(ftMap.checkForKmer(testGoodKmer.getKmer()));
+    EXPECT_FALSE(ftMap.checkForKmer(testBadKmer.getKmer()));
 }
 //======================================================================
 TEST_F(TestFTMap, TestAddQuery)
@@ -197,18 +173,18 @@ TEST_F(TestFTMap, TestRetrieveKmers)
     ft::FTMap ftMap(*_ftProps);
 
 }
-//======================================================================
-TEST_F(TestFTMap, TestCheckForMatch)
-{
-    TEST_DESCRIPTION("Check for match");
-    //bool checkForMatch(ft::QueryClass *query, const ft::KmerClass &kmer);
 
-    ft::FTMap ftMap(*_ftProps);
+//======================================================================
+TEST_F(TestFTMap, TestAddQIDtoKmer)
+{
+    TEST_DESCRIPTION("Add QID to Kmer");
+    //void addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryIDType);
 
 
 
 }
 //======================================================================
+
 TEST_F(TestFTMap, TestAddQKPair)
 {
     TEST_DESCRIPTION("Add QK Pair");
@@ -231,6 +207,7 @@ TEST_F(TestFTMap, TestAddQKSet)
 
 //====================== INDEX TESTS ===================================
 //======================================================================
+
 TEST_F(TestFTMap, TestAddIndexResults)
 {
     TEST_DESCRIPTION("Add Index Results");
@@ -240,6 +217,7 @@ TEST_F(TestFTMap, TestAddIndexResults)
 
     EXPECT_EQ(result, expectedResult);
 }
+
 //======================================================================
 TEST_F(TestFTMap, TestProcessIndexResults)
 {
@@ -250,5 +228,5 @@ TEST_F(TestFTMap, TestProcessIndexResults)
 
     EXPECT_EQ(result, expectedResult);
 }
-
+*/
 }

@@ -33,28 +33,28 @@ void FTProp::init(const fs::path &pathToQueryFile,
                   uint totalKmers,
                   const fs::path &matchingReadFQ)
 {
-    setPathToQueryFile(pathToQueryFile);
-    setKmerSize(kmerSize);
-    setReadLength(readLength);
-    setIndexFileLocation(indexLocation);
-    setOutputFolder(outputFolder);
-    setRefOnlyFlag(refOnly);
-    setSearchType(searchType);
-    setMultithreadFlag(multithread);
-    setInputFastQ(inputFastQ);
-    setOverlap(overlap);
-    setMatchesOnlyFlag(returnMatchesOnly);
-    setKmerCountsFlag(kmerCounts);
-    setStride(stride);
-    setMaxOcc(maxOccurences);
-    setMaxThreads(maxThreads);
-    setOverCountedFlag(flagOverCountedKmers);
-    setIgnoreNonUniqueKmersFlag(ignoreNonUniqueKmers);
-    setCrossoverFlag(crossover);
-    setPrintSearchTimeFlag(printSearchTime);
-    setMaxKmers(maxKmers);
-    setMaxTotalKmers(totalKmers);
-    setMatchingReadFQ(matchingReadFQ);
+    this->setPathToQueryFile(pathToQueryFile);
+    this->setKmerSize(kmerSize);
+    this->setReadLength(readLength);
+    this->setIndexFileLocation(indexLocation);
+    this->setOutputFolder(outputFolder);
+    this->setRefOnlyFlag(refOnly);
+    this->setSearchType(searchType);
+    this->setMultithreadFlag(multithread);
+    this->setInputFastQ(inputFastQ);
+    this->setOverlap(overlap);
+    this->setMatchesOnlyFlag(returnMatchesOnly);
+    this->setKmerCountsFlag(kmerCounts);
+    this->setStride(stride);
+    this->setMaxOcc(maxOccurences);
+    this->setMaxThreads(maxThreads);
+    this->setOverCountedFlag(flagOverCountedKmers);
+    this->setIgnoreNonUniqueKmersFlag(ignoreNonUniqueKmers);
+    this->setCrossoverFlag(crossover);
+    this->setPrintSearchTimeFlag(printSearchTime);
+    this->setMaxKmers(maxKmers);
+    this->setMaxTotalKmers(totalKmers);
+    this->setMatchingReadFQ(matchingReadFQ);
 
 }
 
@@ -80,7 +80,7 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
     uint           stride                  = settings.value("stride").toInt();
     uint           maxOccurences           = settings.value("maxOccurences").toInt();
     uint           threadNumber            = settings.value("threadNumber").toInt();
-    bool           flagOverCountedKmers    = settings.value("flagOverCountedKmers").toBool();
+    bool           flagOverCountedKmers = settings.value("flagOverCountedKmers").toBool();
     bool           ignoreNonUniqueKmers    = settings.value("ignoreNonUniqueKmers").toBool();
     bool           crossover               = settings.value("crossover").toBool();
     bool           printSearchTime         = settings.value("printSearchTime").toBool();
@@ -109,49 +109,49 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
     std::cout << "maxTotalKmers                 : " << maxTotalKmers << std::endl;
     std::cout << "matchinReads                  : " << matchingReads << std::endl;
     }
-    init(pathToQueryFile, kmerSize, readLength,
-         indexFileLocation, outputFolder, refOnly,
-         searchType, multithread, inputFastQ, overlap,
-         returnMatchesOnly, kmerCounts, stride,
-         maxOccurences, threadNumber, flagOverCountedKmers,
-         ignoreNonUniqueKmers, crossover, printSearchTime,
-         maxKmersPerQuery, maxTotalKmers, matchingReads);
+    this->init(pathToQueryFile, kmerSize, readLength,
+               indexFileLocation, outputFolder, refOnly,
+               searchType, multithread, inputFastQ, overlap,
+               returnMatchesOnly, kmerCounts, stride,
+               maxOccurences, threadNumber, flagOverCountedKmers,
+               ignoreNonUniqueKmers, crossover, printSearchTime,
+               maxKmersPerQuery, maxTotalKmers, matchingReads);
 
 }
 
 //================= PARAMETER GETTERS ========================
-SearchType FTProp::getSearchType(){return _searchType;}
+SearchType FTProp::getSearchType(){return this->_searchType;}
 
-uint FTProp::getKmerSize() const {return _kmerSize;}
-uint FTProp::getOverlap() const {return _overlap;}
-uint FTProp::getStride() const {return _stride;}
-uint FTProp::getMaxKmers() const {return _maxKmers;}
-uint FTProp::getMaxTotalKmers() const {return _maxTotalKmers;}
-uint FTProp::getMaxOcc() const {return _maxOccurences;}
-uint FTProp::getReadLength() const {return _readLength;}
-uint FTProp::getMaxThreads() const {return _maxThreads;}
+uint FTProp::getKmerSize(){return this->_kmerSize;}
+uint FTProp::getOverlap(){return this->_overlap;}
+uint FTProp::getStride(){return this->_stride;}
+uint FTProp::getMaxKmers(){return this->_maxKmers;}
+uint FTProp::getMaxTotalKmers(){return this->_maxTotalKmers;}
+uint FTProp::getMaxOcc(){return this->_maxOccurences;}
+uint FTProp::getReadLength(){return this->_readLength;}
+uint FTProp::getMaxThreads(){return this->_maxThreads;}
 
 //==================== PARAMETER SETTERS ===================
-void FTProp::setKmerSize(uint kmerSize) {_kmerSize = kmerSize;}
-void FTProp::setSearchType(ft::SearchType searchType) {_searchType = searchType;}
-void FTProp::setOverlap(uint overlap) {_overlap = overlap;}
-void FTProp::setStride(uint stride) {_stride = stride;}
-void FTProp::setMaxKmers(uint maxKmers) {_maxKmers = maxKmers;}
-void FTProp::setMaxTotalKmers(uint maxTotalKmers) {_maxTotalKmers = maxTotalKmers;}
-void FTProp::setMaxOcc(uint maxOcc) {_maxOccurences = maxOcc;}
-void FTProp::setReadLength(uint readLength) {_readLength = readLength;}
-void FTProp::setMaxThreads(uint maxThreads) {_maxThreads = maxThreads;}
+void FTProp::setKmerSize(uint kmerSize){if (kmerSize != this->getKmerSize()){_kmerSize = kmerSize;}}
+void FTProp::setSearchType(ft::SearchType searchType){if (searchType != this->getSearchType()){_searchType = searchType;}}
+void FTProp::setOverlap(uint overlap){if (overlap != this->getOverlap()){_overlap = overlap;}}
+void FTProp::setStride(uint stride){if (stride != this->getStride()){_stride = stride;}}
+void FTProp::setMaxKmers(uint maxKmers){if (maxKmers != this->getMaxKmers()){_maxKmers = maxKmers;}}
+void FTProp::setMaxTotalKmers(uint maxTotalKmers){if (maxTotalKmers != this->getMaxTotalKmers()){_maxTotalKmers = maxTotalKmers;}}
+void FTProp::setMaxOcc(uint maxOcc){if (maxOcc != this->getMaxOcc()){_maxOccurences = maxOcc;}}
+void FTProp::setReadLength(uint readLength){if (readLength != this->getReadLength()){_readLength = readLength;}}
+void FTProp::setMaxThreads(uint maxThreads){if (maxThreads != this->getMaxThreads()){_maxThreads = maxThreads;}}
 
 //====================== FLAG GETTERS ======================
-bool FTProp::getRefOnlyFlag() const {return _refOnly;}
-bool FTProp::getIgnoreNonUniqueKmersFlag() const {return _ignoreNonUniqueKmers;}
-bool FTProp::getKmerCountsFlag() const {return _kmerCounts;}
-bool FTProp::getCrossoverFlag() const {return _crossover;}
-bool FTProp::getOverCountedFlag() const {return _overcounted;}
-bool FTProp::getMatchesOnlyFlag() const {return _matchesOnly;}
-bool FTProp::getPrintSearchTimeFlag() const {return _matchesOnly;}
-bool FTProp::getMultithreadFlag() const {return _multithread;}
-
+bool FTProp::getRefOnlyFlag(){return this->_refOnly;}
+bool FTProp::getIgnoreNonUniqueKmersFlag(){return this->_ignoreNonUniqueKmers;}
+bool FTProp::getKmerCountsFlag(){return this->_kmerCounts;}
+bool FTProp::getCrossoverFlag(){return this->_crossover;}
+bool FTProp::getOverCountedFlag(){return this->_overcounted;}
+bool FTProp::getMatchesOnlyFlag(){return this->_matchesOnly;}
+bool FTProp::getPrintSearchTimeFlag(){return this->_matchesOnly;}
+bool FTProp::getMultithreadFlag(){return this->_multithread;}
+  
 //====================== FLAG SETTERS ======================
 void FTProp::setRefOnlyFlag(bool refOnly){ _refOnly = refOnly;}
 void FTProp::setIgnoreNonUniqueKmersFlag(bool ignoreNonUnique){_ignoreNonUniqueKmers = ignoreNonUnique;}
@@ -162,65 +162,38 @@ void FTProp::setMatchesOnlyFlag(bool matchesOnly){ _matchesOnly = matchesOnly;}
 void FTProp::setPrintSearchTimeFlag(bool printSearchTime){_printSearchTime = printSearchTime;}
 void FTProp::setMultithreadFlag(bool multithread){_multithread = multithread;}
 
-//====================== FILE SETTERS ======================
-void FTProp::setPathToQueryFile(const fs::path& pathToQueryFile)
-{
-    if ( pathToQueryFile != getPathToQueryFile())
-    {
-        _pathToQueryFile = pathToQueryFile;
-    }
-}
-void FTProp::setIndexFileLocation(const fs::path& indexFileLocation)
-{
-    if ( indexFileLocation != getIndexFileLocation())
-    {
-        _indexFileLocation = indexFileLocation;
-    }
-}
-void FTProp::setOutputFolder(const fs::path& outputFolder)
-{
-    if (outputFolder != getOutputFolder())
-    {
-        _outputFolder = outputFolder;
-    }
-}
-void FTProp::setMatchingReadFQ(const fs::path& matchingReadFQ)
-{
-    if (matchingReadFQ != getMatchingReadFQ())
-    {
-        _matchingReadFQ = matchingReadFQ;
-    }
-}
-void FTProp::setInputFastQ(const fs::path& inputFastQ)
-{
-    if (inputFastQ != getInputFastQ())
-    {
-        _inputFastQ = inputFastQ;
-    }
-}
-void FTProp::setOutputFile(const fs::path& outputFile)
-{
-    if (outputFile != getOutputFile())
-    {
-        _outputFile = outputFile;
-    }
-}
-void FTProp::setIndexSet(std::set<fs::path>& indexes)
-{
-    if (indexes != getIndexSet())
-    {
-        _indexSet = indexes;
-    }
-}
 
 //====================== FILE GETTERS ======================
-const fs::path& FTProp::getPathToQueryFile() const {return _pathToQueryFile;}
-const fs::path& FTProp::getIndexFileLocation()const {return _indexFileLocation;}
-const fs::path& FTProp::getOutputFolder()const {return _outputFolder;}
-const fs::path& FTProp::getMatchingReadFQ() const {return _matchingReadFQ;}
-const fs::path& FTProp::getInputFastQ()const {return _inputFastQ;}
-const fs::path& FTProp::getOutputFile() const {return _outputFile;}
-const std::set<fs::path>& FTProp::getIndexSet() const {return _indexSet;}
+void FTProp::setPathToQueryFile(fs::path pathToQueryFile){
+    if ( pathToQueryFile != this->getPathToQueryFile()){_pathToQueryFile = pathToQueryFile;}
+}
+void FTProp::setIndexFileLocation(fs::path indexFileLocation){
+        if ( indexFileLocation != this->getIndexFileLocation()){_indexFileLocation = indexFileLocation;}
+}
+void FTProp::setOutputFolder(fs::path outputFolder){
+    if (outputFolder != this->getOutputFolder()){_outputFolder = outputFolder;}
+}
+void FTProp::setMatchingReadFQ(fs::path matchingReadFQ){
+    if (matchingReadFQ != this->getMatchingReadFQ()){_matchingReadFQ = matchingReadFQ;}
+}
+void FTProp::setInputFastQ(fs::path inputFastQ){
+    if (inputFastQ != this->getInputFastQ()){_inputFastQ = inputFastQ;}
+}
+void FTProp::setOutputFile(fs::path outputFile){
+    if (outputFile != this->getOutputFile()){_outputFile = outputFile;}
+}
+void FTProp::setIndexSet(std::set<fs::path> indexes){
+    if (indexes != this->getIndexSet()){_indexSet = indexes;}
+}
+
+//====================== FILE SETTERS ======================
+fs::path FTProp::getPathToQueryFile(){return this->_pathToQueryFile;}
+fs::path FTProp::getIndexFileLocation(){return this->_indexFileLocation;}
+fs::path FTProp::getOutputFolder(){return this->_outputFolder;}
+fs::path FTProp::getMatchingReadFQ(){return this->_matchingReadFQ;}
+fs::path FTProp::getInputFastQ(){return this->_inputFastQ;}
+fs::path FTProp::getOutputFile(){return this->_outputFile;}
+std::set<fs::path> FTProp::getIndexSet(){return this->_indexSet;}
 
 
 FTProp::~FTProp()
