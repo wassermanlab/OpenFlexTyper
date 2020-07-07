@@ -10,6 +10,7 @@
 #include "stats.h"
 #include "istats.h"
 #include "ftPropsClass.h"
+#include "indexPropsClass.h"
 
 namespace algo {
 
@@ -32,7 +33,7 @@ public:
     /// \brief createFMIndex
     /// \param stringToIndex
     ////////////////////////////////////////////////////////////////////////
-    fs::path createFMIndex(const fs::path& fileToIndex, const fs::path& output, const fs::path& indexList);
+    fs::path createFMIndex(const algo::IndexProps& props);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief loadIndexFromFile
@@ -57,13 +58,13 @@ public:
     /// \param filenames
     /// \param indexNames
     ////////////////////////////////////////////////////////////////////////
-    void parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList);
+    //void parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief generate the Reads Mapping
     /// \param filename
     ////////////////////////////////////////////////////////////////////////
-    void generateReadsMap(const std::string& filename);
+    //void generateReadsMap(const std::string& filename);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief setKmerMapSize

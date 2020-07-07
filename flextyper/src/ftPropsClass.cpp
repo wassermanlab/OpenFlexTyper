@@ -151,15 +151,17 @@ bool FTProp::getOverCountedFlag(){return this->_overcounted;}
 bool FTProp::getMatchesOnlyFlag(){return this->_matchesOnly;}
 bool FTProp::getPrintSearchTimeFlag(){return this->_matchesOnly;}
 bool FTProp::getMultithreadFlag(){return this->_multithread;}
+  
 //====================== FLAG SETTERS ======================
-void FTProp::setRefOnlyFlag(bool refOnly){if (refOnly != this->getRefOnlyFlag()){ _refOnly = refOnly;}}
-void FTProp::setIgnoreNonUniqueKmersFlag(bool ignoreNonUnique){if (ignoreNonUnique != this->getIgnoreNonUniqueKmersFlag()){ _ignoreNonUniqueKmers = ignoreNonUnique;}}
-void FTProp::setKmerCountsFlag(bool kmerCounts){if (kmerCounts != this->getKmerCountsFlag()){ _kmerCounts = kmerCounts;}}
-void FTProp::setCrossoverFlag(bool crossover){if (crossover != this->getCrossoverFlag()){ _crossover = crossover;}}
-void FTProp::setOverCountedFlag(bool overcounted){if (overcounted != this->getOverCountedFlag()){ _overcounted = overcounted;}}
-void FTProp::setMatchesOnlyFlag(bool matchesOnly){if (matchesOnly != this->getMatchesOnlyFlag()){ _matchesOnly = matchesOnly;}}
-void FTProp::setPrintSearchTimeFlag(bool printSearchTime){if (printSearchTime != this->getPrintSearchTimeFlag()){ _printSearchTime = printSearchTime;}}
-void FTProp::setMultithreadFlag(bool multithread){if (multithread!= this->getMultithreadFlag()){_multithread = multithread;}}
+void FTProp::setRefOnlyFlag(bool refOnly){ _refOnly = refOnly;}
+void FTProp::setIgnoreNonUniqueKmersFlag(bool ignoreNonUnique){_ignoreNonUniqueKmers = ignoreNonUnique;}
+void FTProp::setKmerCountsFlag(bool kmerCounts){ _kmerCounts = kmerCounts;}
+void FTProp::setCrossoverFlag(bool crossover){ _crossover = crossover;}
+void FTProp::setOverCountedFlag(bool overcounted){_overcounted = overcounted;}
+void FTProp::setMatchesOnlyFlag(bool matchesOnly){ _matchesOnly = matchesOnly;}
+void FTProp::setPrintSearchTimeFlag(bool printSearchTime){_printSearchTime = printSearchTime;}
+void FTProp::setMultithreadFlag(bool multithread){_multithread = multithread;}
+
 
 //====================== FILE GETTERS ======================
 void FTProp::setPathToQueryFile(fs::path pathToQueryFile){

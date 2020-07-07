@@ -6,6 +6,7 @@
 #include <iostream>
 #include <experimental/filesystem>
 #include "ftMapClass.h"
+#include "indexPropsClass.h"
 
 namespace fs = std::experimental::filesystem;
 
@@ -24,7 +25,7 @@ public:
     /// \param  stringToIndex
     /// \return The function will return the name of the generated index
     ////////////////////////////////////////////////////////////////////////
-    virtual fs::path createFMIndex(const fs::path& fileToIndex, const fs::path& output, const fs::path& indexList) = 0;
+    virtual fs::path createFMIndex(const algo::IndexProps& props) = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief loadIndexFromFile
@@ -38,7 +39,7 @@ public:
     /// \param indexNames
     /// \param outputFolder
     ////////////////////////////////////////////////////////////////////////
-    virtual void parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList) = 0;
+    //virtual void parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList) = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief search
@@ -57,7 +58,7 @@ public:
     /// \brief generate the Reads Mapping
     /// \param filename
     ////////////////////////////////////////////////////////////////////////
-    virtual void generateReadsMap(const std::string& filename) = 0;
+    //virtual void generateReadsMap(const std::string& filename) = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief setKmerMapSize
