@@ -56,16 +56,18 @@ void PreProcess::addR1R2()
     readFiles /= (_indexProps.getReadSetName());
 
     std::cout << "replaced readFiles : " <<  readFiles << std::endl;
+    fs::path r1 = readFiles;
+    fs::path r2 = readFiles;
 
     //set R1 file
-    fs::path r1 = readFiles += "_R1.fq";
+    r1 += "_R1.fq";
     std::cout << "add R1 : " <<  r1 << std::endl;
     //check for R1 File
      if (!fs::exists(r1)) {std::cout << "ERROR: File " << r1 << " does not exist. Exit." << std::endl;}
      else { _indexProps.setR1(r1);}
 
     //set R2 file
-    fs::path r2 = readFiles += "_R2.fq";
+    r2 += "_R2.fq";
     std::cout << "add R2 : " <<  r2 << std::endl;
     //check for R2 file
      if (!fs::exists(r2)) {std::cout << "ERROR: File " << r2 << " does not exist. Exit." << std::endl;}
