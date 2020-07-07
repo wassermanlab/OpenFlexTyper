@@ -9,11 +9,29 @@ class TestPreProcess : public ::testing::Test {
 protected:
     algo::IndexProps* _props;
     virtual void SetUp() {
+
         _props = new algo::IndexProps();
     }
 
     virtual void TearDown() {
     }
+
+    void createR1R2(const std::string& readSetName)
+    {
+        fs::path r1 = readSetName + "_R1.fq";
+        std::ofstream ofs1(r1);
+        ofs1 << "this is some text in the new file\n";
+        ofs1.close();
+        std::cout << "CREATE R1 : " << r1 << std::endl;
+
+        fs::path r2 = readSetName + "_R2.fq";
+        std::ofstream ofs2(r2);
+        ofs2 << "this is some text in the new file\n";
+        ofs2.close();
+        std::cout << "CREATE R2 : " << r2 << std::endl;
+    }
+
+
 
 public:
 
@@ -24,7 +42,8 @@ public:
 //======================================================================
 TEST_F(TestPreProcess, testGunZipFQ)
 {
-    TEST_DESCRIPTION("addR1R2");
+    TEST_DESCRIPTION("gunzip FQ");
+
 
 }
 //======================================================================
@@ -61,7 +80,22 @@ TEST_F(TestPreProcess, testCreatePreProcessFasta)
 TEST_F(TestPreProcess, testAddR1R2)
 {
     TEST_DESCRIPTION("add R1 R2");
+    _props->setReadSetName("test");
+    fs::path readFiles = fs::current_path();
+    readFiles /= (_props->getReadSetName());
+    fs::path r1 = readFiles += "_R1.fq";
+    fs::path r2 = readFiles += "_R2.fq";
 
+    createR1R2(_props->getReadSetName());
+
+    algo::PreProcess _preprocess(*_props);
+    _preprocess.addR1R2();
+
+    std::cout << "R1 : " << _props->getR1() << std::endl;
+    std::cout << "R2 : " << _props->getR2() << std::endl;
+
+    EXPECT_EQ(r1.string(), _props->getR1().string());
+    EXPECT_EQ(r2.string(), _props->getR2().string());
 }
 //======================================================================
 TEST_F(TestPreProcess, testPreProcessFQGZ)
@@ -78,7 +112,7 @@ TEST_F(TestPreProcess, testPreProcessFQ)
 //======================================================================
 TEST_F(TestPreProcess, testProcessPairedReadFiles)
 {
-    TEST_DESCRIPTION("process read file");
+    TEST_DESCRIPTION("process paired read files");
 
 }
 

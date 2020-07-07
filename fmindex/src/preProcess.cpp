@@ -51,21 +51,25 @@ fs::path PreProcess::createRevFasta(){
 //======================================================================
 void PreProcess::addR1R2()
 {   fs::path readFiles = fs::current_path();
-    readFiles.replace_filename(_indexProps.getReadSetName());
+    std::cout << "readFiles : " <<  readFiles << std::endl;
+
+    readFiles /= (_indexProps.getReadSetName());
+
+    std::cout << "replaced readFiles : " <<  readFiles << std::endl;
 
     //set R1 file
-    fs::path r1 = readFiles;
-    r1.stem()+= "_R1";
-
+    fs::path r1 = readFiles += "_R1.fq";
+    std::cout << "add R1 : " <<  r1 << std::endl;
     //check for R1 File
-     if (!fs::exists(r1)) {std::cout << "ERROR: File " << readFiles << " does not exist. Exit." << std::endl;}
+     if (!fs::exists(r1)) {std::cout << "ERROR: File " << r1 << " does not exist. Exit." << std::endl;}
+     else { _indexProps.setR1(r1);}
 
     //set R2 file
-    fs::path r2 = readFiles;
-    r1.stem() += "_R2";
-
+    fs::path r2 = readFiles += "_R2.fq";
+    std::cout << "add R2 : " <<  r2 << std::endl;
     //check for R2 file
-     if (!fs::exists(r2)) {std::cout << "ERROR: File " << readFiles << " does not exist. Exit." << std::endl;}
+     if (!fs::exists(r2)) {std::cout << "ERROR: File " << r2 << " does not exist. Exit." << std::endl;}
+    else {_indexProps.setR2(r2);}
 }
 
 //======================================================================
