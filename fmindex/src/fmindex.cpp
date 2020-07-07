@@ -116,10 +116,6 @@ fs::path FmIndex::createFMIndex(algo::IndexProps& _props)
     fs::path output;
     fs::path fileToIndex;
 
-    fs::path fileToIndex = props.getPreProcessedFasta();
-    fs::path output = props.getOutputFile();
-    //fs::path indexList;
-
     if (!load_from_file(_fmindex, output)) {
         std::ifstream in(fileToIndex);
         if (!in) {
@@ -157,17 +153,17 @@ void FmIndex::loadIndexFromFile(const std::string& indexname)
 }
 
 //======================================================================
-//void FmIndex::parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList)
-//{
-//    std::vector<std::future<fs::path>> operations;
+void FmIndex::parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList)
+{
+    std::vector<std::future<fs::path>> operations;
 
     for (size_t i = 0; i < filenames.size(); i++)
         //operations.push_back(std::async(std::launch::async, &FmIndex::createFMIndex, this,
                                         //filenames[i], indexNames[i], indexList));
 
-//    for (size_t i = 0; i < filenames.size(); i++)
-//        operations[i].get();
-//}
+    for (size_t i = 0; i < filenames.size(); i++)
+        operations[i].get();
+}
 
 //======================================================================
 void FmIndex::overrideStats(std::shared_ptr<ft::IStats> stats)

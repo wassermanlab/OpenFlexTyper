@@ -39,7 +39,7 @@ public:
     /// \param indexNames
     /// \param outputFolder
     ////////////////////////////////////////////////////////////////////////
-    //virtual void parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList) = 0;
+    virtual void parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList) = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief search
@@ -58,7 +58,7 @@ public:
     /// \brief generate the Reads Mapping
     /// \param filename
     ////////////////////////////////////////////////////////////////////////
-    //virtual void generateReadsMap(const std::string& filename) = 0;
+    virtual void generateReadsMap(const std::string& filename) = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief setKmerMapSize
