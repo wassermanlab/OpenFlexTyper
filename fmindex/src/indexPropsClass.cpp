@@ -47,7 +47,7 @@ void IndexProps::setR1(const fs::path& readFile)
 void IndexProps::setR2(const fs::path& readFile)
 {       _R2 = readFile;   }
 
-void IndexProps::addR1R2(){}
+
 void IndexProps::delR1(){
     fs::remove(_R1);
 }

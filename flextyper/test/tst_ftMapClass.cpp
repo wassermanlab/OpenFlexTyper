@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "ftMapClass.cpp"
+#include "ftMapClass.h"
 
 #include <fstream>
 #include <climits>

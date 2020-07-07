@@ -22,32 +22,32 @@ void FmIndex::setKmerMapSize(size_t kmerMapSize)
 }
 
 //======================================================================
-void FmIndex::generateReadsMap(const std::string& filename)
-{
-    std::ifstream in(filename);
-    std::ofstream ou("map_file");
+//void FmIndex::generateReadsMap(const std::string& filename)
+//{
+//    std::ifstream in(filename);
+//    std::ofstream ou("map_file");
 
-    size_t readid = 0;
-    size_t start  = 0;
-    size_t llen   = 0;
+//    size_t readid = 0;
+//    size_t start  = 0;
+//    size_t llen   = 0;
 
-    std::string line;
-    if (in.is_open() && ou.is_open()) {
+//    std::string line;
+//    if (in.is_open() && ou.is_open()) {
 
-        // header
-        // ou << "length\t" << "readid\t" << "start\t" << "end" << '\n';
+//        // header
+//        // ou << "length\t" << "readid\t" << "start\t" << "end" << '\n';
 
-        while (getline(in, line)) {
-            // std::cout << line << std::endl;
-            ou << llen << "\t" << readid++ << "\t" << start  << "\t" << start + line.length() - 2 << '\n';
-            llen  += line.length();
-            start += line.length();
-        }
+//        while (getline(in, line)) {
+//            // std::cout << line << std::endl;
+//            ou << llen << "\t" << readid++ << "\t" << start  << "\t" << start + line.length() - 2 << '\n';
+//            llen  += line.length();
+//            start += line.length();
+//        }
 
-        in.close();
-        ou.close();
-    }
-}
+//        in.close();
+//        ou.close();
+//    }
+//}
 
 //======================================================================
 ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,

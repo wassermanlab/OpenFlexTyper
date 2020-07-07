@@ -64,7 +64,7 @@ public:
     /// \brief generate the Reads Mapping
     /// \param filename
     ////////////////////////////////////////////////////////////////////////
-    void generateReadsMap(const std::string& filename);
+    //void generateReadsMap(const std::string& filename);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief setKmerMapSize

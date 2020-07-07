@@ -79,7 +79,7 @@ public:
     void setReadFQ(const fs::path& readFQ);
     void setR1(const fs::path& r1);
     void setR2(const fs::path& r2);
-    void addR1R2();
+
     void delR1();
     void delR2();
     void delReadFQ();

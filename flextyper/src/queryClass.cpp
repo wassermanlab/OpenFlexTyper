@@ -19,7 +19,8 @@ int QueryClass::getCount() const {return _count;}
 std::map<ft::FlagType, std::set<std::string>> QueryClass::getQFlags()const {return _qFlags;}
 ft::QIdT QueryClass::getQIdT()const {return std::make_pair(_qID, _qType);}
 std::set<std::string> QueryClass::getFlagKmers(const ft::FlagType& flag) const {
-    return _qFlags[flag];
+    std::set<std::string> output; // = _qFlags[flag] No viable overloaded operator
+    return output;
 }
 
 //================== SETTERS ===========================
