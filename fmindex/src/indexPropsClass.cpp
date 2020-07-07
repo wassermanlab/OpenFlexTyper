@@ -47,7 +47,19 @@ void IndexProps::setR1(const fs::path& readFile)
 void IndexProps::setR2(const fs::path& readFile)
 {       _R2 = readFile;   }
 
-
+void IndexProps::addR1R2(){}
+void IndexProps::delR1(){
+    fs::remove(_R1);
+}
+void IndexProps::delR2(){
+    fs::remove(_R2);
+}
+void IndexProps::delReadFQ(){
+    fs::remove(_readFQ);
+}
+void IndexProps::delReadFasta(){
+    fs::remove(_preProcessedFasta);
+}
 
 void IndexProps::setOutputFile(const fs::path& outputFile)
 {        _outputFile = outputFile;   }
@@ -58,7 +70,9 @@ void IndexProps::setPreProcessedFasta(const fs::path& preProcessedFasta)
 {       _preProcessedFasta = preProcessedFasta; }
 void IndexProps::setIndexSet(std::set<fs::path>& indexes)
 {        _indexSet = indexes;   }
-
+void IndexProps::addToIndexSet(const fs::path& index){
+    _indexSet.insert(index);
+}
 
 IndexProps::~IndexProps()
 {}

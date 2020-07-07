@@ -21,33 +21,33 @@ void FmIndex::setKmerMapSize(size_t kmerMapSize)
     _kmerMapSize = kmerMapSize;
 }
 
-////======================================================================
-//void FmIndex::generateReadsMap(const std::string& filename)
-//{
-//    std::ifstream in(filename);
-//    std::ofstream ou("map_file");
+//======================================================================
+void FmIndex::generateReadsMap(const std::string& filename)
+{
+    std::ifstream in(filename);
+    std::ofstream ou("map_file");
 
-//    size_t readid = 0;
-//    size_t start  = 0;
-//    size_t llen   = 0;
+    size_t readid = 0;
+    size_t start  = 0;
+    size_t llen   = 0;
 
-//    std::string line;
-//    if (in.is_open() && ou.is_open()) {
+    std::string line;
+    if (in.is_open() && ou.is_open()) {
 
-//        // header
-//        // ou << "length\t" << "readid\t" << "start\t" << "end" << '\n';
+        // header
+        // ou << "length\t" << "readid\t" << "start\t" << "end" << '\n';
 
-//        while (getline(in, line)) {
-//            // std::cout << line << std::endl;
-//            ou << llen << "\t" << readid++ << "\t" << start  << "\t" << start + line.length() - 2 << '\n';
-//            llen  += line.length();
-//            start += line.length();
-//        }
+        while (getline(in, line)) {
+            // std::cout << line << std::endl;
+            ou << llen << "\t" << readid++ << "\t" << start  << "\t" << start + line.length() - 2 << '\n';
+            llen  += line.length();
+            start += line.length();
+        }
 
-//        in.close();
-//        ou.close();
-//    }
-//}
+        in.close();
+        ou.close();
+    }
+}
 
 //======================================================================
 ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
@@ -110,15 +110,11 @@ ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
 //}
 
 //======================================================================
-fs::path FmIndex::createFMIndex(const algo::IndexProps& props)
-
-        //const fs::path& fileToIndex, const fs::path& output, const fs::path& indexList)
+fs::path FmIndex::createFMIndex(algo::IndexProps& _props)
 {
     std::lock_guard<std::mutex> lock(_mtx);
-
-    fs::path fileToIndex = props.getPreProcessedFasta();
-    fs::path output = props.getOutputFile();
-    //fs::path indexList;
+    fs::path output;
+    fs::path fileToIndex;
 
     if (!load_from_file(_fmindex, output)) {
         std::ifstream in(fileToIndex);
@@ -133,6 +129,7 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& props)
         store_to_file(_fmindex, output);
     }
 
+
 //    std::ofstream indxl (indexList, std::ios::app);
 //    if (indxl.is_open()) {
 //        indxl << output.string() << std::endl;
@@ -143,6 +140,7 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& props)
     // std::cout << "Index construction complete in " << index_file << " index requires " << size_in_mega_bytes(_fm_index) << " MiB." << std::endl;
     // mtx.unlock();
 
+    _props.addToIndexSet(output);
     return output;
 }
 
@@ -155,17 +153,17 @@ void FmIndex::loadIndexFromFile(const std::string& indexname)
 }
 
 //======================================================================
-//void FmIndex::parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList)
-//{
-//    std::vector<std::future<fs::path>> operations;
+void FmIndex::parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList)
+{
+    std::vector<std::future<fs::path>> operations;
 
-//    for (size_t i = 0; i < filenames.size(); i++)
-//        operations.push_back(std::async(std::launch::async, &FmIndex::createFMIndex, this,
-//                                        filenames[i], indexNames[i], indexList));
+    for (size_t i = 0; i < filenames.size(); i++)
+        //operations.push_back(std::async(std::launch::async, &FmIndex::createFMIndex, this,
+                                        //filenames[i], indexNames[i], indexList));
 
-//    for (size_t i = 0; i < filenames.size(); i++)
-//        operations[i].get();
-//}
+    for (size_t i = 0; i < filenames.size(); i++)
+        operations[i].get();
+}
 
 //======================================================================
 void FmIndex::overrideStats(std::shared_ptr<ft::IStats> stats)

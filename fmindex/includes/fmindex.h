@@ -33,7 +33,7 @@ public:
     /// \brief createFMIndex
     /// \param stringToIndex
     ////////////////////////////////////////////////////////////////////////
-    fs::path createFMIndex(const algo::IndexProps& props);
+    fs::path createFMIndex(algo::IndexProps& _props);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief loadIndexFromFile
@@ -58,13 +58,13 @@ public:
     /// \param filenames
     /// \param indexNames
     ////////////////////////////////////////////////////////////////////////
-    //void parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList);
+    void parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief generate the Reads Mapping
     /// \param filename
     ////////////////////////////////////////////////////////////////////////
-    //void generateReadsMap(const std::string& filename);
+    void generateReadsMap(const std::string& filename);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief setKmerMapSize

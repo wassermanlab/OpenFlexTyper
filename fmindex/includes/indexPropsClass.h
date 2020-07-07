@@ -28,9 +28,9 @@ public:
     fs::path _R2;
     fs::path _preProcessedFasta;
     fs::path _outputFile;
-    fs::path _outputFolder;
+    fs::path _outputFolder; //where to save the indexes
 
-    std::set<fs::path> _indexSet;
+    std::set<fs::path> _indexSet; //this is the set of generated index files
 
     uint _numOfReads;
 
@@ -80,7 +80,6 @@ public:
     void setR1(const fs::path& r1);
     void setR2(const fs::path& r2);
     void addR1R2();
-
     void delR1();
     void delR2();
     void delReadFQ();
@@ -91,6 +90,7 @@ public:
 
     void setPreProcessedFasta(const fs::path& preProcessedFasta);
     void setIndexSet(std::set<fs::path>& indexes);
+    void addToIndexSet(const fs::path& index);
 
 };
 
