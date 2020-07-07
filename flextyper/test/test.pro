@@ -23,6 +23,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH += ../includes                  \
                ../src                       \
                ../../fmindex/includes/      \
+               ../../fmindex/interfaces/      \
                ../../fmindex/src/           \
                ../interfaces/               \
                ../mock/                     \

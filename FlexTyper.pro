@@ -25,6 +25,7 @@ INCLUDEPATH += flextyper/includes                     \
 	       opt/miniconda3/include                 \
                fmindex/includes                       \
                flextyper/interfaces                   \
+               fmindex/interfaces                   \
 
 HEADERS    += flextyper/includes/utils.h              \
               flextyper/includes/ftKPropsClass.h \
@@ -33,16 +34,15 @@ HEADERS    += flextyper/includes/utils.h              \
               flextyper/includes/ftSearch.h \
               flextyper/includes/kmerClass.h \
               flextyper/includes/queryClass.h \
-              fmindex/includes/ifmindex.h             \
-              fmindex/includes/fmindex.h              \
               flextyper/includes/stats.h              \
               flextyper/includes/writerbridge.h       \
               flextyper/includes/kmergenerator.h      \
               flextyper/includes/finder.h             \
               flextyper/includes/resultprocessor.h    \
               flextyper/includes/queryextractor.h     \
+              fmindex/includes/fmindex.h              \
               fmindex/includes/indexPropsClass.h      \
-              fmindex/includes/preProcess.h
+              fmindex/includes/preProcess.h \
 
 HEADERS    += flextyper/interfaces/ikmergenerator.h   \
               flextyper/interfaces/iqueryextractor.h  \
@@ -51,7 +51,8 @@ HEADERS    += flextyper/interfaces/ikmergenerator.h   \
               flextyper/interfaces/iutils.h           \
               flextyper/interfaces/iwriterbridge.h    \
               flextyper/interfaces/ifinder.h          \
-
+              fmindex/interfaces/iindexPropsClass.h   \
+              fmindex/interfaces/ifmindex.h \
 
 SOURCES     += flextyper/src/stats.cpp                \
               flextyper/src/ftKPropsClass.cpp \
