@@ -101,15 +101,15 @@ public:
     SearchType getSearchType();
     void setSearchType(ft::SearchType searchType);
 
-    uint getKmerSize();
-    uint getOverlap();
-    uint getStride();
-    uint getMaxKmers();
-    uint getReadLength();
-    uint getMaxOcc();
-    uint getMaxThreads();
-    uint getMaxKmersPerQuery();
-    uint getMaxTotalKmers();
+    uint getKmerSize() const;
+    uint getOverlap() const;
+    uint getStride() const;
+    uint getMaxKmers() const;
+    uint getReadLength() const;
+    uint getMaxOcc() const;
+    uint getMaxThreads() const;
+    uint getMaxKmersPerQuery() const;
+    uint getMaxTotalKmers() const;
 
     void setKmerSize(uint kmerSize);
     void setOverlap(uint overlap);
@@ -124,14 +124,14 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief Flag getters and setters
     ////////////////////////////////////////////////////////////////////////
-    bool getKmerCountsFlag();
-    bool getMultithreadFlag();
-    bool getRefOnlyFlag();
-    bool getMatchesOnlyFlag();
-    bool getOverCountedFlag();
-    bool getIgnoreNonUniqueKmersFlag();
-    bool getCrossoverFlag();
-    bool getPrintSearchTimeFlag();
+    bool getKmerCountsFlag() const;
+    bool getMultithreadFlag() const;
+    bool getRefOnlyFlag() const;
+    bool getMatchesOnlyFlag() const;
+    bool getOverCountedFlag() const;
+    bool getIgnoreNonUniqueKmersFlag() const;
+    bool getCrossoverFlag() const;
+    bool getPrintSearchTimeFlag() const;
 
     void setKmerCountsFlag(bool kmerCounts);
     void setMultithreadFlag(bool multithread);
@@ -145,21 +145,21 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief File getters and setters
     ////////////////////////////////////////////////////////////////////////
-    void setPathToQueryFile( fs::path pathToQueryFile);
-    void setIndexFileLocation(fs::path indexFileLocation);
-    void setOutputFolder(fs::path outputFolder);
-    void setMatchingReadFQ(fs::path matchingReadFQ);
-    void setInputFastQ(fs::path inputFastQ);
-    void setOutputFile(fs::path outputFile);
-    void setIndexSet(std::set<fs::path>);
+    void setPathToQueryFile(const fs::path& pathToQueryFile);
+    void setIndexFileLocation(const fs::path& indexFileLocation);
+    void setOutputFolder(const fs::path& outputFolder);
+    void setMatchingReadFQ(const fs::path& matchingReadFQ);
+    void setInputFastQ(const fs::path& inputFastQ);
+    void setOutputFile(const fs::path& outputFile);
+    void setIndexSet(std::set<fs::path>& indexes);
 
-    fs::path getPathToQueryFile();
-    fs::path getIndexFileLocation();
-    fs::path getOutputFolder();
-    fs::path getMatchingReadFQ();
-    fs::path getInputFastQ();
-    fs::path getOutputFile();
-    std::set<fs::path> getIndexSet();
+    const fs::path& getPathToQueryFile() const;
+    const fs::path& getIndexFileLocation() const;
+    const fs::path& getOutputFolder() const;
+    const fs::path& getMatchingReadFQ() const;
+    const fs::path& getInputFastQ() const;
+    const fs::path& getOutputFile() const;
+    const std::set<fs::path>& getIndexSet() const;
 };
 
 }

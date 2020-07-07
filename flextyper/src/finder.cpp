@@ -54,13 +54,13 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
     FTProp ftProps = ftMap.getFTProps();
     std::cout << "running search in a multi thread" << std::endl;
 
-    std::set<ft::KmerClass> *kmerMap = ftMap.getKmerSet();
+    std::set<ft::KmerClass> kmerMap = ftMap.getKmerSet();
 
     size_t i = 1;
     std::cout << "working on : " << indexPath << std::endl;
     std::set<ft::KmerClass> indexResults;
 
-    _fmIndex->setKmerMapSize(kmerMap->size());
+    _fmIndex->setKmerMapSize(kmerMap.size());
 
     try {
         _fmIndex->loadIndexFromFile(indexPath);
@@ -71,11 +71,11 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
     // create a vector of futures
     std::vector<std::future<ft::KmerClass>> resultsFutures;
     size_t j = 0;
-    size_t k = kmerMap->size();
+    size_t k = kmerMap.size();
 
     // using a queue to easily control the flow of kmers
     std::queue<ft::KmerClass> kmerQueue;
-    for (ft::KmerClass kmer : *kmerMap) {
+    for (ft::KmerClass kmer : kmerMap) {
         kmerQueue.push(kmer);
     }
 
@@ -146,7 +146,7 @@ void Finder::multipleIndexesParallelSearch(FTMap &ftMap,
      * We will then search inside the indexes one by one.
      * The search of kmers is done in parallel.
      */
-    std::set<ft::KmerClass> *kmerMap = ftMap.getKmerSet();
+    std::set<ft::KmerClass> kmerMap = ftMap.getKmerSet();
     long long curr = 0;
 
     for (auto index : indexPath) {
@@ -167,10 +167,10 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
     // std::thread::id this_id = std::this_thread::get_id();
     FTProp ftProps = ftMap.getFTProps();
 
-    std::set<ft::KmerClass> *kmerMap = ftMap.getKmerSet();
+    std::set<ft::KmerClass> kmerMap = ftMap.getKmerSet();
     size_t i = 0;
     std::cout << "working on : " << indexPath << std::endl;
-    _fmIndex->setKmerMapSize(kmerMap->size());
+    _fmIndex->setKmerMapSize(kmerMap.size());
 
     std::set<ft::KmerClass> indexResults;
 
@@ -180,7 +180,7 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
         std::cout << "Error ! " << indexPath << " " << e.what() << std::endl;
     }
 
-    for (ft::KmerClass kmer : *kmerMap) {
+    for (ft::KmerClass kmer : kmerMap) {
         ft::KmerClass tmpResult = _fmIndex->search(kmer,
                                                    indexPath.stem().string(),
                                                    ftProps.getIndexFileLocation(),

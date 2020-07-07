@@ -48,18 +48,18 @@ public:
     void setqType(QueryType queryType);
     void setQueryString(std::string queryString);
     void setCount(int count);
-    void setFlags(std::map<ft::FlagType, std::set<std::string>> qFlags);
+    void setFlags(const std::map<ft::FlagType, std::set<std::string>>& qFlags);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief adders
     ////////////////////////////////////////////////////////////////////////
-    void addFlag(ft::FlagType flagType, std::set<std::string> kmers);
+    void addFlag(const ft::FlagType& flagType, const std::set<std::string>& kmers);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief removers
     ////////////////////////////////////////////////////////////////////////
     void removeFlag(ft::FlagType flagType);
-    void removeKmerFlag(ft::FlagType flagTyper, std::string kmers);
+    void removeKmerFlag(const ft::FlagType& flagTyper, const std::string& kmers);
     void removeCount();
 
     ////////////////////////////////////////////////////////////////////////

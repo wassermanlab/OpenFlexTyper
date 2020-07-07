@@ -1,3 +1,15 @@
+////////////////////////////////////////////////////////////////////////
+///
+/// Copyright (c) 2018, Wasserman lab
+///
+/// FILE        tst_queryextractor.cpp
+///
+/// DESCRIPTION This file contains tests for the query extractions
+///
+/// Initial version @ Godfrain Jacques Kounkou
+///
+////////////////////////////////////////////////////////////////////////
+
 #include "gmock/gmock.h"
 #include "ifmindex.h"
 
@@ -12,7 +24,7 @@ using namespace ft;
 namespace ft {
 class MockFmIndex : public algo::IFmIndex {
 public:
-    MOCK_METHOD1(createFMIndex,        fs::path(const algo::IndexProps& props));
+    MOCK_METHOD3(createFMIndex,        fs::path(const fs::path&, const fs::path&, const fs::path&));
     //MOCK_METHOD3(searchmany,           std::map<std::string, std::set<size_t>>(const std::vector<std::string>&, const std::string&, const std::string&));
     MOCK_METHOD3(parallelFmIndex,      void(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList));
     //MOCK_METHOD1(generateReadsMap,     void(const std::string&));

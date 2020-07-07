@@ -33,7 +33,7 @@ public:
     /// \brief createFMIndex
     /// \param stringToIndex
     ////////////////////////////////////////////////////////////////////////
-    fs::path createFMIndex(const algo::IndexProps& props);
+    fs::path createFMIndex(algo::IndexProps& _props);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief loadIndexFromFile
