@@ -27,12 +27,12 @@ INCLUDEPATH += flextyper/includes                     \
                flextyper/interfaces                   \
 
 HEADERS    += flextyper/includes/utils.h              \
-    flextyper/includes/ftKPropsClass.h \
-    flextyper/includes/ftMapClass.h \
-    flextyper/includes/ftPropsClass.h \
-    flextyper/includes/ftSearch.h \
-    flextyper/includes/kmerClass.h \
-    flextyper/includes/queryClass.h \
+              flextyper/includes/ftKPropsClass.h \
+              flextyper/includes/ftMapClass.h \
+              flextyper/includes/ftPropsClass.h \
+              flextyper/includes/ftSearch.h \
+              flextyper/includes/kmerClass.h \
+              flextyper/includes/queryClass.h \
               fmindex/includes/ifmindex.h             \
               fmindex/includes/fmindex.h              \
               flextyper/includes/stats.h              \
@@ -40,8 +40,9 @@ HEADERS    += flextyper/includes/utils.h              \
               flextyper/includes/kmergenerator.h      \
               flextyper/includes/finder.h             \
               flextyper/includes/resultprocessor.h    \
-              flextyper/includes/queryextractor.h     \ \
-    fmindex/includes/indexPropsClass.h
+              flextyper/includes/queryextractor.h     \
+              fmindex/includes/indexPropsClass.h      \
+              fmindex/includes/preProcess.h
 
 HEADERS    += flextyper/interfaces/ikmergenerator.h   \
               flextyper/interfaces/iqueryextractor.h  \
@@ -53,12 +54,12 @@ HEADERS    += flextyper/interfaces/ikmergenerator.h   \
 
 
 SOURCES     += flextyper/src/stats.cpp                \
-    flextyper/src/ftKPropsClass.cpp \
-    flextyper/src/ftMapClass.cpp \
-    flextyper/src/ftPropsClass.cpp \
-    flextyper/src/ftSearch.cpp \
-    flextyper/src/kmerClass.cpp \
-    flextyper/src/queryClass.cpp \
+              flextyper/src/ftKPropsClass.cpp \
+              flextyper/src/ftMapClass.cpp \
+              flextyper/src/ftPropsClass.cpp \
+              flextyper/src/ftSearch.cpp \
+              flextyper/src/kmerClass.cpp \
+              flextyper/src/queryClass.cpp \
                flextyper/src/utils.cpp                \
                fmindex/src/fmindex.cpp                \
                flextyper/src/main.cpp                 \
@@ -66,6 +67,7 @@ SOURCES     += flextyper/src/stats.cpp                \
                flextyper/src/kmergenerator.cpp        \
                flextyper/src/finder.cpp               \
                flextyper/src/resultprocessor.cpp      \
-               flextyper/src/queryextractor.cpp       \ \
-    fmindex/src/indexPropsClass.cpp \
-    fmindex/src/indexPropsClass.cpp
+               flextyper/src/queryextractor.cpp       \
+              fmindex/src/indexPropsClass.cpp \
+    fmindex/src/preProcess.cpp
+

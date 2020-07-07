@@ -2,10 +2,19 @@
 #define INDEXPROPSCLASS_H
 #include <set>
 #include <iostream>
+#include <fstream>
 #include <map>
 #include <experimental/filesystem>
+
+
+
 namespace fs = std::experimental::filesystem;
+
+
 namespace algo {
+
+
+enum FileType {FQ = 1, FA, GZ};
 
 class IndexProps{
 public:
@@ -14,51 +23,74 @@ public:
     virtual ~IndexProps();
 
     /// Properties ///
-
-    fs::path _indexFileLocation;
-    fs::path _outputFolder;
-    fs::path _matchingReadFQ;
-    fs::path _inputFastQ;
+    fs::path _readFQ;
+    fs::path _R1;
+    fs::path _R2;
+    fs::path _preProcessedFasta;
     fs::path _outputFile;
+    fs::path _outputFolder;
+
     std::set<fs::path> _indexSet;
 
     uint _numOfReads;
 
-    bool _revComplement;
+    bool _revComp;
     bool _pairedReads;
+    bool _delFQ;
+    bool _delFasta;
 
-    /// Getters ///
-    const fs::path& getPathToQueryFile() const;
-    const fs::path& getIndexFileLocation() const;
-    const fs::path& getOutputFolder() const;
-    const fs::path& getMatchingReadFQ() const;
-    const fs::path& getInputFastQ() const;
-    const fs::path& getOutputFile() const;
-    const std::set<fs::path>& getIndexSet() const;
+    std::string _readSetName;
+    algo::FileType _readFileType;
 
+    /// Parameter Getters ///
     uint getNumOfReads() const;
 
-    bool getRevComplementFlag() const;
+    bool getDelFQFlag() const;
+    bool getDelFastaFlag() const;
+    bool getRevCompFlag() const;
     bool getPairedReadsFlag() const;
 
-    /// Setters ///
-    void setPathToQueryFile(const fs::path& pathToQueryFile);
-    void setIndexFileLocation(const fs::path& indexFileLocation);
-    void setOutputFolder(const fs::path& outputFolder);
-    void setMatchingReadFQ(const fs::path& matchingReadFQ);
-    void setInputFastQ(const fs::path& inputFastQ);
-    void setOutputFile(const fs::path& outputFile);
-    void setIndexSet(std::set<fs::path>& indexes);
+    const std::string& getReadSetName() const;
+    const algo::FileType& getReadFileType() const;
 
+    /// Parameter Setters ///
     void setNumOfReads(uint numOfReads);
 
+    void setDelFQFlag(bool delFQFlag);
+    void setDelFastaFlag(bool delFastaFlag);
     void setRevCompFlag(bool revCompFlag);
     void setPairedReadsFlag(bool pairedReads);
 
+    void setReadSetName(const std::string readSetName);
+    void setReadFileType(const algo::FileType& readFileType);
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief IO functions
-    ////////////////////////////////////////////////////////////////////////
+    /// File Getters ///
+    const fs::path& getReadFQ() const;
+    const fs::path& getR1() const;
+    const fs::path& getR2() const;
+
+    const fs::path& getOutputFile() const;
+    const fs::path& getOutputFolder() const;
+
+    const fs::path& getPreProcessedFasta() const;
+    const std::set<fs::path>& getIndexSet() const;
+
+    /// File Setters ///
+    void setReadFQ(const fs::path& readFQ);
+    void setR1(const fs::path& r1);
+    void setR2(const fs::path& r2);
+    void addR1R2();
+
+    void delR1();
+    void delR2();
+    void delReadFQ();
+    void delReadFasta();
+
+    void setOutputFile(const fs::path& outputFile);
+    void setOutputFolder(const fs::path& outputFolder);
+
+    void setPreProcessedFasta(const fs::path& preProcessedFasta);
+    void setIndexSet(std::set<fs::path>& indexes);
 
 };
 

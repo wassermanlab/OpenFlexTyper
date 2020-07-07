@@ -5,14 +5,16 @@
 #include "ftPropsClass.h"
 #include "ftSearch.h"
 #include "fmindex.h"
+#include "preProcess.h"
+#include "indexPropsClass.h"
 
 static void usage()
 {
     std::cout << "\nUsage\n flextyper [feature] [options...]               \n"
                  "                                                         \n"
                  " Features :                                              \n"
-                 "    searching   uses the FmIndex to search kmers         \n"
-                 "    indexing    uses a fasta file to produce the FmIndex \n"
+                 "    search   uses the FmIndex to search kmers         \n"
+                 "    index   uses a fasta file to produce the FmIndex \n"
                  "                                                         \n"
                  " Options  :                                              \n"
                  "    -h, --help  displays this help                       \n"
@@ -71,7 +73,7 @@ int main(int argc, char** argv)
 
     const QString command = args.isEmpty() ? QString() : args.first();
 
-    if (command == "searching")
+    if (command == "search")
     {
         parser.clearPositionalArguments();
         parser.addHelpOption();
@@ -106,60 +108,89 @@ int main(int argc, char** argv)
         flexTyperInstance->init(*props);
 
 
-    } else if (command == "indexing") {
+    } else if (command == "index") {
         parser.clearPositionalArguments();
         parser.addHelpOption();
 
-        parser.addPositionalArgument("fasta file of reads", "contains the preprocess fasta of reads", "");
-        QCommandLineOption reads = QCommandLineOption(QStringList() << "f" << "fasta", QCoreApplication::translate("main", "Please provide the fastQ file to be indexed"));
-        reads.setValueName("reads");
-        parser.addOption(reads);
+        parser.addPositionalArgument("readFileName", "contains the name of the read file", "");
+        QCommandLineOption readFileName = QCommandLineOption(QStringList() << "f" << "readfile", QCoreApplication::translate("main", "Please provide the name of the read file"));
+        readFileName.setValueName("readFileName");
+        parser.addOption(readFileName);
 
-        parser.addPositionalArgument("outindexdir", "contains the ouput directory for the index", "");
-        QCommandLineOption outindexdir = QCommandLineOption(QStringList() << "o" << "outindexdir", QCoreApplication::translate("main", "Please provide the output index directory"));
-        outindexdir.setValueName("outindexdir");
-        parser.addOption(outindexdir);
+        parser.addPositionalArgument("outputDir", "contains the ouput directory for the index", "");
+        QCommandLineOption outputDir = QCommandLineOption(QStringList() << "o" << "outindexdir", QCoreApplication::translate("main", "Please provide the output index directory"));
+        outputDir.setValueName("outputDir");
+        parser.addOption(outputDir);
 
+        parser.addPositionalArgument("indexFileName", "contains the filename for the index", "");
+        QCommandLineOption indexFileName = QCommandLineOption(QStringList() << "x" << "indexfile",   QCoreApplication::translate("main", "Please provide the index filename (!without .fm9 extension)"));
+        indexFileName.setValueName("indexFileName");
+        parser.addOption(indexFileName);
 
-        parser.addPositionalArgument("indexfile", "contains the output index file", "");
-        QCommandLineOption indexfile = QCommandLineOption(QStringList() << "x" << "indexfile",   QCoreApplication::translate("main", "Please provide the index filename (!without .fm9 extension)"));
-        indexfile.setValueName("indexfile");
-        parser.addOption(indexfile);
+        QCommandLineOption readFastq(QStringList() << "fq" << "fastq" , QCoreApplication::translate("main", "identifies whether to include the rev complement in the index"));
+        parser.addOption(readFastq);
+
+        QCommandLineOption readFasta(QStringList() << "fa" << "fasta" , QCoreApplication::translate("main", "identifies whether to include the rev complement in the index"));
+        parser.addOption(readFasta);
+
+        QCommandLineOption readZip(QStringList() << "gz" << "fastqgz" , QCoreApplication::translate("main", "identifies whether to include the rev complement in the index"));
+        parser.addOption(readZip);
+
+        QCommandLineOption revCompFlag(QStringList() << "r" << "rev" << "revComp", QCoreApplication::translate("main", "identifies whether to include the rev complement in the index"));
+        parser.addOption(revCompFlag);
+
+        QCommandLineOption pairedReadsFlag(QStringList() << "p" << "paired" << "pairedReads", QCoreApplication::translate("main", "identifies whether the reads are paired"));
+        parser.addOption(pairedReadsFlag);
+
+        QCommandLineOption delFQFlag(QStringList() << "dfq" << "delFQ" << "delFastQ", QCoreApplication::translate("main", "identifies whether the reads are paired"));
+        parser.addOption(delFQFlag);
+
+        QCommandLineOption delFastaFlag(QStringList() << "dfa" << "delFA" << "delFasta", QCoreApplication::translate("main", "identifies whether the reads are paired"));
+        parser.addOption(delFastaFlag);
 
         parser.process(aps);
 
-        if (!parser.isSet(reads)) {
-            std::cerr << "-r or --readsfile is required for indexing" << std::endl;
+        algo::IndexProps *props = new algo::IndexProps();
+
+        if (parser.isSet(readFastq))
+        {  props->setReadFileType(algo::FileType::FQ);}
+        else if (parser.isSet(readFastq))
+        {  props->setReadFileType(algo::FileType::FQ);}
+        else if (parser.isSet(readFastq))
+        {  props->setReadFileType(algo::FileType::FQ);}
+        else
+        { std::cout << "Error: Please specify the read file type " << std::endl;
+            return 1;
+        }
+
+        props->setReadSetName(parser.value(readFileName).toStdString());
+        props->setOutputFolder(parser.value(outputDir).toStdString());
+        props->setOutputFile(parser.value(indexFileName).toStdString());
+        props->setRevCompFlag(parser.isSet(revCompFlag));
+        props->setPairedReadsFlag(parser.isSet(pairedReadsFlag));
+        props->setDelFQFlag(parser.isSet(delFQFlag));
+        props->setDelFastaFlag(parser.isSet(delFastaFlag));
+
+        if (!parser.isSet(readFileName)) {
+            std::cerr << "-r or --readfile is required for indexing" << std::endl;
             parser.showHelp();
             return 1;
         }
 
-        std::string tmpReads = parser.value(reads).toStdString();
-        std::string tmpIndexFile;
-        std::string tmpOutIndexDir;
+        algo::PreProcess _preProcess(*props);
 
-        if (!parser.isSet(indexfile))   {
-            std::cout << "! setting -x indexFile or --indexfile indexFile" << std::endl;
-            tmpIndexFile   = "indexFile";
+        if (props->getPairedReadsFlag())
+        {
+           _preProcess.processPairedReadFiles();
         } else {
-            tmpIndexFile   = parser.value(indexfile).toStdString();
+           _preProcess.processReadFile();
         }
 
-        if (!parser.isSet(outindexdir)) {
-            std::cout << "! setting -o . or --oui ." << std::endl;
-            tmpOutIndexDir = ".";
-        } else {
-            tmpOutIndexDir = parser.value(outindexdir).toStdString();
-        }
-
-        std::cout << "read fasta file     : " << tmpReads       << std::endl;
-        std::cout << "indexfile     : " << tmpIndexFile   << std::endl;
-        std::cout << "outindexdir   : " << tmpOutIndexDir << std::endl;
 
         algo::FmIndex fmIndexObj;
 
         try {
-            fmIndexObj.createFMIndex(tmpReads, tmpIndexFile, "indices.txt");
+            fmIndexObj.createFMIndex(*props);
         } catch (std::exception& e) {
             std::cout << "Error ! " << e.what() << std::endl;
         }

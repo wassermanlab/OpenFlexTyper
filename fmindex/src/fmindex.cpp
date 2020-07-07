@@ -110,9 +110,15 @@ ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
 //}
 
 //======================================================================
-fs::path FmIndex::createFMIndex(const fs::path& fileToIndex, const fs::path& output, const fs::path& indexList)
+fs::path FmIndex::createFMIndex(const algo::IndexProps& props)
+
+        //const fs::path& fileToIndex, const fs::path& output, const fs::path& indexList)
 {
     std::lock_guard<std::mutex> lock(_mtx);
+
+    fs::path fileToIndex = props.getPreProcessedFasta();
+    fs::path output = props.getOutputFile();
+    //fs::path indexList;
 
     if (!load_from_file(_fmindex, output)) {
         std::ifstream in(fileToIndex);
@@ -127,11 +133,11 @@ fs::path FmIndex::createFMIndex(const fs::path& fileToIndex, const fs::path& out
         store_to_file(_fmindex, output);
     }
 
-    std::ofstream indxl (indexList, std::ios::app);
-    if (indxl.is_open()) {
-        indxl << output.string() << std::endl;
-    }
-    indxl.close();
+//    std::ofstream indxl (indexList, std::ios::app);
+//    if (indxl.is_open()) {
+//        indxl << output.string() << std::endl;
+//    }
+//    indxl.close();
 
     // mtx.lock();
     // std::cout << "Index construction complete in " << index_file << " index requires " << size_in_mega_bytes(_fm_index) << " MiB." << std::endl;
@@ -149,17 +155,17 @@ void FmIndex::loadIndexFromFile(const std::string& indexname)
 }
 
 //======================================================================
-void FmIndex::parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList)
-{
-    std::vector<std::future<fs::path>> operations;
+//void FmIndex::parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList)
+//{
+//    std::vector<std::future<fs::path>> operations;
 
-    for (size_t i = 0; i < filenames.size(); i++)
-        operations.push_back(std::async(std::launch::async, &FmIndex::createFMIndex, this,
-                                        filenames[i], indexNames[i], indexList));
+//    for (size_t i = 0; i < filenames.size(); i++)
+//        operations.push_back(std::async(std::launch::async, &FmIndex::createFMIndex, this,
+//                                        filenames[i], indexNames[i], indexList));
 
-    for (size_t i = 0; i < filenames.size(); i++)
-        operations[i].get();
-}
+//    for (size_t i = 0; i < filenames.size(); i++)
+//        operations[i].get();
+//}
 
 //======================================================================
 void FmIndex::overrideStats(std::shared_ptr<ft::IStats> stats)
