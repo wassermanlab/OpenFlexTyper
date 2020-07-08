@@ -8,6 +8,12 @@ CONFIG      += c++17
 LIBS        += -lstdc++fs -lsdsl -ldivsufsort64     \
                -ldivsufsort \
 
+copydata.commands = $(COPY_DIR) $$PWD/scripts/preprocess.sh $$OUT_PWD
+first.depends = $(first) copydata
+export(first.depends)
+export(copydata.commands)
+QMAKE_EXTRA_TARGETS += first copydata
+
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -71,5 +77,5 @@ SOURCES     += flextyper/src/stats.cpp                \
               fmindex/src/indexPropsClass.cpp
 
 DISTFILES += \
-    flextyper/src/preprocess.sh
+    scripts/preprocess.sh
 

@@ -51,12 +51,14 @@ int main(int argc, char** argv)
     // making cout fast
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
+    std::cout << fs::current_path() << std::endl;
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication aps(argc, argv);
     QCoreApplication::setApplicationName("flextyper");
     QCoreApplication::setApplicationVersion("version 0.2");
     QCommandLineParser parser;
+
 
     if (argc <= 2) {
         usage();
@@ -125,10 +127,6 @@ int main(int argc, char** argv)
         indexFileName.setValueName("indexFileName");
         parser.addOption(indexFileName);
 
-        parser.addPositionalArgument("buildDirectory", "contains the build directory for flextyper", "");
-        QCommandLineOption buildDirectory = QCommandLineOption(QStringList() << "x" << "indexfile",   QCoreApplication::translate("main", "Please provide the index filename (!without .fm9 extension)"));
-        buildDirectory.setValueName("buildDirectory");
-        parser.addOption(buildDirectory);
 
         QCommandLineOption readPairFileName = QCommandLineOption(QStringList() << "p" << "readPairfile", QCoreApplication::translate("main", "Please provide the name of the paired read file"));
         readPairFileName.setValueName("readPairFileName");
@@ -155,6 +153,8 @@ int main(int argc, char** argv)
         parser.process(aps);
 
         algo::IndexProps *props = new algo::IndexProps();
+        fs::path buildDir = QCoreApplication::applicationDirPath().toStdString();
+        props->setBuildDir(buildDir);
 
         if (parser.isSet(readZip))
         {  props->setReadFileType(algo::FileType::GZ);}
@@ -179,7 +179,6 @@ int main(int argc, char** argv)
         //set output values
         props->setOutputFolder(parser.value(outputDir).toStdString());
         props->setOutputFile(parser.value(indexFileName).toStdString());
-        props->setBuildDir(parser.value(buildDirectory).toStdString());
 
         //set parameters
         props->setRevCompFlag(parser.isSet(revCompFlag));
@@ -194,7 +193,13 @@ int main(int argc, char** argv)
 
         // call bash script to manipulate the input files
         std::string bashargs = props->createBash();
-
+        if (fs::exists(props->getBuildDir() /+ "preprocess.sh")){
+            std::cout << "bash args : " << bashargs << std::endl;
+            std::cout << "running preprocess.sh" << std::endl;
+            system(bashargs.c_str());
+        } else {
+            std::cerr << "cannot find preprocess.sh in " << props->getBuildDir() << std::endl;
+        }
 
 
         algo::FmIndex fmIndexObj;

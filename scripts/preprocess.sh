@@ -184,7 +184,7 @@ function usage() {
         exit 0
 }
 # check the total number of arguments
-if [ $# -lt 10 ]; then
+if [ $# -lt 5 ]; then
         echo '==== ERROR : requires at least 5'
         usage
 fi
@@ -201,7 +201,7 @@ outputDir=''
 outputFileName=''
 
 # retrieve arguments
-while getopts 'z:r:p:n:c:u:' arg ; do
+while getopts 'z:r:p:n:c:o:f:u:' arg ; do
     case $arg in
         -z) zippedReads=$(OPTARG};;
         -r) readFile=${OPTARG};;
@@ -217,5 +217,14 @@ while getopts 'z:r:p:n:c:u:' arg ; do
 done
 
 # call the main function
+echo 'preprocessing with: '
+echo '-z zippedReads ' $zippedReads
+echo '-r readFilename ' $readFile
+echo '-p readPairFile ' $readPairFile
+echo '-n numberOfIndexes ' $numberOfIndexes
+echo '-c reverseComplement ' $reverseComp
+echo '-o outputDir  ' $outputDir
+echo '-f outputFileName  ' $outputFileName
+echo '-u pathToUtils  ' $pathToUtils
 
 main $readFile $readPairFile $outputDir $outputFileName $zippedReads $numberOfIndexes $reverseComp $pairedReads $pathToUtils
