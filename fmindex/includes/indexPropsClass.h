@@ -29,18 +29,21 @@ public:
     fs::path _preProcessedFasta;
     fs::path _outputFile;
     fs::path _outputFolder; //where to save the indexes
+    fs::path _buildDir;
 
     std::set<fs::path> _indexSet; //this is the set of generated index files
 
     uint _numOfReads;
 
-    bool _revComp;
-    bool _pairedReads;
-    bool _delFQ;
-    bool _delFasta;
+    bool _revComp = 0;
+    bool _pairedReads = 0;
+    bool _delFQ = 0;
+    bool _delFasta= 0;
 
     std::string _readSetName;
     algo::FileType _readFileType;
+
+    std::string createBash();
 
     /// Parameter Getters ///
     uint getNumOfReads() const;
@@ -69,6 +72,7 @@ public:
     const fs::path& getR1() const;
     const fs::path& getR2() const;
 
+    const fs::path& getBuildDir() const;
     const fs::path& getOutputFile() const;
     const fs::path& getOutputFolder() const;
 
@@ -85,6 +89,7 @@ public:
     void delReadFQ();
     void delReadFasta();
 
+    void setBuildDir(const fs::path& buildDir);
     void setOutputFile(const fs::path& outputFile);
     void setOutputFolder(const fs::path& outputFolder);
 

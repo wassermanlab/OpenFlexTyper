@@ -5,7 +5,19 @@ namespace algo {
 IndexProps::IndexProps()
 {}
 
+std::string IndexProps::createBash(){
+    std::string bashargs = "bash preprocess.sh";
+    bashargs = " -r " + _R1.string();
+    bashargs += " -o " + _outputFolder.string();
+    bashargs += " -f " + _outputFile.string();
+    fs::path pathToUtils = _buildDir /= "bin/";
+    bashargs += "-u " + pathToUtils.string();
+    if (_readFileType == algo::FileType::FQ) {bashargs += " -z 1 "; }
+    if (_pairedReads) {bashargs += " -p " + _R2.string();}
+    if (_revComp){bashargs += " -c 1 ";}
 
+    return bashargs;
+}
 //================= PARAMETER GETTERS ========================
 uint IndexProps::getNumOfReads() const {return _numOfReads;}
 
@@ -29,6 +41,7 @@ void IndexProps::setReadSetName(const std::string readSetName){_readSetName = re
 void IndexProps::setReadFileType(const algo::FileType& readFileType){_readFileType = readFileType;}
 
 //====================== FILE GETTERS ======================
+const fs::path& IndexProps::getBuildDir() const {return _outputFile;}
 const fs::path& IndexProps::getOutputFile() const {return _outputFile;}
 const fs::path& IndexProps::getOutputFolder()const {return _outputFolder;}
 
@@ -60,7 +73,8 @@ void IndexProps::delReadFQ(){
 void IndexProps::delReadFasta(){
     fs::remove(_preProcessedFasta);
 }
-
+void IndexProps::setBuildDir(const fs::path &buildDir)
+{        _buildDir = buildDir;   }
 void IndexProps::setOutputFile(const fs::path& outputFile)
 {        _outputFile = outputFile;   }
 void IndexProps::setOutputFolder(const fs::path& outputFolder)

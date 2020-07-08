@@ -31,8 +31,8 @@ INCLUDEPATH += ../includes                  \
 # Input
 SOURCES += tst_queryextractor.cpp           \
     tst_ftMapClass.cpp \
+    tst_indexPropsClass.cpp \
     tst_kmerClass.cpp \
-    tst_preProcess.cpp \
     tst_queryClass.cpp \
            tst_resultsflags.cpp             \
            tst_writerbridge.cpp             \

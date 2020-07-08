@@ -42,7 +42,6 @@ HEADERS    += flextyper/includes/utils.h              \
               flextyper/includes/queryextractor.h     \
               fmindex/includes/fmindex.h              \
               fmindex/includes/indexPropsClass.h      \
-              fmindex/includes/preProcess.h \
 
 HEADERS    += flextyper/interfaces/ikmergenerator.h   \
               flextyper/interfaces/iqueryextractor.h  \
@@ -69,6 +68,8 @@ SOURCES     += flextyper/src/stats.cpp                \
                flextyper/src/finder.cpp               \
                flextyper/src/resultprocessor.cpp      \
                flextyper/src/queryextractor.cpp       \
-              fmindex/src/indexPropsClass.cpp \
-    fmindex/src/preProcess.cpp
+              fmindex/src/indexPropsClass.cpp
+
+DISTFILES += \
+    flextyper/src/preprocess.sh
 
