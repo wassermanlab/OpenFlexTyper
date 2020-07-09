@@ -106,10 +106,10 @@ void FmIndex::parallelFmIndex(algo::IndexProps& _props)
     std::vector<std::future<fs::path>> operations;
     std::set<fs::path> _ppfs = _props.getPreProcessedFastas();
     for (fs::path _ppf : _props.getPreProcessedFastas()){
-//        operations.push_back(std::async(std::launch::async,
-//                                        &algo::FmIndex::createFMIndex,
-//                                        _props,
-//                                        const_cast<fs::path&>(_ppf)));
+        operations.push_back(std::async(std::launch::async,
+                                        &algo::FmIndex::createFMIndex,
+                                        _props,
+                                        const_cast<fs::path&>(_ppf)));
     }
 
     for (size_t i = 0; i < _ppfs.size(); i++)
