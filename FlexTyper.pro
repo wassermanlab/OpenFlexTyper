@@ -77,6 +77,11 @@ SOURCES     += flextyper/src/stats.cpp                \
               fmindex/src/indexPropsClass.cpp
 
 DISTFILES += \
+    testFiles/MixedVirus_100_1.fq.gz \
+    testFiles/MixedVirus_100_2.fq.gz \
+    testFiles/Setting.ini \
+    testFiles/indexProps.ini \
     testFiles/preprocess.sh \
-    testFiles/test.fq.gz
+    testFiles/test.fq.gz \
+    testFiles/testQueries.txt
 

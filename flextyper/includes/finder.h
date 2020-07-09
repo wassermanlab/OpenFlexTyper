@@ -51,8 +51,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief searchMultipleIndexes
     ////////////////////////////////////////////////////////////////////////
-    void searchMultipleIndexes(ft::FTMap &ftMap, const std::set<fs::path> &indexPaths,
-                               long long offset);
+    void searchMultipleIndexes(ft::FTMap &ftMap);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Finder::addResultsFutures
@@ -87,15 +86,13 @@ public:
     /// \brief multipleIndexesParallelSearch searches for kmers inside multiple
     ///        indexes in parallel
     ////////////////////////////////////////////////////////////////////////
-    void multipleIndexesParallelSearch(ft::FTMap &ftMap,
-                                       const std::set<fs::path> &indexPath, long long offset);
+    void multipleIndexesParallelSearch(ft::FTMap &ftMap);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief multipleIndexesSequentialSearch searches for kmers inside a multiple
     ///        FmIndexes in q sequential way
     ////////////////////////////////////////////////////////////////////////
-    void multipleIndexesSequentialSearch(ft::FTMap &ftMap,
-                                         const std::set<fs::path> &indexPath, long long offset);
+    void multipleIndexesSequentialSearch(ft::FTMap &ftMap);
 
 private:
     ////////////////////////////////////////////////////////////////////////

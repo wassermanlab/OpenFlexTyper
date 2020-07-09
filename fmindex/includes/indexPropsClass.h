@@ -5,7 +5,7 @@
 #include <fstream>
 #include <map>
 #include <experimental/filesystem>
-
+#include <QSettings>
 
 
 namespace fs = std::experimental::filesystem;
@@ -102,7 +102,13 @@ public:
     void setIndexSet(std::set<fs::path>& indexes);
     void addToIndexSet(const fs::path& index);
 
+    /// File Preprocess ///
     void createPPFSet() const;
+
+    /// Index Props I/O ///
+
+    void saveIndexProps(const fs::path& indexPropsFile) const;
+
 };
 
 

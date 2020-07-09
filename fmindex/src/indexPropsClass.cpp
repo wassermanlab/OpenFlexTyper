@@ -108,20 +108,44 @@ void IndexProps::createPPFSet() const {
     ppFN.replace_extension(".fasta");
     std::set<fs::path> _PPFSet;
     if (_numOfIndexes > 1){
-        for (int i=0; i<_numOfIndexes; ++i)
+        for (u_int i=0; i<_numOfIndexes; ++i)
         {
             fs::path tmpPPF = ppFN;
             std::string tmpPPFName = ppFN.filename();
             tmpPPFName += "_" + std::to_string(i);
             tmpPPF.replace_filename(tmpPPFName);
-
         }
     }
-
-
-
 }
 
+//====================== INDEX PROPS I/O ======================
+void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) const {
+        QSettings settings(_indexPropsFile.string().c_str(), QSettings::NativeFormat);
+
+        settings.setValue("readFQ", QString::fromStdString(_readFQ.string()));
+        settings.setValue("R1", QString::fromStdString(_R1.string()));
+        settings.setValue("R2", QString::fromStdString(_R2.string()));
+        settings.setValue("readSetName", QString::fromStdString(_readSetName));
+        settings.setValue("indexDirectory", QString::fromStdString(_outputFolder.string()));
+        settings.setValue("buildDirectory", QString::fromStdString(_buildDir.string()));
+        settings.setValue("numOfReads", _numOfReads);
+        settings.setValue("numOfIndexes", _numOfIndexes);
+        settings.setValue("revComp", _revComp);
+        settings.setValue("pairedReads", _pairedReads);
+        settings.setValue("delFQ", _delFQ);
+        settings.setValue("delFasta", _delFasta);
+
+        settings.beginWriteArray("IndexFiles");
+
+        for (int i = 0; i < _numOfIndexes; ++i) {
+            fs::path indexFile;
+            u_int offset;
+            settings.setArrayIndex(i);
+            settings.setValue("fileName", indexFile.string().c_str() );
+            settings.setValue("offset", offset);
+            }
+        settings.endArray();
+      }
 
 
 

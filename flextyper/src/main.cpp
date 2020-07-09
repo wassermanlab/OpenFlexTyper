@@ -18,31 +18,7 @@ static void usage()
                  "    -h, --help  displays this help                       \n"
                  "                                                         \n"
                  " Example :                                               \n"
-                 " flextyper searching -h                                \n\n";
-}
-
-static void createdIndexRepo(const fs::path& indexFileLocation)
-{
-    std::ofstream indices("indices.txt");
-
-    if (indices.is_open()) {
-        if (indexFileLocation.extension() == ".fm9") {
-            std::string r = indexFileLocation;
-            r.erase(std::remove(r.begin(), r.end(), '"'), r.end());
-            indices << r << "\n";
-
-        } else {
-            for (const auto& entry : fs::directory_iterator(indexFileLocation)) {
-                fs::path res_entry = entry;
-                if (res_entry.extension() == ".fm9") {
-                    std::string r = res_entry;
-                    r.erase(std::remove(r.begin(), r.end(), '"'), r.end());
-                    indices << r << "\n";
-                }
-            }
-        }
-    }
-    indices.close();
+                 " flextyper search -h                                \n\n";
 }
 
 int main(int argc, char** argv)
@@ -95,9 +71,8 @@ int main(int argc, char** argv)
         ft::FTProp *props = new ft::FTProp();
         props->initFromQSettings(configFile, printInputs);
 
-        createdIndexRepo(props->getIndexFileLocation());
 	    
-        if (props->getMatchingReadFQ().empty()) {
+        if (props->getInputFastQ().empty()) {
             std::cerr << "you need to provide the read file location\n";
             return 1;
         }

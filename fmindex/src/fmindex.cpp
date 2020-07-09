@@ -23,15 +23,13 @@ void FmIndex::setKmerMapSize(size_t kmerMapSize)
 
 //======================================================================
 ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
-                              const std::string& /* filename */,
-                              const std::string& /* indexDirectory */,
                               u_int maxOcc, size_t i,
                               bool flagOverCountedKmers, bool printSearchTime)
 {
     // This code is executed in a different thread for multithreaded
     // executions and in main thread for monothreaded applications
 
-    std::string kmer= kmerClass.getKmer();
+    std::string kmer = kmerClass.getKmer();
     ft::KmerClass resultsfutures(kmer);
 
     auto start = high_resolution_clock::now();
@@ -108,10 +106,10 @@ void FmIndex::parallelFmIndex(algo::IndexProps& _props)
     std::vector<std::future<fs::path>> operations;
     std::set<fs::path> _ppfs = _props.getPreProcessedFastas();
     for (fs::path _ppf : _props.getPreProcessedFastas()){
-        operations.push_back(std::async(std::launch::async,
-                                        &algo::FmIndex::createFMIndex,
-                                        dynamic_cast<algo::IndexProps&>(_props),
-                                        const_cast<fs::path&>(_ppf)));
+//        operations.push_back(std::async(std::launch::async,
+//                                        &algo::FmIndex::createFMIndex,
+//                                        _props,
+//                                        const_cast<fs::path&>(_ppf)));
     }
 
     for (size_t i = 0; i < _ppfs.size(); i++)

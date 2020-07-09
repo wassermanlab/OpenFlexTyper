@@ -24,8 +24,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief searchMultipleIndexes
     ////////////////////////////////////////////////////////////////////////
-    virtual void searchMultipleIndexes(ft::FTMap& ftMap, const std::set<fs::path>& indexPaths,
-                                       long long offset) = 0;
+    virtual void searchMultipleIndexes(ft::FTMap& ftMap ) = 0;
 };
 }
 

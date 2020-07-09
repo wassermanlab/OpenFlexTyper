@@ -41,12 +41,11 @@ public:
     void init(const fs::path& pathToQueryFile       ,
               uint kmerSize                         ,
               uint readLength                       ,
-              const fs::path& indexLocation         ,
+              const fs::path& indexPropsFile        ,
               const fs::path& outputFile            ,
               bool refOnly                          ,
               SearchType searchType                 ,
               bool multithread              = false ,
-              const fs::path& inputFastQ    = ""    ,
               uint overlap                  = 0     ,
               bool returnMatchesOnly        = false ,
               bool kmerCounts               = false ,
@@ -59,14 +58,20 @@ public:
               bool printSearchTime          = false,
               uint maxKmers                 = UINT_MAX,
               uint totalKmers               = UINT_MAX,
-              const fs::path& matchingReads = "");
+              bool printInputs              = false);
 
-    void initFromQSettings (std::string configFile, bool printInputs);
+    void initFromQSettings(std::string configFile, bool printInputs);
+
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief Import Index Properties from INI
+    ////////////////////////////////////////////////////////////////////////
+    void loadIndexProps(const fs::path& _indexPropsFile, bool printInputs);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief properties
     ////////////////////////////////////////////////////////////////////////
     SearchType _searchType;
+    std::string _readSetName;
 
     uint _kmerSize;
     uint _overlap;
@@ -77,6 +82,8 @@ public:
     uint _maxThreads;
     uint _maxKmersPerQuery;
     uint _maxTotalKmers;
+    uint _numOfReads;
+    uint _numOfIndexes;
 
     bool _kmerCounts;
     bool _multithread;
@@ -86,20 +93,32 @@ public:
     bool _ignoreNonUniqueKmers;
     bool _crossover;
     bool _printSearchTime;
+    bool _pairedReads;
+    bool _revComp; //do the index files contain the reverse complement
+    bool _matchingReads; //create files that contain reads that match to each query
 
     fs::path _pathToQueryFile;
-    fs::path _indexFileLocation;
-    fs::path _outputFolder;
-    fs::path _matchingReadFQ;
+
+    fs::path _buildDir;
+    fs::path _indexDir;
+
+    fs::path _R1;
+    fs::path _R2;
     fs::path _inputFastQ;
+
+    fs::path _outputFolder;
     fs::path _outputFile;
-    std::set<fs::path> _indexSet;
+
+    std::map<fs::path, uint> _indexSet; //index path, index offset
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Parameter getters and setters
     ////////////////////////////////////////////////////////////////////////
     SearchType getSearchType();
     void setSearchType(ft::SearchType searchType);
+
+    std::string getReadSetName();
+    void setReadSetName(std::string readSetName);
 
     uint getKmerSize() const;
     uint getOverlap() const;
@@ -110,6 +129,8 @@ public:
     uint getMaxThreads() const;
     uint getMaxKmersPerQuery() const;
     uint getMaxTotalKmers() const;
+    uint getNumOfIndexes() const;
+    uint getNumOfReads() const;
 
     void setKmerSize(uint kmerSize);
     void setOverlap(uint overlap);
@@ -120,6 +141,8 @@ public:
     void setMaxThreads(uint maxThreads);
     void setMaxKmersPerQuery(uint maxKmersPerQ);
     void setMaxTotalKmers(uint maxTotalKmers);
+    void setNumOfIndexes(uint numOfIndexes);
+    void setNumOfReads(uint numOfReads);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Flag getters and setters
@@ -132,6 +155,9 @@ public:
     bool getIgnoreNonUniqueKmersFlag() const;
     bool getCrossoverFlag() const;
     bool getPrintSearchTimeFlag() const;
+    bool getPairedReadFlag() const;
+    bool getRevCompFlag() const;
+    bool getMatchingReadsFlag() const;
 
     void setKmerCountsFlag(bool kmerCounts);
     void setMultithreadFlag(bool multithread);
@@ -141,25 +167,34 @@ public:
     void setIgnoreNonUniqueKmersFlag(bool ignoreNonUnique);
     void setCrossoverFlag(bool crossover);
     void setPrintSearchTimeFlag(bool printSearchTime);
+    void setPairedReadsFlag(bool pairedReads);
+    void setRevCompFlag(bool revComp);
+    void setMatchingReadsFlag(bool matchingReads);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief File getters and setters
     ////////////////////////////////////////////////////////////////////////
     void setPathToQueryFile(const fs::path& pathToQueryFile);
-    void setIndexFileLocation(const fs::path& indexFileLocation);
+    void setIndexDir(const fs::path& indexDir);
     void setOutputFolder(const fs::path& outputFolder);
-    void setMatchingReadFQ(const fs::path& matchingReadFQ);
-    void setInputFastQ(const fs::path& inputFastQ);
     void setOutputFile(const fs::path& outputFile);
-    void setIndexSet(std::set<fs::path>& indexes);
+    void setInputFastQ(const fs::path& inputFastQ);
+    void setIndexSet(std::map<fs::path, uint>& indexes);
+    void setBuildDir(const fs::path& buildDirectory);
+    void setR1(const fs::path& _R1);
+    void setR2(const fs::path& _R2);
 
     const fs::path& getPathToQueryFile() const;
-    const fs::path& getIndexFileLocation() const;
+    const fs::path& getIndexDir() const;
     const fs::path& getOutputFolder() const;
     const fs::path& getMatchingReadFQ() const;
     const fs::path& getInputFastQ() const;
     const fs::path& getOutputFile() const;
-    const std::set<fs::path>& getIndexSet() const;
+    const std::map<fs::path, uint>& getIndexSet() const;
+    const fs::path& getBuildDir() const;
+    const fs::path& getR1() const;
+    const fs::path& getR2() const;
+
 };
 
 }

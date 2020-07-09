@@ -22,7 +22,7 @@ void FTSearch::checkInputFastQ(FTProp ftProps){
     // want to remove the "Indexes_" at the beginning
 
 if (ftProps.getInputFastQ().empty()) {
-    ftProps.getInputFastQ().stem() = _utils->trimmedReadFileName(ftProps.getIndexFileLocation());
+    ftProps.getInputFastQ().stem() = _utils->trimmedReadFileName(ftProps.getIndexDir());
 }
 }
 
@@ -41,45 +41,30 @@ void FTSearch::init(FTProp ftProps)
     ft::FTMap ftMap(ftProps);
     checkInputFastQ(ftProps);
 
-    std::ifstream in(ftProps.getMatchingReadFQ(), std::ifstream::ate | std::ifstream::binary);
-    long long offset = in.tellg();
-    uint lines = offset / (ftProps.getReadLength() + 1);
+    //std::ifstream in(ftProps.getMatchingReadFQ(), std::ifstream::ate | std::ifstream::binary);
+    //long long offset = in.tellg();
 
     checkOutputFile(ftProps);
-
-    std::set<fs::path> setOfIndexes = _utils->getSetOfIndexes();
-    ftProps.setIndexSet(setOfIndexes);
 
     std::set<Query> inputQueries = _queryExtractor->getInputQueries(ftProps.getRefOnlyFlag(), ftProps.getCrossoverFlag(), ftProps.getPathToQueryFile());
 
     ftMap.addInputQueries(inputQueries);
 
-
     ftMap.getQKMap();
 
-
-
-
     std::cout << "\nsearching..." << std::endl;
-    auto indexFile = setOfIndexes.begin()->c_str();
 
     // selecting the correct strategy depending on the size of the index size set
-    if (setOfIndexes.size() == 1) {
-        std::cout << "searching with " << setOfIndexes.size() << " indexes" << std::endl;
-        std::cout << "offset : " << offset << std::endl;
-        offset = 0;
+    if (ftProps.getNumOfIndexes() == 1) {
+        std::cout << "searching with " << ftProps.getNumOfIndexes() << " indexes" << std::endl;
+        std::pair<fs::path, uint> index = *ftProps.getIndexSet().begin();
+        fs::path indexFile = index.first;
+        uint offset = index.second;
         _finder->searchMonoIndex(ftMap, indexFile, offset);
 
-    } else if (setOfIndexes.size() > 1) {
-
-        offset /= setOfIndexes.size();
-        std::cout << "offset : " << offset << std::endl;
-        std::cout << "searching with " << setOfIndexes.size() << " indexes" << std::endl;
-        _finder->searchMultipleIndexes(ftMap, setOfIndexes, offset);
+    } else if (ftProps.getNumOfIndexes() > 1) {
+        _finder->searchMultipleIndexes(ftMap);
     }
-
-    fs::path indexMapFile = indexFile;
-    indexMapFile += ".map";
 
     _resultProcessor->processResults(ftMap);
     _writerBridge->saveQueryOutput(ftMap);

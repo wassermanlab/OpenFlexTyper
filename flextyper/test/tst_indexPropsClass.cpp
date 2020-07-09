@@ -153,7 +153,7 @@ TEST_F(TestIndexProp, createBash_withMultipleIndexes)
 }
 
 //======================================================================
-TEST_F(TestIndexProp, createPPFSet)
+TEST_F(TestIndexProp, DISABLED_createPPFSet)
 {
     algo::IndexProps* _indexProp = new algo::IndexProps();
     _indexProp->setR1("test.fq.gz");
@@ -171,6 +171,20 @@ TEST_F(TestIndexProp, createPPFSet)
     std::cout << outputPPFN1 << std::endl;
     std::cout << outputPPFN2 << std::endl;
 }
+
+//======================================================================
+TEST_F(TestIndexProp, createIndexINI)
+{
+    algo::IndexProps* _indexProp = new algo::IndexProps();
+    _indexProp->setR1("test.fq.gz");
+    _indexProp->setOutputFile("output");
+    _indexProp->setOutputFolder("outputfolder/");
+    _indexProp->setBuildDir("../build");
+    _indexProp->setNumOfIndexes(2);
+
+    _indexProp->saveIndexProps("indexProps.ini");
+}
+
 
 
 

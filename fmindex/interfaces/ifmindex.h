@@ -48,8 +48,7 @@ public:
     /// \return
     ////////////////////////////////////////////////////////////////////////
     virtual ft::KmerClass search(ft::KmerClass kmerClass,
-                                 const std::string& filename = "indexFile",
-                                 const std::string& outputFolder = "./", u_int maxOccurences = 200,
+                                 u_int maxOccurences = 200,
                                  size_t i = 0,
                                  bool flagOverCountedKmers = false,
                                  bool printSearchTime = false) = 0;

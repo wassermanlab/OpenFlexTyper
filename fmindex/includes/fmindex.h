@@ -48,8 +48,7 @@ public:
     /// \return
     ////////////////////////////////////////////////////////////////////////
     ft::KmerClass search(ft::KmerClass kmerClass,
-                         const std::string& = "indexFile",
-                         const std::string& = "/tmp/", u_int maxOcc = 200, size_t i = 0,
+                         u_int maxOcc = 200, size_t i = 0,
                          bool flagOverCountedKmers = false,
                          bool printSearchTime = false);
 
