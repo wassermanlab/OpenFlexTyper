@@ -25,7 +25,7 @@ public:
     /// \param  stringToIndex
     /// \return The function will return the name of the generated index
     ////////////////////////////////////////////////////////////////////////
-    virtual fs::path createFMIndex(algo::IndexProps& _props) = 0;
+    virtual fs::path createFMIndex(algo::IndexProps& _props, const fs::path& preprocessedFasta ) = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief loadIndexFromFile
@@ -39,7 +39,7 @@ public:
     /// \param indexNames
     /// \param outputFolder
     ////////////////////////////////////////////////////////////////////////
-    virtual void parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList) = 0;
+    virtual void parallelFmIndex(algo::IndexProps& _props) = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief search

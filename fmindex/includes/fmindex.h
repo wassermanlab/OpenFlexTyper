@@ -33,7 +33,7 @@ public:
     /// \brief createFMIndex
     /// \param stringToIndex
     ////////////////////////////////////////////////////////////////////////
-    fs::path createFMIndex(algo::IndexProps& _props);
+    fs::path createFMIndex(algo::IndexProps& _props, const fs::path& preprocessedFasta);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief loadIndexFromFile
@@ -58,7 +58,7 @@ public:
     /// \param filenames
     /// \param indexNames
     ////////////////////////////////////////////////////////////////////////
-    void parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList);
+    void parallelFmIndex(algo::IndexProps& _props);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief generate the Reads Mapping

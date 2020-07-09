@@ -23,7 +23,7 @@ function unzipReadFile()
         local readName=$2
         local outputDir=$3
 
-        echo 'uncompress files'
+        #echo 'uncompress files'
         #start_time=$( date +%s.%N )
 
         if [[ $1 == *.fq ]];
@@ -68,23 +68,39 @@ function createFasta()
         if [ $# -eq 3 ]; then
             #start_time=$( date +%s.%N )
             #echo "create forward fasta file from" $readFQ
+            echo "utils path" ${utilsPath}
             if [ ! -f ${utilsPath}/seqtk ]; then
-                if [ ! -f ${utilsPath}seqtk/seqtk ]; then
+                echo "cant find" ${utilsPath}"/seqtk"
+                if [ ! -f ${utilsPath}/seqtk/seqtk ]; then
                     echo "cannot find seqtk, installing in " ${utilsPath}
                     cd ${utilsPath}
                     buildSeqTk
                     utilsPath=${utilsPath}/seqtk
+                    echo "installed seqtk in " ${utilsPath}
                 else
-                    #echo "found seqtk in " ${utilsPath}seqtk
-                    utilsPath=${utilsPath}seqtk
+                    echo "found seqtk in " ${utilsPath}/seqtk
+                    utilsPath=${utilsPath}/seqtk
                 fi
             fi
-
-            ${utilsPath}/seqtk seq -A -C -U  ${PWD}/${readFQ} | egrep -v '[>]' > $fastaFile
+            #echo "creating fasta " ${readFQ} "into " $fastaFile
+            #echo "running ${utilsPath}seqtk seq -A -C -U ${readFQ} | egrep -v '[>]' > ${fastaFile} "
+            ${utilsPath}/seqtk seq -A -C -U ${readFQ} | egrep -v '[>]' > $fastaFile
             #elapsed_time=$( date +%s.%N --date="$start_time seconds ago" )
             #echo task took : $elapsed_time
-            fw_size=$(stat -c "%s" $fastaFile)
+
         fi
+        if [ -f $fastaFile ]
+        then
+            if [ ! -s $fastaFile ]
+            then
+                echo $fastaFile " is empty"
+                exit 1
+            fi
+        else
+            echo $fastaFile " not found"
+            exit 1
+        fi
+        #echo $fastaFile " created"
 }
 
 ##########################################
@@ -107,19 +123,19 @@ function createRevComp()
         if [ $# -eq 3 ]; then
             #start_time=$( date +%s.%N )
             if [ ! -f ${utilsPath}/seqtk ]; then
-                if [ ! -f ${utilsPath}seqtk/seqtk ]; then
+                if [ ! -f ${utilsPath}/seqtk/seqtk ]; then
                     echo "cannot find seqtk, installing in " ${utilsPath}
                     cd ${utilsPath}
                     buildSeqTk
                     utilsPath=${utilsPath}/seqtk
                 else
                     #echo "found seqtk in " ${utilsPath}seqtk
-                    utilsPath=${utilsPath}seqtk
+                    utilsPath=${utilsPath}/seqtk
                 fi
             fi
 
-            echo "create reverse complement fasta file from" ${readFQ}
-            ${utilsPath}/seqtk seq -A -C -U -r ${PWD}/${readFQ} | egrep -v '[>]' > $rcFile
+            #echo "create reverse complement fasta file from" ${readFQ} "into" $rcFile
+            ${utilsPath}/seqtk seq -A -C -U -r ${readFQ} | egrep -v '[>]' > $rcFile
 
             #elapsed_time=$( date +%s.%N --date="$start_time seconds ago" )
             #echo task took : $elapsed_time
@@ -162,6 +178,8 @@ function processReadFile(){
 
     local readFileFQ="${outputDir}/${readName}.fq"
     local readFileFA="${outputDir}/${readName}.fasta"
+    #echo "read file FQ: " $readFileFQ
+    #echo "read file FA: " $readFileFA
 
     #Unzip the input files
     if [ $zippedReads -eq 1 ];then
@@ -173,17 +191,31 @@ function processReadFile(){
     #echo "read File FQ " $readFileFQ
     if [ ! -f ${readFileFQ} ];then
         echo "cannot find read file " ${readFileFQ}
+        exit 1
     fi
 
     #Create Plain Fastas
     createFasta ${readFileFQ} ${readName} ${utilsPath}
 
+    if [ ! -f ${readFileFA} ];then
+        echo "cannot find fasta file " ${readFileFA}
+        exit 1
+    fi
+
     #Add reverse complement
     if [ $reverseComp -eq 1 ];then
         createRevComp ${readFileFQ} ${readName} ${utilsPath}
     fi
-    echo "read file processed " ${readFile}
-    echo "output saved to $PWD$readdir/${readName}.fasta"
+    if [ ! -f ${readFileFA} ];then
+        echo "cannot find fasta file after reverse Comp" ${readFileFA}
+        exit 1
+    fi
+    if [ ! -s ${readFileFA} ];then
+        echo "fasta file is empty after reverse Comp" ${readFileFA}
+        exit 1
+    fi
+    #echo "read file processed " ${readFile}
+    #echo "output saved to "${readFileFA}
 }
 
 ##########################################
@@ -209,7 +241,7 @@ function main() {
         local outputReadFile="${outputDir}/${outputFileName}.fasta"
 
         #echo "read file FA: " $readFileFA
-        echo "outputReadFile: " $outputReadFile
+        #echo "outputReadFile: " $outputReadFile
         processReadFile $readFile $readFileName $outputDir $zippedReads $reverseComp $utilsPath
 
         #Repeat steps for paired reads
@@ -224,20 +256,35 @@ function main() {
             #echo "readPairFA: " $readPairFA
             processReadFile $readPairFile $readPairName $outputDir $zippedReads $reverseComp $utilsPath
             cat $readFileFA $readPairFA > ${outputReadFile}
-            rm $readFileFA
-            rm $readPairFA
-        else
-        cat $readFileFA > ${outputReadFile}
-        rm $readFileFA
+
         fi
 
-        echo "processed fasta file  " ${outputReadFile}
+        if [ ! ${readFileFA} == ${outputReadFile} ]; then
+            #echo "copying " $readFileFA " to " $outputReadFile
+            cat $readFileFA > $outputReadFile
+        fi
+
+
 
         #Split Read Files
         if [ ${numIndexes} -gt 1 ]; then
+            #echo "splitting Read Files into " ${numIndexes}
             splitReadFiles ${outputReadFile} ${outputFileName} ${numIndexes}
         fi
 
+        if [ -f $outputReadFile ]
+        then
+            if [ ! -s $outputReadFile ]
+            then
+                echo "File is empty"
+                exit 1
+            fi
+        else
+            echo "File not found"
+            exit 1
+        fi
+
+        echo "preprocessing complete " ${outputReadFile}
 }
 
 function usage() {
@@ -266,12 +313,12 @@ function usage() {
 # initialise all variables
 readFile=''
 readPairFile=''
-numberOfIndexes=0
+numberOfIndexes=1
 reverseComp=0
 pairedReads=0
 zippedReads=0
-pathToUtils='./'
-outputDir='./'
+pathToUtils=${PWD}
+outputDir=${PWD}
 outputFileName='processedReads'
 
 # retrieve arguments

@@ -13,6 +13,7 @@ std::string IndexProps::createBash(){
     fs::path pathToUtils = _buildDir;
     pathToUtils  /= "bin/";
     bashargs += " -u " + pathToUtils.string();
+    if (_numOfIndexes > 1 ) {bashargs += " -n " + std::to_string(_numOfIndexes);}
     if (_readFileType == algo::FileType::GZ) {bashargs += " -z 1"; }
     if (_pairedReads) {bashargs += " -p " + _R2.string() ;}
     if (_revComp){bashargs += " -c 1";}
@@ -20,6 +21,7 @@ std::string IndexProps::createBash(){
     return bashargs;
 }
 //================= PARAMETER GETTERS ========================
+uint IndexProps::getNumOfIndexes() const {return _numOfIndexes;}
 uint IndexProps::getNumOfReads() const {return _numOfReads;}
 
 bool IndexProps::getDelFQFlag() const {return _delFQ;}
@@ -31,6 +33,7 @@ const std::string& IndexProps::getReadSetName() const {return _readSetName;}
 const algo::FileType& IndexProps::getReadFileType()const {return _readFileType;}
 
 //==================== PARAMETER SETTERS ===================
+void IndexProps::setNumOfIndexes(uint numOfIndexes) {_numOfIndexes = numOfIndexes;}
 void IndexProps::setNumOfReads(uint numOfReads) {_numOfReads = numOfReads;}
 
 void IndexProps::setDelFQFlag(bool delFQ){ _delFQ = delFQ;}
@@ -50,7 +53,7 @@ const fs::path& IndexProps::getReadFQ()const {return _readFQ;}
 const fs::path& IndexProps::getR1()const {return _R1;}
 const fs::path& IndexProps::getR2()const {return _R2;}
 
-const fs::path& IndexProps::getPreProcessedFasta()const {return _preProcessedFasta;}
+const std::set<fs::path>& IndexProps::getPreProcessedFastas()const {return _preProcessedFastas;}
 const std::set<fs::path>& IndexProps::getIndexSet() const {return _indexSet;}
 
 //====================== FILE SETTERS ======================
@@ -71,23 +74,60 @@ void IndexProps::delR2(){
 void IndexProps::delReadFQ(){
     fs::remove(_readFQ);
 }
-void IndexProps::delReadFasta(){
+void IndexProps::delReadFastas(){
+    for (fs::path _ppf : _preProcessedFastas){
+        fs::remove(_ppf);
+    }
+}
+void IndexProps::delSpecificReadFasta(const fs::path& _preProcessedFasta){
     fs::remove(_preProcessedFasta);
 }
+
 void IndexProps::setBuildDir(const fs::path &buildDir)
 {        _buildDir = buildDir;   }
 void IndexProps::setOutputFile(const fs::path& outputFile)
 {        _outputFile = outputFile;   }
 void IndexProps::setOutputFolder(const fs::path& outputFolder)
 {        _outputFolder = outputFolder;    }
-
-void IndexProps::setPreProcessedFasta(const fs::path& preProcessedFasta)
-{       _preProcessedFasta = preProcessedFasta; }
+void IndexProps::addToPreProcessedFastas(const fs::path& preProcessedFasta){
+      _preProcessedFastas.insert(preProcessedFasta);
+}
+void IndexProps::setPreProcessedFastas(std::set<fs::path>& preProcessedFastas)
+{       _preProcessedFastas = preProcessedFastas; }
 void IndexProps::setIndexSet(std::set<fs::path>& indexes)
 {        _indexSet = indexes;   }
 void IndexProps::addToIndexSet(const fs::path& index){
     _indexSet.insert(index);
 }
+
+
+//====================== FILE PREPROCESS ======================
+void IndexProps::createPPFSet() const {
+    fs::path ppFN = _outputFolder;
+    ppFN /= _outputFile;
+    ppFN.replace_extension(".fasta");
+    std::set<fs::path> _PPFSet;
+    if (_numOfIndexes > 1){
+        for (int i=0; i<_numOfIndexes; ++i)
+        {
+            fs::path tmpPPF = ppFN;
+            std::string tmpPPFName = ppFN.filename();
+            tmpPPFName += "_" + std::to_string(i);
+            tmpPPF.replace_filename(tmpPPFName);
+
+        }
+    }
+
+
+
+}
+
+
+
+
+
+
+
 
 IndexProps::~IndexProps()
 {}

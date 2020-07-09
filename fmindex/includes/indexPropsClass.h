@@ -26,7 +26,7 @@ public:
     fs::path _readFQ;
     fs::path _R1;
     fs::path _R2;
-    fs::path _preProcessedFasta;
+    std::set<fs::path> _preProcessedFastas; //this is the set of pre process fasta files created by preprocess.sh
     fs::path _outputFile;
     fs::path _outputFolder; //where to save the indexes
     fs::path _buildDir;
@@ -34,6 +34,7 @@ public:
     std::set<fs::path> _indexSet; //this is the set of generated index files
 
     uint _numOfReads;
+    uint _numOfIndexes;
 
     bool _revComp = 0;
     bool _pairedReads = 0;
@@ -46,6 +47,7 @@ public:
     std::string createBash();
 
     /// Parameter Getters ///
+    uint getNumOfIndexes() const;
     uint getNumOfReads() const;
 
     bool getDelFQFlag() const;
@@ -57,6 +59,7 @@ public:
     const algo::FileType& getReadFileType() const;
 
     /// Parameter Setters ///
+    void setNumOfIndexes(uint numIndexes);
     void setNumOfReads(uint numOfReads);
 
     void setDelFQFlag(bool delFQFlag);
@@ -76,7 +79,7 @@ public:
     const fs::path& getOutputFile() const;
     const fs::path& getOutputFolder() const;
 
-    const fs::path& getPreProcessedFasta() const;
+    const std::set<fs::path>& getPreProcessedFastas() const;
     const std::set<fs::path>& getIndexSet() const;
 
     /// File Setters ///
@@ -87,16 +90,19 @@ public:
     void delR1();
     void delR2();
     void delReadFQ();
-    void delReadFasta();
+    void delReadFastas();
+    void delSpecificReadFasta(const fs::path& _preProcessedFasta);
 
     void setBuildDir(const fs::path& buildDir);
     void setOutputFile(const fs::path& outputFile);
     void setOutputFolder(const fs::path& outputFolder);
 
-    void setPreProcessedFasta(const fs::path& preProcessedFasta);
+    void setPreProcessedFastas(std::set<fs::path>& preProcessedFastas);
+    void addToPreProcessedFastas(const fs::path& preProcessedFastas);
     void setIndexSet(std::set<fs::path>& indexes);
     void addToIndexSet(const fs::path& index);
 
+    void createPPFSet() const;
 };
 
 

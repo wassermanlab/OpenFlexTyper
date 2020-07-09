@@ -117,12 +117,12 @@ int main(int argc, char** argv)
         readFileName.setValueName("readFileName");
         parser.addOption(readFileName);
 
-        parser.addPositionalArgument("outputDir", "contains the ouput directory for the index", "");
+        //parser.addPositionalArgument("outputDir", "contains the ouput directory for the index", "");
         QCommandLineOption outputDir = QCommandLineOption(QStringList() << "o" << "outindexDir", QCoreApplication::translate("main", "Please provide the output index directory"));
         outputDir.setValueName("outputDir");
         parser.addOption(outputDir);
 
-        parser.addPositionalArgument("indexFileName", "contains the filename for the index", "");
+        //parser.addPositionalArgument("indexFileName", "contains the filename for the index", "");
         QCommandLineOption indexFileName = QCommandLineOption(QStringList() << "x" << "indexFileName",   QCoreApplication::translate("main", "Please provide the index filename (!without .fm9 extension)"));
         indexFileName.setValueName("indexFileName");
         parser.addOption(indexFileName);
@@ -131,6 +131,10 @@ int main(int argc, char** argv)
         QCommandLineOption readPairFileName = QCommandLineOption(QStringList() << "p" << "readPairfile", QCoreApplication::translate("main", "Please provide the name of the paired read file"));
         readPairFileName.setValueName("readPairFileName");
         parser.addOption(readPairFileName);
+
+        QCommandLineOption numOfIndexes(QStringList() << "n" << "numOfIndexes" , QCoreApplication::translate("main", "the input file is in fq format "));
+        numOfIndexes.setValueName("numOfIndexes");
+        parser.addOption(numOfIndexes);
 
         QCommandLineOption readFastq(QStringList() << "fq" << "fastq" , QCoreApplication::translate("main", "the input file is in fq format "));
         parser.addOption(readFastq);
@@ -168,7 +172,9 @@ int main(int argc, char** argv)
         }
 
         //set Read Files
-        props->setR1(parser.value(readFileName).toStdString());
+        fs::path readFile = parser.value(readFileName).toStdString();
+        std::cout << "Read File " << readFile << std::endl;
+        props->setR1(readFile);
 
         props->setPairedReadsFlag(parser.isSet(readPairFileName));
         if (props->getPairedReadsFlag())
@@ -177,8 +183,26 @@ int main(int argc, char** argv)
         }
 
         //set output values
+        if (!parser.isSet(outputDir)){
+            std::cout << "Output Folder not set" << std::endl;
+            if (readFile.parent_path() != "" ){
+            std::cout << "Setting Output Folder to readFile directory " << readFile.parent_path() << std::endl;
+            props->setOutputFolder(readFile.parent_path());
+            }else {
+                std::cout << "Setting Output Folder to current path" << fs::current_path() << std::endl;
+                props->setOutputFolder(fs::current_path());
+            }
+        }else{
         props->setOutputFolder(parser.value(outputDir).toStdString());
-        props->setOutputFile(parser.value(indexFileName).toStdString());
+        }
+        if (!parser.isSet(indexFileName)){
+            std::cout << "Output File Name not set" << std::endl;
+            std::cout << "Setting File Name to " << readFile.filename()<< std::endl;
+            props->setOutputFile(readFile.filename());
+            }else {
+            props->setOutputFile(parser.value(indexFileName).toStdString());
+        }
+        std::cout << "Output File Name "<< props->getOutputFile() << std::endl;
 
         //set parameters
         props->setRevCompFlag(parser.isSet(revCompFlag));
@@ -191,23 +215,38 @@ int main(int argc, char** argv)
             return 1;
         }
 
+        if (parser.isSet(numOfIndexes))
+        { u_int numOfIndicies = std::stoi(parser.value(numOfIndexes).toStdString());
+            props->setNumOfIndexes(numOfIndicies);
+        } else {
+            props->setNumOfIndexes(1);
+        }
+
+        props->createPPFSet();
+
         // call bash script to manipulate the input files
         std::string bashargs = props->createBash();
+
         if (fs::exists(props->getBuildDir() /+ "preprocess.sh")){
-            std::cout << "bash args : " << bashargs << std::endl;
-            std::cout << "running preprocess.sh" << std::endl;
-            system(bashargs.c_str());
+            try {
+                std::cout << "running preprocess.sh with " << bashargs<< std::endl;
+                system(bashargs.c_str());
+            } catch (std::exception& e) {
+                std::cout << "Error in preprocessing " << e.what() << std::endl;
+            }
+
         } else {
             std::cerr << "cannot find preprocess.sh in " << props->getBuildDir() << std::endl;
         }
 
 
+
         algo::FmIndex fmIndexObj;
 
         try {
-            fmIndexObj.createFMIndex(*props);
+            fmIndexObj.parallelFmIndex(*props);
         } catch (std::exception& e) {
-            std::cout << "Error in FM Index Creation! " << e.what() << std::endl;
+            std::cout << "Error in FM Index Creation " << e.what() << std::endl;
         }
     }
 
