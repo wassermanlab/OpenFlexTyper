@@ -1,4 +1,3 @@
-#include <QGuiApplication>
 #include <QCommandLineParser>
 #include <QSettings>
 #include <iostream>
@@ -52,9 +51,8 @@ int main(int argc, char** argv)
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     std::cout << fs::current_path() << std::endl;
-
+    QCoreApplication aps(argc, argv);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication aps(argc, argv);
     QCoreApplication::setApplicationName("flextyper");
     QCoreApplication::setApplicationVersion("version 0.2");
     QCommandLineParser parser;
