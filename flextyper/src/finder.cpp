@@ -103,14 +103,15 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
         while (1) {
             if (kmerQueue.size() > 0 && kmerQueue.size() < ftProps.getMaxThreads()) {
                 ft::KmerClass kmer = kmerQueue.front();
-                resultsFutures.push_back(std::async(std::launch::async, &algo::FmIndex::search, dynamic_cast<algo::FmIndex*>(_fmIndex),
-                                        kmer,
-                                        indexPath.stem().string(),
-                                        ftProps.getIndexFileLocation().string(),
-                                        ftProps.getMaxOcc(),
-                                        i++,
-                                        ftProps.getOverCountedFlag(),
-                                        ftProps.getPrintSearchTimeFlag()));
+                resultsFutures.push_back(std::async(std::launch::async, &algo::FmIndex::search,
+                                                    dynamic_cast<algo::FmIndex*>(_fmIndex),
+                                                    kmer,
+                                                    indexPath.stem().string(),
+                                                    ftProps.getIndexFileLocation().string(),
+                                                    ftProps.getMaxOcc(),
+                                                    i++,
+                                                    ftProps.getOverCountedFlag(),
+                                                    ftProps.getPrintSearchTimeFlag()));
                 kmerQueue.pop();
             } else {
                 break;
