@@ -8,7 +8,7 @@ CONFIG      += c++17
 LIBS        += -lstdc++fs -lsdsl -ldivsufsort64     \
                -ldivsufsort \
 
-copydata.commands = $(COPY_DIR) $$PWD/scripts/preprocess.sh $$OUT_PWD
+copydata.commands = $(COPY_DIR) $$PWD/testFiles/* $$OUT_PWD
 first.depends = $(first) copydata
 export(first.depends)
 export(copydata.commands)
@@ -77,5 +77,6 @@ SOURCES     += flextyper/src/stats.cpp                \
               fmindex/src/indexPropsClass.cpp
 
 DISTFILES += \
-    scripts/preprocess.sh
+    testFiles/preprocess.sh \
+    testFiles/test.fq.gz
 

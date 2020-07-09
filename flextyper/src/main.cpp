@@ -207,7 +207,7 @@ int main(int argc, char** argv)
         try {
             fmIndexObj.createFMIndex(*props);
         } catch (std::exception& e) {
-            std::cout << "Error ! " << e.what() << std::endl;
+            std::cout << "Error in FM Index Creation! " << e.what() << std::endl;
         }
     }
 

@@ -183,7 +183,7 @@ function processReadFile(){
         createRevComp ${readFileFQ} ${readName} ${utilsPath}
     fi
     echo "read file processed " ${readFile}
-    echo "output saved to $readdir/${readName}.fasta"
+    echo "output saved to $PWD$readdir/${readName}.fasta"
 }
 
 ##########################################
