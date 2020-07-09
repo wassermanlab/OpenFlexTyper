@@ -1,4 +1,4 @@
-#include <QGuiApplication>
+
 #include <QCommandLineParser>
 #include <iostream>
 #include "ftsearch.h"
@@ -51,7 +51,7 @@ int main(int argc, char** argv)
     std::cin.tie(NULL);
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication aps(argc, argv);
+    QCoreApplication aps(argc, argv);
     QCoreApplication::setApplicationName("flextyper");
     QCoreApplication::setApplicationVersion("version 0.2");
     QCommandLineParser parser;
