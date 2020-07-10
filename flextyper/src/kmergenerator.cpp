@@ -4,8 +4,7 @@
 namespace ft {
 //======================================================================
 KmerGenerator::KmerGenerator(const KmerProperties& _kProperties)
-    : _kProps(_kProperties),
-      _stats(&_ownedStats)
+    : _kProps(_kProperties)
 {
 }
 
@@ -34,10 +33,6 @@ std::set<std::string> KmerGenerator::genSlidingSearchStrings(const std::string& 
         }
         count++;
         // std::cout << "Nominal : Trying : " << queryString << ".substr(" << start << ", " << kmerSize << ");" << std::endl;
-    }
-
-    if (kmerCounts) {
-        _stats->printKmerCountToFile("kmerCount.log", _counter);
     }
 
     return searchStrings;
@@ -77,10 +72,6 @@ std::set<std::string> KmerGenerator::genCenteredSearchStrings(const std::string&
         count++;
     }
 
-    if (kmerCounts) {
-        _stats->printKmerCountToFile("kmerCount.log", _counter);
-    }
-
     return searchStrings;
 }
 
@@ -104,11 +95,6 @@ std::set<std::string> KmerGenerator::genSearchKmers(const ft::QueryClass& queryO
     return searchKmers;
 }
 
-//======================================================================
-void KmerGenerator::overrideStats(std::shared_ptr<IStats> stats)
-{
-    _stats = stats.get();
-}
 
 //======================================================================
 KmerGenerator::~KmerGenerator()

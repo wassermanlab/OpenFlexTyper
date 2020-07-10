@@ -89,8 +89,7 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
                                                         kmer,                                                        
                                                         ftProps.getMaxOcc(),
                                                         i++,
-                                                        ftProps.getOverCountedFlag(),
-                                                        ftProps.getPrintSearchTimeFlag()));
+                                                        ftProps.getOverCountedFlag()));
             kmerQueue.pop();
             j++;
             k--;
@@ -105,8 +104,7 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
                                                     kmer,
                                                     ftProps.getMaxOcc(),
                                                     i++,
-                                                    ftProps.getOverCountedFlag(),
-                                                    ftProps.getPrintSearchTimeFlag()));
+                                                    ftProps.getOverCountedFlag()));
                 kmerQueue.pop();
             } else {
                 break;
@@ -180,8 +178,7 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
         ft::KmerClass tmpResult = _fmIndex->search(kmer,
                                                    ftProps.getMaxOcc(),
                                                    i++,
-                                                   ftProps.getOverCountedFlag(),
-                                                   ftProps.getPrintSearchTimeFlag());
+                                                   ftProps.getOverCountedFlag());
         addResultsFutures(indexResults,tmpResult, offset);
     }
 

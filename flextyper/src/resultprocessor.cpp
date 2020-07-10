@@ -5,7 +5,6 @@ namespace ft {
 //======================================================================
 ResultProcessor::ResultProcessor()
     : _utils(&_ownedUtils)
-    , _stats(&_ownedStats)
 {
 }
 
@@ -96,12 +95,6 @@ void ResultProcessor::processResults(ft::FTMap& ftMap)
 void ResultProcessor::overrideUtils(std::shared_ptr<IUtils> utils)
 {
     _utils = utils.get();
-}
-
-//======================================================================
-void ResultProcessor::overrideStats(std::shared_ptr<IStats> stats)
-{
-    _stats = stats.get();
 }
 
 //======================================================================

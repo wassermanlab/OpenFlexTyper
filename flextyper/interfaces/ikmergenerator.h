@@ -10,8 +10,6 @@
 #include <string>
 #include <map>
 #include "ftMapClass.h"
-#include "stats.h"
-#include "istats.h"
 
 namespace ft {
 

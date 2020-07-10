@@ -19,9 +19,6 @@
 #include "utils.h"
 #include "iutils.h"
 
-#include "stats.h"
-#include "istats.h"
-
 #include "writerbridge.h"
 #include "iwriterbridge.h"
 
@@ -55,7 +52,6 @@ public:
     void checkInputFastQ(FTProp ftProps);
     void checkOutputFile(FTProp ftProps);
     void overrideUtils(std::shared_ptr<IUtils> utils);
-    void overrideStats(std::shared_ptr<IStats> stats);
     void overrideWriterBridge(std::shared_ptr<IWriterBridge> writerBridge);
     //void overrideKmerGenerator(std::shared_ptr<IKmerGenerator> kmerGenerator);
     void overrideFinder(std::shared_ptr<IFinder> finder);
@@ -78,12 +74,6 @@ private:
     ////////////////////////////////////////////////////////////////////////
     Utils   _ownedUtils;
     IUtils* _utils;
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief _stats
-    ////////////////////////////////////////////////////////////////////////
-    Stats   _ownedStats;
-    IStats* _stats;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief _writerBridge

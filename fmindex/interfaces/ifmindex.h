@@ -50,8 +50,7 @@ public:
     virtual ft::KmerClass search(ft::KmerClass kmerClass,
                                  u_int maxOccurences = 200,
                                  size_t i = 0,
-                                 bool flagOverCountedKmers = false,
-                                 bool printSearchTime = false) = 0;
+                                 bool flagOverCountedKmers = false) = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief generate the Reads Mapping

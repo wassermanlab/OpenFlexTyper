@@ -40,7 +40,6 @@ HEADERS    += flextyper/includes/utils.h              \
               flextyper/includes/ftSearch.h \
               flextyper/includes/kmerClass.h \
               flextyper/includes/queryClass.h \
-              flextyper/includes/stats.h              \
               flextyper/includes/writerbridge.h       \
               flextyper/includes/kmergenerator.h      \
               flextyper/includes/finder.h             \
@@ -52,14 +51,13 @@ HEADERS    += flextyper/includes/utils.h              \
 HEADERS    += flextyper/interfaces/ikmergenerator.h   \
               flextyper/interfaces/iqueryextractor.h  \
               flextyper/interfaces/iresultprocessor.h \
-              flextyper/interfaces/istats.h           \
               flextyper/interfaces/iutils.h           \
               flextyper/interfaces/iwriterbridge.h    \
               flextyper/interfaces/ifinder.h          \
               fmindex/interfaces/iindexPropsClass.h   \
               fmindex/interfaces/ifmindex.h \
 
-SOURCES     += flextyper/src/stats.cpp                \
+SOURCES     +=                \
               flextyper/src/ftKPropsClass.cpp \
               flextyper/src/ftMapClass.cpp \
               flextyper/src/ftPropsClass.cpp \

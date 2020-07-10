@@ -6,7 +6,6 @@ namespace ft {
 //======================================================================
 FTSearch::FTSearch()
     : _utils(&_ownedUtils)
-    , _stats(&_ownedStats)
     , _writerBridge(&_ownedWriterBridge)
     //, _kmerGenerator(&_ownedKmerGenerator)
     , _finder(&_ownedFinder)
@@ -71,12 +70,6 @@ void FTSearch::init(FTProp ftProps)
 void FTSearch::overrideUtils(std::shared_ptr<IUtils> utils)
 {
     _utils = utils.get();
-}
-
-//======================================================================
-void FTSearch::overrideStats(std::shared_ptr<IStats> stats)
-{
-    _stats = stats.get();
 }
 
 //======================================================================

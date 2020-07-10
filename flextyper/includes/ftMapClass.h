@@ -6,7 +6,6 @@
 #include <map>
 #include <future>
 #include <vector>
-#include "stats.h"
 #include "kmerClass.h"
 #include "queryClass.h"
 #include "ftKPropsClass.h"

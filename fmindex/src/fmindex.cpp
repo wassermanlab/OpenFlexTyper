@@ -1,9 +1,4 @@
 #include "fmindex.h"
-#include <time.h>
-#include <future>
-#include <chrono>
-#include <iostream>
-#include <fstream>
 
 using namespace std::chrono;
 
@@ -11,7 +6,6 @@ namespace algo {
 
 //======================================================================
 FmIndex::FmIndex()
-    : _stats(&_ownedStats)
 {
 }
 
@@ -24,7 +18,7 @@ void FmIndex::setKmerMapSize(size_t kmerMapSize)
 //======================================================================
 ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
                               u_int maxOcc, size_t i,
-                              bool flagOverCountedKmers, bool printSearchTime)
+                              bool flagOverCountedKmers)
 {
     // This code is executed in a different thread for multithreaded
     // executions and in main thread for monothreaded applications
@@ -55,11 +49,6 @@ ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
 
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop - start);
-
-    if (printSearchTime) {
-        _stats->printKmerSearchTimeToFile("tmp.log", kmer, duration.count());
-    }
-
 
     return resultsfutures;
 }
@@ -107,19 +96,14 @@ void FmIndex::parallelFmIndex(algo::IndexProps& _props)
     std::set<fs::path> _ppfs = _props.getPreProcessedFastas();
     for (fs::path _ppf : _props.getPreProcessedFastas()){
         operations.push_back(std::async(std::launch::async,
-                                        &algo::FmIndex::createFMIndex,
+                                        &FmIndex::createFMIndex,
+                                        this,
                                         _props,
-                                        const_cast<fs::path&>(_ppf)));
+                                        _ppf));
     }
 
     for (size_t i = 0; i < _ppfs.size(); i++)
         operations[i].get();
-}
-
-//======================================================================
-void FmIndex::overrideStats(std::shared_ptr<ft::IStats> stats)
-{
-    _stats = stats.get();
 }
 
 //======================================================================
