@@ -53,7 +53,7 @@ const fs::path& IndexProps::getReadFQ()const {return _readFQ;}
 const fs::path& IndexProps::getR1()const {return _R1;}
 const fs::path& IndexProps::getR2()const {return _R2;}
 
-const std::set<fs::path>& IndexProps::getPreProcessedFastas()const {return _preProcessedFastas;}
+const std::set<fs::path>& IndexProps::getPreProcessedFastas()const {return _ppFSet;}
 const std::set<fs::path>& IndexProps::getIndexSet() const {return _indexSet;}
 
 //====================== FILE SETTERS ======================
@@ -75,7 +75,7 @@ void IndexProps::delReadFQ(){
     fs::remove(_readFQ);
 }
 void IndexProps::delReadFastas(){
-    for (fs::path _ppf : _preProcessedFastas){
+    for (fs::path _ppf : _ppFSet){
         fs::remove(_ppf);
     }
 }
@@ -89,24 +89,25 @@ void IndexProps::setOutputFile(const fs::path& outputFile)
 {        _outputFile = outputFile;   }
 void IndexProps::setOutputFolder(const fs::path& outputFolder)
 {        _outputFolder = outputFolder;    }
-void IndexProps::addToPreProcessedFastas(const fs::path& preProcessedFasta){
-      _preProcessedFastas.insert(preProcessedFasta);
+void IndexProps::addPPF(fs::path _ppf){
+    _ppFSet.insert(_ppf);
 }
 void IndexProps::setPreProcessedFastas(std::set<fs::path>& preProcessedFastas)
-{       _preProcessedFastas = preProcessedFastas; }
+{       _ppFSet = preProcessedFastas; }
 void IndexProps::setIndexSet(std::set<fs::path>& indexes)
 {        _indexSet = indexes;   }
-void IndexProps::addToIndexSet(const fs::path& index){
+void IndexProps::addToIndexSet(fs::path index){
     _indexSet.insert(index);
 }
 
 
 //====================== FILE PREPROCESS ======================
-void IndexProps::createPPFSet() const {
+void IndexProps::createPPFSet(){
     fs::path ppFN = _outputFolder;
     ppFN /= _outputFile;
     ppFN.replace_extension(".fasta");
-    std::set<fs::path> _PPFSet;
+    std::cout << "creating _ppFSet" << std::endl;
+
     if (_numOfIndexes > 1){
         for (u_int i=0; i<_numOfIndexes; ++i)
         {
@@ -114,8 +115,14 @@ void IndexProps::createPPFSet() const {
             std::string tmpPPFName = ppFN.filename();
             tmpPPFName += "_" + std::to_string(i);
             tmpPPF.replace_filename(tmpPPFName);
+            addPPF(tmpPPF);
         }
+
+
+    } else {
+        addPPF(ppFN);
     }
+
 }
 
 //====================== INDEX PROPS I/O ======================

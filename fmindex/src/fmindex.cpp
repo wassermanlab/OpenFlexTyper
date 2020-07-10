@@ -7,6 +7,7 @@ namespace algo {
 //======================================================================
 FmIndex::FmIndex()
 {
+
 }
 
 //======================================================================
@@ -55,27 +56,28 @@ ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
 
 
 //======================================================================
-fs::path FmIndex::createFMIndex(algo::IndexProps& _props, const fs::path& preprocessedFasta)
+fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta)
 {
     std::lock_guard<std::mutex> lock(_mtx);
+
     fs::path outputIndex = _props.getOutputFolder();
     outputIndex /= preprocessedFasta.filename();
     outputIndex.replace_extension(".fm9");
     std::cout << "output index " << outputIndex << std::endl;
-    if (!load_from_file(_fmindex, _props.getOutputFolder())) {
+    if (!load_from_file(_fmindex, outputIndex)) {
         std::ifstream in(preprocessedFasta);
         if (!in) {
             std::cout << "ERROR: File " << preprocessedFasta << " does not exist. Exit." << std::endl;
             return "";
         }
         // mtx.lock();
-        std::cout << "No index " << _props.getOutputFolder() << " located. Building index now." << std::endl;
+        std::cout << "No index " << outputIndex << " located. Building index now." << std::endl;
         // mtx.unlock();
         construct(_fmindex, preprocessedFasta, 1);
-        store_to_file(_fmindex, _props.getOutputFolder());
+        store_to_file(_fmindex, outputIndex);
     }
 
-    _props.addToIndexSet(outputIndex);
+
     return outputIndex;
 }
 
@@ -91,10 +93,13 @@ void FmIndex::loadIndexFromFile(const std::string& indexname)
 void FmIndex::parallelFmIndex(algo::IndexProps& _props)
 {
     //   fs::path createFMIndex(algo::IndexProps& _props, const fs::path& preprocessedFasta);
-
+    std::cout << "Running parallel FM Index" << std::endl;
     std::vector<std::future<fs::path>> operations;
+    std::cout << "number of files to index  " << _props.getNumOfIndexes() << std::endl;
     std::set<fs::path> _ppfs = _props.getPreProcessedFastas();
+    std::cout << "number of files found  " << _ppfs.size() << std::endl;
     for (fs::path _ppf : _props.getPreProcessedFastas()){
+        std::cout << "indexing " << _ppf << std::endl;
         operations.push_back(std::async(std::launch::async,
                                         &FmIndex::createFMIndex,
                                         this,
@@ -102,13 +107,15 @@ void FmIndex::parallelFmIndex(algo::IndexProps& _props)
                                         _ppf));
     }
 
-    for (size_t i = 0; i < _ppfs.size(); i++)
-        operations[i].get();
+    for (size_t i = 0; i < _ppfs.size(); i++){
+        fs::path outputIndex = operations[i].get();
+        std::cout << "index created " << outputIndex << std::endl;
+        _props.addToIndexSet(outputIndex);
+       }
 }
 
 //======================================================================
 FmIndex::~FmIndex()
 {
-    std::rename("tmp.log", "kmerSearchTime.log");
 }
 }

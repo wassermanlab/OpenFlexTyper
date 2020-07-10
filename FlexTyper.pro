@@ -75,6 +75,7 @@ SOURCES     +=                \
               fmindex/src/indexPropsClass.cpp
 
 DISTFILES += \
+    install.sh \
     testFiles/MixedVirus_100_1.fq.gz \
     testFiles/MixedVirus_100_2.fq.gz \
     testFiles/Setting.ini \

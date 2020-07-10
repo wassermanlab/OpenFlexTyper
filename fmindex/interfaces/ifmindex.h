@@ -25,7 +25,7 @@ public:
     /// \param  stringToIndex
     /// \return The function will return the name of the generated index
     ////////////////////////////////////////////////////////////////////////
-    virtual fs::path createFMIndex(algo::IndexProps& _props, const fs::path& preprocessedFasta ) = 0;
+    virtual fs::path createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta ) = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief loadIndexFromFile

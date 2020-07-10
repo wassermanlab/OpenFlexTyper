@@ -26,7 +26,7 @@ public:
     fs::path _readFQ;
     fs::path _R1;
     fs::path _R2;
-    std::set<fs::path> _preProcessedFastas; //this is the set of pre process fasta files created by preprocess.sh
+    std::set<fs::path> _ppFSet; //this is the set of pre process fasta files created by preprocess.sh
     fs::path _outputFile;
     fs::path _outputFolder; //where to save the indexes
     fs::path _buildDir;
@@ -97,13 +97,13 @@ public:
     void setOutputFile(const fs::path& outputFile);
     void setOutputFolder(const fs::path& outputFolder);
 
-    void setPreProcessedFastas(std::set<fs::path>& preProcessedFastas);
-    void addToPreProcessedFastas(const fs::path& preProcessedFastas);
+    void setPreProcessedFastas(std::set<fs::path>& _ppFSet);
+    void addPPF(fs::path _ppf);
     void setIndexSet(std::set<fs::path>& indexes);
-    void addToIndexSet(const fs::path& index);
+    void addToIndexSet(fs::path index);
 
     /// File Preprocess ///
-    void createPPFSet() const;
+    void createPPFSet();
 
     /// Index Props I/O ///
 
