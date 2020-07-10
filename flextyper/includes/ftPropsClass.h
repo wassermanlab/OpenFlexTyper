@@ -195,6 +195,8 @@ public:
     const fs::path& getR1() const;
     const fs::path& getR2() const;
 
+    void addToIndexSet(const fs::path& index, u_int offset);
+
 };
 
 }

@@ -16,8 +16,10 @@ void WriterBridge::saveQueryOutput(ft::FTMap& ftMap)
 {
     FTProp ftProps = ftMap.getFTProps();
     const fs::path& inputQueryFile = ftProps.getPathToQueryFile();
-    const fs::path& outputQueryFile = ftProps.getOutputFolder();
+    const fs::path& outputQueryFile = ftProps.getOutputFile();
 
+    std::cout << "Input Query File " << inputQueryFile << std::endl;
+    std::cout << "Output Query File " << outputQueryFile << std::endl;
     // save counts to output tsv
     std::fstream outputFileStream;
     outputFileStream.open(outputQueryFile, std::ios::out);

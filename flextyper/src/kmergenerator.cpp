@@ -27,6 +27,7 @@ std::set<std::string> KmerGenerator::genSlidingSearchStrings(const std::string& 
             break;
         if (queryString == ".") continue;
         std::string searchString = queryString.substr(i, kmerSize);
+        std::cout << "kmer string  " << searchString << std::endl;
         if (!searchString.empty()) {
             _counter[searchString]++;
             searchStrings.insert(searchString);

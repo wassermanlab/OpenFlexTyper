@@ -44,9 +44,13 @@ void FTSearch::init(FTProp ftProps)
 
     std::set<Query> inputQueries = _queryExtractor->getInputQueries(ftProps.getRefOnlyFlag(), ftProps.getCrossoverFlag(), ftProps.getPathToQueryFile());
 
+    std::cout << " number of queries " << inputQueries.size() << std::endl;
+
     ftMap.addInputQueries(inputQueries);
 
-    ftMap.getQKMap();
+    std::cout << " number of queries in FTMap " << ftMap.getQuerySet().size() << std::endl;
+
+    ftMap.genQKMap();
 
     std::cout << "\nsearching..." << std::endl;
 

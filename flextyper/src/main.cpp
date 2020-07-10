@@ -133,10 +133,18 @@ int main(int argc, char** argv)
         fs::path buildDir = QCoreApplication::applicationDirPath().toStdString();
         props->setBuildDir(buildDir);
 
+        //set Read Files
+        fs::path readFile = parser.value(readFileName).toStdString();
+        std::cout << "Read File " << readFile << std::endl;
+        props->setR1(readFile);
+
         if (parser.isSet(readZip))
-        {  props->setReadFileType(algo::FileType::GZ);}
+        {  props->setReadFileType(algo::FileType::GZ);
+            props->setReadSetName(readFile.stem().replace_extension());}
+
         else if (parser.isSet(readFastq))
-        {  props->setReadFileType(algo::FileType::FQ);}
+        {  props->setReadFileType(algo::FileType::FQ);
+            props->setReadSetName(readFile.stem());}
         else if (parser.isSet(readFasta))
         {  props->setReadFileType(algo::FileType::FA);}
         else
@@ -144,16 +152,16 @@ int main(int argc, char** argv)
             return 1;
         }
 
-        //set Read Files
-        fs::path readFile = parser.value(readFileName).toStdString();
-        std::cout << "Read File " << readFile << std::endl;
-        props->setR1(readFile);
-
         props->setPairedReadsFlag(parser.isSet(readPairFileName));
         if (props->getPairedReadsFlag())
         {
             props->setR2(parser.value(readPairFileName).toStdString());
+            std::string readsetName = props->getReadSetName();
+            props->setReadSetName(readsetName.substr(0,readsetName.size()-2));
+            std::cout << "paired read files " << props->getR2() << std::endl;
         }
+
+         std::cout << "read set Name " << props->getReadSetName() << std::endl;
 
         //set output values
         if (!parser.isSet(outputDir)){
@@ -195,7 +203,7 @@ int main(int argc, char** argv)
             props->setNumOfIndexes(1);
         }
 
-        props->createPPFSet();
+
 
         // call bash script to manipulate the input files
         std::string bashargs = props->createBash();
@@ -212,6 +220,9 @@ int main(int argc, char** argv)
             std::cerr << "cannot find preprocess.sh in " << props->getBuildDir() << std::endl;
         }
 
+        props->createPPFSet();
+        // count number of reads in read set
+        props->countNumOfReads();
 
 
         algo::FmIndex fmIndexObj;

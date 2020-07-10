@@ -45,17 +45,21 @@ void FTMap::addInputQueries(const std::set<Query> &inputQueries){
     }
 }
 //======================================================
-void FTMap::genQKMap(const std::set<ft::QueryClass>& queries){
-
+void FTMap::genQKMap()
+{
+    std::cout << "generate QK Map" << std::endl;
+    // causes a seg fault when trying to create KProps
     KmerProperties _kProps(_ftProps);
+    std::cout << "create kmer generator" << std::endl;
     KmerGenerator  _kmerGenerator(_kProps);
-    for (const ft::QueryClass& query : queries){
+    for (const ft::QueryClass& query : _querySet ){
         std::set<ft::KmerClass*> kmerObj;
         std::set<std::string> kmers = (_kmerGenerator.genSearchKmers(query));
         for (auto kmer : kmers)
         {
-            addKmer(kmer);
-            kmerObj.insert(findKmer(kmer));
+            std::cout << "add kmer " << kmer << std::endl;
+            //addKmer(kmer);
+            //kmerObj.insert(findKmer(kmer));
         }
         //addQKSet(query, kmerObj);
     }

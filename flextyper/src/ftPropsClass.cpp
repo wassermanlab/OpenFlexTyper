@@ -53,6 +53,11 @@ void FTProp::init(const fs::path &pathToQueryFile,
     setMaxKmers(maxKmers);
     setMaxTotalKmers(totalKmers);
 
+    fs::path outputFile = _outputFolder;
+    outputFile /= _readSetName += _pathToQueryFile;
+    std::cout << "Query search results will be save in " << outputFile << std::endl;
+    setOutputFile(outputFile);
+
 }
 
 //================= INIT From Q SETTINGS ========================
@@ -135,6 +140,18 @@ void FTProp::loadIndexProps(const fs::path &_indexPropsFile, bool printInputs){
     setNumOfReads(isettings.value("numOfReads").toUInt());
     setNumOfIndexes(isettings.value("numOfIndexes").toUInt());
 
+    std::map<fs::path, uint> indexSet;
+
+    int size = isettings.beginReadArray("IndexFiles");
+    for (int i = 0; i < size; ++i) {
+        isettings.setArrayIndex(i);
+        std::string fileName = isettings.value("fileName").toString().toStdString();
+        u_int offset = isettings.value("offset").toInt();
+        indexSet[fileName] = offset;
+    }
+    isettings.endArray();
+    setIndexSet(indexSet);
+
     if (printInputs){
     std::cout << "Properties loaded from Index File     " <<  std::endl;
     std::cout << "Paired Reads      : " << _pairedReads <<  std::endl;
@@ -143,10 +160,15 @@ void FTProp::loadIndexProps(const fs::path &_indexPropsFile, bool printInputs){
     std::cout << "index Directory   : " << _indexDir <<  std::endl;
     std::cout << "read Set Name     : " << _readSetName <<  std::endl;
     std::cout << "Read FQ           : " << _inputFastQ <<  std::endl;
+    std::cout << "Number of Reads   : " << _numOfReads <<  std::endl;
+    std::cout << "Number of Indexes : " << _numOfIndexes <<  std::endl;
     if (_pairedReads)
         {std::cout << "R1                : " << _R1 <<  std::endl;
          std::cout << "R2                : " << _R2 <<  std::endl;
         }
+    for (auto index : _indexSet){
+        std::cout << "Index File : " << index.first << " Offset: " << index.second <<  std::endl;
+    }
     }
 
 }

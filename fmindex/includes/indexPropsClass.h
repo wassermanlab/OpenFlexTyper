@@ -26,12 +26,12 @@ public:
     fs::path _readFQ;
     fs::path _R1;
     fs::path _R2;
-    std::set<fs::path> _ppFSet; //this is the set of pre process fasta files created by preprocess.sh
+    std::map<fs::path, std::pair<u_int, u_int>> _ppFSet; //this is the set of pre process fasta files, plus start, end read numbers created by preprocess.sh
     fs::path _outputFile;
     fs::path _outputFolder; //where to save the indexes
     fs::path _buildDir;
 
-    std::set<fs::path> _indexSet; //this is the set of generated index files
+    std::map<fs::path, uint> _indexSet; //this is the set of generated index files and their offsets
 
     uint _numOfReads;
     uint _numOfIndexes;
@@ -79,8 +79,8 @@ public:
     const fs::path& getOutputFile() const;
     const fs::path& getOutputFolder() const;
 
-    const std::set<fs::path>& getPreProcessedFastas() const;
-    const std::set<fs::path>& getIndexSet() const;
+    const std::map<fs::path, std::pair<u_int, u_int>>& getPreProcessedFastas() const;
+    const std::map<fs::path, uint>& getIndexSet() const;
 
     /// File Setters ///
     void setReadFQ(const fs::path& readFQ);
@@ -97,17 +97,19 @@ public:
     void setOutputFile(const fs::path& outputFile);
     void setOutputFolder(const fs::path& outputFolder);
 
-    void setPreProcessedFastas(std::set<fs::path>& _ppFSet);
-    void addPPF(fs::path _ppf);
-    void setIndexSet(std::set<fs::path>& indexes);
-    void addToIndexSet(fs::path index);
+    void setPreProcessedFastas(std::map<fs::path, std::pair<u_int, u_int>>& _ppFSet);
+    void addPPF(fs::path _ppf, uint start, uint end);
+    void setIndexSet(std::map<fs::path, uint>& indexes);
+    void addToIndexSet(fs::path index, uint offset);
 
     /// File Preprocess ///
     void createPPFSet();
 
     /// Index Props I/O ///
-
+    void countNumOfReads();
+    u_int countLines(fs::path fileToCount);
     void saveIndexProps(const fs::path& indexPropsFile) const;
+    u_int getOffsetForIndex(fs::path indexFile);
 
 };
 

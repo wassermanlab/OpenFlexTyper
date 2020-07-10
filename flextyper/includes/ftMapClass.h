@@ -42,7 +42,7 @@ public:
     /// \brief init
     ////////////////////////////////////////////////////////////////////////
     void addInputQueries(const std::set<Query> &inputQueries);
-    void genQKMap(const std::set<ft::QueryClass> &queries);
+    void genQKMap();
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters

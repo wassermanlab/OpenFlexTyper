@@ -68,7 +68,7 @@ function createFasta()
         if [ $# -eq 3 ]; then
             #start_time=$( date +%s.%N )
             #echo "create forward fasta file from" $readFQ
-            echo "utils path" ${utilsPath}
+            #echo "utils path" ${utilsPath}
             if [ ! -f ${utilsPath}/seqtk ]; then
                 echo "cant find" ${utilsPath}"/seqtk"
                 if [ ! -f ${utilsPath}/seqtk/seqtk ]; then
@@ -162,6 +162,10 @@ function splitReadFiles() {
     local subIndexes=$3
     local digits=${#subIndexes}
 
+    echo "read dir " readdir
+    echo "read name " readname
+    echo "subIndexes " subIndexes
+
     split "${readdir}/${readname}.fasta" -n "l/${subIndexes}" -a $((digits)) -d ${readdir}/output_ --additional-suffix=.fasta
 
 }
@@ -214,8 +218,8 @@ function processReadFile(){
         echo "fasta file is empty after reverse Comp" ${readFileFA}
         exit 1
     fi
-    #echo "read file processed " ${readFile}
-    #echo "output saved to "${readFileFA}
+    echo "read file processed " ${readFile}
+    echo "output saved to "${readFileFA}
 }
 
 ##########################################
@@ -244,6 +248,10 @@ function main() {
         #echo "outputReadFile: " $outputReadFile
         processReadFile $readFile $readFileName $outputDir $zippedReads $reverseComp $utilsPath
 
+        if [ ! ${readFileFA} == ${outputReadFile} ]; then
+            echo "copying " $readFileFA " to " $outputReadFile
+            cat $readFileFA > $outputReadFile
+        fi
         #Repeat steps for paired reads
         if [ ${pairedReads} -eq 1 ]; then
             local readPairName=$(basename $readPairFile)
@@ -253,18 +261,12 @@ function main() {
             if [ $zippedReads -eq 1 ]; then readPairName=${readPairName%.*}; fi
 
             local readPairFA="${outputDir}/$readPairName.fasta"
-            #echo "readPairFA: " $readPairFA
+            echo "readPairFA: " $readPairFA
             processReadFile $readPairFile $readPairName $outputDir $zippedReads $reverseComp $utilsPath
-            cat $readFileFA $readPairFA > ${outputReadFile}
+
+            cat $readPairFA >> $outputReadFile
 
         fi
-
-        if [ ! ${readFileFA} == ${outputReadFile} ]; then
-            #echo "copying " $readFileFA " to " $outputReadFile
-            cat $readFileFA > $outputReadFile
-        fi
-
-
 
         #Split Read Files
         if [ ${numIndexes} -gt 1 ]; then
@@ -347,6 +349,7 @@ echo '-z zippedReads ' $zippedReads
 echo '-n numberOfIndexes ' $numberOfIndexes
 echo '-c reverseComplement ' $reverseComp
 echo '-u pathToUtils  ' $pathToUtils
+echo ' using paired reads ' $pairedReads
 echo '-p readPairFile ' $readPairFile
 
 main $readFile $outputDir $outputFileName $zippedReads $numberOfIndexes $reverseComp $pairedReads $pathToUtils  $readPairFile

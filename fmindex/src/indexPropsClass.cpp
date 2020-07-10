@@ -53,8 +53,8 @@ const fs::path& IndexProps::getReadFQ()const {return _readFQ;}
 const fs::path& IndexProps::getR1()const {return _R1;}
 const fs::path& IndexProps::getR2()const {return _R2;}
 
-const std::set<fs::path>& IndexProps::getPreProcessedFastas()const {return _ppFSet;}
-const std::set<fs::path>& IndexProps::getIndexSet() const {return _indexSet;}
+const std::map<fs::path, std::pair<u_int, u_int>>& IndexProps::getPreProcessedFastas()const {return _ppFSet;}
+const std::map<fs::path, uint>& IndexProps::getIndexSet() const {return _indexSet;}
 
 //====================== FILE SETTERS ======================
 void IndexProps::setReadFQ(const fs::path& readFile)
@@ -75,8 +75,8 @@ void IndexProps::delReadFQ(){
     fs::remove(_readFQ);
 }
 void IndexProps::delReadFastas(){
-    for (fs::path _ppf : _ppFSet){
-        fs::remove(_ppf);
+    for (auto _ppf : _ppFSet){
+        fs::remove(_ppf.first);
     }
 }
 void IndexProps::delSpecificReadFasta(const fs::path& _preProcessedFasta){
@@ -89,15 +89,15 @@ void IndexProps::setOutputFile(const fs::path& outputFile)
 {        _outputFile = outputFile;   }
 void IndexProps::setOutputFolder(const fs::path& outputFolder)
 {        _outputFolder = outputFolder;    }
-void IndexProps::addPPF(fs::path _ppf){
-    _ppFSet.insert(_ppf);
+void IndexProps::addPPF(fs::path _ppf, uint start, uint end){
+    _ppFSet[_ppf] = std::make_pair(start, end);
 }
-void IndexProps::setPreProcessedFastas(std::set<fs::path>& preProcessedFastas)
+void IndexProps::setPreProcessedFastas(std::map<fs::path, std::pair<u_int, u_int>>& preProcessedFastas)
 {       _ppFSet = preProcessedFastas; }
-void IndexProps::setIndexSet(std::set<fs::path>& indexes)
+void IndexProps::setIndexSet(std::map<fs::path, uint>& indexes)
 {        _indexSet = indexes;   }
-void IndexProps::addToIndexSet(fs::path index){
-    _indexSet.insert(index);
+void IndexProps::addToIndexSet(fs::path index, uint offset){
+    _indexSet[index] = offset;
 }
 
 
@@ -107,31 +107,43 @@ void IndexProps::createPPFSet(){
     ppFN /= _outputFile;
     ppFN.replace_extension(".fasta");
     std::cout << "creating _ppFSet" << std::endl;
-
+    u_int start = 0;
     if (_numOfIndexes > 1){
         for (u_int i=0; i<_numOfIndexes; ++i)
         {
             fs::path tmpPPF = ppFN;
-            std::string tmpPPFName = ppFN.filename();
+            //std::cout << "tmp PPF " << tmpPPF << std::endl;
+            std::string tmpPPFName = ppFN.stem();
+            //std::cout << "tmp PPFName " << tmpPPFName << std::endl;
             tmpPPFName += "_" + std::to_string(i);
             tmpPPF.replace_filename(tmpPPFName);
-            addPPF(tmpPPF);
+            tmpPPF.replace_extension(".fasta");
+            std::cout << "tmp PPF new " << tmpPPF << std::endl;
+            u_int lines = countLines(tmpPPF);
+            u_int end = start + lines;
+            addPPF(tmpPPF, start, end);
+            start += lines;
         }
 
 
     } else {
-        addPPF(ppFN);
+        u_int lines = countLines(ppFN);
+        addPPF(ppFN, 0, lines);
     }
 
 }
 
 //====================== INDEX PROPS I/O ======================
 void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) const {
+        std::cout << "saving index properties " << _indexPropsFile << std::endl;
+
+
         QSettings settings(_indexPropsFile.string().c_str(), QSettings::NativeFormat);
 
         settings.setValue("readFQ", QString::fromStdString(_readFQ.string()));
         settings.setValue("R1", QString::fromStdString(_R1.string()));
         settings.setValue("R2", QString::fromStdString(_R2.string()));
+        settings.setValue("indexSetName", QString::fromStdString(_outputFile.string()));
         settings.setValue("readSetName", QString::fromStdString(_readSetName));
         settings.setValue("indexDirectory", QString::fromStdString(_outputFolder.string()));
         settings.setValue("buildDirectory", QString::fromStdString(_buildDir.string()));
@@ -143,19 +155,81 @@ void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) const {
         settings.setValue("delFasta", _delFasta);
 
         settings.beginWriteArray("IndexFiles");
-
-        for (int i = 0; i < _numOfIndexes; ++i) {
-            fs::path indexFile;
-            u_int offset;
+        int i = 0;
+        for (auto index : _indexSet) {
+            fs::path indexFile = index.first;
+            u_int offset = index.second;
             settings.setArrayIndex(i);
             settings.setValue("fileName", indexFile.string().c_str() );
             settings.setValue("offset", offset);
+            ++i;
             }
         settings.endArray();
+
+
+
       }
 
+void IndexProps::countNumOfReads(){
+    fs::path r1Fasta = _R1;
+    if (_readFileType == algo::FileType::GZ)
+    {
+        r1Fasta.filename();
+        r1Fasta.replace_extension();
+        r1Fasta.replace_extension(".fasta");
+    }
+    else if (_readFileType == algo::FileType::FQ)
+    {
+        r1Fasta.filename();
+        r1Fasta.replace_extension(".fasta");
+    }
 
+    int nR1 = countLines(r1Fasta);
 
+    if (_pairedReads){
+        fs::path r2Fasta = _R2;
+        if (_readFileType == algo::FileType::GZ)
+        {
+            r2Fasta.filename();
+            r2Fasta.replace_extension();
+            r2Fasta.replace_extension(".fasta");
+        }
+        else if (_readFileType == algo::FileType::FQ)
+        {
+            r2Fasta.filename();
+            r2Fasta.replace_extension(".fasta");
+        }
+        int nR2 = countLines(r2Fasta);
+
+        if ( nR1 != nR2){
+            std::cout << "error: R1 and R2 do not contain the same number of reads" << std::endl;
+        }
+    }
+  setNumOfReads(nR1);
+  std::cout << getNumOfReads() << std::endl;
+
+}
+
+u_int IndexProps::countLines(fs::path fileToCount){
+    std::ifstream in(fileToCount);
+    u_int n = 0;
+    std::string line;
+
+    while (std::getline(in, line))
+        ++n;
+    in.close();
+    return n;
+
+}
+
+u_int IndexProps::getOffsetForIndex(fs::path indexFile)
+{
+    fs::path fastaFile = indexFile.replace_extension(".fasta");
+
+    std::pair<u_int, u_int> offset = _ppFSet[fastaFile];
+
+    return offset.first;
+}
 
 
 

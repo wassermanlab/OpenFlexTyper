@@ -59,12 +59,15 @@ ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
 fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta)
 {
     std::lock_guard<std::mutex> lock(_mtx);
-
+    std::cout << "create index for " << preprocessedFasta << std::endl;
     fs::path outputIndex = _props.getOutputFolder();
     outputIndex /= preprocessedFasta.filename();
+
     outputIndex.replace_extension(".fm9");
-    std::cout << "output index " << outputIndex << std::endl;
+
+    std::cout << "creating output index " << outputIndex << std::endl;
     if (!load_from_file(_fmindex, outputIndex)) {
+
         std::ifstream in(preprocessedFasta);
         if (!in) {
             std::cout << "ERROR: File " << preprocessedFasta << " does not exist. Exit." << std::endl;
@@ -96,22 +99,28 @@ void FmIndex::parallelFmIndex(algo::IndexProps& _props)
     std::cout << "Running parallel FM Index" << std::endl;
     std::vector<std::future<fs::path>> operations;
     std::cout << "number of files to index  " << _props.getNumOfIndexes() << std::endl;
-    std::set<fs::path> _ppfs = _props.getPreProcessedFastas();
+    std::map<fs::path, std::pair<u_int, u_int>> _ppfs = _props.getPreProcessedFastas();
     std::cout << "number of files found  " << _ppfs.size() << std::endl;
-    for (fs::path _ppf : _props.getPreProcessedFastas()){
-        std::cout << "indexing " << _ppf << std::endl;
+    for (auto _ppf : _props.getPreProcessedFastas()){
+        std::cout << "indexing " << _ppf.first << std::endl;
         operations.push_back(std::async(std::launch::async,
                                         &FmIndex::createFMIndex,
                                         this,
                                         _props,
-                                        _ppf));
+                                        _ppf.first));
     }
 
     for (size_t i = 0; i < _ppfs.size(); i++){
         fs::path outputIndex = operations[i].get();
+        u_int offset = _props.getOffsetForIndex(outputIndex);
         std::cout << "index created " << outputIndex << std::endl;
-        _props.addToIndexSet(outputIndex);
+        _props.addToIndexSet(outputIndex, offset);
        }
+    fs::path indexPropsINI =  _props.getOutputFolder();
+    indexPropsINI /= _props.getOutputFile().filename();
+    indexPropsINI.replace_extension(".ini");
+
+    _props.saveIndexProps(indexPropsINI);
 }
 
 //======================================================================
