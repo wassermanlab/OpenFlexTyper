@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include "ikmergenerator.h"
+#include "queryClass.h"
 #include "ftPropsClass.h"
 
 namespace ft {
@@ -15,12 +16,14 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief KmerGenerator
     ////////////////////////////////////////////////////////////////////////
-    KmerGenerator();
+    KmerGenerator(const uint& _kmerSize ,
+                    const bool& _refOnly ,
+                    const SearchType& _searchType ,
+                    const uint& _overlap = 0,
+                    const uint& _stride = 1,
+                    const bool& _kmerCounts = false,
+                    const uint& _maxKmers = 1000);
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief KmerGenerator
-    ////////////////////////////////////////////////////////////////////////
-    void init(const ft::FTProp& _ftprops);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief ~KmerGenerator

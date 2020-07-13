@@ -3,31 +3,25 @@
 
 namespace ft {
 //======================================================================
-KmerGenerator::KmerGenerator()
-    : _kmerSize() ,
-    _refOnly(),
-    _searchType(),
-    _overlap(),
-    _stride(),
-    _kmerCounts(),
-    _maxKmers()
+KmerGenerator::KmerGenerator(const uint& kmerSize ,
+                             const bool& refOnly ,
+                             const SearchType& searchType ,
+                             const uint& overlap ,
+                             const uint& stride,
+                             const bool& kmerCounts,
+                             const uint& maxKmers)
+    : _kmerSize(kmerSize) ,
+    _refOnly(refOnly),
+    _searchType(searchType),
+    _overlap(overlap),
+    _stride(stride),
+    _kmerCounts(kmerCounts),
+    _maxKmers(maxKmers)
 {
 }
 
-//======================================================================
-void KmerGenerator::init(const ft::FTProp& _ftProps)
-{       setKmerSize(_ftProps.getKmerSize());
-        setRefOnly(_ftProps.getRefOnlyFlag());
-        setSearchType(_ftProps.getSearchType());
-        setOverlap(_ftProps.getOverlap());
-        setKmerCountsFlag(_ftProps.getKmerCountsFlag());
-        setMaxKmers(_ftProps.getMaxKmers());
-
-}
-
-
 //================= PARAMETER GETTERS ========================
-uint KmerGenerator::getKmerSize() const {return getKmerSize();}
+uint KmerGenerator::getKmerSize() const {return _kmerSize;}
 bool KmerGenerator::getRefOnly() const {return _refOnly;}
 SearchType KmerGenerator::getSearchType() const {return _searchType;}
 uint KmerGenerator::getOverlap() const {return _overlap;}

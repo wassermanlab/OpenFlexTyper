@@ -51,8 +51,8 @@ void FTMap::genQKMap()
     // causes a seg fault when trying to create KProps
 
     std::cout << "create kmer generator" << std::endl;
-    KmerGenerator  _kmerGenerator;
-    _kmerGenerator.init(_ftProps);
+    KmerGenerator  _kmerGenerator(_ftProps.getKmerSize(), _ftProps.getRefOnlyFlag(), _ftProps.getSearchType());
+
     for (const ft::QueryClass& query : _querySet ){
         std::set<ft::KmerClass*> kmerObj;
         std::set<std::string> kmers = (_kmerGenerator.genSearchKmers(query));

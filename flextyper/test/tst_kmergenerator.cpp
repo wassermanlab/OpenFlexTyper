@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include "kmergenerator.cpp"
-
+#include "ftPropsClass.cpp"
 #include <climits>
 
 using namespace std;
@@ -22,7 +22,7 @@ public:
 #define TEST_DESCRIPTION(desc) RecordProperty("description", desc)
 
 //======================================================================
-TEST_F(TestKmerGenerator, genSlidingSearchStrings)
+TEST_F(TestKmerGenerator, DISABLED_init)
 {
     TEST_DESCRIPTION("genSlidingSearchStrings");
 
@@ -35,8 +35,27 @@ TEST_F(TestKmerGenerator, genSlidingSearchStrings)
     bool _kmerCounts = false;
     uint _maxKmers  = 30;
 
-    KmerGenerator _kmerGenerator;
+    KmerGenerator _kmerGenerator(_kmerSize, _refOnly, _searchType);
+    _kmerGenerator.setOverlap(_overlap);
+    _kmerGenerator.setStride(_stride);
+    _kmerGenerator.setKmerCountsFlag(_kmerCounts);
+    _kmerGenerator.setMaxKmers(_maxKmers);
 
+}
+
+//======================================================================
+TEST_F(TestKmerGenerator, DISABLED_genSlidingSearchStrings)
+{
+    TEST_DESCRIPTION("genSlidingSearchStrings");
+    uint _kmerSize = 5;
+    bool _refOnly = true;
+    SearchType _searchType = SLIDING;
+    uint _overlap = 0;
+    uint _stride = 1;
+    bool _kmerCounts = false;
+    uint _maxKmers  = 30;
+
+    KmerGenerator _kmerGenerator(_kmerSize, _refOnly, _searchType);
     std::string queryString = "AAAAATCCCCC";
 
     std::set<std::string> expectedResult = {"AAAAA", "AAAAT", "AAATC", "AATCC", "ATCCC", "TCCCC", "CCCCC"};
