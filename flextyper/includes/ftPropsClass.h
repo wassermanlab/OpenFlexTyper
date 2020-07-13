@@ -114,10 +114,10 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief Parameter getters and setters
     ////////////////////////////////////////////////////////////////////////
-    SearchType getSearchType();
+    SearchType getSearchType() const;
     void setSearchType(ft::SearchType searchType);
 
-    std::string getReadSetName();
+    std::string getReadSetName()const ;
     void setReadSetName(std::string readSetName);
 
     uint getKmerSize() const;

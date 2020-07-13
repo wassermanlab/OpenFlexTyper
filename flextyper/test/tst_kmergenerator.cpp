@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include "kmergenerator.cpp"
-#include "ftKPropsClass.cpp"
+
 #include <climits>
 
 using namespace std;
@@ -26,7 +26,7 @@ TEST_F(TestKmerGenerator, genSlidingSearchStrings)
 {
     TEST_DESCRIPTION("genSlidingSearchStrings");
 
-    ft::KmerProperties* _kProps = new KmerProperties();
+
     uint _kmerSize = 5;
     bool _refOnly = true;
     SearchType _searchType = SLIDING;
@@ -34,14 +34,8 @@ TEST_F(TestKmerGenerator, genSlidingSearchStrings)
     uint _stride = 1;
     bool _kmerCounts = false;
     uint _maxKmers  = 30;
-    _kProps->setKmerSize(_kmerSize);
-    _kProps->setRefOnly(_refOnly);
-    _kProps->setSearchType(_searchType);
-    _kProps->setStride(_stride);
-    _kProps->setOverlap(_overlap);
-    _kProps->setKmerCountsFlag(_kmerCounts);
-    _kProps->setMaxKmers(_maxKmers);
-    KmerGenerator _kmerGenerator(*_kProps);
+
+    KmerGenerator _kmerGenerator;
 
     std::string queryString = "AAAAATCCCCC";
 

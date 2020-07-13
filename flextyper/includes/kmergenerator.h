@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include "ikmergenerator.h"
+#include "ftPropsClass.h"
 
 namespace ft {
 
@@ -14,7 +15,12 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief KmerGenerator
     ////////////////////////////////////////////////////////////////////////
-    KmerGenerator(const KmerProperties& _kProps);
+    KmerGenerator();
+
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief KmerGenerator
+    ////////////////////////////////////////////////////////////////////////
+    void init(const ft::FTProp& _ftprops);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief ~KmerGenerator
@@ -48,16 +54,40 @@ public:
     ////////////////////////////////////////////////////////////////////////
     virtual std::set<std::string> genSearchKmers(const ft::QueryClass& queryObj);
 
+    /// Getters ///
+    uint getKmerSize() const;
+    bool getRefOnly() const;
+    SearchType getSearchType() const;
+    uint getOverlap() const;
+    uint getStride() const;
+    bool getKmerCountsFlag() const;
+    uint getMaxKmers() const;
+
+    /// Setters ///
+    void setKmerSize(uint kmerSize);
+    void setRefOnly(bool refOnly);
+    void setSearchType(SearchType searchType);
+    void setOverlap(uint overlap);
+    void setStride(uint stride);
+    void setKmerCountsFlag(bool kmerCounts);
+    void setMaxKmers(uint maxKmers);
+
+
+
 private:
     ////////////////////////////////////////////////////////////////////////
     /// \brief _counter
     ////////////////////////////////////////////////////////////////////////
     std::map<std::string, uint> _counter;
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief _kProps
-    ////////////////////////////////////////////////////////////////////////
-    const KmerProperties& _kProps;
+    uint _kmerSize;
+    bool _refOnly;
+    SearchType _searchType;
+    uint _overlap;
+    uint _stride;
+    bool _kmerCounts;
+    uint _maxKmers;
+
 };
 }
 

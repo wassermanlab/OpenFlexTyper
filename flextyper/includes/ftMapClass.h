@@ -8,7 +8,7 @@
 #include <vector>
 #include "kmerClass.h"
 #include "queryClass.h"
-#include "ftKPropsClass.h"
+
 #include "ftPropsClass.h"
 #include "kmergenerator.h"
 

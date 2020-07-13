@@ -34,7 +34,6 @@ INCLUDEPATH += flextyper/includes                     \
                fmindex/interfaces                   \
 
 HEADERS    += flextyper/includes/utils.h              \
-              flextyper/includes/ftKPropsClass.h \
               flextyper/includes/ftMapClass.h \
               flextyper/includes/ftPropsClass.h \
               flextyper/includes/ftSearch.h \
@@ -58,7 +57,6 @@ HEADERS    += flextyper/interfaces/ikmergenerator.h   \
               fmindex/interfaces/ifmindex.h \
 
 SOURCES     +=                \
-              flextyper/src/ftKPropsClass.cpp \
               flextyper/src/ftMapClass.cpp \
               flextyper/src/ftPropsClass.cpp \
               flextyper/src/ftSearch.cpp \

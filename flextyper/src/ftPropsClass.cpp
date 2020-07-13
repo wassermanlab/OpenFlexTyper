@@ -174,8 +174,8 @@ void FTProp::loadIndexProps(const fs::path &_indexPropsFile, bool printInputs){
 }
 
 //================= PARAMETER GETTERS ========================
-SearchType FTProp::getSearchType(){return _searchType;}
-std::string FTProp::getReadSetName(){return _readSetName;}
+SearchType FTProp::getSearchType() const {return _searchType;}
+std::string FTProp::getReadSetName() const{return _readSetName;}
 uint FTProp::getKmerSize() const {return _kmerSize;}
 uint FTProp::getOverlap() const {return _overlap;}
 uint FTProp::getStride() const {return _stride;}
