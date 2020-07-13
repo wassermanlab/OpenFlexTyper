@@ -22,7 +22,7 @@ public:
                     const uint& _overlap = 0,
                     const uint& _stride = 1,
                     const bool& _kmerCounts = false,
-                    const uint& _maxKmers = 1000);
+                    const uint& _maxKmers = 1000000000);
 
 
     ////////////////////////////////////////////////////////////////////////

@@ -34,12 +34,10 @@ SOURCES += tst_queryextractor.cpp           \
     tst_indexPropsClass.cpp \
     tst_kmerClass.cpp \
     tst_queryClass.cpp \
-           tst_resultsflags.cpp             \
            tst_writerbridge.cpp             \
            tst_resultprocessor.cpp          \
            tst_utils.cpp                    \
            tst_finder.cpp                   \
-           tst_stat.cpp                     \
            tst_kmergenerator.cpp            \
 
 SOURCES += mock/mock_fmindex.cpp            \

@@ -1,166 +1,155 @@
-//////////////////////////////////////////////////////////////////////////
-/////
-///// Copyright (c) 2019, Wasserman lab
-/////
-///// FILE        tst_queryextractor.cpp
-/////
-///// DESCRIPTION This file contains tests for the query extractions
-/////
-///// Initial version @ Godfrain Jacques Kounkou
-/////
-//////////////////////////////////////////////////////////////////////////
+#include <gtest/gtest.h>
+#include "queryextractor.cpp"
 
-//#include <gtest/gtest.h>
-//#include "queryextractor.cpp"
 
-//using namespace std;
-//using namespace ft;
+using namespace std;
+using namespace ft;
 
-//namespace ft {
-//class TestQueryExtractor : public ::testing::Test {
-//protected:
-//    virtual void SetUp() {
-////        ofstream tmpFile ("temp.tsv");
+namespace ft {
+class TestQueryExtractor : public ::testing::Test {
+protected:
+    virtual void SetUp() {
+        ofstream tmpFile ("temp.tsv");
 
-////        if (tmpFile.is_open()) {
-////           tmpFile << "# header\n";
-////           tmpFile << "0\tTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\t"
-////                         "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\t";
-////           tmpFile.close();
-////        }
-//    }
+        if (tmpFile.is_open()) {
+           tmpFile << "# header\n";
+           tmpFile << "0\tTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\t"
+                         "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\t";
+           tmpFile.close();
+        }
+    }
 
-//    virtual void TearDown() {
-//    }
+    virtual void TearDown() {
+    }
 
-//public:
-//    //QueryExtractor _queryExtractor;
-//};
+public:
+    QueryExtractor _queryExtractor;
+};
 
-//#define TEST_DESCRIPTION(desc) RecordProperty("description", desc)
-///*
-////======================================================================
-//TEST_F(TestQueryExtractor, getInputQueriesRoutineTest_FileIndex_0)
-//{
-//    TEST_DESCRIPTION("This test tests the input queries generated");
+#define TEST_DESCRIPTION(desc) RecordProperty("description", desc)
 
-//    string refSequence("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-//    string altSequence("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+//======================================================================
+TEST_F(TestQueryExtractor, getInputQueriesRoutineTest_FileIndex_0)
+{
+    TEST_DESCRIPTION("This test tests the input queries generated");
 
-//    uint fileIndex = 0;
-//    set<Query> inputQueries;
+    string refSequence("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+    string altSequence("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
-//    _queryExtractor.getInputQueriesRoutine(refSequence, altSequence, fileIndex, inputQueries);
+    uint fileIndex = 0;
+    set<Query> inputQueries;
 
-//    set<Query> expectedQueries {{ 1, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-//                                     "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-//                                     "" }};
+    _queryExtractor.getInputQueriesRoutine(refSequence, altSequence, fileIndex, inputQueries);
 
-//    EXPECT_EQ(expectedQueries, inputQueries);
-//    EXPECT_NO_FATAL_FAILURE();
-//    EXPECT_NO_THROW();
-//}
+    set<Query> expectedQueries {{ 1, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+                                     "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                     "" }};
 
-////======================================================================
-//TEST_F(TestQueryExtractor, getInputQueriesRoutineTest_FileIndex_1)
-//{
-//    TEST_DESCRIPTION("This test tests the input queries generated");
+    EXPECT_EQ(expectedQueries, inputQueries);
+    EXPECT_NO_FATAL_FAILURE();
+    EXPECT_NO_THROW();
+}
 
-//    string refSequence("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-//    string altSequence("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+//======================================================================
+TEST_F(TestQueryExtractor, getInputQueriesRoutineTest_FileIndex_1)
+{
+    TEST_DESCRIPTION("This test tests the input queries generated");
 
-//    uint fileIndex = 1;
-//    set<Query> inputQueries;
+    string refSequence("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+    string altSequence("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
-//    _queryExtractor.getInputQueriesRoutine(refSequence, altSequence, fileIndex, inputQueries);
+    uint fileIndex = 1;
+    set<Query> inputQueries;
 
-//    set<Query> expectedQueries {{ 2, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-//                                     "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-//                                     "" }};
+    _queryExtractor.getInputQueriesRoutine(refSequence, altSequence, fileIndex, inputQueries);
 
-//    EXPECT_EQ(expectedQueries, inputQueries);
-//    EXPECT_NO_FATAL_FAILURE();
-//    EXPECT_NO_THROW();
-//}
+    set<Query> expectedQueries {{ 2, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+                                     "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                     "" }};
 
-////======================================================================
-//TEST_F(TestQueryExtractor, getStartAndEndPointSequencesTest)
-//{
-//    TEST_DESCRIPTION("This test tests the get start and endpoint sequence");
+    EXPECT_EQ(expectedQueries, inputQueries);
+    EXPECT_NO_FATAL_FAILURE();
+    EXPECT_NO_THROW();
+}
 
-//    string startPointRef("AATAAAACCGGTTA");
-//    string endPointRef("AATTTTTTTTTTTA");
-//    uint fileIndex = 1;
-//    set<Query> results;
-//    _queryExtractor.getStartAndEndPointSequences(startPointRef, endPointRef, fileIndex, results);
-//    set<Query> expectedResults {{ 2, "AATAAAACCGGTTA", "AATTTTTTTTTTTA", "AATAAAATTTTTTA" }};
+//======================================================================
+TEST_F(TestQueryExtractor, getStartAndEndPointSequencesTest)
+{
+    TEST_DESCRIPTION("This test tests the get start and endpoint sequence");
 
-//    EXPECT_EQ(results, expectedResults);
-//    EXPECT_NO_FATAL_FAILURE();
-//    EXPECT_NO_THROW();
-//}
+    string startPointRef("AATAAAACCGGTTA");
+    string endPointRef("AATTTTTTTTTTTA");
+    uint fileIndex = 1;
+    set<Query> results;
+    _queryExtractor.getStartAndEndPointSequences(startPointRef, endPointRef, fileIndex, results);
+    set<Query> expectedResults {{ 2, "AATAAAACCGGTTA", "AATTTTTTTTTTTA", "AATAAAATTTTTTA" }};
 
-////======================================================================
-//TEST_F(TestQueryExtractor, getInputQueriesTestRefOnly)
-//{
-//    TEST_DESCRIPTION("This test tests the get input queries method");
+    EXPECT_EQ(results, expectedResults);
+    EXPECT_NO_FATAL_FAILURE();
+    EXPECT_NO_THROW();
+}
 
-//    bool refOnly  = true;
-//    bool crossover = false;
-//    const fs::path& pathToQueryFile("temp.tsv");
+//======================================================================
+TEST_F(TestQueryExtractor, getInputQueriesTestRefOnly)
+{
+    TEST_DESCRIPTION("This test tests the get input queries method");
 
-//    set<Query> results;
-//    results = _queryExtractor.getInputQueries(refOnly, crossover, pathToQueryFile);
+    bool refOnly  = true;
+    bool crossover = false;
+    const fs::path& pathToQueryFile("temp.tsv");
 
-//    set<Query> expectedResults {{ 1, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-//                                     "",
-//                                     "" }};
+    set<Query> results;
+    results = _queryExtractor.getInputQueries(refOnly, crossover, pathToQueryFile);
 
-//    EXPECT_EQ(results, expectedResults);
-//    EXPECT_NO_FATAL_FAILURE();
-//    EXPECT_NO_THROW();
-//}
+    set<Query> expectedResults {{ 1, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+                                     "",
+                                     "" }};
 
-////======================================================================
-//TEST_F(TestQueryExtractor, getInputQueriesTestRefAndAlt)
-//{
-//    TEST_DESCRIPTION("This test tests the get input queries method");
+    EXPECT_EQ(results, expectedResults);
+    EXPECT_NO_FATAL_FAILURE();
+    EXPECT_NO_THROW();
+}
 
-//    bool refOnly  = false;
-//    bool crossover = false;
-//    const fs::path& pathToQueryFile("temp.tsv");
+//======================================================================
+TEST_F(TestQueryExtractor, getInputQueriesTestRefAndAlt)
+{
+    TEST_DESCRIPTION("This test tests the get input queries method");
 
-//    set<Query> results;
-//    results = _queryExtractor.getInputQueries(refOnly, crossover, pathToQueryFile);
+    bool refOnly  = false;
+    bool crossover = false;
+    const fs::path& pathToQueryFile("temp.tsv");
 
-//    set<Query> expectedResults {{ 1, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-//                                     "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-//                                     "" }};
+    set<Query> results;
+    results = _queryExtractor.getInputQueries(refOnly, crossover, pathToQueryFile);
 
-//    EXPECT_EQ(results, expectedResults);
-//    EXPECT_NO_FATAL_FAILURE();
-//    EXPECT_NO_THROW();
-//}
+    set<Query> expectedResults {{ 1, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+                                     "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                     "" }};
 
-////======================================================================
-//TEST_F(TestQueryExtractor, getInputQueriesTestCrossover)
-//{
-//    TEST_DESCRIPTION("This test tests the get input queries method");
+    EXPECT_EQ(results, expectedResults);
+    EXPECT_NO_FATAL_FAILURE();
+    EXPECT_NO_THROW();
+}
 
-//    bool refOnly  = false;
-//    bool crossover = true;
-//    const fs::path& pathToQueryFile("temp.tsv");
+//======================================================================
+TEST_F(TestQueryExtractor, getInputQueriesTestCrossover)
+{
+    TEST_DESCRIPTION("This test tests the get input queries method");
 
-//    set<Query> results;
-//    results = _queryExtractor.getInputQueries(refOnly, crossover, pathToQueryFile);
+    bool refOnly  = false;
+    bool crossover = true;
+    const fs::path& pathToQueryFile("temp.tsv");
 
-//    set<Query> expectedResults {{ 1, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-//                                     "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-//                                     "TTTTTTTTTTTTTTTTTTTTTTTTTTTTAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" }};
+    set<Query> results;
+    results = _queryExtractor.getInputQueries(refOnly, crossover, pathToQueryFile);
 
-//    EXPECT_EQ(results, expectedResults);
-//    EXPECT_NO_FATAL_FAILURE();
-//    EXPECT_NO_THROW();
-//}
-//*/
-//}
+    set<Query> expectedResults {{ 1, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+                                     "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                                     "TTTTTTTTTTTTTTTTTTTTTTTTTTTTAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" }};
+
+    EXPECT_EQ(results, expectedResults);
+    EXPECT_NO_FATAL_FAILURE();
+    EXPECT_NO_THROW();
+}
+
+}

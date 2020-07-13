@@ -1,15 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-///
-/// Copyright (c) 2018, Wasserman lab
-///
-/// FILE        tst_queryextractor.cpp
-///
-/// DESCRIPTION This file contains tests for the query extractions
-///
-/// Initial version @ Godfrain Jacques Kounkou
-///
-////////////////////////////////////////////////////////////////////////
-
 #include "gmock/gmock.h"
 #include "ifmindex.h"
 
@@ -24,12 +12,12 @@ using namespace ft;
 namespace ft {
 class MockFmIndex : public algo::IFmIndex {
 public:
-    MOCK_METHOD1(createFMIndex,        fs::path( algo::IndexProps& _props));
+    MOCK_METHOD2(createFMIndex,        fs::path( const algo::IndexProps& _props, const fs::path& preprocessedFasta));
     //MOCK_METHOD3(searchmany,           std::map<std::string, std::set<size_t>>(const std::vector<std::string>&, const std::string&, const std::string&));
-    MOCK_METHOD3(parallelFmIndex,      void(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList));
+    MOCK_METHOD1(parallelFmIndex,      void(algo::IndexProps& _props));
     //MOCK_METHOD1(generateReadsMap,     void(const std::string&));
     MOCK_METHOD1(setKmerMapSize,       void(size_t));
-    MOCK_METHOD7(search,               ft::KmerClass(ft::KmerClass, const std::string&, const std::string&, u_int, size_t, bool, bool));
+    MOCK_METHOD4(search,               ft::KmerClass(ft::KmerClass, u_int, size_t, bool));
     MOCK_METHOD1(loadIndexFromFile,    void(const std::string&));
 };
 }

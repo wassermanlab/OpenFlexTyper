@@ -25,12 +25,13 @@ ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
     // executions and in main thread for monothreaded applications
 
     std::string kmer = kmerClass.getKmer();
+
     ft::KmerClass resultsfutures(kmer);
 
     auto start = high_resolution_clock::now();
 
     size_t occs = count(_fmindex, kmer.begin(), kmer.end());
-
+    std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
     _mtx.lock();
     std::cout << '\r' << float(((float)i * 100) / _kmerMapSize) << " % " << std::flush;
     _mtx.unlock();

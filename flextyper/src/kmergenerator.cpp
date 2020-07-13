@@ -55,7 +55,7 @@ std::set<std::string> KmerGenerator::genSlidingSearchStrings(const std::string& 
             break;
         if (queryString == ".") continue;
         std::string searchString = queryString.substr(i, _kmerSize);
-        std::cout << "kmer string  " << searchString << std::endl;
+        //std::cout << "kmer string  " << searchString << std::endl;
         if (!searchString.empty()) {
             _counter[searchString]++;
             searchStrings.insert(searchString);
@@ -105,6 +105,13 @@ std::set<std::string> KmerGenerator::genCenteredSearchStrings(const std::string&
 std::set<std::string> KmerGenerator::genSearchKmers(const ft::QueryClass& queryObj)
 {
     std::set<std::string> searchKmers;
+//    std::cout << "Kmer Size " << _kmerSize << std::endl;
+//    std::cout << "Ref Only Flag " << _refOnly << std::endl;
+//    std::cout << "Search Type " << _searchType << std::endl;
+//    std::cout << "Overlap  " << _overlap << std::endl;
+//    std::cout << "Stride " << _stride << std::endl;
+//    std::cout << "kmer Counts " << _kmerCounts << std::endl;
+//    std::cout << "MaxKmers  " << _maxKmers << std::endl;
 
 
     // generate search queries

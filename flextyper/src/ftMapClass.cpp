@@ -6,7 +6,7 @@
 
 namespace ft {
 
-FTMap::FTMap(FTProp ftProps)
+FTMap::FTMap(FTProp& ftProps)
     : _ftProps(ftProps),
       _kmerSet(),
       _querySet(),
@@ -48,21 +48,27 @@ void FTMap::addInputQueries(const std::set<Query> &inputQueries){
 void FTMap::genQKMap()
 {
     std::cout << "generate QK Map" << std::endl;
-    // causes a seg fault when trying to create KProps
-
     std::cout << "create kmer generator" << std::endl;
     KmerGenerator  _kmerGenerator(_ftProps.getKmerSize(), _ftProps.getRefOnlyFlag(), _ftProps.getSearchType());
+    _kmerGenerator.setOverlap(_ftProps.getOverlap());
+    _kmerGenerator.setStride(_ftProps.getStride());
+    _kmerGenerator.setKmerCountsFlag(_ftProps.getKmerCountsFlag());
+    _kmerGenerator.setMaxKmers(_ftProps.getMaxKmers());
 
-    for (const ft::QueryClass& query : _querySet ){
+
+    for (ft::QueryClass query : _querySet ){
         std::set<ft::KmerClass*> kmerObj;
         std::set<std::string> kmers = (_kmerGenerator.genSearchKmers(query));
+        std::cout << "generated " << kmers.size() << " kmers " << std::endl;
         for (auto kmer : kmers)
         {
-            std::cout << "add kmer " << kmer << std::endl;
-            //addKmer(kmer);
-            //kmerObj.insert(findKmer(kmer));
+            //std::cout << "add kmer " << kmer << std::endl;
+            addKmer(kmer);
+            kmerObj.insert(findKmer(kmer));
         }
-        //addQKSet(query, kmerObj);
+        ft::QueryClass* queryPointer = findQuery(query.getQIdT());
+        addQKSet(queryPointer, kmerObj);
+        std::cout << "size of kmer map " << _kmerSet.size() << std::endl;
     }
 }
 
@@ -120,7 +126,7 @@ void FTMap::addKmer(const ft::KmerClass& kmer)
     if (!checkForKmer(kmer.getKmer())){
         _kmerSet.insert(kmer);
     } else {
-        std::cout << "Kmer not added, kmer already exists" << std::endl;
+        //std::cout << "Kmer not added, kmer already exists" << std::endl;
     }
 }
 
