@@ -49,7 +49,8 @@ void FTMap::genQKMap()
 {
     std::cout << "generate QK Map" << std::endl;
     // causes a seg fault when trying to create KProps
-    KmerProperties _kProps(_ftProps);
+    KmerProperties _kProps;
+    _kProps.genKProps(_ftProps);
     std::cout << "create kmer generator" << std::endl;
     KmerGenerator  _kmerGenerator(_kProps);
     for (const ft::QueryClass& query : _querySet ){

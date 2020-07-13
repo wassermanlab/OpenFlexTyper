@@ -9,7 +9,7 @@
 namespace ft {
 class KmerProperties {
 public:
-    KmerProperties(FTProp _ftProps);
+    KmerProperties();
     virtual ~KmerProperties();
     void genKProps(FTProp _ftProps);
 
