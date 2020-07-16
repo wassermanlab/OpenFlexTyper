@@ -8,11 +8,13 @@ CONFIG      += c++17
 LIBS        += -lstdc++fs -lsdsl -ldivsufsort64     \
                -ldivsufsort \
 
-copydata.commands = $(COPY_DIR) $$PWD/testFiles/* $$OUT_PWD
-first.depends = $(first) copydata
+
+outputDir.commands = $(MKDIR) $$OUT_PWD/testFiles ; $(COPY_DIR) $$PWD/flextyper/test/testFiles/* $$OUT_PWD/testFiles/
+first.depends = $(first) outputDir
 export(first.depends)
-export(copydata.commands)
-QMAKE_EXTRA_TARGETS += first copydata
+export(outputDir.commands)
+QMAKE_EXTRA_TARGETS += first outputDir
+
 
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings
@@ -73,20 +75,19 @@ SOURCES     +=                \
               fmindex/src/indexPropsClass.cpp
 
 DISTFILES += \
+    flextyper/test/testFiles/MixedVirus_100.fasta \
+    flextyper/test/testFiles/MixedVirus_100_1.fq.gz \
+    flextyper/test/testFiles/MixedVirus_100_2.fq.gz \
+    flextyper/test/testFiles/Setting.ini \
+    flextyper/test/testFiles/Test.fasta \
+    flextyper/test/testFiles/Test.fm9 \
+    flextyper/test/testFiles/TestQueries.txt \
+    flextyper/test/testFiles/Test_1.fq.gz \
+    flextyper/test/testFiles/Test_2.fq.gz \
+    flextyper/test/testFiles/Test_Settings.ini \
+    flextyper/test/testFiles/Test_indexProps.ini \
+    flextyper/test/testFiles/indexProps.ini \
+    flextyper/test/testFiles/preprocess.sh \
     install.sh \
-    testFiles/MixedVirus_100_1.fq.gz \
-    testFiles/MixedVirus_100_1.fq.gz \
-    testFiles/MixedVirus_100_2.fq.gz \
-    testFiles/MixedVirus_100_2.fq.gz \
-    testFiles/Setting.ini \
-    testFiles/Test.fm9 \
-    testFiles/TestQueries.txt \
-    testFiles/Test_1.fq.gz \
-    testFiles/Test_2.fq.gz \
-    testFiles/Test_Settings.ini \
-    testFiles/Test_indexProps.ini \
-    testFiles/indexProps.ini \
-    testFiles/preprocess.sh \
-    testFiles/test.fq.gz \
-    testFiles/testQueries.txt
+
 

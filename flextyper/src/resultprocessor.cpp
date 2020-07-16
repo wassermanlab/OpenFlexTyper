@@ -50,7 +50,7 @@ void ResultProcessor::processResults(ft::FTMap& ftMap)
         // Add ReadIDs to QueryMap
     for (auto indexResult : resultsMap)
     {
-        ftMap.processIndexResults(indexResult, _ftProps.getReadLength());
+        ftMap.processIndexResults(indexResult);
     }
 
     //processIndexPos(ftMap, readLen);

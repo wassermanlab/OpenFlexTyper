@@ -28,9 +28,20 @@ if (ftProps.getInputFastQ().empty()) {
 //======================================================================
 void FTSearch::checkOutputFile(FTProp ftProps){
 
-    fs::path queryOutputFile = ftProps.getOutputFolder();
-    queryOutputFile /= ftProps.getPathToQueryFile().stem() += std::string("_") += ftProps.getInputFastQ().stem() += "_Results.tsv";
-    ftProps.setOutputFile(queryOutputFile);
+if (!exists(ftProps.getOutputFile())) {
+    std::cout << "Error: Output File doesnt exist" << std::endl;
+    std::cout << "checking output directory"  << std::endl;
+    if (!exists(ftProps.getOutputFolder()))
+    {
+        std::cout << "Error: Output folder doesnt exist" << std::endl;
+        std::cout << "Making output folder " << std::endl;
+        create_directory(ftProps.getOutputFolder());
+        if (!exists(ftProps.getOutputFolder()))
+        {
+            std::cout << "Error: Couldnt create output folder" << std::endl;
+        }
+    }
+}
 }
 
 
@@ -55,18 +66,12 @@ void FTSearch::init(FTProp ftProps)
     std::cout << "\nsearching..." << std::endl;
 
     // selecting the correct strategy depending on the size of the index size set
-    if (ftProps.getNumOfIndexes() == 1) {
-        std::cout << "searching with " << ftProps.getNumOfIndexes() << " indexes" << std::endl;
-        std::pair<fs::path, uint> index = *ftProps.getIndexSet().begin();
-        fs::path indexFile = index.first;
-        uint offset = index.second;
-        _finder->searchMonoIndex(ftMap, indexFile, offset);
 
-    } else if (ftProps.getNumOfIndexes() > 1) {
-        _finder->searchMultipleIndexes(ftMap);
-    }
+    _finder->searchMultipleIndexes(ftMap);
 
     _resultProcessor->processResults(ftMap);
+
+
     _writerBridge->saveQueryOutput(ftMap);
 }
 

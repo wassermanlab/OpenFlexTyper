@@ -48,12 +48,8 @@ void KmerClass::addKFlag(const ft::FlagType& flag)
 }
 void KmerClass::addKPosition(const size_t& kPosition, const uint& offset)
 {
-    std::cout << "number of positions " << _positions.size() << std::endl;
     size_t kPos = kPosition + offset;
-    std::cout << "search position " << kPos << std::endl;
-
     _positions.insert(kPos);
-    std::cout << "number of positions after insert " << _positions.size() << std::endl;
 }
 void KmerClass::addReadID(const ft::ReadID& readID)
 {    _readIDs.insert(readID);}
@@ -92,15 +88,28 @@ bool KmerClass::hasReadID(ft::ReadID read ) const {
 //====================== CONVERT ========================
 void KmerClass::convertPosToReadID(uint readLength, uint numOfReads, bool revComp)
 {
+//    std::cout << "read Length " << readLength << std::endl;
+//    std::cout << "num of Reads " << numOfReads << std::endl;
+//    std::cout << " rev comp " << revComp << std::endl;
+
+    if (readLength == 0)
+    {
+        std::cout << "ERROR: Read Length not set " << std::endl;
+    }
+    if (numOfReads == 0)
+    {
+        std::cout << "ERROR: Num of Reads not set " << std::endl;
+    }
+
     for (auto pos : _positions) {
-        u_int r = (size_t) std::ceil(pos / (readLength + 1)) +1 ;
+        u_int r = std::ceil(pos / (readLength + 1)) ;
         int rID = r%numOfReads;
         rID +=1;
-        u_int readType = std::ceil(float(r)/float(numOfReads));
+        u_int readType = std::ceil((r+1)/float(numOfReads));
         //std::cout << "r " << float(r) << " num of Reads "<< float(numOfReads) << std::endl;
         //std::cout << "read Type " << readType << std::endl;
         if (revComp){readType = ceil((readType+1)/2);}
-        //std::cout << "read Type " << readType << std::endl;
+        //std::cout <<"read ID " << rID <<  " read Type " << readType << std::endl;
         addReadID(std::make_pair(rID, readType));
     }
 }

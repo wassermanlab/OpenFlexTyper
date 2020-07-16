@@ -9,11 +9,13 @@ LIBS        += -lgtest -lgtest_main -lgmock       \
                -ldivsufsort
 CONFIG      += c++17
 
-copydata.commands = $(COPY_DIR) $$PWD/testFiles/* $$OUT_PWD
-first.depends = $(first) copydata
+
+outputDir.commands = $(MKDIR) $$OUT_PWD/testFiles ; $(COPY_DIR) $$PWD/testFiles/* $$OUT_PWD/testFiles/
+first.depends = $(first) outputDir
 export(first.depends)
-export(copydata.commands)
-QMAKE_EXTRA_TARGETS += first copydata
+export(outputDir.commands)
+QMAKE_EXTRA_TARGETS += first outputDir
+
 
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings

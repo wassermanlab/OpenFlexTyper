@@ -10,31 +10,31 @@ using namespace std;
 namespace ft {
 class TestFTMap : public ::testing::Test {
 protected:
-    static void SetUpTestSuite()
-    {
-        ofstream tmpFile("tempConfig.ini");
-        if (tmpFile.is_open()) {
-            tmpFile <<  "queryFile 		= path_query.txt"
-                        "kmerSize 		= 30"
-                        "overlap 		= 0"
-                        "stride 			= 5"
-                        "maxOccurences 		= 2000"
-                        "threadNumber 		= 512"
-                        "readLength 		= 150"
-                        "indexFileLocation 	= ."
-                        "outputFolder 		= ."
-                        "refOnly 		= False"
-                        "searchType 		= SLIDING"
-                        "multithread 		= True"
-                        "ignoreNonUniqueKmers 	= False"
-                        "kmerCounts 		= False"
-                        "matchingReads 		= MixedVirus_100.fasta";
-            tmpFile.close();
-        }
-    };
-    static void TearDownTestSuite() {
-        fs::remove(fs::path("tempConfig.ini"));
-    }
+//    static void SetUpTestSuite()
+//    {
+//        ofstream tmpFile("tempConfig.ini");
+//        if (tmpFile.is_open()) {
+//            tmpFile <<  "queryFile 		= path_query.txt"
+//                        "kmerSize 		= 30"
+//                        "overlap 		= 0"
+//                        "stride 			= 5"
+//                        "maxOccurences 		= 2000"
+//                        "threadNumber 		= 512"
+//                        "readLength 		= 150"
+//                        "indexFileLocation 	= ."
+//                        "outputFolder 		= ."
+//                        "refOnly 		= False"
+//                        "searchType 		= SLIDING"
+//                        "multithread 		= True"
+//                        "ignoreNonUniqueKmers 	= False"
+//                        "kmerCounts 		= False"
+//                        "matchingReads 		= MixedVirus_100.fasta";
+//            tmpFile.close();
+//        }
+//    };
+//    static void TearDownTestSuite() {
+//        fs::remove(fs::path("tempConfig.ini"));
+//    }
 
     virtual void SetUp() {}
     virtual void TearDown() {}
@@ -51,7 +51,7 @@ TEST_F(TestFTMap, TestCheckKmer)
 {
     TEST_DESCRIPTION("Check Kmer");
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("tempConfig.ini", false);
+    _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);
     ft::KmerClass testKmer1("AAAA");
     ftMap.addKmer(testKmer1);
@@ -65,7 +65,7 @@ TEST_F(TestFTMap, TestCheckQIDT)
     TEST_DESCRIPTION("check QIdT");
     //bool checkQIDT(ft::QIdT testQueryObject);
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("tempConfig.ini", false);
+    _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);
     ft::QueryClass testQuery1Ref =  ft::QueryClass(1, ft::QueryType::REF);
     ft::QueryClass testQuery1Alt =  ft::QueryClass(1, ft::QueryType::ALT);
@@ -90,7 +90,7 @@ TEST_F(TestFTMap, TestFindKmer)
     TEST_DESCRIPTION("Find Kmer");
     //ft::KmerClass findKmer(std::string kmer);
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("tempConfig.ini", false);
+    _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);
     ftMap.setKmers({ft::KmerClass("AAAA"),ft::KmerClass("TTTT")});
 
@@ -103,7 +103,7 @@ TEST_F(TestFTMap, TestGetQuery)
     TEST_DESCRIPTION("Get Query");
     //ft::QueryClass getQuery(ft::QIdT qIDT);
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("tempConfig.ini", false);
+    _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);
     ft::QueryClass testQuery1Ref =  ft::QueryClass(1, ft::QueryType::REF);
     ft::QueryClass testQuery1Alt = ft::QueryClass(1, ft::QueryType::ALT);
@@ -127,7 +127,7 @@ TEST_F(TestFTMap, TestAddKmer)
     TEST_DESCRIPTION("Add Kmer");
     //void addKmer(ft::KmerClass kmer);
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("tempConfig.ini", false);
+    _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);
     ft::KmerClass testGoodKmer("AAAA");
     ft::KmerClass testBadKmer("AAAC");
@@ -142,7 +142,7 @@ TEST_F(TestFTMap, TestAddQuery)
     TEST_DESCRIPTION("Add Query");
     //void addQuery(ft::QueryClass query);
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("tempConfig.ini", false);
+    _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);
     ftMap.addQuery(ft::QueryClass(1, ft::QueryType::REF));
     ft::QIdT testGoodQIdT = std::make_pair(1, ft::QueryType::REF);
@@ -158,7 +158,7 @@ TEST_F(TestFTMap, TestRetrieveQueries)
     TEST_DESCRIPTION("Retrieve Queries");
     //std::set<ft::QueryClass*> retrieveQueries(const ft::KmerClass& kmer);
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("tempConfig.ini", false);
+    _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);
 
 
@@ -171,7 +171,7 @@ TEST_F(TestFTMap, TestRetrieveKmers)
     TEST_DESCRIPTION("Retrieve Kmers");
     //std::set<ft::KmerClass*> retrieveKmers(ft::QueryClass *query);
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("tempConfig.ini", false);
+    _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);
 
 }
@@ -182,7 +182,7 @@ TEST_F(TestFTMap, TestAddQIDtoKmer)
     TEST_DESCRIPTION("Add QID to Kmer");
     //void addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryIDType);
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("tempConfig.ini", false);
+    _ftProps.initFromQSettings("Test_Settings.ini", false);
 
 
 }
@@ -193,7 +193,7 @@ TEST_F(TestFTMap, TestAddQKPair)
     TEST_DESCRIPTION("Add QK Pair");
     //void addQKPair(ft::QueryClass* query, ft::KmerClass* kmer);
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("tempConfig.ini", false);
+    _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);
 
 }
@@ -203,25 +203,55 @@ TEST_F(TestFTMap, TestAddQKSet)
     TEST_DESCRIPTION("Add QK Set");
     //void addQKSet(ft::QueryClass* query, std::set<ft::KmerClass*> kmers);
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("tempConfig.ini", false);
+    _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);
     ft::QueryClass query1 (1, ft::QueryType::REF);
-
-
 
 }
 
 //====================== INDEX TESTS ===================================
 //======================================================================
+TEST_F(TestFTMap, TestAddKmerResults)
+{
+    TEST_DESCRIPTION("Add Kmer Results");
+    //void FTMap::addKmerResults(ft::KmerClass kmerResult)
+    ft::FTProp _ftProps;
+    _ftProps.initFromQSettings("Test_Settings.ini", false);
+    ft::FTMap ftMap(_ftProps);
 
+    ft::KmerClass testKmer1("AAAA");
+    testKmer1.addReadID(std::make_pair(1, 1));
+    testKmer1.addKFlag(ft::FlagType::ABK);
+
+    ftMap.addKmerResults(testKmer1);
+    ft::ReadID testRID = std::make_pair(1, 1);
+    ft::KmerClass* kmer = ftMap.findKmer(testKmer1._kmer);
+
+    EXPECT_TRUE(kmer->hasFlag(ft::FlagType::ABK));
+    EXPECT_TRUE(kmer->hasReadID(testRID));
+
+}
+
+//======================================================================
 TEST_F(TestFTMap, TestAddIndexResults)
 {
     TEST_DESCRIPTION("Add Index Results");
     //void addIndexResults(std::set<ft::KmerClass> indexResults);
-    std::string result;
-    std::string expectedResult;
+    ft::FTProp _ftProps;
+    _ftProps.initFromQSettings("Test_Settings.ini", false);
+    ft::FTMap ftMap(_ftProps);
 
-    EXPECT_EQ(result, expectedResult);
+    ft::KmerClass testKmer1("AAAA");
+    testKmer1.addKPosition(123);
+    ft::KmerClass testKmer2("CCCC");
+    testKmer2.addKPosition(345);
+    std::set<ft::KmerClass> indexResults = {testKmer1, testKmer2};
+
+    ftMap.addIndexResults(indexResults);
+    EXPECT_EQ(ftMap.getResults().size(), 1);
+    //add a second set to make sure it doesnt override existing
+    ftMap.addIndexResults(indexResults);
+    EXPECT_EQ(ftMap.getResults().size(), 2);
 }
 
 //======================================================================
@@ -229,10 +259,26 @@ TEST_F(TestFTMap, TestProcessIndexResults)
 {
     TEST_DESCRIPTION("Process Index Results");
     //void processIndexResults(std::set<ft::KmerClass> indexResults, uint readLength);
-    std::string result;
-    std::string expectedResult;
+    ft::FTProp _ftProps;
+    _ftProps.initFromQSettings("Test_Settings.ini", false);
+    ft::FTMap ftMap(_ftProps);
+    ftMap._ftProps.setNumOfReads(20);
+    ftMap._ftProps.setRevCompFlag(false);
+    ft::KmerClass testKmer1("AAAA");
+    testKmer1.addKPosition(123);
+    ft::KmerClass testKmer2("CCCC");
+    testKmer2.addKPosition(345);
+    std::set<ft::KmerClass> indexResults = {testKmer1, testKmer2};
 
-    EXPECT_EQ(result, expectedResult);
+    ftMap.processIndexResults(indexResults);
+
+    ft::KmerClass* outputKmer = ftMap.findKmer("AAAA");
+    ft::KmerClass* outputKmer2 = ftMap.findKmer("CCCC");
+
+    EXPECT_TRUE(ftMap.checkForKmer("AAAA"));
+    EXPECT_TRUE(ftMap.checkForKmer("CCCC"));
+    EXPECT_TRUE(outputKmer->hasReadID(std::make_pair(2, 1)));
+    EXPECT_TRUE(outputKmer2->hasReadID(std::make_pair(4, 1)));
 }
 
 }
