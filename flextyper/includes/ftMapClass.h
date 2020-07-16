@@ -86,8 +86,8 @@ public:
     /// All kmer results from a single index
     ////////////////////////////////////////////////////////////////////////
     void addIndexResults(std::set<ft::KmerClass> indexResults);
-    void addKmerResults(ft::KmerClass kmerResult);
-    void processIndexResults(std::set<ft::KmerClass> indexResults, uint readLength);
+    void addKmerResults(const ft::KmerClass& kmerResult);
+    void processIndexResults(std::set<ft::KmerClass> indexResults);
 
 private:
 

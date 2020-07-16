@@ -30,7 +30,7 @@ TEST_F(TestFinder, searchSequentially)
 
     Finder _finder;
 
-    fs::path _indexPath = "/home/tixii/Git/OpenFlexTyper/build/Test.fm9";
+    fs::path _indexPath = "testOutput/Test.fm9";
     u_int offset = 0;
 
     ft::FTProp _ftProps;
@@ -46,7 +46,7 @@ TEST_F(TestFinder, searchSequentially)
     ft::FTMap _ftMap(_ftProps);
     _ftProps.setMaxOcc(200);
     _ftProps.setOverCountedFlag(false);
-
+    _ftProps.setNumOfIndexes(1);
     ft::KmerClass kmer("CCTT");
     ft::KmerClass kmer2("AAT");
     ft::KmerClass kmer3("ATATT");
@@ -54,18 +54,28 @@ TEST_F(TestFinder, searchSequentially)
     _ftMap.addKmer(kmer2);
     _ftMap.addKmer(kmer3);
 
-
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
-    sdsl::load_from_file(_testindex, "testOutput/Test2.fm9");
-    auto occs = sdsl::count(_testindex, kmer._kmer.begin(), kmer._kmer.end());
-    std::cout << "kmer CCTT occs " << occs << std::endl;
-    auto occs2 = sdsl::count(_testindex, kmer2._kmer.begin(), kmer2._kmer.end());
-    std::cout << "kmer AAT occs " << occs2 << std::endl;
-    auto occs3 = sdsl::count(_testindex, kmer3._kmer.begin(), kmer3._kmer.end());
-    std::cout << "kmer AAT occs " << occs3 << std::endl;
+    sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
+    auto occs3 = sdsl::count(_testindex, kmer._kmer.begin(), kmer._kmer.end());
+    auto occs = sdsl::count(_testindex, kmer2._kmer.begin(), kmer2._kmer.end());
+    auto occs2 = sdsl::count(_testindex, kmer3._kmer.begin(), kmer3._kmer.end());
 
+    EXPECT_NO_THROW(_finder.sequentialSearch(_ftMap, _indexPath, offset));
 
-    EXPECT_NO_THROW(_finder.sequentialSearch(_ftMap, _indexPath, 0));
+    std::vector<std::set<ft::KmerClass>> results = _ftMap.getResults();
+    EXPECT_EQ(results.size(), _ftProps.getNumOfIndexes());
+    std::set<ft::KmerClass> result = results.front();
+    EXPECT_EQ(result.size(), 3);
+    auto roccsIT = result.begin();
+    uint roccs = roccsIT->getKPositions().size();
+    roccsIT++;
+    uint roccs2 = roccsIT->getKPositions().size();
+    roccsIT++;
+    uint roccs3 = roccsIT->getKPositions().size();
+    EXPECT_EQ(occs, roccs);
+    EXPECT_EQ(occs2, roccs2);
+    EXPECT_EQ(occs3, roccs3);
+
 }
 
 }

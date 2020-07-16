@@ -138,6 +138,19 @@ TEST_F(TestKmerClass, convertPosToRead_NotPaired_NotReverseComp)
 }
 
 //======================================================================
+TEST_F(TestKmerClass, convertPosToReadDirect)
+{
+    TEST_DESCRIPTION("convert index positions to read ids ");
+    ft::KmerClass testKmerClass("AAAA");
+    testKmerClass.setKPositions({50, 125, 251, 313, 449, 555, 654, 723});
+    testKmerClass.convertPosToReadID(100,8,false);
+    std::set<ft::ReadID> expectedReadIDs = {{1,1}, {2,1}, {3, 1}, {4, 1}, {5, 1}, {6, 1}, {7, 1}, {8, 1}};
+
+    EXPECT_EQ(expectedReadIDs, testKmerClass.getReadIDs());
+}
+
+
+//======================================================================
 TEST_F(TestKmerClass, convertPosToRead_Paired_NotReverseComp)
 {
     TEST_DESCRIPTION("convert index positions to read ids ");
