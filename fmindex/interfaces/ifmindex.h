@@ -7,9 +7,10 @@
 #include <experimental/filesystem>
 #include "ftMapClass.h"
 #include "indexPropsClass.h"
+#include <sdsl/suffix_arrays.hpp>
 
 namespace fs = std::experimental::filesystem;
-
+using namespace sdsl;
 namespace algo {
 
 typedef unsigned int Position;
@@ -32,6 +33,8 @@ public:
     /// \param indexname
     ////////////////////////////////////////////////////////////////////////
     virtual void loadIndexFromFile(const std::string& indexname) = 0;
+    virtual csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> getFmIndex() =0;
+
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief parallelFmIndex

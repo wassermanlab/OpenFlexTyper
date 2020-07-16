@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include "finder.cpp"
-#include "fmindex.cpp"
+
 #include "ftMapClass.cpp"
 #include "mock/mock_fmindex.cpp"
 
@@ -24,38 +24,38 @@ public:
 //======================================================================
 TEST_F(TestFinder, DISABLED_searchSequentially)
 {
-    TEST_DESCRIPTION("This test checks that the function searchSequentially");
+//    TEST_DESCRIPTION("This test checks that the function searchSequentially");
 
-    std::shared_ptr<MockFmIndex> fmIndex = std::make_shared<MockFmIndex>();
-    EXPECT_CALL(*fmIndex, loadIndexFromFile("./test.fm9"))
-            .Times(AtLeast(1));
-    EXPECT_CALL(*fmIndex, setKmerMapSize(1))
-            .Times(AtLeast(1));
-    Finder _finder;
+//    std::shared_ptr<MockFmIndex> fmIndex = std::make_shared<MockFmIndex>();
+//    EXPECT_CALL(*fmIndex, loadIndexFromFile("./test.fm9"))
+//            .Times(AtLeast(1));
+//    EXPECT_CALL(*fmIndex, setKmerMapSize(1))
+//            .Times(AtLeast(1));
+//    Finder _finder;
 
-    ft::FTProp _ftProps;
-    fs::path pathToQueryFile = "path_query.tsv";
-    uint kmerSize = 30;
-    uint readLength =150;
-    fs::path indexPropsFile;
-    fs::path outputFolder;
-    bool refOnly;
-    SearchType searchType;
+//    ft::FTProp _ftProps;
+//    fs::path pathToQueryFile = "TestQuery.txt";
+//    uint kmerSize = 30;
+//    uint readLength =150;
+//    fs::path indexPropsFile;
+//    fs::path outputFolder;
+//    bool refOnly = false;
+//    SearchType searchType;
 
-    _ftProps.init(pathToQueryFile,kmerSize,readLength,indexPropsFile,outputFolder,refOnly,searchType);
-    _finder.overrideFmIndex(fmIndex);
+//    _ftProps.init(pathToQueryFile,kmerSize,readLength,indexPropsFile,outputFolder,refOnly,searchType);
+//    _finder.overrideFmIndex(fmIndex);
 
-    ft::FTMap ftMap(_ftProps);
-    _ftProps.setMaxOcc(200);
-    _ftProps.setOverCountedFlag(false);
-    ft::KmerClass kmer("ATATTATATAT");
+//    ft::FTMap ftMap(_ftProps);
+//    _ftProps.setMaxOcc(200);
+//    _ftProps.setOverCountedFlag(false);
+//    ft::KmerClass kmer("ATATTATATAT");
 
-    ftMap.addKmer(kmer);
-    fs::path indexPath ("./test.fm9");
-    std::string indexFileLocation ("test.fm9");
-    bool printSearchTime = false;
+//    ftMap.addKmer(kmer);
+//    fs::path indexPath ("./test.fm9");
+//    std::string indexFileLocation ("test.fm9");
 
-    EXPECT_NO_THROW(_finder.sequentialSearch(ftMap, indexPath, 0));
+
+//    EXPECT_NO_THROW(_finder.sequentialSearch(ftMap, indexPath, 0));
 }
 
 }

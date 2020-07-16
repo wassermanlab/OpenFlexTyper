@@ -15,6 +15,11 @@ void FmIndex::setKmerMapSize(size_t kmerMapSize)
 {
     _kmerMapSize = kmerMapSize;
 }
+//======================================================================
+csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> FmIndex::getFmIndex()
+{
+    return _fmindex;
+}
 
 //======================================================================
 ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
@@ -62,6 +67,7 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
     std::lock_guard<std::mutex> lock(_mtx);
     std::cout << "create index for " << preprocessedFasta << std::endl;
     fs::path outputIndex = _props.getOutputFolder();
+
     outputIndex /= preprocessedFasta.filename();
 
     outputIndex.replace_extension(".fm9");
@@ -97,11 +103,15 @@ void FmIndex::loadIndexFromFile(const std::string& indexname)
 void FmIndex::parallelFmIndex(algo::IndexProps& _props)
 {
     //   fs::path createFMIndex(algo::IndexProps& _props, const fs::path& preprocessedFasta);
-    std::cout << "Running parallel FM Index" << std::endl;
+    std::cout << "Running FM Index" << std::endl;
     std::vector<std::future<fs::path>> operations;
     std::cout << "number of files to index  " << _props.getNumOfIndexes() << std::endl;
     std::map<fs::path, std::pair<u_int, u_int>> _ppfs = _props.getPreProcessedFastas();
     std::cout << "number of files found  " << _ppfs.size() << std::endl;
+
+    if  (_props.getNumOfIndexes() != _ppfs.size()){
+        std::cout << "Error: wrong number of files found "<< std::endl;
+    }
     for (auto _ppf : _props.getPreProcessedFastas()){
         std::cout << "indexing " << _ppf.first << std::endl;
         operations.push_back(std::async(std::launch::async,

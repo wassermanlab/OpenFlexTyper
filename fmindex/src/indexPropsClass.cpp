@@ -88,7 +88,11 @@ void IndexProps::setBuildDir(const fs::path &buildDir)
 void IndexProps::setOutputFile(const fs::path& outputFile)
 {        _outputFile = outputFile;   }
 void IndexProps::setOutputFolder(const fs::path& outputFolder)
-{        _outputFolder = outputFolder;    }
+{   if (!fs::exists(outputFolder)){
+        std::cout << "creating output Folder " << outputFolder << std::endl;
+        fs::create_directory(outputFolder);
+    }
+    _outputFolder = outputFolder;    }
 void IndexProps::addPPF(fs::path _ppf, uint start, uint end){
     _ppFSet[_ppf] = std::make_pair(start, end);
 }

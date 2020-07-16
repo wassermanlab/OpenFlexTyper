@@ -75,8 +75,16 @@ SOURCES     +=                \
 DISTFILES += \
     install.sh \
     testFiles/MixedVirus_100_1.fq.gz \
+    testFiles/MixedVirus_100_1.fq.gz \
+    testFiles/MixedVirus_100_2.fq.gz \
     testFiles/MixedVirus_100_2.fq.gz \
     testFiles/Setting.ini \
+    testFiles/Test.fm9 \
+    testFiles/TestQueries.txt \
+    testFiles/Test_1.fq.gz \
+    testFiles/Test_2.fq.gz \
+    testFiles/Test_Settings.ini \
+    testFiles/Test_indexProps.ini \
     testFiles/indexProps.ini \
     testFiles/preprocess.sh \
     testFiles/test.fq.gz \

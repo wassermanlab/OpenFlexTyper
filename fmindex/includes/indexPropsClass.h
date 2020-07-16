@@ -34,7 +34,7 @@ public:
     std::map<fs::path, uint> _indexSet; //this is the set of generated index files and their offsets
 
     uint _numOfReads;
-    uint _numOfIndexes;
+    uint _numOfIndexes = 1;
 
     bool _revComp = 0;
     bool _pairedReads = 0;

@@ -9,6 +9,12 @@ LIBS        += -lgtest -lgtest_main -lgmock       \
                -ldivsufsort
 CONFIG      += c++17
 
+copydata.commands = $(COPY_DIR) $$PWD/testFiles/* $$OUT_PWD
+first.depends = $(first) copydata
+export(first.depends)
+export(copydata.commands)
+QMAKE_EXTRA_TARGETS += first copydata
+
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -30,6 +36,7 @@ INCLUDEPATH += ../includes                  \
 
 # Input
 SOURCES += tst_queryextractor.cpp           \
+    tst_fmindex.cpp \
     tst_ftMapClass.cpp \
     tst_indexPropsClass.cpp \
     tst_kmerClass.cpp \

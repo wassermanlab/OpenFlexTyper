@@ -27,7 +27,7 @@ public:
     std::string _kmer;
     std::map<ft::FlagType, bool> _kFlags;
     std::set<size_t> _positions;
-    std::set<int> _readIDs;
+    std::set<ft::ReadID> _readIDs;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
@@ -35,7 +35,7 @@ public:
     std::string getKmer() const;
     std::map<ft::FlagType, bool> getKFlags()const;
     std::set<size_t> getKPositions()const;
-    std::set<int> getReadIDs()const;
+    std::set<ft::ReadID> getReadIDs()const;
     uint getKmerMapSize()const;
 
     ////////////////////////////////////////////////////////////////////////
@@ -43,21 +43,21 @@ public:
     ////////////////////////////////////////////////////////////////////////
     void setKFlags(std::set<ft::FlagType> kFlags);
     void setKPositions(std::set<size_t> kPositions, uint offset = 0);
-    void setReadIDs(std::set<int> readIDs);
+    void setReadIDs(std::set<ft::ReadID>readIDs);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief adders
     ////////////////////////////////////////////////////////////////////////
     void addKFlag(const ft::FlagType& kFlag);
     void addKPosition(const size_t& kPosition, const uint& offset = 0);
-    void addReadID(const int& readID);
+    void addReadID(const ft::ReadID& readID);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief removers
     ////////////////////////////////////////////////////////////////////////
     void removeKFlag(ft::FlagType kFlag);
     void removeKPosition(size_t kPosition, uint offset = 0);
-    void removeReadID(int readID);
+    void removeReadID(ft::ReadID readID);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief checkers
@@ -66,12 +66,12 @@ public:
     bool hasKmer(std::string test) const;
     bool hasFlag(ft::FlagType flag) const;
     bool hasKPosition(size_t position) const;
-    bool hasReadID(int readID) const;
+    bool hasReadID(ft::ReadID readID) const;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief convert
     ////////////////////////////////////////////////////////////////////////
-    void convertPosToReadID(uint readlength);
+    void convertPosToReadID(uint readLength, uint numOfReads, bool revComp);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief overload

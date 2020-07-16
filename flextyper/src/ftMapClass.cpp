@@ -210,14 +210,30 @@ void FTMap::addQKSet(ft::QueryClass* query, std::set<ft::KmerClass*> kmers){
 void FTMap::addIndexResults(std::set<ft::KmerClass> indexResults)
 {    _searchResults.push_back(indexResults); }
 
+void FTMap::addKmerResults(ft::KmerClass kmerResult)
+{
+    KmerClass* kmer = findKmer(kmerResult.getKmer());
+    // add read IDs
+    for (ft::ReadID resultID : kmerResult.getReadIDs()){
+        kmer->addReadID(resultID);
+    }
+    // add flags
+    for (auto flag : kmerResult.getKFlags())
+    {
+        kmer->addKFlag(flag.first);
+    }
+
+}
+
 void FTMap::processIndexResults(std::set<ft::KmerClass> indexResult, uint readLength)
 {
     for (ft::KmerClass kmerResult : indexResult){
-       kmerResult.convertPosToReadID(readLength);
+       kmerResult.convertPosToReadID(readLength, _ftProps.getNumOfReads(), _ftProps.getRevCompFlag());
     }
     // iterate over results from a single index
     for (ft::KmerClass kmerResult : indexResult){
-       // add positions and flags from each Kmer to the QKMAP
+       // add positions and flags from each Kmer to the KmerSet
+        addKmerResults(kmerResult);
     }
 }
 
