@@ -33,8 +33,6 @@ public:
     /// \param indexname
     ////////////////////////////////////////////////////////////////////////
     virtual void loadIndexFromFile(const std::string& indexname) = 0;
-    virtual csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> getFmIndex() =0;
-
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief parallelFmIndex

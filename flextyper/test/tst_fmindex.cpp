@@ -91,17 +91,23 @@ TEST_F(TestFMIndex, loadFMIndex)
 //======================================================================
 TEST_F(TestFMIndex, searchFMIndex)
 {
-    TEST_DESCRIPTION("SearchFMIndex");
+    TEST_DESCRIPTION("Search FMIndex");
 
     algo::FmIndex _fmindex;
     _fmindex.loadIndexFromFile("testOutput/Test.fm9");
 
-    std::string kmer = "CCCTGCATGCACTGGATGCACTCTATCCCATTCTGCAGCTTCCTCATTGATGGTCTCTTTTAACATTTGCATGGCTGCTTGATGTCCCCCCAC";
+    std::string kmer = "CCTT";
     KmerClass testKmer(kmer);
-    _fmindex.search(testKmer);
-
-
+    KmerClass resultsKmer = _fmindex.search(testKmer);
+    uint count = resultsKmer.getKPositions().size();
+    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
+    sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
+    auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
+    std::cout << "occs " << occs << std::endl;
+    EXPECT_EQ(count, occs);
     EXPECT_NO_FATAL_FAILURE();
     EXPECT_NO_THROW();
+
 }
+
 }

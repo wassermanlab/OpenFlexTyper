@@ -84,6 +84,8 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
     while (!kmerQueue.empty()) {
         if (j < ftProps.getMaxThreads()) {
             ft::KmerClass kmer = kmerQueue.front();
+            std::cout << "Kmer search launch ! " << kmer._kmer << " j " << j << " k " << k <<" i " << i << std::endl;
+
             resultsFutures.push_back(std::async(std::launch::async, &algo::FmIndex::search,
                                                 dynamic_cast<algo::FmIndex*>(_fmIndex),
                                                         kmer,                                                        
@@ -165,24 +167,28 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
     std::set<ft::KmerClass> kmerMap = ftMap.getKmerSet();
     size_t i = 0;
     std::cout << "working on : " << indexPath << std::endl;
-    _fmIndex->setKmerMapSize(kmerMap.size());
+    std::cout << "kmer Map Size " << kmerMap.size() << std::endl;
+    algo::FmIndex _fmIndex;
+    _fmIndex.setKmerMapSize(kmerMap.size());
 
     std::set<ft::KmerClass> indexResults;
 
+
     try {
-        _fmIndex->loadIndexFromFile(indexPath);
+        _fmIndex.loadIndexFromFile(indexPath);
     } catch (std::exception& e) {
         std::cout << "Error ! " << indexPath << " " << e.what() << std::endl;
     }
 
     for (ft::KmerClass kmer : kmerMap) {
-        //std::cout << "searching for kmer " << kmer._kmer << std::endl;
-        ft::KmerClass tmpResult = _fmIndex->search(kmer,
+        std::cout << "searching for kmer " << kmer._kmer << "  i  " << i << std::endl;
+        ft::KmerClass tmpResult = _fmIndex.search(kmer,
                                                    ftProps.getMaxOcc(),
                                                    i++,
                                                    ftProps.getOverCountedFlag());
-        if (kmer._positions.size() > 0 )
-        {std::cout << "kmer results " << kmer._positions.size() << std::endl;}
+
+        std::cout << "index search results " << tmpResult._positions.size() << std::endl;
+
         addResultsFutures(indexResults,tmpResult, offset);
     }
 

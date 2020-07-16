@@ -48,9 +48,12 @@ void KmerClass::addKFlag(const ft::FlagType& flag)
 }
 void KmerClass::addKPosition(const size_t& kPosition, const uint& offset)
 {
+    std::cout << "number of positions " << _positions.size() << std::endl;
     size_t kPos = kPosition + offset;
-    _positions.insert(kPos);
+    std::cout << "search position " << kPos << std::endl;
 
+    _positions.insert(kPos);
+    std::cout << "number of positions after insert " << _positions.size() << std::endl;
 }
 void KmerClass::addReadID(const ft::ReadID& readID)
 {    _readIDs.insert(readID);}

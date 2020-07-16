@@ -15,11 +15,6 @@ void FmIndex::setKmerMapSize(size_t kmerMapSize)
 {
     _kmerMapSize = kmerMapSize;
 }
-//======================================================================
-csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> FmIndex::getFmIndex()
-{
-    return _fmindex;
-}
 
 //======================================================================
 ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
@@ -33,7 +28,7 @@ ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
 
     ft::KmerClass resultsfutures(kmer);
 
-    auto start = high_resolution_clock::now();
+    //auto start = high_resolution_clock::now();
 
     size_t occs = count(_fmindex, kmer.begin(), kmer.end());
     std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
@@ -49,13 +44,12 @@ ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
     if (occs > 0  && occs <= maxOcc) {
         auto locations = sdsl::locate(_fmindex, kmer.begin(), kmer.begin() + kmer.length());
         for (auto e : locations) {
-            // std::cout << e << " --> " << (e / 59) + 1 << std::endl;
             resultsfutures.addKPosition(e);
         }
     }
 
-    auto stop = high_resolution_clock::now();
-    auto duration = duration_cast<microseconds>(stop - start);
+    //auto stop = high_resolution_clock::now();
+    //auto duration = duration_cast<microseconds>(stop - start);
 
     return resultsfutures;
 }
