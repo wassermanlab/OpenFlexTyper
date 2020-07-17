@@ -7,7 +7,6 @@ namespace ft {
 FTSearch::FTSearch()
     : _utils(&_ownedUtils)
     , _writerBridge(&_ownedWriterBridge)
-    //, _kmerGenerator(&_ownedKmerGenerator)
     , _finder(&_ownedFinder)
     , _resultProcessor(&_ownedResultProcessor)
     , _queryExtractor(&_ownedQueryExtractor)
@@ -72,7 +71,7 @@ void FTSearch::init(FTProp ftProps)
     _resultProcessor->processResults(ftMap);
 
 
-    _writerBridge->saveQueryOutput(ftMap);
+    _writerBridge->saveOutput(ftMap);
 }
 
 //======================================================================
@@ -86,12 +85,6 @@ void FTSearch::overrideWriterBridge(std::shared_ptr<IWriterBridge> writerBridge)
 {
     _writerBridge = writerBridge.get();
 }
-
-//======================================================================
-//void FTSearch::overrideKmerGenerator(std::shared_ptr<IKmerGenerator> kmerGenerator)
-//{
-//    _kmerGenerator = kmerGenerator.get();
-//}
 
 //======================================================================
 void FTSearch::overrideFinder(std::shared_ptr<IFinder> finder)

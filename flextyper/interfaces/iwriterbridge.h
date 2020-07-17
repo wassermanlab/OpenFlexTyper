@@ -14,10 +14,18 @@ class IWriterBridge {
 public:
     virtual ~IWriterBridge() {}
 
+    virtual void setOutputOptions(const ft::FTMap& ftMap) = 0;
+    virtual std::string createHeader() = 0;
+    virtual std::string formatOutputMap(std::map<std::string, std::string>& outputMap) = 0;
+    virtual std::string getFlagKmers(const ft::QueryClass& query, const ft::FlagType flag) = 0;
+    virtual void addQueryToOutput(std::map<std::string, std::string>& outputMap, const ft::QueryClass& query, const std::string prefix)  = 0;
+
+
+
     ////////////////////////////////////////////////////////////////////////
     /// \brief saveQueryOutput
     ////////////////////////////////////////////////////////////////////////
-    virtual void saveQueryOutput(ft::FTMap& ftMap) = 0;
+    virtual void saveOutput(const ft::FTMap& ftMap) = 0;
 };
 }
 

@@ -9,14 +9,112 @@ WriterBridge::WriterBridge()
     : _utils(&_ownedUtils)
 {
 }
+void WriterBridge::setOutputOptions(const ft::FTMap& ftMap)
+{
+    _refData = true;
+    if (!ftMap.getRefOnlyFlag()){ _altData = true;}
+    if (!ftMap.getCrossoverFlag()){_croData = true;}
+    if (!ftMap.getOverCountedFlag()){_OCK = true;}
+    if (!ftMap.getIgnoreNonUniqueKmersFlag()){_NUK = true;}
+    if (ftMap.getMatchesOnlyFlag()){_MatchesOnly = true;}
+}
+
+
+std::string WriterBridge::createHeader()
+{
+    std::string header;
+
+    if (_croData) {
+        header = '\t' + std::string("start_point_count") + '\t' + std::string("crossover_count") + '\t' + std::string("endpoint_count");
+        if (_NUK) {
+            header += '\t' + std::string("Start_Non_Unique_Kmers") + '\t' + std::string("Crossover_Non_Unique_Kmers") + '\t' + std::string("Endpoint_Non_Unique_Kmers");
+        }
+        if (_OCK) {
+            header += '\t' + std::string("Start_Over_Counted_Kmers") + '\t' + std::string("Crossover_Over_Counted_Kmers") + '\t' + std::string("Endpoint_Over_Counted_Kmers");
+        }
+
+    } else {
+        header = '\t' + std::string("Ref_count") + '\t' + std::string("Alt_count") ;
+
+        if (_NUK) {
+            header += '\t' + std::string("Ref_Non_Unique_Kmers") + '\t' + std::string("Alt_Non_Unique_Kmers");
+        }
+        if (_OCK) {
+            header += '\t' + std::string("Ref_Over_Counted_Kmers") + '\t' + std::string("Alt_Over_Counted_Kmers");
+        }
+    }
+
+    header += '\n';
+    std::cout << header << std::endl;
+    return header;
+
+}
+//======================================================================
+std::string WriterBridge::formatOutputMap(std::map<std::string, std::string>& outputMap)
+{
+    std::string outputLine;
+
+    if (_croData) {
+        outputLine = '\t' + outputMap["refCount"] + '\t' + outputMap["croCount"]  + '\t' + outputMap["altCount"] ;
+        if (_NUK) {
+            outputLine +='\t' + outputMap["refNUK"] + '\t' + outputMap["croNUK"]  + '\t' + outputMap["altNUK"] ;
+        }
+        if (_OCK) {
+            outputLine +='\t' + outputMap["refOCK"] + '\t' + outputMap["croOCK"]  + '\t' + outputMap["altOCK"] ;
+        }
+
+    } else {
+        outputLine = '\t' + outputMap["refCount"] + '\t' + outputMap["altCount"] ;
+        if (_NUK) {
+            outputLine +='\t' + outputMap["refNUK"] + '\t' + outputMap["altNUK"] ;
+        }
+        if (_OCK) {
+            outputLine +='\t' + outputMap["refOCK"] + '\t' + outputMap["altOCK"] ;
+        }
+
+    }
+    std::cout << " outputLine " << outputLine <<std::endl;
+    return outputLine;
+}
 
 //======================================================================
-void WriterBridge::saveQueryOutput(ft::FTMap& ftMap)
-
+std::string WriterBridge::getFlagKmers(const ft::QueryClass& query, const ft::FlagType flag)
 {
-    FTProp ftProps = ftMap.getFTProps();
-    const fs::path& inputQueryFile = ftProps.getPathToQueryFile();
-    const fs::path& outputQueryFile = ftProps.getOutputFile();
+    std::string queryFlagK = _utils->joinString(query.getFlagKmers(flag));
+    return queryFlagK;
+}
+
+//======================================================================
+void WriterBridge::addQueryToOutput(std::map<std::string, std::string>& outputMap, const ft::QueryClass& query, const std::string prefix)
+{
+    u_int count = query.getCount();
+    if (count == 0){outputMap[prefix+"Matches"] = false;}
+    else {outputMap[prefix+"Matches"] = true;}
+    outputMap[prefix+"counts"] = '\t' + std::to_string(count);
+
+    if (_OCK)
+    {
+        std::string refOCK = getFlagKmers(query, ft::FlagType::OCK);
+        outputMap[prefix+"OCK"] = refOCK;
+    }
+
+    if (_NUK)
+    {
+        std::string refNUK = getFlagKmers(query, ft::FlagType::NUK);
+        outputMap[prefix+"NUK"] = refNUK;
+    }
+
+}
+
+
+
+//======================================================================
+void WriterBridge::saveOutput(const ft::FTMap& ftMap)
+{
+
+    setOutputOptions(ftMap);
+    const fs::path& inputQueryFile = ftMap.getPathToQueryFile();
+    const fs::path& outputQueryFile = ftMap.getOutputFile();
 
     std::cout << "Input Query File " << inputQueryFile << std::endl;
     std::cout << "Output Query File " << outputQueryFile << std::endl;
@@ -40,107 +138,53 @@ void WriterBridge::saveQueryOutput(ft::FTMap& ftMap)
         if (line[line.length()-1] == '\n') {
             line.erase(line.length()-1);
         }
+
+        // header line <- might be issue if there is >1 header line
         if (line[0] == '#') {
-            std::string header;
-            if (ftProps.getCrossoverFlag()) {
-                header = '\t' + std::string("start_point_count") + '\t' + std::string("crossover_count") + '\t' + std::string("endpoint_count");
-                if (ftProps.getIgnoreNonUniqueKmersFlag()) {
-                    header += '\t' + std::string("Start_Non_Unique_Kmers") + '\t' + std::string("Crossover_Non_Unique_Kmers") + '\t' + std::string("Endpoint_Non_Unique_Kmers");
-                }
-                if (ftProps.getOverCountedFlag()) {
-                    header += '\t' + std::string("Start_Over_Counted_Kmers") + '\t' + std::string("Crossover_Over_Counted_Kmers") + '\t' + std::string("Endpoint_Over_Counted_Kmers");
-                }
-
-            } else {
-                header = '\t' + std::string("Ref_count") + '\t' + std::string("Alt_count") ;
-
-                if (ftProps.getIgnoreNonUniqueKmersFlag()) {
-                    header += '\t' + std::string("Ref_Non_Unique_Kmers") + '\t' + std::string("Alt_Non_Unique_Kmers");
-                }
-                if (ftProps.getOverCountedFlag()) {
-                    header += '\t' + std::string("Ref_Over_Counted_Kmers") + '\t' + std::string("Alt_Over_Counted_Kmers");
-                }
-            }
-
-            header += '\n';
-
-            std::cout << header << std::endl;
-
+            std::string header = createHeader();
             line.append(header);
             outputFileStream << line;
             continue;
         }
+
         std::vector<std::string> splitline = _utils->split(line, '\t');
         uint fileIndex = atoi(splitline[0].c_str());
         int queryIndex = _utils->fileIndexToQueryIndex(fileIndex);
 
+        std::map<std::string, std::string> outputMap;
 
-        u_int ref_count =0;
-        std::string ref_NUK;
-        std::string ref_OCK;
-        u_int alt_count =0;
-        std::string alt_NUK;
-        std::string alt_OCK;
-        u_int cro_count =0;
-        std::string cro_NUK;
-        std::string cro_OCK;
 
-        if (ftMap.checkForQIDT(std::make_pair(queryIndex, QueryType::REF))) {
-            QueryClass& refQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::REF));
-            ref_count = refQuery.getCount();
-            ref_NUK =  _utils->joinString(refQuery.getFlagKmers(FlagType::NUK));
-            ref_OCK =  _utils->joinString(refQuery.getFlagKmers(FlagType::OCK));
+        ft::QueryClass refQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::REF));
+        addQueryToOutput(outputMap, refQuery, "ref");
+
+        if (_altData){
+            ft::QueryClass altQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::ALT));
+            addQueryToOutput(outputMap, altQuery, "alt");
         }
 
-        if (ftMap.checkForQIDT(std::make_pair(queryIndex, QueryType::ALT))) {
-            QueryClass& altQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::ALT));
-            alt_count = altQuery.getCount();
-            alt_NUK =  _utils->joinString(altQuery.getFlagKmers(FlagType::NUK));
-            alt_OCK =  _utils->joinString(altQuery.getFlagKmers(FlagType::OCK));
+        if (_croData){
+            ft::QueryClass croQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::CRO));
+            addQueryToOutput(outputMap, croQuery, "cro");
         }
 
-        if (ftMap.checkForQIDT(std::make_pair(queryIndex, QueryType::CRO))) {
-            QueryClass& croQuery = ftMap.getQuery(std::make_pair(queryIndex, QueryType::CRO));
-            cro_count = croQuery.getCount();
-            cro_NUK =  _utils->joinString(croQuery.getFlagKmers(FlagType::NUK));
-            cro_OCK =  _utils->joinString(croQuery.getFlagKmers(FlagType::OCK));
+        if (_MatchesOnly)
+        {
+            // if no matches for any of the expected data sets then skip
+            bool skip = true;
+            if (_refData &&  outputMap["refMatches"] == "true"){skip = false;} //ref counts found, dont skip
+            if (_altData &&  outputMap["altMatches"] == "true"){skip = false;} //alt counts found, dont skip
+            if (_croData &&  outputMap["croMatches"] == "true"){skip = false;} //cro counts found, dont skip
+
+            if (skip){outputMap.clear(); continue;}
         }
 
-        std::string counts;
-        if (ftProps.getCrossoverFlag()) {
-            counts = '\t' + std::to_string(ref_count) + '\t' + std::to_string(cro_count) + '\t' + std::to_string(alt_count) ;
-            if (ftProps.getIgnoreNonUniqueKmersFlag()) {
-                counts += '\t' + ref_NUK + '\t' + cro_NUK + '\t' + alt_NUK ;
-            }
-            if (ftProps.getOverCountedFlag()) {
-               counts += '\t' + ref_OCK + '\t' + cro_OCK + '\t' + alt_OCK ;
-            }
+        std::string outputLine = formatOutputMap(outputMap);
 
-        } else {
-            counts = '\t' + std::to_string(ref_count) + '\t' + std::to_string(alt_count) ;
-            if (ftProps.getIgnoreNonUniqueKmersFlag()) {
-                counts += '\t' + ref_NUK + '\t' + alt_NUK ;
-            }
-            if (ftProps.getOverCountedFlag()) {
-               counts += '\t' + ref_OCK + '\t' + alt_OCK ;
-            }
+        outputMap.clear();
 
-        }
-
-        counts += '\n';
-        // returnMatchesOnly doesnt work as we are just appending the lines, not creating a new file
-
-
-        if (ftProps.getMatchesOnlyFlag()){
-            line.append(counts);
-            //std::cout << line; //<< std::endl;
-            outputFileStream << line;
-        }else{
-            line.append(counts);
-            // std::cout << line; //<< std::endl;
-            outputFileStream << line;
-        }
-
+        line.append(outputLine);
+        // std::cout << line; //<< std::endl;
+        outputFileStream << line;
 
     }
 }

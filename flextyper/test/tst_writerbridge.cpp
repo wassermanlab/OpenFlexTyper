@@ -8,14 +8,7 @@ namespace ft {
 class TestWriterBridge : public ::testing::Test {
 protected:
     virtual void SetUp() {
-        ofstream tmpFile ("temp.tsv");
 
-        if (tmpFile.is_open()) {
-            tmpFile << "# header\n";
-            tmpFile << "0\tTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\t"
-                       "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\t";
-            tmpFile.close();
-        }
     }
 
     virtual void TearDown() {

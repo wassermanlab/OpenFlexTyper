@@ -53,7 +53,6 @@ public:
     void checkOutputFile(FTProp ftProps);
     void overrideUtils(std::shared_ptr<IUtils> utils);
     void overrideWriterBridge(std::shared_ptr<IWriterBridge> writerBridge);
-    //void overrideKmerGenerator(std::shared_ptr<IKmerGenerator> kmerGenerator);
     void overrideFinder(std::shared_ptr<IFinder> finder);
     void overrideResultProcessor(std::shared_ptr<IResultProcessor> resultProcessor);
     void overrideQueryExtractor(std::shared_ptr<IQueryExtractor> queryExtractor);
@@ -82,12 +81,6 @@ private:
     IWriterBridge* _writerBridge;
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief _kmerGenerator
-    ////////////////////////////////////////////////////////////////////////
-    //KmerGenerator   _ownedKmerGenerator;
-    //IKmerGenerator* _kmerGenerator;
-
-    ////////////////////////////////////////////////////////////////////////
     /// \brief _finder
     ////////////////////////////////////////////////////////////////////////
     Finder   _ownedFinder;
@@ -104,7 +97,6 @@ private:
     ////////////////////////////////////////////////////////////////////////
     QueryExtractor   _ownedQueryExtractor;
     IQueryExtractor* _queryExtractor;
-
 
 
 };

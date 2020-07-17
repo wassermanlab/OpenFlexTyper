@@ -17,6 +17,7 @@ FTMap::FTMap(FTProp& ftProps)
 //======================================================
 //================== INIT ==============================
 //======================================================
+#define INITSTART {
 void FTMap::addInputQueries(const std::set<Query> &inputQueries){
     for (auto inputQuery : inputQueries) {
         std::string refString = std::get<1>(inputQuery);
@@ -67,30 +68,30 @@ void FTMap::genQKMap()
             kmerObj.insert(findKmer(kmer));
         }
         ft::QueryClass* queryPointer = findQuery(query.getQIdT());
-        addQKSet(queryPointer, kmerObj);
+        _qkMap.addQKSet(queryPointer, kmerObj);
         std::cout << "size of kmer map " << _kmerSet.size() << std::endl;
     }
 }
 
+#define INITEND }
 //======================================================
-//=============== GETTERS ==============================
+//=============== GETTERS & SETTERS ====================
 //======================================================
+#define GSSTART {
 const std::set<ft::KmerClass>& FTMap::getKmerSet(){return _kmerSet;}
 const std::set<ft::QueryClass>& FTMap::getQuerySet(){return _querySet;}
-const std::map<ft::QueryClass*, std::set<KmerClass*>>& FTMap::getQKMap(){return _qkMap;}
+const QKMap& FTMap::getQKMap(){return _qkMap;}
 const std::vector<std::set<ft::KmerClass>>& FTMap::getResults(){return _searchResults;}
 const FTProp& FTMap::getFTProps(){return _ftProps;}
 
-//======================================================
-//=============== SETTERS ==============================
-//======================================================
 void FTMap::setKmers(std::set<ft::KmerClass> kmerSet){if (_kmerSet.empty()){_kmerSet = kmerSet;}}
 void FTMap::setQueries(std::set<ft::QueryClass> querySet){if (_querySet.empty()){_querySet = querySet;}}
-
+#define GSEND }
 //======================================================
 //================= KMERS ==============================
 //======================================================
-bool FTMap::checkForKmer(const std::string &testKmer)
+#define KMERSTART {
+bool FTMap::checkForKmer(const std::string &testKmer) const
 {
     auto it = std::find_if(std::begin(_kmerSet), std::end(_kmerSet),
         [&] (const ft::KmerClass& k) {return k.hasKmer(testKmer);});
@@ -135,13 +136,12 @@ void FTMap::addKmer(const ft::KmerClass& kmer)
     }
 }
 
-
-
-
+#define KMERSEND }
 //======================================================
 //================= QUERIES ============================
 //======================================================
-bool FTMap::checkForQIDT(const ft::QIdT& testQIDTObject)
+#define QUERIESSTART {
+bool FTMap::checkForQIDT(const ft::QIdT& testQIDTObject) const
 {
     auto it = std::find_if(std::begin(_querySet ), std::end(_querySet ),
         [&] (ft::QueryClass k) {return k.isQIdTEqual(testQIDTObject);});
@@ -156,12 +156,13 @@ ft::QueryClass* FTMap::findQuery(const ft::QIdT& qIDT)
     return (ft::QueryClass *) &(*it);
 }
 //======================================================
-ft::QueryClass& FTMap::getQuery(const ft::QIdT& qIDT)
+ft::QueryClass& FTMap::getQuery(const ft::QIdT& qIDT) const
 {
     std::set<ft::QueryClass>::iterator it = std::find_if(std::begin(_querySet), std::end(_querySet),
       [&] (ft::QueryClass q) {return q.isQIdTEqual(qIDT);});
     return (ft::QueryClass &) (*it);
 }
+
 //======================================================
 void FTMap::addQuery(const ft::QueryClass& query)
 {
@@ -172,49 +173,12 @@ void FTMap::addQuery(const ft::QueryClass& query)
         std::cout << "Query not added, query already exists" << std::endl;
     }
 }
-
-//=======================================================
-//==================== QKMAP ============================
-//=======================================================
-std::set<ft::QueryClass*> FTMap::retrieveQueries(const ft::KmerClass& kmer)
-{
-    std::set<ft::QueryClass*> _matchingQueries;
-     for (auto qk : _qkMap){
-         auto it = std::find_if(std::begin(qk.second), std::end(qk.second),
-             [&] (const ft::KmerClass* k) {return k->isKmerEqual(kmer);});
-         if (it != qk.second.end()) {_matchingQueries.insert(qk.first);}
-     }
-     return _matchingQueries;
-}
-//=======================================================
-std::set<ft::KmerClass*> FTMap::retrieveKmers(ft::QueryClass* query){
-    return _qkMap[query];
-}
-//=======================================================
-bool FTMap::checkForMatch(ft::QueryClass *query, const ft::KmerClass& kmer){
-
-    auto it = std::find_if(std::begin(_qkMap[query]), std::end(_qkMap[query]),
-        [&] (const ft::KmerClass* k) {return k->isKmerEqual(kmer);});
-    if (it != _qkMap[query].end()) {return true;}
-    else {return false;}
-}
-//=======================================================
-void FTMap::addQKPair(ft::QueryClass* query, ft::KmerClass* kmer){
-    _qkMap[query].insert(kmer);
-
-}
-//=======================================================
-void FTMap::addQKSet(ft::QueryClass* query, std::set<ft::KmerClass*> kmers){
-
-    for (auto kmer: kmers){
-        _qkMap[query].insert(kmer);
-    }
-
-}
-
+#define QUERIESEND }
 //=======================================================
 //==================== INDEX ============================
 //=======================================================
+#define INDEXSTART {
+
 void FTMap::addIndexResults(std::set<ft::KmerClass> indexResults)
 {
     _searchResults.push_back(indexResults);
@@ -262,7 +226,56 @@ void FTMap::processIndexResults(std::set<ft::KmerClass> indexResult)
        addKmerResults(kmerResult);
     }
 }
+#define INDEXEND }
+//=======================================================
+//==================== Props ============================
+//=======================================================
+#define PROPSSTART {
+SearchType FTMap::getSearchType() const {return _ftProps.getSearchType();}
+std::string FTMap::getReadSetName()const {return _ftProps.getReadSetName();}
+uint FTMap::getKmerSize() const {return _ftProps.getKmerSize();}
+uint FTMap::getOverlap() const {return _ftProps.getOverlap();}
+uint FTMap::getStride() const {return _ftProps.getStride();}
+uint FTMap::getMaxKmers() const {return _ftProps.getMaxKmers();}
+uint FTMap::getReadLength() const {return _ftProps.getReadLength();}
+uint FTMap::getMaxOcc() const {return _ftProps.getMaxOcc();}
+uint FTMap::getMaxThreads() const {return _ftProps.getMaxThreads();}
+uint FTMap::getMaxKmersPerQuery() const {return _ftProps.getMaxKmersPerQuery();}
+uint FTMap::getMaxTotalKmers() const {return _ftProps.getMaxTotalKmers();}
+uint FTMap::getNumOfIndexes() const {return _ftProps.getNumOfIndexes();}
+uint FTMap::getNumOfReads() const {return _ftProps.getNumOfReads();}
+bool FTMap::getKmerCountsFlag() const {return _ftProps.getKmerCountsFlag();}
+bool FTMap::getMultithreadFlag() const {return _ftProps.getMultithreadFlag();}
+bool FTMap::getRefOnlyFlag() const {return _ftProps.getRefOnlyFlag();}
+bool FTMap::getMatchesOnlyFlag() const {return _ftProps.getMatchesOnlyFlag();}
+bool FTMap::getOverCountedFlag() const {return _ftProps.getOverCountedFlag();}
+bool FTMap::getIgnoreNonUniqueKmersFlag() const {return _ftProps.getOverCountedFlag();}
+bool FTMap::getCrossoverFlag() const{return _ftProps.getCrossoverFlag();}
+bool FTMap::getPrintSearchTimeFlag() const {return _ftProps.getPrintSearchTimeFlag();}
+bool FTMap::getPairedReadFlag() const {return _ftProps.getPairedReadFlag();}
+bool FTMap::getRevCompFlag() const {return _ftProps.getRevCompFlag();}
+bool FTMap::getMatchingReadsFlag() const {return _ftProps.getMatchingReadsFlag();}
+const fs::path& FTMap::getPathToQueryFile() const {return _ftProps.getPathToQueryFile();}
+const fs::path& FTMap::getIndexDir() const {return _ftProps.getPathToQueryFile();}
+const fs::path& FTMap::getOutputFolder() const {return _ftProps.getPathToQueryFile();}
+const fs::path& FTMap::getMatchingReadFQ() const {return _ftProps.getPathToQueryFile();}
+const fs::path& FTMap::getInputFastQ() const {return _ftProps.getPathToQueryFile();}
+const fs::path& FTMap::getOutputFile() const {return _ftProps.getPathToQueryFile();}
+const std::map<fs::path, uint>& FTMap::getIndexSet() const {return _ftProps.getIndexSet();}
+const fs::path& FTMap::getBuildDir() const {return _ftProps.getBuildDir();}
+const fs::path& FTMap::getR1() const {return _ftProps.getR1();}
+const fs::path& FTMap::getR2() const {return _ftProps.getR2();}
 
+#define PROPSEND }
+
+#define QKMAPSTART {
+std::set<ft::QueryClass*> FTMap::retrieveQueriesFromMap(const ft::KmerClass& kmer){return _qkMap.retrieveQueries(kmer);}
+std::set<ft::KmerClass*> FTMap::retrieveKmersFromMap(ft::QueryClass *query){ return _qkMap.retrieveKmers(query);}
+bool FTMap::checkMapForMatch(const ft::QueryClass& query, const ft::KmerClass &kmer) const {return _qkMap.checkForMatch(query, kmer);}
+void FTMap::addQKPairToMap(ft::QueryClass* query, ft::KmerClass* kmer){_qkMap.addQKPair(query, kmer);}
+void FTMap::addQKSetToMap(ft::QueryClass* query, std::set<ft::KmerClass*> kmers){_qkMap.addQKSet(query, kmers);}
+
+#define QKMAPEND }
 //======================================================
 FTMap::~FTMap(){}
 

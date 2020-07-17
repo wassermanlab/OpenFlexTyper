@@ -26,9 +26,6 @@ public:
     ////////////////////////////////////////////////////////////////////////
     int _qID;
     QueryType _qType;
-
-
-
     std::string _qstring;
     int _count;
     std::map<ft::FlagType, std::set<std::string>> _qFlags;

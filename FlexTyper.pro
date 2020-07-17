@@ -40,6 +40,7 @@ HEADERS    += flextyper/includes/utils.h              \
               flextyper/includes/ftPropsClass.h \
               flextyper/includes/ftSearch.h \
               flextyper/includes/kmerClass.h \
+    flextyper/includes/qkMapClass.h \
               flextyper/includes/queryClass.h \
               flextyper/includes/writerbridge.h       \
               flextyper/includes/kmergenerator.h      \
@@ -63,6 +64,7 @@ SOURCES     +=                \
               flextyper/src/ftPropsClass.cpp \
               flextyper/src/ftSearch.cpp \
               flextyper/src/kmerClass.cpp \
+    flextyper/src/qkMapClass.cpp \
               flextyper/src/queryClass.cpp \
                flextyper/src/utils.cpp                \
                fmindex/src/fmindex.cpp                \
