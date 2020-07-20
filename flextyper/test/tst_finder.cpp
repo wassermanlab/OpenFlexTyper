@@ -1,7 +1,5 @@
 #include <gtest/gtest.h>
 #include "finder.cpp"
-
-#include "ftMapClass.cpp"
 #include "mock/mock_fmindex.cpp"
 
 

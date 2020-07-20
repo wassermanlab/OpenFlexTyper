@@ -42,6 +42,7 @@ SOURCES += tst_queryextractor.cpp           \
     tst_ftMapClass.cpp \
     tst_indexPropsClass.cpp \
     tst_kmerClass.cpp \
+    tst_qkMapClass.cpp \
     tst_queryClass.cpp \
            tst_writerbridge.cpp             \
            tst_resultprocessor.cpp          \
