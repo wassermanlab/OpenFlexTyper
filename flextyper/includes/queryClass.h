@@ -39,7 +39,7 @@ public:
     int getCount() const;
     std::map<ft::FlagType, std::set<std::string>> getQFlags() const;
     ft::QIdT getQIdT() const;
-    std::set<std::string> getFlagKmers(const ft::FlagType flag) const;
+    const std::set<std::string> getFlagKmers(const ft::FlagType flag) const;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief setters

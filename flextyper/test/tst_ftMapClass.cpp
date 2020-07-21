@@ -70,8 +70,10 @@ TEST_F(TestFTMap, TestCheckQIDT)
     ft::QueryClass testQuery1Ref =  ft::QueryClass(1, ft::QueryType::REF);
     ft::QueryClass testQuery1Alt =  ft::QueryClass(1, ft::QueryType::ALT);
     ft::QueryClass testQuery2Ref =  ft::QueryClass(2, ft::QueryType::REF);
+    ftMap.addQuery(testQuery1Alt);
+    ftMap.addQuery(testQuery1Ref);
+    ftMap.addQuery(testQuery2Ref);
 
-    ftMap.setQueries({testQuery1Alt, testQuery1Ref, testQuery2Ref});
     ft::QIdT truetest = std::make_pair(1, ft::QueryType::REF);
     ft::QIdT truetest2 = std::make_pair(1, ft::QueryType::ALT);
     ft::QIdT truetest3 = std::make_pair(2, ft::QueryType::REF);
@@ -92,10 +94,9 @@ TEST_F(TestFTMap, TestFindKmer)
     ft::FTProp _ftProps;
     _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);
-    ftMap.setKmers({ft::KmerClass("AAAA"),ft::KmerClass("TTTT")});
+    ftMap.addKmer(ft::KmerClass("AAAA"));
 
     EXPECT_EQ("AAAA", ftMap.findKmer("AAAA")->getKmer());
-    EXPECT_EQ("TTTT", ftMap.findKmer("TTTT")->getKmer());
 }
 //======================================================================
 TEST_F(TestFTMap, TestGetQuery)
@@ -262,8 +263,9 @@ TEST_F(TestFTMap, TestProcessIndexResults)
     ft::FTProp _ftProps;
     _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);
-    ftMap._ftProps.setNumOfReads(20);
-    ftMap._ftProps.setRevCompFlag(false);
+    ftMap._ftProps._numOfReads = 20;
+    ftMap._ftProps._revComp = false;
+    ftMap._ftProps._readLength = 100;
     ft::KmerClass testKmer1("AAAA");
     testKmer1.addKPosition(123);
     ft::KmerClass testKmer2("CCCC");

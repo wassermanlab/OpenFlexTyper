@@ -180,6 +180,7 @@ void FTMap::addQuery(const ft::QueryClass& query)
     }
 }
 
+
 //======================================================
 void FTMap::createQuery(int queryID, ft::QueryType queryType)
 {

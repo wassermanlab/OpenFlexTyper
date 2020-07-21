@@ -35,11 +35,7 @@ TEST_F(TestKmerGenerator, init)
     bool _kmerCounts = false;
     uint _maxKmers  = 30;
 
-    KmerGenerator _kgen(_kmerSize, _refOnly, _searchType);
-    _kgen.setOverlap(_overlap);
-    _kgen.setStride(_stride);
-    _kgen.setKmerCountsFlag(_kmerCounts);
-    _kgen.setMaxKmers(_maxKmers);
+    KmerGenerator _kgen(_kmerSize, _refOnly, _searchType, _overlap, _stride, _kmerCounts, _maxKmers);
 
     EXPECT_EQ(_kmerSize, _kgen.getKmerSize());
     EXPECT_EQ(_refOnly, _kgen.getRefOnly());
@@ -62,16 +58,12 @@ TEST_F(TestKmerGenerator, genSlidingSearchStrings)
     uint _stride = 1;
     bool _kmerCounts = false;
     uint _maxKmers  = 30;
+    KmerGenerator _kgen(_kmerSize, _refOnly, _searchType, _overlap, _stride, _kmerCounts, _maxKmers);
 
-    KmerGenerator _kmerGenerator(_kmerSize, _refOnly, _searchType);
-    _kmerGenerator.setOverlap(_overlap);
-    _kmerGenerator.setStride(_stride);
-    _kmerGenerator.setKmerCountsFlag(_kmerCounts);
-    _kmerGenerator.setMaxKmers(_maxKmers);
     std::string queryString = "AAAAATCCCCC";
 
     std::set<std::string> expectedResult = {"AAAAA", "AAAAT", "AAATC", "AATCC", "ATCCC", "TCCCC", "CCCCC"};
-    std::set<std::string> results = _kmerGenerator.genSlidingSearchStrings(queryString);
+    std::set<std::string> results = _kgen.genSlidingSearchStrings(queryString);
 
     EXPECT_EQ(results, expectedResult);
 }
@@ -90,17 +82,13 @@ TEST_F(TestKmerGenerator, genCenteredSearchStrings)
     bool _kmerCounts = false;
     uint _maxKmers  = 30;
 
-    KmerGenerator _kmerGenerator(_kmerSize, _refOnly, _searchType);
-    _kmerGenerator.setOverlap(_overlap);
-    _kmerGenerator.setStride(_stride);
-    _kmerGenerator.setKmerCountsFlag(_kmerCounts);
-    _kmerGenerator.setMaxKmers(_maxKmers);
+    KmerGenerator _kgen(_kmerSize, _refOnly, _searchType, _overlap, _stride, _kmerCounts, _maxKmers);
 
     //input: const std::string& queryString, uint kmerSize, uint overlap, uint stride, bool kmerCounts, uint maxKmers
     std::string queryString = "AAAAATCCCCC";
 
     std::set<std::string> expectedResults = {"AAAAT", "AAATC", "AATCC", "ATCCC", "TCCCC"};
-    std::set<std::string> results = _kmerGenerator.genCenteredSearchStrings(queryString);
+    std::set<std::string> results = _kgen.genCenteredSearchStrings(queryString);
 
     EXPECT_EQ(results, expectedResults);
 }

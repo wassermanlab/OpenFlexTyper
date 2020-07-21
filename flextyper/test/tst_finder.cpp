@@ -42,9 +42,9 @@ TEST_F(TestFinder, searchSequentially)
 
     _ftProps.init(pathToQueryFile,kmerSize,readLength,indexPropsFile,outputFolder,refOnly,searchType);
     ft::FTMap _ftMap(_ftProps);
-    _ftProps.setMaxOcc(200);
-    _ftProps.setOverCountedFlag(false);
-    _ftProps.setNumOfIndexes(1);
+    _ftProps._maxOccurences = 200;
+    _ftProps._overcounted = false;
+    _ftProps._numOfIndexes = 1;
     ft::KmerClass kmer("CCTT");
     ft::KmerClass kmer2("AAT");
     ft::KmerClass kmer3("ATATT");
