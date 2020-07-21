@@ -165,11 +165,17 @@ TEST_F(TestIndexProp, createPPFSet)
     _indexProp->createPPFSet();
     std::string expectedPPFN1 = "outputfolder/output_0.fasta";
     std::string expectedPPFN2 = "outputfolder/output_1.fasta";
-    //std::set<fs::path> outputPPFNs = _indexProp->getPreProcessedFastas();
-    //std::string outputPPFN1 = *outputPPFNs.begin();
-    //std::string outputPPFN2 = *outputPPFNs.end();
-    //std::cout << outputPPFN1 << std::endl;
-   // std::cout << outputPPFN2 << std::endl;
+
+    std::map<fs::path, std::pair<u_int, u_int>> outputPPFNs = _indexProp->getPreProcessedFastas();
+
+    std::map<fs::path, std::pair<u_int, u_int>>::iterator it = outputPPFNs.begin();
+    fs::path outputPPFN1 = it->first;
+    ++it;
+    fs::path outputPPFN2 = it->first;
+
+    EXPECT_EQ(expectedPPFN1, outputPPFN1);
+    EXPECT_EQ(expectedPPFN2, outputPPFN2);
+
 }
 
 //======================================================================

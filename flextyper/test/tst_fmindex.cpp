@@ -19,6 +19,7 @@ public:
 
 #define TEST_DESCRIPTION(desc) RecordProperty("description", desc)
 
+
 //======================================================================
 TEST_F(TestFMIndex, createFMIndex)
 {
@@ -29,14 +30,14 @@ TEST_F(TestFMIndex, createFMIndex)
     _indexProp.setOutputFile("Test");
     _indexProp.setOutputFolder("testOutput");
     _indexProp.setReadFileType(algo::FileType::GZ);
-    fs::path pPF = "Test.fasta";
+    fs::path pPF = "testFiles/Test.fasta";
     fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
     EXPECT_NO_FATAL_FAILURE();
     EXPECT_NO_THROW();
 
 }
 //======================================================================
-TEST_F(TestFMIndex, DISABLED_createParalleFMIndex)
+TEST_F(TestFMIndex, createParalleFMIndex)
 {
     TEST_DESCRIPTION("This test checks that the function searchSequentially");
     algo::IndexProps _indexProp;
@@ -47,8 +48,8 @@ TEST_F(TestFMIndex, DISABLED_createParalleFMIndex)
     _indexProp.setNumOfIndexes(2);
     _indexProp.setReadFileType(algo::FileType::GZ);
     std::map<fs::path, std::pair<u_int, uint>> pPFS;
-    pPFS["Test.fasta"]= std::make_pair(0, 10);
-    pPFS["Test2.fasta"]= std::make_pair(11, 20);
+    pPFS["testFiles/Test.fasta"]= std::make_pair(0, 10);
+    pPFS["testFiles/Test2.fasta"]= std::make_pair(11, 20);
     _indexProp.setPreProcessedFastas(pPFS);
     _fmindex.parallelFmIndex(_indexProp);
 

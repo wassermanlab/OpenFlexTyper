@@ -61,7 +61,7 @@ void FTMap::genQKMap()
     for (ft::QueryClass query : _querySet ){
         std::set<ft::KmerClass*> kmerObj;
         std::set<std::string> kmers = (_kmerGenerator.genSearchKmers(query));
-        std::cout << "generated " << kmers.size() << " kmers " << std::endl;
+        //std::cout << "generated " << kmers.size() << " kmers " << std::endl;
         for (auto kmer : kmers)
         {
             //std::cout << "add kmer " << kmer << std::endl;
@@ -70,7 +70,7 @@ void FTMap::genQKMap()
         }
         ft::QueryClass* queryPointer = findQuery(query.getQIdT());
         _qkMap.addQKSet(queryPointer, kmerObj);
-        std::cout << "size of kmer map " << _kmerSet.size() << std::endl;
+        //std::cout << "size of kmer map " << _kmerSet.size() << std::endl;
     }
 }
 
@@ -176,7 +176,7 @@ void FTMap::addQuery(const ft::QueryClass& query)
     if (checkForQIDT(testQIDT)==false){
         _querySet.insert(query);
     } else {
-        std::cout << "Query not added, query already exists" << std::endl;
+        //std::cout << "Query not added, query already exists" << std::endl;
     }
 }
 
@@ -189,7 +189,7 @@ void FTMap::createQuery(int queryID, ft::QueryType queryType)
         ft::QueryClass newquery(queryID, queryType);
         _querySet.insert(newquery);
     } else {
-        std::cout << "Query not added, query already exists" << std::endl;
+        //std::cout << "Query not added, query already exists" << std::endl;
     }
 }
 #define QUERIESEND }
@@ -209,7 +209,7 @@ void FTMap::addKmerResults(const ft::KmerClass& kmerResult)
      KmerClass* kmer = findKmer(kmerResult.getKmer());
 
      if (kmer == NULL){
-         std::cout << "kmer not found, creating new kmer entry" << std::endl;
+         //std::cout << "kmer not found, creating new kmer entry" << std::endl;
          addKmer(kmerResult);
 
          if (!checkForKmer(kmerResult.getKmer())){

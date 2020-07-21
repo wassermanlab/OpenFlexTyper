@@ -117,9 +117,9 @@ void KmerClass::convertPosToReadID(uint readLength, uint numOfReads, bool revCom
 //===================== OVERLOAD ========================
 bool KmerClass::operator< (const ft::KmerClass &k) const {
     int output = _kmer.compare(k._kmer);
-    std::cout << "Lower kmer  " << _kmer << std::endl;
-    std::cout << "Higher kmer " << k._kmer << std::endl;
-    std::cout << "negative = true, positive = false  " << output << std::endl;
+    //std::cout << "Lower kmer  " << _kmer << std::endl;
+    //std::cout << "Higher kmer " << k._kmer << std::endl;
+    //std::cout << "negative = true, positive = false  " << output << std::endl;
     // lower.compare(higher) < 0 => true
     if (output <0 )
     {

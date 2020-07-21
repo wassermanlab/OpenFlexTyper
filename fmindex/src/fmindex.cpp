@@ -31,7 +31,7 @@ ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
     //auto start = high_resolution_clock::now();
 
     size_t occs = count(_fmindex, kmer.begin(), kmer.end());
-    std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
+    //std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
     _mtx.lock();
     std::cout << '\r' << float(((float)i * 100) / _kmerMapSize) << " % " << std::flush;
     _mtx.unlock();
@@ -59,19 +59,22 @@ ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
 fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta)
 {
     std::lock_guard<std::mutex> lock(_mtx);
-    std::cout << "create index for " << preprocessedFasta << std::endl;
+    //std::cout << "create index for " << preprocessedFasta << std::endl;
     fs::path outputIndex = _props.getOutputFolder();
 
     outputIndex /= preprocessedFasta.filename();
 
     outputIndex.replace_extension(".fm9");
 
-    std::cout << "creating output index " << outputIndex << std::endl;
+    //std::cout << "creating output index " << outputIndex << std::endl;
     if (!load_from_file(_fmindex, outputIndex)) {
 
         std::ifstream in(preprocessedFasta);
         if (!in) {
             std::cout << "ERROR: File " << preprocessedFasta << " does not exist. Exit." << std::endl;
+            if (!fs::exists(_props.getOutputFolder())){
+                std::cout << " output Folder doesnt exist " << _props.getOutputFolder() << std::endl;
+            }
             return "";
         }
         // mtx.lock();
@@ -99,15 +102,15 @@ void FmIndex::parallelFmIndex(algo::IndexProps& _props)
     //   fs::path createFMIndex(algo::IndexProps& _props, const fs::path& preprocessedFasta);
     std::cout << "Running FM Index" << std::endl;
     std::vector<std::future<fs::path>> operations;
-    std::cout << "number of files to index  " << _props.getNumOfIndexes() << std::endl;
+    //std::cout << "number of files to index  " << _props.getNumOfIndexes() << std::endl;
     std::map<fs::path, std::pair<u_int, u_int>> _ppfs = _props.getPreProcessedFastas();
-    std::cout << "number of files found  " << _ppfs.size() << std::endl;
+    //std::cout << "number of files found  " << _ppfs.size() << std::endl;
 
     if  (_props.getNumOfIndexes() != _ppfs.size()){
         std::cout << "Error: wrong number of files found "<< std::endl;
     }
     for (auto _ppf : _props.getPreProcessedFastas()){
-        std::cout << "indexing " << _ppf.first << std::endl;
+        //std::cout << "indexing " << _ppf.first << std::endl;
         operations.push_back(std::async(std::launch::async,
                                         &FmIndex::createFMIndex,
                                         this,

@@ -54,16 +54,16 @@ void FTProp::init(const fs::path &pathToQueryFile,
     _maxTotalKmers = totalKmers;
 
     fs::path queryOutputFile = _outputFolder;
-    std::cout << "Output query folder " <<   queryOutputFile << std::endl;
+    if (printInputs){ std::cout << "Output query folder " <<   queryOutputFile << std::endl;}
     fs::path queryFileName = _pathToQueryFile.filename();
     queryFileName.replace_extension();
-    std::cout << "query File Name " << queryFileName << std::endl;
-    std::cout << _readSetName << std::endl;
+    if (printInputs){std::cout << "query File Name " << queryFileName << std::endl;}
+    if (printInputs){std::cout << "read set name " << _readSetName << std::endl;}
     queryOutputFile /= queryFileName+= std::string("_") += _readSetName += "_Results.tsv";
-    std::cout << "Output query file " <<   queryOutputFile << std::endl;
+    if (printInputs){std::cout << "Output query file " <<   queryOutputFile << std::endl;}
     _outputFile = queryOutputFile;
 
-    std::cout << "Query search results will be save in " << _outputFile << std::endl;
+    if (printInputs){std::cout << "Query search results will be save in " << _outputFile << std::endl;}
 
 
 }
