@@ -77,7 +77,7 @@ public:
     /// \brief overload
     ////////////////////////////////////////////////////////////////////////
     bool operator< (const ft::KmerClass &k) const;
-
+    bool operator== (const ft::KmerClass &k) const;
 private:
 
 };

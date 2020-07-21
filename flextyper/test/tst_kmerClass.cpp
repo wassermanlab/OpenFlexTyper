@@ -187,19 +187,13 @@ TEST_F(TestKmerClass, convertPosToRead_Paired_ReverseComp)
 TEST_F(TestKmerClass, testOverloadOperator)
 {
     TEST_DESCRIPTION("check the overload operator ");
-    ft::KmerClass* testKmerClass = new ft::KmerClass("AATT");
     ft::KmerClass* higherKmerClass = new ft::KmerClass("ATTT");
     ft::KmerClass* equalKmerClass = new ft::KmerClass("AATT");
+    ft::KmerClass* testKmerClass = new ft::KmerClass("AATT");
     ft::KmerClass* lowerKmerClass = new ft::KmerClass("AAAA");
-
-    EXPECT_TRUE("AAAA" < "AATT");
-    EXPECT_FALSE("AAAA" < "AAAA");
-    EXPECT_TRUE("AATT" < "ATTT");
-
-    EXPECT_TRUE(testKmerClass < higherKmerClass);
     EXPECT_TRUE(lowerKmerClass < testKmerClass);
-    EXPECT_FALSE(equalKmerClass < testKmerClass);
-    EXPECT_FALSE(testKmerClass < equalKmerClass);
+    EXPECT_TRUE(testKmerClass < higherKmerClass);
+    EXPECT_TRUE(equalKmerClass == testKmerClass);
 
 }
 
