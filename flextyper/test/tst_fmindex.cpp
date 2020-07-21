@@ -36,7 +36,7 @@ TEST_F(TestFMIndex, createFMIndex)
 
 }
 //======================================================================
-TEST_F(TestFMIndex, createParalleFMIndex)
+TEST_F(TestFMIndex, DISABLED_createParalleFMIndex)
 {
     TEST_DESCRIPTION("This test checks that the function searchSequentially");
     algo::IndexProps _indexProp;

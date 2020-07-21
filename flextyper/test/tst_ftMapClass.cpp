@@ -136,6 +136,18 @@ TEST_F(TestFTMap, TestAddKmer)
     EXPECT_TRUE(ftMap.checkForKmer(testGoodKmer.getKmer()));
     EXPECT_FALSE(ftMap.checkForKmer(testBadKmer.getKmer()));
 }
+//======================================================================
+TEST_F(TestFTMap, TestCreateKmer)
+{
+    TEST_DESCRIPTION("Add Kmer");
+    //void addKmer(ft::KmerClass kmer);
+    ft::FTProp _ftProps;
+    _ftProps.initFromQSettings("Test_Settings.ini", false);
+    ft::FTMap ftMap(_ftProps);
+    ftMap.createKmer("AAAA");
+    EXPECT_TRUE(ftMap.checkForKmer("AAAA"));
+    EXPECT_FALSE(ftMap.checkForKmer("AAAC"));
+}
 
 //======================================================================
 TEST_F(TestFTMap, TestAddQuery)
@@ -152,63 +164,21 @@ TEST_F(TestFTMap, TestAddQuery)
     EXPECT_FALSE(ftMap.checkForQIDT(testBadQIdT));
 }
 
-//====================== QKMAP TESTS ===================================
 //======================================================================
-TEST_F(TestFTMap, TestRetrieveQueries)
+TEST_F(TestFTMap, TestCreateQuery)
 {
-    TEST_DESCRIPTION("Retrieve Queries");
-    //std::set<ft::QueryClass*> retrieveQueries(const ft::KmerClass& kmer);
+    TEST_DESCRIPTION("Create Query");
+    //void addQuery(ft::QueryClass query);
     ft::FTProp _ftProps;
     _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);
-
-
-
-
-}
-//======================================================================
-TEST_F(TestFTMap, TestRetrieveKmers)
-{
-    TEST_DESCRIPTION("Retrieve Kmers");
-    //std::set<ft::KmerClass*> retrieveKmers(ft::QueryClass *query);
-    ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini", false);
-    ft::FTMap ftMap(_ftProps);
-
+    ftMap.createQuery(1, ft::QueryType::REF);
+    ft::QIdT testGoodQIdT = std::make_pair(1, ft::QueryType::REF);
+    ft::QIdT testBadQIdT = std::make_pair(6, ft::QueryType::REF);
+    EXPECT_TRUE(ftMap.checkForQIDT(testGoodQIdT));
+    EXPECT_FALSE(ftMap.checkForQIDT(testBadQIdT));
 }
 
-//======================================================================
-TEST_F(TestFTMap, TestAddQIDtoKmer)
-{
-    TEST_DESCRIPTION("Add QID to Kmer");
-    //void addQIDtoKmer(std::string kmer, int queryID, ft::QueryType queryIDType);
-    ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini", false);
-
-
-}
-//======================================================================
-
-TEST_F(TestFTMap, TestAddQKPair)
-{
-    TEST_DESCRIPTION("Add QK Pair");
-    //void addQKPair(ft::QueryClass* query, ft::KmerClass* kmer);
-    ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini", false);
-    ft::FTMap ftMap(_ftProps);
-
-}
-//======================================================================
-TEST_F(TestFTMap, TestAddQKSet)
-{
-    TEST_DESCRIPTION("Add QK Set");
-    //void addQKSet(ft::QueryClass* query, std::set<ft::KmerClass*> kmers);
-    ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini", false);
-    ft::FTMap ftMap(_ftProps);
-    ft::QueryClass query1 (1, ft::QueryType::REF);
-
-}
 
 //====================== INDEX TESTS ===================================
 //======================================================================
