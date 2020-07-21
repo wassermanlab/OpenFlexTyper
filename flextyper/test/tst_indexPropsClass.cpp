@@ -153,7 +153,7 @@ TEST_F(TestIndexProp, createBash_withMultipleIndexes)
 }
 
 //======================================================================
-TEST_F(TestIndexProp, DISABLED_createPPFSet)
+TEST_F(TestIndexProp, createPPFSet)
 {
     algo::IndexProps* _indexProp = new algo::IndexProps();
     _indexProp->setR1("test.fq.gz");
