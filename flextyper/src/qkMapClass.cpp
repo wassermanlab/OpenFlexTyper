@@ -84,16 +84,15 @@ bool QKMap::checkForMatch(const ft::QueryClass& query, const ft::KmerClass& kmer
 
 //=======================================================
 void QKMap::addQKPair(ft::QueryClass* query, ft::KmerClass* kmer){
-    _map[query].insert(kmer);
-
+    if (! checkForMatch(*query, *kmer)){
+        _map[query].insert(kmer);
+    }
 }
 //=======================================================
 void QKMap::addQKSet(ft::QueryClass* query, std::set<ft::KmerClass*> kmers){
-
     for (auto kmer: kmers){
-        _map[query].insert(kmer);
-    }
-
+        addQKPair(query, kmer);
+        }
 }
 
 //======================================================
