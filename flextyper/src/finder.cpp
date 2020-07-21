@@ -60,7 +60,7 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
     FTProp ftProps = ftMap.getFTProps();
     std::cout << "Parallel search of single index" << std::endl;
 
-    std::set<ft::KmerClass> kmerMap = ftMap.getKmerSet();
+    std::set<ft::KmerClass> kmerMap = ftMap._kmerSet;
 
     size_t i = 1;
     std::cout << "working on : " << indexPath << std::endl;
@@ -149,7 +149,7 @@ void Finder::multipleIndexesParallelSearch(FTMap &ftMap)
      * We will then search inside the indexes one by one.
      * The search of kmers is done in parallel.
      */
-    std::set<ft::KmerClass> kmerMap = ftMap.getKmerSet();
+    std::set<ft::KmerClass> kmerMap = ftMap._kmerSet;
     std::map<fs::path, uint> indexes = ftProps.getIndexSet();
     long long curr = 0;
 
@@ -171,7 +171,7 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
     // std::thread::id this_id = std::this_thread::get_id();
     FTProp ftProps = ftMap.getFTProps();
 
-    std::set<ft::KmerClass> kmerMap = ftMap.getKmerSet();
+    std::set<ft::KmerClass> kmerMap = ftMap._kmerSet;
     size_t i = 0;
     std::cout << "working on : " << indexPath << std::endl;
     std::cout << "kmer Map Size " << kmerMap.size() << std::endl;

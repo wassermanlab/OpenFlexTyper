@@ -29,16 +29,6 @@ uint KmerGenerator::getStride() const {return _stride;}
 bool KmerGenerator::getKmerCountsFlag() const {return _kmerCounts;}
 uint KmerGenerator::getMaxKmers() const {return _maxKmers;}
 
-//==================== PARAMETER SETTERS ===================
-void KmerGenerator::setKmerSize(uint kmerSize){_kmerSize = kmerSize;}
-void KmerGenerator::setRefOnly(bool refOnly){_refOnly = refOnly;}
-void KmerGenerator::setSearchType(SearchType searchType){_searchType = searchType;}
-void KmerGenerator::setOverlap(uint overlap){_overlap = overlap;}
-void KmerGenerator::setStride(uint stride){_stride = stride;}
-void KmerGenerator::setKmerCountsFlag(bool kmerCounts){_kmerCounts = kmerCounts;}
-void KmerGenerator::setMaxKmers(uint maxKmers){_maxKmers = maxKmers;}
-
-
 //======================================================================
 std::set<std::string> KmerGenerator::genSlidingSearchStrings(const std::string& queryString)
 {

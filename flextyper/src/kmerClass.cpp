@@ -16,11 +16,11 @@ KmerClass::KmerClass(std::string kmer)
 }
 
 //=================== GETTERS =========================
-std::string KmerClass::getKmer() const{return this->_kmer;}
-std::map<ft::FlagType, bool> KmerClass::getKFlags() const {return this->_kFlags;}
-std::set<size_t> KmerClass::getKPositions() const {return this->_positions;}
-uint KmerClass::getKmerMapSize() const {return this->_kmer.size();}
-std::set<ft::ReadID> KmerClass::getReadIDs() const {return this->_readIDs;}
+std::string KmerClass::getKmer() const{return _kmer;}
+std::map<ft::FlagType, bool> KmerClass::getKFlags() const {return _kFlags;}
+std::set<size_t> KmerClass::getKPositions() const {return _positions;}
+uint KmerClass::getKmerMapSize() const {return _kmer.size();}
+std::set<ft::ReadID> KmerClass::getReadIDs() const {return _readIDs;}
 
 //================== SETTERS ===========================
 void KmerClass::setKFlags( std::set<ft::FlagType> flags)

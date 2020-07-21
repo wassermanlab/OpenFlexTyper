@@ -12,11 +12,12 @@ WriterBridge::WriterBridge()
 void WriterBridge::setOutputOptions(const ft::FTMap& ftMap)
 {
     _refData = true;
-    if (!ftMap.getRefOnlyFlag()){ _altData = true;}
-    if (!ftMap.getCrossoverFlag()){_croData = true;}
-    if (!ftMap.getOverCountedFlag()){_OCK = true;}
-    if (!ftMap.getIgnoreNonUniqueKmersFlag()){_NUK = true;}
-    if (ftMap.getMatchesOnlyFlag()){_MatchesOnly = true;}
+
+    if (!ftMap._ftProps.getRefOnlyFlag()){ _altData = true;}
+    if (!ftMap._ftProps.getCrossoverFlag()){_croData = true;}
+    if (!ftMap._ftProps.getOverCountedFlag()){_OCK = true;}
+    if (!ftMap._ftProps.getIgnoreNonUniqueKmersFlag()){_NUK = true;}
+    if (ftMap._ftProps.getMatchesOnlyFlag()){_MatchesOnly = true;}
 }
 
 
@@ -113,8 +114,8 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
 {
 
     setOutputOptions(ftMap);
-    const fs::path& inputQueryFile = ftMap.getPathToQueryFile();
-    const fs::path& outputQueryFile = ftMap.getOutputFile();
+    const fs::path& inputQueryFile = ftMap._ftProps.getPathToQueryFile();
+    const fs::path& outputQueryFile = ftMap._ftProps.getOutputFile();
 
     std::cout << "Input Query File " << inputQueryFile << std::endl;
     std::cout << "Output Query File " << outputQueryFile << std::endl;

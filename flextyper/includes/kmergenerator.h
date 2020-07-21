@@ -66,17 +66,6 @@ public:
     bool getKmerCountsFlag() const;
     uint getMaxKmers() const;
 
-    /// Setters ///
-    void setKmerSize(uint kmerSize);
-    void setRefOnly(bool refOnly);
-    void setSearchType(SearchType searchType);
-    void setOverlap(uint overlap);
-    void setStride(uint stride);
-    void setKmerCountsFlag(bool kmerCounts);
-    void setMaxKmers(uint maxKmers);
-
-
-
 private:
     ////////////////////////////////////////////////////////////////////////
     /// \brief _counter

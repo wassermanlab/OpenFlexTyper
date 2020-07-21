@@ -32,36 +32,36 @@ void FTProp::init(const fs::path &pathToQueryFile,
                   uint totalKmers,
                   bool printInputs)
 {
-    setPathToQueryFile(pathToQueryFile);
-    setKmerSize(kmerSize);
-    setReadLength(readLength);
+    _pathToQueryFile = pathToQueryFile;
+    _kmerSize = kmerSize;
+    _readLength = readLength;
     loadIndexProps(indexPropsFile, printInputs);
-    setOutputFolder(outputFolder);
-    setRefOnlyFlag(refOnly);
-    setSearchType(searchType);
-    setMultithreadFlag(multithread);
-    setOverlap(overlap);
-    setMatchesOnlyFlag(returnMatchesOnly);
-    setKmerCountsFlag(kmerCounts);
-    setStride(stride);
-    setMaxOcc(maxOccurences);
-    setMaxThreads(maxThreads);
-    setOverCountedFlag(flagOverCountedKmers);
-    setIgnoreNonUniqueKmersFlag(ignoreNonUniqueKmers);
-    setCrossoverFlag(crossover);
-    setPrintSearchTimeFlag(printSearchTime);
-    setMaxKmers(maxKmers);
-    setMaxTotalKmers(totalKmers);
+    _outputFolder = outputFolder;
+    _refOnly = refOnly;
+    _searchType = searchType;
+    _multithread = multithread;
+    _overlap = overlap;
+    _matchesOnly = returnMatchesOnly;
+    _kmerCounts = kmerCounts;
+    _stride = stride;
+    _maxOccurences = maxOccurences;
+    _maxThreads = maxThreads;
+    _overcounted = flagOverCountedKmers;
+    _ignoreNonUniqueKmers = ignoreNonUniqueKmers;
+    _crossover = crossover;
+    _printSearchTime = printSearchTime;
+    _maxKmers = maxKmers;
+    _maxTotalKmers = totalKmers;
 
-    fs::path queryOutputFile = getOutputFolder();
+    fs::path queryOutputFile = _outputFolder;
     std::cout << "Output query folder " <<   queryOutputFile << std::endl;
-    fs::path queryFileName = getPathToQueryFile().filename();
+    fs::path queryFileName = _pathToQueryFile.filename();
     queryFileName.replace_extension();
     std::cout << "query File Name " << queryFileName << std::endl;
-    std::cout << getReadSetName() << std::endl;
-    queryOutputFile /= queryFileName+= std::string("_") += getReadSetName() += "_Results.tsv";
+    std::cout << _readSetName << std::endl;
+    queryOutputFile /= queryFileName+= std::string("_") += _readSetName += "_Results.tsv";
     std::cout << "Output query file " <<   queryOutputFile << std::endl;
-    setOutputFile(queryOutputFile);
+    _outputFile = queryOutputFile;
 
     std::cout << "Query search results will be save in " << _outputFile << std::endl;
 
@@ -131,22 +131,22 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
 void FTProp::loadIndexProps(const fs::path &_indexPropsFile, bool printInputs){
     QSettings isettings(_indexPropsFile.string().c_str(), QSettings::IniFormat);
 
-    setPairedReadsFlag(isettings.value("pairedReads").toBool());
-    setRevCompFlag(isettings.value("revComp").toBool());
-    setBuildDir(isettings.value("buildDirectory").toString().toStdString());
-    setIndexDir(isettings.value("indexDirectory").toString().toStdString());
-    setReadSetName(isettings.value("readSetName").toString().toStdString());
+    _pairedReads = isettings.value("pairedReads").toBool();
+    _revComp = isettings.value("revComp").toBool();
+    _buildDir = isettings.value("buildDirectory").toString().toStdString();
+    _indexDir = isettings.value("indexDirectory").toString().toStdString();
+    _readSetName = isettings.value("readSetName").toString().toStdString();
 
     if (_pairedReads){
-       setInputFastQ(isettings.value("R1").toString().toStdString());
-       setR1(isettings.value("R1").toString().toStdString());
-       setR2(isettings.value("R2").toString().toStdString());
+       _inputFastQ = isettings.value("R1").toString().toStdString();
+       _R1 = isettings.value("R1").toString().toStdString();
+       _R2 = isettings.value("R2").toString().toStdString();
     } else {
-       setInputFastQ(isettings.value("readFQ").toString().toStdString());
+       _inputFastQ = isettings.value("readFQ").toString().toStdString();
     }
 
-    setNumOfReads(isettings.value("numOfReads").toUInt());
-    setNumOfIndexes(isettings.value("numOfIndexes").toUInt());
+    _numOfReads = isettings.value("numOfReads").toUInt();
+    _numOfIndexes = isettings.value("numOfIndexes").toUInt();
 
     std::map<fs::path, uint> indexSet;
 
@@ -158,7 +158,8 @@ void FTProp::loadIndexProps(const fs::path &_indexPropsFile, bool printInputs){
         indexSet[fileName] = offset;
     }
     isettings.endArray();
-    setIndexSet(indexSet);
+    _indexSet = indexSet;
+
 
     if (printInputs){
     std::cout << "Properties loaded from Index File     " <<  std::endl;
@@ -196,21 +197,6 @@ uint FTProp::getMaxTotalKmers() const {return _maxTotalKmers;}
 uint FTProp::getNumOfIndexes() const {return _numOfIndexes;}
 uint FTProp::getNumOfReads() const {return _numOfReads;}
 
-//==================== PARAMETER SETTERS ===================
-void FTProp::setSearchType(ft::SearchType searchType) {_searchType = searchType;}
-void FTProp::setReadSetName(std::string readSetName){_readSetName = readSetName;}
-void FTProp::setKmerSize(uint kmerSize) {_kmerSize = kmerSize;}
-void FTProp::setOverlap(uint overlap) {_overlap = overlap;}
-void FTProp::setStride(uint stride) {_stride = stride;}
-void FTProp::setMaxKmers(uint maxKmers) {_maxKmers = maxKmers;}
-void FTProp::setReadLength(uint readLength) {_readLength = readLength;}
-void FTProp::setMaxOcc(uint maxOcc) {_maxOccurences = maxOcc;}
-void FTProp::setMaxThreads(uint maxThreads) {_maxThreads = maxThreads;}
-void FTProp::setMaxKmersPerQuery(uint maxKmersPerQ) {_maxKmersPerQuery = maxKmersPerQ;}
-void FTProp::setMaxTotalKmers(uint maxTotalKmers) {_maxTotalKmers = maxTotalKmers;}
-void FTProp::setNumOfIndexes(uint numOfIndexes) {_numOfIndexes = numOfIndexes;}
-void FTProp::setNumOfReads(uint numOfReads) {_numOfReads = numOfReads;}
-
 //====================== FLAG GETTERS ======================
 bool FTProp::getKmerCountsFlag() const {return _kmerCounts;}
 bool FTProp::getMultithreadFlag() const {return _multithread;}
@@ -223,29 +209,6 @@ bool FTProp::getPrintSearchTimeFlag() const {return _matchesOnly;}
 bool FTProp::getPairedReadFlag() const {return _pairedReads;}
 bool FTProp::getRevCompFlag() const {return _revComp;}
 bool FTProp::getMatchingReadsFlag() const{return _matchingReads;}
-
-//====================== FLAG SETTERS ======================
-void FTProp::setKmerCountsFlag(bool kmerCounts){ _kmerCounts = kmerCounts;}
-void FTProp::setMultithreadFlag(bool multithread){_multithread = multithread;}
-void FTProp::setRefOnlyFlag(bool refOnly){ _refOnly = refOnly;}
-void FTProp::setMatchesOnlyFlag(bool matchesOnly){ _matchesOnly = matchesOnly;}
-void FTProp::setOverCountedFlag(bool overcounted){ _overcounted = overcounted;}
-void FTProp::setIgnoreNonUniqueKmersFlag(bool ignoreNonUnique){ _ignoreNonUniqueKmers = ignoreNonUnique;}
-void FTProp::setCrossoverFlag(bool crossover){ _crossover = crossover;}
-void FTProp::setPrintSearchTimeFlag(bool printSearchTime){ _printSearchTime = printSearchTime;}
-void FTProp::setPairedReadsFlag(bool pairedReads) {_pairedReads = pairedReads;}
-void FTProp::setRevCompFlag(bool revComp){ _revComp = revComp;}
-void FTProp::setMatchingReadsFlag(bool matchingReads){_matchingReads = matchingReads;}
-//====================== FILE SETTERS ======================
-void FTProp::setPathToQueryFile(const fs::path& pathToQueryFile){_pathToQueryFile = pathToQueryFile; }
-void FTProp::setIndexDir(const fs::path& indexDirectory){ _indexDir = indexDirectory;}
-void FTProp::setOutputFolder(const fs::path& outputFolder){ _outputFolder = outputFolder;}
-void FTProp::setOutputFile(const fs::path& outputFile){ _outputFile = outputFile;}
-void FTProp::setInputFastQ(const fs::path& inputFastQ){_inputFastQ = inputFastQ;}
-void FTProp::setIndexSet(std::map<fs::path, uint>& indexes){_indexSet = indexes;}
-void FTProp::setBuildDir(const fs::path& buildDirectory){_buildDir = buildDirectory;}
-void FTProp::setR1(const fs::path& _read1){ _R1 = _read1;}
-void FTProp::setR2(const fs::path& _read2){ _R2 = _read2;}
 
 //====================== FILE GETTERS ======================
 const fs::path& FTProp::getPathToQueryFile() const {return _pathToQueryFile;}
