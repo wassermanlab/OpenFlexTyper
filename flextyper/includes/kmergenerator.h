@@ -5,6 +5,8 @@
 #include <string>
 #include <map>
 #include "ikmergenerator.h"
+#include "queryClass.h"
+#include "ftPropsClass.h"
 
 namespace ft {
 
@@ -14,7 +16,14 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief KmerGenerator
     ////////////////////////////////////////////////////////////////////////
-    KmerGenerator(const KmerProperties& _kProps);
+    KmerGenerator(const uint& _kmerSize ,
+                    const bool& _refOnly ,
+                    const SearchType& _searchType ,
+                    const uint& _overlap = 0,
+                    const uint& _stride = 1,
+                    const bool& _kmerCounts = false,
+                    const uint& _maxKmers = 1000000000);
+
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief ~KmerGenerator
@@ -48,16 +57,29 @@ public:
     ////////////////////////////////////////////////////////////////////////
     virtual std::set<std::string> genSearchKmers(const ft::QueryClass& queryObj);
 
+    /// Getters ///
+    uint getKmerSize() const;
+    bool getRefOnly() const;
+    SearchType getSearchType() const;
+    uint getOverlap() const;
+    uint getStride() const;
+    bool getKmerCountsFlag() const;
+    uint getMaxKmers() const;
+
 private:
     ////////////////////////////////////////////////////////////////////////
     /// \brief _counter
     ////////////////////////////////////////////////////////////////////////
     std::map<std::string, uint> _counter;
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief _kProps
-    ////////////////////////////////////////////////////////////////////////
-    const KmerProperties& _kProps;
+    uint _kmerSize;
+    bool _refOnly;
+    SearchType _searchType;
+    uint _overlap;
+    uint _stride;
+    bool _kmerCounts;
+    uint _maxKmers;
+
 };
 }
 

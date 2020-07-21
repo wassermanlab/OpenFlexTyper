@@ -32,9 +32,9 @@ TEST_F(TestQueryClass, OverloadOperators)
 {
     TEST_DESCRIPTION("Test the overload operators ");
 
-    ft::QueryClass* testQuery1Ref = new ft::QueryClass(1, ft::QueryType::REF);
-    ft::QueryClass* testQuery1Alt = new ft::QueryClass(1, ft::QueryType::ALT);
-    ft::QueryClass* testQuery2Ref = new ft::QueryClass(2, ft::QueryType::REF);
+    ft::QueryClass testQuery1Ref = ft::QueryClass(1, ft::QueryType::REF);
+    ft::QueryClass testQuery1Alt = ft::QueryClass(1, ft::QueryType::ALT);
+    ft::QueryClass testQuery2Ref = ft::QueryClass(2, ft::QueryType::REF);
 
     EXPECT_TRUE(testQuery1Alt < testQuery2Ref);
     EXPECT_TRUE(testQuery1Ref < testQuery1Alt);

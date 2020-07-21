@@ -15,13 +15,26 @@ public:
     /// \brief WriterBridge constructor
     ////////////////////////////////////////////////////////////////////////
     WriterBridge();
+    bool _refData;
+    bool _altData;
+    bool _croData;
+    bool _OCK;
+    bool _NUK;
+    bool _MatchesOnly;
+
+    void setOutputOptions(const ft::FTMap& ftMap);
+    std::string createHeader();
+    std::string formatOutputMap(std::map<std::string, std::string>& outputMap);
+    std::string getFlagKmers(const ft::QueryClass& query, const ft::FlagType flag);
+    void addQueryToOutput(std::map<std::string, std::string>& outputMap, const ft::QueryClass& query, const std::string prefix);
+
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief saveQueryOutput
     /// \param allCounts
     /// \param returnMatchesOnly
     ////////////////////////////////////////////////////////////////////////
-    void saveQueryOutput(ft::FTMap& ftMap);
+    void saveOutput(const ft::FTMap& ftMap);
 
     ////////////////////////////////////////////////////////////////////////
     /// `brief destructor

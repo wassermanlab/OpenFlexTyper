@@ -19,6 +19,7 @@ const   std::string     CENTERED = "CENTERED";  // search type centered approach
 const   std::string     SLIDING  = "SLIDING";   // search type sliding approach
 
 typedef std::pair<int, QueryType>  QIdT; // int is the query ID
+typedef std::pair<int, int> ReadID; // pair (id, pair 1 or pair 2)
 typedef std::tuple<uint, std::string, std::string, std::string>  Query;
 
 enum FlagType { ABK = 1, OCK, NUK}; // abundant, overcounted, non-unique
@@ -114,11 +115,9 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief Parameter getters and setters
     ////////////////////////////////////////////////////////////////////////
-    SearchType getSearchType();
-    void setSearchType(ft::SearchType searchType);
+    SearchType getSearchType() const;
 
-    std::string getReadSetName();
-    void setReadSetName(std::string readSetName);
+    std::string getReadSetName()const ;
 
     uint getKmerSize() const;
     uint getOverlap() const;
@@ -132,20 +131,8 @@ public:
     uint getNumOfIndexes() const;
     uint getNumOfReads() const;
 
-    void setKmerSize(uint kmerSize);
-    void setOverlap(uint overlap);
-    void setStride(uint stride);
-    void setMaxKmers(uint maxKmers);
-    void setReadLength(uint readlength);
-    void setMaxOcc(uint maxOcc);
-    void setMaxThreads(uint maxThreads);
-    void setMaxKmersPerQuery(uint maxKmersPerQ);
-    void setMaxTotalKmers(uint maxTotalKmers);
-    void setNumOfIndexes(uint numOfIndexes);
-    void setNumOfReads(uint numOfReads);
-
     ////////////////////////////////////////////////////////////////////////
-    /// \brief Flag getters and setters
+    /// \brief Flag getters
     ////////////////////////////////////////////////////////////////////////
     bool getKmerCountsFlag() const;
     bool getMultithreadFlag() const;
@@ -159,30 +146,10 @@ public:
     bool getRevCompFlag() const;
     bool getMatchingReadsFlag() const;
 
-    void setKmerCountsFlag(bool kmerCounts);
-    void setMultithreadFlag(bool multithread);
-    void setRefOnlyFlag(bool refOnly);
-    void setMatchesOnlyFlag(bool matchesOnly);
-    void setOverCountedFlag(bool overcounted);
-    void setIgnoreNonUniqueKmersFlag(bool ignoreNonUnique);
-    void setCrossoverFlag(bool crossover);
-    void setPrintSearchTimeFlag(bool printSearchTime);
-    void setPairedReadsFlag(bool pairedReads);
-    void setRevCompFlag(bool revComp);
-    void setMatchingReadsFlag(bool matchingReads);
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief File getters and setters
+    /// \brief File getters
     ////////////////////////////////////////////////////////////////////////
-    void setPathToQueryFile(const fs::path& pathToQueryFile);
-    void setIndexDir(const fs::path& indexDir);
-    void setOutputFolder(const fs::path& outputFolder);
-    void setOutputFile(const fs::path& outputFile);
-    void setInputFastQ(const fs::path& inputFastQ);
-    void setIndexSet(std::map<fs::path, uint>& indexes);
-    void setBuildDir(const fs::path& buildDirectory);
-    void setR1(const fs::path& _R1);
-    void setR2(const fs::path& _R2);
 
     const fs::path& getPathToQueryFile() const;
     const fs::path& getIndexDir() const;

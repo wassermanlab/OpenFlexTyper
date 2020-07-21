@@ -9,13 +9,22 @@
 #include <set>
 #include <string>
 #include <map>
-#include "ftMapClass.h"
+#include "ftPropsClass.h"
+#include "queryClass.h"
 
 namespace ft {
 
 class IKmerGenerator {
 public:
     virtual ~IKmerGenerator() {}
+
+    virtual void init(const uint& _kmerSize ,
+                      const bool& _refOnly ,
+                      const SearchType& _searchType ,
+                      const uint& _overlap ,
+                      const uint& _stride,
+                      const bool& _kmerCounts,
+                      const uint& _maxKmers) =0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief genSlidingSearchStrings

@@ -7,9 +7,10 @@
 #include <experimental/filesystem>
 #include "ftMapClass.h"
 #include "indexPropsClass.h"
+#include <sdsl/suffix_arrays.hpp>
 
 namespace fs = std::experimental::filesystem;
-
+using namespace sdsl;
 namespace algo {
 
 typedef unsigned int Position;
