@@ -18,10 +18,8 @@ std::string QueryClass::getQueryString() const {return _qstring;}
 int QueryClass::getCount() const {return _count;}
 std::map<ft::FlagType, std::set<std::string>> QueryClass::getQFlags()const {return _qFlags;}
 ft::QIdT QueryClass::getQIdT()const {return std::make_pair(_qID, _qType);}
-std::set<std::string> QueryClass::getFlagKmers(const ft::FlagType flag) const {
-    std::set<std::string> output = _qFlags[flag]; // No viable overloaded operator
-    return output;
-}
+const std::set<std::string> QueryClass::getFlagKmers(const ft::FlagType flag) const {
+return _qFlags.find(flag)->second;}
 
 //================== SETTERS ===========================
 void QueryClass::setqID(int qID){
