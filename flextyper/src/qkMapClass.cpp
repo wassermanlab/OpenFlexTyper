@@ -62,7 +62,7 @@ bool QKMap::checkForMatch(const ft::QueryClass& query, const ft::KmerClass& kmer
 {
     if (!checkForQuery(query)) //query not in QKMap
     {
-        std::cout << "Cannot find query in QKMap" << std::endl;
+        //std::cout << "Cannot find query in QKMap" << std::endl;
         return false;
     } else {
         ft::QIdT qID = query.getQIdT();

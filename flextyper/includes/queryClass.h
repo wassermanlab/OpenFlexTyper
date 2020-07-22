@@ -37,6 +37,7 @@ public:
     QueryType getqType() const;
     std::string getQueryString() const;
     int getCount() const;
+
     std::map<ft::FlagType, std::set<std::string>> getQFlags() const;
     ft::QIdT getQIdT() const;
     const std::set<std::string> getFlagKmers(const ft::FlagType flag) const;
@@ -44,8 +45,6 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief setters
     ////////////////////////////////////////////////////////////////////////
-    void setqID(int qID);
-    void setqType(QueryType queryType);
     void setQueryString(std::string queryString);
     void setCount(int count);
     void setFlags(const std::map<ft::FlagType, std::set<std::string>>& qFlags);
@@ -53,7 +52,8 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief adders
     ////////////////////////////////////////////////////////////////////////
-    void addFlag(const ft::FlagType& flagType, const std::set<std::string>& kmers);
+    void addFlags(const ft::FlagType& flagType, const std::set<std::string>& kmers);
+    void addFlag(const ft::FlagType& flagType, const std::string& kmer);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief removers
@@ -68,6 +68,7 @@ public:
     bool isQIdTEqual(const ft::QIdT& test) const;
     bool hasQueryID(const int& qid) const;
     bool hasQueryType(const ft::QueryType& qType) const;
+    bool hasFlag(const ft::FlagType& flag) const;
     bool hasKmerFlag(const ft::FlagType& flag, const std::string& kmer) const;
     bool hasNonZeroCount() const;
 
