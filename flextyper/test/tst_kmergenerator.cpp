@@ -93,32 +93,4 @@ TEST_F(TestKmerGenerator, genCenteredSearchStrings)
     EXPECT_EQ(results, expectedResults);
 }
 
-//======================================================================
-//TEST_F(TestKmerGenerator, genSearchKmers)
-//{
-//    TEST_DESCRIPTION("genSearchKmers");
-
-//    //input: std::set<std::string> genSearchKmers(const ft::QueryClass& queryObj);
-
-//    uint _kmerSize = 5;
-//    bool _refOnly = true;
-//    SearchType _searchType = CENTERED;
-//    uint _overlap = 1;
-//    uint _stride = 1;
-//    bool _kmerCounts = false;
-//    uint _maxKmers  = 30;
-
-//    KmerGenerator _kmerGenerator(_kmerSize, _refOnly, _searchType);
-//    _kmerGenerator.setOverlap(_overlap);
-//    _kmerGenerator.setStride(_stride);
-//    _kmerGenerator.setKmerCountsFlag(_kmerCounts);
-//    _kmerGenerator.setMaxKmers(_maxKmers);
-
-//    std::set<std::string> result;
-//    std::set<std::string> expectedResult;
-
-//    EXPECT_EQ(result, expectedResult);
-//}
-
-
 }

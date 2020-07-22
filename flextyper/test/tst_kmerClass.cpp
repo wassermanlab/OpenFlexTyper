@@ -7,15 +7,9 @@ using namespace std;
 namespace ft {
 class TestKmerClass : public ::testing::Test {
 protected:
-    virtual void SetUp() {
-
-    }
-
-    virtual void TearDown() {
-    }
-
+    virtual void SetUp() {}
+    virtual void TearDown() {}
 public:
-
 };
 
 #define TEST_DESCRIPTION(desc) RecordProperty("description", desc)
@@ -28,10 +22,7 @@ TEST_F(TestKmerClass, getKmer)
     ft::KmerClass testKmerClass(kmer);
     std::string resultkmer = testKmerClass.getKmer();
     EXPECT_EQ(resultkmer, kmer);
-
-
 }
-
 
 //======================================================================
 TEST_F(TestKmerClass, KFlag)
@@ -191,9 +182,9 @@ TEST_F(TestKmerClass, testOverloadOperator)
     ft::KmerClass* equalKmerClass = new ft::KmerClass("AATT");
     ft::KmerClass* testKmerClass = new ft::KmerClass("AATT");
     ft::KmerClass* lowerKmerClass = new ft::KmerClass("AAAA");
-    EXPECT_TRUE(lowerKmerClass < testKmerClass);
-    EXPECT_TRUE(testKmerClass < higherKmerClass);
-    EXPECT_TRUE(equalKmerClass == testKmerClass);
+    EXPECT_TRUE(*lowerKmerClass < *testKmerClass);
+    EXPECT_TRUE(*testKmerClass < *higherKmerClass);
+    EXPECT_TRUE(*equalKmerClass == *testKmerClass);
 
 }
 

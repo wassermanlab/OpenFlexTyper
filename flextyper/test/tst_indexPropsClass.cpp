@@ -7,18 +7,13 @@ namespace algo {
 
 class TestIndexProp : public ::testing::Test {
 protected:
-    virtual void SetUp() {
-    }
-
-    virtual void TearDown() {
-    }
+    virtual void SetUp() {    }
+    virtual void TearDown() {    }
 
 public:
 
 };
 #define TEST_DESCRIPTION(desc) RecordProperty("description", desc)
-
-
 
 //======================================================================
 TEST_F(TestIndexProp, createBash1)

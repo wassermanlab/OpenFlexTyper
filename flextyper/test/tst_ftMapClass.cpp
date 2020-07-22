@@ -10,32 +10,6 @@ using namespace std;
 namespace ft {
 class TestFTMap : public ::testing::Test {
 protected:
-//    static void SetUpTestSuite()
-//    {
-//        ofstream tmpFile("tempConfig.ini");
-//        if (tmpFile.is_open()) {
-//            tmpFile <<  "queryFile 		= path_query.txt"
-//                        "kmerSize 		= 30"
-//                        "overlap 		= 0"
-//                        "stride 			= 5"
-//                        "maxOccurences 		= 2000"
-//                        "threadNumber 		= 512"
-//                        "readLength 		= 150"
-//                        "indexFileLocation 	= ."
-//                        "outputFolder 		= ."
-//                        "refOnly 		= False"
-//                        "searchType 		= SLIDING"
-//                        "multithread 		= True"
-//                        "ignoreNonUniqueKmers 	= False"
-//                        "kmerCounts 		= False"
-//                        "matchingReads 		= MixedVirus_100.fasta";
-//            tmpFile.close();
-//        }
-//    };
-//    static void TearDownTestSuite() {
-//        fs::remove(fs::path("tempConfig.ini"));
-//    }
-
     virtual void SetUp() {}
     virtual void TearDown() {}
 

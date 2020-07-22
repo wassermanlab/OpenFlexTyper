@@ -16,10 +16,11 @@ std::string Utils::joinString(const std::set<std::string>& setOfStr, std::string
     std::string output;
     std::set<std::string>::iterator it = setOfStr.begin();
 
-    while (it != setOfStr.end())
+    while (it != std::prev(setOfStr.end()))
     {
         output += (*it++) + delimeter;
     }
+    output += *std::prev(setOfStr.end());
     return output;
 }
 

@@ -167,6 +167,7 @@ TEST_F(TestQueryClass, hasKmerFlag)
     //bool hasKmerFlag(const ft::FlagType& flag, const std::string& kmer) const;
     ft::QueryClass* testQuery = new ft::QueryClass(1, ft::QueryType::REF);
     testQuery->_qFlags[FlagType::NUK] = {"AAAA", "CCCC"};
+
     EXPECT_TRUE(testQuery->hasKmerFlag(ft::FlagType::NUK, "AAAA"));
     EXPECT_TRUE(testQuery->hasKmerFlag(ft::FlagType::NUK, "CCCC"));
     EXPECT_FALSE(testQuery->hasKmerFlag(ft::FlagType::OCK, "AAAA")); //wrong flag type
@@ -188,58 +189,16 @@ TEST_F(TestQueryClass, OverloadOperators)
 {
     TEST_DESCRIPTION("Test the overload operators ");
 
-    ft::QueryClass testQuery1Ref = ft::QueryClass(1, ft::QueryType::REF);
-    ft::QueryClass testQuery1Alt = ft::QueryClass(1, ft::QueryType::ALT);
-    ft::QueryClass testQuery2Ref = ft::QueryClass(2, ft::QueryType::REF);
-
-    EXPECT_TRUE(testQuery1Alt < testQuery2Ref);
-    EXPECT_TRUE(testQuery1Ref < testQuery1Alt);
-    EXPECT_TRUE(testQuery2Ref == testQuery2Ref);
-    EXPECT_FALSE(testQuery1Ref == testQuery1Alt);
-    EXPECT_FALSE(testQuery2Ref < testQuery1Alt);
-
-}
-
-
-
-
-//======================================================================
-TEST_F(TestQueryClass, Flags)
-{
-    TEST_DESCRIPTION("Add a flag to a query");
+    ft::QueryClass* testQuery2Ref = new ft::QueryClass(2, ft::QueryType::REF);
     ft::QueryClass* testQuery1Ref = new ft::QueryClass(1, ft::QueryType::REF);
-    std::map<ft::FlagType, std::set<std::string>> flags;
-    flags[FlagType::NUK]={"AAAA", "AATT"};
-
-    testQuery1Ref->setFlags(flags);
-//    EXPECT_TRUE(testQuery1Ref->hasKmerFlag(FlagType::NUK, "AAAA"));
-//    EXPECT_FALSE(testQuery1Ref->hasKmerFlag(FlagType::NUK, "TTTT"));
-//    EXPECT_FALSE(testQuery1Ref->hasKmerFlag(FlagType::OCK, "AAAA"));
-
-//    testQuery1Ref->addFlag(FlagType::OCK, {"AAAA", "CCTT"});
-//    EXPECT_TRUE(testQuery1Ref->hasKmerFlag(FlagType::NUK, "AAAA"));
-//    EXPECT_FALSE(testQuery1Ref->hasKmerFlag(FlagType::NUK, "TTTT"));
-//    EXPECT_FALSE(testQuery1Ref->hasKmerFlag(FlagType::NUK, "CCTT"));
-//    EXPECT_TRUE(testQuery1Ref->hasKmerFlag(FlagType::OCK, "AAAA"));
-//    EXPECT_FALSE(testQuery1Ref->hasKmerFlag(FlagType::OCK, "TTTT"));
-//    EXPECT_TRUE(testQuery1Ref->hasKmerFlag(FlagType::OCK, "CCTT"));
-
-//    testQuery1Ref->removeKmerFlag(FlagType::OCK, "AAAA");
-//    EXPECT_TRUE(testQuery1Ref->hasKmerFlag(FlagType::NUK, "AAAA"));
-//    EXPECT_FALSE(testQuery1Ref->hasKmerFlag(FlagType::NUK, "TTTT"));
-//    EXPECT_FALSE(testQuery1Ref->hasKmerFlag(FlagType::NUK, "CCTT"));
-//    EXPECT_FALSE(testQuery1Ref->hasKmerFlag(FlagType::OCK, "AAAA"));
-//    EXPECT_FALSE(testQuery1Ref->hasKmerFlag(FlagType::OCK, "TTTT"));
-//    EXPECT_TRUE(testQuery1Ref->hasKmerFlag(FlagType::OCK, "CCTT"));
-
-//    testQuery1Ref->removeFlag(FlagType::OCK);
-//    EXPECT_TRUE(testQuery1Ref->hasKmerFlag(FlagType::NUK, "AAAA"));
-//    EXPECT_FALSE(testQuery1Ref->hasKmerFlag(FlagType::NUK, "TTTT"));
-//    EXPECT_FALSE(testQuery1Ref->hasKmerFlag(FlagType::NUK, "CCTT"));
-//    EXPECT_FALSE(testQuery1Ref->hasKmerFlag(FlagType::OCK, "AAAA"));
-//    EXPECT_FALSE(testQuery1Ref->hasKmerFlag(FlagType::OCK, "TTTT"));
-//    EXPECT_FALSE(testQuery1Ref->hasKmerFlag(FlagType::OCK, "CCTT"));
+    ft::QueryClass* testQuery1Alt = new ft::QueryClass(1, ft::QueryType::ALT);
+    EXPECT_TRUE(*testQuery1Alt < *testQuery2Ref);
+    EXPECT_TRUE(*testQuery1Ref < *testQuery1Alt);
+    EXPECT_TRUE(*testQuery2Ref == *testQuery2Ref);
+    EXPECT_FALSE(*testQuery1Ref == *testQuery1Alt);
+    EXPECT_FALSE(*testQuery2Ref < *testQuery1Alt);
 
 }
+
 
 }

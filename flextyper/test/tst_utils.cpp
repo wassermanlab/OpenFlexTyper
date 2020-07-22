@@ -29,7 +29,7 @@ public:
 #define TEST_DESCRIPTION(desc) RecordProperty("description", desc)
 
 //======================================================================
-TEST_F(TestUtils, DISABLED_joinStringWithDelimiter)
+TEST_F(TestUtils, joinStringWithDelimiter)
 {
     TEST_DESCRIPTION("Tests whether a string is join correctly ");
     std::set<std::string> inputSetOfStr= {"A", "B", "C"};
@@ -39,7 +39,7 @@ TEST_F(TestUtils, DISABLED_joinStringWithDelimiter)
     EXPECT_EQ(output, expectedOutput);
 }
 //======================================================================
-TEST_F(TestUtils, DISABLED_joinStringNoDelimiter)
+TEST_F(TestUtils, joinStringNoDelimiter)
 {
     TEST_DESCRIPTION("Tests whether a string is join correctly ");
     std::set<std::string> inputSetOfStr= {"A", "B", "C"};
@@ -59,12 +59,12 @@ TEST_F(TestUtils, split)
     EXPECT_EQ(output, expectedOutput);
 }
 //======================================================================
-TEST_F(TestUtils, DISABLED_splitWrongDelimiter)
+TEST_F(TestUtils, splitWrongDelimiter)
 {
     TEST_DESCRIPTION("Tests whether a string is split correctly");
     char delimiter = ',';
     string input ("A+B+C");
-    std::vector<std::string> expectedOutput ={};
+    std::vector<std::string> expectedOutput ={"A+B+C"};
     std::vector<std::string> output = _utils.split(input, delimiter);
     EXPECT_EQ(output, expectedOutput);
 }

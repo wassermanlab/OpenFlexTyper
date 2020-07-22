@@ -71,14 +71,21 @@ bool QueryClass::hasFlag(const ft::FlagType& flag) const{
     }
 }
 
-bool QueryClass::hasKmerFlag(const ft::FlagType& flag, const std::string& kmer) const{
-    std::set<std::string> flagKmers = _qFlags.find(flag)->second;
-    const bool is_in = flagKmers.find(kmer) != flagKmers.end();
-    return is_in;
-
+bool QueryClass::hasKmerFlag(const ft::FlagType& flag, const std::string& kmer) const
+{
+    if (hasFlag(flag)){
+        //std::cout << "has flag" << std::endl;
+        std::set<std::string> flagKmers = _qFlags.find(flag)->second;
+        //std::cout << "number of flag kmers " << flagKmers.size() << std::endl;
+        const bool is_in = flagKmers.find(kmer) != flagKmers.end();
+        return is_in;
+    } else {
+        //std::cout << "query doesnt have that flag type" << std::endl;
+        return false;
+    }
 }
-bool QueryClass::hasNonZeroCount() const{
-
+bool QueryClass::hasNonZeroCount() const
+{
     return this->getCount()>0;
 }
 
