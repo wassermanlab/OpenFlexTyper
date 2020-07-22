@@ -10,8 +10,67 @@ using ::testing::AtLeast;
 namespace ft {
 class TestFinder : public ::testing::Test {
 protected:
-    virtual void SetUp() {}
+    virtual void SetUp() {
+        _indexPath = "testOutput/Test.fm9";
+        offset = 0;
+        pathToQueryFile = "TestQuery.txt";
+        kmerSize = 30;
+        readLength =150;
+        indexPropsFile = "Test.ini";
+        outputFolder = "testOutput";
+        refOnly = false;
+        searchType = CENTERED;
+        multithread              = false ;
+        overlap                  = 0     ;
+        returnMatchesOnly        = false ;
+        kmerCounts               = false ;
+        stride                   = 10    ;
+        maxOccurences            = 200   ;
+        maxThreads               = 1     ;
+        flagOverCountedKmers     = false ;
+        ignoreNonUniqueKmers     = true  ;
+        crossover                = false ;
+        pairedReads = false;
+        revComp = false;
+        buildDir = "";
+        indexDir = "testOutput";
+        readSetName = "test";
+        inputFastQ = "testFiles/test.fq";
+        numOfReads = 10;
+        numOfIndexes =1 ;
+        printInputs = false;
+
+    }
     virtual void TearDown() {}
+
+    fs::path _indexPath ;
+    u_int offset = 0;
+    fs::path pathToQueryFile;
+    uint kmerSize ;
+    uint readLength;
+    fs::path indexPropsFile ;
+    fs::path outputFolder;
+    bool refOnly ;
+    SearchType searchType;
+    bool multithread;
+    uint overlap;
+    bool returnMatchesOnly;
+    bool kmerCounts;
+    uint stride;
+    uint maxOccurences;
+    uint maxThreads;
+    bool flagOverCountedKmers;
+    bool ignoreNonUniqueKmers;
+    bool crossover;
+    bool pairedReads;
+    bool revComp;
+    fs::path buildDir;
+    fs::path indexDir;
+    std::string readSetName;
+    fs::path inputFastQ;
+    uint numOfReads;
+    uint numOfIndexes;
+    bool printInputs;
 
 public:
 
@@ -27,24 +86,19 @@ TEST_F(TestFinder, searchSequentially)
 
 
     Finder _finder;
-
-    fs::path _indexPath = "testOutput/Test.fm9";
-    u_int offset = 0;
-
     ft::FTProp _ftProps;
-    fs::path pathToQueryFile = "TestQuery.txt";
-    uint kmerSize = 30;
-    uint readLength =150;
-    fs::path indexPropsFile = "Test.ini";
-    fs::path outputFolder;
-    bool refOnly = false;
-    SearchType searchType;
 
-    _ftProps.init(pathToQueryFile,kmerSize,readLength,indexPropsFile,outputFolder,refOnly,searchType);
+    _ftProps.init(pathToQueryFile,kmerSize,readLength,
+                  indexPropsFile,outputFolder,refOnly,
+                  searchType, multithread, overlap,
+                  returnMatchesOnly, kmerCounts, stride,
+                  maxOccurences, maxThreads, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, crossover);
+    _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,readSetName,
+                             inputFastQ, numOfReads,numOfIndexes);
+
     ft::FTMap _ftMap(_ftProps);
-    _ftProps._maxOccurences = 200;
-    _ftProps._overcounted = false;
-    _ftProps._numOfIndexes = 1;
+
     ft::KmerClass kmer("CCTT");
     ft::KmerClass kmer2("AAT");
     ft::KmerClass kmer3("ATATT");

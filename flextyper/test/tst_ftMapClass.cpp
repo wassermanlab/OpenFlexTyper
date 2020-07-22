@@ -206,10 +206,9 @@ TEST_F(TestFTMap, TestProcessIndexResults)
     //void processIndexResults(std::set<ft::KmerClass> indexResults, uint readLength);
     ft::FTProp _ftProps;
     _ftProps.initFromQSettings("Test_Settings.ini", false);
+    _ftProps.setTestProps(20, 100, false);
     ft::FTMap ftMap(_ftProps);
-    ftMap._ftProps._numOfReads = 20;
-    ftMap._ftProps._revComp = false;
-    ftMap._ftProps._readLength = 100;
+
     ft::KmerClass testKmer1("AAAA");
     testKmer1.addKPosition(123);
     ft::KmerClass testKmer2("CCCC");

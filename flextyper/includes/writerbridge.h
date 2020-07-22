@@ -15,18 +15,12 @@ public:
     /// \brief WriterBridge constructor
     ////////////////////////////////////////////////////////////////////////
     WriterBridge();
-    bool _refData;
-    bool _altData;
-    bool _croData;
-    bool _OCK;
-    bool _NUK;
-    bool _MatchesOnly;
 
     void setOutputOptions(const ft::FTMap& ftMap);
     std::string createHeader();
-    std::string formatOutputMap(std::map<std::string, std::string>& outputMap);
+    std::string formatOutputMap();
     std::string getFlagKmers(const ft::QueryClass& query, const ft::FlagType flag);
-    void addQueryToOutput(std::map<std::string, std::string>& outputMap, const ft::QueryClass& query, const std::string prefix);
+    void addQueryToOutput( const ft::QueryClass& query, const std::string prefix);
 
 
     ////////////////////////////////////////////////////////////////////////
@@ -47,7 +41,26 @@ public:
     ////////////////////////////////////////////////////////////////////////
     void overrideUtils(std::shared_ptr<IUtils> utils);
 
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief getters
+    ////////////////////////////////////////////////////////////////////////
+    bool getRefData();
+    bool getAltData();
+    bool getCroData();
+    bool getOCKFlag();
+    bool getNUKFlag();
+    bool getMatchesOnlyFlag();
+
+
 private:
+    std::map<std::string, std::string> _outputMap;
+    bool _refData;
+    bool _altData;
+    bool _croData;
+    bool _OCK;
+    bool _NUK;
+    bool _MatchesOnly;
+
     ////////////////////////////////////////////////////////////////////////
     /// \brief _utils
     ////////////////////////////////////////////////////////////////////////

@@ -182,6 +182,37 @@ void FTProp::loadIndexProps(const fs::path &_indexPropsFile, bool printInputs){
 
 }
 
+void FTProp::initIndexProps( const bool pairedReads,
+                             const bool revComp,
+                             fs::path buildDir,
+                             fs::path indexDir,
+                             std::string readSetName,
+                             fs::path inputFastQ,
+                             uint numOfReads,
+                             uint numOfIndexes,
+                             bool printInputs)
+{
+    _pairedReads = pairedReads;
+    _revComp = revComp;
+    _buildDir = buildDir;
+    _indexDir = indexDir;
+    _readSetName = readSetName;
+    _inputFastQ = inputFastQ;
+    _numOfReads = numOfReads;
+    _numOfIndexes = numOfIndexes;
+    if (printInputs){
+    std::cout << "Properties loaded from Index File     " <<  std::endl;
+    std::cout << "Paired Reads      : " << _pairedReads <<  std::endl;
+    std::cout << "reverse Comp      : " << _revComp <<  std::endl;
+    std::cout << "build Directory   : " << _buildDir <<  std::endl;
+    std::cout << "index Directory   : " << _indexDir <<  std::endl;
+    std::cout << "read Set Name     : " << _readSetName <<  std::endl;
+    std::cout << "Read FQ           : " << _inputFastQ <<  std::endl;
+    std::cout << "Number of Reads   : " << _numOfReads <<  std::endl;
+    std::cout << "Number of Indexes : " << _numOfIndexes <<  std::endl;
+    }
+}
+
 //================= PARAMETER GETTERS ========================
 SearchType FTProp::getSearchType() const {return _searchType;}
 std::string FTProp::getReadSetName() const{return _readSetName;}
@@ -221,6 +252,12 @@ const fs::path& FTProp::getBuildDir() const {return _buildDir;}
 const fs::path& FTProp::getR1() const{return _R1;}
 const fs::path& FTProp::getR2() const{return _R2;}
 
+//====================== FILE GETTERS ======================
+void FTProp::setTestProps(const uint numOfReads, const uint readLength, bool revComp){
+    _numOfReads = numOfReads;
+    _readLength = readLength;
+    _revComp = revComp;
+}
 FTProp::~FTProp()
 {
 }

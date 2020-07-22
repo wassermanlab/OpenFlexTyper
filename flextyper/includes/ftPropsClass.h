@@ -63,53 +63,24 @@ public:
 
     void initFromQSettings(std::string configFile, bool printInputs);
 
+
     ////////////////////////////////////////////////////////////////////////
     /// \brief Import Index Properties from INI
     ////////////////////////////////////////////////////////////////////////
     void loadIndexProps(const fs::path& _indexPropsFile, bool printInputs);
+    void initIndexProps( const bool pairedReads,
+                         const bool revComp,
+                         fs::path buildDir,
+                         fs::path indexDir,
+                         std::string readSetName,
+                         fs::path inputFastQ,
+                         uint numOfReads,
+                         uint numOfIndexes,
+                         bool printInputs = false);
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief properties
+    /// \brief malliable properties
     ////////////////////////////////////////////////////////////////////////
-    SearchType _searchType;
-    std::string _readSetName;
-
-    uint _kmerSize;
-    uint _overlap;
-    uint _stride;
-    uint _maxKmers;
-    uint _readLength;
-    uint _maxOccurences ;
-    uint _maxThreads;
-    uint _maxKmersPerQuery;
-    uint _maxTotalKmers;
-    uint _numOfReads;
-    uint _numOfIndexes;
-
-    bool _kmerCounts;
-    bool _multithread;
-    bool _refOnly;
-    bool _matchesOnly;
-    bool _overcounted;
-    bool _ignoreNonUniqueKmers;
-    bool _crossover;
-    bool _printSearchTime;
-    bool _pairedReads;
-    bool _revComp; //do the index files contain the reverse complement
-    bool _matchingReads; //create files that contain reads that match to each query
-
-    fs::path _pathToQueryFile;
-
-    fs::path _buildDir;
-    fs::path _indexDir;
-
-    fs::path _R1;
-    fs::path _R2;
-    fs::path _inputFastQ;
-
-    fs::path _outputFolder;
-    fs::path _outputFile;
-
     std::map<fs::path, uint> _indexSet; //index path, index offset
 
     ////////////////////////////////////////////////////////////////////////
@@ -146,7 +117,6 @@ public:
     bool getRevCompFlag() const;
     bool getMatchingReadsFlag() const;
 
-
     ////////////////////////////////////////////////////////////////////////
     /// \brief File getters
     ////////////////////////////////////////////////////////////////////////
@@ -164,6 +134,51 @@ public:
 
     void addToIndexSet(const fs::path& index, u_int offset);
 
+    void setTestProps(const uint numOfReads, const uint readLength, bool _revComp);
+private:
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief fixed properties
+    ////////////////////////////////////////////////////////////////////////
+
+    SearchType _searchType;
+    std::string _readSetName;
+
+    uint _numOfReads;
+    uint _numOfIndexes;
+
+    fs::path _pathToQueryFile;
+
+    fs::path _buildDir;
+    fs::path _indexDir;
+
+    fs::path _R1;
+    fs::path _R2;
+    fs::path _inputFastQ;
+
+    fs::path _outputFolder;
+    fs::path _outputFile;
+
+    uint _kmerSize;
+    uint _overlap;
+    uint _stride;
+    uint _maxKmers;
+    uint _readLength;
+    uint _maxOccurences ;
+    uint _maxThreads;
+    uint _maxKmersPerQuery;
+    uint _maxTotalKmers;
+
+    bool _kmerCounts;
+    bool _multithread;
+    bool _refOnly;
+    bool _matchesOnly;
+    bool _overcounted;
+    bool _ignoreNonUniqueKmers;
+    bool _crossover;
+    bool _printSearchTime;
+    bool _pairedReads;
+    bool _revComp; //do the index files contain the reverse complement
+    bool _matchingReads; //create files that contain reads that match to each query
 };
 
 }
