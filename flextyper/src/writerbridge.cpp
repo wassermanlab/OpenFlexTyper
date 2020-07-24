@@ -206,6 +206,8 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
         //std::cout << "fileIndex " << fileIndex  << " query Index " << queryIndex << std::endl;
 
         ft::QueryClass refQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::REF));
+
+
         //std::cout << "Ref Query " << refQuery._qID << std::endl;
         addQueryToOutput(refQuery, "ref");
         //std::cout << "prefix ref " << " output Map count " << _outputMap["refCount"] << std::endl;

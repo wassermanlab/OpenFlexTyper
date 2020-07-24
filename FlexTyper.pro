@@ -45,14 +45,12 @@ HEADERS    += flextyper/includes/utils.h              \
               flextyper/includes/writerbridge.h       \
               flextyper/includes/kmergenerator.h      \
               flextyper/includes/finder.h             \
-              flextyper/includes/resultprocessor.h    \
               flextyper/includes/queryextractor.h     \
               fmindex/includes/fmindex.h              \
               fmindex/includes/indexPropsClass.h      \
 
 HEADERS    += flextyper/interfaces/ikmergenerator.h   \
               flextyper/interfaces/iqueryextractor.h  \
-              flextyper/interfaces/iresultprocessor.h \
               flextyper/interfaces/iutils.h           \
               flextyper/interfaces/iwriterbridge.h    \
               flextyper/interfaces/ifinder.h          \
@@ -72,7 +70,6 @@ SOURCES     +=                \
                flextyper/src/writerbridge.cpp         \
                flextyper/src/kmergenerator.cpp        \
                flextyper/src/finder.cpp               \
-               flextyper/src/resultprocessor.cpp      \
                flextyper/src/queryextractor.cpp       \
               fmindex/src/indexPropsClass.cpp
 

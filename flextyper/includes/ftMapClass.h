@@ -71,8 +71,8 @@ public:
     ////////////////////////////////////////////////////////////////////////
     void addIndexResults(std::set<ft::KmerClass> indexResults);
     void addKmerResults(const ft::KmerClass& kmerResult);
+    void processResults();
     void processIndexResults(std::set<ft::KmerClass> indexResults);
-
     void processQueryResults(const ft::QIdT& query);
 
 

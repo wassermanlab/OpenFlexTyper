@@ -7,13 +7,6 @@ namespace algo {
 //======================================================================
 FmIndex::FmIndex()
 {
-
-}
-
-//======================================================================
-void FmIndex::setKmerMapSize(size_t kmerMapSize)
-{
-    _kmerMapSize = kmerMapSize;
 }
 
 //======================================================================
@@ -31,10 +24,7 @@ ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
     //auto start = high_resolution_clock::now();
 
     size_t occs = count(_fmindex, kmer.begin(), kmer.end());
-    //std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
-    _mtx.lock();
-    std::cout << '\r' << float(((float)i * 100) / _kmerMapSize) << " % " << std::flush;
-    _mtx.unlock();
+    std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
 
     // if number kmers > max, flag kmer as "abundant"
     if (occs > maxOcc && flagOverCountedKmers) {

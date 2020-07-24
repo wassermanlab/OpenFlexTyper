@@ -22,8 +22,6 @@
 #include "writerbridge.h"
 #include "iwriterbridge.h"
 
-#include "resultprocessor.h"
-#include "iresultprocessor.h"
 #include "queryextractor.h"
 #include "iqueryextractor.h"
 
@@ -54,7 +52,6 @@ public:
     void overrideUtils(std::shared_ptr<IUtils> utils);
     void overrideWriterBridge(std::shared_ptr<IWriterBridge> writerBridge);
     void overrideFinder(std::shared_ptr<IFinder> finder);
-    void overrideResultProcessor(std::shared_ptr<IResultProcessor> resultProcessor);
     void overrideQueryExtractor(std::shared_ptr<IQueryExtractor> queryExtractor);
 
 private:
@@ -85,12 +82,6 @@ private:
     ////////////////////////////////////////////////////////////////////////
     Finder   _ownedFinder;
     IFinder* _finder;
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief _resultProcessor
-    ////////////////////////////////////////////////////////////////////////
-    ResultProcessor   _ownedResultProcessor;
-    IResultProcessor* _resultProcessor;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief _queryExtractor

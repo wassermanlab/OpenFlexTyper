@@ -16,15 +16,46 @@ public:
     virtual ~IFinder() {}
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief searchMonoIndex
+    /// \brief searchIndexes
     ////////////////////////////////////////////////////////////////////////
-    virtual void searchMonoIndex(ft::FTMap& ftMap, const fs::path& indexPath,
-                                 long long offset) = 0;
+    virtual void searchIndexes(ft::FTMap &ftMap) =0;
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief searchMultipleIndexes
+    /// \brief Finder::addResultsFutures
     ////////////////////////////////////////////////////////////////////////
-    virtual void searchMultipleIndexes(ft::FTMap& ftMap ) = 0;
+    virtual void addResultsFutures(std::set<ft::KmerClass> &indexResults, ft::KmerClass &tmpResult, uint offset) =0;
+
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief Finder::overrideFmIndex
+    /// \param fmIndex
+    ////////////////////////////////////////////////////////////////////////
+    virtual void overrideFmIndex(std::shared_ptr<algo::IFmIndex> fmIndex) =0;
+
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief parallelSearch
+    ////////////////////////////////////////////////////////////////////////
+    virtual void parallelSearch(FTMap &ftMap, const fs::path &indexPath, long long offset) =0;
+
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief sequentialSearch searches for kmers inside a single FmIndex
+    ///        in a sequential way.
+    ////////////////////////////////////////////////////////////////////////
+    virtual void sequentialSearch(ft::FTMap &ftMap,
+                          const fs::path &indexPath,long long offset) =0;
+
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief multipleIndexesParallelSearch searches for kmers inside multiple
+    ///        indexes in parallel
+    ////////////////////////////////////////////////////////////////////////
+    virtual void multipleIndexesParallelSearch(ft::FTMap &ftMap) =0;
+
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief multipleIndexesSequentialSearch searches for kmers inside a multiple
+    ///        FmIndexes in q sequential way
+    ////////////////////////////////////////////////////////////////////////
+    virtual void multipleIndexesSequentialSearch(ft::FTMap &ftMap)= 0;
+
+
 };
 }
 

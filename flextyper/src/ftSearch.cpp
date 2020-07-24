@@ -8,7 +8,6 @@ FTSearch::FTSearch()
     : _utils(&_ownedUtils)
     , _writerBridge(&_ownedWriterBridge)
     , _finder(&_ownedFinder)
-    , _resultProcessor(&_ownedResultProcessor)
     , _queryExtractor(&_ownedQueryExtractor)
 {
 }
@@ -43,13 +42,11 @@ if (!exists(ftProps.getOutputFile())) {
 }
 }
 
-
 //======================================================================
 void FTSearch::init(FTProp ftProps)
 {
     ft::FTMap ftMap(ftProps);
     checkInputFastQ(ftProps);
-
     checkOutputFile(ftProps);
 
     std::set<Query> inputQueries = _queryExtractor->getInputQueries(ftProps.getRefOnlyFlag(), ftProps.getCrossoverFlag(), ftProps.getPathToQueryFile());
@@ -64,12 +61,9 @@ void FTSearch::init(FTProp ftProps)
 
     std::cout << "\nsearching..." << std::endl;
 
-    // selecting the correct strategy depending on the size of the index size set
+    _finder->searchIndexes(ftMap);
 
-    _finder->searchMultipleIndexes(ftMap);
-
-    _resultProcessor->processResults(ftMap);
-
+    ftMap.processResults();
 
     _writerBridge->saveOutput(ftMap);
 }
@@ -92,11 +86,6 @@ void FTSearch::overrideFinder(std::shared_ptr<IFinder> finder)
     _finder = finder.get();
 }
 
-//======================================================================
-void FTSearch::overrideResultProcessor(std::shared_ptr<IResultProcessor> resultProcessor)
-{
-    _resultProcessor = resultProcessor.get();
-}
 
 //======================================================================
 void FTSearch::overrideQueryExtractor(std::shared_ptr<IQueryExtractor> queryExtractor)

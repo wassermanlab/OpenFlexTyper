@@ -23,7 +23,7 @@ public:
 //======================================================================
 TEST_F(TestFMIndex, createFMIndex)
 {
-    TEST_DESCRIPTION("This test checks that the function searchSequentially");
+    TEST_DESCRIPTION("This test checks createFMIndex");
     algo::IndexProps _indexProp;
     algo::FmIndex _fmindex;
     _indexProp.setR1("test.fq.gz");
@@ -32,14 +32,21 @@ TEST_F(TestFMIndex, createFMIndex)
     _indexProp.setReadFileType(algo::FileType::GZ);
     fs::path pPF = "testFiles/Test.fasta";
     fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
+    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
+
+    std::string kmer = "AAAATAGTACTTTCCTGATTCCAGCACTGACTAATTTATCTACTTGTTCA";
+
+    sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
+    auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
+    EXPECT_EQ(occs, 1);
     EXPECT_NO_FATAL_FAILURE();
     EXPECT_NO_THROW();
 
 }
 //======================================================================
-TEST_F(TestFMIndex, createParalleFMIndex)
+TEST_F(TestFMIndex, createParallelFMIndex)
 {
-    TEST_DESCRIPTION("This test checks that the function searchSequentially");
+    TEST_DESCRIPTION("create parallel FMIndex");
     algo::IndexProps _indexProp;
     algo::FmIndex _fmindex;
     _indexProp.setR1("test.fq.gz");
@@ -55,7 +62,7 @@ TEST_F(TestFMIndex, createParalleFMIndex)
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
 
-    std::string kmer = "CCCTGCATGCACTGGATGCACTCTATCCCATTCTGCAGCTTCCTCATTGATGGTCTCTTTTAACATTTGCATGGCTGCTTGATGTCCCCCCAC";
+    std::string kmer = "AAAATAGTACTTTCCTGATTCCAGCACTGACTAATTTATCTACTTGTTCA";
 
 
     sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
@@ -76,7 +83,7 @@ TEST_F(TestFMIndex, createParalleFMIndex)
 //======================================================================
 TEST_F(TestFMIndex, loadFMIndex)
 {
-    TEST_DESCRIPTION("This test checks that the function searchSequentially");
+    TEST_DESCRIPTION("This test checks loadFMIndex");
 
     algo::FmIndex _fmindex;
     _fmindex.loadIndexFromFile("testOutput/Test.fm9");

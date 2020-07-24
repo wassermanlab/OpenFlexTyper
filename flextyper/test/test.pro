@@ -45,7 +45,6 @@ SOURCES += tst_queryextractor.cpp           \
     tst_qkMapClass.cpp \
     tst_queryClass.cpp \
            tst_writerbridge.cpp             \
-           tst_resultprocessor.cpp          \
            tst_utils.cpp                    \
            tst_finder.cpp                   \
            tst_kmergenerator.cpp            \

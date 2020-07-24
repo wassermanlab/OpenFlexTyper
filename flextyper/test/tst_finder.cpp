@@ -78,8 +78,92 @@ public:
 
 #define TEST_DESCRIPTION(desc) RecordProperty("description", desc)
 
+
 //======================================================================
-TEST_F(TestFinder, searchSequentially)
+TEST_F(TestFinder, addResultsFutures)
+{
+    TEST_DESCRIPTION("Add results futures");
+    //void addResultsFutures(std::set<ft::KmerClass> &indexResults, ft::KmerClass &tmpResult, uint offset);
+
+    Finder _finder;
+    ft::FTProp _ftProps;
+
+    _ftProps.init(pathToQueryFile,kmerSize,readLength,
+                  indexPropsFile,outputFolder,refOnly,
+                  searchType, multithread, overlap,
+                  returnMatchesOnly, kmerCounts, stride,
+                  maxOccurences, maxThreads, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, crossover);
+    _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,readSetName,
+                             inputFastQ, numOfReads,numOfIndexes);
+
+    ft::FTMap _ftMap(_ftProps);
+
+    ft::KmerClass kmer("AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG");
+    ft::KmerClass kmer2("AAT");
+    ft::KmerClass kmer3("ATATT");
+    _ftMap.addKmer(kmer);
+    _ftMap.addKmer(kmer2);
+    _ftMap.addKmer(kmer3);
+
+
+}
+
+
+
+//======================================================================
+TEST_F(TestFinder, parallelSearch)
+{
+    TEST_DESCRIPTION("parallele search");
+    //void parallelSearch(FTMap &ftMap,const fs::path &indexPath, long long offset);
+
+    Finder _finder;
+    ft::FTProp _ftProps;
+
+    _ftProps.init(pathToQueryFile,kmerSize,readLength,
+                  indexPropsFile,outputFolder,refOnly,
+                  searchType, multithread, overlap,
+                  returnMatchesOnly, kmerCounts, stride,
+                  maxOccurences, maxThreads, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, crossover);
+    _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,readSetName,
+                             inputFastQ, numOfReads,numOfIndexes);
+
+    ft::FTMap _ftMap(_ftProps);
+
+    ft::KmerClass kmer("AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG");
+    ft::KmerClass kmer2("AAT");
+    ft::KmerClass kmer3("ATATT");
+    _ftMap.addKmer(kmer);
+    _ftMap.addKmer(kmer2);
+    _ftMap.addKmer(kmer3);
+
+    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
+    sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
+    auto occs3 = sdsl::count(_testindex, kmer._kmer.begin(), kmer._kmer.end());
+    auto occs = sdsl::count(_testindex, kmer2._kmer.begin(), kmer2._kmer.end());
+    auto occs2 = sdsl::count(_testindex, kmer3._kmer.begin(), kmer3._kmer.end());
+
+    //    EXPECT_NO_THROW(_finder.parallelSearch(_ftMap, _indexPath, offset));
+
+    //    std::vector<std::set<ft::KmerClass>> results = _ftMap.getResults();
+    //    EXPECT_EQ(results.size(), _ftProps.getNumOfIndexes());
+    //    std::set<ft::KmerClass> result = results.front();
+    //    EXPECT_EQ(result.size(), 3);
+    //    auto roccsIT = result.begin();
+    //    uint roccs = roccsIT->getKPositions().size();
+    //    roccsIT++;
+    //    uint roccs2 = roccsIT->getKPositions().size();
+    //    roccsIT++;
+    //    uint roccs3 = roccsIT->getKPositions().size();
+    //    EXPECT_EQ(occs, roccs);
+    //    EXPECT_EQ(occs2, roccs2);
+    //    EXPECT_EQ(occs3, roccs3);
+
+}
+
+//======================================================================
+TEST_F(TestFinder, sequentialSearch)
 {
     TEST_DESCRIPTION("This test checks that the function searchSequentially");
     //void Finder::sequentialSearch(ft::FTMap &ftMap, const fs::path &indexPath, long long offset)
@@ -99,7 +183,7 @@ TEST_F(TestFinder, searchSequentially)
 
     ft::FTMap _ftMap(_ftProps);
 
-    ft::KmerClass kmer("CCTT");
+    ft::KmerClass kmer("AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG");
     ft::KmerClass kmer2("AAT");
     ft::KmerClass kmer3("ATATT");
     _ftMap.addKmer(kmer);
@@ -129,5 +213,14 @@ TEST_F(TestFinder, searchSequentially)
     EXPECT_EQ(occs3, roccs3);
 
 }
+
+
+
+
+
+
+
+
+
 
 }
