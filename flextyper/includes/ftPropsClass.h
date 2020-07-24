@@ -13,7 +13,7 @@ namespace fs = std::experimental::filesystem;
 namespace ft {
 
 enum QueryType {REF = 1, ALT, CRO};
-
+enum Orientation {FWD = 1, REV};
 typedef std::string     SearchType;             // SearchType declaration
 const   std::string     CENTERED = "CENTERED";  // search type centered approach
 const   std::string     SLIDING  = "SLIDING";   // search type sliding approach
@@ -114,7 +114,8 @@ public:
     bool getCrossoverFlag() const;
     bool getPrintSearchTimeFlag() const;
     bool getPairedReadFlag() const;
-    bool getRevCompFlag() const;
+    bool getRevCompSearchFlag() const;
+    bool getIndexRevCompFlag() const;
     bool getMatchingReadsFlag() const;
 
     ////////////////////////////////////////////////////////////////////////
@@ -177,7 +178,8 @@ private:
     bool _crossover;
     bool _printSearchTime;
     bool _pairedReads;
-    bool _revComp; //do the index files contain the reverse complement
+    bool _revCompSearch; //generate and search for _qkRCMap
+    bool _indexRevComp; //do the index files contain the reverse complement
     bool _matchingReads; //create files that contain reads that match to each query
 };
 

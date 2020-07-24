@@ -120,6 +120,7 @@ TEST_F(TestKmerClass, isKmerEqual)
 TEST_F(TestKmerClass, convertPosToRead_NotPaired_NotReverseComp)
 {
     TEST_DESCRIPTION("convert index positions to read ids ");
+
     ft::KmerClass* testKmerClass = new ft::KmerClass("AAAA");
     testKmerClass->setKPositions({50, 125, 251, 313, 449, 555, 654, 723});
     testKmerClass->convertPosToReadID(100,8,false);

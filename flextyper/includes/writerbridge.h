@@ -50,6 +50,7 @@ public:
     bool getOCKFlag();
     bool getNUKFlag();
     bool getMatchesOnlyFlag();
+    std::map<std::string, std::string> getOutputMap();
 
 
 private:

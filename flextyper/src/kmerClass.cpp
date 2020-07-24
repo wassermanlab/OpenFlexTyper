@@ -86,7 +86,7 @@ bool KmerClass::hasReadID(ft::ReadID read ) const {
 }
 
 //====================== CONVERT ========================
-void KmerClass::convertPosToReadID(uint readLength, uint numOfReads, bool revComp)
+void KmerClass::convertPosToReadID(uint readLength, uint numOfReads, bool indexRevComp)
 {
 //    std::cout << "read Length " << readLength << std::endl;
 //    std::cout << "num of Reads " << numOfReads << std::endl;
@@ -108,7 +108,7 @@ void KmerClass::convertPosToReadID(uint readLength, uint numOfReads, bool revCom
         u_int readType = std::ceil((r+1)/float(numOfReads));
         //std::cout << "r " << float(r) << " num of Reads "<< float(numOfReads) << std::endl;
         //std::cout << "read Type " << readType << std::endl;
-        if (revComp){readType = ceil((readType+1)/2);}
+        if (indexRevComp){readType = ceil((readType+1)/2);}
         //std::cout <<"read ID " << rID <<  " read Type " << readType << std::endl;
         addReadID(std::make_pair(rID, readType));
     }

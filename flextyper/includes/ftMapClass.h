@@ -11,6 +11,7 @@
 #include "qkMapClass.h"
 #include "ftPropsClass.h"
 #include "kmergenerator.h"
+#include "utils.h"
 
 namespace ft {
 
@@ -34,6 +35,7 @@ public:
     std::set<ft::KmerClass> _kmerSet;
     std::set<ft::QueryClass> _querySet;
     QKMap _qkMap;
+    QKMap _qkRCMap;
     std::vector<std::set<ft::KmerClass>> _searchResults;
 
     ////////////////////////////////////////////////////////////////////////
@@ -70,6 +72,10 @@ public:
     void addIndexResults(std::set<ft::KmerClass> indexResults);
     void addKmerResults(const ft::KmerClass& kmerResult);
     void processIndexResults(std::set<ft::KmerClass> indexResults);
+
+    void processQueryResults(const ft::QIdT& query);
+
+
 
 private:
 

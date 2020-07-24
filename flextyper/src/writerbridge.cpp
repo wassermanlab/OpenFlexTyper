@@ -10,11 +10,17 @@ WriterBridge::WriterBridge()
       _utils(&_ownedUtils)
 
 {
+    _refData = false;
+    _altData = false;
+    _croData = false;
+    _OCK = false;
+    _NUK = false;
+    _MatchesOnly = false;
 }
+//======================================================================
 void WriterBridge::setOutputOptions(const ft::FTMap& ftMap)
 {
     _refData = true;
-
     if (!ftMap._ftProps.getRefOnlyFlag()){ _altData = true;}
     if (ftMap._ftProps.getCrossoverFlag()){_croData = true;}
     if (ftMap._ftProps.getOverCountedFlag()){_OCK = true;}
@@ -22,22 +28,22 @@ void WriterBridge::setOutputOptions(const ft::FTMap& ftMap)
     if (ftMap._ftProps.getMatchesOnlyFlag()){_MatchesOnly = true;}
 }
 
-
+//======================================================================
 std::string WriterBridge::createHeader()
 {
     std::string header;
-
     if (_croData) {
-        header = '\t' + std::string("start_point_count") + '\t' + std::string("crossover_count") + '\t' + std::string("endpoint_count");
+        std::cout << "CrossOver Header" << std::endl;
+        header = '\t' + std::string("Start_Count") + '\t' + std::string("Crossover_Count") + '\t' + std::string("End_Count");
         if (_NUK) {
-            header += '\t' + std::string("Start_Non_Unique_Kmers") + '\t' + std::string("Crossover_Non_Unique_Kmers") + '\t' + std::string("Endpoint_Non_Unique_Kmers");
+            header += '\t' + std::string("Start_Non_Unique_Kmers") + '\t' + std::string("Crossover_Non_Unique_Kmers") + '\t' + std::string("End_Non_Unique_Kmers");
         }
         if (_OCK) {
-            header += '\t' + std::string("Start_Over_Counted_Kmers") + '\t' + std::string("Crossover_Over_Counted_Kmers") + '\t' + std::string("Endpoint_Over_Counted_Kmers");
+            header += '\t' + std::string("Start_Over_Counted_Kmers") + '\t' + std::string("Crossover_Over_Counted_Kmers") + '\t' + std::string("End_Over_Counted_Kmers");
         }
-
-    } else {
-        header = '\t' + std::string("Ref_count") + '\t' + std::string("Alt_count") ;
+    } else if (!_croData && _altData){
+        std::cout << "Ref and Alt Header" << std::endl;
+        header = '\t' + std::string("Ref_Count") + '\t' + std::string("Alt_Count");
 
         if (_NUK) {
             header += '\t' + std::string("Ref_Non_Unique_Kmers") + '\t' + std::string("Alt_Non_Unique_Kmers");
@@ -45,12 +51,19 @@ std::string WriterBridge::createHeader()
         if (_OCK) {
             header += '\t' + std::string("Ref_Over_Counted_Kmers") + '\t' + std::string("Alt_Over_Counted_Kmers");
         }
+    } else if (!_croData && !_altData){
+        std::cout << "Ref Only Header" << std::endl;
+        header = '\t' + std::string("Ref_Count");
+        if (_NUK) {
+            header += '\t' + std::string("Ref_Non_Unique_Kmers");
+        }
+        if (_OCK) {
+            header += '\t' + std::string("Ref_Over_Counted_Kmers");
+        }
     }
-
     header += '\n';
     std::cout << header << std::endl;
     return header;
-
 }
 //======================================================================
 std::string WriterBridge::formatOutputMap()
@@ -97,16 +110,17 @@ std::string WriterBridge::formatOutputMap()
 //======================================================================
 std::string WriterBridge::getFlagKmers(const ft::QueryClass& query, const ft::FlagType flag)
 {
-    //std::cout << "add flag kmers " << std::endl;
+    std::cout << "add flag kmers " << std::endl;
     std::string queryFlagK;
     if (query.hasFlag(flag)){
         std::set<std::string> flagKmers = query.getFlagKmers(flag);
-        //std::cout << "Number of flag kmers " << flagKmers.size() << std::endl;
-        std::string queryFlagK = _utils->joinString(query.getFlagKmers(flag));
-    } else {
-        //std::cout<< "Query doesnt have that flag" << std::endl;
-    }
+        std::cout << "Number of flag kmers " << flagKmers.size() << std::endl;
+        queryFlagK = _utils->joinString(query.getFlagKmers(flag));
 
+    } else {
+        std::cout<< "Query doesnt have that flag" << std::endl;
+    }
+    std::cout << "formatted string " << queryFlagK << std::endl;
     return queryFlagK;
 }
 
@@ -115,17 +129,17 @@ void WriterBridge::addQueryToOutput( const ft::QueryClass& query, const std::str
 {
     //std::cout << "add query to output Map" << std::endl;
     u_int count = query.getCount();
-    _outputMap[prefix+"Matches"] = false;
+    _outputMap[prefix+"Matches"] = "false";
     if (count > 0){
-        _outputMap[prefix+"Matches"] = true;
+        _outputMap[prefix+"Matches"] = "true";
         //std::cout << "Output Map Matches " << _outputMap[prefix+"Matches"] << std::endl;
     } else {
-        _outputMap[prefix+"Matches"] = false;
+        _outputMap[prefix+"Matches"] = "false";
         //std::cout << "No output Map Matches " << _outputMap[prefix+"Matches"] << std::endl;
     }
     //std::cout << "output Map Matches " << _outputMap[prefix+"Matches"] << std::endl;
 
-    _outputMap[prefix+"Count"] = '\t' + std::to_string(count);
+    _outputMap[prefix+"Count"] = std::to_string(count);
     //std::cout << "prefix " << prefix << " output Map count " << _outputMap[prefix+"Count"] << std::endl;
     if (_OCK)
     {
@@ -142,10 +156,7 @@ void WriterBridge::addQueryToOutput( const ft::QueryClass& query, const std::str
         _outputMap[prefix+"NUK"] = refNUK;
         //std::cout << "NUKs  " << refNUK << std::endl;
     }
-
 }
-
-
 
 //======================================================================
 void WriterBridge::saveOutput(const ft::FTMap& ftMap)
@@ -255,6 +266,7 @@ bool WriterBridge::getCroData(){return _croData;}
 bool WriterBridge::getOCKFlag(){return _OCK;}
 bool WriterBridge::getNUKFlag(){return _NUK;}
 bool WriterBridge::getMatchesOnlyFlag(){return _MatchesOnly;}
+std::map<std::string, std::string> WriterBridge::getOutputMap(){return _outputMap;}
 
 //======================================================================
 WriterBridge::~WriterBridge()

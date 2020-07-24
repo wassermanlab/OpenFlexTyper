@@ -9,22 +9,6 @@ ResultProcessor::ResultProcessor()
 }
 
 ////======================================================================
-//void ResultProcessor::getIndexCounts(std::set<ft::KmerClass> readIDResults)
-//{
-//    std::set<ft::QueryClass> _queryMap;
-
-//    int count = 0;
-
-//    for (auto e : readIDResults) {
-//        count  = 0;
-//        for (auto f : e.second) {
-//            count++;
-//        }
-//        indexCounts.insert({{e.first.first, e.first.second}, count});
-//    }
-//}
-
-////======================================================================
 //std::set<ft::QueryClass> ResultProcessor::processIndexPos(std::set<ft::KmerClass> indexResults, uint readLen)
 //{
 //    std::set<ft::QueryClass> readIDResults; // map< query ID, set<read ID>>

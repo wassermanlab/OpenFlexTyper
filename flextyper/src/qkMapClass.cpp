@@ -40,8 +40,6 @@ ft::QueryClass* QKMap::getQueryPointer(const ft::QueryClass& query)
 //======================================================
 //================= KMERS ==============================
 //======================================================
-
-
 std::set<ft::QueryClass*> QKMap::retrieveQueries(const ft::KmerClass& kmer)
 {
     std::set<ft::QueryClass*> _matchingQueries;

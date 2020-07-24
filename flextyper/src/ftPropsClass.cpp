@@ -132,7 +132,7 @@ void FTProp::loadIndexProps(const fs::path &_indexPropsFile, bool printInputs){
     QSettings isettings(_indexPropsFile.string().c_str(), QSettings::IniFormat);
 
     _pairedReads = isettings.value("pairedReads").toBool();
-    _revComp = isettings.value("revComp").toBool();
+    _indexRevComp = isettings.value("revComp").toBool();
     _buildDir = isettings.value("buildDirectory").toString().toStdString();
     _indexDir = isettings.value("indexDirectory").toString().toStdString();
     _readSetName = isettings.value("readSetName").toString().toStdString();
@@ -164,7 +164,7 @@ void FTProp::loadIndexProps(const fs::path &_indexPropsFile, bool printInputs){
     if (printInputs){
     std::cout << "Properties loaded from Index File     " <<  std::endl;
     std::cout << "Paired Reads      : " << _pairedReads <<  std::endl;
-    std::cout << "reverse Comp      : " << _revComp <<  std::endl;
+    std::cout << "reverse Comp      : " << _indexRevComp <<  std::endl;
     std::cout << "build Directory   : " << _buildDir <<  std::endl;
     std::cout << "index Directory   : " << _indexDir <<  std::endl;
     std::cout << "read Set Name     : " << _readSetName <<  std::endl;
@@ -193,7 +193,7 @@ void FTProp::initIndexProps( const bool pairedReads,
                              bool printInputs)
 {
     _pairedReads = pairedReads;
-    _revComp = revComp;
+    _indexRevComp = revComp;
     _buildDir = buildDir;
     _indexDir = indexDir;
     _readSetName = readSetName;
@@ -203,7 +203,7 @@ void FTProp::initIndexProps( const bool pairedReads,
     if (printInputs){
     std::cout << "Properties loaded from Index File     " <<  std::endl;
     std::cout << "Paired Reads      : " << _pairedReads <<  std::endl;
-    std::cout << "reverse Comp      : " << _revComp <<  std::endl;
+    std::cout << "reverse Comp      : " << _indexRevComp <<  std::endl;
     std::cout << "build Directory   : " << _buildDir <<  std::endl;
     std::cout << "index Directory   : " << _indexDir <<  std::endl;
     std::cout << "read Set Name     : " << _readSetName <<  std::endl;
@@ -238,7 +238,8 @@ bool FTProp::getIgnoreNonUniqueKmersFlag() const {return _ignoreNonUniqueKmers;}
 bool FTProp::getCrossoverFlag() const {return _crossover;}
 bool FTProp::getPrintSearchTimeFlag() const {return _matchesOnly;}
 bool FTProp::getPairedReadFlag() const {return _pairedReads;}
-bool FTProp::getRevCompFlag() const {return _revComp;}
+bool FTProp::getRevCompSearchFlag() const {return _revCompSearch;}
+bool FTProp::getIndexRevCompFlag() const {return _indexRevComp;}
 bool FTProp::getMatchingReadsFlag() const{return _matchingReads;}
 
 //====================== FILE GETTERS ======================
@@ -256,7 +257,7 @@ const fs::path& FTProp::getR2() const{return _R2;}
 void FTProp::setTestProps(const uint numOfReads, const uint readLength, bool revComp){
     _numOfReads = numOfReads;
     _readLength = readLength;
-    _revComp = revComp;
+    _indexRevComp = revComp;
 }
 FTProp::~FTProp()
 {

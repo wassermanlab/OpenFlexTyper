@@ -53,7 +53,7 @@ std::set<std::string> KmerGenerator::genSlidingSearchStrings(const std::string& 
         count++;
         // std::cout << "Nominal : Trying : " << queryString << ".substr(" << start << ", " << kmerSize << ");" << std::endl;
     }
-
+    //std::cout << "Number of kmers  " << searchStrings.size() << std::endl;
     return searchStrings;
 }
 
@@ -116,6 +116,7 @@ std::set<std::string> KmerGenerator::genSearchKmers(const ft::QueryClass& queryO
         std::cout << "Error during the ID creation !" << std::endl;
     }
 
+    std::cout << "Number of kmers  " << searchKmers.size() << std::endl;
     return searchKmers;
 }
 
