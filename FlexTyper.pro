@@ -9,7 +9,7 @@ LIBS        += -lstdc++fs -lsdsl -ldivsufsort64     \
                -ldivsufsort \
 
 
-outputDir.commands = $(MKDIR) $$OUT_PWD/testFiles ; $(COPY_DIR) $$PWD/flextyper/test/testFiles/* $$OUT_PWD/testFiles/
+outputDir.commands = $(MKDIR) $$OUT_PWD/testFiles ; $(COPY_DIR) $$PWD/flextyper/test/testFiles/* $$OUT_PWD/testFiles/ ; $(COPY_DIR) $$PWD/flextyper/test/testFiles/preprocess.sh $$OUT_PWD
 first.depends = $(first) outputDir
 export(first.depends)
 export(outputDir.commands)

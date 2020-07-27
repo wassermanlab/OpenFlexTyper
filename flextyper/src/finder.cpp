@@ -74,10 +74,10 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
 {
     FTProp ftProps = ftMap.getFTProps();
     std::cout << "Parallel search of single index" << std::endl;
-
+    algo::FmIndex* _fmIndex = new algo::FmIndex;
     std::set<ft::KmerClass> kmerMap = ftMap._kmerSet;
 
-    size_t i = 1;
+
     std::cout << "working on : " << indexPath << std::endl;
     std::set<ft::KmerClass> indexResults;
 
@@ -110,7 +110,6 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
                                                 dynamic_cast<algo::FmIndex*>(_fmIndex),
                                                         kmer,                                                        
                                                         ftProps.getMaxOcc(),
-                                                        i++,
                                                         ftProps.getOverCountedFlag()));
             kmerQueue.pop();
             j++;
@@ -125,7 +124,6 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
                                                     dynamic_cast<algo::FmIndex*>(_fmIndex),
                                                     kmer,
                                                     ftProps.getMaxOcc(),
-                                                    i++,
                                                     ftProps.getOverCountedFlag()));
                 kmerQueue.pop();
             } else {
@@ -138,6 +136,7 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
         }
         for (auto& e : resultsFutures) {
             ft::KmerClass tmpResult = e.get();
+            std::cout << "number of results " << tmpResult.getKPositions().size() << std::endl;
             addResultsFutures(indexResults,tmpResult, offset);
             elts++;
             }
@@ -156,7 +155,7 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
 void Finder::sequentialSearch(ft::FTMap &ftMap,
                               const fs::path &indexPath, long long offset)
 {
-    std::cout << "running search in a single thread" << std::endl;
+    std::cout << "running sequential search" << std::endl;
 
     // performs the kmer search for a single index file
     // returns indexPosResults for a single index
@@ -182,16 +181,14 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
        std::cout << "searching for kmer " << kmer._kmer << "  i  " << i << std::endl;
        ft::KmerClass tmpResult = _fmIndex.search(kmer,
                                                    ftProps.getMaxOcc(),
-                                                   i++,
                                                    ftProps.getOverCountedFlag());
 
-        std::cout << "index search results " << tmpResult._positions.size() << std::endl;
-
-        addResultsFutures(indexResults,tmpResult, offset);
+       std::cout << "index results " << tmpResult._positions.size() << std::endl;
+       addResultsFutures(indexResults,tmpResult, offset);
     }
 
     ftMap.addIndexResults(indexResults);
-    std::cout << "number of index results " << indexResults.size() << std::endl;
+    //std::cout << "number of indexes processed " << indexResults.size() << std::endl;
     indexResults.clear();
     std::cout << "Finished\n";
 }

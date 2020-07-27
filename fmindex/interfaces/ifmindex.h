@@ -50,14 +50,12 @@ public:
     ////////////////////////////////////////////////////////////////////////
     virtual ft::KmerClass search(ft::KmerClass kmerClass,
                                  u_int maxOccurences = 200,
-                                 size_t i = 0,
                                  bool flagOverCountedKmers = false) = 0;
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief generate the Reads Mapping
-    /// \param filename
+    /// \brief parallelFmIndex
     ////////////////////////////////////////////////////////////////////////
-    //virtual void generateReadsMap(const std::string& filename) = 0;
+    virtual csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> getIndex() = 0;
 
 };
 }

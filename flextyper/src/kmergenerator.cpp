@@ -81,6 +81,7 @@ std::set<std::string> KmerGenerator::genCenteredSearchStrings(const std::string&
             break;
         if (i + _kmerSize < queryString.size()) {
             std::string searchString = queryString.substr(i, _kmerSize);
+            //std::cout << "kmer string  " << searchString << std::endl;
             _counter[searchString]++;
             searchStrings.insert(searchString);
         }

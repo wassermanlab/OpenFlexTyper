@@ -51,7 +51,7 @@ void FTMap::addInputQueries(const std::set<Query> &inputQueries){
 void FTMap::genQKMap()
 {
     std::cout << "generate QK Map" << std::endl;
-    std::cout << "create kmer generator" << std::endl;
+
     KmerGenerator  _kmerGenerator(_ftProps.getKmerSize(),
                                   _ftProps.getRefOnlyFlag(),
                                   _ftProps.getSearchType(),
@@ -66,7 +66,7 @@ void FTMap::genQKMap()
         std::set<ft::KmerClass*> kmerObj;
         // generate fwd query kmers
         std::set<std::string> kmers = (_kmerGenerator.genSearchKmers(query));
-        std::cout << "generated " << kmers.size() << " kmers " << std::endl;
+        //std::cout << "generated " << kmers.size() << " kmers " << std::endl;
         for (std::string kmer : kmers)
         {
             if (checkForKmer(kmer)){
@@ -92,9 +92,9 @@ void FTMap::genQKMap()
                 if (checkForKmer(rckmer)){
                     ft::KmerClass* nonuniqueKmer = findKmer(rckmer);
                     nonuniqueKmer->addKFlag(ft::FlagType::NUK);
-                    std::cout << "add existing RC kmer " << kmer << std::endl;
+                    //std::cout << "add existing RC kmer " << kmer << std::endl;
                 } else {
-                    std::cout << "add new RC kmer " << kmer << std::endl;
+                    //std::cout << "add new RC kmer " << kmer << std::endl;
                     addKmer(rckmer);
                 }
                 rcKmerObj.insert(findKmer(rckmer));
@@ -240,7 +240,7 @@ void FTMap::addIndexResults(std::set<ft::KmerClass> indexResults)
 //======================================================
 void FTMap::addKmerResults(const ft::KmerClass& kmerResult)
 {
-     std::cout << "number of read IDs to add " << kmerResult.getReadIDs().size() << std::endl;
+     //std::cout << "number of read IDs to add " << kmerResult.getReadIDs().size() << std::endl;
      KmerClass* kmer = findKmer(kmerResult.getKmer());
 
      if (kmer == NULL){
@@ -253,19 +253,19 @@ void FTMap::addKmerResults(const ft::KmerClass& kmerResult)
      }
 
      kmer = findKmer(kmerResult.getKmer());
-     std::cout << "number of existing read IDs " << kmer->getReadIDs().size() << std::endl;
+     //std::cout << "number of existing read IDs " << kmer->getReadIDs().size() << std::endl;
 
      // add read IDs
      for (ft::ReadID resultID : kmerResult.getReadIDs())
      {
-         std::cout << "result ID " << resultID.first << std::endl;
+         //std::cout << "result ID " << resultID.first << std::endl;
          kmer->addReadID(resultID);
      }
 
      // add flags
      for (auto flag : kmerResult.getKFlags())
      {
-         std::cout << "result Flag " << flag.first << std::endl;
+         //std::cout << "result Flag " << flag.first << std::endl;
          kmer->addKFlag(flag.first);
      }
 
@@ -318,7 +318,7 @@ void FTMap::processQueryResults(const ft::QIdT& queryIDT)
         }
 
         std::set<ft::ReadID> fwdKmerReadIDs = fwdKmer->getReadIDs();
-        std::cout << "number of fwd ReadIDs " << fwdKmerReadIDs.size() << std::endl;
+        //std::cout << "number of fwd ReadIDs " << fwdKmerReadIDs.size() << std::endl;
         if (addToCount){
             for ( ft::ReadID readID : fwdKmerReadIDs)
             {
@@ -345,7 +345,7 @@ void FTMap::processQueryResults(const ft::QIdT& queryIDT)
             }
 
             std::set<ft::ReadID> rcKmerReadIDs = rcKmer->getReadIDs();
-                    std::cout << "number of fwd ReadIDs " << rcKmerReadIDs.size() << std::endl;
+            //std::cout << "number of rc ReadIDs " << rcKmerReadIDs.size() << std::endl;
             if (addToCount){
                 for ( ft::ReadID readID : rcKmerReadIDs)
                 {

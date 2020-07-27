@@ -51,7 +51,7 @@ public:
     /// \return
     ////////////////////////////////////////////////////////////////////////
     ft::KmerClass search(ft::KmerClass kmerClass,
-                         u_int maxOcc = 200, size_t i = 0,
+                         u_int maxOcc = 200,
                          bool flagOverCountedKmers = false);
 
     ////////////////////////////////////////////////////////////////////////
@@ -62,10 +62,9 @@ public:
     void parallelFmIndex(algo::IndexProps& _props);
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief generate the Reads Mapping
-    /// \param filename
+    /// \brief parallelFmIndex
     ////////////////////////////////////////////////////////////////////////
-    //void generateReadsMap(const std::string& filename);
+    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> getIndex();
 
 
 private:
@@ -91,7 +90,7 @@ private:
     ///        For more information, please refere to :
     ///        https://github.com/simongog/sdsl-lite
     ////////////////////////////////////////////////////////////////////////
-    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _fmindex;
+    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _index;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief mtx

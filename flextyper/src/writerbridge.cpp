@@ -33,7 +33,7 @@ std::string WriterBridge::createHeader()
 {
     std::string header;
     if (_croData) {
-        std::cout << "CrossOver Header" << std::endl;
+        //std::cout << "CrossOver Header" << std::endl;
         header = '\t' + std::string("Start_Count") + '\t' + std::string("Crossover_Count") + '\t' + std::string("End_Count");
         if (_NUK) {
             header += '\t' + std::string("Start_Non_Unique_Kmers") + '\t' + std::string("Crossover_Non_Unique_Kmers") + '\t' + std::string("End_Non_Unique_Kmers");
@@ -42,7 +42,7 @@ std::string WriterBridge::createHeader()
             header += '\t' + std::string("Start_Over_Counted_Kmers") + '\t' + std::string("Crossover_Over_Counted_Kmers") + '\t' + std::string("End_Over_Counted_Kmers");
         }
     } else if (!_croData && _altData){
-        std::cout << "Ref and Alt Header" << std::endl;
+        //std::cout << "Ref and Alt Header" << std::endl;
         header = '\t' + std::string("Ref_Count") + '\t' + std::string("Alt_Count");
 
         if (_NUK) {
@@ -52,7 +52,7 @@ std::string WriterBridge::createHeader()
             header += '\t' + std::string("Ref_Over_Counted_Kmers") + '\t' + std::string("Alt_Over_Counted_Kmers");
         }
     } else if (!_croData && !_altData){
-        std::cout << "Ref Only Header" << std::endl;
+        //std::cout << "Ref Only Header" << std::endl;
         header = '\t' + std::string("Ref_Count");
         if (_NUK) {
             header += '\t' + std::string("Ref_Non_Unique_Kmers");
@@ -62,7 +62,7 @@ std::string WriterBridge::createHeader()
         }
     }
     header += '\n';
-    std::cout << header << std::endl;
+    //std::cout << header << std::endl;
     return header;
 }
 //======================================================================
@@ -110,17 +110,17 @@ std::string WriterBridge::formatOutputMap()
 //======================================================================
 std::string WriterBridge::getFlagKmers(const ft::QueryClass& query, const ft::FlagType flag)
 {
-    std::cout << "add flag kmers " << std::endl;
+    //std::cout << "add flag kmers " << std::endl;
     std::string queryFlagK;
     if (query.hasFlag(flag)){
         std::set<std::string> flagKmers = query.getFlagKmers(flag);
-        std::cout << "Number of flag kmers " << flagKmers.size() << std::endl;
+        //std::cout << "Number of flag kmers " << flagKmers.size() << std::endl;
         queryFlagK = _utils->joinString(query.getFlagKmers(flag));
 
     } else {
-        std::cout<< "Query doesnt have that flag" << std::endl;
+        //std::cout<< "Query doesnt have that flag" << std::endl;
     }
-    std::cout << "formatted string " << queryFlagK << std::endl;
+    //std::cout << "formatted string " << queryFlagK << std::endl;
     return queryFlagK;
 }
 

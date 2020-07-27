@@ -213,8 +213,8 @@ TEST_F(TestWriterBridge, createHeaderRef4)
     _writerBridge.setOutputOptions(_ftMap);
     std::string expectedHeader = '\t' + std::string("Ref_Count") + '\t' + std::string("Ref_Non_Unique_Kmers") +'\t' + std::string("Ref_Over_Counted_Kmers") +'\n';
     std::string outputHeader = _writerBridge.createHeader();
-    std::cout<< "Expected Header" << expectedHeader << std::endl;
-    std::cout<< "Output Header" << outputHeader << std::endl;
+    //std::cout<< "Expected Header" << expectedHeader << std::endl;
+    //std::cout<< "Output Header" << outputHeader << std::endl;
     EXPECT_EQ(outputHeader, expectedHeader);
 }
 //======================================================================
@@ -242,8 +242,8 @@ TEST_F(TestWriterBridge, createHeaderRA1)
     EXPECT_FALSE(_writerBridge.getMatchesOnlyFlag());
     std::string expectedHeader = '\t' + std::string("Ref_Count") + '\t' + std::string("Alt_Count") + "\n" ;
     std::string outputHeader = _writerBridge.createHeader();
-    std::cout<< "Expected Header" << expectedHeader << std::endl;
-    std::cout<< "Output Header" << outputHeader << std::endl;
+    //std::cout<< "Expected Header" << expectedHeader << std::endl;
+    //std::cout<< "Output Header" << outputHeader << std::endl;
     EXPECT_EQ(outputHeader, expectedHeader);
 }
 //======================================================================

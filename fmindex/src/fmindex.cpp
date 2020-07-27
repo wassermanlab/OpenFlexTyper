@@ -11,39 +11,33 @@ FmIndex::FmIndex()
 
 //======================================================================
 ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
-                              u_int maxOcc, size_t i,
-                              bool flagOverCountedKmers)
+                              u_int maxOcc, bool flagOverCountedKmers)
 {
     // This code is executed in a different thread for multithreaded
     // executions and in main thread for monothreaded applications
 
     std::string kmer = kmerClass.getKmer();
-
     ft::KmerClass resultsfutures(kmer);
-
-    //auto start = high_resolution_clock::now();
-
-    size_t occs = count(_fmindex, kmer.begin(), kmer.end());
+    size_t occs = count(_index, kmer.begin(), kmer.end());
     std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
 
     // if number kmers > max, flag kmer as "abundant"
     if (occs > maxOcc && flagOverCountedKmers) {
+        std::cout << "Kmer flagged as Abundant " << kmer << std::endl;
         resultsfutures.addKFlag(ft::FlagType::ABK);
     }
 
     if (occs > 0  && occs <= maxOcc) {
-        auto locations = sdsl::locate(_fmindex, kmer.begin(), kmer.begin() + kmer.length());
+        std::cout << "locating kmer positions " << kmer << std::endl;
+        auto locations = locate(_index, kmer.begin(), kmer.end());
+        //std::cout << "adding " << locations.size()<< " hits to kmer positions " << kmer << std::endl;
         for (auto e : locations) {
             resultsfutures.addKPosition(e);
         }
     }
-
-    //auto stop = high_resolution_clock::now();
-    //auto duration = duration_cast<microseconds>(stop - start);
-
+    std::cout << "index search results " << resultsfutures._positions.size() << std::endl;
     return resultsfutures;
 }
-
 
 //======================================================================
 fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta)
@@ -57,7 +51,7 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
     outputIndex.replace_extension(".fm9");
 
     //std::cout << "creating output index " << outputIndex << std::endl;
-    if (!load_from_file(_fmindex, outputIndex)) {
+    if (!load_from_file(_index, outputIndex)) {
 
         std::ifstream in(preprocessedFasta);
         if (!in) {
@@ -70,10 +64,9 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
         // mtx.lock();
         std::cout << "No index " << outputIndex << " located. Building index now." << std::endl;
         // mtx.unlock();
-        construct(_fmindex, preprocessedFasta, 1);
-        store_to_file(_fmindex, outputIndex);
+        construct(_index, preprocessedFasta, 1);
+        store_to_file(_index, outputIndex);
     }
-
 
     return outputIndex;
 }
@@ -81,9 +74,13 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
 //======================================================================
 void FmIndex::loadIndexFromFile(const std::string& indexname)
 {
-    if (!load_from_file(_fmindex, indexname)) {
+    if (!load_from_file(_index, indexname)) {
         std::cerr << "Error loading the index, please provide the index file";
     }
+}
+//======================================================================
+csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> FmIndex::getIndex(){
+    return _index;
 }
 
 //======================================================================
