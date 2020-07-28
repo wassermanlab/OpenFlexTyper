@@ -140,21 +140,21 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
             std::cout << "process results futures " << std::endl;
             ft::KmerClass tmpResult = e.get();
             elts++;
-            std::cout << "number of results in results future " << tmpResult.getKPositions().size() << std::endl;
+            //std::cout << "number of results in results future " << tmpResult.getKPositions().size() << std::endl;
             addResultsFutures(indexResults,tmpResult, offset);
-            std::cout << "size of index results " << indexResults->size() << std::endl;
+            //std::cout << "size of index results " << indexResults.size() << std::endl;
             elts++;
             }
         j = 0;
     }
         resultsFutures.clear();
-    std::cout << "size of index results " << indexResults->size() << std::endl;
-    ftMap.addIndexResults(*indexResults);
+   // std::cout << "size of index results " << indexResults.size() << std::endl;
+    ftMap.addIndexResults(indexResults);
 
     ftMap.addIndexResults(indexResults);
     //std::cout << "number of index results " << indexResults.size() << std::endl;
     indexResults.clear();
-    std::cout << "Finished\n";
+    //std::cout << "Finished\n";
 }
 
 

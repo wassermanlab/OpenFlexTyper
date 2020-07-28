@@ -26,7 +26,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     std::string _kmer;
     std::map<ft::FlagType, bool> _kFlags;
-    std::set<size_t> _positions;
+    std::set<long long> _positions;
     std::set<ft::ReadID> _readIDs;
 
     ////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     std::string getKmer() const;
     std::map<ft::FlagType, bool> getKFlags()const;
-    std::set<size_t> getKPositions()const;
+    std::set<long long> getKPositions()const;
     std::set<ft::ReadID> getReadIDs()const;
     uint getKmerMapSize()const;
 

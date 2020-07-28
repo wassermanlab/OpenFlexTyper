@@ -55,7 +55,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief parallelFmIndex
     ////////////////////////////////////////////////////////////////////////
-    virtual csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> getIndex() = 0;
+    virtual const csa_wt<wt_huff<rrr_vector<256>>, 512, 1024>& getIndex() = 0;
 
 };
 }

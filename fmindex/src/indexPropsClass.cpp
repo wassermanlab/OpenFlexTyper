@@ -173,9 +173,15 @@ void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) const {
 
 
       }
-
+//======================================================================
 void IndexProps::countNumOfReads(){
-    fs::path r1Fasta = _R1;
+
+    //count R1
+    fs::path r1Fasta = _outputFolder ;
+    r1Fasta /= _R1.filename();
+
+    u_int nR1 = 0;
+    u_int nR2 = 0;
     if (_readFileType == algo::FileType::GZ)
     {
         r1Fasta.filename();
@@ -188,10 +194,12 @@ void IndexProps::countNumOfReads(){
         r1Fasta.replace_extension(".fasta");
     }
 
-    int nR1 = countLines(r1Fasta);
+    nR1 = countLines(r1Fasta);
 
+    //count R2
     if (_pairedReads){
-        fs::path r2Fasta = _R2;
+        fs::path r2Fasta = _outputFolder ;
+        r2Fasta /= _R2.filename();
         if (_readFileType == algo::FileType::GZ)
         {
             r2Fasta.filename();
@@ -203,29 +211,31 @@ void IndexProps::countNumOfReads(){
             r2Fasta.filename();
             r2Fasta.replace_extension(".fasta");
         }
-        int nR2 = countLines(r2Fasta);
+        nR2 = countLines(r2Fasta);
 
         if ( nR1 != nR2){
             std::cout << "error: R1 and R2 do not contain the same number of reads" << std::endl;
         }
     }
-  setNumOfReads(nR1);
-  std::cout << getNumOfReads() << std::endl;
+
+  _numOfReads = nR1;
 
 }
-
+//======================================================================
 u_int IndexProps::countLines(fs::path fileToCount){
     std::ifstream in(fileToCount);
     u_int n = 0;
     std::string line;
 
     while (std::getline(in, line))
-        ++n;
+    {
+        n++;
+    }
     in.close();
     return n;
 
 }
-
+//======================================================================
 u_int IndexProps::getOffsetForIndex(fs::path indexFile)
 {
     fs::path fastaFile = indexFile.replace_extension(".fasta");
@@ -236,7 +246,7 @@ u_int IndexProps::getOffsetForIndex(fs::path indexFile)
 }
 
 
-
+//======================================================================
 
 IndexProps::~IndexProps()
 {}

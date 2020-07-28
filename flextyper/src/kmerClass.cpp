@@ -18,7 +18,7 @@ KmerClass::KmerClass(std::string kmer)
 //=================== GETTERS =========================
 std::string KmerClass::getKmer() const{return _kmer;}
 std::map<ft::FlagType, bool> KmerClass::getKFlags() const {return _kFlags;}
-std::set<size_t> KmerClass::getKPositions() const {return _positions;}
+std::set<long long> KmerClass::getKPositions() const {return _positions;}
 uint KmerClass::getKmerMapSize() const {return _kmer.size();}
 std::set<ft::ReadID> KmerClass::getReadIDs() const {return _readIDs;}
 
