@@ -213,6 +213,11 @@ void FTProp::initIndexProps( const bool pairedReads,
     }
 }
 
+
+void FTProp::addToIndexSet(const fs::path& index, u_int offset){
+    _indexSet[index] = offset;
+}
+
 //================= PARAMETER GETTERS ========================
 SearchType FTProp::getSearchType() const {return _searchType;}
 std::string FTProp::getReadSetName() const{return _readSetName;}

@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include "kmergenerator.cpp"
-#include "ftPropsClass.cpp"
+
 #include <climits>
 
 using namespace std;
