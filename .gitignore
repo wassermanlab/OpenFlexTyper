@@ -6,3 +6,5 @@ build*
 *.o
 Makefile
 .DS_Store
+
+*.autosave
