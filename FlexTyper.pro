@@ -62,7 +62,7 @@ SOURCES     +=                \
               flextyper/src/ftPropsClass.cpp \
               flextyper/src/ftSearch.cpp \
               flextyper/src/kmerClass.cpp \
-    flextyper/src/qkMapClass.cpp \
+              flextyper/src/qkMapClass.cpp \
               flextyper/src/queryClass.cpp \
                flextyper/src/utils.cpp                \
                fmindex/src/fmindex.cpp                \

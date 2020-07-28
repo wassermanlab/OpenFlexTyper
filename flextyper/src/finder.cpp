@@ -28,7 +28,7 @@ void Finder::multipleIndexesSequentialSearch(FTMap &ftMap)
 {
     std::map<fs::path, uint> indexes = ftMap._ftProps.getIndexSet();
     for (auto [indexPath, offset] : indexes) {
-        std::cout << "searching : " << indexPath << std::endl;
+        std::cout << "sequential search : " << indexPath << std::endl;
         sequentialSearch(ftMap, indexPath, offset);
     }
 }
@@ -38,7 +38,7 @@ void Finder::multipleIndexesParallelSearch(FTMap &ftMap)
 {
     std::map<fs::path, uint> indexes = ftMap._ftProps.getIndexSet();
     for (auto [indexPath, offset] : indexes) {
-        std::cout << "searching : " << indexPath << std::endl;
+        std::cout << "parallel search : " << indexPath << std::endl;
         parallelSearch(ftMap, indexPath, offset);
     }
 }
@@ -47,25 +47,25 @@ void Finder::multipleIndexesParallelSearch(FTMap &ftMap)
 void Finder::addResultsFutures(std::set<ft::KmerClass> &indexResults, ft::KmerClass &tmpResult, uint offset)
 {
     std::string resultkmer = tmpResult.getKmer();
-    std::cout << "results kmer " << resultkmer << std::endl;
-    std::cout << "number of  result kmer positions " << tmpResult.getKPositions().size() << std::endl;
+    //std::cout << "results kmer " << resultkmer << std::endl;
+    //std::cout << "number of  result kmer positions " << tmpResult.getKPositions().size() << std::endl;
 
     auto it = std::find_if(std::begin(indexResults), std::end(indexResults),
         [&] (const ft::KmerClass& k) {return k.hasKmer(resultkmer);});
     if (it != indexResults.end()) {
-        std::cout << "Kmer found" << std::endl;
+        //std::cout << "Kmer found" << std::endl;
         for (auto pos = tmpResult.getKPositions().begin(); pos !=tmpResult.getKPositions().end();)
         {
-           std::cout << "Add to existing result" << std::endl;
+           //std::cout << "Add to existing result" << std::endl;
             ft::KmerClass result = (*it);
             result.addKPosition((*pos), offset);
         }
     }
     else {
-        std::cout << "Kmer not found in Index " << std::endl;
+        //std::cout << "Kmer not found in Index " << std::endl;
         indexResults.insert(tmpResult);
     }
-    std::cout << "number of index results " << indexResults.size() << std::endl;
+    //std::cout << "number of index results " << indexResults.size() << std::endl;
 }
 
 //======================================================================
@@ -91,16 +91,18 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
     std::vector<std::future<ft::KmerClass>> resultsFutures;
     size_t j = 0;
     size_t k = kmerMap.size();
+    std::cout << "number of kmers " << kmerMap.size() << " j " << j << std::endl;
 
     // using a queue to easily control the flow of kmers
     std::queue<ft::KmerClass> kmerQueue;
     for (ft::KmerClass kmer : kmerMap) {
+        std::cout << "kmers " << kmer._kmer << std::endl;
         kmerQueue.push(kmer);
     }
 
     std::atomic<int> elts;
     elts = 0;
-
+    std::cout<< "max threads " << ftProps.getMaxThreads() << std::endl;
     while (!kmerQueue.empty()) {
         if (j < ftProps.getMaxThreads()) {
             ft::KmerClass kmer = kmerQueue.front();
@@ -135,14 +137,19 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
             e.wait();
         }
         for (auto& e : resultsFutures) {
+            std::cout << "process results futures " << std::endl;
             ft::KmerClass tmpResult = e.get();
-            std::cout << "number of results " << tmpResult.getKPositions().size() << std::endl;
+            elts++;
+            std::cout << "number of results in results future " << tmpResult.getKPositions().size() << std::endl;
             addResultsFutures(indexResults,tmpResult, offset);
+            std::cout << "size of index results " << indexResults->size() << std::endl;
             elts++;
             }
         j = 0;
     }
         resultsFutures.clear();
+    std::cout << "size of index results " << indexResults->size() << std::endl;
+    ftMap.addIndexResults(*indexResults);
 
     ftMap.addIndexResults(indexResults);
     //std::cout << "number of index results " << indexResults.size() << std::endl;
