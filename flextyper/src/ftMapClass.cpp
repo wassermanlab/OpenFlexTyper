@@ -6,7 +6,7 @@
 
 namespace ft {
 
-FTMap::FTMap(FTProp& ftProps)
+FTMap::FTMap(const FTProp& ftProps)
     : _ftProps(ftProps),
       _kmerSet(),
       _querySet(),
@@ -230,10 +230,10 @@ void FTMap::createQuery(int queryID, ft::QueryType queryType)
 
 void FTMap::addIndexResults(std::set<ft::KmerClass> indexResults)
 {
-    for (ft::KmerClass result : indexResults)
-    {
-        std::cout<< " kmer " << result._kmer << " number of positions: " << result._positions.size() << std::endl;
-    }
+    //for (ft::KmerClass result : indexResults)
+    //{
+        //std::cout<< " kmer " << result._kmer << " number of positions: " << result._positions.size() << std::endl;
+    //}
     _searchResults.push_back(indexResults);
 }
 

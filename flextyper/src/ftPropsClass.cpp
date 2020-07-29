@@ -25,6 +25,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
                   uint maxOccurences,
                   uint maxThreads,
                   bool flagOverCountedKmers,
+                  bool flagNonUniqueKmers,
                   bool ignoreNonUniqueKmers,
                   bool crossover,
                   bool printSearchTime,
@@ -47,6 +48,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
     _maxOccurences = maxOccurences;
     _maxThreads = maxThreads;
     _overcounted = flagOverCountedKmers;
+    _nonUnique = flagNonUniqueKmers;
     _ignoreNonUniqueKmers = ignoreNonUniqueKmers;
     _crossover = crossover;
     _printSearchTime = printSearchTime;
@@ -71,6 +73,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
 //================= INIT From Q SETTINGS ========================
 void FTProp::initFromQSettings (std::string configFile, bool printInputs){
 
+    std::cout<< "config file " << fs::current_path() << configFile << std::endl;
     QString m_sSettingsFile(configFile.c_str());
     QSettings settings(m_sSettingsFile, QSettings::NativeFormat);
 
@@ -90,6 +93,7 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
     uint           maxOccurences           = settings.value("maxOccurences").toInt();
     uint           numOfThreads            = settings.value("numOfThreads").toInt();
     bool           flagOverCountedKmers    = settings.value("flagOverCountedKmers").toBool();
+    bool           flagNonUniqueKmers    = settings.value("flagNonUniqueKmers").toBool();
     bool           ignoreNonUniqueKmers    = settings.value("ignoreNonUniqueKmers").toBool();
     bool           crossover               = settings.value("crossover").toBool();
     bool           printSearchTime         = settings.value("printSearchTime").toBool();
@@ -112,6 +116,7 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
     std::cout << "maxOccurences                 : " << maxOccurences << std::endl;
     std::cout << "numOfThreads                  : " << numOfThreads << std::endl;
     std::cout << "flagOverCountedKmers          : " << flagOverCountedKmers << std::endl;
+    std::cout << "flagNonUniqueKmers            : " << flagNonUniqueKmers << std::endl;
     std::cout << "ignoreNonUniqueKmers          : " << ignoreNonUniqueKmers << std::endl;
     std::cout << "printSearchTime               : " << printSearchTime << std::endl;
     std::cout << "maxKmersPerQuery              : " << maxKmersPerQuery << std::endl;
@@ -122,7 +127,7 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
          indexPropsFile, outputFolder, refOnly,
          searchType, multithread, overlap,
          returnMatchesOnly, kmerCounts, stride,
-         maxOccurences, numOfThreads, flagOverCountedKmers,
+         maxOccurences, numOfThreads, flagOverCountedKmers, flagNonUniqueKmers,
          ignoreNonUniqueKmers, crossover, printSearchTime,
          maxKmersPerQuery, maxTotalKmers, printInputs);
 }
@@ -239,6 +244,7 @@ bool FTProp::getMultithreadFlag() const {return _multithread;}
 bool FTProp::getRefOnlyFlag() const {return _refOnly;}
 bool FTProp::getMatchesOnlyFlag() const {return _matchesOnly;}
 bool FTProp::getOverCountedFlag() const {return _overcounted;}
+bool FTProp::getNonUniqueFlag() const {return _nonUnique;}
 bool FTProp::getIgnoreNonUniqueKmersFlag() const {return _ignoreNonUniqueKmers;}
 bool FTProp::getCrossoverFlag() const {return _crossover;}
 bool FTProp::getPrintSearchTimeFlag() const {return _matchesOnly;}

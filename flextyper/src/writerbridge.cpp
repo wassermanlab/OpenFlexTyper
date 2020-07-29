@@ -24,7 +24,7 @@ void WriterBridge::setOutputOptions(const ft::FTMap& ftMap)
     if (!ftMap._ftProps.getRefOnlyFlag()){ _altData = true;}
     if (ftMap._ftProps.getCrossoverFlag()){_croData = true;}
     if (ftMap._ftProps.getOverCountedFlag()){_OCK = true;}
-    if (ftMap._ftProps.getIgnoreNonUniqueKmersFlag()){_NUK = true;}
+    if (ftMap._ftProps.getNonUniqueFlag()){_NUK = true;}
     if (ftMap._ftProps.getMatchesOnlyFlag()){_MatchesOnly = true;}
 }
 
@@ -161,14 +161,14 @@ void WriterBridge::addQueryToOutput( const ft::QueryClass& query, const std::str
 //======================================================================
 void WriterBridge::saveOutput(const ft::FTMap& ftMap)
 {
-
+    std::cout << "Writing to output file " << ftMap._ftProps.getOutputFile() << std::endl;
     setOutputOptions(ftMap);
 
     const fs::path& inputQueryFile = ftMap._ftProps.getPathToQueryFile();
     const fs::path& outputQueryFile = ftMap._ftProps.getOutputFile();
 
-    std::cout << "Input Query File " << inputQueryFile << std::endl;
-    std::cout << "Output Query File " << outputQueryFile << std::endl;
+    //std::cout << "Input Query File " << inputQueryFile << std::endl;
+    //std::cout << "Output Query File " << outputQueryFile << std::endl;
     // save counts to output tsv
     std::fstream outputFileStream;
     outputFileStream.open(outputQueryFile, std::ios::out);
@@ -186,7 +186,7 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
     std::string line;
 
     while (getline(queryFileStream, line)) {
-        std::cout<< "line  " << line << std::endl;
+        //std::cout<< "line  " << line << std::endl;
         if (line[line.length()-1] == '\n') {
             line.erase(line.length()-1);
         }
@@ -249,7 +249,7 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
 
         line.append(outputLine);
         line.append("\n");
-        std::cout << line << std::endl;
+        //std::cout << line << std::endl;
         outputFileStream << line;
 
     }

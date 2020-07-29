@@ -43,10 +43,10 @@ if (!exists(ftProps.getOutputFile())) {
 }
 
 //======================================================================
-void FTSearch::init(FTProp ftProps)
+void FTSearch::init(const FTProp& ftProps)
 {
     ft::FTMap ftMap(ftProps);
-    checkInputFastQ(ftProps);
+    //checkInputFastQ(ftProps);
     checkOutputFile(ftProps);
 
     std::set<Query> inputQueries = _queryExtractor->getInputQueries(ftProps.getRefOnlyFlag(), ftProps.getCrossoverFlag(), ftProps.getPathToQueryFile());

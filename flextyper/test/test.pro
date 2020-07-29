@@ -41,6 +41,7 @@ SOURCES += tst_queryextractor.cpp           \
     tst_fmindex.cpp \
     tst_ftMapClass.cpp \
     tst_ftPropsClass.cpp \
+    tst_ftSearch.cpp \
     tst_indexPropsClass.cpp \
     tst_kmerClass.cpp \
     tst_qkMapClass.cpp \

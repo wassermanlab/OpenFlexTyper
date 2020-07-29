@@ -68,17 +68,17 @@ int main(int argc, char** argv)
         std::cout << "\nconfig File                   : " << configFile   << std::endl;
         bool printInputs = true;
 
-        ft::FTProp *props = new ft::FTProp();
-        props->initFromQSettings(configFile, printInputs);
+        ft::FTProp props;
+        props.initFromQSettings(configFile, printInputs);
 
 	    
-        if (props->getInputFastQ().empty()) {
+        if (props.getInputFastQ().empty()) {
             std::cerr << "you need to provide the read file location\n";
             return 1;
         }
 
         ft::FTSearch *flexTyperInstance = new ft::FTSearch();
-        flexTyperInstance->init(*props);
+        flexTyperInstance->init(props);
 
 
     } else if (command == "index") {

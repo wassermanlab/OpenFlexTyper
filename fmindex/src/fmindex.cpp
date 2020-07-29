@@ -19,7 +19,7 @@ ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
     std::string kmer = kmerClass.getKmer();
     ft::KmerClass resultsfutures(kmer);
     size_t occs = sdsl::count(getIndex(), kmer.begin(), kmer.end());
-    std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
+    //std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
 
     // if number kmers > max, flag kmer as "abundant"
     if (occs > maxOcc && flagOverCountedKmers) {
@@ -28,9 +28,9 @@ ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
     }
 
     if (occs > 0  && occs <= maxOcc) {
-        std::cout << "locating kmer positions " << kmer << std::endl;
+        //std::cout << "locating kmer positions " << kmer << std::endl;
         auto locations = sdsl::locate(getIndex(), kmer.begin(), kmer.begin()+kmer.length());
-        std::cout << "adding " << locations.size()<< " hits to kmer positions " << kmer << std::endl;
+        //std::cout << "adding " << locations.size()<< " hits to kmer positions " << kmer << std::endl;
         for (auto e : locations) {
             //std::cout << "e " << e << std::endl;
             resultsfutures.addKPosition(e);

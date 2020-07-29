@@ -54,6 +54,7 @@ public:
               uint maxOccurences            = 200   ,
               uint maxThreads             = 1     ,
               bool flagOverCountedKmers     = false ,
+              bool flagNonUniqueKmers       = false ,
               bool ignoreNonUniqueKmers     = true  ,
               bool crossover                = false ,
               bool printSearchTime          = false,
@@ -110,6 +111,7 @@ public:
     bool getRefOnlyFlag() const;
     bool getMatchesOnlyFlag() const;
     bool getOverCountedFlag() const;
+    bool getNonUniqueFlag() const;
     bool getIgnoreNonUniqueKmersFlag() const;
     bool getCrossoverFlag() const;
     bool getPrintSearchTimeFlag() const;
@@ -174,8 +176,9 @@ private:
     bool _multithread;
     bool _refOnly;
     bool _matchesOnly;
-    bool _overcounted;
-    bool _ignoreNonUniqueKmers;
+    bool _overcounted; //output a list of OCK
+    bool _nonUnique; //output a list of NUK
+    bool _ignoreNonUniqueKmers; //discount the NUK
     bool _crossover;
     bool _printSearchTime;
     bool _pairedReads;
