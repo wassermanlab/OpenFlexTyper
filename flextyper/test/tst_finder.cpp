@@ -19,6 +19,7 @@ protected:
         indexPropsFile = "Test.ini";
         outputFolder = "testOutput";
         refOnly = false;
+        revCompSearch = false;
         searchType = CENTERED;
         multithread              = false ;
         overlap                  = 0     ;
@@ -51,6 +52,7 @@ protected:
     fs::path indexPropsFile ;
     fs::path outputFolder;
     bool refOnly ;
+    bool revCompSearch;
     SearchType searchType;
     bool multithread;
     uint overlap;
@@ -89,7 +91,7 @@ TEST_F(TestFinder, addResultsFutures)
     ft::FTProp _ftProps;
 
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
@@ -122,7 +124,7 @@ TEST_F(TestFinder, sequentialSearch)
     ft::FTProp _ftProps;
 
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
@@ -178,7 +180,7 @@ TEST_F(TestFinder, sequentialSearchFromIndexProps)
     ft::FTProp _ftProps;
     indexPropsFile = "testFiles/Test.ini";
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
@@ -226,24 +228,30 @@ TEST_F(TestFinder, sequentialSearchFromIndexProps)
 
 
 //======================================================================
-TEST_F(TestFinder, DISABLED_parallelSearch)
+TEST_F(TestFinder, parallelSearch)
 {
-    TEST_DESCRIPTION("parallel search");
+    TEST_DESCRIPTION("parallel search single index");
     //void parallelSearch(FTMap &ftMap,const fs::path &indexPath, long long offset);
 
 
     Finder _finder;
     ft::FTProp _ftProps;
-    maxThreads = 30;
+    maxThreads = 2;
+    indexPropsFile = "testFiles/Test.ini";
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
                   ignoreNonUniqueKmers, crossover);
-    _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,readSetName,
-                             inputFastQ, numOfReads,numOfIndexes);
 
+    _ftProps.addToIndexSet("testOutput/Test.fm9", 0);
+
+
+    std::map<fs::path, uint> _indexSet = _ftProps._indexSet;
+    std::cout << "number of indexes " << _indexSet.size() << std::endl;
+    _indexPath = _indexSet.begin()->first;
+    std::cout << "index loaded " << _indexPath << std::endl;
     ft::FTMap _ftMap(_ftProps);
 
     ft::KmerClass kmer("AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG");
@@ -252,25 +260,30 @@ TEST_F(TestFinder, DISABLED_parallelSearch)
     _ftMap.addKmer(kmer);
     _ftMap.addKmer(kmer2);
     _ftMap.addKmer(kmer3);
+    _finder.parallelSearch(_ftMap, _indexPath, offset);
+
+    std::vector<std::set<ft::KmerClass>> results = _ftMap.getResults();
+    EXPECT_EQ(results.size(), _ftProps.getNumOfIndexes());
+
+    std::set<ft::KmerClass> result = results.front();
+    std::cout<< "result size " << result.size() << std::endl;
+
+
+    auto roccsIT = result.begin();
+    ft::KmerClass rkmer = *roccsIT;
+    uint roccs = rkmer.getKPositions().size();
+    roccsIT++;
+    ft::KmerClass rkmer2 = *roccsIT;
+    uint roccs2 = rkmer2.getKPositions().size();
+    roccsIT++;
+    ft::KmerClass rkmer3 = *roccsIT;
+    uint roccs3 = rkmer3.getKPositions().size();
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
     sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
     auto occs3 = sdsl::count(_testindex, kmer._kmer.begin(), kmer._kmer.end());
     auto occs = sdsl::count(_testindex, kmer2._kmer.begin(), kmer2._kmer.end());
     auto occs2 = sdsl::count(_testindex, kmer3._kmer.begin(), kmer3._kmer.end());
-
-    _finder.parallelSearch(_ftMap, _indexPath, offset);
-
-    std::vector<std::set<ft::KmerClass>> results = _ftMap.getResults();
-    EXPECT_EQ(results.size(), _ftProps.getNumOfIndexes());
-    std::set<ft::KmerClass> result = results.front();
-    std::cout<< "result size " << result.size() << std::endl;
-    auto roccsIT = result.begin();
-    uint roccs = roccsIT->getKPositions().size();
-    roccsIT++;
-    uint roccs2 = roccsIT->getKPositions().size();
-    roccsIT++;
-    uint roccs3 = roccsIT->getKPositions().size();
     EXPECT_EQ(occs, roccs);
     EXPECT_EQ(occs2, roccs2);
     EXPECT_EQ(occs3, roccs3);

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <map>
 #include <algorithm>
+#include <queue>
 #include "ftMapClass.h"
 
 namespace ft {
@@ -66,7 +67,7 @@ void FTMap::genQKMap()
         std::set<ft::KmerClass*> kmerObj;
         // generate fwd query kmers
         std::set<std::string> kmers = (_kmerGenerator.genSearchKmers(query));
-        //std::cout << "generated " << kmers.size() << " kmers " << std::endl;
+        std::cout << "generated " << kmers.size() << " kmers " << std::endl;
         for (std::string kmer : kmers)
         {
             if (checkForKmer(kmer)){
@@ -104,6 +105,82 @@ void FTMap::genQKMap()
     }
 }
 
+////======================================================================
+//void FTMap::classifyQueryKmers(ft::QueryClass* queryPointer, std::set<std::string> inputkmers)
+//{
+//    std::set<ft::KmerClass*> newKmers;
+//    std::set<ft::KmerClass*> nukKmers;
+
+//    // create a vector of futures
+//    std::vector< std::pair<std::string, std::future<ft::KmerClass*>>> classifiedKmerFutures;
+//    size_t j = 0;
+//    size_t k = inputkmers.size();
+
+//    // using a queue to easily control the flow of kmers
+//    std::queue<std::string> kmerQueue;
+//    for (std::string kmer : inputkmers) {
+//        //std::cout << "kmers " << kmer._kmer << std::endl;
+//        kmerQueue.push(kmer);
+//    }
+
+//    std::atomic<int> elts;
+//    elts = 0;
+
+//    while (!kmerQueue.empty()) {
+//        if (j < _ftProps.getMaxThreads()) {
+//            std::string kmer = kmerQueue.front();
+//            classifiedKmerFutures.push_back(std::make_pair(kmer,std::async(std::launch::async,
+//                                                       &ft::FTMap::findKmer,
+//                                                       dynamic_cast<ft::FTMap*>(this),
+//                                                       kmer)));
+//            kmerQueue.pop();
+//            j++;
+//            k--;
+//            continue;
+//        }
+//        while (kmerQueue.size() > 0) {
+//            if (kmerQueue.size() < _ftProps.getMaxThreads()) {
+//                std::string kmer = kmerQueue.front();
+//                classifiedKmerFutures.push_back(std::make_pair(kmer, std::async(std::launch::async,
+//                                                 &ft::FTMap::findKmer,
+//                                                 dynamic_cast<ft::FTMap*>(this),
+//                                                 kmer)));
+//                kmerQueue.pop();
+//            } else {
+//                break;
+//            }
+//        }
+
+//        for (auto& e : classifiedKmerFutures) {
+//            e.second.wait();
+//        }
+
+//        for (auto& e : classifiedKmerFutures) {
+//            if (!e.second.get()){
+
+//            }
+//            ft::KmerClass *exists = e.second.get();
+//            std::string kmer = e.first;
+//            elts++;
+//            if (exists)
+//            {
+//                ft::KmerClass* nonuniqueKmer = findKmer(kmer);
+//                nonuniqueKmer->addKFlag(ft::FlagType::NUK);
+//                //std::cout << "add existing kmer " << kmer << std::endl;
+//            } else {
+//                //std::cout << "add new kmer " << kmer << std::endl;
+//                addKmer(kmer);
+//            elts++;
+//            }
+//        j = 0;
+//    }
+//    std::cout << "Finished\n";
+//}
+
+
+
+
+
 #define INITEND }
 //======================================================
 //=============== GETTERS & SETTERS ====================
@@ -128,6 +205,8 @@ bool FTMap::checkForKmer(const std::string &testKmer) const
         return false;
     }
 }
+
+
 
 //======================================================
 ft::KmerClass* FTMap::findKmer(const std::string& testkmer)
@@ -246,13 +325,13 @@ void FTMap::addKmerResults(const ft::KmerClass& kmerResult)
      if (kmer == NULL){
          //std::cout << "kmer not found, creating new kmer entry" << std::endl;
          addKmer(kmerResult);
-
-         if (!checkForKmer(kmerResult.getKmer())){
+         kmer = findKmer(kmerResult.getKmer());
+         if (!checkForKmer(kmer->getKmer())){
              std::cout << "Error: couldnt add new kmer to FTMap" << std::endl;
          }
      }
 
-     kmer = findKmer(kmerResult.getKmer());
+
      //std::cout << "number of existing read IDs " << kmer->getReadIDs().size() << std::endl;
 
      // add read IDs
@@ -260,6 +339,10 @@ void FTMap::addKmerResults(const ft::KmerClass& kmerResult)
      {
          //std::cout << "result ID " << resultID.first << std::endl;
          kmer->addReadID(resultID);
+         if (!kmer->hasReadID(resultID))
+         {
+             std::cout << "Error: couldnt add readID to Kmer" << std::endl;
+         }
      }
 
      // add flags
@@ -273,7 +356,11 @@ void FTMap::addKmerResults(const ft::KmerClass& kmerResult)
 //======================================================
 void FTMap::processIndexResults(std::set<ft::KmerClass> indexResult)
 {
+
+    //std::cout << "Number of kmers for this index " << indexResult.size() << std::endl;
     for (ft::KmerClass kmerResult : indexResult){
+        //std::cout << "kmer being added " << kmerResult._kmer << " positions " << kmerResult._positions.size()<< std::endl;
+
        kmerResult.convertPosToReadID(_ftProps.getReadLength(),
                                      _ftProps.getNumOfReads(),
                                      _ftProps.getIndexRevCompFlag());
@@ -284,12 +371,15 @@ void FTMap::processIndexResults(std::set<ft::KmerClass> indexResult)
 //======================================================
 void FTMap::processResults()
 {
+    //std::cout << "number of index results to process " << _searchResults.size() << std::endl;
     for (std::set<ft::KmerClass> indexResult : _searchResults ){
+       //std::cout << "Number of kmers for this index " << indexResult.size() << std::endl;
        processIndexResults(indexResult);
     }
-
+    std::cout << "Number of queries to count " << _querySet.size() << std::endl;
     for (ft::QueryClass query : _querySet)
     {
+        std::cout << "Query ID " << query.getqID() << std::endl;
         processQueryResults(query.getQIdT());
     }
 
@@ -323,6 +413,7 @@ void FTMap::processQueryResults(const ft::QIdT& queryIDT)
             for ( ft::ReadID readID : fwdKmerReadIDs)
             {
                 readIds.insert(readID);
+                //std::cout << "number of query ReadIDs " << readIds.size() << std::endl;
             }
         }
     }
@@ -350,10 +441,12 @@ void FTMap::processQueryResults(const ft::QIdT& queryIDT)
                 for ( ft::ReadID readID : rcKmerReadIDs)
                 {
                     readIds.insert(readID);
+                    //std::cout << "number of query ReadIDs " << readIds.size() << std::endl;
                 }
             }
         }
     }
+
     query->setCount(readIds.size());
 }
 

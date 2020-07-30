@@ -72,6 +72,7 @@ public:
     /// \brief convert
     ////////////////////////////////////////////////////////////////////////
     void convertPosToReadID(uint readLength, uint numOfReads, bool indexRevComp = false);
+    bool matchingReadID(const ft::ReadID &a, const ft::ReadID &b) const;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief overload

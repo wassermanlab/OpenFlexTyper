@@ -52,7 +52,11 @@ void KmerClass::addKPosition(const size_t& kPosition, const uint& offset)
     _positions.insert(kPos);
 }
 void KmerClass::addReadID(const ft::ReadID& readID)
-{    _readIDs.insert(readID);}
+{
+    if (!hasReadID(readID)){
+        //std::cout << "adding readID " << readID.first << " pair " << readID.second <<  std::endl;
+        _readIDs.insert(readID);}
+}
 
 //===================== REMOVERS =======================+
 void KmerClass::removeKFlag(ft::FlagType flag){
@@ -72,26 +76,39 @@ bool KmerClass::isKmerEqual(KmerClass test) const {
 bool KmerClass::hasKmer(std::string test) const {
     return _kmer == test;
 }
-bool KmerClass::hasFlag(ft::FlagType flag) const{
+bool KmerClass::hasFlag(ft::FlagType flag) const{    
     return this->getKFlags()[flag];
 }
 bool KmerClass::hasKPosition(size_t kPosition) const{
     const bool is_in = _positions.find(kPosition) != _positions.end();
     return is_in;
 }
+
+bool KmerClass::matchingReadID(const ft::ReadID &a, const ft::ReadID &b) const
+{
+    return (a.first == b.first && a.second == b.second);
+}
+
 bool KmerClass::hasReadID(ft::ReadID read ) const {
 
-    const bool is_in = _readIDs.find(read) != _readIDs.end();
+    bool is_in = false;
+    for (ft::ReadID rID : _readIDs)
+    {
+        if (matchingReadID(rID, read))
+        {
+            is_in = true;
+            continue;
+        }
+    }
     return is_in;
 }
 
 //====================== CONVERT ========================
 void KmerClass::convertPosToReadID(uint readLength, uint numOfReads, bool indexRevComp)
 {
-//    std::cout << "read Length " << readLength << std::endl;
-//    std::cout << "num of Reads " << numOfReads << std::endl;
-//    std::cout << " rev comp " << revComp << std::endl;
 
+    //std::cout << "conver Pos to ReadID " <<std::endl;
+    //std::cout << "number of positions " << _positions.size() << std::endl;
     if (readLength == 0)
     {
         std::cout << "ERROR: Read Length not set " << std::endl;
@@ -112,6 +129,7 @@ void KmerClass::convertPosToReadID(uint readLength, uint numOfReads, bool indexR
         //std::cout <<"read ID " << rID <<  " read Type " << readType << std::endl;
         addReadID(std::make_pair(rID, readType));
     }
+    //std::cout << "number of ReadIDs " << _readIDs.size() << std::endl;
 }
 
 //===================== OVERLOAD ========================

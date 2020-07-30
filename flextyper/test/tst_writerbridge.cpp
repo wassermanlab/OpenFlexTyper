@@ -48,6 +48,7 @@ protected:
     fs::path indexPropsFile ;
     fs::path outputFolder;
     bool refOnly ;
+    bool revCompSearch;
     SearchType searchType;
     bool multithread;
     uint overlap;
@@ -85,7 +86,7 @@ TEST_F(TestWriterBridge, setOutputOptions)
     //void setOutputOptions(const ft::FTMap& ftMap);
     ft::FTProp _ftProps;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -97,11 +98,8 @@ TEST_F(TestWriterBridge, setOutputOptions)
     EXPECT_TRUE(_writerBridge.getAltData());
     EXPECT_FALSE(_writerBridge.getCroData());
     EXPECT_FALSE(_writerBridge.getOCKFlag());
-    EXPECT_TRUE(_writerBridge.getNUKFlag());
+    EXPECT_FALSE(_writerBridge.getNUKFlag());
     EXPECT_FALSE(_writerBridge.getMatchesOnlyFlag());
-
-
-
 }
 ////////////////////////////////////////////////////////////////////////
 /// createHeader()
@@ -118,7 +116,7 @@ TEST_F(TestWriterBridge, createHeaderRef1)
     flagNonUniqueKmers = false;
     ignoreNonUniqueKmers = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -148,7 +146,7 @@ TEST_F(TestWriterBridge, createHeaderRef2)
     flagNonUniqueKmers = false;
     ignoreNonUniqueKmers = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -178,7 +176,7 @@ TEST_F(TestWriterBridge, createHeaderRef3)
     flagNonUniqueKmers = true;
     ignoreNonUniqueKmers = true;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -208,7 +206,7 @@ TEST_F(TestWriterBridge, createHeaderRef4)
     flagNonUniqueKmers = true;
     ignoreNonUniqueKmers = true;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -232,7 +230,7 @@ TEST_F(TestWriterBridge, createHeaderRA1)
     flagNonUniqueKmers = false;
     ignoreNonUniqueKmers = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -262,7 +260,7 @@ TEST_F(TestWriterBridge, createHeaderRA2)
     flagNonUniqueKmers = false;
     ignoreNonUniqueKmers = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -291,7 +289,7 @@ TEST_F(TestWriterBridge, createHeaderRA3)
     flagNonUniqueKmers = true;
     ignoreNonUniqueKmers = true;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -320,7 +318,7 @@ TEST_F(TestWriterBridge, createHeaderRA4)
     flagNonUniqueKmers = true;
     ignoreNonUniqueKmers = true;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -351,7 +349,7 @@ TEST_F(TestWriterBridge, createHeaderCRO1)
     flagNonUniqueKmers = false;
     ignoreNonUniqueKmers = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -380,7 +378,7 @@ TEST_F(TestWriterBridge, createHeaderCRO2)
     flagNonUniqueKmers = false;
     ignoreNonUniqueKmers = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -412,7 +410,7 @@ TEST_F(TestWriterBridge, createHeaderCRO3)
     flagNonUniqueKmers = true;
     ignoreNonUniqueKmers = true;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -444,7 +442,7 @@ TEST_F(TestWriterBridge, createHeaderCRO4)
     flagNonUniqueKmers = true;
     ignoreNonUniqueKmers = true;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -483,7 +481,7 @@ TEST_F(TestWriterBridge, getFlagKmers)
     flagOverCountedKmers = true;
     ignoreNonUniqueKmers = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
@@ -508,7 +506,7 @@ TEST_F(TestWriterBridge, getFlagKmers2)
     flagOverCountedKmers = false;
     ignoreNonUniqueKmers = true;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
@@ -536,7 +534,7 @@ TEST_F(TestWriterBridge, getFlagKmers3)
     flagOverCountedKmers = false;
     ignoreNonUniqueKmers = true;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
@@ -569,7 +567,7 @@ TEST_F(TestWriterBridge, addQueryToOutput1)
     flagOverCountedKmers = false;
     ignoreNonUniqueKmers = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
@@ -597,7 +595,7 @@ TEST_F(TestWriterBridge, addQueryToOutput2)
     flagOverCountedKmers = true;
     ignoreNonUniqueKmers = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch ,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
@@ -637,7 +635,7 @@ TEST_F(TestWriterBridge, formatOutputMap1)
     flagNonUniqueKmers = false;
     ignoreNonUniqueKmers = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -662,7 +660,7 @@ TEST_F(TestWriterBridge, formatOutputMap2)
     flagNonUniqueKmers = false;
     ignoreNonUniqueKmers = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -691,7 +689,7 @@ TEST_F(TestWriterBridge, formatOutputMap3)
     flagNonUniqueKmers = false;
     ignoreNonUniqueKmers = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -722,7 +720,7 @@ TEST_F(TestWriterBridge, formatOutputMap4)
     flagNonUniqueKmers = false;
     ignoreNonUniqueKmers = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -749,7 +747,7 @@ TEST_F(TestWriterBridge, formatOutputMap5)
     flagNonUniqueKmers = true;
     ignoreNonUniqueKmers = true;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -776,7 +774,7 @@ TEST_F(TestWriterBridge, formatOutputMap6)
     flagNonUniqueKmers = true;
     ignoreNonUniqueKmers = true;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -805,7 +803,7 @@ TEST_F(TestWriterBridge, formatOutputMap7)
     flagNonUniqueKmers = true;
     ignoreNonUniqueKmers = true;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,

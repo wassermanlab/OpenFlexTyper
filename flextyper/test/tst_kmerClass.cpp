@@ -176,6 +176,45 @@ TEST_F(TestKmerClass, convertPosToRead_Paired_ReverseComp)
     EXPECT_EQ(expectedReadIDs, testKmerClass->getReadIDs());
 }
 //======================================================================
+TEST_F(TestKmerClass, matchingReadID)
+{
+    TEST_DESCRIPTION("check if readids match ");
+    ft::KmerClass* testKmerClass = new ft::KmerClass("AAAA");
+    ft::ReadID a = {1,1};
+    ft::ReadID b = {1,2};
+    ft::ReadID c = {2,1};
+    ft::ReadID d = {2,2};
+    ft::ReadID e = {1,1};
+    EXPECT_TRUE(testKmerClass->matchingReadID(a,e));
+    EXPECT_FALSE(testKmerClass->matchingReadID(a,b));
+    EXPECT_FALSE(testKmerClass->matchingReadID(a,c));
+    EXPECT_FALSE(testKmerClass->matchingReadID(a,d));
+
+}
+
+//======================================================================
+TEST_F(TestKmerClass, hasReadID)
+{
+    TEST_DESCRIPTION("check if Kmer has ReadID ");
+    ft::KmerClass* testKmerClass = new ft::KmerClass("AAAA");
+    ft::ReadID a = {1,1};
+    ft::ReadID b = {1,2};
+    ft::ReadID c = {2,1};
+    ft::ReadID d = {1,3};
+    ft::ReadID e = {3,1};
+    ft::ReadID f = {3,3};
+    std::set<ft::ReadID> readIDs = {{1,1}, {2,1}, {1,2}, {2,2}};
+    testKmerClass->setReadIDs(readIDs);
+    EXPECT_TRUE(testKmerClass->hasReadID(a));
+    EXPECT_TRUE(testKmerClass->hasReadID(b));
+    EXPECT_TRUE(testKmerClass->hasReadID(c));
+
+    EXPECT_FALSE(testKmerClass->hasReadID(d));
+    EXPECT_FALSE(testKmerClass->hasReadID(e));
+    EXPECT_FALSE(testKmerClass->hasReadID(f));
+
+}
+//======================================================================
 TEST_F(TestKmerClass, testOverloadOperator)
 {
     TEST_DESCRIPTION("check the overload operator ");

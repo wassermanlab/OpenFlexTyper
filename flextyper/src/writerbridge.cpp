@@ -103,7 +103,7 @@ std::string WriterBridge::formatOutputMap()
             outputLine +='\t' + _outputMap["refOCK"] ;
         }
     }
-    //std::cout << " outputLine " << outputLine <<std::endl;
+    std::cout << " outputLine " << outputLine <<std::endl;
     return outputLine;
 }
 

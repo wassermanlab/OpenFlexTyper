@@ -139,21 +139,6 @@ TEST_F(TestUtils, convertIndexPositionsToReadIDsWithRepeatedPositions)
     EXPECT_EQ(output, expectedPositions);
 }
 
-//======================================================================
-TEST_F(TestUtils, fileIndexToQueryIndex)
-{
-    TEST_DESCRIPTION("Tests that the method findIndexToQueryIndex translates the index");
-
-    vector<int> input {1, 5, 2, 6, 3, 1, 4, 2, 1};
-    vector<int> expectedOutputVector {2, 6, 3, 7, 4, 2, 5, 3, 2};
-
-    vector<int> output;
-    for (auto e : input) {
-        output.push_back(_utils.fileIndexToQueryIndex(e));
-    }
-
-    EXPECT_EQ(output, expectedOutputVector);
-}
 
 //======================================================================
 TEST_F(TestUtils, fileIndexToQueryIndexWithWeirdCases)

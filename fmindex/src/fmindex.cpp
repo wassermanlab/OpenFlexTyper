@@ -36,7 +36,7 @@ ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
             resultsfutures.addKPosition(e);
         }
     }
-    //std::cout << "index search results " << resultsfutures._positions.size() << std::endl;
+    //std::cout << "index search positions  " << resultsfutures._positions.size() << std::endl;
     return resultsfutures;
 }
 

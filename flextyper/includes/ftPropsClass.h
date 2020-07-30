@@ -45,6 +45,7 @@ public:
               const fs::path& indexPropsFile        ,
               const fs::path& outputFile            ,
               bool refOnly                          ,
+              bool revCompSearch                    ,
               SearchType searchType                 ,
               bool multithread              = false ,
               uint overlap                  = 0     ,
@@ -185,6 +186,10 @@ private:
     bool _revCompSearch; //generate and search for _qkRCMap
     bool _indexRevComp; //do the index files contain the reverse complement
     bool _matchingReads; //create files that contain reads that match to each query
+
+
+
+
 };
 
 }

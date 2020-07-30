@@ -41,6 +41,14 @@ TEST_F(TestQueryClass, getFlagKmers)
 {
     TEST_DESCRIPTION("get Flag Kmers ");
     //const std::set<std::string> getFlagKmers(const ft::FlagType flag) const;
+    ft::QueryClass* testQuery = new ft::QueryClass(1, ft::QueryType::REF);
+    testQuery->_qFlags[FlagType::NUK]={"AAAA", "AATT"};
+    std::set<std::string> expected = {"AAAA", "AATT"};
+    std::set<std::string> output = testQuery->getFlagKmers(FlagType::NUK);
+    std::set<std::string> output2 = testQuery->getFlagKmers(FlagType::OCK);
+    std::set<std::string> expected2 = {};
+    EXPECT_EQ(expected, output);
+    EXPECT_EQ(output2, expected2);
 
 }
 //======================================================================
@@ -51,10 +59,11 @@ TEST_F(TestQueryClass, setFlags)
     ft::QueryClass* testQuery = new ft::QueryClass(1, ft::QueryType::REF);
     std::map<ft::FlagType, std::set<std::string>> flags;
     flags[FlagType::NUK]={"AAAA", "AATT"};
-
+    std::set<std::string> expected = {"AAAA", "AATT"};
     testQuery->setFlags(flags);
-
-
+    EXPECT_TRUE(testQuery->hasFlag(FlagType::NUK));
+    EXPECT_FALSE(testQuery->hasFlag(FlagType::OCK));
+    EXPECT_EQ(testQuery->getFlagKmers(FlagType::NUK),expected);
 
 }
 

@@ -19,7 +19,13 @@ int QueryClass::getCount() const {return _count;}
 std::map<ft::FlagType, std::set<std::string>> QueryClass::getQFlags()const {return _qFlags;}
 ft::QIdT QueryClass::getQIdT()const {return std::make_pair(_qID, _qType);}
 const std::set<std::string> QueryClass::getFlagKmers(const ft::FlagType flag) const {
-return _qFlags.find(flag)->second;}
+    if (hasFlag(flag)){
+        return _qFlags.find(flag)->second;
+    } else {
+        std::cout << "query doesnt have flag" << std::endl;
+        return {};
+    }
+}
 
 //================== SETTERS ===========================
 

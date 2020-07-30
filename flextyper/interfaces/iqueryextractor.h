@@ -15,24 +15,6 @@ public:
     virtual ~IQueryExtractor() {}
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief getInputQueriesRoutine
-    /// \param refSequence
-    /// \param altSequence
-    /// \param fileIndex
-    /// \param inputQueries
-    ////////////////////////////////////////////////////////////////////////
-    virtual void getInputQueriesRoutine(const std::string& refSequence, const std::string& altSequence, uint fileIndex, std::set<Query>& inputQueries) = 0;
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief getStartAndEndPointSequences
-    /// \param startPointRef
-    /// \param endPointRef
-    /// \param fileIndex
-    /// \param inputQueries
-    ////////////////////////////////////////////////////////////////////////
-    virtual void getStartAndEndPointSequences(const std::string& startPointRef, const std::string& endPointRef, uint fileIndex, std::set<Query>& inputQueries) = 0;
-
-    ////////////////////////////////////////////////////////////////////////
     /// \brief getInputQueries
     /// \param refOnly
     /// \param crossover

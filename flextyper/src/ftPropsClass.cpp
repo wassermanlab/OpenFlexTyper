@@ -16,6 +16,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
                   const fs::path &indexPropsFile,
                   const fs::path &outputFolder,
                   bool refOnly,
+                  bool revCompSearch,
                   SearchType searchType,
                   bool multithread,
                   uint overlap,
@@ -39,6 +40,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
     loadIndexProps(indexPropsFile, printInputs);
     _outputFolder = outputFolder;
     _refOnly = refOnly;
+    _revCompSearch = revCompSearch;
     _searchType = searchType;
     _multithread = multithread;
     _overlap = overlap;
@@ -83,6 +85,7 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
     fs::path       indexPropsFile          = settings.value("indexPropsFile").toString().toStdString();
     fs::path       outputFolder            = settings.value("outputFolder").toString().toStdString();
     bool           refOnly                 = settings.value("refOnly").toBool();
+    bool           revCompSearch           = settings.value("revCompSearch").toBool();
     ft::SearchType searchType              = static_cast<ft::SearchType>(settings.value("searchType").toString().toStdString()) ;
     bool           multithread             = settings.value("multithread").toBool();
     bool           matchingReads           = settings.value("matchingReads").toBool();
@@ -107,6 +110,7 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
     std::cout << "indexPropsFile                : " << indexPropsFile <<  std::endl;
     std::cout << "outputFolder                  : " << outputFolder <<  std::endl;
     std::cout << "refOnly                       : " << refOnly <<  std::endl;
+    std::cout << "revComp                       : " << revCompSearch <<  std::endl;
     std::cout << "searchType                    : " << searchType <<  std::endl;
     std::cout << "multithread                   : " << multithread <<  std::endl;
     std::cout << "overlap                       : " << overlap <<  std::endl;
@@ -124,7 +128,7 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
     std::cout << "matchingReads                 : " << matchingReads << std::endl;
     }
     init(pathToQueryFile, kmerSize, readLength,
-         indexPropsFile, outputFolder, refOnly,
+         indexPropsFile, outputFolder, refOnly, revCompSearch,
          searchType, multithread, overlap,
          returnMatchesOnly, kmerCounts, stride,
          maxOccurences, numOfThreads, flagOverCountedKmers, flagNonUniqueKmers,
@@ -220,6 +224,7 @@ void FTProp::initIndexProps( const bool pairedReads,
 
 
 void FTProp::addToIndexSet(const fs::path& index, u_int offset){
+    std::cout<< "add index to set " << index << std::endl;
     _indexSet[index] = offset;
 }
 
@@ -270,6 +275,8 @@ void FTProp::setTestProps(const uint numOfReads, const uint readLength, bool rev
     _readLength = readLength;
     _indexRevComp = revComp;
 }
+
+
 FTProp::~FTProp()
 {
 }

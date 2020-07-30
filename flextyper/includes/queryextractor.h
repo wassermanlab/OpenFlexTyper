@@ -25,24 +25,6 @@ public:
     virtual ~QueryExtractor();
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief getInputQueriesRoutine
-    /// \param refSequence
-    /// \param altSequence
-    /// \param fileIndex
-    /// \param inputQueries
-    ////////////////////////////////////////////////////////////////////////
-    void getInputQueriesRoutine(const std::string& refSequence, const std::string& altSequence, uint fileIndex, std::set<Query>& inputQueries);
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief getStartAndEndPointSequences
-    /// \param startPointRef
-    /// \param endPointRef
-    /// \param fileIndex
-    /// \param inputQueries
-    ////////////////////////////////////////////////////////////////////////
-    void getStartAndEndPointSequences(const std::string& startPointRef, const std::string& endPointRef, uint fileIndex, std::set<Query>& inputQueries);
-
-    ////////////////////////////////////////////////////////////////////////
     /// \brief getInputQueries
     /// \param refOnly
     /// \param crossover

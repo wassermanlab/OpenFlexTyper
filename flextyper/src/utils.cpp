@@ -132,7 +132,7 @@ std::string Utils::reverseComplement(const std::string& inputString) const
 int Utils::fileIndexToQueryIndex(uint fileIndex)
 {
     // query index cannot be zero
-    int queryIndex = fileIndex + 1;
+    int queryIndex = fileIndex ;
 
     if (queryIndex <= 0) {
         exit(1);
@@ -160,7 +160,7 @@ std::string Utils::trimmedReadFileName(const fs::path& p)
 uint Utils::queryIndexToFileIndex(int queryIndex)
 {
     // file index can be zero
-    uint fileIndex = abs(queryIndex) -1;
+    uint fileIndex = abs(queryIndex) ;
     return fileIndex;
 }
 
