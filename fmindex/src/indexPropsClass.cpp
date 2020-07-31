@@ -179,9 +179,9 @@ void IndexProps::countNumOfReads(){
     //count R1
     fs::path r1Fasta = _outputFolder ;
     r1Fasta /= _R1.filename();
-
     u_int nR1 = 0;
     u_int nR2 = 0;
+
     if (_readFileType == algo::FileType::GZ)
     {
         r1Fasta.filename();
@@ -218,7 +218,7 @@ void IndexProps::countNumOfReads(){
         }
     }
 
-  _numOfReads = nR1;
+  _numOfReads = nR1 + nR2;
 
 }
 //======================================================================

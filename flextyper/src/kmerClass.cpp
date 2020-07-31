@@ -19,7 +19,7 @@ KmerClass::KmerClass(std::string kmer)
 std::string KmerClass::getKmer() const{return _kmer;}
 std::map<ft::FlagType, bool> KmerClass::getKFlags() const {return _kFlags;}
 std::set<long long> KmerClass::getKPositions() const {return _positions;}
-uint KmerClass::getKmerMapSize() const {return _kmer.size();}
+//uint KmerClass::getKmerMapSize() const {return _kmer.size();}
 std::set<ft::ReadID> KmerClass::getReadIDs() const {return _readIDs;}
 
 //================== SETTERS ===========================
@@ -54,8 +54,10 @@ void KmerClass::addKPosition(const size_t& kPosition, const uint& offset)
 void KmerClass::addReadID(const ft::ReadID& readID)
 {
     if (!hasReadID(readID)){
-        //std::cout << "adding readID " << readID.first << " pair " << readID.second <<  std::endl;
-        _readIDs.insert(readID);}
+        _readIDs.insert(readID);
+    }else {
+        //std::cout << "ReadID already added" << std::endl;
+    }
 }
 
 //===================== REMOVERS =======================+
@@ -70,16 +72,16 @@ void KmerClass::removeKPosition(size_t kPosition, uint offset)
 void KmerClass::removeReadID(ft::ReadID readID){_readIDs.erase(readID);}
 
 //==================== CHECKERS =========================
-bool KmerClass::isKmerEqual(KmerClass test) const {
+bool KmerClass::isKmerEqual(const KmerClass& test) const {
     return _kmer == test.getKmer();
 }
-bool KmerClass::hasKmer(std::string test) const {
+bool KmerClass::hasKmer(const std::string& test) const {
     return _kmer == test;
 }
-bool KmerClass::hasFlag(ft::FlagType flag) const{    
+bool KmerClass::hasFlag(const ft::FlagType& flag) const{
     return this->getKFlags()[flag];
 }
-bool KmerClass::hasKPosition(size_t kPosition) const{
+bool KmerClass::hasKPosition(const size_t& kPosition) const{
     const bool is_in = _positions.find(kPosition) != _positions.end();
     return is_in;
 }
@@ -89,22 +91,25 @@ bool KmerClass::matchingReadID(const ft::ReadID &a, const ft::ReadID &b) const
     return (a.first == b.first && a.second == b.second);
 }
 
-bool KmerClass::hasReadID(ft::ReadID read ) const {
+bool KmerClass::hasReadID(const ft::ReadID& read ) const {
 
     bool is_in = false;
-    for (ft::ReadID rID : _readIDs)
+
+    for (ft::ReadID rID : getReadIDs())
     {
-        if (matchingReadID(rID, read))
+        //std::cout << "existing rID " << rID.first << " pair " << rID.second << std::endl;
+        if (matchingReadID(rID, read) == true)
         {
             is_in = true;
             continue;
         }
     }
+    //std::cout << "Read ID " << read.first << " pair " << read.second << " is_in " << is_in << std::endl;
     return is_in;
 }
 
 //====================== CONVERT ========================
-void KmerClass::convertPosToReadID(uint readLength, uint numOfReads, bool indexRevComp)
+void KmerClass::convertPosToReadID(uint readLength, uint numOfReads, bool pairedReads, bool indexRevComp)
 {
 
     //std::cout << "conver Pos to ReadID " <<std::endl;
@@ -117,6 +122,10 @@ void KmerClass::convertPosToReadID(uint readLength, uint numOfReads, bool indexR
     {
         std::cout << "ERROR: Num of Reads not set " << std::endl;
     }
+    if (pairedReads)
+    {
+        numOfReads = numOfReads/2;
+    }
 
     for (auto pos : _positions) {
         u_int r = std::ceil(pos / (readLength + 1)) ;
@@ -126,7 +135,7 @@ void KmerClass::convertPosToReadID(uint readLength, uint numOfReads, bool indexR
         //std::cout << "r " << float(r) << " num of Reads "<< float(numOfReads) << std::endl;
         //std::cout << "read Type " << readType << std::endl;
         if (indexRevComp){readType = ceil((readType+1)/2);}
-        //std::cout <<"read ID " << rID <<  " read Type " << readType << std::endl;
+        //std::cout <<"pos " << pos << " read ID " << rID <<  " read Type " << readType << std::endl;
         addReadID(std::make_pair(rID, readType));
     }
     //std::cout << "number of ReadIDs " << _readIDs.size() << std::endl;
@@ -135,16 +144,13 @@ void KmerClass::convertPosToReadID(uint readLength, uint numOfReads, bool indexR
 //===================== OVERLOAD ========================
 bool KmerClass::operator< (const ft::KmerClass &k) const {
     int output = _kmer.compare(k._kmer);
-    //std::cout << "Lower kmer  " << _kmer << std::endl;
-    //std::cout << "Higher kmer " << k._kmer << std::endl;
-    //std::cout << "negative = true, positive = false  " << output << std::endl;
+
     // lower.compare(higher) < 0 => true
     if (output <0 )
     {
         return true;
     }
     else return false;
-    //return  (_kmer) < k._kmer;}
 }
 bool KmerClass::operator== (const ft::KmerClass &k) const {return _kmer == k._kmer;}
 

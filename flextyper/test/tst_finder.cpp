@@ -30,6 +30,7 @@ protected:
         maxThreads               = 1     ;
         flagOverCountedKmers     = false ;
         ignoreNonUniqueKmers     = true  ;
+        countAsPairs             = false ;
         crossover                = false ;
         pairedReads = false;
         revComp = false;
@@ -63,6 +64,7 @@ protected:
     uint maxThreads;
     bool flagOverCountedKmers;
     bool ignoreNonUniqueKmers;
+    bool countAsPairs;
     bool crossover;
     bool pairedReads;
     bool revComp;

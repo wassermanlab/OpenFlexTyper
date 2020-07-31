@@ -57,6 +57,7 @@ public:
               bool flagOverCountedKmers     = false ,
               bool flagNonUniqueKmers       = false ,
               bool ignoreNonUniqueKmers     = true  ,
+              bool countAsPairs             = false,
               bool crossover                = false ,
               bool printSearchTime          = false,
               uint maxKmers                 = UINT_MAX,
@@ -117,6 +118,7 @@ public:
     bool getCrossoverFlag() const;
     bool getPrintSearchTimeFlag() const;
     bool getPairedReadFlag() const;
+    bool getCountAsPairsFlag() const;
     bool getRevCompSearchFlag() const;
     bool getIndexRevCompFlag() const;
     bool getMatchingReadsFlag() const;
@@ -148,7 +150,7 @@ private:
     SearchType _searchType;
     std::string _readSetName;
 
-    uint _numOfReads;
+    uint _numOfReads; // total individual reads, note: if countAsPairs, then equal to the number of Pairs of reads.
     uint _numOfIndexes;
 
     fs::path _pathToQueryFile;
@@ -166,23 +168,24 @@ private:
     uint _kmerSize;
     uint _overlap;
     uint _stride;
-    uint _maxKmers;
     uint _readLength;
+    uint _maxKmers;
     uint _maxOccurences ;
     uint _maxThreads;
     uint _maxKmersPerQuery;
     uint _maxTotalKmers;
 
     bool _kmerCounts;
-    bool _multithread;
-    bool _refOnly;
-    bool _matchesOnly;
+    bool _multithread; //run search in parallel
+    bool _refOnly; // single sequence for each query
+    bool _matchesOnly; // only output positive hits
     bool _overcounted; //output a list of OCK
     bool _nonUnique; //output a list of NUK
     bool _ignoreNonUniqueKmers; //discount the NUK
-    bool _crossover;
+    bool _crossover; //search for crossover counts
     bool _printSearchTime;
-    bool _pairedReads;
+    bool _pairedReads; // paired reads
+    bool _countAsPairs; // only count one hit per read pair
     bool _revCompSearch; //generate and search for _qkRCMap
     bool _indexRevComp; //do the index files contain the reverse complement
     bool _matchingReads; //create files that contain reads that match to each query

@@ -28,6 +28,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
                   bool flagOverCountedKmers,
                   bool flagNonUniqueKmers,
                   bool ignoreNonUniqueKmers,
+                  bool countAsPairs,
                   bool crossover,
                   bool printSearchTime,
                   uint maxKmers,
@@ -52,6 +53,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
     _overcounted = flagOverCountedKmers;
     _nonUnique = flagNonUniqueKmers;
     _ignoreNonUniqueKmers = ignoreNonUniqueKmers;
+    _countAsPairs = countAsPairs;
     _crossover = crossover;
     _printSearchTime = printSearchTime;
     _maxKmers = maxKmers;
@@ -96,8 +98,9 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
     uint           maxOccurences           = settings.value("maxOccurences").toInt();
     uint           numOfThreads            = settings.value("numOfThreads").toInt();
     bool           flagOverCountedKmers    = settings.value("flagOverCountedKmers").toBool();
-    bool           flagNonUniqueKmers    = settings.value("flagNonUniqueKmers").toBool();
+    bool           flagNonUniqueKmers      = settings.value("flagNonUniqueKmers").toBool();
     bool           ignoreNonUniqueKmers    = settings.value("ignoreNonUniqueKmers").toBool();
+    bool           countAsPairs            = settings.value("countAsPairs").toBool();
     bool           crossover               = settings.value("crossover").toBool();
     bool           printSearchTime         = settings.value("printSearchTime").toBool();
     uint           maxKmersPerQuery        = settings.value("maxKmersPerQuery").toInt();
@@ -110,7 +113,7 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
     std::cout << "indexPropsFile                : " << indexPropsFile <<  std::endl;
     std::cout << "outputFolder                  : " << outputFolder <<  std::endl;
     std::cout << "refOnly                       : " << refOnly <<  std::endl;
-    std::cout << "revComp                       : " << revCompSearch <<  std::endl;
+    std::cout << "revCompSearch                 : " << revCompSearch <<  std::endl;
     std::cout << "searchType                    : " << searchType <<  std::endl;
     std::cout << "multithread                   : " << multithread <<  std::endl;
     std::cout << "overlap                       : " << overlap <<  std::endl;
@@ -122,6 +125,7 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
     std::cout << "flagOverCountedKmers          : " << flagOverCountedKmers << std::endl;
     std::cout << "flagNonUniqueKmers            : " << flagNonUniqueKmers << std::endl;
     std::cout << "ignoreNonUniqueKmers          : " << ignoreNonUniqueKmers << std::endl;
+    std::cout << "countAsPairs                  : " << countAsPairs << std::endl;
     std::cout << "printSearchTime               : " << printSearchTime << std::endl;
     std::cout << "maxKmersPerQuery              : " << maxKmersPerQuery << std::endl;
     std::cout << "maxTotalKmers                 : " << maxTotalKmers << std::endl;
@@ -132,7 +136,7 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
          searchType, multithread, overlap,
          returnMatchesOnly, kmerCounts, stride,
          maxOccurences, numOfThreads, flagOverCountedKmers, flagNonUniqueKmers,
-         ignoreNonUniqueKmers, crossover, printSearchTime,
+         ignoreNonUniqueKmers, countAsPairs, crossover, printSearchTime,
          maxKmersPerQuery, maxTotalKmers, printInputs);
 }
 
@@ -191,6 +195,7 @@ void FTProp::loadIndexProps(const fs::path &_indexPropsFile, bool printInputs){
 
 }
 
+//======================================================================
 void FTProp::initIndexProps( const bool pairedReads,
                              const bool revComp,
                              fs::path buildDir,
@@ -209,6 +214,13 @@ void FTProp::initIndexProps( const bool pairedReads,
     _inputFastQ = inputFastQ;
     _numOfReads = numOfReads;
     _numOfIndexes = numOfIndexes;
+
+    if (_countAsPairs && !_pairedReads)
+    {
+        throw std::runtime_error("Error: Cannot count as pairs as input reads arent paired");
+    }
+
+
     if (printInputs){
     std::cout << "Properties loaded from Index File     " <<  std::endl;
     std::cout << "Paired Reads      : " << _pairedReads <<  std::endl;
@@ -222,7 +234,7 @@ void FTProp::initIndexProps( const bool pairedReads,
     }
 }
 
-
+//======================================================================
 void FTProp::addToIndexSet(const fs::path& index, u_int offset){
     std::cout<< "add index to set " << index << std::endl;
     _indexSet[index] = offset;
@@ -254,6 +266,7 @@ bool FTProp::getIgnoreNonUniqueKmersFlag() const {return _ignoreNonUniqueKmers;}
 bool FTProp::getCrossoverFlag() const {return _crossover;}
 bool FTProp::getPrintSearchTimeFlag() const {return _matchesOnly;}
 bool FTProp::getPairedReadFlag() const {return _pairedReads;}
+bool FTProp::getCountAsPairsFlag() const {return _countAsPairs;}
 bool FTProp::getRevCompSearchFlag() const {return _revCompSearch;}
 bool FTProp::getIndexRevCompFlag() const {return _indexRevComp;}
 bool FTProp::getMatchingReadsFlag() const{return _matchingReads;}

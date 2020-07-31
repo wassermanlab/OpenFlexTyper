@@ -165,7 +165,7 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
     FTProp ftProps = ftMap.getFTProps();
 
     std::set<ft::KmerClass> kmerMap = ftMap._kmerSet;
-    size_t i = 0;
+    //size_t i = 0;
     //std::cout << "working on : " << indexPath << std::endl;
     //std::cout << "kmer Map Size " << kmerMap.size() << std::endl;
     algo::FmIndex _fmIndex;
