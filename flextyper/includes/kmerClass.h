@@ -7,6 +7,7 @@
 #include "ftPropsClass.h"
 
 namespace ft {
+typedef std::string Kmer;
 
 class KmerClass
 {

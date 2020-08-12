@@ -3,7 +3,7 @@
 
 #include <set>
 #include <iostream>
-#include <map>
+#include <unordered_map>
 #include <future>
 #include <vector>
 #include "kmerClass.h"
@@ -24,30 +24,23 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief properties
     ////////////////////////////////////////////////////////////////////////
-    std::map<ft::QueryClass*, std::set<KmerClass*>> _map;
-
+    std::map<ft::QIdT, std::set<ft::Kmer>> _map;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
-    const std::map<ft::QueryClass*, std::set<KmerClass*>>& getQKMap();
-
-    bool checkForQuery(const ft::QueryClass& query) const;
-    ft::QueryClass* getQueryPointer(const ft::QueryClass& query);
-
+    const std::map<ft::QIdT, std::set<ft::Kmer>>& getQKMap();
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Access functions for _qkMap
     ////////////////////////////////////////////////////////////////////////
-    std::set<ft::QueryClass*> retrieveQueries(const ft::KmerClass& kmer);
-    std::set<ft::KmerClass*> retrieveKmers(ft::QueryClass *query);
+    std::set<ft::QIdT> retrieveQueries(const ft::KmerClass& kmer);
+    std::set<ft::Kmer> retrieveKmers(const ft::QIdT& queryIDT);
     bool checkForMatch(const ft::QueryClass& query, const ft::KmerClass &kmer) const;
-    void addQKPair(ft::QueryClass* query, ft::KmerClass* kmer);
-    void addQKSet(ft::QueryClass* query, std::set<ft::KmerClass*> kmers);
+    bool checkForQuery(const ft::QueryClass& query) const;
+    void addQKPair(const ft::QIdT& qIDT, const ft::Kmer& kmer);
 
-
-
-
+private:
 
 
 };

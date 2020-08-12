@@ -107,14 +107,15 @@ TEST_F(TestFTMap, TestAddKmer)
     ft::KmerClass testGoodKmer("AAAA");
     ft::KmerClass testBadKmer("AAAC");
     ftMap.addKmer(testGoodKmer);
+    ftMap.addKmer("CCCC");
     EXPECT_TRUE(ftMap.checkForKmer(testGoodKmer.getKmer()));
     EXPECT_FALSE(ftMap.checkForKmer(testBadKmer.getKmer()));
 }
 //======================================================================
 TEST_F(TestFTMap, TestCreateKmer)
 {
-    TEST_DESCRIPTION("Add Kmer");
-    //void addKmer(ft::KmerClass kmer);
+    TEST_DESCRIPTION("Create Kmer");
+    //void createKmer(ft::KmerClass kmer);
     ft::FTProp _ftProps;
     _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);

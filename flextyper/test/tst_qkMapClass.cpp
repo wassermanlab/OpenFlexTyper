@@ -31,9 +31,9 @@ TEST_F(TestQKMap, TestCheckForQuery)
     ft::QueryClass* falseQuery = new ft::QueryClass(1, ft::QueryType::ALT);
     ft::QueryClass* trueQuery2 = new ft::QueryClass(2, ft::QueryType::ALT);
     ft::QueryClass* falseQuery2 = new ft::QueryClass(2, ft::QueryType::REF);
-    std::set<KmerClass*> kmerSet = {new ft::KmerClass("AAAA"), new ft::KmerClass("CCCC")};
-    _qkMap._map[trueQuery] = kmerSet;
-    _qkMap._map[trueQuery2] = kmerSet;
+    std::set<ft::Kmer> kmerSet = {"AAAA","CCCC"};
+    _qkMap._map[trueQuery->getQIdT()] = kmerSet;
+    _qkMap._map[trueQuery2->getQIdT()] = kmerSet;
 
     EXPECT_TRUE(_qkMap.checkForQuery(*trueQuery));
     EXPECT_TRUE(_qkMap.checkForQuery(*trueQuery2));
