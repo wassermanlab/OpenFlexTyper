@@ -11,6 +11,7 @@ QueryClass::QueryClass(int queryID, ft::QueryType queryType)
 {
 }
 
+QueryClass::QueryClass(){}
 //=================== GETTERS =============================
 int QueryClass::getqID()const {return _qID;}
 QueryType QueryClass::getqType() const {return _qType;}

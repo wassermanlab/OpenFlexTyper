@@ -14,6 +14,7 @@ KmerClass::KmerClass(std::string kmer)
     _readIDs()
 {
 }
+KmerClass::KmerClass(){}
 
 //=================== GETTERS =========================
 std::string KmerClass::getKmer() const{return _kmer;}

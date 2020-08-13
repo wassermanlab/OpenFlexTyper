@@ -79,7 +79,7 @@ private:
     void createQuery(int queryID, ft::QueryType queryType);
     void addNewQuery(int queryID, ft::QueryType queryType, std::string queryString);
     ft::QueryClass* findQuery(const ft::QIdT& qIDT);
-
+    bool operator()(const ft::QIdT& a, const ft::QIdT& b) const;
 };
 
 }

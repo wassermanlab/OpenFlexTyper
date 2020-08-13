@@ -415,6 +415,13 @@ void FTMap::processQueryResults(const ft::QIdT& queryIDT)
 }
 
 #define INDEXEND }
+bool FTMap::operator()(const ft::QIdT& a, const ft::QIdT& b) const {
+    if (a.first != b.first){
+        return a.first < b.first;
+    } else {
+        return a.second < b.second;
+    }
+}
 
 //======================================================
 FTMap::~FTMap(){}
