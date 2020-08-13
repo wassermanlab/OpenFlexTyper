@@ -10,21 +10,22 @@ FmIndex::FmIndex()
 }
 
 //======================================================================
-ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
+ft::KmerClass FmIndex::search(const ft::Kmer& kmer,
                               u_int maxOcc, bool flagOverCountedKmers)
 {
     // This code is executed in a different thread for multithreaded
     // executions and in main thread for monothreaded applications
 
-    std::string kmer = kmerClass.getKmer();
-    ft::KmerClass resultsfutures(kmer);
+
+    ft::KmerClass kmerResult(kmer);
+
     size_t occs = sdsl::count(getIndex(), kmer.begin(), kmer.end());
-    //std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
+    std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
 
     // if number kmers > max, flag kmer as "abundant"
     if (occs > maxOcc && flagOverCountedKmers) {
         std::cout << "Kmer flagged as Abundant " << kmer << std::endl;
-        resultsfutures.addKFlag(ft::FlagType::ABK);
+        kmerResult.addKFlag(ft::FlagType::ABK);
     }
 
     if (occs > 0  && occs <= maxOcc) {
@@ -33,11 +34,11 @@ ft::KmerClass FmIndex::search(ft::KmerClass kmerClass,
         //std::cout << "adding " << locations.size()<< " hits to kmer positions " << kmer << std::endl;
         for (auto e : locations) {
             //std::cout << "e " << e << std::endl;
-            resultsfutures.addKPosition(e);
+            kmerResult.addKPosition(e);
         }
     }
-    //std::cout << "index search positions  " << resultsfutures._positions.size() << std::endl;
-    return resultsfutures;
+    std::cout << "index search positions  " << kmerResult._positions.size() << std::endl;
+    return kmerResult;
 }
 
 //======================================================================

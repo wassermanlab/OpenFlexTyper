@@ -65,10 +65,10 @@ bool QKMap::checkForMatch(const ft::QueryClass& query, const ft::KmerClass& kmer
 //=======================================================
 void QKMap::addQKPair(const ft::QIdT& qIDT, const ft::Kmer& kmer){
     if (_map.count(qIDT) > 0){
-        std::cout << " add to existing qIDT" << std::endl;
+        //std::cout << " add to existing qIDT" << std::endl;
         _map[qIDT].insert(kmer);
     } else {
-        std::cout << " create new map entry " << std::endl;
+        //std::cout << " create new map entry " << std::endl;
          _map[qIDT] = {kmer};
     }
 }

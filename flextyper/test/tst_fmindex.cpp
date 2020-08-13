@@ -105,7 +105,7 @@ TEST_F(TestFMIndex, searchFMIndexDirect)
     _fmindex.loadIndexFromFile("testOutput/Test.fm9");
     std::string kmer = "CCTT";
     KmerClass testKmer(kmer);
-    KmerClass resultsKmer = _fmindex.search(testKmer);
+    KmerClass resultsKmer = _fmindex.search(kmer);
     uint count = resultsKmer.getKPositions().size();
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
     sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
@@ -125,7 +125,7 @@ TEST_F(TestFMIndex, locateInFMIndexDirect)
     _fmindex.loadIndexFromFile("testOutput/Test.fm9");
     std::string kmer = "CCTT";
     KmerClass testKmer(kmer);
-    KmerClass resultsKmer = _fmindex.search(testKmer);
+    KmerClass resultsKmer = _fmindex.search(kmer);
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
     sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
@@ -176,7 +176,7 @@ TEST_F(TestFMIndex, searchFMIndexUsingPointer)
     std::string kmer = "AA";
     _fmindex->loadIndexFromFile(output);
     auto locations = sdsl::locate(_fmindex->getIndex(), kmer.begin(), kmer.end());
-    ft::KmerClass outputKmer = _fmindex->search(ft::KmerClass(kmer), 10000, true);
+    ft::KmerClass outputKmer = _fmindex->search(kmer, 10000, true);
     EXPECT_EQ(outputKmer.getKPositions().size(), locations.size());
     EXPECT_NO_FATAL_FAILURE();
     EXPECT_NO_THROW();
@@ -258,7 +258,7 @@ TEST_F(TestFMIndex, searchUsingSettingsIni)
     std::string kmer = "CCCTGCATGCACTGGATGCACTCTATCCCATTCTGCAGCTTCCTCATTGATGGTCTCTTTTAACATTTGCATGGCTGCTTGATGTCCCCCCAC";
     _fmindex->loadIndexFromFile(index);
     auto locations = sdsl::locate(_fmindex->getIndex(), kmer.begin(), kmer.end());
-    ft::KmerClass outputKmer = _fmindex->search(ft::KmerClass(kmer), 10000, true);
+    ft::KmerClass outputKmer = _fmindex->search(kmer, 10000, true);
     EXPECT_EQ(outputKmer.getKPositions().size(), locations.size());
     EXPECT_NO_FATAL_FAILURE();
     EXPECT_NO_THROW();

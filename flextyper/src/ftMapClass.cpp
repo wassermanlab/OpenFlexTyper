@@ -59,12 +59,12 @@ void FTMap::genQKMap()
     ft::Utils _utils;
     while (it != _querySet.end()){
         ft::QueryClass query = it->second;
-        // generate fwd query kmers
         std::set<ft::Kmer> kmers = (_kmerGenerator.genSearchKmers(query));
-        //std::cout << "generated " << kmers.size() << " kmers " << std::endl;
+        std::cout << "generated " << kmers.size() << " kmers " << std::endl;
 
         for (ft::Kmer kmer : kmers)
         {
+            //std::cout << "fwd kmer " << kmer << std::endl;
             if (_kmerSet.count(kmer)>0){
                 findKmer(kmer)->addKFlag(ft::FlagType::NUK);
                 //std::cout << "add existing kmer " << kmer << std::endl;
@@ -74,15 +74,14 @@ void FTMap::genQKMap()
             }
             _qkMap.addQKPair(it->first, kmer);
         }
-
-        //std::cout << "number of fwd kmers " << kmerObj.size() << std::endl;
-
+        //std::cout<< "size of _qkMap " << _qkMap._map.size() << std::endl;
+        // generate rc query kmers
         if (_ftProps.getRevCompSearchFlag()){
             std::set<ft::Kmer> rckmers;
-
             for (ft::Kmer kmer : kmers)
             {
                 ft::Kmer rckmer = _utils.reverseComplement(kmer);
+                //std::cout << "rc kmer " << rckmer << std::endl;
                 if (_kmerSet.count(rckmer) > 0){
                     findKmer(rckmer)->addKFlag(ft::FlagType::NUK);
                     //std::cout << "add existing RC kmer " << kmer << std::endl;
@@ -92,8 +91,10 @@ void FTMap::genQKMap()
                 }
                 _qkRCMap.addQKPair(it->first, rckmer);
             }       
+        //std::cout<< "size of _qkRCMap " << _qkRCMap._map.size() << std::endl;
         }
-        //std::cout << "number of fwd + rc kmers " << kmerObj.size() << std::endl;
+
+        it++;
     }
 }
 

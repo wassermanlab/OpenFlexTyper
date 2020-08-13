@@ -48,7 +48,7 @@ public:
     /// \param queryString
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    virtual ft::KmerClass search(ft::KmerClass kmerClass,
+    virtual ft::KmerClass search(const ft::Kmer& kmer,
                                  u_int maxOccurences = 200,
                                  bool flagOverCountedKmers = false) = 0;
 
