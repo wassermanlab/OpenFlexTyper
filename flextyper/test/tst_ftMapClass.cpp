@@ -27,8 +27,8 @@ TEST_F(TestFTMap, TestCheckKmer)
     ft::FTProp _ftProps;
     _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);
-    ft::KmerClass testKmer1("AAAA");
-    ftMap.addKmer(testKmer1);
+
+    ftMap.addKmer("AAAA");
     EXPECT_TRUE(ftMap.checkForKmer("AAAA"));
     EXPECT_FALSE(ftMap.checkForKmer("AAAC"));
 }
@@ -41,12 +41,10 @@ TEST_F(TestFTMap, TestCheckQIDT)
     ft::FTProp _ftProps;
     _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);
-    ft::QueryClass testQuery1Ref =  ft::QueryClass(1, ft::QueryType::REF);
-    ft::QueryClass testQuery1Alt =  ft::QueryClass(1, ft::QueryType::ALT);
-    ft::QueryClass testQuery2Ref =  ft::QueryClass(2, ft::QueryType::REF);
-    ftMap.addQuery(testQuery1Alt);
-    ftMap.addQuery(testQuery1Ref);
-    ftMap.addQuery(testQuery2Ref);
+
+    ftMap.addQuery(1, ft::QueryType::REF);
+    ftMap.addQuery(1, ft::QueryType::ALT);
+    ftMap.addQuery(2, ft::QueryType::REF);
 
     ft::QIdT truetest = std::make_pair(1, ft::QueryType::REF);
     ft::QIdT truetest2 = std::make_pair(1, ft::QueryType::ALT);
@@ -60,69 +58,9 @@ TEST_F(TestFTMap, TestCheckQIDT)
     EXPECT_FALSE(ftMap.checkForQIDT(falsetest2));
 }
 
-//======================================================================
-TEST_F(TestFTMap, TestFindKmer)
-{
-    TEST_DESCRIPTION("Find Kmer");
-    //ft::KmerClass findKmer(std::string kmer);
-    ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini", false);
-    ft::FTMap ftMap(_ftProps);
-    ftMap.addKmer(ft::KmerClass("AAAA"));
 
-    EXPECT_EQ("AAAA", ftMap.findKmer("AAAA")->getKmer());
-}
-//======================================================================
-TEST_F(TestFTMap, TestGetQuery)
-{
-    TEST_DESCRIPTION("Get Query");
-    //ft::QueryClass getQuery(ft::QIdT qIDT);
-    ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini", false);
-    ft::FTMap ftMap(_ftProps);
-    ft::QueryClass testQuery1Ref =  ft::QueryClass(1, ft::QueryType::REF);
-    ft::QueryClass testQuery1Alt = ft::QueryClass(1, ft::QueryType::ALT);
-    ft::QueryClass testQuery2Ref = ft::QueryClass(2, ft::QueryType::REF);
-    ftMap.addQuery(testQuery1Ref);
-    ftMap.addQuery(testQuery1Alt);
-    ftMap.addQuery(testQuery2Ref);
 
-    ft::QIdT truetest = std::make_pair(1, ft::QueryType::REF);
-    ft::QIdT truetest2 = std::make_pair(1, ft::QueryType::ALT);
-    ft::QIdT truetest3 = std::make_pair(2, ft::QueryType::REF);
 
-    EXPECT_EQ(testQuery1Ref, ftMap.getQuery(truetest));
-    EXPECT_EQ(testQuery1Alt, ftMap.getQuery(truetest2));
-    EXPECT_EQ(testQuery2Ref, ftMap.getQuery(truetest3));
-}
-
-//======================================================================
-TEST_F(TestFTMap, TestAddKmer)
-{
-    TEST_DESCRIPTION("Add Kmer");
-    //void addKmer(ft::KmerClass kmer);
-    ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini", false);
-    ft::FTMap ftMap(_ftProps);
-    ft::KmerClass testGoodKmer("AAAA");
-    ft::KmerClass testBadKmer("AAAC");
-    ftMap.addKmer(testGoodKmer);
-    ftMap.addKmer("CCCC");
-    EXPECT_TRUE(ftMap.checkForKmer(testGoodKmer.getKmer()));
-    EXPECT_FALSE(ftMap.checkForKmer(testBadKmer.getKmer()));
-}
-//======================================================================
-TEST_F(TestFTMap, TestCreateKmer)
-{
-    TEST_DESCRIPTION("Create Kmer");
-    //void createKmer(ft::KmerClass kmer);
-    ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini", false);
-    ft::FTMap ftMap(_ftProps);
-    ftMap.createKmer("AAAA");
-    EXPECT_TRUE(ftMap.checkForKmer("AAAA"));
-    EXPECT_FALSE(ftMap.checkForKmer("AAAC"));
-}
 
 //======================================================================
 TEST_F(TestFTMap, TestAddQuery)
@@ -132,22 +70,7 @@ TEST_F(TestFTMap, TestAddQuery)
     ft::FTProp _ftProps;
     _ftProps.initFromQSettings("Test_Settings.ini", false);
     ft::FTMap ftMap(_ftProps);
-    ftMap.addQuery(ft::QueryClass(1, ft::QueryType::REF));
-    ft::QIdT testGoodQIdT = std::make_pair(1, ft::QueryType::REF);
-    ft::QIdT testBadQIdT = std::make_pair(6, ft::QueryType::REF);
-    EXPECT_TRUE(ftMap.checkForQIDT(testGoodQIdT));
-    EXPECT_FALSE(ftMap.checkForQIDT(testBadQIdT));
-}
-
-//======================================================================
-TEST_F(TestFTMap, TestCreateQuery)
-{
-    TEST_DESCRIPTION("Create Query");
-    //void addQuery(ft::QueryClass query);
-    ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini", false);
-    ft::FTMap ftMap(_ftProps);
-    ftMap.createQuery(1, ft::QueryType::REF);
+    ftMap.addQuery(1, ft::QueryType::REF);
     ft::QIdT testGoodQIdT = std::make_pair(1, ft::QueryType::REF);
     ft::QIdT testBadQIdT = std::make_pair(6, ft::QueryType::REF);
     EXPECT_TRUE(ftMap.checkForQIDT(testGoodQIdT));
@@ -171,10 +94,10 @@ TEST_F(TestFTMap, TestAddKmerResults)
 
     ftMap.addKmerResults(testKmer1);
     ft::ReadID testRID = std::make_pair(1, 1);
-    ft::KmerClass* kmer = ftMap.findKmer(testKmer1._kmer);
+    ft::KmerClass kmer = ftMap.getKmer(testKmer1._kmer);
 
-    EXPECT_TRUE(kmer->hasFlag(ft::FlagType::ABK));
-    EXPECT_TRUE(kmer->hasReadID(testRID));
+    EXPECT_TRUE(kmer.hasFlag(ft::FlagType::ABK));
+    EXPECT_TRUE(kmer.hasReadID(testRID));
 
 }
 
@@ -218,13 +141,13 @@ TEST_F(TestFTMap, TestProcessIndexResults)
 
     ftMap.processIndexResults(indexResults);
 
-    ft::KmerClass* outputKmer = ftMap.findKmer("AAAA");
-    ft::KmerClass* outputKmer2 = ftMap.findKmer("CCCC");
+    ft::KmerClass outputKmer = ftMap.getKmer("AAAA");
+    ft::KmerClass outputKmer2 = ftMap.getKmer("CCCC");
 
     EXPECT_TRUE(ftMap.checkForKmer("AAAA"));
     EXPECT_TRUE(ftMap.checkForKmer("CCCC"));
-    EXPECT_TRUE(outputKmer->hasReadID(std::make_pair(2, 1)));
-    EXPECT_TRUE(outputKmer2->hasReadID(std::make_pair(4, 1)));
+    EXPECT_TRUE(outputKmer.hasReadID(std::make_pair(2, 1)));
+    EXPECT_TRUE(outputKmer2.hasReadID(std::make_pair(4, 1)));
 }
 
 }

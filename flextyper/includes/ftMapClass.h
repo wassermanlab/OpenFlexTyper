@@ -55,9 +55,11 @@ public:
     /// \brief Access functions for single kmer and queries
     ////////////////////////////////////////////////////////////////////////
     bool checkForKmer(const ft::Kmer& testKmer) const;
+    void addKmer(const std::string &kmer);
     const ft::KmerClass& getKmer(const ft::Kmer& kmer) const;
 
     bool checkForQIDT(const ft::QIdT& testQueryObject) const;
+    void addQuery(int queryID, ft::QueryType queryType);
     const ft::QueryClass& getQuery(const ft::QIdT& qIDT) const;
 
     ////////////////////////////////////////////////////////////////////////

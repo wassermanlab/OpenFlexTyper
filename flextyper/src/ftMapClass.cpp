@@ -209,6 +209,14 @@ const ft::KmerClass& FTMap::getKmer(const ft::Kmer& kmerString) const
         std::cout << "Kmer Doesnt Exist" << std::endl;
  }
 }
+//======================================================
+void FTMap::addKmer(const std::string &kmer)
+{
+    if(!checkForKmer(kmer)){
+        createKmer(kmer);
+    }
+
+}
 
 //======================================================
 void FTMap::createKmer(const std::string &kmer)
@@ -254,7 +262,14 @@ void FTMap::addNewQuery(int queryID, ft::QueryType queryType, std::string queryS
     newquery.setQueryString(queryString);
     _querySet[testQIDT] = newquery;
 }
-
+//======================================================
+void FTMap::addQuery(int queryID, ft::QueryType queryType)
+{
+    ft::QIdT testQIDT = std::make_pair(queryID, queryType);
+    if(!checkForQIDT(testQIDT)){
+        createQuery(queryID, queryType);
+    }
+}
 //======================================================
 void FTMap::createQuery(int queryID, ft::QueryType queryType)
 {
