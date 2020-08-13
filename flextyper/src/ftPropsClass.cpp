@@ -238,6 +238,8 @@ void FTProp::initIndexProps( const bool pairedReads,
 void FTProp::addToIndexSet(const fs::path& index, u_int offset){
     std::cout<< "add index to set " << index << std::endl;
     _indexSet[index] = offset;
+    _numOfIndexes = _indexSet.size();
+
 }
 
 //================= PARAMETER GETTERS ========================

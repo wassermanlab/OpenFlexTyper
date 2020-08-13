@@ -185,14 +185,14 @@ TEST_F(TestFMIndex, searchFMIndexUsingPointer)
 
 
 //======================================================================
-TEST_F(TestFMIndex, DISABLED_searchUsingSettingsIni)
+TEST_F(TestFMIndex, searchUsingSettingsIni)
 {
     TEST_DESCRIPTION("search kmer in Index");
     algo::IndexProps _indexProp;
     algo::FmIndex* _fmindex = new algo::FmIndex;
 
 
-    fs::path testSettings = fs::current_path() /= "testFiles/Test.ini";
+    fs::path testSettings = fs::current_path() /= "testOutput/Test.ini";
     std::cout << "test settings " << testSettings << std::endl;
     QSettings isettings(testSettings.string().c_str(), QSettings::IniFormat);
 
