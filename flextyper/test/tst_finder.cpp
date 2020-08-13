@@ -113,7 +113,6 @@ TEST_F(TestFinder, addResultsFutures)
 
 
 
-
 //======================================================================
 TEST_F(TestFinder, sequentialSearch)
 {
@@ -291,14 +290,6 @@ TEST_F(TestFinder, parallelSearch)
     EXPECT_EQ(occs3, roccs3);
 
 }
-
-
-
-
-
-
-
-
 
 
 }

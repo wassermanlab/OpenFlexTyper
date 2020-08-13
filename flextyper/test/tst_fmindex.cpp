@@ -185,7 +185,7 @@ TEST_F(TestFMIndex, searchFMIndexUsingPointer)
 
 
 //======================================================================
-TEST_F(TestFMIndex, searchUsingSettingsIni)
+TEST_F(TestFMIndex, DISABLED_searchUsingSettingsIni)
 {
     TEST_DESCRIPTION("search kmer in Index");
     algo::IndexProps _indexProp;
