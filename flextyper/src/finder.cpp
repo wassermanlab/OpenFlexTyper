@@ -52,27 +52,24 @@ void Finder::multipleIndexesParallelSearch(FTMap &ftMap)
 }
 
 //======================================================================
-void Finder::addResultsFutures(std::set<ft::KmerClass> &indexResults, ft::KmerClass &tmpResult, uint offset)
+void Finder::addResultsFutures(std::map<ft::Kmer, ft::KmerClass> & indexResults, ft::KmerClass &tmpResult, uint offset)
 {
     std::string resultkmer = tmpResult.getKmer();
     std::cout << "results kmer " << resultkmer << std::endl;
     std::cout << "number of result kmer positions " << tmpResult.getKPositions().size() << std::endl;
-
-    auto it = std::find_if(std::begin(indexResults), std::end(indexResults),
-        [&] (const ft::KmerClass& k) {return k.hasKmer(resultkmer);});
-    if (it != indexResults.end()) {
+    if (indexResults.count(resultkmer) > 0)
+    {
         std::cout << "Kmer found" << std::endl;
 
-        for (auto pos : tmpResult.getKPositions())
+        for (long long pos : tmpResult.getKPositions())
         {
            //std::cout << "Add to existing result" << std::endl;
-            ft::KmerClass result = (*it);
+            ft::KmerClass result = indexResults.find(resultkmer)->second;
             result.addKPosition(pos, offset);
         }
-    }
-    else {
+    } else {
         std::cout << "Kmer not found in Index " << std::endl;
-        indexResults.insert(tmpResult);
+        indexResults[resultkmer] = tmpResult;
     }
    std::cout << "number of index results " << indexResults.size() << std::endl;
 }
@@ -88,7 +85,7 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
 
 
     std::cout << "working on : " << indexPath << std::endl;
-    std::set<ft::KmerClass> indexResults;
+    std::map<ft::Kmer, ft::KmerClass>  indexResults;
 
     try {
         _fmIndex->loadIndexFromFile(indexPath);
@@ -183,7 +180,7 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
     std::cout << "kmer Map Size " << kmerMap.size() << std::endl;
     algo::FmIndex _fmIndex;
 
-    std::set<ft::KmerClass> indexResults;
+    std::map<ft::Kmer, ft::KmerClass> indexResults;
     try {
         _fmIndex.loadIndexFromFile(indexPath);
     } catch (std::exception& e) {

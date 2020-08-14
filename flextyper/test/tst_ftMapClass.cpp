@@ -114,7 +114,9 @@ TEST_F(TestFTMap, TestAddIndexResults)
     testKmer1.addKPosition(123);
     ft::KmerClass testKmer2("CCCC");
     testKmer2.addKPosition(345);
-    std::set<ft::KmerClass> indexResults = {testKmer1, testKmer2};
+    std::map<ft::Kmer, ft::KmerClass> indexResults;
+    indexResults["AAAA"]= testKmer1;
+    indexResults["CCCC"] = testKmer2;
 
     ftMap.addIndexResults(indexResults);
     EXPECT_EQ(ftMap.getResults().size(), 1);
@@ -137,7 +139,9 @@ TEST_F(TestFTMap, TestProcessIndexResults)
     testKmer1.addKPosition(123);
     ft::KmerClass testKmer2("CCCC");
     testKmer2.addKPosition(345);
-    std::set<ft::KmerClass> indexResults = {testKmer1, testKmer2};
+    std::map<ft::Kmer, ft::KmerClass> indexResults;
+    indexResults["AAAA"]= testKmer1;
+    indexResults["CCCC"] = testKmer2;
 
     ftMap.processIndexResults(indexResults);
 

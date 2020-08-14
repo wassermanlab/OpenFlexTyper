@@ -50,7 +50,7 @@ public:
     /// \param queryString
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    ft::KmerClass search(const ft::Kmer& kmer,
+    ft::KmerClass search(ft::Kmer kmer,
                          u_int maxOcc = 200,
                          bool flagOverCountedKmers = false);
 

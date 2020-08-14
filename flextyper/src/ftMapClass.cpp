@@ -178,7 +178,7 @@ void FTMap::genQKMap()
 //======================================================
 //=============== GETTERS & SETTERS ====================
 //======================================================
-const std::vector<std::set<ft::KmerClass>>& FTMap::getResults(){return _searchResults;}
+const std::vector<std::map<ft::Kmer, ft::KmerClass>>& FTMap::getResults(){return _searchResults;}
 const FTProp& FTMap::getFTProps(){return _ftProps;}
 
 //======================================================
@@ -216,7 +216,6 @@ void FTMap::addKmer(const std::string &kmer)
     if(!checkForKmer(kmer)){
         createKmer(kmer);
     }
-
 }
 
 //======================================================
@@ -254,7 +253,6 @@ const ft::QueryClass& FTMap::getQuery(const ft::QIdT& qIDT) const
         std::cout << "Query Doesnt Exist" << std::endl;
  }
 }
-
 //======================================================
 void FTMap::addNewQuery(int queryID, ft::QueryType queryType, std::string queryString)
 {
@@ -284,7 +282,7 @@ void FTMap::createQuery(int queryID, ft::QueryType queryType)
 //=======================================================
 #define INDEXSTART {
 
-void FTMap::addIndexResults(std::set<ft::KmerClass> indexResults)
+void FTMap::addIndexResults(const std::map<ft::Kmer, ft::KmerClass>& indexResults)
 {
     //for (ft::KmerClass result : indexResults)
     //{
@@ -326,18 +324,19 @@ void FTMap::addKmerResults(const ft::KmerClass& kmerResult)
 
 }
 //======================================================
-void FTMap::processIndexResults(std::set<ft::KmerClass> indexResult)
+void FTMap::processIndexResults(const std::map<ft::Kmer, ft::KmerClass>& indexResult)
 {
-
+    std::map<ft::Kmer, ft::KmerClass>::const_iterator it = indexResult.begin();
     //std::cout << "Number of kmers for this index " << indexResult.size() << std::endl;
-    for (ft::KmerClass kmerResult : indexResult){
+    while (it != indexResult.end()){
         //std::cout << "kmer being added " << kmerResult._kmer << " positions " << kmerResult._positions.size()<< std::endl;
-
+       ft::KmerClass kmerResult = it->second;
        kmerResult.convertPosToReadID(_ftProps.getReadLength(),
                                      _ftProps.getNumOfReads(),
                                      _ftProps.getPairedReadFlag(),
                                      _ftProps.getIndexRevCompFlag());
        addKmerResults(kmerResult);
+       it++;
     }
 
 }
@@ -346,7 +345,7 @@ void FTMap::processIndexResults(std::set<ft::KmerClass> indexResult)
 void FTMap::processResults()
 {
     //std::cout << "number of index results to process " << _searchResults.size() << std::endl;
-    for (std::set<ft::KmerClass> indexResult : _searchResults ){
+    for (std::map<ft::Kmer, ft::KmerClass> indexResult : _searchResults ){
        //std::cout << "Number of kmers for this index " << indexResult.size() << std::endl;
        processIndexResults(indexResult);
     }

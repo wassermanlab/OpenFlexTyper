@@ -146,22 +146,22 @@ TEST_F(TestFinder, sequentialSearch)
 
     EXPECT_NO_THROW(_finder.sequentialSearch(_ftMap, _indexPath, offset));
 
-    std::vector<std::set<ft::KmerClass>> results = _ftMap.getResults();
+    std::vector<std::map<ft::Kmer, ft::KmerClass>> results = _ftMap.getResults();
     EXPECT_EQ(results.size(), _ftProps.getNumOfIndexes());
-    std::set<ft::KmerClass> result = results.front();
+    std::map<ft::Kmer, ft::KmerClass> result = results.front();
     EXPECT_EQ(result.size(), 3);
-    auto roccsIT = result.begin();
-    uint roccs = roccsIT->getKPositions().size();
-    roccsIT++;
-    uint roccs2 = roccsIT->getKPositions().size();
-    roccsIT++;
-    uint roccs3 = roccsIT->getKPositions().size();
+
+
+    uint roccs = result[kmer].getKPositions().size();
+    uint roccs2 = result[kmer2].getKPositions().size();
+    uint roccs3 = result[kmer3].getKPositions().size();
+
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
     sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
-    auto occs3 = sdsl::count(_testindex, kmer.begin(), kmer.end());
-    auto occs = sdsl::count(_testindex, kmer2.begin(), kmer2.end());
-    auto occs2 = sdsl::count(_testindex, kmer3.begin(), kmer3.end());
+    auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
+    auto occs2 = sdsl::count(_testindex, kmer2.begin(), kmer2.end());
+    auto occs3 = sdsl::count(_testindex, kmer3.begin(), kmer3.end());
 
     EXPECT_EQ(occs, roccs);
     EXPECT_EQ(occs2, roccs2);
@@ -202,22 +202,19 @@ TEST_F(TestFinder, sequentialSearchFromIndexProps)
 
     EXPECT_NO_THROW(_finder.sequentialSearch(_ftMap, _indexPath, offset));
 
-    std::vector<std::set<ft::KmerClass>> results = _ftMap.getResults();
+    std::vector<std::map<ft::Kmer, ft::KmerClass>> results = _ftMap.getResults();
     EXPECT_EQ(results.size(), _ftProps.getNumOfIndexes());
-    std::set<ft::KmerClass> result = results.front();
+    std::map<ft::Kmer, ft::KmerClass> result = results.front();
     EXPECT_EQ(result.size(), 3);
-    auto roccsIT = result.begin();
-    uint roccs = roccsIT->getKPositions().size();
-    roccsIT++;
-    uint roccs2 = roccsIT->getKPositions().size();
-    roccsIT++;
-    uint roccs3 = roccsIT->getKPositions().size();
+    uint roccs = result[kmer].getKPositions().size();
+    uint roccs2 = result[kmer2].getKPositions().size();
+    uint roccs3 = result[kmer3].getKPositions().size();
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
     sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
-    auto occs3 = sdsl::count(_testindex, kmer.begin(), kmer.end());
-    auto occs = sdsl::count(_testindex, kmer2.begin(), kmer2.end());
-    auto occs2 = sdsl::count(_testindex, kmer3.begin(), kmer3.end());
+    auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
+    auto occs2 = sdsl::count(_testindex, kmer2.begin(), kmer2.end());
+    auto occs3 = sdsl::count(_testindex, kmer3.begin(), kmer3.end());
 
     EXPECT_EQ(occs, roccs);
     EXPECT_EQ(occs2, roccs2);
@@ -263,28 +260,20 @@ TEST_F(TestFinder, parallelSearch)
 
     _finder.parallelSearch(_ftMap, _indexPath, offset);
 
-    std::vector<std::set<ft::KmerClass>> results = _ftMap.getResults();
+
+    std::vector<std::map<ft::Kmer, ft::KmerClass>> results = _ftMap.getResults();
     EXPECT_EQ(results.size(), _ftProps.getNumOfIndexes());
-
-    std::set<ft::KmerClass> result = results.front();
-    std::cout<< "result size " << result.size() << std::endl;
-
-
-    auto roccsIT = result.begin();
-    ft::KmerClass rkmer = *roccsIT;
-    uint roccs = rkmer.getKPositions().size();
-    roccsIT++;
-    ft::KmerClass rkmer2 = *roccsIT;
-    uint roccs2 = rkmer2.getKPositions().size();
-    roccsIT++;
-    ft::KmerClass rkmer3 = *roccsIT;
-    uint roccs3 = rkmer3.getKPositions().size();
+    std::map<ft::Kmer, ft::KmerClass> result = results.front();
+    EXPECT_EQ(result.size(), 3);
+    uint roccs = result[kmer].getKPositions().size();
+    uint roccs2 = result[kmer2].getKPositions().size();
+    uint roccs3 = result[kmer3].getKPositions().size();
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
     sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
-    auto occs3 = sdsl::count(_testindex, kmer.begin(), kmer.end());
-    auto occs = sdsl::count(_testindex, kmer2.begin(), kmer2.end());
-    auto occs2 = sdsl::count(_testindex, kmer3.begin(), kmer3.end());
+    auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
+    auto occs2 = sdsl::count(_testindex, kmer2.begin(), kmer2.end());
+    auto occs3 = sdsl::count(_testindex, kmer3.begin(), kmer3.end());
     EXPECT_EQ(occs, roccs);
     EXPECT_EQ(occs2, roccs2);
     EXPECT_EQ(occs3, roccs3);

@@ -37,7 +37,7 @@ public:
     std::map<ft::QIdT, ft::QueryClass> _querySet;
     QKMap _qkMap;
     QKMap _qkRCMap;
-    std::vector<std::set<ft::KmerClass>> _searchResults;
+    std::vector<std::map<ft::Kmer, ft::KmerClass>> _searchResults;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief init
@@ -48,7 +48,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
-    const std::vector<std::set<ft::KmerClass>>& getResults();
+    const std::vector<std::map<ft::Kmer, ft::KmerClass>>& getResults();
     const FTProp& getFTProps();
 
     ////////////////////////////////////////////////////////////////////////
@@ -66,10 +66,10 @@ public:
     /// \brief Adds results from parallel search
     /// All kmer results from a single index
     ////////////////////////////////////////////////////////////////////////
-    void addIndexResults(std::set<ft::KmerClass> indexResults);
+    void addIndexResults(const std::map<ft::Kmer, ft::KmerClass> & indexResults);
     void addKmerResults(const ft::KmerClass& kmerResult);
     void processResults();
-    void processIndexResults(std::set<ft::KmerClass> indexResults);
+    void processIndexResults(const std::map<ft::Kmer, ft::KmerClass>& indexResults);
     void processQueryResults(const ft::QIdT& query);
 
 

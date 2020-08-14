@@ -51,7 +51,7 @@ public:
     /// \brief Finder::addResultsFutures
     /// \param fmIndex
     ////////////////////////////////////////////////////////////////////////
-    void addResultsFutures(std::set<ft::KmerClass> &indexResults, ft::KmerClass &tmpResult, uint offset);
+    void addResultsFutures(std::map<ft::Kmer, ft::KmerClass> & indexResults, ft::KmerClass &tmpResult, uint offset);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Finder::overrideFmIndex
