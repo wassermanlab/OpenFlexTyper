@@ -109,8 +109,6 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
     }
 
     std::cout << "kmer queue created " << std::endl;
-    std::atomic<int> elts;
-    elts = 0;
 
     while (!kmerQueue.empty()) {
         if (j < ftProps.getMaxThreads()) {
@@ -147,17 +145,18 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
 
         for (auto& e : resultsFutures) {
             ft::KmerClass tmpResult = e.get();
-            elts++;
+
             if (tmpResult._positions.size() > 0)
             {
                 addResultsFutures(indexResults,tmpResult, offset);
             }
 
             }
-
+        resultsFutures.clear();
         j = 0;
-    }
-    resultsFutures.clear();
+        std::cout << "Kmer queue size" << kmerQueue.size() << std::endl;
+        }
+
     ftMap.addIndexResults(indexResults);
     indexResults.clear();
     std::cout << "Finished\n";
@@ -202,6 +201,7 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
            std::cout << "number of kmer hits  " << tmpResult._positions.size() << std::endl;
            addResultsFutures(indexResults,tmpResult, offset);
        }
+
        it++;
     }
 

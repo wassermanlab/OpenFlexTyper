@@ -16,7 +16,7 @@ ft::KmerClass FmIndex::search(ft::Kmer kmer,
     // This code is executed in a different thread for multithreaded
     // executions and in main thread for monothreaded applications
 
-    std::cout << "searching index  " << _index.size() << std::endl;
+    std::cout << "searching index  " << getIndex().size() << std::endl;
     ft::KmerClass kmerResult(kmer);
 
     size_t occs = sdsl::count(getIndex(), kmer.begin(), kmer.end());
@@ -29,8 +29,8 @@ ft::KmerClass FmIndex::search(ft::Kmer kmer,
     }
 
     if (occs > 0  && occs <= maxOcc) {
-        std::cout << "locating kmer positions " << kmer << std::endl;
-        auto locations = sdsl::locate(getIndex(), kmer.begin(), kmer.end());
+        std::cout << "locating kmer positions " << kmer << " with count " << occs <<  std::endl;
+        auto locations = sdsl::locate(getIndex(), kmer.begin(), kmer.begin()+kmer.size());
         std::cout << "adding " << locations.size()<< " hits to kmer positions " << kmer << std::endl;
         for (auto e : locations) {
             std::cout << "e " << e << std::endl;
