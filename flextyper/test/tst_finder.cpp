@@ -286,9 +286,9 @@ TEST_F(TestFinder, sequentialSearchFromIndexProps)
 
 
 //======================================================================
-TEST_F(TestFinder, parallelSearch)
+TEST_F(TestFinder, parallelSearch1)
 {
-    TEST_DESCRIPTION("parallel search single index");
+    TEST_DESCRIPTION("parallel search single index, num kmers > max threads");
     //void parallelSearch(FTMap &ftMap,const fs::path &indexPath, long long offset);
 
 
@@ -313,7 +313,7 @@ TEST_F(TestFinder, parallelSearch)
     ft::FTMap _ftMap(_ftProps);
 
     ft::Kmer kmer = "AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG";
-    ft::Kmer kmer2 = "AAT";
+    ft::Kmer kmer2 = "TTG";
     ft::Kmer kmer3 = "ATATT";
     _ftMap.addKmer(kmer);
     _ftMap.addKmer(kmer2);
@@ -340,6 +340,59 @@ TEST_F(TestFinder, parallelSearch)
     EXPECT_EQ(occs3, roccs3);
 
 }
+//======================================================================
+TEST_F(TestFinder, parallelSearch2)
+{
+    TEST_DESCRIPTION("parallel search single index, num kmers <= max threads ");
+    //void parallelSearch(FTMap &ftMap,const fs::path &indexPath, long long offset);
 
+
+    Finder _finder;
+    ft::FTProp _ftProps;
+    maxThreads = 3;
+    indexPropsFile = "testFiles/Test.ini";
+    _ftProps.init(pathToQueryFile,kmerSize,readLength,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  searchType, multithread, overlap,
+                  returnMatchesOnly, kmerCounts, stride,
+                  maxOccurences, maxThreads, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, crossover);
+
+    _ftProps.addToIndexSet("testOutput/Test.fm9", 0);
+
+
+    std::map<fs::path, uint> _indexSet = _ftProps._indexSet;
+    std::cout << "number of indexes " << _indexSet.size() << std::endl;
+    _indexPath = _indexSet.begin()->first;
+    std::cout << "index loaded " << _indexPath << std::endl;
+    ft::FTMap _ftMap(_ftProps);
+
+    ft::Kmer kmer = "AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG";
+    ft::Kmer kmer2 = "TTG";
+    ft::Kmer kmer3 = "ATATT";
+    _ftMap.addKmer(kmer);
+    _ftMap.addKmer(kmer2);
+    _ftMap.addKmer(kmer3);
+
+    _finder.parallelSearch(_ftMap, _indexPath, offset);
+
+    std::vector<std::map<ft::Kmer, ft::KmerClass>> results = _ftMap.getResults();
+    EXPECT_EQ(results.size(), _ftProps.getNumOfIndexes());
+    std::map<ft::Kmer, ft::KmerClass> result = results.front();
+    EXPECT_EQ(result.size(), 3);
+    uint roccs = result[kmer].getKPositions().size();
+    uint roccs2 = result[kmer2].getKPositions().size();
+    uint roccs3 = result[kmer3].getKPositions().size();
+
+    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
+    sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
+    auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
+    auto occs2 = sdsl::count(_testindex, kmer2.begin(), kmer2.end());
+    auto occs3 = sdsl::count(_testindex, kmer3.begin(), kmer3.end());
+    EXPECT_EQ(occs, roccs);
+    EXPECT_EQ(occs2, roccs2);
+    EXPECT_EQ(occs3, roccs3);
+
+}
 
 }

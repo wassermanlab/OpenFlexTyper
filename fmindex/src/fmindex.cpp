@@ -16,28 +16,32 @@ ft::KmerClass FmIndex::search(ft::Kmer kmer,
     // This code is executed in a different thread for multithreaded
     // executions and in main thread for monothreaded applications
 
-    std::cout << "searching index  " << getIndex().size() << std::endl;
+    //std::cout << "searching index of size " << getIndex().size() << " for " << kmer << std::endl;
     ft::KmerClass kmerResult(kmer);
 
     size_t occs = sdsl::count(getIndex(), kmer.begin(), kmer.end());
-    std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
+    //std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
 
     // if number kmers > max, flag kmer as "abundant"
     if (occs > maxOcc && flagOverCountedKmers) {
         std::cout << "Kmer flagged as Abundant " << kmer << std::endl;
         kmerResult.addKFlag(ft::FlagType::ABK);
     }
-
     if (occs > 0  && occs <= maxOcc) {
-        std::cout << "locating kmer positions " << kmer << " with count " << occs <<  std::endl;
-        auto locations = sdsl::locate(getIndex(), kmer.begin(), kmer.begin()+kmer.size());
-        std::cout << "adding " << locations.size()<< " hits to kmer positions " << kmer << std::endl;
+        //std::cout << "locating kmer positions " << kmer << " with count " << occs <<  std::endl;
+        auto locations = sdsl::locate(getIndex(), kmer.begin(), kmer.begin()+kmer.length());
+        if (locations.size() != occs)
+        {
+            std::runtime_error("number of locations doesnt equal number of occurences for kmer " + kmer );
+        }
+
+        //std::cout << "adding " << locations.size()<< " hits to kmer positions " << kmer << std::endl;
         for (auto e : locations) {
-            std::cout << "e " << e << std::endl;
+            //std::cout << "e " << e << std::endl;
             kmerResult.addKPosition(e);
         }
     }
-    std::cout << "index search positions  " << kmerResult._positions.size() << std::endl;
+    //std::cout << "index search positions  " << kmerResult._positions.size() << std::endl;
     return kmerResult;
 }
 

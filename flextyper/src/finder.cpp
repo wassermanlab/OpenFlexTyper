@@ -55,11 +55,11 @@ void Finder::multipleIndexesParallelSearch(FTMap &ftMap)
 void Finder::addResultsFutures(std::map<ft::Kmer, ft::KmerClass> & indexResults, ft::KmerClass &tmpResult, uint offset)
 {
     std::string resultkmer = tmpResult.getKmer();
-    std::cout << "results kmer " << resultkmer << std::endl;
-    std::cout << "number of result kmer positions " << tmpResult.getKPositions().size() << std::endl;
+    //std::cout << "results kmer " << resultkmer << std::endl;
+    //std::cout << "number of result kmer positions " << tmpResult.getKPositions().size() << std::endl;
     if (indexResults.count(resultkmer) > 0)
     {
-        std::cout << "Kmer found" << std::endl;
+        //std::cout << "Kmer found" << std::endl;
 
         for (long long pos : tmpResult.getKPositions())
         {
@@ -71,7 +71,7 @@ void Finder::addResultsFutures(std::map<ft::Kmer, ft::KmerClass> & indexResults,
         std::cout << "Kmer not found in Index " << std::endl;
         indexResults[resultkmer] = tmpResult;
     }
-   std::cout << "number of index results " << indexResults.size() << std::endl;
+   //std::cout << "number of index results " << indexResults.size() << std::endl;
 }
 
 //======================================================================
@@ -107,14 +107,21 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
         kmerQueue.push(it->first);
         it++;
     }
+    if (kmerMap.size() != kmerQueue.size()){
+        std::cout << "Error: Kmers not added to queue correctly " << std::endl;
+        std::cout << "Number of kmers in kmer map: " << kmerMap.size() << std::endl;
+        std::cout << "Number of kmers in kmerQueue: " << kmerQueue.size() << std::endl;
+    }
 
     std::cout << "kmer queue created " << std::endl;
+    std::atomic<int> elts;
+    elts = 0;
 
     while (!kmerQueue.empty()) {
         if (j < ftProps.getMaxThreads()) {
 
             ft::Kmer kmer = kmerQueue.front();
-            std::cout << "add kmer future " << kmer << std::endl;
+            //std::cout << "add kmer to ResultsFuture " << kmer << std::endl;
             resultsFutures.push_back(std::async(std::launch::async, &algo::FmIndex::search,
                                                 dynamic_cast<algo::FmIndex*>(_fmIndex),
                                                         kmer,
@@ -123,11 +130,16 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
             kmerQueue.pop();
             j++;
             k--;
+            //std::cout << "Kmer Queue size " << kmerQueue.size() << " j " << j << std::endl;
             continue;
         }
+
+
         while (kmerQueue.size() > 0) {
-            if (kmerQueue.size() < ftProps.getMaxThreads()) {
+            //std::cout << "Kmer queue is greater than 0" << std::endl;
+            if ( kmerQueue.size() < ftProps.getMaxThreads()) {
                 ft::Kmer kmer = kmerQueue.front();
+                //std::cout << "kmer added to resultsFutures  " << kmer << std::endl;
                 resultsFutures.push_back(std::async(std::launch::async, &algo::FmIndex::search,
                                                     dynamic_cast<algo::FmIndex*>(_fmIndex),
                                                     kmer,
@@ -140,25 +152,44 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
         }
 
         for (auto& e : resultsFutures) {
+            //std::cout << "waiting for results future " << std::endl;
             e.wait();
         }
 
         for (auto& e : resultsFutures) {
             ft::KmerClass tmpResult = e.get();
+            elts++;
+            //std::cout << "getting results future " << std::endl;
 
             if (tmpResult._positions.size() > 0)
             {
                 addResultsFutures(indexResults,tmpResult, offset);
             }
-
-            }
-        resultsFutures.clear();
-        j = 0;
-        std::cout << "Kmer queue size" << kmerQueue.size() << std::endl;
         }
 
+        j = 0;
+        resultsFutures.clear();
+
+        //std::cout << "Kmer Queue size (end) " << kmerQueue.size() << " j " << j << std::endl;
+    }
+    for (auto& e : resultsFutures) {
+        //std::cout << "waiting for results future " << std::endl;
+        e.wait();
+    }
+
+    for (auto& e : resultsFutures) {
+        ft::KmerClass tmpResult = e.get();
+        elts++;
+        //std::cout << "getting results future " << std::endl;
+
+        if (tmpResult._positions.size() > 0)
+        {
+            addResultsFutures(indexResults,tmpResult, offset);
+        }
+    }
+
     ftMap.addIndexResults(indexResults);
-    indexResults.clear();
+
     std::cout << "Finished\n";
 }
 

@@ -70,16 +70,16 @@ function createFasta()
             #echo "create forward fasta file from" $readFQ
             #echo "utils path" ${utilsPath}
             if [ ! -f ${utilsPath}/seqtk ]; then
-                echo "cant find" ${utilsPath}"/seqtk"
+                echo "cant find" ${utilsPath}"seqtk"
                 if [ ! -f ${utilsPath}/seqtk/seqtk ]; then
                     echo "cannot find seqtk, installing in " ${utilsPath}
                     cd ${utilsPath}
                     buildSeqTk
-                    utilsPath=${utilsPath}/seqtk
+                    utilsPath=${utilsPath}seqtk
                     echo "installed seqtk in " ${utilsPath}
                 else
-                    echo "found seqtk in " ${utilsPath}/seqtk
-                    utilsPath=${utilsPath}/seqtk
+                    echo "found seqtk in " ${utilsPath}seqtk
+                    utilsPath=${utilsPath}seqtk
                 fi
             fi
             #echo "creating fasta " ${readFQ} "into " $fastaFile
@@ -182,8 +182,8 @@ function processReadFile(){
 
     local readFileFQ="${outputDir}/${readName}.fq"
     local readFileFA="${outputDir}/${readName}.fasta"
-    #echo "read file FQ: " $readFileFQ
-    #echo "read file FA: " $readFileFA
+    echo "read file FQ: " $readFileFQ
+    echo "read file FA: " $readFileFA
 
     #Unzip the input files
     if [ $zippedReads -eq 1 ];then
@@ -243,6 +243,12 @@ function main() {
 
         local readFileFA="${outputDir}/${readFileName}.fasta"
         local outputReadFile="${outputDir}/${outputFileName}.fasta"
+
+
+        if [ ! -d ${utilsPath} ]; then
+            echo "Utils folder doesnt exist " $utilsPath " , mkdir"
+            mkdir ${utilsPath}
+        fi
 
         #echo "read file FA: " $readFileFA
         #echo "outputReadFile: " $outputReadFile
