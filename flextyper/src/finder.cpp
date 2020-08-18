@@ -117,6 +117,18 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
     std::atomic<int> elts;
     elts = 0;
 
+
+
+    ft::Kmer kmer2 = "AAT";
+    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
+    sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
+
+    auto occ2 = sdsl::count(_testindex, kmer2.begin(), kmer2.end());
+    std::cout << "kmer3 count " << occ2 << std::endl;
+    auto locs2 = sdsl::locate(_testindex, kmer2.begin(), kmer2.end());
+    std::cout << "kmer3 " << locs2.size() << std::endl;
+
+
     while (!kmerQueue.empty()) {
         if (j < ftProps.getMaxThreads()) {
 
