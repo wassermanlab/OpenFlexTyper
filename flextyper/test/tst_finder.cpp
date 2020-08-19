@@ -213,9 +213,11 @@ TEST_F(TestFinder, sequentialSearchLocations)
 
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
+    std::cout << fs::current_path() << std::endl;
     sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
 
     auto occs2 = sdsl::count(_testindex, kmer2.begin(), kmer2.end());
+    std::cout << "occs2 " << occs2 << std::endl;
     auto locs2 = sdsl::locate(_testindex, kmer2.begin(), kmer2.end());
 
     auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());

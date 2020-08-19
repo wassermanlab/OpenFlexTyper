@@ -121,6 +121,7 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
 
     ft::Kmer kmer2 = "AAT";
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
+    std::cout << fs::current_path() << std::endl;
     sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
 
     auto occ2 = sdsl::count(_testindex, kmer2.begin(), kmer2.end());

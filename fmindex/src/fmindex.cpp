@@ -70,10 +70,16 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
         // mtx.lock();
         std::cout << "No index " << outputIndex << " located. Building index now." << std::endl;
         // mtx.unlock();
-        construct(_index, preprocessedFasta, 1);
+        construct(_index, preprocessedFasta);
         store_to_file(_index, outputIndex);
     }
-
+    ft::Kmer test_kmer = "AA";
+    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
+    sdsl::load_from_file(_testindex, outputIndex);
+    auto occs = sdsl::count(_testindex, test_kmer.begin(), test_kmer.end());
+    std::cout << "occs " << occs << std::endl;
+    auto locs = sdsl::locate(_testindex, test_kmer.begin(), test_kmer.end());
+    std::cout << "locs " << locs.size() << std::endl;
     return outputIndex;
 }
 
