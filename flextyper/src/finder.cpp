@@ -16,29 +16,27 @@ void Finder::searchIndexes(ft::FTMap &ftMap)
 
     if (ftMap.getFTProps().getMultithreadFlag()) {
         std::cout << "Parallel Search " << std::endl;
-        multipleIndexesParallelSearch(ftMap);
+        indexParallelSearch(ftMap);
     } else {
         std::cout << "Sequential Search " << std::endl;
-        multipleIndexesSequentialSearch(ftMap);
+        indexSequentialSearch(ftMap);
     }
 }
 
 //======================================================================
-void Finder::multipleIndexesSequentialSearch(FTMap &ftMap)
+void Finder::indexSequentialSearch(FTMap &ftMap)
 {
     std::map<fs::path, uint> indexes = ftMap._ftProps.getIndexSet();
-    std::map<fs::path, uint>::iterator it = indexes.begin();
-    while ( it != indexes.end()) {
-        fs::path indexPath = it->first;
-        uint offset = it->second;
-        std::cout << "sequential search : " << indexPath << std::endl;
+    for (std::pair<fs::path, u_int> item : indexes){
+        fs::path indexPath = item.first;
+        u_int offset = item.second;
         sequentialSearch(ftMap, indexPath, offset);
-        it++;
     }
+
 }
 
 //======================================================================
-void Finder::multipleIndexesParallelSearch(FTMap &ftMap)
+void Finder::indexParallelSearch(FTMap &ftMap)
 {
     std::map<fs::path, uint> indexes = ftMap._ftProps.getIndexSet();
     std::map<fs::path, uint>::iterator it = indexes.begin();

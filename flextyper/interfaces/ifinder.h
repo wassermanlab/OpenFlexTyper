@@ -47,13 +47,13 @@ public:
     /// \brief multipleIndexesParallelSearch searches for kmers inside multiple
     ///        indexes in parallel
     ////////////////////////////////////////////////////////////////////////
-    virtual void multipleIndexesParallelSearch(ft::FTMap &ftMap) =0;
+    virtual void indexParallelSearch(ft::FTMap &ftMap) =0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief multipleIndexesSequentialSearch searches for kmers inside a multiple
     ///        FmIndexes in q sequential way
     ////////////////////////////////////////////////////////////////////////
-    virtual void multipleIndexesSequentialSearch(ft::FTMap &ftMap)= 0;
+    virtual void indexSequentialSearch(ft::FTMap &ftMap)= 0;
 
 
 };

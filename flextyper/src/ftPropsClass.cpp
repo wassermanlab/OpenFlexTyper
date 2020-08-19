@@ -81,7 +81,6 @@ void FTProp::setVerbose(bool verbose)
 //================= INIT From Q SETTINGS ========================
 void FTProp::initFromQSettings (std::string configFile, bool printInputs){
 
-    std::cout<< "config file " << fs::current_path() << configFile << std::endl;
     QString m_sSettingsFile(configFile.c_str());
     QSettings settings(m_sSettingsFile, QSettings::NativeFormat);
 

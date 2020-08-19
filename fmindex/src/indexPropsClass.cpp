@@ -221,12 +221,12 @@ void IndexProps::createPPFSet(){
 void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) const {
 
     fs::path savePath = _indexPropsFile;
-    if (_indexPropsFile.parent_path() == _outputFolder){
-        printToStdOut("save path for " + _indexPropsFile.string() + " is not in set outputFolder " + _outputFolder.string());
-        savePath = _outputFolder;
-        savePath /= _indexPropsFile;
-        printToStdOut("updated save path to " + savePath.string());
-    }
+//    if (_indexPropsFile.parent_path() == _outputFolder){
+//        printToStdOut("save path for " + _indexPropsFile.string() + " is not in set outputFolder " + _outputFolder.string());
+//        savePath = _outputFolder;
+//        savePath /= _indexPropsFile;
+//        printToStdOut("updated save path to " + savePath.string());
+//    }
     printToStdOut("saving index properties " + savePath.string());
 
     QSettings settings(_indexPropsFile.string().c_str(), QSettings::NativeFormat);
