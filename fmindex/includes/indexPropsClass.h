@@ -19,6 +19,7 @@ enum FileType {FQ = 1, FA, GZ};
 class IndexProps{
 public:
     IndexProps();
+    IndexProps(bool verbose);
 
     virtual ~IndexProps();
 
@@ -40,11 +41,14 @@ public:
     bool _pairedReads = 0;
     bool _delFQ = 0;
     bool _delFasta= 0;
+    bool _verbose = 0;
 
     std::string _readSetName;
     algo::FileType _readFileType;
 
     std::string createBash();
+
+    void printToStdOut(std::string) const;
 
     /// Parameter Getters ///
     uint getNumOfIndexes() const;
@@ -66,7 +70,7 @@ public:
     void setDelFastaFlag(bool delFastaFlag);
     void setRevCompFlag(bool revCompFlag);
     void setPairedReadsFlag(bool pairedReads);
-
+    void setVerboseFlag(bool verbose);
     void setReadSetName(const std::string readSetName);
     void setReadFileType(const algo::FileType& readFileType);
 
@@ -94,7 +98,7 @@ public:
     void delSpecificReadFasta(const fs::path& _preProcessedFasta);
 
     void setBuildDir(const fs::path& buildDir);
-    void setOutputFile(const fs::path& outputFile);
+    void setOutputFile(const std::string outputFileName);
     void setOutputFolder(const fs::path& outputFolder);
 
     void setPreProcessedFastas(std::map<fs::path, std::pair<u_int, u_int>>& _ppFSet);

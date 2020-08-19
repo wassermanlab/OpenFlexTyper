@@ -164,6 +164,7 @@ uint Utils::queryIndexToFileIndex(int queryIndex)
     return fileIndex;
 }
 
+
 //======================================================================
 Utils::~Utils()
 {

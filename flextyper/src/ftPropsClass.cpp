@@ -74,6 +74,10 @@ void FTProp::init(const fs::path &pathToQueryFile,
 
 }
 
+void FTProp::setVerbose(bool verbose)
+{
+    _verbose = verbose;
+}
 //================= INIT From Q SETTINGS ========================
 void FTProp::initFromQSettings (std::string configFile, bool printInputs){
 
@@ -140,6 +144,11 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
          maxKmersPerQuery, maxTotalKmers, printInputs);
 }
 
+void FTProp::printToStdOut(const std::string outputString) const {
+    if (_verbose){
+        std::cout << outputString << std::endl;
+    }
+}
 //================= Load Index Props ========================
 void FTProp::loadIndexProps(const fs::path &_indexPropsFile, bool printInputs){
     QSettings isettings(_indexPropsFile.string().c_str(), QSettings::IniFormat);

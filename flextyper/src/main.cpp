@@ -56,6 +56,8 @@ int main(int argc, char** argv)
         QCommandLineOption config = QCommandLineOption(QStringList() << "c" << "config",   QCoreApplication::translate("main", "Please provide configuration file"));
         config.setValueName("config");
         parser.addOption(config);
+        QCommandLineOption verbose(QStringList() << "v" << "verbose" , QCoreApplication::translate("main", "prints debugging messages"));
+        parser.addOption(verbose);
         parser.process(aps);
 
         if (!parser.isSet(config))   {
@@ -138,15 +140,21 @@ int main(int argc, char** argv)
         QCommandLineOption delFastaFlag(QStringList() << "dfa" << "delFA" << "delFasta", QCoreApplication::translate("main", "deletes the preprocess fasta once the index is built"));
         parser.addOption(delFastaFlag);
 
+        QCommandLineOption verbose(QStringList() << "v" << "verbose" , QCoreApplication::translate("main", "prints debugging messages"));
+        parser.addOption(verbose);
+
         parser.process(aps);
 
         algo::IndexProps *props = new algo::IndexProps();
+        props->setVerboseFlag(parser.isSet(verbose));
+
         fs::path buildDir = QCoreApplication::applicationDirPath().toStdString();
         props->setBuildDir(buildDir);
 
         //set Read Files
         fs::path readFile = parser.value(readFileName).toStdString();
-        std::cout << "Read File " << readFile << std::endl;
+        props->printToStdOut("Read File " + readFile.string());
+
         props->setR1(readFile);
 
         if (parser.isSet(readZip))
@@ -169,32 +177,34 @@ int main(int argc, char** argv)
             props->setR2(parser.value(readPairFileName).toStdString());
             std::string readsetName = props->getReadSetName();
             props->setReadSetName(readsetName.substr(0,readsetName.size()-2));
-            std::cout << "paired read files " << props->getR2() << std::endl;
+            props->printToStdOut("paired read files " + props->getR2().string());
         }
 
-         std::cout << "read set Name " << props->getReadSetName() << std::endl;
+         props->printToStdOut( "read set Name " + props->getReadSetName());
 
         //set output values
         if (!parser.isSet(outputDir)){
-            std::cout << "Output Folder not set" << std::endl;
+            props->printToStdOut( "Output Folder not set");
             if (readFile.parent_path() != "" ){
-            std::cout << "Setting Output Folder to readFile directory " << readFile.parent_path() << std::endl;
+            props->printToStdOut( "Setting Output Folder to readFile directory " + readFile.parent_path().string());
             props->setOutputFolder(readFile.parent_path());
             }else {
-                std::cout << "Setting Output Folder to current path" << fs::current_path() << std::endl;
+                props->printToStdOut( "Setting Output Folder to current path" + fs::current_path().string());
                 props->setOutputFolder(fs::current_path());
             }
         }else{
         props->setOutputFolder(parser.value(outputDir).toStdString());
         }
+        props->printToStdOut( "Output Folder "+ props->getOutputFolder().string());
+
         if (!parser.isSet(indexFileName)){
-            std::cout << "Output File Name not set" << std::endl;
-            std::cout << "Setting File Name to " << readFile.filename()<< std::endl;
+            props->printToStdOut("Output File Name not set");
+            props->printToStdOut( "Setting File Name to " + readFile.filename().string());
             props->setOutputFile(readFile.filename());
             }else {
             props->setOutputFile(parser.value(indexFileName).toStdString());
         }
-        std::cout << "Output File Name "<< props->getOutputFile() << std::endl;
+        props->printToStdOut( "Output File Name "+ props->getOutputFile().string());
 
         //set parameters
         props->setRevCompFlag(parser.isSet(revCompFlag));
@@ -221,7 +231,7 @@ int main(int argc, char** argv)
 
         if (fs::exists(props->getBuildDir() /+ "preprocess.sh")){
             try {
-                std::cout << "running preprocess.sh with " << bashargs<< std::endl;
+                props->printToStdOut( "running preprocess.sh with " + bashargs);
                 system(bashargs.c_str());
             } catch (std::exception& e) {
                 std::cout << "Error in preprocessing " << e.what() << std::endl;
@@ -232,6 +242,7 @@ int main(int argc, char** argv)
         }
 
         props->createPPFSet();
+
         // count number of reads in read set
         props->countNumOfReads();
 
@@ -242,6 +253,7 @@ int main(int argc, char** argv)
             fmIndexObj.parallelFmIndex(*props);
         } catch (std::exception& e) {
             std::cout << "Error in FM Index Creation " << e.what() << std::endl;
+            return 1;
         }
     }
 

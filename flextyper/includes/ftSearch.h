@@ -34,7 +34,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief FTSearch
     ////////////////////////////////////////////////////////////////////////
-    FTSearch();
+    FTSearch(bool verbose=false);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief ~FTSearch
@@ -45,6 +45,7 @@ public:
     /// \brief init
     ////////////////////////////////////////////////////////////////////////
     void init(const FTProp& ftProp);
+    void printToStdOut(const std::string outputString) const;
 
 public:
     void checkInputFastQ(FTProp ftProps);
@@ -89,7 +90,7 @@ private:
     QueryExtractor   _ownedQueryExtractor;
     IQueryExtractor* _queryExtractor;
 
-
+    bool _verbose;
 };
 }
 

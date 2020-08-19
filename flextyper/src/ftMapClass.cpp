@@ -14,7 +14,6 @@ FTMap::FTMap(const FTProp& ftProps)
       _qkMap(),
       _qkRCMap(),
       _searchResults()
-
 {
 }
 //======================================================
@@ -45,7 +44,7 @@ void FTMap::addInputQueries(const std::set<Query> &inputQueries){
 //======================================================
 void FTMap::genQKMap()
 {
-    std::cout << "generate QK Map" << std::endl;
+    _ftProps.printToStdOut("generate QK Map" );
 
     KmerGenerator  _kmerGenerator(_ftProps.getKmerSize(),
                                   _ftProps.getRefOnlyFlag(),
@@ -60,7 +59,8 @@ void FTMap::genQKMap()
     while (it != _querySet.end()){
         ft::QueryClass query = it->second;
         std::set<ft::Kmer> kmers = (_kmerGenerator.genSearchKmers(query));
-        std::cout << "generated " << kmers.size() << " kmers " << std::endl;
+
+        _ftProps.printToStdOut( "generated " + std::to_string(kmers.size()) + " kmers " );
 
         for (ft::Kmer kmer : kmers)
         {
@@ -250,7 +250,7 @@ const ft::QueryClass& FTMap::getQuery(const ft::QIdT& qIDT) const
     if (_querySet.count(qIDT)>0) {
         return  _querySet.find(qIDT)->second;
     } else {
-        std::cout << "Query Doesnt Exist" << std::endl;
+        _ftProps.printToStdOut("Query Doesnt Exist");
  }
 }
 //======================================================

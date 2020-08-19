@@ -77,7 +77,23 @@ protected:
     bool printInputs;
 
 public:
+    void CreateIndex(){
+        algo::IndexProps _indexProp(true);
+        algo::FmIndex _fmindex;
+        std::ofstream("test.fq.gz");
+        _indexProp.setR1("test.fq.gz");
+        _indexProp.setBuildDir(fs::current_path());
+        _indexProp.setOutputFolder("testOutput");
+        _indexProp.setReadFileType(algo::FileType::GZ);
+        _indexProp.setOutputFile("Test");
+        fs::path pPF = fs::current_path() /= "testFiles/Test.fasta";
 
+        if (fs::exists(fs::current_path() /= "testOutput/Test.fm9"))
+        {
+            fs::remove(fs::current_path() /= "testOutput/Test.fm9");
+        }
+         fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
+        }
 };
 
 #define TEST_DESCRIPTION(desc) RecordProperty("description", desc)
@@ -118,7 +134,7 @@ TEST_F(TestFinder, sequentialSearch)
 {
     TEST_DESCRIPTION("This test checks that the function searchSequentially");
     //void Finder::sequentialSearch(ft::FTMap &ftMap, const fs::path &indexPath, long long offset)
-
+    CreateIndex();
     Finder _finder;
     ft::FTProp _ftProps;
 
@@ -173,7 +189,7 @@ TEST_F(TestFinder, sequentialSearchLocations)
 {
     TEST_DESCRIPTION("This test checks that the function searchSequentially");
     //void Finder::sequentialSearch(ft::FTMap &ftMap, const fs::path &indexPath, long long offset)
-
+    CreateIndex();
     Finder _finder;
     ft::FTProp _ftProps;
 
@@ -239,7 +255,7 @@ TEST_F(TestFinder, sequentialSearchFromIndexProps)
 {
     TEST_DESCRIPTION("This test checks that the function searchSequentially");
     //void Finder::sequentialSearch(ft::FTMap &ftMap, const fs::path &indexPath, long long offset)
-
+    CreateIndex();
     Finder _finder;
     ft::FTProp _ftProps;
     indexPropsFile = "testFiles/Test.ini";
@@ -294,7 +310,7 @@ TEST_F(TestFinder, parallelSearch1)
 {
     TEST_DESCRIPTION("parallel search single index, num kmers > max threads");
     //void parallelSearch(FTMap &ftMap,const fs::path &indexPath, long long offset);
-
+    CreateIndex();
 
     Finder _finder;
     ft::FTProp _ftProps;
@@ -350,7 +366,7 @@ TEST_F(TestFinder, parallelSearch2)
     TEST_DESCRIPTION("parallel search single index, num kmers <= max threads ");
     //void parallelSearch(FTMap &ftMap,const fs::path &indexPath, long long offset);
 
-
+    CreateIndex();
     Finder _finder;
     ft::FTProp _ftProps;
     maxThreads = 3;

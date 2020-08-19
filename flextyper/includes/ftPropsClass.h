@@ -66,7 +66,7 @@ public:
 
     void initFromQSettings(std::string configFile, bool printInputs);
 
-
+    void setVerbose(bool verbose);
     ////////////////////////////////////////////////////////////////////////
     /// \brief Import Index Properties from INI
     ////////////////////////////////////////////////////////////////////////
@@ -81,6 +81,7 @@ public:
                          uint numOfIndexes,
                          bool printInputs = false);
 
+    void printToStdOut(const std::string outputString) const;
     ////////////////////////////////////////////////////////////////////////
     /// \brief malliable properties
     ////////////////////////////////////////////////////////////////////////
@@ -189,7 +190,7 @@ private:
     bool _revCompSearch; //generate and search for _qkRCMap
     bool _indexRevComp; //do the index files contain the reverse complement
     bool _matchingReads; //create files that contain reads that match to each query
-
+    bool _verbose; //print to std::cout
 
 
 

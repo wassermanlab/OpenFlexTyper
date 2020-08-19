@@ -49,37 +49,58 @@ ft::KmerClass FmIndex::search(ft::Kmer kmer,
 fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta)
 {
     std::lock_guard<std::mutex> lock(_mtx);
-    //std::cout << "create index for " << preprocessedFasta << std::endl;
+    std::cout << "create index for " << preprocessedFasta << std::endl;
     fs::path outputIndex = _props.getOutputFolder();
-
+    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> tmpIndex;
     outputIndex /= preprocessedFasta.filename();
 
     outputIndex.replace_extension(".fm9");
 
-    //std::cout << "creating output index " << outputIndex << std::endl;
+    std::cout << "creating output index " << outputIndex << std::endl;
+    if (preprocessedFasta.empty())
+    {
+        throw std::runtime_error( "Error: Preprocessed Fasta File is empty " + preprocessedFasta.string());
+    }
+
+    if (!exists(preprocessedFasta))
+    {
+        throw std::runtime_error( "Error: Preprocessed Fasta File doesnt exist " + preprocessedFasta.string());
+    }
+    if (fs::exists(outputIndex))
+    {
+        throw std::runtime_error( "Error: Index already exists " + outputIndex.string());
+    }
+
     if (!load_from_file(_index, outputIndex)) {
 
         std::ifstream in(preprocessedFasta);
         if (!in) {
-            std::cout << "ERROR: File " << preprocessedFasta << " does not exist. Exit." << std::endl;
-            if (!fs::exists(_props.getOutputFolder())){
-                std::cout << " output Folder doesnt exist " << _props.getOutputFolder() << std::endl;
-            }
-            return "";
+            throw std::runtime_error( "Error: Cannot load to ifstream " + preprocessedFasta.string());
         }
+        if (!fs::exists(_props.getOutputFolder())){
+
+            throw std::runtime_error( "Error: output Folder doesnt exist " + _props.getOutputFolder().string());
+        }
+
         // mtx.lock();
         std::cout << "No index " << outputIndex << " located. Building index now." << std::endl;
         // mtx.unlock();
-        construct(_index, preprocessedFasta);
-        store_to_file(_index, outputIndex);
+        try {
+            construct(tmpIndex, preprocessedFasta, 1);
+        } catch (std::exception& e) {
+            std::cout << "Error in FM Index Creation " << e.what() << std::endl;
+            throw std::runtime_error(e.what());
+        }
+
+        std::cout << "Index Built " << outputIndex << std::endl;
+        try {
+            store_to_file(tmpIndex, outputIndex);
+        } catch (std::exception& e) {
+            std::cout << "Error in FM Index Creation " << e.what() << std::endl;
+        }
+
     }
-    ft::Kmer test_kmer = "AA";
-    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
-    sdsl::load_from_file(_testindex, outputIndex);
-    auto occs = sdsl::count(_testindex, test_kmer.begin(), test_kmer.end());
-    std::cout << "occs " << occs << std::endl;
-    auto locs = sdsl::locate(_testindex, test_kmer.begin(), test_kmer.end());
-    std::cout << "locs " << locs.size() << std::endl;
+
     return outputIndex;
 }
 

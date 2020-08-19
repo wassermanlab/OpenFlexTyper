@@ -4,15 +4,20 @@
 namespace ft {
 
 //======================================================================
-FTSearch::FTSearch()
+FTSearch::FTSearch(bool verbose)
     : _utils(&_ownedUtils)
     , _writerBridge(&_ownedWriterBridge)
     , _finder(&_ownedFinder)
     , _queryExtractor(&_ownedQueryExtractor)
+    , _verbose(verbose)
 {
 }
 
-
+void FTSearch::printToStdOut(const std::string outputString) const {
+    if (_verbose){
+        std::cout << outputString << std::endl;
+    }
+}
 //======================================================================
 void FTSearch::checkInputFastQ(FTProp ftProps){
 
@@ -27,23 +32,20 @@ if (ftProps.getInputFastQ().empty()) {
 void FTSearch::checkOutputFile(FTProp ftProps){
 
 if (!exists(ftProps.getOutputFile())) {
-    std::cout << "Error: Output File doesnt exist" << std::endl;
-    std::cout << "checking for output directory"  << std::endl;
+    printToStdOut("Error: Output File doesnt exist");
+    printToStdOut( "checking for output directory");
     if (!exists(ftProps.getOutputFolder()))
     {
-        std::cout << "Error: Output folder doesnt exist" << std::endl;
-        std::cout << "Making output folder " << std::endl;
+        printToStdOut("Error: Output folder doesnt exist" );
+        printToStdOut( "Making output folder " );
         create_directory(ftProps.getOutputFolder());
         if (!exists(ftProps.getOutputFolder()))
         {
-            std::cout << "Error: Couldnt create output folder" << std::endl;
+            printToStdOut("Error: Couldnt create output folder" );
         }
     } else {
-        std::cout << "Output Folder exists " << std::endl;
+        printToStdOut( "Output Folder exists " );
     }
-
-
-
 }
 }
 
@@ -53,18 +55,18 @@ void FTSearch::init(const FTProp& ftProps)
     ft::FTMap ftMap(ftProps);
     //checkInputFastQ(ftProps);
     checkOutputFile(ftProps);
-    std::cout << "extracting queries " << std::endl;
+    printToStdOut("extracting queries " );
     std::set<Query> inputQueries = _queryExtractor->getInputQueries(ftProps.getRefOnlyFlag(), ftProps.getCrossoverFlag(), ftProps.getPathToQueryFile());
 
-    std::cout << " number of queries " << inputQueries.size() << std::endl;
+    printToStdOut(" number of queries " + std::to_string(inputQueries.size()));
 
     ftMap.addInputQueries(inputQueries);
 
-    std::cout << " number of queries in FTMap " << ftMap._querySet.size() << std::endl;
+    printToStdOut( " number of queries in FTMap " + std::to_string(ftMap._querySet.size()));
 
     ftMap.genQKMap();
 
-    std::cout << "\nsearching..." << std::endl;
+    printToStdOut( "\nsearching..." );
 
     _finder->searchIndexes(ftMap);
 
