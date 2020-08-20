@@ -36,6 +36,7 @@ protected:
         revComp = false;
         buildDir = "";
         indexDir = "testOutput";
+        indexFileName = "Index";
         readSetName = "test";
         inputFastQ = "testFiles/test.fq";
         numOfReads = 10;
@@ -70,6 +71,7 @@ protected:
     bool revComp;
     fs::path buildDir;
     fs::path indexDir;
+    std::string indexFileName;
     std::string readSetName;
     fs::path inputFastQ;
     uint numOfReads;
@@ -77,15 +79,19 @@ protected:
     bool printInputs;
 
 public:
-    void CreateIndex(){
+    fs::path CreateIndex(){
         algo::IndexProps _indexProp(true);
         algo::FmIndex _fmindex;
         std::ofstream("test.fq.gz");
-        _indexProp.setR1("test.fq.gz");
+        fs::path R1 = fs::current_path() /= "test.fq.gz";
+        fs::path outputFolder = fs::current_path() /= "testOutput";
+
+        _indexProp.setR1(R1);
         _indexProp.setBuildDir(fs::current_path());
-        _indexProp.setOutputFolder("testOutput");
+        _indexProp.setOutputFolder(outputFolder);
         _indexProp.setReadFileType(algo::FileType::GZ);
-        _indexProp.setOutputFile("Test");
+        _indexProp.setIndexFileName("Test");
+        _indexProp.setOutputFile();
         fs::path pPF = fs::current_path() /= "testFiles/Test.fasta";
 
         if (fs::exists(fs::current_path() /= "testOutput/Test.fm9"))
@@ -93,6 +99,8 @@ public:
             fs::remove(fs::current_path() /= "testOutput/Test.fm9");
         }
          fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
+         std::cout << "index created " << output << std::endl;
+         return output;
         }
 };
 
@@ -114,7 +122,7 @@ TEST_F(TestFinder, addResultsFutures)
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
                   ignoreNonUniqueKmers, crossover);
-    _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,readSetName,
+    _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,indexFileName, readSetName,
                              inputFastQ, numOfReads,numOfIndexes);
 
     ft::FTMap _ftMap(_ftProps);
@@ -144,7 +152,7 @@ TEST_F(TestFinder, sequentialSearch)
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
                   ignoreNonUniqueKmers, crossover);
-    _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,readSetName,
+    _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,indexFileName, readSetName,
                              inputFastQ, numOfReads,numOfIndexes);
     _ftProps.addToIndexSet("testOutput/Test.fm9", 0);
 
@@ -199,7 +207,7 @@ TEST_F(TestFinder, sequentialSearchLocations)
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
                   ignoreNonUniqueKmers, crossover);
-    _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,readSetName,
+    _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,indexFileName, readSetName,
                              inputFastQ, numOfReads,numOfIndexes);
     _ftProps.addToIndexSet("testOutput/Test.fm9", 0);
 
@@ -414,5 +422,52 @@ TEST_F(TestFinder, parallelSearch2)
     EXPECT_EQ(occs3, roccs3);
 
 }
+
+//======================================================================
+TEST_F(TestFinder, testIndex)
+{
+    //test the index can be loaded correctly
+
+    fs::path indexPath3 = CreateIndex();
+    Finder _finder;
+    ft::FTProp ftProps;
+
+
+    fs::path indexPath1 = "/home/tixii/Git/OpenFlexTyper/build/testFiles/Test.fm9";
+    fs::path indexPath2 = fs::absolute("testFiles/Test.fm9");
+
+    std::string testkmer = "AAT";
+    ftProps.printToStdOut("test kmer " + testkmer);
+
+    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex1;
+    sdsl::load_from_file(_testindex1, indexPath1);
+    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex2;
+    sdsl::load_from_file(_testindex2, indexPath2);
+    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex3;
+    sdsl::load_from_file(_testindex3, indexPath3);
+
+    std::cout << "index 1 " << fs::absolute(indexPath1) << std::endl;
+    std::cout << "index 2 " << fs::absolute(indexPath2) << std::endl;
+    std::cout << "index 3 " << fs::absolute(indexPath3) << std::endl;
+
+    size_t occ1 = sdsl::count(_testindex1, testkmer.begin(), testkmer.end());
+    std::cout << "occs 1 count complete" << std::endl;
+    size_t occ2 = sdsl::count(_testindex2, testkmer.begin(), testkmer.end());
+    std::cout << "occs 2 count complete" << std::endl;
+    size_t occ3 = sdsl::count(_testindex3, testkmer.begin(), testkmer.end());
+
+    std::cout << "testkmer count ooc1 " << occ1 << " occ2 " << occ2 <<" occ3 " << occ3 << std::endl;
+
+    auto locs2 = sdsl::locate(_testindex2, testkmer.begin(), testkmer.begin()+testkmer.length());
+    std::cout << "locs 2 locate complete" << std::endl;
+    auto locs3 = sdsl::locate(_testindex3, testkmer.begin(), testkmer.begin()+testkmer.length());
+    std::cout << "locs 3 locate complete" << std::endl;
+    auto locs1 = sdsl::locate(_testindex1, testkmer.begin(), testkmer.begin()+testkmer.length());
+    std::cout << "testkmer locations locs1 " << locs1.size() << " locs2 " << locs2.size() << " locs3 " << locs3.size()<< std::endl;
+
+
+};
+
+
 
 }

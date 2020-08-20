@@ -75,6 +75,7 @@ public:
                          const bool revComp,
                          fs::path buildDir,
                          fs::path indexDir,
+                         std::string indexFileName,
                          std::string readSetName,
                          fs::path inputFastQ,
                          uint numOfReads,
@@ -124,6 +125,7 @@ public:
     bool getIndexRevCompFlag() const;
     bool getMatchingReadsFlag() const;
 
+    bool isVerbose() const;
     ////////////////////////////////////////////////////////////////////////
     /// \brief File getters
     ////////////////////////////////////////////////////////////////////////
@@ -150,6 +152,7 @@ private:
 
     SearchType _searchType;
     std::string _readSetName;
+    std::string _indexFileName;
 
     uint _numOfReads; // total individual reads, note: if countAsPairs, then equal to the number of Pairs of reads.
     uint _numOfIndexes;

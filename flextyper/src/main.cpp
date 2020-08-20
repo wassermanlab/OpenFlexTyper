@@ -198,12 +198,12 @@ int main(int argc, char** argv)
         props->printToStdOut( "Output Folder "+ props->getOutputFolder().string());
 
         if (!parser.isSet(indexFileName)){
-            props->printToStdOut("Output File Name not set");
-            props->printToStdOut( "Setting File Name to " + readFile.filename().string());
-            props->setOutputFile(readFile.filename());
-            }else {
-            props->setOutputFile(parser.value(indexFileName).toStdString());
+            props->printToStdOut("Index File Name not set");
+        }else {
+            props->printToStdOut( "Setting Index File Name to " + parser.value(indexFileName).toStdString());
+            props->setIndexFileName(parser.value(indexFileName).toStdString());
         }
+        props->setOutputFile();
         props->printToStdOut( "Output File Name "+ props->getOutputFile().string());
 
         //set parameters

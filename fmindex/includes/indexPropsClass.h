@@ -28,8 +28,9 @@ public:
     fs::path _R1;
     fs::path _R2;
     std::map<fs::path, std::pair<u_int, u_int>> _ppFSet; //this is the set of pre process fasta files, plus start, end read numbers created by preprocess.sh
+
     fs::path _outputFile;
-    fs::path _outputFolder; //where to save the indexes
+    fs::path _outputFolder; //where to save the indexes and ini file
     fs::path _buildDir;
 
     std::map<fs::path, uint> _indexSet; //this is the set of generated index files and their offsets
@@ -45,7 +46,7 @@ public:
 
     std::string _readSetName;
     algo::FileType _readFileType;
-
+    std::string _indexFileName;
     std::string createBash();
 
     void printToStdOut(std::string) const;
@@ -98,7 +99,8 @@ public:
     void delSpecificReadFasta(const fs::path& _preProcessedFasta);
 
     void setBuildDir(const fs::path& buildDir);
-    void setOutputFile(const std::string outputFileName);
+    void setIndexFileName(const std::string indexFileName);
+    void setOutputFile();
     void setOutputFolder(const fs::path& outputFolder);
 
     void setPreProcessedFastas(std::map<fs::path, std::pair<u_int, u_int>>& _ppFSet);

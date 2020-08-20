@@ -7,6 +7,31 @@ Finder::Finder()
     : _fmIndex(&_ownedFmIndex)
 {
 }
+
+//======================================================================
+void Finder::testIndex(FTProp& ftProps, const fs::path &indexPath, ft::Kmer& testkmer2 )
+{
+    //test the index can be loaded correctly
+    std::string testkmer = testkmer2;
+    ftProps.printToStdOut("test kmer " + testkmer);
+
+    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
+    sdsl::load_from_file(_testindex, indexPath);
+    size_t occ2 = sdsl::count(_testindex, testkmer.begin(), testkmer.end());
+    std::cout << "testkmer count " << occ2 << std::endl;
+
+    auto locs2 = sdsl::locate(_testindex, testkmer.begin(), testkmer.begin()+testkmer.length());
+    std::cout << "testkmer locations " << locs2.size() << std::endl;
+
+    ft::KmerClass tmpResult = _fmIndex->search(testkmer,
+                                                ftProps.getMaxOcc(),
+                                                ftProps.getOverCountedFlag());
+    if (! (tmpResult.getKPositions().size() == locs2.size())){
+        ftProps.printToStdOut("test kmer search results dont match");
+    }
+
+
+}
 //======================================================================
 void Finder::searchIndexes(ft::FTMap &ftMap)
 {
@@ -78,7 +103,8 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
 {
     FTProp ftProps = ftMap.getFTProps();
     std::cout << "Parallel search of single index" << std::endl;
-    algo::FmIndex* _fmIndex = new algo::FmIndex;
+
+    algo::FmIndex* _fmIndex = new algo::FmIndex(ftProps.isVerbose());
     std::unordered_map<ft::Kmer, ft::KmerClass> kmerMap = ftMap._kmerSet;
 
 
@@ -90,6 +116,8 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
     } catch (std::exception& e) {
         std::cout << "Error ! " << indexPath << " " << e.what() << std::endl;
     }
+    ft::Kmer testKmer = "AAT";
+    testIndex(ftProps, indexPath, testKmer);
 
     // create a vector of futures
     std::vector<std::future<ft::KmerClass>> resultsFutures;
@@ -114,19 +142,6 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
     std::cout << "kmer queue created " << std::endl;
     std::atomic<int> elts;
     elts = 0;
-
-
-
-    ft::Kmer kmer2 = "AAT";
-    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
-    std::cout << fs::current_path() << std::endl;
-    sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
-
-    auto occ2 = sdsl::count(_testindex, kmer2.begin(), kmer2.end());
-    std::cout << "kmer3 count " << occ2 << std::endl;
-    auto locs2 = sdsl::locate(_testindex, kmer2.begin(), kmer2.end());
-    std::cout << "kmer3 " << locs2.size() << std::endl;
-
 
     while (!kmerQueue.empty()) {
         if (j < ftProps.getMaxThreads()) {
@@ -227,6 +242,8 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
     } catch (std::exception& e) {
         std::cout << "Error ! " << indexPath << " " << e.what() << std::endl;
     }
+    ft::Kmer testKmer = "AAT";
+    testIndex(ftProps, indexPath, testKmer);
 
     std::unordered_map<ft::Kmer, ft::KmerClass>::iterator it = kmerMap.begin();
     while (it != kmerMap.end())

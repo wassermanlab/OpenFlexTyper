@@ -78,6 +78,10 @@ void FTProp::setVerbose(bool verbose)
 {
     _verbose = verbose;
 }
+bool FTProp::isVerbose() const
+{
+    return _verbose;
+}
 //================= INIT From Q SETTINGS ========================
 void FTProp::initFromQSettings (std::string configFile, bool printInputs){
 
@@ -157,6 +161,7 @@ void FTProp::loadIndexProps(const fs::path &_indexPropsFile, bool printInputs){
     _buildDir = isettings.value("buildDirectory").toString().toStdString();
     _indexDir = isettings.value("indexDirectory").toString().toStdString();
     _readSetName = isettings.value("readSetName").toString().toStdString();
+    _indexFileName = isettings.value("indexFileName").toString().toStdString();
 
     if (_pairedReads){
        _inputFastQ = isettings.value("R1").toString().toStdString();
@@ -188,6 +193,7 @@ void FTProp::loadIndexProps(const fs::path &_indexPropsFile, bool printInputs){
     std::cout << "reverse Comp      : " << _indexRevComp <<  std::endl;
     std::cout << "build Directory   : " << _buildDir <<  std::endl;
     std::cout << "index Directory   : " << _indexDir <<  std::endl;
+    std::cout << "Index File Name   : " << _indexFileName <<  std::endl;
     std::cout << "read Set Name     : " << _readSetName <<  std::endl;
     std::cout << "Read FQ           : " << _inputFastQ <<  std::endl;
     std::cout << "Number of Reads   : " << _numOfReads <<  std::endl;
@@ -208,6 +214,7 @@ void FTProp::initIndexProps( const bool pairedReads,
                              const bool revComp,
                              fs::path buildDir,
                              fs::path indexDir,
+                             std::string indexFileName,
                              std::string readSetName,
                              fs::path inputFastQ,
                              uint numOfReads,
@@ -218,6 +225,7 @@ void FTProp::initIndexProps( const bool pairedReads,
     _indexRevComp = revComp;
     _buildDir = buildDir;
     _indexDir = indexDir;
+    _indexFileName = indexFileName;
     _readSetName = readSetName;
     _inputFastQ = inputFastQ;
     _numOfReads = numOfReads;
@@ -235,6 +243,7 @@ void FTProp::initIndexProps( const bool pairedReads,
     std::cout << "reverse Comp      : " << _indexRevComp <<  std::endl;
     std::cout << "build Directory   : " << _buildDir <<  std::endl;
     std::cout << "index Directory   : " << _indexDir <<  std::endl;
+    std::cout << "Index File Name   : " << _indexFileName <<  std::endl;
     std::cout << "read Set Name     : " << _readSetName <<  std::endl;
     std::cout << "Read FQ           : " << _inputFastQ <<  std::endl;
     std::cout << "Number of Reads   : " << _numOfReads <<  std::endl;

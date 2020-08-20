@@ -46,7 +46,7 @@ public:
     /// \brief searchIndexes
     ////////////////////////////////////////////////////////////////////////
     void searchIndexes(ft::FTMap &ftMap);
-
+    void testIndex(FTProp& ftProps, const fs::path &indexPath, ft::Kmer &testkmer);
     ////////////////////////////////////////////////////////////////////////
     /// \brief Finder::addResultsFutures
     /// \param fmIndex

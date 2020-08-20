@@ -22,14 +22,14 @@ public:
         std::ofstream("test.fq.gz");
         _indexProp.setR1("test.fq.gz");
         _indexProp.setBuildDir(fs::current_path());
-        _indexProp.setOutputFolder("testFiles");
+        _indexProp.setOutputFolder("testOutput");
         _indexProp.setReadFileType(algo::FileType::GZ);
-        _indexProp.setOutputFile("Test");
+        _indexProp.setIndexFileName("Test");
         fs::path pPF = fs::current_path() /= "testFiles/Test.fasta";
 
-        if (fs::exists(fs::current_path() /= "testFiles/Test.fm9"))
+        if (fs::exists(fs::current_path() /= "testOutput/Test.fm9"))
         {
-            fs::remove(fs::current_path() /= "testFiles/Test.fm9");
+            fs::remove(fs::current_path() /= "testOutput/Test.fm9");
         }
          fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
         }
@@ -43,23 +43,28 @@ public:
 TEST_F(TestFMIndex, createFMIndex)
 {
     TEST_DESCRIPTION("This test checks createFMIndex");
+    fs::path testIndex = fs::absolute(fs::current_path() /= "testOutput/Index_Test.fm9");
+    std::cout << "test index " << testIndex.string() << std::endl;
+    if (fs::exists(testIndex)){ fs::remove(testIndex); }
+
     algo::IndexProps _indexProp(true);
     algo::FmIndex _fmindex;
     std::ofstream("test.fq.gz");
     _indexProp.setR1("test.fq.gz");
-    _indexProp.setBuildDir(fs::current_path());
-    _indexProp.setOutputFolder("testOutput");
+    _indexProp.setBuildDir(fs::current_path().parent_path() /= "build");
+    _indexProp.setOutputFolder(fs::absolute(fs::current_path() /= "testOutput"));
+
     _indexProp.setReadFileType(algo::FileType::GZ);
-    _indexProp.setOutputFile("Test");
-    fs::path pPF = fs::current_path() /= "testFiles/Test.fasta";
-    if (fs::exists(fs::current_path() /= "testOutput/Test.fm9"))
-        {fs::remove(fs::current_path() /= "testOutput/Test.fm9");}
+    _indexProp.setReadSetName("Test");
+    _indexProp.setOutputFile();
+    fs::path pPF = fs::absolute(fs::current_path() /= "testFiles/Test.fasta");
+
     fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
 
     std::string kmer = "AAAATAGTACTTTCCTGATTCCAGCACTGACTAATTTATCTACTTGTTCA";
 
-    sdsl::load_from_file(_testindex, fs::current_path() /= "testOutput/Test.fm9");
+    sdsl::load_from_file(_testindex, testIndex);
     auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
     fs::remove(output);
     EXPECT_EQ(occs, 1);
@@ -71,18 +76,24 @@ TEST_F(TestFMIndex, createFMIndex)
 TEST_F(TestFMIndex, createParallelFMIndex)
 {
     TEST_DESCRIPTION("create parallel FMIndex");
+    fs::path testIndex = fs::current_path() /= "testOutput/Index_Test.fm9";
+    std::cout << "test index " << testIndex.string() << std::endl;
+    if (fs::exists(testIndex)){ fs::remove(testIndex); }
+
     algo::IndexProps _indexProp(true);
     algo::FmIndex _fmindex;
     std::ofstream("test.fq.gz");
     _indexProp.setR1("test.fq.gz");
 
-    _indexProp.setOutputFolder("testOutput");
-        _indexProp.setOutputFile("Test");
+    _indexProp.setOutputFolder(fs::current_path() /= "testOutput");
+    _indexProp.setReadSetName("Test");
     _indexProp.setNumOfIndexes(2);
     _indexProp.setReadFileType(algo::FileType::GZ);
+
+    _indexProp.setOutputFile();
     std::map<fs::path, std::pair<u_int, uint>> pPFS;
-    pPFS["testFiles/Test.fasta"]= std::make_pair(0, 10);
-    pPFS["testFiles/Test2.fasta"]= std::make_pair(11, 20);
+    pPFS[fs::current_path() /="testFiles/Test.fasta"]= std::make_pair(0, 10);
+    pPFS[fs::current_path() /="testFiles/Test2.fasta"]= std::make_pair(11, 20);
     _indexProp.setPreProcessedFastas(pPFS);
     _fmindex.parallelFmIndex(_indexProp);
 
@@ -91,11 +102,11 @@ TEST_F(TestFMIndex, createParallelFMIndex)
     std::string kmer = "AAAATAGTACTTTCCTGATTCCAGCACTGACTAATTTATCTACTTGTTCA";
 
 
-    sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
+    sdsl::load_from_file(_testindex, "testOutput/Index_Test1.fm9");
     auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex2;
-    sdsl::load_from_file(_testindex, "testOutput/Test2.fm9");
+    sdsl::load_from_file(_testindex, "testOutput/Index_Test2.fm9");
     auto occs2 = sdsl::count(_testindex, kmer.begin(), kmer.end());
     fs::remove("testOutput/Test.fm9");
     fs::remove("testOutput/Test2.fm9");
@@ -179,7 +190,8 @@ TEST_F(TestFMIndex, locateInIndexUsingPointers)
     std::ofstream("test.fq.gz");
     _indexProp.setR1("test.fq.gz");
     _indexProp.setOutputFolder("testOutput");
-    _indexProp.setOutputFile("Test");
+    _indexProp.setReadSetName("Test");
+    _indexProp.setOutputFile();
     _indexProp.setReadFileType(algo::FileType::GZ);
     fs::path pPF = fs::current_path() /="testFiles/Test.fasta";
     std::cout << pPF.string() << std::endl;
@@ -205,7 +217,8 @@ TEST_F(TestFMIndex, searchFMIndexUsingPointer)
     _indexProp.setR1("test.fq.gz");
 
     _indexProp.setOutputFolder("testOutput");
-        _indexProp.setOutputFile("Test");
+    _indexProp.setReadSetName("Test");
+    _indexProp.setOutputFile();
     _indexProp.setReadFileType(algo::FileType::GZ);
     fs::path pPF = "testFiles/Test.fasta";
     fs::path output = _fmindex->createFMIndex(_indexProp, pPF );
@@ -225,6 +238,7 @@ TEST_F(TestFMIndex, searchFMIndexUsingPointer)
 TEST_F(TestFMIndex, searchUsingSettingsIni)
 {
     TEST_DESCRIPTION("search kmer in Index");
+    CreateIndex();
     algo::IndexProps _indexProp;
     algo::FmIndex* _fmindex = new algo::FmIndex;
 
@@ -296,6 +310,7 @@ TEST_F(TestFMIndex, searchUsingSettingsIni)
     _fmindex->loadIndexFromFile(index);
     auto locations = sdsl::locate(_fmindex->getIndex(), kmer.begin(), kmer.end());
     ft::KmerClass outputKmer = _fmindex->search(kmer, 10000, true);
+    EXPECT_TRUE(locations.size()>0);
     EXPECT_EQ(outputKmer.getKPositions().size(), locations.size());
     EXPECT_NO_FATAL_FAILURE();
     EXPECT_NO_THROW();
