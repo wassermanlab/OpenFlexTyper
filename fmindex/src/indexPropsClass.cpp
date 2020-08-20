@@ -301,7 +301,8 @@ void IndexProps::countNumOfReads(){
         nR2 = countLines(r2Fasta);
 
         if ( nR1 != nR2){
-            std::cout << "error: R1 and R2 do not contain the same number of reads" << std::endl;
+
+            throw std::runtime_error("R1 and R2 do not contain the same number of reads. R1 has " + std::to_string(nR1) + " and R2 has " + std::to_string(nR2));
         }
     }
 

@@ -242,7 +242,7 @@ function main() {
         if [ $zippedReads -eq 1 ]; then readFileName=${readFileName%.*}; fi
 
         local readFileFA="${outputDir}/${readFileName}.fasta"
-        local outputReadFile="${outputDir}/${outputFileName}.fasta"
+        local outputReadFile="${outputFileName}.fasta"
 
 
         if [ ! -d ${utilsPath} ]; then
