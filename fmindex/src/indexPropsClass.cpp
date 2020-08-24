@@ -74,37 +74,29 @@ void IndexProps::setReadFQ(const fs::path& readFile)
 {   printToStdOut("Read FQ set " + fs::absolute(readFile).string());
     _readFQ = fs::absolute(readFile);   }
 
-void IndexProps::setR1(const fs::path& readFile)
-{   printToStdOut("Read 1 set " + fs::absolute(readFile).string());
-    _R1 = fs::absolute(readFile);
-    if (!fs::exists(_R1))
-    {
-     printToStdOut("R1 doesnt exist at " +_R1.string());
-     fs::path r1 = fs::current_path();
-     r1 /= readFile;
-
-     if (fs::exists(r1))
-      {
-         printToStdOut("R1 exists at " +r1.string());
-         _R1 = fs::absolute(r1);
-      }
+bool IndexProps::setR1(const fs::path& readFile)
+{
+    fs::path r1 = fs::absolute(readFile);
+    if (!fs::exists(r1)) {
+        printToStdOut("R1 doesnt exist at " +r1.string());
+        return false;
     }
+    _R1 = r1;
+    printToStdOut("Set R1 " + _R1.string());
+    return true;
 }
-void IndexProps::setR2(const fs::path& readFile)
-{   printToStdOut("Read 2 set " + fs::absolute(readFile).string());
-    _R2 = fs::absolute(readFile);
-    if (!fs::exists(_R2))
-    {
-     printToStdOut("R2 doesnt exist at " +_R2.string());
-     fs::path r2 = fs::current_path();
-     r2 /= readFile;
 
-     if (fs::exists(r2))
-      {
-         printToStdOut("R2 exists at " +r2.string());
-         _R2 = fs::absolute(r2);
-      }
-    }}
+bool IndexProps::setR2(const fs::path& readFile)
+{
+    fs::path r2 = fs::absolute(readFile);
+    if (!fs::exists(r2)) {
+        printToStdOut("R2 doesnt exist at " +r2.string());
+        return false;
+    }
+    _R2 = r2;
+    printToStdOut("Set R2 " + _R2.string());
+    return true;
+}
 
 
 void IndexProps::delR1(){
@@ -317,84 +309,8 @@ void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) const {
 
     }
 
-    }
-
-  }
-
-//====================== INDEX PROPS I/O ======================
-void IndexProps::loadFromIni(const fs::path inifile){
-    QSettings isettings(inifile.string().c_str(), QSettings::IniFormat);
-    bool _pairedReads = isettings.value("pairedReads").toBool();
-    bool _indexRevComp = isettings.value("revComp").toBool();
-    fs::path _buildDir = isettings.value("buildDirectory").toString().toStdString();
-    fs::path _indexDir = isettings.value("indexDirectory").toString().toStdString();
-    std::string _readSetName = isettings.value("readSetName").toString().toStdString();
-    std::string _indexFileName = isettings.value("indexFileName").toString().toStdString();
-    std::string _inputFastQ;
-    if (_pairedReads){
-        _inputFastQ = isettings.value("R1").toString().toStdString();
-       std::string _R1 = isettings.value("R1").toString().toStdString();
-       std::string _R2 = isettings.value("R2").toString().toStdString();
-    } else {
-       _inputFastQ = isettings.value("readFQ").toString().toStdString();
-    }
-
-    u_int _numOfReads = isettings.value("numOfReads").toUInt();
-    u_int _numOfIndexes = isettings.value("numOfIndexes").toUInt();
-
-    std::map<fs::path, uint> indexSet;
-
-    int size = isettings.beginReadArray("IndexFiles");
-    for (int i = 0; i < size; ++i) {
-        isettings.setArrayIndex(i);
-        std::string fileName = isettings.value("fileName").toString().toStdString();
-        u_int offset = isettings.value("offset").toInt();
-        if (_verbose){
-            std::cout << "Index " << fileName << " offset: " << offset << std::endl;
-        }
-        indexSet[fileName] = offset;
-    }
-    isettings.endArray();
-
-    if (_verbose){
-    std::cout << "Properties loaded from Index File     " <<  std::endl;
-    std::cout << "Paired Reads      : " << _pairedReads <<  std::endl;
-    std::cout << "reverse Comp      : " << _indexRevComp <<  std::endl;
-    std::cout << "build Directory   : " << _buildDir <<  std::endl;
-    std::cout << "index Directory   : " << _indexDir <<  std::endl;
-    std::cout << "Index File Name   : " << _indexFileName <<  std::endl;
-    std::cout << "read Set Name     : " << _readSetName <<  std::endl;
-    std::cout << "Read FQ           : " << _inputFastQ <<  std::endl;
-    std::cout << "Number of Reads   : " << _numOfReads <<  std::endl;
-    std::cout << "Number of Indexes : " << _numOfIndexes <<  std::endl;
-    if (_pairedReads)
-        {std::cout << "R1                : " << _R1 <<  std::endl;
-         std::cout << "R2                : " << _R2 <<  std::endl;
-        }
-    for (auto index : indexSet){
-        std::cout << "Index File : " << index.first << " Offset: " << index.second <<  std::endl;
-    }
-    }
-
-    setR1(_R1);
-    setR2(_R2);
-    setReadFQ(_inputFastQ);
-    setBuildDir(_buildDir);
-    setNumOfReads(_numOfReads);
-    setNumOfIndexes(_numOfIndexes);
-    setIndexSet(indexSet);
-    setIndexFileName(_indexFileName);
-    setReadSetName(_readSetName);
-    setOutputFolder(_indexDir);
-
-
-
 }
 
-//======================================================================
-void IndexProps::countNumOfReads(){
-
-  }
 
 //====================== INDEX PROPS I/O ======================
 void IndexProps::loadFromIni(const fs::path inifile){

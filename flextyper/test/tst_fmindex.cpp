@@ -26,7 +26,8 @@ public:
         _indexProp.setOutputFolder("testOutput");
         _indexProp.setReadFileType(algo::FileType::GZ);
         _indexProp.setIndexFileName("Index");
-        fs::path pPF = fs::current_path() /= "testFiles/Test.fasta";
+        _indexProp.setNumOfReads(10);
+        fs::path pPF = fs::current_path() /= "testFiles/Index_Test.fasta";
 
         if (fs::exists(fs::current_path() /= "testOutput/Index_Test.fm9"))
         {
@@ -102,16 +103,6 @@ TEST_F(TestFMIndex, createParallelFMIndex)
     _indexProp.setNumOfIndexes(2);
     _indexProp.setReadFileType(algo::FileType::GZ);
     _indexProp.setOutputFile();
-    std::map<fs::path, std::pair<u_int, uint>> pPFS;
-
-    fs::path index1 = fs::absolute(fs::current_path() /="testFiles/Test.fasta");
-
-    pPFS[index1]= std::make_pair(0, 10);
-     fs::path index2 = fs::absolute(fs::current_path() /="testFiles/Test2.fasta");
-
-    pPFS[index2]= std::make_pair(11, 20);
-    _indexProp.setPreProcessedFastas(pPFS);
-    _fmindex.parallelFmIndex(_indexProp);
 
 
     fs::path index1 = fs::absolute(fs::current_path() /="testFiles/Index_Test.fasta");
@@ -134,16 +125,9 @@ TEST_F(TestFMIndex, createParallelFMIndex)
         fs::remove(index.first);
     }
 
-    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex2;
-    sdsl::load_from_file(_testindex, "testOutput/Index_Test2.fm9");
-    auto occs2 = sdsl::count(_testindex, kmer.begin(), kmer.end());
-
-    EXPECT_EQ(occs, 1);
-    EXPECT_EQ(occs2, 1);
     EXPECT_NO_FATAL_FAILURE();
     EXPECT_NO_THROW();
-    fs::remove("testOutput/Index_Test.fm9");
-    fs::remove("testOutput/Index_Test2.fm9");
+
 }
 
 //======================================================================
@@ -152,7 +136,7 @@ TEST_F(TestFMIndex, loadFMIndex)
     TEST_DESCRIPTION("This test checks loadFMIndex");
     CreateIndex();
     algo::FmIndex _fmindex;
-    fs::path index = fs::current_path() /= "testFiles/Test.fm9";
+    fs::path index = fs::current_path() /= "testFiles/Index_Test.fm9";
 
     _fmindex.loadIndexFromFile(index);
 

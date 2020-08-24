@@ -30,7 +30,19 @@ TEST_F(TestIndexProp, setOutputFolder1)
     }
     EXPECT_EQ(expectedOutputFolder, outputFolder);
 
+
 }
+//======================================================================
+TEST_F(TestIndexProp, sdo)
+{
+    TEST_DESCRIPTION("test create bash function: set:[R1, R2, build dir] not set:[outputFolder, Index Filename, Read Filename]");
+
+    algo::IndexProps* _indexProp = new algo::IndexProps(true);
+
+    _indexProp->setR1("/home/osboxes/test_1.fq");
+
+}
+
 //======================================================================
 TEST_F(TestIndexProp, setOutputFolder2)
 {
