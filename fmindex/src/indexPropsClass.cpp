@@ -146,7 +146,7 @@ void IndexProps::setOutputFile()
          printToStdOut("Read Set Name set ");
          outputFile += "_" + _readSetName;
     }
-    printToStdOut("output file " + outputFile.string());
+
     outputFile.replace_extension(".fm9");
     _outputFile = outputFile;
 
@@ -259,7 +259,8 @@ void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) {
     std::string  savePath = _indexPropsFile.string();
 
     printToStdOut("saving index properties " + savePath);
-    countNumOfReads();
+    if (_numOfReads ==0 ){
+    countNumOfReads();}
     QSettings settings(_indexPropsFile.c_str(), QSettings::NativeFormat);
 
     settings.setValue("readFQ", QString::fromStdString(_readFQ.string()));
@@ -389,10 +390,10 @@ void IndexProps::countNumOfReads() {
         uint lines = countLines(ppF.first);
         reads +=lines;
     }
-//    if (reads == 0)
-//    {
-//        throw std::runtime_error("Pre Processed Fasta files contain no reads");
-//    }
+    if (reads == 0)
+    {
+        throw std::runtime_error("Pre Processed Fasta files contain no reads");
+    }
     _numOfReads = reads;
 
 }

@@ -26,6 +26,7 @@ public:
         _indexProp.setOutputFolder("testOutput");
         _indexProp.setReadFileType(algo::FileType::GZ);
         _indexProp.setIndexFileName("Index");
+        _indexProp.setNumOfReads(10);
         fs::path pPF = fs::current_path() /= "testFiles/Test.fasta";
 
         if (fs::exists(fs::current_path() /= "testOutput/Index_Test.fm9"))
@@ -102,37 +103,32 @@ TEST_F(TestFMIndex, createParallelFMIndex)
     _indexProp.setNumOfIndexes(2);
     _indexProp.setReadFileType(algo::FileType::GZ);
     _indexProp.setOutputFile();
-    std::map<fs::path, std::pair<u_int, uint>> pPFS;
+
 
     fs::path index1 = fs::absolute(fs::current_path() /="testFiles/Test.fasta");
 
-    pPFS[index1]= std::make_pair(0, 10);
+    _indexProp.addPPF(index1, 0, 10);
      fs::path index2 = fs::absolute(fs::current_path() /="testFiles/Test2.fasta");
 
-    pPFS[index2]= std::make_pair(11, 20);
-    _indexProp.setPreProcessedFastas(pPFS);
+    _indexProp.addPPF(index2, 11, 20);
+
     _fmindex.parallelFmIndex(_indexProp);
+     std::map<fs::path, uint> _indexSet = _indexProp.getIndexSet();
+     std::string kmer = "AAAATAGTACTTTCCTGATTCCAGCACTGACTAATTTATCTACTTGTTCA";
+    for (auto index : _indexSet)
+    {
+        std::cout << "Checking in " << index.first << std::endl;
+        csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
+        sdsl::load_from_file(_testindex, fs::absolute(index.first));
+        auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
+        EXPECT_EQ(occs, 1);
+        fs::remove(index.first);
+    }
 
-    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
-
-    std::string kmer = "AAAATAGTACTTTCCTGATTCCAGCACTGACTAATTTATCTACTTGTTCA";
-
-
-    sdsl::load_from_file(_testindex, "testOutput/Index_Test1.fm9");
-    auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
-
-    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex2;
-    sdsl::load_from_file(_testindex, "testOutput/Index_Test2.fm9");
-    auto occs2 = sdsl::count(_testindex, kmer.begin(), kmer.end());
-
-    EXPECT_EQ(occs, 1);
-    EXPECT_EQ(occs2, 1);
     EXPECT_NO_FATAL_FAILURE();
     EXPECT_NO_THROW();
-    fs::remove("testOutput/Index_Test.fm9");
-    fs::remove("testOutput/Index_Test2.fm9");
-}
 
+}
 
 //======================================================================
 TEST_F(TestFMIndex, loadFMIndex)

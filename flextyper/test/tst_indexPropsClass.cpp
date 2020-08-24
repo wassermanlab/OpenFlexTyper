@@ -584,7 +584,7 @@ TEST_F(TestIndexProp, createIndexINI)
     algo::IndexProps* _indexProp = new algo::IndexProps(true);
     std::ofstream("test.fq.gz");
     _indexProp->setR1("test.fq.gz");
-
+    _indexProp->setNumOfReads(10);
     _indexProp->setOutputFolder("outputfolder/");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(2);

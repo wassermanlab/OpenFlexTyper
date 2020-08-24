@@ -94,9 +94,6 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
             throw std::runtime_error( "Error: output Folder doesnt exist " + _props.getOutputFolder().string());
         }
 
-        // mtx.lock();
-        std::cout << "No index " << outputIndex << " located. Building index now." << std::endl;
-        // mtx.unlock();
         try {
             construct(tmpIndex, preprocessedFasta, 1);
         } catch (std::exception& e) {
@@ -104,11 +101,10 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
             throw std::runtime_error(e.what());
         }
 
-        std::cout << "Index Built " << outputIndex << std::endl;
         try {
             store_to_file(tmpIndex, outputIndex);
         } catch (std::exception& e) {
-            std::cout << "Error in FM Index Creation " << e.what() << std::endl;
+            std::cout << "Error while saving FM Index " << e.what() << std::endl;
         }
 
     }
