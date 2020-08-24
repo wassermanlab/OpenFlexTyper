@@ -57,15 +57,18 @@ ft::KmerClass FmIndex::search(ft::Kmer kmer,
 fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta)
 {
     std::lock_guard<std::mutex> lock(_mtx);
-    std::cout << "create index for " << preprocessedFasta.stem() << std::endl;
-    fs::path outputIndex = _props.getOutputFile();
-    std::string newfilename = outputIndex.filename();
-    newfilename += "_" + preprocessedFasta.stem().string();
+    std::string ppfname = preprocessedFasta.stem();
+
+    fs::path outputIndex = _props.getOutputFolder();
+    std::string newfilename = _props.getIndexFileName();
+    newfilename += "_" + ppfname + ".fm9";
+
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> tmpIndex;
-    outputIndex.replace_filename(newfilename);
+    outputIndex /= newfilename;
+
     outputIndex.replace_extension(".fm9");
 
-    std::cout << "creating output index " << outputIndex << std::endl;
+    std::cout << "creating index for " << ppfname << " at " << outputIndex << std::endl;
     if (preprocessedFasta.empty())
     {
         throw std::runtime_error( "Error: Preprocessed Fasta File is empty " + preprocessedFasta.string());
@@ -114,14 +117,14 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
 }
 
 //======================================================================
-void FmIndex::loadIndexFromFile(const std::string& indexname)
+void FmIndex::loadIndexFromFile(const fs::path& indexname)
 {
     std::cout << "load index from file " << indexname << std::endl;
     if (!fs::exists(indexname)){
-        std::runtime_error("cannot find index at " + indexname);
+        std::runtime_error("cannot find index at " + indexname.string());
     }
-    if (!load_from_file(_index, indexname)) {
-        std::runtime_error("Error loading the index, please provide the index file " + indexname);
+    if (!load_from_file(_index, fs::absolute(indexname).string())) {
+        std::runtime_error("Error loading the index, please provide the index file " + indexname.string());
     }
     std::cout << "Index loaded " << _index.size() << std::endl;
 }

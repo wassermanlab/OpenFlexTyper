@@ -8,12 +8,12 @@ namespace ft {
 class TestWriterBridge : public ::testing::Test {
 protected:
     virtual void SetUp() {
-        _indexPath = "testOutput/Test.fm9";
+        _indexPath = "testOutput/Index_Test.fm9";
         offset = 0;
         pathToQueryFile = "testFiles/TestQuery.txt";
         kmerSize = 30;
         readLength =150;
-        indexPropsFile = "testOutput/indexProps.ini";
+        indexPropsFile = "testOutput/Index_Test.ini";
         outputFolder = "testOutput";
         refOnly = false;
         searchType = CENTERED;
@@ -32,7 +32,7 @@ protected:
         revComp = false;
         buildDir = "";
         indexDir = "testOutput";
-        readSetName = "test";
+        readSetName = "Test";
         inputFastQ = "testFiles/test.fq";
         numOfReads = 10;
         numOfIndexes =1 ;

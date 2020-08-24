@@ -46,7 +46,7 @@ public:
 
     std::string _readSetName;
     algo::FileType _readFileType;
-    std::string _indexFileName;
+    std::string _indexFileName = "Index";
     std::string createBash();
 
     void printToStdOut(std::string) const;
@@ -61,6 +61,7 @@ public:
     bool getPairedReadsFlag() const;
 
     const std::string& getReadSetName() const;
+    const std::string& getIndexFileName() const;
     const algo::FileType& getReadFileType() const;
 
     /// Parameter Setters ///
@@ -114,7 +115,8 @@ public:
     /// Index Props I/O ///
     void countNumOfReads();
     u_int countLines(fs::path fileToCount);
-    void saveIndexProps(const fs::path& indexPropsFile) const;
+    void saveIndexProps(const fs::path& indexPropsFile);
+    void loadFromIni(const fs::path inifile);
     u_int getOffsetForIndex(fs::path indexFile);
 
 };

@@ -32,7 +32,7 @@ public:
     /// \brief loadIndexFromFile
     /// \param indexname
     ////////////////////////////////////////////////////////////////////////
-    virtual void loadIndexFromFile(const std::string& indexname) = 0;
+    virtual void loadIndexFromFile(const fs::path& indexname) = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief parallelFmIndex

@@ -599,6 +599,15 @@ TEST_F(TestIndexProp, createIndexINI)
     }
 }
 
+//======================================================================
+TEST_F(TestIndexProp, countReads)
+{
+    //algo::IndexProps* _indexProp = new algo::IndexProps(true);
+    //countNumOfReads();
+
+
+
+}
 
 
 

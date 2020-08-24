@@ -79,29 +79,34 @@ protected:
     bool printInputs;
 
 public:
-    fs::path CreateIndex(){
+    void CreateIndex(bool saveini = false){
         algo::IndexProps _indexProp(true);
         algo::FmIndex _fmindex;
-        std::ofstream("test.fq.gz");
-        fs::path R1 = fs::current_path() /= "test.fq.gz";
-        fs::path outputFolder = fs::current_path() /= "testOutput";
-
-        _indexProp.setR1(R1);
+        std::ofstream("testFiles/test.fq.gz");
+        _indexProp.setReadFQ("testFiles/test.fq.gz");
+        _indexProp.setR1("testFiles/test.fq.gz");
         _indexProp.setBuildDir(fs::current_path());
-        _indexProp.setOutputFolder(outputFolder);
+        _indexProp.setOutputFolder("testOutput");
         _indexProp.setReadFileType(algo::FileType::GZ);
-        _indexProp.setIndexFileName("Test");
-        _indexProp.setOutputFile();
+
+        _indexProp.setReadSetName("Test");
         fs::path pPF = fs::current_path() /= "testFiles/Test.fasta";
 
-        if (fs::exists(fs::current_path() /= "testOutput/Test.fm9"))
+        if (fs::exists(fs::current_path() /= "testOutput/Index_Test.fm9"))
         {
-            fs::remove(fs::current_path() /= "testOutput/Test.fm9");
+            fs::remove(fs::current_path() /= "testOutput/Index_Test.fm9");
         }
          fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
-         std::cout << "index created " << output << std::endl;
-         return output;
+        _indexProp.addToIndexSet(output, 0);
+         if (saveini){
+             fs::path ini = fs::current_path() /= "testOutput/Index_Test.ini";
+             if (fs::exists(ini))
+            {
+             fs::remove(ini);
+             }
+            _indexProp.saveIndexProps(ini);
         }
+    }
 };
 
 #define TEST_DESCRIPTION(desc) RecordProperty("description", desc)
@@ -154,7 +159,7 @@ TEST_F(TestFinder, sequentialSearch)
                   ignoreNonUniqueKmers, crossover);
     _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,indexFileName, readSetName,
                              inputFastQ, numOfReads,numOfIndexes);
-    _ftProps.addToIndexSet("testOutput/Test.fm9", 0);
+    _ftProps.addToIndexSet("testOutput/Index_Test.fm9", 0);
 
     ft::FTMap _ftMap(_ftProps);
 
@@ -182,7 +187,7 @@ TEST_F(TestFinder, sequentialSearch)
 
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
-    sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
+    sdsl::load_from_file(_testindex, "testOutput/Index_Test.fm9");
     auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
     auto occs2 = sdsl::count(_testindex, kmer2.begin(), kmer2.end());
     auto occs3 = sdsl::count(_testindex, kmer3.begin(), kmer3.end());
@@ -209,7 +214,7 @@ TEST_F(TestFinder, sequentialSearchLocations)
                   ignoreNonUniqueKmers, crossover);
     _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,indexFileName, readSetName,
                              inputFastQ, numOfReads,numOfIndexes);
-    _ftProps.addToIndexSet("testOutput/Test.fm9", 0);
+    _ftProps.addToIndexSet("testOutput/Index_Test.fm9", 0);
 
     ft::FTMap _ftMap(_ftProps);
 
@@ -238,7 +243,7 @@ TEST_F(TestFinder, sequentialSearchLocations)
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
     std::cout << fs::current_path() << std::endl;
-    sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
+    sdsl::load_from_file(_testindex, "testOutput/Index_Test.fm9");
 
     auto occs2 = sdsl::count(_testindex, kmer2.begin(), kmer2.end());
     std::cout << "occs2 " << occs2 << std::endl;
@@ -274,7 +279,7 @@ TEST_F(TestFinder, sequentialSearchFromIndexProps)
                   maxOccurences, maxThreads, flagOverCountedKmers,
                   ignoreNonUniqueKmers, crossover, false, 3000, 3000000000, true);
 
-    _ftProps.addToIndexSet("testOutput/Test.fm9", 0);
+    _ftProps.addToIndexSet("testOutput/Index_Test.fm9", 0);
 
     ft::FTMap _ftMap(_ftProps);
 
@@ -300,7 +305,7 @@ TEST_F(TestFinder, sequentialSearchFromIndexProps)
     uint roccs3 = result[kmer3].getKPositions().size();
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
-    sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
+    sdsl::load_from_file(_testindex, "testOutput/Index_Test.fm9");
     auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
     auto occs2 = sdsl::count(_testindex, kmer2.begin(), kmer2.end());
     auto occs3 = sdsl::count(_testindex, kmer3.begin(), kmer3.end());
@@ -318,12 +323,12 @@ TEST_F(TestFinder, parallelSearch1)
 {
     TEST_DESCRIPTION("parallel search single index, num kmers > max threads");
     //void parallelSearch(FTMap &ftMap,const fs::path &indexPath, long long offset);
-    CreateIndex();
+    CreateIndex(true);
 
     Finder _finder;
     ft::FTProp _ftProps;
     maxThreads = 2;
-    indexPropsFile = "testFiles/Test.ini";
+    indexPropsFile = "testOutput/Index_Test.ini";
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
                   indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
@@ -331,10 +336,14 @@ TEST_F(TestFinder, parallelSearch1)
                   maxOccurences, maxThreads, flagOverCountedKmers,
                   ignoreNonUniqueKmers, crossover);
 
-    _ftProps.addToIndexSet("testOutput/Test.fm9", 0);
+    _ftProps.addToIndexSet("testOutput/Index_Test.fm9", 0);
 
 
     std::map<fs::path, uint> _indexSet = _ftProps._indexSet;
+    for (auto index : _indexSet)
+    {
+        std::cout << "index " << index.first << std::endl;
+    }
     std::cout << "number of indexes " << _indexSet.size() << std::endl;
     _indexPath = _indexSet.begin()->first;
     std::cout << "index loaded " << _indexPath << std::endl;
@@ -359,7 +368,7 @@ TEST_F(TestFinder, parallelSearch1)
     uint roccs3 = result[kmer3].getKPositions().size();
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
-    sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
+    sdsl::load_from_file(_testindex, "testOutput/Index_Test.fm9");
     auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
     auto occs2 = sdsl::count(_testindex, kmer2.begin(), kmer2.end());
     auto occs3 = sdsl::count(_testindex, kmer3.begin(), kmer3.end());
@@ -386,7 +395,7 @@ TEST_F(TestFinder, parallelSearch2)
                   maxOccurences, maxThreads, flagOverCountedKmers,
                   ignoreNonUniqueKmers, crossover);
 
-    _ftProps.addToIndexSet("testOutput/Test.fm9", 0);
+    _ftProps.addToIndexSet("testOutput/Index_Test.fm9", 0);
 
 
     std::map<fs::path, uint> _indexSet = _ftProps._indexSet;
@@ -413,7 +422,7 @@ TEST_F(TestFinder, parallelSearch2)
     uint roccs3 = result[kmer3].getKPositions().size();
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
-    sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
+    sdsl::load_from_file(_testindex, "testOutput/Index_Test.fm9");
     auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
     auto occs2 = sdsl::count(_testindex, kmer2.begin(), kmer2.end());
     auto occs3 = sdsl::count(_testindex, kmer3.begin(), kmer3.end());
@@ -427,8 +436,8 @@ TEST_F(TestFinder, parallelSearch2)
 TEST_F(TestFinder, testIndex)
 {
     //test the index can be loaded correctly
-
-    fs::path indexPath3 = CreateIndex();
+    CreateIndex();
+    fs::path indexPath3 = fs::current_path() /= "testOutput/Index_Test.fm9";
     Finder _finder;
     ft::FTProp ftProps;
 

@@ -45,7 +45,7 @@ public:
     /// \brief loadIndexFromFile
     /// \param indexname
     ////////////////////////////////////////////////////////////////////////
-    void loadIndexFromFile(const std::string& indexname);
+    void loadIndexFromFile(const fs::path& indexname);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief search

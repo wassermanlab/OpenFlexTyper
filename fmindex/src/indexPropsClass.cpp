@@ -37,6 +37,7 @@ bool IndexProps::getRevCompFlag() const {return _revComp;}
 bool IndexProps::getPairedReadsFlag() const {return _pairedReads;}
 
 const std::string& IndexProps::getReadSetName() const {return _readSetName;}
+const std::string& IndexProps::getIndexFileName() const {return _indexFileName;}
 const algo::FileType& IndexProps::getReadFileType()const {return _readFileType;}
 
 //==================== PARAMETER SETTERS ===================
@@ -238,30 +239,28 @@ void IndexProps::createPPFSet(){
             printToStdOut("tmp PPF " + tmpPPF.string());
 
             u_int lines = countLines(tmpPPF);
+            printToStdOut("number of lines " + std::to_string(lines));
             u_int end = start + lines;
             addPPF(tmpPPF, start, end);
             start += lines;
         }
     } else {
+    printToStdOut("tmp PPF " + ppFN.string());
         u_int lines = countLines(ppFN);
+        printToStdOut("number of lines " + std::to_string(lines));
         addPPF(ppFN, 0, lines);
     }
 
 }
 
 //====================== INDEX PROPS I/O ======================
-void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) const {
+void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) {
 
-    fs::path savePath = _indexPropsFile;
-//    if (_indexPropsFile.parent_path() == _outputFolder){
-//        printToStdOut("save path for " + _indexPropsFile.string() + " is not in set outputFolder " + _outputFolder.string());
-//        savePath = _outputFolder;
-//        savePath /= _indexPropsFile;
-//        printToStdOut("updated save path to " + savePath.string());
-//    }
-    printToStdOut("saving index properties " + savePath.string());
+    std::string  savePath = _indexPropsFile.string();
 
-    QSettings settings(_indexPropsFile.string().c_str(), QSettings::NativeFormat);
+    printToStdOut("saving index properties " + savePath);
+    countNumOfReads();
+    QSettings settings(_indexPropsFile.c_str(), QSettings::NativeFormat);
 
     settings.setValue("readFQ", QString::fromStdString(_readFQ.string()));
     settings.setValue("R1", QString::fromStdString(_R1.string()));
@@ -290,56 +289,111 @@ void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) const {
         }
     settings.endArray();
 
+    if (_verbose){
+    std::cout << "Properties saved to Index File     " <<  std::endl;
+    std::cout << "Paired Reads      : " << settings.value("pairedReads").toString().toStdString() <<  std::endl;
+    std::cout << "reverse Comp      : " << settings.value("revComp").toString().toStdString() <<  std::endl;
+    std::cout << "build Directory   : " << settings.value("buildDirectory").toString().toStdString() <<  std::endl;
+    std::cout << "index Directory   : " << settings.value("indexDirectory").toString().toStdString() <<  std::endl;
+    std::cout << "Index File Name   : " << settings.value("indexFileName").toString().toStdString() <<  std::endl;
+    std::cout << "read Set Name     : " << settings.value("readSetName").toString().toStdString() <<  std::endl;
+    std::cout << "Read FQ           : " << settings.value("readFQ").toString().toStdString() <<  std::endl;
+    std::cout << "Number of Reads   : " << settings.value("numOfReads").toString().toStdString() <<  std::endl;
+    std::cout << "Number of Indexes : " << settings.value("numOfIndexes").toString().toStdString() <<  std::endl;
+    if (_pairedReads)
+        {std::cout << "R1                : " << settings.value("R1").toString().toStdString() <<  std::endl;
+         std::cout << "R2                : " << settings.value("R2").toString().toStdString() <<  std::endl;
+        }
+
+    }
 
 
   }
-//======================================================================
-void IndexProps::countNumOfReads(){
 
-    //count R1
-    fs::path r1Fasta = _outputFolder ;
-    r1Fasta /= _R1.filename();
-    u_int nR1 = 0;
-    u_int nR2 = 0;
-
-    if (_readFileType == algo::FileType::GZ)
-    {
-        r1Fasta.filename();
-        r1Fasta.replace_extension();
-        r1Fasta.replace_extension(".fasta");
-    }
-    else if (_readFileType == algo::FileType::FQ)
-    {
-        r1Fasta.filename();
-        r1Fasta.replace_extension(".fasta");
-    }
-
-    nR1 = countLines(r1Fasta);
-
-    //count R2
+//====================== INDEX PROPS I/O ======================
+void IndexProps::loadFromIni(const fs::path inifile){
+    QSettings isettings(inifile.string().c_str(), QSettings::IniFormat);
+    bool _pairedReads = isettings.value("pairedReads").toBool();
+    bool _indexRevComp = isettings.value("revComp").toBool();
+    fs::path _buildDir = isettings.value("buildDirectory").toString().toStdString();
+    fs::path _indexDir = isettings.value("indexDirectory").toString().toStdString();
+    std::string _readSetName = isettings.value("readSetName").toString().toStdString();
+    std::string _indexFileName = isettings.value("indexFileName").toString().toStdString();
+    std::string _inputFastQ;
     if (_pairedReads){
-        fs::path r2Fasta = _outputFolder ;
-        r2Fasta /= _R2.filename();
-        if (_readFileType == algo::FileType::GZ)
-        {
-            r2Fasta.filename();
-            r2Fasta.replace_extension();
-            r2Fasta.replace_extension(".fasta");
-        }
-        else if (_readFileType == algo::FileType::FQ)
-        {
-            r2Fasta.filename();
-            r2Fasta.replace_extension(".fasta");
-        }
-        nR2 = countLines(r2Fasta);
-
-        if ( nR1 != nR2){
-
-            throw std::runtime_error("R1 and R2 do not contain the same number of reads. R1 has " + std::to_string(nR1) + " and R2 has " + std::to_string(nR2));
-        }
+        _inputFastQ = isettings.value("R1").toString().toStdString();
+       std::string _R1 = isettings.value("R1").toString().toStdString();
+       std::string _R2 = isettings.value("R2").toString().toStdString();
+    } else {
+       _inputFastQ = isettings.value("readFQ").toString().toStdString();
     }
 
-  _numOfReads = nR1 + nR2;
+    u_int _numOfReads = isettings.value("numOfReads").toUInt();
+    u_int _numOfIndexes = isettings.value("numOfIndexes").toUInt();
+
+    std::map<fs::path, uint> indexSet;
+
+    int size = isettings.beginReadArray("IndexFiles");
+    for (int i = 0; i < size; ++i) {
+        isettings.setArrayIndex(i);
+        std::string fileName = isettings.value("fileName").toString().toStdString();
+        u_int offset = isettings.value("offset").toInt();
+        if (_verbose){
+            std::cout << "Index " << fileName << " offset: " << offset << std::endl;
+        }
+        indexSet[fileName] = offset;
+    }
+    isettings.endArray();
+
+    if (_verbose){
+    std::cout << "Properties loaded from Index File     " <<  std::endl;
+    std::cout << "Paired Reads      : " << _pairedReads <<  std::endl;
+    std::cout << "reverse Comp      : " << _indexRevComp <<  std::endl;
+    std::cout << "build Directory   : " << _buildDir <<  std::endl;
+    std::cout << "index Directory   : " << _indexDir <<  std::endl;
+    std::cout << "Index File Name   : " << _indexFileName <<  std::endl;
+    std::cout << "read Set Name     : " << _readSetName <<  std::endl;
+    std::cout << "Read FQ           : " << _inputFastQ <<  std::endl;
+    std::cout << "Number of Reads   : " << _numOfReads <<  std::endl;
+    std::cout << "Number of Indexes : " << _numOfIndexes <<  std::endl;
+    if (_pairedReads)
+        {std::cout << "R1                : " << _R1 <<  std::endl;
+         std::cout << "R2                : " << _R2 <<  std::endl;
+        }
+    for (auto index : indexSet){
+        std::cout << "Index File : " << index.first << " Offset: " << index.second <<  std::endl;
+    }
+    }
+
+    setR1(_R1);
+    setR2(_R2);
+    setReadFQ(_inputFastQ);
+    setBuildDir(_buildDir);
+    setNumOfReads(_numOfReads);
+    setNumOfIndexes(_numOfIndexes);
+    setIndexSet(indexSet);
+    setIndexFileName(_indexFileName);
+    setReadSetName(_readSetName);
+    setOutputFolder(_indexDir);
+
+
+
+}
+
+//======================================================================
+void IndexProps::countNumOfReads() {
+
+    uint reads = 0;
+    for (auto ppF : _ppFSet)
+    {
+        uint lines = countLines(ppF.first);
+        reads +=lines;
+    }
+//    if (reads == 0)
+//    {
+//        throw std::runtime_error("Pre Processed Fasta files contain no reads");
+//    }
+    _numOfReads = reads;
 
 }
 //======================================================================
@@ -350,7 +404,7 @@ u_int IndexProps::countLines(fs::path fileToCount){
 
     while (std::getline(in, line))
     {
-        n++;
+        ++n;
     }
     in.close();
     return n;

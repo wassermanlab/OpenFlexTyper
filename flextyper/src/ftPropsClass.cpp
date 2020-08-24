@@ -254,14 +254,17 @@ void FTProp::initIndexProps( const bool pairedReads,
 //======================================================================
 void FTProp::addToIndexSet(const fs::path& index, u_int offset){
     std::cout<< "add index to set " << index << std::endl;
-    _indexSet[index] = offset;
-    _numOfIndexes = _indexSet.size();
 
+    if (_indexSet.count(fs::absolute(index)) == 0){
+        _indexSet[fs::absolute(index)] = offset;
+        _numOfIndexes = _indexSet.size();
+    }
 }
 
 //================= PARAMETER GETTERS ========================
 SearchType FTProp::getSearchType() const {return _searchType;}
 std::string FTProp::getReadSetName() const{return _readSetName;}
+std::string FTProp::getIndexFileName() const{return _indexFileName;}
 uint FTProp::getKmerSize() const {return _kmerSize;}
 uint FTProp::getOverlap() const {return _overlap;}
 uint FTProp::getStride() const {return _stride;}
