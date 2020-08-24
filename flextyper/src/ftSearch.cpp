@@ -56,7 +56,14 @@ void FTSearch::init(const FTProp& ftProps)
     //checkInputFastQ(ftProps);
     checkOutputFile(ftProps);
     printToStdOut("extracting queries " );
-    std::set<Query> inputQueries = _queryExtractor->getInputQueries(ftProps.getRefOnlyFlag(), ftProps.getCrossoverFlag(), ftProps.getPathToQueryFile());
+    std::set<Query> inputQueries;
+    try {
+        inputQueries = _queryExtractor->getInputQueries(ftProps.getRefOnlyFlag(), ftProps.getCrossoverFlag(), ftProps.getPathToQueryFile());
+
+    } catch (std::exception& e) {
+        std::cerr << e.what() << std::endl;
+        exit(1);
+    }
 
     printToStdOut(" number of queries " + std::to_string(inputQueries.size()));
 

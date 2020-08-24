@@ -242,7 +242,7 @@ function main() {
         if [ $zippedReads -eq 1 ]; then readFileName=${readFileName%.*}; fi
 
         local readFileFA="${outputDir}/${readFileName}.fasta"
-        local outputReadFile="${outputFileName}.fasta"
+        local outputReadFile="${outputDir}/${outputFileName}.fasta"
 
 
         if [ ! -d ${utilsPath} ]; then
@@ -251,7 +251,7 @@ function main() {
         fi
 
         #echo "read file FA: " $readFileFA
-        #echo "outputReadFile: " $outputReadFile
+        echo "outputReadFile: " $outputReadFile
         processReadFile $readFile $readFileName $outputDir $zippedReads $reverseComp $utilsPath
 
         if [ ! ${readFileFA} == ${outputReadFile} ]; then

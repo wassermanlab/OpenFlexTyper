@@ -39,7 +39,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
     _kmerSize = kmerSize;
     _readLength = readLength;
     loadIndexProps(indexPropsFile, printInputs);
-    _outputFolder = outputFolder;
+    setOutputFolder(outputFolder);
     _refOnly = refOnly;
     _revCompSearch = revCompSearch;
     _searchType = searchType;
@@ -58,6 +58,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
     _printSearchTime = printSearchTime;
     _maxKmers = maxKmers;
     _maxTotalKmers = totalKmers;
+
 
     fs::path queryOutputFile = _outputFolder;
     if (printInputs){ std::cout << "Output query folder " <<   queryOutputFile << std::endl;}
@@ -243,7 +244,6 @@ void FTProp::initIndexProps( const bool pairedReads,
     std::cout << "reverse Comp      : " << _indexRevComp <<  std::endl;
     std::cout << "build Directory   : " << _buildDir <<  std::endl;
     std::cout << "index Directory   : " << _indexDir <<  std::endl;
-    std::cout << "Index File Name   : " << _indexFileName <<  std::endl;
     std::cout << "read Set Name     : " << _readSetName <<  std::endl;
     std::cout << "Read FQ           : " << _inputFastQ <<  std::endl;
     std::cout << "Number of Reads   : " << _numOfReads <<  std::endl;
@@ -311,6 +311,37 @@ void FTProp::setTestProps(const uint numOfReads, const uint readLength, bool rev
     _indexRevComp = revComp;
 }
 
+void FTProp::setOutputFolder(const fs::path& outputFolder)
+{
+    fs::path outfolder;
+    if (outputFolder == "" or outputFolder =="."){
+        printToStdOut("no output folder set ");
+        outfolder = fs::current_path();
+    } else if (outputFolder == "../"){
+        printToStdOut("set as parent path  " + outputFolder.string());
+        outfolder = fs::current_path().parent_path();
+    } else {
+        printToStdOut("set absolute path as output Folder " + outputFolder.string());
+        outfolder = fs::absolute(outputFolder);
+    }
+    _outputFolder = outfolder;
+    printToStdOut(_outputFolder.string());
+
+    if (!fs::exists(_outputFolder)){
+     printToStdOut("creating output Folder " +outputFolder.string());
+         try {
+             fs::create_directory(outputFolder);
+         } catch (std::exception& e ) {
+             throw std::runtime_error("Cannot create output folder " + _outputFolder.string());
+         }
+    }
+
+    if (!fs::exists(_outputFolder))
+    {
+        throw std::runtime_error("Cannot create output folder " + _outputFolder.string());
+    }
+
+}
 
 FTProp::~FTProp()
 {

@@ -146,10 +146,12 @@ int main(int argc, char** argv)
         parser.process(aps);
 
         algo::IndexProps *props = new algo::IndexProps();
+
         props->setVerboseFlag(parser.isSet(verbose));
 
         fs::path buildDir = QCoreApplication::applicationDirPath().toStdString();
         props->setBuildDir(buildDir);
+        props->printToStdOut("Build directory " + props->getBuildDir().string());
 
         //set Read Files
         fs::path readFile = parser.value(readFileName).toStdString();
@@ -228,8 +230,13 @@ int main(int argc, char** argv)
 
         // call bash script to manipulate the input files
         std::string bashargs = props->createBash();
+        std::cout << "bash args " << bashargs << std::endl;
+        fs::path preprocess = props->getBuildDir();
+        preprocess /= "preprocess.sh";
 
-        if (fs::exists(props->getBuildDir() /+ "preprocess.sh")){
+        std::cout << "Preprocess path " << preprocess.string() << std::endl;
+
+        if (fs::exists(preprocess)){
             try {
                 props->printToStdOut( "running preprocess.sh with " + bashargs);
                 system(bashargs.c_str());

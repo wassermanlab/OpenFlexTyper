@@ -52,7 +52,8 @@ void FTMap::genQKMap()
                                   _ftProps.getOverlap(),
                                   _ftProps.getStride(),
                                   _ftProps.getKmerCountsFlag(),
-                                  _ftProps.getMaxKmers());
+                                  _ftProps.getMaxKmers(),
+                                  _ftProps.isVerbose());
 
     std::map<ft::QIdT, ft::QueryClass>::iterator it = _querySet.begin();
     ft::Utils _utils;

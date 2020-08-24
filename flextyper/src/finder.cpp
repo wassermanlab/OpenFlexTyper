@@ -55,6 +55,7 @@ void Finder::indexSequentialSearch(FTMap &ftMap)
     for (std::pair<fs::path, u_int> item : indexes){
         fs::path indexPath = item.first;
         u_int offset = item.second;
+        std::cout << "index Path " << indexPath << std::endl;
         sequentialSearch(ftMap, indexPath, offset);
     }
 
@@ -238,7 +239,7 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
 
     std::map<ft::Kmer, ft::KmerClass> indexResults;
     try {
-        _fmIndex.loadIndexFromFile(indexPath);
+        _fmIndex.loadIndexFromFile(fs::absolute(indexPath));
     } catch (std::exception& e) {
         std::cout << "Error ! " << indexPath << " " << e.what() << std::endl;
     }

@@ -8,11 +8,16 @@ IndexProps::IndexProps(bool verbose)
 {}
 
 std::string IndexProps::createBash(){
-    std::string bashargs = "bash preprocess.sh";
+    std::cout << "build directory " << _buildDir << std::endl;
+    fs::path pathToUtils = _buildDir;
+    fs::path preprocess = _buildDir;
+    preprocess /= "preprocess.sh";
+    std::string bashargs = "bash ";
+    bashargs += preprocess.string();
     bashargs += " -r " + fs::absolute(_R1).string();
     bashargs += " -o " + fs::absolute(_outputFolder).string();
     bashargs += " -f " + _outputFile.stem().string();
-    fs::path pathToUtils = _buildDir;
+
     pathToUtils  /= "bin/";
     bashargs += " -u " + pathToUtils.string();
     if (_numOfIndexes > 1 ) {bashargs += " -n " + std::to_string(_numOfIndexes);}
@@ -215,13 +220,13 @@ void IndexProps::addToIndexSet(fs::path index, uint offset){
 //====================== FILE PREPROCESS ======================
 void IndexProps::createPPFSet(){
 
-    fs::path ppFN = fs::absolute(_outputFolder);
-    if (_readSetName.empty())
-    {
-        printToStdOut("Read set name not set, using default of 'R'");
-        setReadSetName(std::string("R"));
-    }
-    ppFN /= _readSetName;
+    fs::path ppFN = fs::absolute(_outputFile);
+//    if (_readSetName.empty())
+//    {
+//        printToStdOut("Read set name not set, using default of 'R'");
+//        setReadSetName(std::string("R"));
+//    }
+    //ppFN /= _readSetName;
 
     printToStdOut( "creating _ppFN " + ppFN.string());
     ppFN.replace_extension(".fasta");
