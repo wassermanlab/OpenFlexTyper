@@ -61,6 +61,7 @@ public:
     bool getPairedReadsFlag() const;
 
     const std::string& getReadSetName() const;
+    const std::string& getIndexFileName() const;
     const algo::FileType& getReadFileType() const;
 
     /// Parameter Setters ///
@@ -115,6 +116,7 @@ public:
     void countNumOfReads();
     u_int countLines(fs::path fileToCount);
     void saveIndexProps(const fs::path& indexPropsFile) const;
+    void loadFromIni(const fs::path inifile);
     u_int getOffsetForIndex(fs::path indexFile);
 
 };

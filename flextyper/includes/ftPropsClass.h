@@ -94,6 +94,7 @@ public:
     SearchType getSearchType() const;
 
     std::string getReadSetName()const ;
+    std::string getIndexFileName()const ;
 
     uint getKmerSize() const;
     uint getOverlap() const;
