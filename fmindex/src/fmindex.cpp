@@ -25,9 +25,9 @@ ft::KmerClass FmIndex::search(ft::Kmer kmer,
     // executions and in main thread for monothreaded applications
 
     //std::cout << "searching index of size " << getIndex().size() << " for " << kmer << std::endl;
-    ft::KmerClass kmerResult(kmer);
+    ft::KmerClass kmerResult = ft::KmerClass(kmer);
 
-    size_t occs = sdsl::count(_index, kmer.begin(), kmer.end());
+    size_t occs = sdsl::count(_index, kmerResult._kmer.begin(),  kmerResult._kmer.end());
     std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
 
     // if number kmers > max, flag kmer as "abundant"
@@ -37,7 +37,7 @@ ft::KmerClass FmIndex::search(ft::Kmer kmer,
     }
     if (occs > 0  && occs <= maxOcc) {
         //std::cout << "locating kmer positions " << kmer << " with count " << occs <<  std::endl;
-        auto locations = sdsl::locate(_index, kmer.begin(), kmer.begin()+kmer.length());
+        auto locations = sdsl::locate(_index, kmerResult._kmer.begin(), kmerResult._kmer.begin()+kmerResult._kmer.length());
         if (locations.size() != occs)
         {
             std::runtime_error("number of locations doesnt equal number of occurences for kmer " + kmer );
@@ -94,9 +94,6 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
             throw std::runtime_error( "Error: output Folder doesnt exist " + _props.getOutputFolder().string());
         }
 
-        // mtx.lock();
-        std::cout << "No index " << outputIndex << " located. Building index now." << std::endl;
-        // mtx.unlock();
         try {
             construct(tmpIndex, preprocessedFasta, 1);
         } catch (std::exception& e) {
@@ -104,11 +101,10 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
             throw std::runtime_error(e.what());
         }
 
-        std::cout << "Index Built " << outputIndex << std::endl;
         try {
             store_to_file(tmpIndex, outputIndex);
         } catch (std::exception& e) {
-            std::cout << "Error in FM Index Creation " << e.what() << std::endl;
+            std::cout << "Error while saving FM Index " << e.what() << std::endl;
         }
 
     }

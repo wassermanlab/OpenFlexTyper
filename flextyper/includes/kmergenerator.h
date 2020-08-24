@@ -22,7 +22,8 @@ public:
                     const uint& _overlap = 0,
                     const uint& _stride = 1,
                     const bool& _kmerCounts = false,
-                    const uint& _maxKmers = 1000000000);
+                    const uint& _maxKmers = 1000000000,
+                    const bool& _verbose = false);
 
 
     ////////////////////////////////////////////////////////////////////////
@@ -79,6 +80,7 @@ private:
     uint _stride;
     bool _kmerCounts;
     uint _maxKmers;
+    bool _verbose;
 
 };
 }

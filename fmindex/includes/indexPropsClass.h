@@ -46,7 +46,7 @@ public:
 
     std::string _readSetName;
     algo::FileType _readFileType;
-    std::string _indexFileName;
+    std::string _indexFileName = "Index";
     std::string createBash();
 
     void printToStdOut(std::string) const;

@@ -340,6 +340,10 @@ TEST_F(TestFinder, parallelSearch1)
 
 
     std::map<fs::path, uint> _indexSet = _ftProps._indexSet;
+    for (auto index : _indexSet)
+    {
+        std::cout << "index " << index.first << std::endl;
+    }
     std::cout << "number of indexes " << _indexSet.size() << std::endl;
     _indexPath = _indexSet.begin()->first;
     std::cout << "index loaded " << _indexPath << std::endl;

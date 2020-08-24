@@ -145,7 +145,7 @@ public:
     void addToIndexSet(const fs::path& index, u_int offset);
 
     void setTestProps(const uint numOfReads, const uint readLength, bool _revComp);
-
+    void setOutputFolder(const fs::path& outputFolder);
 private:
     ////////////////////////////////////////////////////////////////////////
     /// \brief fixed properties

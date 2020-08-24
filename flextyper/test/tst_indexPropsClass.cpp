@@ -238,7 +238,8 @@ TEST_F(TestIndexProp, createBash1)
     _indexProp->setR1("test.fq");
     _indexProp->setBuildDir("../build");
     _indexProp->setOutputFile();
-    std::string expectedBash = "bash preprocess.sh -r "
+    std::string expectedBash = "bash "
+            + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
             + fs::current_path().string()+ "/test.fq -o "
             + fs::current_path().string() + " -f Index -u ../build/bin/";
     std::string outputBash = _indexProp->createBash();
@@ -272,7 +273,8 @@ TEST_F(TestIndexProp, createBash2)
     _indexProp->setPairedReadsFlag(true);
     _indexProp->setOutputFile();
     _indexProp->setBuildDir("../build");
-    std::string expectedBash = "bash preprocess.sh -r "
+    std::string expectedBash = "bash "
+            + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
             + fs::current_path().string()+ "/reads/test_1.fq -o "
             + fs::current_path().string() + " -f Index -u ../build/bin/ -p "
             + fs::current_path().string()+ "/reads/test_2.fq";
@@ -301,7 +303,8 @@ TEST_F(TestIndexProp, createBash3)
     _indexProp->setOutputFolder("../");
     _indexProp->setOutputFile();
     _indexProp->setBuildDir("../build");
-    std::string expectedBash = "bash preprocess.sh -r "
+    std::string expectedBash = "bash "
+            + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
             + fs::current_path().string()+ "/reads/test_1.fq -o "
             + fs::current_path().parent_path().string() + " -f Index_PatientX -u ../build/bin/";
     std::string outputBash = _indexProp->createBash();
@@ -326,7 +329,8 @@ TEST_F(TestIndexProp, createBash4)
     _indexProp->setIndexFileName("Test");
     _indexProp->setOutputFile();
     _indexProp->setBuildDir("../build");
-    std::string expectedBash = "bash preprocess.sh -r "
+    std::string expectedBash = "bash "
+                        + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
             + fs::current_path().string()+ "/reads/test_1.fq -o "
             + fs::current_path().string() + " -f Test -u ../build/bin/";
     std::string outputBash = _indexProp->createBash();
@@ -351,7 +355,8 @@ TEST_F(TestIndexProp, createBash5)
     _indexProp->setOutputFolder("outputFolder");
     _indexProp->setOutputFile();
     _indexProp->setBuildDir("../build");
-    std::string expectedBash = "bash preprocess.sh -r "
+    std::string expectedBash = "bash "
+                        + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
             + fs::current_path().string()+ "/reads/test_1.fq -o "
             + fs::current_path().string() + "/outputFolder -f Index -u ../build/bin/";
     std::string outputBash = _indexProp->createBash();
@@ -370,7 +375,8 @@ TEST_F(TestIndexProp, createBash_withUnzip)
     _indexProp->setBuildDir("../build");
     _indexProp->setOutputFile();
     _indexProp->setReadFileType(algo::FileType::GZ);
-    std::string expectedBash = "bash preprocess.sh -r "
+    std::string expectedBash = "bash "
+                        + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
             + fs::current_path().string()+ "/test.fq.gz -o "
             + fs::current_path().string() + " -f Index -u ../build/bin/ -z 1";
     std::string outputBash = _indexProp->createBash();
@@ -396,7 +402,8 @@ TEST_F(TestIndexProp, createBash_withRevComp)
     _indexProp->setBuildDir("../build");
     _indexProp->setOutputFile();
     _indexProp->setRevCompFlag(true);
-    std::string expectedBash = "bash preprocess.sh -r "
+    std::string expectedBash = "bash "
+            + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
             + fs::current_path().string()+ "/test.fq -o "
             + fs::current_path().string() + " -f Index -u ../build/bin/ -c 1";
     std::string outputBash = _indexProp->createBash();
@@ -431,7 +438,8 @@ TEST_F(TestIndexProp, createBash_withUnzipPairedRevComp)
     _indexProp->setRevCompFlag(true);
     _indexProp->setOutputFile();
     _indexProp->setBuildDir("../build");
-    std::string expectedBash = "bash preprocess.sh -r "
+    std::string expectedBash = "bash "
+            + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
             + fs::current_path().string()+ "/reads/test_1.fq.gz -o "
             + fs::current_path().string() + " -f Index -u ../build/bin/ -z 1 -p "
             + fs::current_path().string()+ "/reads/test_2.fq.gz -c 1";
@@ -456,7 +464,8 @@ TEST_F(TestIndexProp, createBash_withMultipleIndexes)
     _indexProp->setNumOfIndexes(5);
     _indexProp->setOutputFile();
 
-    std::string expectedBash = "bash preprocess.sh -r "
+    std::string expectedBash = "bash "
+             + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
              + fs::current_path().string()+ "/test_R1.fq.gz -o "
              + fs::current_path().string()+ "/outputfolder -f Index -u ../build/bin/ -n 5";
     std::string outputBash = _indexProp->createBash();
@@ -481,7 +490,7 @@ TEST_F(TestIndexProp, createPPFSet1)
     _indexProp->setOutputFile();
 
     _indexProp->createPPFSet();
-    std::string expectedPPFN1 =  fs::current_path().string() + "/outputfolder/R.fasta";
+    std::string expectedPPFN1 =  fs::current_path().string() + "/outputfolder/Index.fasta";
     std::map<fs::path, std::pair<u_int, u_int>> outputPPFNs = _indexProp->getPreProcessedFastas();
     std::string outputPPFN1 = outputPPFNs.begin()->first.string() ;
     fs::remove(_indexProp->getR1());
@@ -505,7 +514,7 @@ TEST_F(TestIndexProp, createPPFSet2)
     _indexProp->setOutputFile();
 
     _indexProp->createPPFSet();
-    std::string expectedPPFN1 =  fs::current_path().string() + "/outputfolder/reads.fasta";
+    std::string expectedPPFN1 =  fs::current_path().string() + "/outputfolder/Index_reads.fasta";
     std::map<fs::path, std::pair<u_int, u_int>> outputPPFNs = _indexProp->getPreProcessedFastas();
     std::string outputPPFN1 = outputPPFNs.begin()->first.string() ;
     fs::remove(_indexProp->getR1());
@@ -528,8 +537,8 @@ TEST_F(TestIndexProp, createPPFSet3)
     _indexProp->setNumOfIndexes(2);
     _indexProp->setOutputFile();
     _indexProp->createPPFSet();
-    std::string expectedPPFN1 =  fs::current_path().string() +  "/outputfolder/R_0.fasta";
-    std::string expectedPPFN2 =  fs::current_path().string() + "/outputfolder/R_1.fasta";
+    std::string expectedPPFN1 =  fs::current_path().string() +  "/outputfolder/Index_0.fasta";
+    std::string expectedPPFN2 =  fs::current_path().string() + "/outputfolder/Index_1.fasta";
 
     std::map<fs::path, std::pair<u_int, u_int>> outputPPFNs = _indexProp->getPreProcessedFastas();
 
@@ -558,8 +567,8 @@ TEST_F(TestIndexProp, createPPFSet4)
     _indexProp->setReadSetName("reads");
     _indexProp->setOutputFile();
     _indexProp->createPPFSet();
-    std::string expectedPPFN1 =  fs::current_path().string() +  "/outputfolder/reads_0.fasta";
-    std::string expectedPPFN2 =  fs::current_path().string() + "/outputfolder/reads_1.fasta";
+    std::string expectedPPFN1 =  fs::current_path().string() +  "/outputfolder/Index_reads_0.fasta";
+    std::string expectedPPFN2 =  fs::current_path().string() + "/outputfolder/Index_reads_1.fasta";
 
     std::map<fs::path, std::pair<u_int, u_int>> outputPPFNs = _indexProp->getPreProcessedFastas();
 
@@ -584,7 +593,7 @@ TEST_F(TestIndexProp, createIndexINI)
     algo::IndexProps* _indexProp = new algo::IndexProps(true);
     std::ofstream("test.fq.gz");
     _indexProp->setR1("test.fq.gz");
-
+    _indexProp->setNumOfReads(10);
     _indexProp->setOutputFolder("outputfolder/");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(2);
@@ -599,6 +608,15 @@ TEST_F(TestIndexProp, createIndexINI)
     }
 }
 
+//======================================================================
+TEST_F(TestIndexProp, countReads)
+{
+    //algo::IndexProps* _indexProp = new algo::IndexProps(true);
+    //countNumOfReads();
+
+
+
+}
 
 
 

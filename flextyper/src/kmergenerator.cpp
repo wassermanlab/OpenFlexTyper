@@ -9,14 +9,16 @@ KmerGenerator::KmerGenerator(const uint& kmerSize ,
                              const uint& overlap ,
                              const uint& stride,
                              const bool& kmerCounts,
-                             const uint& maxKmers)
+                             const uint& maxKmers,
+                             const bool &verbose)
     : _kmerSize(kmerSize) ,
     _refOnly(refOnly),
     _searchType(searchType),
     _overlap(overlap),
     _stride(stride),
     _kmerCounts(kmerCounts),
-    _maxKmers(maxKmers)
+    _maxKmers(maxKmers),
+    _verbose(verbose)
 {
 }
 
@@ -96,21 +98,33 @@ std::set<std::string> KmerGenerator::genCenteredSearchStrings(const std::string&
 std::set<std::string> KmerGenerator::genSearchKmers(const ft::QueryClass& queryObj)
 {
     std::set<std::string> searchKmers;
-//    std::cout << "Kmer Size " << _kmerSize << std::endl;
-//    std::cout << "Ref Only Flag " << _refOnly << std::endl;
-//    std::cout << "Search Type " << _searchType << std::endl;
-//    std::cout << "Overlap  " << _overlap << std::endl;
-//    std::cout << "Stride " << _stride << std::endl;
-//    std::cout << "kmer Counts " << _kmerCounts << std::endl;
-//    std::cout << "MaxKmers  " << _maxKmers << std::endl;
+    if (_verbose){
+            std::cout << "  " << std::endl;
+            std::cout << "  " << std::endl;
+            std::cout << "Query String " << queryObj._qstring.substr(0,10) <<std::endl;
+            std::cout << "Kmer Size " << _kmerSize << std::endl;
+            std::cout << "Ref Only Flag " << _refOnly << std::endl;
+            std::cout << "Search Type " << _searchType << std::endl;
+            std::cout << "Overlap  " << _overlap << std::endl;
+            std::cout << "Stride " << _stride << std::endl;
+            std::cout << "kmer Counts " << _kmerCounts << std::endl;
+            std::cout << "MaxKmers  " << _maxKmers << std::endl;
+
+    }
 
 
     // generate search queries
 
     if (_searchType == CENTERED) {
         searchKmers = genCenteredSearchStrings(queryObj._qstring);
-    } else {
+    } else if (_searchType == SLIDING) {
         searchKmers = genSlidingSearchStrings(queryObj._qstring);
+    } else {
+        throw std::runtime_error("Search Type not recognised");
+    }
+    if (_verbose)
+    {
+        std::cout << "length of searchKmers " << searchKmers.size() << std::endl;
     }
 
     if (searchKmers.empty()) {
