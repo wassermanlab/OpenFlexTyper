@@ -60,10 +60,13 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
     std::string ppfname = preprocessedFasta.stem();
 
     fs::path outputIndex = _props.getOutputFolder();
-    std::string newfilename = ppfname + ".fm9";
+    std::string newfilename = _props.getIndexFileName();
+    newfilename += "_" + ppfname + ".fm9";
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> tmpIndex;
     outputIndex /= newfilename;
+
+    outputIndex.replace_extension(".fm9");
 
     std::cout << "creating index for " << ppfname << " at " << outputIndex << std::endl;
     if (preprocessedFasta.empty())
@@ -157,8 +160,8 @@ void FmIndex::parallelFmIndex(algo::IndexProps& _props)
         _props.addToIndexSet(outputIndex, offset);
        }
     fs::path indexPropsINI =  _props.getOutputFolder();
-    indexPropsINI /= _props.getOutputFile().filename();
-    indexPropsINI.replace_extension(".ini");
+    indexPropsINI /= _props.getIndexName() + "_" + _props.getReadSetName() + ".ini";
+
 
     _props.saveIndexProps(indexPropsINI);
 }

@@ -155,7 +155,7 @@ int main(int argc, char** argv)
 
         //set Read Files
         fs::path readFile = parser.value(readFileName).toStdString();
-        props->printToStdOut("Read File " + readFile.string());
+        props->printToStdOut("R1 " + readFile.string());
 
         props->setR1(readFile);
 
@@ -174,12 +174,13 @@ int main(int argc, char** argv)
         }
 
         props->setPairedReadsFlag(parser.isSet(readPairFileName));
+
         if (props->getPairedReadsFlag())
         {
             props->setR2(parser.value(readPairFileName).toStdString());
             std::string readsetName = props->getReadSetName();
             props->setReadSetName(readsetName.substr(0,readsetName.size()-2));
-            props->printToStdOut("paired read files " + props->getR2().string());
+            props->printToStdOut("R2 " + props->getR2().string());
         }
 
          props->printToStdOut( "read set Name " + props->getReadSetName());
@@ -203,10 +204,8 @@ int main(int argc, char** argv)
             props->printToStdOut("Index File Name not set");
         }else {
             props->printToStdOut( "Setting Index File Name to " + parser.value(indexFileName).toStdString());
-            props->setIndexFileName(parser.value(indexFileName).toStdString());
+            props->setIndexName(parser.value(indexFileName).toStdString());
         }
-        props->setOutputFile();
-        props->printToStdOut( "Output File Name "+ props->getOutputFile().string());
 
         //set parameters
         props->setRevCompFlag(parser.isSet(revCompFlag));

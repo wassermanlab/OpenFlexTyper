@@ -180,8 +180,9 @@ void FTProp::loadIndexProps(const fs::path &_indexPropsFile, bool printInputs){
     int size = isettings.beginReadArray("IndexFiles");
     for (int i = 0; i < size; ++i) {
         isettings.setArrayIndex(i);
-        std::string fileName = isettings.value("fileName").toString().toStdString();
+        fs::path fileName = isettings.value("fileName").toString().toStdString();
         u_int offset = isettings.value("offset").toInt();
+        printToStdOut("index fileName " + fileName.string());
         indexSet[fileName] = offset;
     }
     isettings.endArray();
@@ -253,10 +254,10 @@ void FTProp::initIndexProps( const bool pairedReads,
 
 //======================================================================
 void FTProp::addToIndexSet(const fs::path& index, u_int offset){
-    std::cout<< "add index to set " << index << std::endl;
+    std::cout<< "add index to set " << fs::absolute(index) << std::endl;
 
-    if (_indexSet.count(fs::absolute(index)) == 0){
-        _indexSet[fs::absolute(index)] = offset;
+    if (_indexSet.count(index) == 0){
+        _indexSet[index] = offset;
         _numOfIndexes = _indexSet.size();
     }
 }
