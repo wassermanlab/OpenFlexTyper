@@ -58,8 +58,8 @@ public:
     const fs::path& getR2() const;
 
     const fs::path& getBuildDir() const;
-    const fs::path& getOutputFile() const;
     const fs::path& getOutputFolder() const;
+    const fs::path& getppfFolder()const ;
 
     const std::map<fs::path, std::pair<u_int, u_int>>& getPreProcessedFastas() const;
     const std::map<fs::path, uint>& getIndexSet() const;
@@ -78,6 +78,7 @@ public:
     void setBuildDir(const fs::path& buildDir);
     void setIndexName(const std::string indexName);
     void setOutputFolder(const fs::path& outputFolder);
+    void setppfFolder(const fs::path& ppfFolder);
 
     void setPreProcessedFastas(std::map<fs::path, std::pair<u_int, u_int>>& _ppFSet);
     void addPPF(fs::path _ppf, uint start, uint end);

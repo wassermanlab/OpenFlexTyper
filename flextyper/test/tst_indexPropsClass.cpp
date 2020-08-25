@@ -214,7 +214,7 @@ TEST_F(TestIndexProp, createBash1)
     std::string r(_r), o(_o), f(_f), u(_u);
 
     std::string expected_r = _indexProp->getR1();
-    std::string expected_o = _indexProp->getOutputFolder();
+    std::string expected_o = _indexProp->getppfFolder();
     std::string expected_f = _indexProp->getReadSetName();
     std::string expected_u = _indexProp->getBuildDir().string() + "/bin/";
 
@@ -225,7 +225,7 @@ TEST_F(TestIndexProp, createBash1)
 
     //cleanup
     _indexProp->delR1();
-    fs::remove("reads");
+    fs::remove_all("reads");
 }
 //======================================================================
 TEST_F(TestIndexProp, createBash2)
@@ -254,7 +254,7 @@ TEST_F(TestIndexProp, createBash2)
     std::string r(_r), o(_o), f(_f), u(_u), p(_p);
 
     std::string expected_r = _indexProp->getR1();
-    std::string expected_o = _indexProp->getOutputFolder();
+    std::string expected_o = _indexProp->getppfFolder();
     std::string expected_f = _indexProp->getReadSetName();
     std::string expected_u = _indexProp->getBuildDir().string() + "/bin/";
     std::string expected_p = _indexProp->getR2();
@@ -268,8 +268,8 @@ TEST_F(TestIndexProp, createBash2)
     //cleanup
     _indexProp->delR1();
     _indexProp->delR2();
-    fs::remove("reads");
-    fs::remove("outputFolder");
+    fs::remove_all("reads");
+    fs::remove_all("outputFolder");
 
 }
 //======================================================================
@@ -293,7 +293,7 @@ TEST_F(TestIndexProp, createBash_withUnzip)
     std::string r(_r), o(_o), f(_f), u(_u);
 
     std::string expected_r = _indexProp->getR1();
-    std::string expected_o = _indexProp->getOutputFolder();
+    std::string expected_o = _indexProp->getppfFolder();
     std::string expected_f = _indexProp->getReadSetName();
     std::string expected_u = _indexProp->getBuildDir().string() + "/bin/";
 
@@ -330,7 +330,7 @@ TEST_F(TestIndexProp, createBash_withRevComp)
     std::string r(_r), o(_o), f(_f), u(_u);
 
     std::string expected_r = _indexProp->getR1();
-    std::string expected_o = _indexProp->getOutputFolder();
+    std::string expected_o = _indexProp->getppfFolder();
     std::string expected_f = _indexProp->getReadSetName();
     std::string expected_u = _indexProp->getBuildDir().string() + "/bin/";
 
@@ -371,7 +371,7 @@ TEST_F(TestIndexProp, createBash_withUnzipPairedRevComp)
     std::string r(_r), o(_o), f(_f), u(_u), p(_p);
 
     std::string expected_r = _indexProp->getR1();
-    std::string expected_o = _indexProp->getOutputFolder();
+    std::string expected_o = _indexProp->getppfFolder();
     std::string expected_f = _indexProp->getReadSetName();
     std::string expected_u = _indexProp->getBuildDir().string() + "/bin/";
     std::string expected_p = _indexProp->getR2();
@@ -387,7 +387,7 @@ TEST_F(TestIndexProp, createBash_withUnzipPairedRevComp)
     //cleanup
     _indexProp->delR1();
     _indexProp->delR2();
-    fs::remove("reads");
+    fs::remove_all("reads");
 }
 
 //======================================================================
@@ -414,7 +414,7 @@ TEST_F(TestIndexProp, createBash_withMultipleIndexes)
     std::string r(_r), o(_o), f(_f), u(_u);
 
     std::string expected_r = _indexProp->getR1();
-    std::string expected_o = _indexProp->getOutputFolder();
+    std::string expected_o = _indexProp->getppfFolder();
     std::string expected_f = _indexProp->getReadSetName();
     std::string expected_u = _indexProp->getBuildDir().string() + "/bin/";
 

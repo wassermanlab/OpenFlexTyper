@@ -9,6 +9,7 @@ IndexProps::IndexProps(bool verbose)
     : _verbose(verbose)
 {
     _outputFolder = fs::current_path();
+    _ppfFolder = fs::current_path() /="tmp_ppf";
 }
 
 std::string IndexProps::createBash(){
@@ -19,7 +20,7 @@ std::string IndexProps::createBash(){
     std::string bashargs = "bash ";
     bashargs += preprocess.string();
     bashargs += " -r " + _R1.string();
-    bashargs += " -o " + _outputFolder.string();
+    bashargs += " -o " + _ppfFolder.string();
     bashargs += " -f " + _readSetName;
 
     pathToUtils  /= "bin/";
@@ -68,7 +69,7 @@ void IndexProps::setReadFileType(const algo::FileType& readFileType){_readFileTy
 //====================== FILE GETTERS ======================
 const fs::path& IndexProps::getBuildDir() const {return _buildDir;}
 const fs::path& IndexProps::getOutputFolder()const {return _outputFolder;}
-
+const fs::path& IndexProps::getppfFolder()const {return _ppfFolder;}
 const fs::path& IndexProps::getR1()const {return _R1;}
 const fs::path& IndexProps::getR2()const {return _R2;}
 
@@ -119,7 +120,20 @@ void IndexProps::delSpecificReadFasta(const fs::path& _preProcessedFasta){
 
 void IndexProps::setBuildDir(const fs::path &buildDir)
 {        _buildDir = buildDir;   }
-
+void IndexProps::setppfFolder(const fs::path &ppfFolder)
+{
+    fs::path ppffolder = ppfFolder;
+    printToStdOut("PPF Folder " + fs::absolute(ppffolder).string());
+    if (!fs::exists(ppffolder)){
+        printToStdOut("creating PPF folder in " + ppffolder.string());
+            try {
+            fs::create_directory(ppffolder);
+            } catch (std::exception& e ) {
+            throw std::runtime_error("Cannot create ppf folder " + ppffolder.string());
+        }
+    }
+    _ppfFolder = ppffolder;
+}
 void IndexProps::setOutputFolder(const fs::path& outputFolder)
 {
     fs::path outfolder = outputFolder;
