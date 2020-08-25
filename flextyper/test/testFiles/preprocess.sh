@@ -181,7 +181,7 @@ function processReadFile(){
     local utilsPath=$6
 
     local readFileFQ="${outputDir}/${readName}.fq"
-    local readFileFA="${outputDir}/${readName}.fasta"
+    local readFileFA="${outputDir}/tmp_ppf/${readSetName}.fasta"
     echo "read file FQ: " $readFileFQ
     echo "read file FA: " $readFileFA
 
@@ -225,10 +225,10 @@ function processReadFile(){
 ##########################################
 # main function call
 function main() {
-#main $readFile  $outputDir $outputFileName $zippedReads $numberOfIndexes $reverseComp $pairedReads $pathToUtils $readPairFile
+#main $readFile  $outputDir $readSetName $zippedReads $numberOfIndexes $reverseComp $pairedReads $pathToUtils $readPairFile
         local readFile=$1
         local outputDir=$2
-        local outputFileName=$3
+        local readSetName=$3
         local zippedReads=$4
         local numIndexes=$5
         local reverseComp=$6
@@ -242,7 +242,7 @@ function main() {
         if [ $zippedReads -eq 1 ]; then readFileName=${readFileName%.*}; fi
 
         local readFileFA="${outputDir}/${readFileName}.fasta"
-        local outputReadFile="${outputDir}/${outputFileName}.fasta"
+        local outputReadFile="${outputDir}/tmp_ppf/${readSetName}.fasta"
 
 
         if [ ! -d ${utilsPath} ]; then
@@ -251,7 +251,7 @@ function main() {
         fi
 
         #echo "read file FA: " $readFileFA
-        echo "outputReadFile: " $outputReadFile
+        echo "read Set Name: " $readSetName
         processReadFile $readFile $readFileName $outputDir $zippedReads $reverseComp $utilsPath
 
         if [ ! ${readFileFA} == ${outputReadFile} ]; then
@@ -277,7 +277,7 @@ function main() {
         #Split Read Files
         if [ ${numIndexes} -gt 1 ]; then
             #echo "splitting Read Files into " ${numIndexes}
-            splitReadFiles ${outputReadFile} ${outputFileName} ${numIndexes}
+            splitReadFiles ${outputReadFile} ${readSetName} ${numIndexes}
         fi
 
         if [ -f $outputReadFile ]
@@ -327,7 +327,6 @@ pairedReads=0
 zippedReads=0
 pathToUtils=${PWD}
 outputDir=${PWD}
-outputFileName='processedReads'
 
 # retrieve arguments
 while getopts ":z:r:p:n:c:o:f:u:" arg ; do
@@ -338,7 +337,7 @@ while getopts ":z:r:p:n:c:o:f:u:" arg ; do
         n) numberOfIndexes=${OPTARG};;
         c) reverseComp=${OPTARG};;
         o) outputDir=${OPTARG};;
-        f) outputFileName=${OPTARG};;
+        f) readSetName=${OPTARG};;
         u) pathToUtils=${OPTARG};;
         *) usage;;
     esac
@@ -348,9 +347,9 @@ if [ "$readPairFile" != "" ]; then pairedReads=1; fi
 
 # call the main function
 echo 'preprocessing with: '
-echo '-r readFilename ' $readFile
+echo '-r readFile ' $readFile
+echo '-f readSetName ' $readSetName
 echo '-o outputDir  ' $outputDir
-echo '-f outputFileName  ' $outputFileName
 echo '-z zippedReads ' $zippedReads
 echo '-n numberOfIndexes ' $numberOfIndexes
 echo '-c reverseComplement ' $reverseComp
@@ -358,4 +357,4 @@ echo '-u pathToUtils  ' $pathToUtils
 echo ' using paired reads ' $pairedReads
 echo '-p readPairFile ' $readPairFile
 
-main $readFile $outputDir $outputFileName $zippedReads $numberOfIndexes $reverseComp $pairedReads $pathToUtils  $readPairFile
+main $readFile $outputDir $readSetName $zippedReads $numberOfIndexes $reverseComp $pairedReads $pathToUtils  $readPairFile

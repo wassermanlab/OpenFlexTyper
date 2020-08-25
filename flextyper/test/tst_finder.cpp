@@ -83,7 +83,6 @@ public:
         algo::IndexProps _indexProp(true);
         algo::FmIndex _fmindex;
         std::ofstream("testFiles/test.fq.gz");
-        _indexProp.setReadFQ("testFiles/test.fq.gz");
         _indexProp.setR1("testFiles/test.fq.gz");
         _indexProp.setBuildDir(fs::current_path());
         _indexProp.setOutputFolder("testOutput");

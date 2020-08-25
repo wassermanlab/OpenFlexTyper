@@ -37,7 +37,7 @@ public:
     bool getPairedReadsFlag() const;
 
     const std::string& getReadSetName() const;
-    const std::string& getIndexFileName() const;
+    const std::string& getIndexName() const;
     const algo::FileType& getReadFileType() const;
 
     /// Parameter Setters ///
@@ -53,7 +53,7 @@ public:
     void setReadFileType(const algo::FileType& readFileType);
 
     /// File Getters ///
-    const fs::path& getReadFQ() const;
+
     const fs::path& getR1() const;
     const fs::path& getR2() const;
 
@@ -69,15 +69,14 @@ public:
     bool setR1(const fs::path& r1);
     bool setR2(const fs::path& r2);
 
-    void delR1();
-    void delR2();
-    void delReadFQ();
+    bool delR1();
+    bool delR2();
+
     void delReadFastas();
     void delSpecificReadFasta(const fs::path& _preProcessedFasta);
 
     void setBuildDir(const fs::path& buildDir);
-    void setIndexFileName(const std::string indexFileName);
-    void setOutputFile();
+    void setIndexName(const std::string indexName);
     void setOutputFolder(const fs::path& outputFolder);
 
     void setPreProcessedFastas(std::map<fs::path, std::pair<u_int, u_int>>& _ppFSet);

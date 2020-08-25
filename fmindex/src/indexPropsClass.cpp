@@ -1,11 +1,15 @@
 ﻿#include "indexPropsClass.h"
 
 namespace algo {
-IndexProps::IndexProps(){}
+IndexProps::IndexProps()
+   :IndexProps(false)
+{}
 
 IndexProps::IndexProps(bool verbose)
     : _verbose(verbose)
-{}
+{
+    _outputFolder = fs::current_path();
+}
 
 std::string IndexProps::createBash(){
     std::cout << "build directory " << _buildDir << std::endl;
@@ -14,15 +18,15 @@ std::string IndexProps::createBash(){
     preprocess /= "preprocess.sh";
     std::string bashargs = "bash ";
     bashargs += preprocess.string();
-    bashargs += " -r " + fs::absolute(_R1).string();
-    bashargs += " -o " + fs::absolute(_outputFolder).string();
-    bashargs += " -f " + _outputFile.stem().string();
+    bashargs += " -r " + _R1.string();
+    bashargs += " -o " + _outputFolder.string();
+    bashargs += " -f " + _readSetName;
 
     pathToUtils  /= "bin/";
     bashargs += " -u " + pathToUtils.string();
     if (_numOfIndexes > 1 ) {bashargs += " -n " + std::to_string(_numOfIndexes);}
     if (_readFileType == algo::FileType::GZ) {bashargs += " -z 1"; }
-    if (_pairedReads) {bashargs += " -p " + fs::absolute(_R2).string() ;}
+    if (_pairedReads) {bashargs += " -p " + _R2.string() ;}
     if (_revComp){bashargs += " -c 1";}
 
     return bashargs;
@@ -42,7 +46,7 @@ bool IndexProps::getRevCompFlag() const {return _revComp;}
 bool IndexProps::getPairedReadsFlag() const {return _pairedReads;}
 
 const std::string& IndexProps::getReadSetName() const {return _readSetName;}
-const std::string& IndexProps::getIndexFileName() const {return _indexFileName;}
+const std::string& IndexProps::getIndexName() const {return _indexName;}
 const algo::FileType& IndexProps::getReadFileType()const {return _readFileType;}
 
 //==================== PARAMETER SETTERS ===================
@@ -56,13 +60,11 @@ void IndexProps::setPairedReadsFlag(bool pairedReads){ _pairedReads = pairedRead
 void IndexProps::setVerboseFlag(bool verbose){_verbose = verbose;}
 void IndexProps::setReadSetName(const std::string readSetName){_readSetName = readSetName;}
 void IndexProps::setReadFileType(const algo::FileType& readFileType){_readFileType = readFileType;}
-void IndexProps::setIndexFileName(const std::string indexFileName){_indexFileName = indexFileName;}
+void IndexProps::setIndexName(const std::string indexFileName){_indexName = indexFileName;}
 //====================== FILE GETTERS ======================
 const fs::path& IndexProps::getBuildDir() const {return _buildDir;}
-const fs::path& IndexProps::getOutputFile() const {return _outputFile;}
 const fs::path& IndexProps::getOutputFolder()const {return _outputFolder;}
 
-const fs::path& IndexProps::getReadFQ()const {return _readFQ;}
 const fs::path& IndexProps::getR1()const {return _R1;}
 const fs::path& IndexProps::getR2()const {return _R2;}
 
@@ -78,7 +80,7 @@ bool IndexProps::setR1(const fs::path& readFile)
 {
     fs::path r1 = fs::absolute(readFile);
     if (!fs::exists(r1)) {
-        printToStdOut("R1 doesnt exist at " +r1.string());
+        printToStdOut("R1 doesn't exist at " +r1.string());
         return false;
     }
     _R1 = r1;
@@ -90,7 +92,7 @@ bool IndexProps::setR2(const fs::path& readFile)
 {
     fs::path r2 = fs::absolute(readFile);
     if (!fs::exists(r2)) {
-        printToStdOut("R2 doesnt exist at " +r2.string());
+        printToStdOut("R2 doesn't exist at " +r2.string());
         return false;
     }
     _R2 = r2;
@@ -99,15 +101,13 @@ bool IndexProps::setR2(const fs::path& readFile)
 }
 
 
-void IndexProps::delR1(){
-    fs::remove(_R1);
+bool IndexProps::delR1(){
+    return fs::remove(_R1);
 }
-void IndexProps::delR2(){
-    fs::remove(_R2);
+bool IndexProps::delR2(){
+    return fs::remove(_R2);
 }
-void IndexProps::delReadFQ(){
-    fs::remove(_readFQ);
-}
+
 void IndexProps::delReadFastas(){
     for (auto _ppf : _ppFSet){
         fs::remove(_ppf.first);
@@ -120,77 +120,19 @@ void IndexProps::delSpecificReadFasta(const fs::path& _preProcessedFasta){
 void IndexProps::setBuildDir(const fs::path &buildDir)
 {        _buildDir = buildDir;   }
 
-void IndexProps::setOutputFile()
-{
-    if (_outputFolder == "" ){
-         printToStdOut("Output Folder not set, setting to current directory  ");
-         setOutputFolder(fs::current_path());
-    }
-    if (!fs::exists(_outputFolder)){
-     printToStdOut("creating output Folder " +_outputFolder.string());
-     fs::create_directory(_outputFolder);
-    }
-    if (_indexFileName.empty()){
-         printToStdOut("Index File Name not set, setting to default 'Index'  ");
-         setIndexFileName("Index");
-    }
-
-    printToStdOut("output Folder " + _outputFolder.string());
-    fs::path outputFile = _outputFolder;
-    outputFile /= _indexFileName ;
-
-    if (!_readSetName.empty() ){
-         printToStdOut("Read Set Name set ");
-         outputFile += "_" + _readSetName;
-    }
-
-    outputFile.replace_extension(".fm9");
-    _outputFile = outputFile;
-
-    printToStdOut("output file " + outputFile.string());
-
-    //check permission to create files
-    fs::path tmpOutputFile = _outputFolder;
-    tmpOutputFile /="test123456789.tsv";
-    std::ofstream(tmpOutputFile.string());
-    if (!fs::exists(tmpOutputFile))
-    {
-        fs::remove(tmpOutputFile);
-        throw std::runtime_error("Cannot create files in output folder " + _outputFolder.string());
-    }
-    fs::remove(tmpOutputFile);
-}
-
 void IndexProps::setOutputFolder(const fs::path& outputFolder)
 {
-    fs::path outfolder;
-    if (outputFolder == "" or outputFolder =="."){
-        printToStdOut("no output folder set ");
-        outfolder = fs::current_path();
-    } else if (outputFolder == "../"){
-        printToStdOut("set as parent path  " + outputFolder.string());
-        outfolder = fs::current_path().parent_path();
-    } else {
-        printToStdOut("set absolute path as output Folder " + outputFolder.string());
-        outfolder = fs::absolute(outputFolder);
+    fs::path outfolder = outputFolder;
+    printToStdOut("Output Folder " + fs::absolute(outfolder).string());
+    if (!fs::exists(outfolder)){
+        printToStdOut("creating output folder in " + outfolder.string());
+            try {
+            fs::create_directory(outfolder);
+            } catch (std::exception& e ) {
+            throw std::runtime_error("Cannot create output folder " + outfolder.string());
+        }
     }
     _outputFolder = outfolder;
-    printToStdOut(_outputFolder.string());
-
-    if (!fs::exists(_outputFolder)){
-     printToStdOut("creating output Folder " +outputFolder.string());
-         try {
-             fs::create_directory(outputFolder);
-         } catch (std::exception& e ) {
-             throw std::runtime_error("Cannot create output folder " + _outputFolder.string());
-         }
-    }
-
-    if (!fs::exists(_outputFolder))
-    {
-        throw std::runtime_error("Cannot create output folder " + _outputFolder.string());
-    }
-
 }
 void IndexProps::addPPF(fs::path _ppf, uint start, uint end){
     printToStdOut("add to _ppFSet " + _ppf.string() + " start " + std::to_string(start) + " end " + std::to_string(end));
@@ -212,63 +154,31 @@ void IndexProps::addToIndexSet(fs::path index, uint offset){
 //====================== FILE PREPROCESS ======================
 void IndexProps::createPPFSet(){
 
-    fs::path ppFN = fs::absolute(_outputFile);
-//    if (_readSetName.empty())
-//    {
-//        printToStdOut("Read set name not set, using default of 'R'");
-//        setReadSetName(std::string("R"));
-//    }
-    //ppFN /= _readSetName;
-
-    printToStdOut( "creating _ppFN " + ppFN.string());
-    ppFN.replace_extension(".fasta");
-
-    printToStdOut( "creating _ppFSet for " + ppFN.string());
+    _ppfFolder = _outputFolder;
+    _ppfFolder /= "tmp_ppf";
+    printToStdOut("tmp ppf: " + _ppfFolder.string());
     u_int start = 0;
-    if (_numOfIndexes > 1){
-        for (u_int i=0; i<_numOfIndexes; ++i)
-        {
-            std::string newfilename = ppFN.stem();
-            newfilename += "_" + std::to_string(i) + ppFN.extension().string();
-
-            fs::path tmpPPF = ppFN;
-            tmpPPF.replace_filename(newfilename);
-            printToStdOut("tmp PPF " + tmpPPF.string());
-
-            u_int lines = countLines(tmpPPF);
-            printToStdOut("number of lines " + std::to_string(lines));
-            u_int end = start + lines;
-            addPPF(tmpPPF, start, end);
-            start += lines;
-        }
-    } else {
-    printToStdOut("tmp PPF " + ppFN.string());
-        u_int lines = countLines(ppFN);
+    for (auto& ppf : fs::directory_iterator(_ppfFolder)){
+        u_int lines = countLines(ppf);
         printToStdOut("number of lines " + std::to_string(lines));
-        addPPF(ppFN, 0, lines);
+        u_int end = start + lines;
+        addPPF(ppf, start, end);
+        start += lines;
     }
-
+    _numOfReads = start;
 }
 
 //====================== INDEX PROPS I/O ======================
 void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) const {
 
     std::string  savePath = _indexPropsFile.string();
-//    if (_indexPropsFile.parent_path() == _outputFolder){
-//        printToStdOut("save path for " + _indexPropsFile.string() + " is not in set outputFolder " + _outputFolder.string());
-//        savePath = _outputFolder;
-//        savePath /= _indexPropsFile;
-//        printToStdOut("updated save path to " + savePath.string());
-//    }
     printToStdOut("saving index properties " + savePath);
 
     QSettings settings(_indexPropsFile.c_str(), QSettings::NativeFormat);
 
-    settings.setValue("readFQ", QString::fromStdString(_readFQ.string()));
     settings.setValue("R1", QString::fromStdString(_R1.string()));
     settings.setValue("R2", QString::fromStdString(_R2.string()));
-    settings.setValue("outputFile", QString::fromStdString(_outputFile.string()));
-    settings.setValue("indexFileName", QString::fromStdString(_indexFileName));
+    settings.setValue("indexFileName", QString::fromStdString(_indexName));
     settings.setValue("readSetName", QString::fromStdString(_readSetName));
     settings.setValue("indexDirectory", QString::fromStdString(_outputFolder.string()));
     settings.setValue("buildDirectory", QString::fromStdString(_buildDir.string()));
@@ -297,9 +207,8 @@ void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) const {
     std::cout << "reverse Comp      : " << settings.value("revComp").toString().toStdString() <<  std::endl;
     std::cout << "build Directory   : " << settings.value("buildDirectory").toString().toStdString() <<  std::endl;
     std::cout << "index Directory   : " << settings.value("indexDirectory").toString().toStdString() <<  std::endl;
-    std::cout << "Index File Name   : " << settings.value("indexFileName").toString().toStdString() <<  std::endl;
+    std::cout << "Index File Name   : " << settings.value("indexName").toString().toStdString() <<  std::endl;
     std::cout << "read Set Name     : " << settings.value("readSetName").toString().toStdString() <<  std::endl;
-    std::cout << "Read FQ           : " << settings.value("readFQ").toString().toStdString() <<  std::endl;
     std::cout << "Number of Reads   : " << settings.value("numOfReads").toString().toStdString() <<  std::endl;
     std::cout << "Number of Indexes : " << settings.value("numOfIndexes").toString().toStdString() <<  std::endl;
     if (_pairedReads)
@@ -320,15 +229,11 @@ void IndexProps::loadFromIni(const fs::path inifile){
     fs::path _buildDir = isettings.value("buildDirectory").toString().toStdString();
     fs::path _indexDir = isettings.value("indexDirectory").toString().toStdString();
     std::string _readSetName = isettings.value("readSetName").toString().toStdString();
-    std::string _indexFileName = isettings.value("indexFileName").toString().toStdString();
-    std::string _inputFastQ;
-    if (_pairedReads){
-        _inputFastQ = isettings.value("R1").toString().toStdString();
-       std::string _R1 = isettings.value("R1").toString().toStdString();
-       std::string _R2 = isettings.value("R2").toString().toStdString();
-    } else {
-       _inputFastQ = isettings.value("readFQ").toString().toStdString();
-    }
+    std::string _indexName = isettings.value("indexFileName").toString().toStdString();
+
+   std::string _R1 = isettings.value("R1").toString().toStdString();
+   std::string _R2 = isettings.value("R2").toString().toStdString();
+
 
     u_int _numOfReads = isettings.value("numOfReads").toUInt();
     u_int _numOfIndexes = isettings.value("numOfIndexes").toUInt();
@@ -353,9 +258,9 @@ void IndexProps::loadFromIni(const fs::path inifile){
     std::cout << "reverse Comp      : " << _indexRevComp <<  std::endl;
     std::cout << "build Directory   : " << _buildDir <<  std::endl;
     std::cout << "index Directory   : " << _indexDir <<  std::endl;
-    std::cout << "Index File Name   : " << _indexFileName <<  std::endl;
+    std::cout << "Index File Name   : " << _indexName <<  std::endl;
     std::cout << "read Set Name     : " << _readSetName <<  std::endl;
-    std::cout << "Read FQ           : " << _inputFastQ <<  std::endl;
+
     std::cout << "Number of Reads   : " << _numOfReads <<  std::endl;
     std::cout << "Number of Indexes : " << _numOfIndexes <<  std::endl;
     if (_pairedReads)
@@ -369,12 +274,12 @@ void IndexProps::loadFromIni(const fs::path inifile){
 
     setR1(_R1);
     setR2(_R2);
-    setReadFQ(_inputFastQ);
+
     setBuildDir(_buildDir);
     setNumOfReads(_numOfReads);
     setNumOfIndexes(_numOfIndexes);
     setIndexSet(indexSet);
-    setIndexFileName(_indexFileName);
+    setIndexName(_indexName);
     setReadSetName(_readSetName);
     setOutputFolder(_indexDir);
 
