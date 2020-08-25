@@ -47,6 +47,7 @@ bool IndexProps::getPairedReadsFlag() const {return _pairedReads;}
 
 const std::string& IndexProps::getReadSetName() const {return _readSetName;}
 const std::string& IndexProps::getIndexName() const {return _indexName;}
+
 const algo::FileType& IndexProps::getReadFileType()const {return _readFileType;}
 
 //==================== PARAMETER SETTERS ===================
@@ -58,9 +59,12 @@ void IndexProps::setDelFastaFlag(bool delFasta){ _delFasta = delFasta;}
 void IndexProps::setRevCompFlag(bool revComp){ _revComp = revComp;}
 void IndexProps::setPairedReadsFlag(bool pairedReads){ _pairedReads = pairedReads;}
 void IndexProps::setVerboseFlag(bool verbose){_verbose = verbose;}
+
 void IndexProps::setReadSetName(const std::string readSetName){_readSetName = readSetName;}
-void IndexProps::setReadFileType(const algo::FileType& readFileType){_readFileType = readFileType;}
 void IndexProps::setIndexName(const std::string indexFileName){_indexName = indexFileName;}
+
+void IndexProps::setReadFileType(const algo::FileType& readFileType){_readFileType = readFileType;}
+
 //====================== FILE GETTERS ======================
 const fs::path& IndexProps::getBuildDir() const {return _buildDir;}
 const fs::path& IndexProps::getOutputFolder()const {return _outputFolder;}
@@ -280,9 +284,6 @@ void IndexProps::loadFromIni(const fs::path inifile){
     setIndexName(_indexName);
     setReadSetName(_readSetName);
     setOutputFolder(_indexDir);
-
-
-
 }
 
 //======================================================================

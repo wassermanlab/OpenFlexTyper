@@ -335,7 +335,8 @@ TEST_F(TestFinder, parallelSearch1)
                   maxOccurences, maxThreads, flagOverCountedKmers,
                   ignoreNonUniqueKmers, crossover);
 
-    _ftProps.addToIndexSet("testOutput/Index_Test.fm9", 0);
+    fs::path index = "testOutput/Index_Test.fm9";
+    _ftProps.addToIndexSet(index, 0);
 
 
     std::map<fs::path, uint> _indexSet = _ftProps._indexSet;
@@ -343,7 +344,8 @@ TEST_F(TestFinder, parallelSearch1)
     {
         std::cout << "index " << index.first << std::endl;
     }
-    std::cout << "number of indexes " << _indexSet.size() << std::endl;
+    std::cout << "number of indexes in indexSet " << _indexSet.size() << std::endl;
+    std::cout << "number of indexes in ftProps  " << _ftProps.getNumOfIndexes() << std::endl;
     _indexPath = _indexSet.begin()->first;
     std::cout << "index loaded " << _indexPath << std::endl;
     ft::FTMap _ftMap(_ftProps);
