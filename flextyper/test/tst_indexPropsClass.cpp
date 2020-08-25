@@ -80,152 +80,152 @@ TEST_F(TestIndexProp, setOutputFolder4)
 
 }
 
-//======================================================================
-TEST_F(TestIndexProp, setOutputFile1)
-{
-    TEST_DESCRIPTION("test set outputfile: set:[] not set:[outputfolder,index file name,read set]");
+////======================================================================
+//TEST_F(TestIndexProp, setOutputFile1)
+//{
+//    TEST_DESCRIPTION("test set outputfile: set:[] not set:[outputfolder,index file name,read set]");
 
-    algo::IndexProps* _indexProp = new algo::IndexProps(true);
-    _indexProp->setOutputFile();
-    fs::path outputfile = fs::current_path() /= "Index.fm9";
-    std::string expectedOutputFile = outputfile.string();
-    std::string outputFile = _indexProp->getOutputFile();
-    if (fs::is_empty(_indexProp->getOutputFolder())){
-        fs::remove(_indexProp->getOutputFolder());
-    }
-    EXPECT_EQ(expectedOutputFile, outputFile);
+//    algo::IndexProps* _indexProp = new algo::IndexProps(true);
 
-}
+//    fs::path outputfile = fs::current_path() /= "Index.fm9";
+//    std::string expectedOutputFile = outputfile.string();
+//    std::string outputFile = _indexProp->getOutputFile();
+//    if (fs::is_empty(_indexProp->getOutputFolder())){
+//        fs::remove(_indexProp->getOutputFolder());
+//    }
+//    EXPECT_EQ(expectedOutputFile, outputFile);
 
-//======================================================================
-TEST_F(TestIndexProp, setOutputFile2)
-{
-    TEST_DESCRIPTION("test set outputfile: set:[outputfolder] not set:[index file name,read set]");
+//}
 
-    algo::IndexProps* _indexProp = new algo::IndexProps(true);
+////======================================================================
+//TEST_F(TestIndexProp, setOutputFile2)
+//{
+//    TEST_DESCRIPTION("test set outputfile: set:[outputfolder] not set:[index file name,read set]");
 
-    _indexProp->setOutputFolder(fs::current_path().parent_path());
-    _indexProp->setOutputFile();
-    fs::path outputfile = fs::current_path().parent_path() /= "Index.fm9";
-    std::string expectedOutputFile = outputfile.string();
-    std::string outputFile = _indexProp->getOutputFile();
-    if (fs::is_empty(_indexProp->getOutputFolder())){
-        fs::remove(_indexProp->getOutputFolder());
-    }
-    EXPECT_EQ(expectedOutputFile, outputFile);
+//    algo::IndexProps* _indexProp = new algo::IndexProps(true);
 
-}
-//======================================================================
-TEST_F(TestIndexProp, setOutputFile3)
-{
-    TEST_DESCRIPTION("test set outputfile: set:[index file name] not set:[outputfolder,read set]");
+//    _indexProp->setOutputFolder(fs::current_path().parent_path());
+//    _indexProp->setOutputFile();
+//    fs::path outputfile = fs::current_path().parent_path() /= "Index.fm9";
+//    std::string expectedOutputFile = outputfile.string();
+//    std::string outputFile = _indexProp->getOutputFile();
+//    if (fs::is_empty(_indexProp->getOutputFolder())){
+//        fs::remove(_indexProp->getOutputFolder());
+//    }
+//    EXPECT_EQ(expectedOutputFile, outputFile);
 
-    algo::IndexProps* _indexProp = new algo::IndexProps(true);
+//}
+////======================================================================
+//TEST_F(TestIndexProp, setOutputFile3)
+//{
+//    TEST_DESCRIPTION("test set outputfile: set:[index file name] not set:[outputfolder,read set]");
 
-    _indexProp->setIndexFileName("Test");
+//    algo::IndexProps* _indexProp = new algo::IndexProps(true);
 
-    _indexProp->setOutputFile();
-    fs::path outputfile = fs::current_path() /= "Test.fm9";
-    std::string expectedOutputFile = outputfile.string();
-    std::string outputFile = _indexProp->getOutputFile();
-    if (fs::is_empty(_indexProp->getOutputFolder())){
-        fs::remove(_indexProp->getOutputFolder());
-    }
-    EXPECT_EQ(expectedOutputFile, outputFile);
-}
+//    _indexProp->setIndexFileName("Test");
 
-//======================================================================
-TEST_F(TestIndexProp, setOutputFile4)
-{
-    TEST_DESCRIPTION("test set outputfile: set:[read set] not set:[outputfolder,index file name]");
+//    _indexProp->setOutputFile();
+//    fs::path outputfile = fs::current_path() /= "Test.fm9";
+//    std::string expectedOutputFile = outputfile.string();
+//    std::string outputFile = _indexProp->getOutputFile();
+//    if (fs::is_empty(_indexProp->getOutputFolder())){
+//        fs::remove(_indexProp->getOutputFolder());
+//    }
+//    EXPECT_EQ(expectedOutputFile, outputFile);
+//}
 
-    algo::IndexProps* _indexProp = new algo::IndexProps(true);
-    _indexProp->setReadSetName("Reads");
+////======================================================================
+//TEST_F(TestIndexProp, setOutputFile4)
+//{
+//    TEST_DESCRIPTION("test set outputfile: set:[read set] not set:[outputfolder,index file name]");
+
+//    algo::IndexProps* _indexProp = new algo::IndexProps(true);
+//    _indexProp->setReadSetName("Reads");
 
 
-    _indexProp->setOutputFile();
-    fs::path outputfile = fs::current_path() /= "Index_Reads.fm9";
-    std::string expectedOutputFile = outputfile.string();
-    std::string outputFile = _indexProp->getOutputFile();
-    if (fs::is_empty(_indexProp->getOutputFolder())){
-        fs::remove(_indexProp->getOutputFolder());
-    }
-    EXPECT_EQ(expectedOutputFile, outputFile);
-}
+//    _indexProp->setOutputFile();
+//    fs::path outputfile = fs::current_path() /= "Index_Reads.fm9";
+//    std::string expectedOutputFile = outputfile.string();
+//    std::string outputFile = _indexProp->getOutputFile();
+//    if (fs::is_empty(_indexProp->getOutputFolder())){
+//        fs::remove(_indexProp->getOutputFolder());
+//    }
+//    EXPECT_EQ(expectedOutputFile, outputFile);
+//}
 
-//======================================================================
-TEST_F(TestIndexProp, setOutputFile5)
-{
-    TEST_DESCRIPTION("test set outputfile: set:[outputfolder,index file name] not set:[read set]");
+////======================================================================
+//TEST_F(TestIndexProp, setOutputFile5)
+//{
+//    TEST_DESCRIPTION("test set outputfile: set:[outputfolder,index file name] not set:[read set]");
 
-    algo::IndexProps* _indexProp = new algo::IndexProps(true);
+//    algo::IndexProps* _indexProp = new algo::IndexProps(true);
 
-    _indexProp->setIndexFileName("Test");
-    _indexProp->setOutputFolder(fs::current_path().parent_path());
-    _indexProp->setOutputFile();
-    fs::path outputfile = fs::current_path().parent_path() /= "Test.fm9";
-    std::string expectedOutputFile = outputfile.string();
-    std::string outputFile = _indexProp->getOutputFile();
-    if (fs::is_empty(_indexProp->getOutputFolder())){
-        fs::remove(_indexProp->getOutputFolder());
-    }
-    EXPECT_EQ(expectedOutputFile, outputFile);
-}
+//    _indexProp->setIndexFileName("Test");
+//    _indexProp->setOutputFolder(fs::current_path().parent_path());
+//    _indexProp->setOutputFile();
+//    fs::path outputfile = fs::current_path().parent_path() /= "Test.fm9";
+//    std::string expectedOutputFile = outputfile.string();
+//    std::string outputFile = _indexProp->getOutputFile();
+//    if (fs::is_empty(_indexProp->getOutputFolder())){
+//        fs::remove(_indexProp->getOutputFolder());
+//    }
+//    EXPECT_EQ(expectedOutputFile, outputFile);
+//}
 
-//======================================================================
-TEST_F(TestIndexProp, setOutputFile6)
-{
-    TEST_DESCRIPTION("test set outputfile: set:[outputfolder,read set] not set:[index file name,]");
+////======================================================================
+//TEST_F(TestIndexProp, setOutputFile6)
+//{
+//    TEST_DESCRIPTION("test set outputfile: set:[outputfolder,read set] not set:[index file name,]");
 
-    algo::IndexProps* _indexProp = new algo::IndexProps(true);
-    _indexProp->setReadSetName("Reads");
+//    algo::IndexProps* _indexProp = new algo::IndexProps(true);
+//    _indexProp->setReadSetName("Reads");
 
-    _indexProp->setOutputFolder(fs::current_path().parent_path());
-    _indexProp->setOutputFile();
-    fs::path outputfile = fs::current_path().parent_path() /= "Index_Reads.fm9";
-    std::string expectedOutputFile = outputfile.string();
-    std::string outputFile = _indexProp->getOutputFile();
-    if (fs::is_empty(_indexProp->getOutputFolder())){
-        fs::remove(_indexProp->getOutputFolder());
-    }
-    EXPECT_EQ(expectedOutputFile, outputFile);
-}
-//======================================================================
-TEST_F(TestIndexProp, setOutputFile7)
-{
-    TEST_DESCRIPTION("test set outputfile: set:[index file name,read set] not set:[outputfolder]");
+//    _indexProp->setOutputFolder(fs::current_path().parent_path());
+//    _indexProp->setOutputFile();
+//    fs::path outputfile = fs::current_path().parent_path() /= "Index_Reads.fm9";
+//    std::string expectedOutputFile = outputfile.string();
+//    std::string outputFile = _indexProp->getOutputFile();
+//    if (fs::is_empty(_indexProp->getOutputFolder())){
+//        fs::remove(_indexProp->getOutputFolder());
+//    }
+//    EXPECT_EQ(expectedOutputFile, outputFile);
+//}
+////======================================================================
+//TEST_F(TestIndexProp, setOutputFile7)
+//{
+//    TEST_DESCRIPTION("test set outputfile: set:[index file name,read set] not set:[outputfolder]");
 
-    algo::IndexProps* _indexProp = new algo::IndexProps(true);
-    _indexProp->setReadSetName("Reads");
-    _indexProp->setIndexFileName("Test");
+//    algo::IndexProps* _indexProp = new algo::IndexProps(true);
+//    _indexProp->setReadSetName("Reads");
+//    _indexProp->setIndexFileName("Test");
 
-    _indexProp->setOutputFile();
-    fs::path outputfile = fs::current_path() /= "Test_Reads.fm9";
-    std::string expectedOutputFile = outputfile.string();
-    std::string outputFile = _indexProp->getOutputFile();
-    if (fs::is_empty(_indexProp->getOutputFolder())){
-        fs::remove(_indexProp->getOutputFolder());
-    }
-    EXPECT_EQ(expectedOutputFile, outputFile);
-}
-//======================================================================
-TEST_F(TestIndexProp, setOutputFile8)
-{
-    TEST_DESCRIPTION("test set outputfile: set:[outputfolder,index file name,read set] not set:[]");
+//    _indexProp->setOutputFile();
+//    fs::path outputfile = fs::current_path() /= "Test_Reads.fm9";
+//    std::string expectedOutputFile = outputfile.string();
+//    std::string outputFile = _indexProp->getOutputFile();
+//    if (fs::is_empty(_indexProp->getOutputFolder())){
+//        fs::remove(_indexProp->getOutputFolder());
+//    }
+//    EXPECT_EQ(expectedOutputFile, outputFile);
+//}
+////======================================================================
+//TEST_F(TestIndexProp, setOutputFile8)
+//{
+//    TEST_DESCRIPTION("test set outputfile: set:[outputfolder,index file name,read set] not set:[]");
 
-    algo::IndexProps* _indexProp = new algo::IndexProps(true);
-    _indexProp->setReadSetName("Reads");
-    _indexProp->setIndexFileName("Test");
-    _indexProp->setOutputFolder(fs::current_path().parent_path());
-    _indexProp->setOutputFile();
-    fs::path outputfile = fs::current_path().parent_path() /= "Test_Reads.fm9";
-    std::string expectedOutputFile = outputfile.string();
-    std::string outputFile = _indexProp->getOutputFile();
-    if (fs::is_empty(_indexProp->getOutputFolder())){
-        fs::remove(_indexProp->getOutputFolder());
-    }
-    EXPECT_EQ(expectedOutputFile, outputFile);
-}
+//    algo::IndexProps* _indexProp = new algo::IndexProps(true);
+//    _indexProp->setReadSetName("Reads");
+//    _indexProp->setIndexFileName("Test");
+//    _indexProp->setOutputFolder(fs::current_path().parent_path());
+//    _indexProp->setOutputFile();
+//    fs::path outputfile = fs::current_path().parent_path() /= "Test_Reads.fm9";
+//    std::string expectedOutputFile = outputfile.string();
+//    std::string outputFile = _indexProp->getOutputFile();
+//    if (fs::is_empty(_indexProp->getOutputFolder())){
+//        fs::remove(_indexProp->getOutputFolder());
+//    }
+//    EXPECT_EQ(expectedOutputFile, outputFile);
+//}
 
 
 //======================================================================
@@ -236,14 +236,14 @@ TEST_F(TestIndexProp, createBash1)
     algo::IndexProps* _indexProp = new algo::IndexProps(true);
     std::ofstream("test.fq");
     _indexProp->setR1("test.fq");
+    _indexProp->setReadSetName("test");
     _indexProp->setBuildDir("../build");
-    _indexProp->setOutputFile();
     std::string expectedBash = "bash "
             + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
             + fs::current_path().string()+ "/test.fq -o "
             + fs::current_path().string() + " -f Index -u ../build/bin/";
     std::string outputBash = _indexProp->createBash();
-    fs::remove(_indexProp->getOutputFile());
+
     if (fs::is_empty(_indexProp->getOutputFolder())){
         fs::remove(_indexProp->getOutputFolder());
     }
@@ -271,7 +271,7 @@ TEST_F(TestIndexProp, createBash2)
     _indexProp->setR1("/reads/test_1.fq");
     _indexProp->setR2("/reads/test_2.fq");
     _indexProp->setPairedReadsFlag(true);
-    _indexProp->setOutputFile();
+
     _indexProp->setBuildDir("../build");
     std::string expectedBash = "bash "
             + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
@@ -301,7 +301,7 @@ TEST_F(TestIndexProp, createBash3)
 
     _indexProp->setReadSetName("PatientX");
     _indexProp->setOutputFolder("../");
-    _indexProp->setOutputFile();
+
     _indexProp->setBuildDir("../build");
     std::string expectedBash = "bash "
             + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
@@ -326,8 +326,8 @@ TEST_F(TestIndexProp, createBash4)
     std::ofstream(read1.string());
 
     _indexProp->setR1("/reads/test_1.fq");
-    _indexProp->setIndexFileName("Test");
-    _indexProp->setOutputFile();
+    _indexProp->setIndexName("Test");
+;
     _indexProp->setBuildDir("../build");
     std::string expectedBash = "bash "
                         + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
@@ -353,7 +353,7 @@ TEST_F(TestIndexProp, createBash5)
 
     _indexProp->setR1("/reads/test_1.fq");
     _indexProp->setOutputFolder("outputFolder");
-    _indexProp->setOutputFile();
+
     _indexProp->setBuildDir("../build");
     std::string expectedBash = "bash "
                         + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
@@ -373,14 +373,14 @@ TEST_F(TestIndexProp, createBash_withUnzip)
     std::ofstream("test.fq");
     _indexProp->setR1("test.fq.gz");
     _indexProp->setBuildDir("../build");
-    _indexProp->setOutputFile();
+
     _indexProp->setReadFileType(algo::FileType::GZ);
     std::string expectedBash = "bash "
                         + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
             + fs::current_path().string()+ "/test.fq.gz -o "
             + fs::current_path().string() + " -f Index -u ../build/bin/ -z 1";
     std::string outputBash = _indexProp->createBash();
-    fs::remove(_indexProp->getOutputFile());
+
     if (fs::is_empty(_indexProp->getOutputFolder())){
         fs::remove(_indexProp->getOutputFolder());
     }
@@ -400,14 +400,14 @@ TEST_F(TestIndexProp, createBash_withRevComp)
     std::ofstream("test.fq");
     _indexProp->setR1("test.fq");
     _indexProp->setBuildDir("../build");
-    _indexProp->setOutputFile();
+
     _indexProp->setRevCompFlag(true);
     std::string expectedBash = "bash "
             + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
             + fs::current_path().string()+ "/test.fq -o "
             + fs::current_path().string() + " -f Index -u ../build/bin/ -c 1";
     std::string outputBash = _indexProp->createBash();
-    fs::remove(_indexProp->getOutputFile());
+
     if (fs::is_empty(_indexProp->getOutputFolder())){
         fs::remove(_indexProp->getOutputFolder());
     }
@@ -436,7 +436,7 @@ TEST_F(TestIndexProp, createBash_withUnzipPairedRevComp)
     _indexProp->setPairedReadsFlag(true);
     _indexProp->setReadFileType(algo::FileType::GZ);
     _indexProp->setRevCompFlag(true);
-    _indexProp->setOutputFile();
+
     _indexProp->setBuildDir("../build");
     std::string expectedBash = "bash "
             + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
@@ -462,7 +462,7 @@ TEST_F(TestIndexProp, createBash_withMultipleIndexes)
     _indexProp->setOutputFolder("outputfolder");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(5);
-    _indexProp->setOutputFile();
+
 
     std::string expectedBash = "bash "
              + _indexProp->getBuildDir().string() + "/preprocess.sh -r "
@@ -487,7 +487,6 @@ TEST_F(TestIndexProp, createPPFSet1)
     _indexProp->setOutputFolder("outputfolder/");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(1);
-    _indexProp->setOutputFile();
 
     _indexProp->createPPFSet();
     std::string expectedPPFN1 =  fs::current_path().string() + "/outputfolder/Index.fasta";
@@ -511,7 +510,7 @@ TEST_F(TestIndexProp, createPPFSet2)
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(1);
     _indexProp->setReadSetName("reads");
-    _indexProp->setOutputFile();
+
 
     _indexProp->createPPFSet();
     std::string expectedPPFN1 =  fs::current_path().string() + "/outputfolder/Index_reads.fasta";
@@ -535,7 +534,7 @@ TEST_F(TestIndexProp, createPPFSet3)
     _indexProp->setOutputFolder("outputfolder/");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(2);
-    _indexProp->setOutputFile();
+
     _indexProp->createPPFSet();
     std::string expectedPPFN1 =  fs::current_path().string() +  "/outputfolder/Index_0.fasta";
     std::string expectedPPFN2 =  fs::current_path().string() + "/outputfolder/Index_1.fasta";
@@ -565,7 +564,7 @@ TEST_F(TestIndexProp, createPPFSet4)
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(2);
     _indexProp->setReadSetName("reads");
-    _indexProp->setOutputFile();
+
     _indexProp->createPPFSet();
     std::string expectedPPFN1 =  fs::current_path().string() +  "/outputfolder/Index_reads_0.fasta";
     std::string expectedPPFN2 =  fs::current_path().string() + "/outputfolder/Index_reads_1.fasta";
@@ -597,8 +596,8 @@ TEST_F(TestIndexProp, createIndexINI)
     _indexProp->setOutputFolder("outputfolder/");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(2);
-    _indexProp->setIndexFileName("output");
-    _indexProp->setOutputFile();
+    _indexProp->setIndexName("output");
+
     _indexProp->saveIndexProps("indexProps.ini");
     EXPECT_TRUE(fs::exists("indexProps.ini"));
     fs::remove(_indexProp->getR1());

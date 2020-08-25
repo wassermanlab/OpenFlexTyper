@@ -20,12 +20,12 @@ public:
         algo::IndexProps _indexProp(true);
         algo::FmIndex _fmindex;
         std::ofstream("testFiles/test.fq.gz");
-        _indexProp.setReadFQ("testFiles/test.fq.gz");
+
         _indexProp.setR1("testFiles/test.fq.gz");
         _indexProp.setBuildDir(fs::current_path());
         _indexProp.setOutputFolder("testOutput");
         _indexProp.setReadFileType(algo::FileType::GZ);
-        _indexProp.setIndexFileName("Index");
+        _indexProp.setIndexName("Index");
         _indexProp.setNumOfReads(10);
         fs::path pPF = fs::current_path() /= "testFiles/Index_Test.fasta";
 
@@ -68,7 +68,7 @@ TEST_F(TestFMIndex, createFMIndex)
 
     _indexProp.setReadFileType(algo::FileType::GZ);
     _indexProp.setReadSetName("Test");
-    _indexProp.setOutputFile();
+
     fs::path pPF = fs::absolute(fs::current_path() /= "testFiles/Index_Test.fasta");
 
     fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
@@ -102,7 +102,7 @@ TEST_F(TestFMIndex, createParallelFMIndex)
     _indexProp.setReadSetName("Test");
     _indexProp.setNumOfIndexes(2);
     _indexProp.setReadFileType(algo::FileType::GZ);
-    _indexProp.setOutputFile();
+
 
 
     fs::path index1 = fs::absolute(fs::current_path() /="testFiles/Index_Test.fasta");
@@ -208,7 +208,7 @@ TEST_F(TestFMIndex, locateInIndexUsingPointers)
     _indexProp.setR1("test.fq.gz");
     _indexProp.setOutputFolder("testOutput");
     _indexProp.setReadSetName("Test");
-    _indexProp.setOutputFile();
+
     _indexProp.setReadFileType(algo::FileType::GZ);
     fs::path pPF = fs::current_path() /="testFiles/Index_Test.fasta";
     std::cout << pPF.string() << std::endl;
@@ -237,7 +237,7 @@ TEST_F(TestFMIndex, searchFMIndexUsingPointer)
 
     _indexProp.setOutputFolder("testOutput");
     _indexProp.setReadSetName("Test");
-    _indexProp.setOutputFile();
+
     _indexProp.setReadFileType(algo::FileType::GZ);
     fs::path pPF = "testFiles/Index_Test.fasta";
     fs::path output = _fmindex->createFMIndex(_indexProp, pPF );

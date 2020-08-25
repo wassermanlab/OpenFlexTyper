@@ -24,17 +24,16 @@ public:
     virtual ~IndexProps();
 
     /// Properties ///
-    fs::path _readFQ;
+
     fs::path _R1;
     fs::path _R2;
+
     std::map<fs::path, std::pair<u_int, u_int>> _ppFSet; //this is the set of pre process fasta files, plus start, end read numbers created by preprocess.sh
-
-    fs::path _outputFile;
-    fs::path _outputFolder; //where to save the indexes and ini file
-    fs::path _buildDir;
-
     std::map<fs::path, uint> _indexSet; //this is the set of generated index files and their offsets
 
+    fs::path _outputFolder; //where to save the indexes and ini file
+    fs::path _ppfFolder; //where to save the pre processed fast files
+    fs::path _buildDir;
     uint _numOfReads;
     uint _numOfIndexes = 1;
 
@@ -45,8 +44,8 @@ public:
     bool _verbose = 0;
 
     std::string _readSetName;
+    std::string _indexName = "Index";
     algo::FileType _readFileType;
-    std::string _indexFileName = "Index";
     std::string createBash();
 
     void printToStdOut(std::string) const;
@@ -61,7 +60,7 @@ public:
     bool getPairedReadsFlag() const;
 
     const std::string& getReadSetName() const;
-    const std::string& getIndexFileName() const;
+    const std::string& getIndexName() const;
     const algo::FileType& getReadFileType() const;
 
     /// Parameter Setters ///
@@ -77,7 +76,7 @@ public:
     void setReadFileType(const algo::FileType& readFileType);
 
     /// File Getters ///
-    const fs::path& getReadFQ() const;
+
     const fs::path& getR1() const;
     const fs::path& getR2() const;
 
@@ -89,19 +88,18 @@ public:
     const std::map<fs::path, uint>& getIndexSet() const;
 
     /// File Setters ///
-    void setReadFQ(const fs::path& readFQ);
+
     void setR1(const fs::path& r1);
     void setR2(const fs::path& r2);
 
     void delR1();
     void delR2();
-    void delReadFQ();
+
     void delReadFastas();
     void delSpecificReadFasta(const fs::path& _preProcessedFasta);
 
     void setBuildDir(const fs::path& buildDir);
-    void setIndexFileName(const std::string indexFileName);
-    void setOutputFile();
+    void setIndexName(const std::string indexName);
     void setOutputFolder(const fs::path& outputFolder);
 
     void setPreProcessedFastas(std::map<fs::path, std::pair<u_int, u_int>>& _ppFSet);
