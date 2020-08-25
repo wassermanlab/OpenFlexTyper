@@ -21,10 +21,6 @@ function unzipReadFile()
 {
         local readFile=$1
         local readName=$2
-        local outputDir=$3
-
-        #echo 'uncompress files'
-        #start_time=$( date +%s.%N )
 
         if [[ $1 == *.fq ]];
         then
@@ -37,13 +33,8 @@ function unzipReadFile()
             return
         fi
 
-        if [ ! -d "$outputDir" ]; then
-            echo "directory ${outputDir} doesnt exist "
-            echo "making directory ${outputDir} "
-            mkdir ${outputDir}
-        fi
 
-        gunzip -c ${readFile} >  "${outputDir}/${readName}.fq"
+        gunzip -c ${readFile} >  "${readName}.fq"
 
         #elapsed_time=$( date +%s.%N --date="$start_time seconds ago" )
         #echo uncommpress took : $elapsed_time
@@ -54,53 +45,51 @@ function unzipReadFile()
 ##########################################
 function createFasta()
 {
-        local readFQ=$1
-        local readName=$2
-        local utilsPath=$3
-        local readdir=$(dirname $readFQ)
-        local fastaFile="$readdir/${readName}.fasta"
 
-        if [[ -f $fwFile ]] ; then
-                echo 'fasta file already exists'
+#createFasta ${readFileFQ} ${readSetName} ${utilsPath} ${outputDir}
+        local readFileFQ=$1
+        local readSetName=$2
+        local utilsPath=$3
+        local outputDir=$4
+
+        local fastaFile="$outputDir/${readSetName}.fasta"
+        echo "createFasta: fasta file :" ${fastaFile}
+        if [[ -f $fastaFile ]] ; then
+                echo 'createFasta: fasta file already exists' ${fastaFile}
                 return
         fi
 
-        if [ $# -eq 3 ]; then
-            #start_time=$( date +%s.%N )
-            #echo "create forward fasta file from" $readFQ
-            #echo "utils path" ${utilsPath}
-            if [ ! -f ${utilsPath}/seqtk ]; then
-                echo "cant find" ${utilsPath}"seqtk"
-                if [ ! -f ${utilsPath}/seqtk/seqtk ]; then
-                    echo "cannot find seqtk, installing in " ${utilsPath}
-                    cd ${utilsPath}
-                    buildSeqTk
-                    utilsPath=${utilsPath}seqtk
-                    echo "installed seqtk in " ${utilsPath}
-                else
-                    echo "found seqtk in " ${utilsPath}seqtk
-                    utilsPath=${utilsPath}seqtk
-                fi
-            fi
-            #echo "creating fasta " ${readFQ} "into " $fastaFile
-            #echo "running ${utilsPath}seqtk seq -A -C -U ${readFQ} | egrep -v '[>]' > ${fastaFile} "
-            ${utilsPath}/seqtk seq -A -C -U ${readFQ} | egrep -v '[>]' > $fastaFile
-            #elapsed_time=$( date +%s.%N --date="$start_time seconds ago" )
-            #echo task took : $elapsed_time
 
+        if [ ! -f ${utilsPath}/seqtk ]; then
+            echo "cant find" ${utilsPath}"seqtk"
+            if [ ! -f ${utilsPath}/seqtk/seqtk ]; then
+                echo "cannot find seqtk, installing in " ${utilsPath}
+                cd ${utilsPath}
+                buildSeqTk
+                utilsPath=${utilsPath}seqtk
+                echo "installed seqtk in " ${utilsPath}
+            else
+                echo "found seqtk in " ${utilsPath}seqtk
+                utilsPath=${utilsPath}seqtk
+            fi
         fi
+        echo "creating fasta " ${readFileFQ} "into " $fastaFile
+        echo "running ${utilsPath}/seqtk seq -A -C -U ${readFileFQ} | egrep -v '[>]' > ${fastaFile} "
+        ${utilsPath}/seqtk seq -A -C -U ${readFileFQ} | egrep -v '[>]' > $fastaFile
+
+
         if [ -f $fastaFile ]
         then
             if [ ! -s $fastaFile ]
             then
-                echo $fastaFile " is empty"
+                echo "createFasta: " $fastaFile " is empty"
                 exit 1
             fi
         else
-            echo $fastaFile " not found"
+            echo "createFasta: " $fastaFile " not found"
             exit 1
         fi
-        #echo $fastaFile " created"
+        echo  "createFasta: " $fastaFile " created"
 }
 
 ##########################################
@@ -162,9 +151,9 @@ function splitReadFiles() {
     local subIndexes=$3
     local digits=${#subIndexes}
 
-    echo "read dir " readdir
-    echo "read name " readname
-    echo "subIndexes " subIndexes
+    echo "splitReadFiles: read dir " readdir
+    echo "splitReadFiles: read name " readname
+    echo "splitReadFiles: subIndexes " subIndexes
 
     split "${readdir}/${readname}.fasta" -n "l/${subIndexes}" -a $((digits)) -d ${readdir}/output_ --additional-suffix=.fasta
 
@@ -172,54 +161,54 @@ function splitReadFiles() {
 
 ##########################################
 function processReadFile(){
-
+    #processReadFile $readFile $readFileName $readSetName $ppfDir $zippedReads $reverseComp $utilsPath
     local readFile=$1
-    local readName=$2
-    local outputDir=$3
-    local zippedReads=$4
-    local reverseComp=$5
-    local utilsPath=$6
+    local readFileName=$2
+    local readSetName=$3
+    local outputDir=$4
+    local zippedReads=$5
+    local reverseComp=$6
+    local utilsPath=$7
 
-    local readFileFQ="${outputDir}/${readName}.fq"
-    local readFileFA="${outputDir}/tmp_ppf/${readSetName}.fasta"
-    echo "read file FQ: " $readFileFQ
-    echo "read file FA: " $readFileFA
+
+    local readFileFA="${readFileName}.fasta"
+    local readFileFQ="${readFileName}.fq"
+    local outputFastaFile="$outputDir/${readSetName}.fasta"
+    echo "Process Read File: readName: " $readFileName
 
     #Unzip the input files
     if [ $zippedReads -eq 1 ];then
-        unzipReadFile ${readFile} ${readName} ${outputDir}
-    else
-        mv ${readFile} ${outputDir}
-
+        unzipReadFile ${readFile} ${readFileName}
     fi
-    #echo "read File FQ " $readFileFQ
+
+    echo "read File FQ " $readFileFQ
     if [ ! -f ${readFileFQ} ];then
-        echo "cannot find read file " ${readFileFQ}
+        echo "Process Read File: cannot find read file " ${readFileFQ}
         exit 1
     fi
 
     #Create Plain Fastas
-    createFasta ${readFileFQ} ${readName} ${utilsPath}
+    createFasta ${readFileFQ} ${readSetName} ${utilsPath} ${outputDir}
 
-    if [ ! -f ${readFileFA} ];then
-        echo "cannot find fasta file " ${readFileFA}
+    if [ ! -f ${outputFastaFile} ];then
+        echo "Process Read File: cannot find fasta file " ${outputFastaFile}
         exit 1
     fi
 
     #Add reverse complement
     if [ $reverseComp -eq 1 ];then
-        createRevComp ${readFileFQ} ${readName} ${utilsPath}
+        createRevComp ${readFileFQ} ${readSetName} ${utilsPath} ${outputDir}
     fi
     if [ ! -f ${readFileFA} ];then
-        echo "cannot find fasta file after reverse Comp" ${readFileFA}
+        echo "Process Read File: cannot find fasta file after reverse Comp" ${outputFastaFile}
         exit 1
     fi
     if [ ! -s ${readFileFA} ];then
-        echo "fasta file is empty after reverse Comp" ${readFileFA}
+        echo "Process Read File: fasta file is empty after reverse Comp" ${outputFastaFile}
         exit 1
     fi
-    echo "read file processed " ${readFile}
-    echo "output saved to "${readFileFA}
+    echo "Process Read File: read file processed " ${outputFastaFile}
+    echo "Process Read File: output saved to "${outputFastaFile}
 }
 
 ##########################################
@@ -227,7 +216,7 @@ function processReadFile(){
 function main() {
 #main $readFile  $outputDir $readSetName $zippedReads $numberOfIndexes $reverseComp $pairedReads $pathToUtils $readPairFile
         local readFile=$1
-        local outputDir=$2
+        local ppfDir="$2/tmp_ppf"
         local readSetName=$3
         local zippedReads=$4
         local numIndexes=$5
@@ -236,23 +225,30 @@ function main() {
         local utilsPath=$8
         local readPairFile=$9
 
+        echo "main: ppf dir: " $ppfDir
+
+
         local readFileName=$(basename $readFile)
         local readFileName=${readFileName%.*}
         #if zipped, remove both file extensions ( .fq.gz)
         if [ $zippedReads -eq 1 ]; then readFileName=${readFileName%.*}; fi
 
-        local readFileFA="${outputDir}/${readFileName}.fasta"
-        local outputReadFile="${outputDir}/tmp_ppf/${readSetName}.fasta"
+        local readFileFA="${readFileName}.fasta"
+        local readFileFQ="${readFileName}.fq"
+        local outputReadFile="${ppfDir}/${readSetName}.fasta"
 
 
         if [ ! -d ${utilsPath} ]; then
             echo "Utils folder doesnt exist " $utilsPath " , mkdir"
             mkdir ${utilsPath}
         fi
-
-        #echo "read file FA: " $readFileFA
-        echo "read Set Name: " $readSetName
-        processReadFile $readFile $readFileName $outputDir $zippedReads $reverseComp $utilsPath
+        echo "main: read File" $readFile
+        echo "main: read file FA: " $readFileFA
+        echo "main: read file FQ: " $readFileFQ
+        echo "main: output file FA: " $outputReadFile
+        echo "main: read File Name: " $readFileName
+        echo "main: read Set Name: " $readSetName
+        processReadFile $readFile $readFileName $readSetName $ppfDir $zippedReads $reverseComp $utilsPath
 
         if [ ! ${readFileFA} == ${outputReadFile} ]; then
             echo "copying " $readFileFA " to " $outputReadFile
@@ -266,9 +262,9 @@ function main() {
             #if zipped, remove both file extensions ( .fq.gz)
             if [ $zippedReads -eq 1 ]; then readPairName=${readPairName%.*}; fi
 
-            local readPairFA="${outputDir}/$readPairName.fasta"
-            echo "readPairFA: " $readPairFA
-            processReadFile $readPairFile $readPairName $outputDir $zippedReads $reverseComp $utilsPath
+            local readPairFA="${ppfDir}/$readPairName.fasta"
+            echo "main: readPairFA: " $readPairFA
+            processReadFile $readPairFile $readPairName $ppfDir $zippedReads $reverseComp $utilsPath
 
             cat $readPairFA >> $outputReadFile
 

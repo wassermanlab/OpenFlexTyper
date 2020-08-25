@@ -199,7 +199,10 @@ int main(int argc, char** argv)
         props->setOutputFolder(parser.value(outputDir).toStdString());
         }
         props->printToStdOut( "Output Folder "+ props->getOutputFolder().string());
-
+        fs::path ppfFolder = props->getOutputFolder();
+        ppfFolder /= "tmp_ppf";
+        props->setppfFolder(ppfFolder);
+        props->printToStdOut( "PPF Folder "+ props->getppfFolder().string());
         if (!parser.isSet(indexFileName)){
             props->printToStdOut("Index File Name not set");
         }else {
