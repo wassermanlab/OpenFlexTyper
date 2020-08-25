@@ -23,29 +23,6 @@ public:
 
     virtual ~IndexProps();
 
-    /// Properties ///
-
-    fs::path _R1;
-    fs::path _R2;
-
-    std::map<fs::path, std::pair<u_int, u_int>> _ppFSet; //this is the set of pre process fasta files, plus start, end read numbers created by preprocess.sh
-    std::map<fs::path, uint> _indexSet; //this is the set of generated index files and their offsets
-
-    fs::path _outputFolder; //where to save the indexes and ini file
-    fs::path _ppfFolder; //where to save the pre processed fast files
-    fs::path _buildDir;
-    uint _numOfReads;
-    uint _numOfIndexes = 1;
-
-    bool _revComp = 0;
-    bool _pairedReads = 0;
-    bool _delFQ = 0;
-    bool _delFasta= 0;
-    bool _verbose = 0;
-
-    std::string _readSetName;
-    std::string _indexName = "Index";
-    algo::FileType _readFileType;
     std::string createBash();
 
     void printToStdOut(std::string) const;
@@ -89,11 +66,11 @@ public:
 
     /// File Setters ///
 
-    void setR1(const fs::path& r1);
-    void setR2(const fs::path& r2);
+    bool setR1(const fs::path& r1);
+    bool setR2(const fs::path& r2);
 
-    void delR1();
-    void delR2();
+    bool delR1();
+    bool delR2();
 
     void delReadFastas();
     void delSpecificReadFasta(const fs::path& _preProcessedFasta);
@@ -113,9 +90,38 @@ public:
     /// Index Props I/O ///
     void countNumOfReads();
     u_int countLines(fs::path fileToCount);
-    void saveIndexProps(const fs::path& indexPropsFile);
+    void saveIndexProps(const fs::path& indexPropsFile) const;
     void loadFromIni(const fs::path inifile);
     u_int getOffsetForIndex(fs::path indexFile);
+
+private:
+    /// Properties ///
+
+    fs::path _R1;
+    fs::path _R2;
+
+    std::map<fs::path, std::pair<u_int, u_int>> _ppFSet; //this is the set of pre process fasta files, plus start, end read numbers created by preprocess.sh
+    std::map<fs::path, uint> _indexSet; //this is the set of generated index files and their offsets
+
+    fs::path _outputFolder; //where to save the indexes and ini file
+    fs::path _ppfFolder; //where to save the pre processed fast files
+    fs::path _buildDir;
+
+    uint _numOfReads;
+    uint _numOfIndexes = 1;
+
+    bool _revComp = 0;
+    bool _pairedReads = 0;
+    bool _delFQ = 0;
+    bool _delFasta= 0;
+
+    bool _verbose = 0;
+
+    std::string _readSetName;
+    std::string _indexName = "Index";
+    algo::FileType _readFileType;
+
+
 
 };
 
