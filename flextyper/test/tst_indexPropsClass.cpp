@@ -38,7 +38,7 @@ TEST_F(TestIndexProp, setOutputFile2)
     algo::IndexProps* _indexProp = new algo::IndexProps(true);
 
     fs::path expectedOutputFile = "/tmp/outputFile/Index.fm9";
-    _indexProp->setOutputFolder(expectedOutputFile.string());
+    _indexProp->setOutputFolder(expectedOutputFile.parent_path().string());
     _indexProp->setOutputFile();
     std::string outputFile = _indexProp->getOutputFile();
 
@@ -58,7 +58,8 @@ TEST_F(TestIndexProp, setOutputFile3)
     algo::IndexProps* _indexProp = new algo::IndexProps(true);
 
     fs::path expectedOutputFile = fs::current_path() /= "outputFile/Index.fm9";
-    _indexProp->setOutputFolder(expectedOutputFile.string());
+    //std::cout << "GGG " << _buildDir << std::endl;
+    _indexProp->setOutputFolder(expectedOutputFile.parent_path().string());
     _indexProp->setOutputFile();
     std::string outputFile = _indexProp->getOutputFile();
 
@@ -77,10 +78,11 @@ TEST_F(TestIndexProp, setOutputFile4)
 
     algo::IndexProps* _indexProp = new algo::IndexProps(true);
 
-    _indexProp->setOutputFolder("../Index.fm9");
+    fs::path expectedOutputFile = "../Index.fm9";
+    _indexProp->setOutputFolder(expectedOutputFile.parent_path().string());
     _indexProp->setOutputFile();
     std::string outputFile = _indexProp->getOutputFile();
-    fs::path expectedOutputFile = fs::current_path() /= "../Index.fm9";
+    expectedOutputFile = fs::absolute(expectedOutputFile);
 
     bool exist = fs::exists(_indexProp->getOutputFolder());
 
@@ -112,7 +114,7 @@ TEST_F(TestIndexProp, setOutputFile6)
     _indexProp->setReadSetName("Reads");
 
     _indexProp->setOutputFile();
-    fs::path expectedOutputFile = fs::current_path() /= "Index_Reads.fm9";
+    fs::path expectedOutputFile = fs::absolute("Index_Reads.fm9");
     std::string outputFile = _indexProp->getOutputFile();
 
     EXPECT_EQ(expectedOutputFile.string(), outputFile);
@@ -127,7 +129,7 @@ TEST_F(TestIndexProp, setOutputFile7)
     fs::path expectedOutputFile = "/tmp/outputFile2/Index_Reads.fm9";
 
     _indexProp->setReadSetName("Reads");
-    _indexProp->setOutputFolder(expectedOutputFile.string());
+    _indexProp->setOutputFolder(expectedOutputFile.parent_path().string());
     _indexProp->setOutputFile();
 
     std::string outputFile = _indexProp->getOutputFile();
@@ -407,7 +409,7 @@ TEST_F(TestIndexProp, createBash_withMultipleIndexes)
     _indexProp->setOutputFile();
     std::string outputBash = _indexProp->createBash();
 
-    char _r[80], _o[80], _f[80], _u[80], _p[80];
+    char _r[80], _o[80], _f[80], _u[80];
     int n;
     //"bash .../preprocess.sh -r <r> -o <o> -f <f> -u <u> -n <n>"
     std::sscanf(outputBash.c_str(), "%*s %*s %*2s %s %*2s %s %*2s %s %*2s %s %*2s %d",
@@ -435,7 +437,7 @@ TEST_F(TestIndexProp, createPPFSet1)
     std::ofstream("test.fq.gz");
 
     _indexProp->setR1("test.fq.gz");
-    _indexProp->setOutputFolder("outputfolder/");
+    _indexProp->setOutputFolder("outputfolder");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(1);
     _indexProp->setOutputFile();
@@ -446,9 +448,9 @@ TEST_F(TestIndexProp, createPPFSet1)
     std::string outputPPFN1 = outputPPFNs.begin()->first.string() ;
     fs::remove(_indexProp->getR1());
 
-    if (fs::is_empty(_indexProp->getOutputFolder())){
-        fs::remove(_indexProp->getOutputFolder());
-    }
+    //if (fs::is_empty(_indexProp->getOutputFolder())){
+    //    fs::remove(_indexProp->getOutputFolder());
+    //}
     EXPECT_EQ(expectedPPFN1, outputPPFN1);
 }
 //======================================================================

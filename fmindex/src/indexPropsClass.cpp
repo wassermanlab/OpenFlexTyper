@@ -137,14 +137,14 @@ void IndexProps::setOutputFile()
     outputFile.replace_extension(".fm9");
     _outputFile = outputFile;
 
-    setOutputFolder(outputFile);
+    setOutputFolder(outputFile.parent_path());
     printToStdOut("output file " + _outputFile.string());
 }
 
 void IndexProps::setOutputFolder(const fs::path& outputFolder)
 {
-    fs::path outfolder = fs::absolute(outputFolder).parent_path();
-
+    fs::path outfolder = fs::absolute(outputFolder);
+printToStdOut("setOutputFolder " + outfolder.string());
     if (!fs::exists(outfolder)){
          try {
              fs::create_directory(outfolder);
@@ -175,18 +175,11 @@ void IndexProps::addToIndexSet(fs::path index, uint offset){
 //====================== FILE PREPROCESS ======================
 void IndexProps::createPPFSet(){
 
-    fs::path ppFN = fs::absolute(_outputFile);
-//    if (_readSetName.empty())
-//    {
-//        printToStdOut("Read set name not set, using default of 'R'");
-//        setReadSetName(std::string("R"));
-//    }
-    //ppFN /= _readSetName;
+    fs::path ppFN = _outputFile;
 
-    printToStdOut( "creating _ppFN " + ppFN.string());
     ppFN.replace_extension(".fasta");
+    printToStdOut( "creating _ppFN " + ppFN.string());
 
-    printToStdOut( "creating _ppFSet for " + ppFN.string());
     u_int start = 0;
     if (_numOfIndexes > 1){
         for (u_int i=0; i<_numOfIndexes; ++i)
@@ -196,7 +189,7 @@ void IndexProps::createPPFSet(){
 
             fs::path tmpPPF = ppFN;
             tmpPPF.replace_filename(newfilename);
-            printToStdOut("tmp PPF " + tmpPPF.string());
+            printToStdOut("tmp PPF " + tmpPPF.string() + " " + newfilename);
 
             u_int lines = countLines(tmpPPF);
             printToStdOut("number of lines " + std::to_string(lines));
