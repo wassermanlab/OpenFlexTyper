@@ -438,6 +438,7 @@ TEST_F(TestIndexProp, createPPFSet1)
 
     _indexProp->setR1("test.fq.gz");
     _indexProp->setOutputFolder("outputfolder");
+    _indexProp->setppfFolder("outputfolder/tmp_ppf");
 
     _indexProp->setBuildDir("/build");
     _indexProp->setNumOfIndexes(1);
@@ -461,6 +462,7 @@ TEST_F(TestIndexProp, createPPFSet2)
     std::ofstream("outputfolder/tmp_ppf/reads.fasta");
     _indexProp->setR1("test.fq.gz");
     _indexProp->setOutputFolder("outputfolder");
+    _indexProp->setppfFolder("outputfolder/tmp_ppf");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(1);
     _indexProp->setReadSetName("reads");
@@ -487,6 +489,7 @@ TEST_F(TestIndexProp, createPPFSet3)
     _indexProp->setR1("test.fq.gz");
     _indexProp->setReadSetName("test");
     _indexProp->setOutputFolder("outputfolder/");
+    _indexProp->setppfFolder("outputfolder/tmp_ppf");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(2);
 
@@ -519,6 +522,7 @@ TEST_F(TestIndexProp, createPPFSet4)
     std::ofstream("outputfolder/tmp_ppf/reads_1.fasta");
     _indexProp->setR1("test.fq.gz");
     _indexProp->setOutputFolder("outputfolder/");
+    _indexProp->setppfFolder("outputfolder/tmp_ppf");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(2);
     _indexProp->setReadSetName("reads");
@@ -549,6 +553,7 @@ TEST_F(TestIndexProp, createIndexINI)
     _indexProp->setR1("test.fq.gz");
     _indexProp->setNumOfReads(10);
     _indexProp->setOutputFolder("outputfolder/");
+    _indexProp->setppfFolder("outputfolder/tmp_ppf");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(2);
     _indexProp->setIndexName("output");
