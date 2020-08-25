@@ -167,8 +167,6 @@ void IndexProps::addToIndexSet(fs::path index, uint offset){
 //====================== FILE PREPROCESS ======================
 void IndexProps::createPPFSet(){
 
-    _ppfFolder = _outputFolder;
-    _ppfFolder /= "tmp_ppf";
     printToStdOut("tmp ppf: " + _ppfFolder.string());
     u_int start = 0;
     for (auto& ppf : fs::directory_iterator(_ppfFolder)){
