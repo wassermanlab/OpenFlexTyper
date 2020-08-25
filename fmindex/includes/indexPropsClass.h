@@ -59,7 +59,7 @@ public:
 
     const fs::path& getBuildDir() const;
     const fs::path& getOutputFolder() const;
-    const fs::path& getppfFolder()const ;
+    const fs::path& getppfFolder() const;
 
     const std::map<fs::path, std::pair<u_int, u_int>>& getPreProcessedFastas() const;
     const std::map<fs::path, uint>& getIndexSet() const;
