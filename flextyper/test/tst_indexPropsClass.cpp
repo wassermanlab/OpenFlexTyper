@@ -443,15 +443,15 @@ TEST_F(TestIndexProp, createPPFSet1)
     _indexProp->setOutputFile();
 
     _indexProp->createPPFSet();
-    std::string expectedPPFN1 =  fs::current_path().string() + "/outputfolder/Index.fasta";
+    std::string expectedPPFN1 =  fs::absolute("outputfolder/Index.fasta");
     std::map<fs::path, std::pair<u_int, u_int>> outputPPFNs = _indexProp->getPreProcessedFastas();
     std::string outputPPFN1 = outputPPFNs.begin()->first.string() ;
-    fs::remove(_indexProp->getR1());
 
-    //if (fs::is_empty(_indexProp->getOutputFolder())){
-    //    fs::remove(_indexProp->getOutputFolder());
-    //}
     EXPECT_EQ(expectedPPFN1, outputPPFN1);
+
+    //cleanup
+    _indexProp->delR1();
+    fs::remove(_indexProp->getOutputFolder());
 }
 //======================================================================
 TEST_F(TestIndexProp, createPPFSet2)
@@ -460,38 +460,39 @@ TEST_F(TestIndexProp, createPPFSet2)
     std::ofstream("test.fq.gz");
 
     _indexProp->setR1("test.fq.gz");
-    _indexProp->setOutputFolder("outputfolder/");
+    _indexProp->setOutputFolder("outputfolder");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(1);
     _indexProp->setReadSetName("reads");
     _indexProp->setOutputFile();
-
     _indexProp->createPPFSet();
-    std::string expectedPPFN1 =  fs::current_path().string() + "/outputfolder/Index_reads.fasta";
+
+    std::string expectedPPFN1 =  fs::absolute("outputfolder/Index_reads.fasta");
+
     std::map<fs::path, std::pair<u_int, u_int>> outputPPFNs = _indexProp->getPreProcessedFastas();
     std::string outputPPFN1 = outputPPFNs.begin()->first.string() ;
-    fs::remove(_indexProp->getR1());
-
-    if (fs::is_empty(_indexProp->getOutputFolder())){
-        fs::remove(_indexProp->getOutputFolder());
-    }
-
 
     EXPECT_EQ(expectedPPFN1, outputPPFN1);
+
+    //cleanup
+    _indexProp->delR1();
+    fs::remove(_indexProp->getOutputFolder());
 }
 //======================================================================
 TEST_F(TestIndexProp, createPPFSet3)
 {
     algo::IndexProps* _indexProp = new algo::IndexProps(true);
+
     std::ofstream("test.fq.gz");
     _indexProp->setR1("test.fq.gz");
-    _indexProp->setOutputFolder("outputfolder/");
+    _indexProp->setOutputFolder("outputfolder");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(2);
     _indexProp->setOutputFile();
     _indexProp->createPPFSet();
-    std::string expectedPPFN1 =  fs::current_path().string() +  "/outputfolder/Index_0.fasta";
-    std::string expectedPPFN2 =  fs::current_path().string() + "/outputfolder/Index_1.fasta";
+
+    std::string expectedPPFN1 =  fs::absolute("outputfolder/Index_0.fasta");
+    std::string expectedPPFN2 =  fs::absolute("outputfolder/Index_1.fasta");
 
     std::map<fs::path, std::pair<u_int, u_int>> outputPPFNs = _indexProp->getPreProcessedFastas();
 
@@ -499,14 +500,13 @@ TEST_F(TestIndexProp, createPPFSet3)
     std::string outputPPFN1 = it->first.string();
     it++;
     std::string outputPPFN2 = it->first.string();
-    fs::remove(_indexProp->getR1());
 
-    if (fs::is_empty(_indexProp->getOutputFolder())){
-        fs::remove(_indexProp->getOutputFolder());
-    }
     EXPECT_EQ(expectedPPFN1, outputPPFN1);
     EXPECT_EQ(expectedPPFN2, outputPPFN2);
 
+    //cleanup
+    _indexProp->delR1();
+    fs::remove(_indexProp->getOutputFolder());
 }
 //======================================================================
 TEST_F(TestIndexProp, createPPFSet4)
@@ -514,14 +514,15 @@ TEST_F(TestIndexProp, createPPFSet4)
     algo::IndexProps* _indexProp = new algo::IndexProps(true);
     std::ofstream("test.fq.gz");
     _indexProp->setR1("test.fq.gz");
-    _indexProp->setOutputFolder("outputfolder/");
+    _indexProp->setOutputFolder("outputfolder");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(2);
     _indexProp->setReadSetName("reads");
     _indexProp->setOutputFile();
     _indexProp->createPPFSet();
-    std::string expectedPPFN1 =  fs::current_path().string() +  "/outputfolder/Index_reads_0.fasta";
-    std::string expectedPPFN2 =  fs::current_path().string() + "/outputfolder/Index_reads_1.fasta";
+
+    std::string expectedPPFN1 =  fs::absolute("outputfolder/Index_reads_0.fasta");
+    std::string expectedPPFN2 =  fs::absolute("outputfolder/Index_reads_1.fasta");
 
     std::map<fs::path, std::pair<u_int, u_int>> outputPPFNs = _indexProp->getPreProcessedFastas();
 
@@ -529,14 +530,13 @@ TEST_F(TestIndexProp, createPPFSet4)
     std::string outputPPFN1 = it->first.string();
     it++;
     std::string outputPPFN2 = it->first.string();
-    fs::remove(_indexProp->getR1());
 
-    if (fs::is_empty(_indexProp->getOutputFolder())){
-        fs::remove(_indexProp->getOutputFolder());
-    }
     EXPECT_EQ(expectedPPFN1, outputPPFN1);
     EXPECT_EQ(expectedPPFN2, outputPPFN2);
 
+    //cleanup
+    _indexProp->delR1();
+    fs::remove(_indexProp->getOutputFolder());
 }
 
 
@@ -544,21 +544,23 @@ TEST_F(TestIndexProp, createPPFSet4)
 TEST_F(TestIndexProp, createIndexINI)
 {
     algo::IndexProps* _indexProp = new algo::IndexProps(true);
+
     std::ofstream("test.fq.gz");
     _indexProp->setR1("test.fq.gz");
     _indexProp->setNumOfReads(10);
-    _indexProp->setOutputFolder("outputfolder/");
+    _indexProp->setOutputFolder("outputfolder");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(2);
     _indexProp->setIndexFileName("output");
     _indexProp->setOutputFile();
     _indexProp->saveIndexProps("indexProps.ini");
-    EXPECT_TRUE(fs::exists("indexProps.ini"));
-    fs::remove(_indexProp->getR1());
 
-    if (fs::is_empty(_indexProp->getOutputFolder())){
-        fs::remove(_indexProp->getOutputFolder());
-    }
+    EXPECT_TRUE(fs::exists("indexProps.ini"));
+
+    //cleanup
+    _indexProp->delR1();
+    fs::remove(_indexProp->getOutputFolder());
+    fs::remove("indexProps.ini");
 }
 
 //======================================================================

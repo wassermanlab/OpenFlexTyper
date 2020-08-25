@@ -176,9 +176,7 @@ void IndexProps::addToIndexSet(fs::path index, uint offset){
 void IndexProps::createPPFSet(){
 
     fs::path ppFN = _outputFile;
-
     ppFN.replace_extension(".fasta");
-    printToStdOut( "creating _ppFN " + ppFN.string());
 
     u_int start = 0;
     if (_numOfIndexes > 1){
@@ -189,18 +187,16 @@ void IndexProps::createPPFSet(){
 
             fs::path tmpPPF = ppFN;
             tmpPPF.replace_filename(newfilename);
-            printToStdOut("tmp PPF " + tmpPPF.string() + " " + newfilename);
 
             u_int lines = countLines(tmpPPF);
-            printToStdOut("number of lines " + std::to_string(lines));
+            printToStdOut(tmpPPF.string() + " number of lines " + std::to_string(lines));
             u_int end = start + lines;
             addPPF(tmpPPF, start, end);
-            start += lines;
+            start = end;
         }
     } else {
-    printToStdOut("tmp PPF " + ppFN.string());
         u_int lines = countLines(ppFN);
-        printToStdOut("number of lines " + std::to_string(lines));
+        printToStdOut(ppFN.string() + " number of lines " + std::to_string(lines));
         addPPF(ppFN, 0, lines);
     }
 
@@ -209,14 +205,7 @@ void IndexProps::createPPFSet(){
 //====================== INDEX PROPS I/O ======================
 void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) const {
 
-    std::string  savePath = _indexPropsFile.string();
-//    if (_indexPropsFile.parent_path() == _outputFolder){
-//        printToStdOut("save path for " + _indexPropsFile.string() + " is not in set outputFolder " + _outputFolder.string());
-//        savePath = _outputFolder;
-//        savePath /= _indexPropsFile;
-//        printToStdOut("updated save path to " + savePath.string());
-//    }
-    printToStdOut("saving index properties " + savePath);
+    printToStdOut("saving index properties " + _indexPropsFile.string());
 
     QSettings settings(_indexPropsFile.c_str(), QSettings::NativeFormat);
 

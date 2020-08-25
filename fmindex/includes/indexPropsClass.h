@@ -90,7 +90,6 @@ public:
 
     /// Index Props I/O ///
     void countNumOfReads();
-    u_int countLines(fs::path fileToCount);
     void saveIndexProps(const fs::path& indexPropsFile) const;
     void loadFromIni(const fs::path inifile);
     u_int getOffsetForIndex(fs::path indexFile);
@@ -121,6 +120,7 @@ private:
     algo::FileType _readFileType;
     std::string _indexFileName = "Index";
 
+    u_int countLines(fs::path fileToCount);
 };
 
 
