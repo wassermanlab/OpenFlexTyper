@@ -30,16 +30,6 @@ public:
     virtual ~FTMap();
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief properties
-    ////////////////////////////////////////////////////////////////////////
-    FTProp  _ftProps;
-    std::unordered_map<ft::Kmer, ft::KmerClass> _kmerSet;
-    std::map<ft::QIdT, ft::QueryClass> _querySet;
-    QKMap _qkMap;
-    QKMap _qkRCMap;
-    std::vector<std::map<ft::Kmer, ft::KmerClass>> _searchResults;
-
-    ////////////////////////////////////////////////////////////////////////
     /// \brief init
     ////////////////////////////////////////////////////////////////////////
     void addInputQueries(const std::set<Query> &inputQueries);
@@ -48,39 +38,49 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
-    const std::vector<std::map<ft::Kmer, ft::KmerClass>>& getResults();
-    const FTProp& getFTProps();
+    const std::vector<std::map<std::string, ft::KmerClass>>& getResults();
+    const FTProp& getFTProps() const;
+    const std::unordered_map<std::string, ft::KmerClass>& getKmerSet() const;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Access functions for single kmer and queries
     ////////////////////////////////////////////////////////////////////////
-    bool checkForKmer(const ft::Kmer& testKmer) const;
+    bool checkForKmer(const std::string& testKmer) const;
     void addKmer(const std::string &kmer);
-    const ft::KmerClass& getKmer(const ft::Kmer& kmer) const;
+    const ft::KmerClass& getKmer(const std::string& kmer) const;
 
     bool checkForQIDT(const ft::QIdT& testQueryObject) const;
-    void addQuery(int queryID, ft::QueryType queryType);
+    void addQuery(int queryID, ft::QueryType queryType, const std::string& queryString);
     const ft::QueryClass& getQuery(const ft::QIdT& qIDT) const;
+    void updateQuery(const ft::QIdT& qIDT, const ft::QueryClass& query);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Adds results from parallel search
     /// All kmer results from a single index
     ////////////////////////////////////////////////////////////////////////
-    void addIndexResults(const std::map<ft::Kmer, ft::KmerClass> & indexResults);
+    void addIndexResults(const std::map<std::string, ft::KmerClass> & indexResults);
     void addKmerResults(const ft::KmerClass& kmerResult);
     void processResults();
-    void processIndexResults(const std::map<ft::Kmer, ft::KmerClass>& indexResults);
-    void processQueryResults(const ft::QIdT& query);
+    void processIndexResults(const std::map<std::string, ft::KmerClass>& indexResults);
+    void processQueryResults(const ft::QIdT& qIDT);
 
 
 
 private:
-    void createKmer(const std::string& kmer);
-    ft::KmerClass* findKmer(const ft::Kmer& kmer);
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief properties
+    ////////////////////////////////////////////////////////////////////////
+    FTProp  _ftProps;
+    std::unordered_map<std::string, ft::KmerClass> _kmerSet;
+    std::map<ft::QIdT, ft::QueryClass> _querySet;
+    QKMap _qkMap;
+    QKMap _qkRCMap;
+    std::vector<std::map<std::string, ft::KmerClass>> _searchResults;
 
-    void createQuery(int queryID, ft::QueryType queryType);
-    void addNewQuery(int queryID, ft::QueryType queryType, std::string queryString);
-    ft::QueryClass* findQuery(const ft::QIdT& qIDT);
+
+    void createKmer(const std::string& kmer);
+    ft::KmerClass* findKmer(const std::string& kmer);
+
     bool operator()(const ft::QIdT& a, const ft::QIdT& b) const;
 };
 

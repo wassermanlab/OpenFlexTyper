@@ -18,6 +18,10 @@ typedef std::string     SearchType;             // SearchType declaration
 const   std::string     CENTERED = "CENTERED";  // search type centered approach
 const   std::string     SLIDING  = "SLIDING";   // search type sliding approach
 
+const   std::string QUERYTYPE_REF  = "REF";
+const   std::string QUERYTYPE_ALT  = "ALT";
+const   std::string QUERYTYPE_CRO  = "CRO";
+
 typedef std::pair<int, QueryType>  QIdT; // int is the query ID
 typedef std::pair<int, int> ReadID; // pair (id, pair 1 or pair 2)
 typedef std::tuple<uint, std::string, std::string, std::string>  Query;

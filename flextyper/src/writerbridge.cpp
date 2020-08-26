@@ -20,12 +20,13 @@ WriterBridge::WriterBridge()
 //======================================================================
 void WriterBridge::setOutputOptions(const ft::FTMap& ftMap)
 {
+    const FTProp& ftProps = ftMap.getFTProps();
     _refData = true;
-    if (!ftMap._ftProps.getRefOnlyFlag()){ _altData = true;}
-    if (ftMap._ftProps.getCrossoverFlag()){_croData = true;}
-    if (ftMap._ftProps.getOverCountedFlag()){_OCK = true;}
-    if (ftMap._ftProps.getNonUniqueFlag()){_NUK = true;}
-    if (ftMap._ftProps.getMatchesOnlyFlag()){_MatchesOnly = true;}
+    if (!ftProps.getRefOnlyFlag()){ _altData = true;}
+    if (ftProps.getCrossoverFlag()){_croData = true;}
+    if (ftProps.getOverCountedFlag()){_OCK = true;}
+    if (ftProps.getNonUniqueFlag()){_NUK = true;}
+    if (ftProps.getMatchesOnlyFlag()){_MatchesOnly = true;}
 }
 
 //======================================================================
@@ -161,11 +162,12 @@ void WriterBridge::addQueryToOutput( const ft::QueryClass& query, const std::str
 //======================================================================
 void WriterBridge::saveOutput(const ft::FTMap& ftMap)
 {
-    std::cout << "Writing to output file " << ftMap._ftProps.getOutputFile() << std::endl;
+    const FTProp& ftProps = ftMap.getFTProps();
+    std::cout << "Writing to output file " << ftProps.getOutputFile() << std::endl;
     setOutputOptions(ftMap);
 
-    const fs::path& inputQueryFile = ftMap._ftProps.getPathToQueryFile();
-    const fs::path& outputQueryFile = ftMap._ftProps.getOutputFile();
+    const fs::path& inputQueryFile = ftProps.getPathToQueryFile();
+    const fs::path& outputQueryFile = ftProps.getOutputFile();
 
     //std::cout << "Input Query File " << inputQueryFile << std::endl;
     //std::cout << "Output Query File " << outputQueryFile << std::endl;
@@ -205,7 +207,7 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
         int queryIndex = _utils->fileIndexToQueryIndex(fileIndex);
         //std::cout << "fileIndex " << fileIndex  << " query Index " << queryIndex << std::endl;
 
-        ft::QueryClass refQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::REF));
+        const ft::QueryClass& refQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::REF));
 
 
         //std::cout << "Ref Query " << refQuery._qID << std::endl;
@@ -215,7 +217,7 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
 
         if (_altData){
             //std::cout << "Alt Query " << std::endl;
-            ft::QueryClass altQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::ALT));
+            const ft::QueryClass& altQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::ALT));
             //std::cout << "Alt Query " << altQuery._qID << std::endl;
             addQueryToOutput(altQuery, "alt");
             //std::cout << "output Alt Map count " << _outputMap["altCount"] << std::endl;
@@ -223,7 +225,7 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
 
         if (_croData){
             //std::cout << "Cro Query " << std::endl;
-            ft::QueryClass croQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::CRO));
+            const ft::QueryClass& croQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::CRO));
             addQueryToOutput(croQuery, "cro");
             //std::cout << "output CRO Map count " << _outputMap["croCount"] << std::endl;
         }

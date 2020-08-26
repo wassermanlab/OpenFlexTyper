@@ -24,21 +24,21 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief properties
     ////////////////////////////////////////////////////////////////////////
-    std::map<ft::QIdT, std::set<ft::Kmer>> _map;
+    std::map<ft::QIdT, std::set<std::string>> _map;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
-    const std::map<ft::QIdT, std::set<ft::Kmer>>& getQKMap();
+    const std::map<ft::QIdT, std::set<std::string>>& getQKMap();
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Access functions for _qkMap
     ////////////////////////////////////////////////////////////////////////
     std::set<ft::QIdT> retrieveQueries(const ft::KmerClass& kmer);
-    std::set<ft::Kmer> retrieveKmers(const ft::QIdT& queryIDT);
+    std::set<std::string> retrieveKmers(const ft::QIdT& queryIDT);
     bool checkForMatch(const ft::QueryClass& query, const ft::KmerClass &kmer) const;
     bool checkForQuery(const ft::QueryClass& query) const;
-    void addQKPair(const ft::QIdT& qIDT, const ft::Kmer& kmer);
+    void addQKPair(const ft::QIdT& qIDT, const std::string& kmer);
 
 private:
 

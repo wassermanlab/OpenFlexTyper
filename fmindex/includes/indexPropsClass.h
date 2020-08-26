@@ -102,6 +102,7 @@ private:
 
     fs::path _outputFile;
     fs::path _outputFolder; //where to save the indexes and ini file
+    fs::path _ppfFolder; //where to save the pre processed fast files
     fs::path _buildDir;
 
     std::map<fs::path, uint> _indexSet; //this is the set of generated index files and their offsets
@@ -116,9 +117,10 @@ private:
     bool _verbose = 0;
 
     std::string _readSetName;
+    std::string _indexName = "Index";
     algo::FileType _readFileType;
-    std::string _indexFileName = "Index";
 
+    u_int countLines(fs::path fileToCount);
 };
 
 

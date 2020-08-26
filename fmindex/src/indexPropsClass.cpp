@@ -165,7 +165,7 @@ void IndexProps::createPPFSet(){
     u_int start = 0;
     for (auto& ppf : fs::directory_iterator(_ppfFolder)){
         u_int lines = countLines(ppf);
-        printToStdOut(ppf + " number of lines " + std::to_string(lines));
+        printToStdOut(" number of lines " + std::to_string(lines));
         u_int end = start + lines;
         addPPF(ppf, start, end);
         start += lines;

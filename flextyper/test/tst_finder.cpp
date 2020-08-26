@@ -87,7 +87,7 @@ public:
         _indexProp.setBuildDir(fs::current_path());
         _indexProp.setOutputFolder("testOutput");
         _indexProp.setReadFileType(algo::FileType::GZ);
-        _indexProp.setIndexFileName("Index");
+        _indexProp.setIndexName("Index");
         _indexProp.setReadSetName("Test");
         fs::path pPF = fs::current_path() /= "testFiles/Test.fasta";
 
@@ -165,18 +165,18 @@ TEST_F(TestFinder, sequentialSearch)
     std::map<fs::path, uint> _indexSet = _ftProps._indexSet;
     _indexPath = _indexSet.begin()->first;
 
-    ft::Kmer kmer = "AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG";
-    ft::Kmer kmer2 = "AAT";
-    ft::Kmer kmer3 = "ATATT";
+    std::string kmer = "AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG";
+    std::string kmer2 = "AAT";
+    std::string kmer3 = "ATATT";
     _ftMap.addKmer(kmer);
     _ftMap.addKmer(kmer2);
     _ftMap.addKmer(kmer3);
 
     EXPECT_NO_THROW(_finder.sequentialSearch(_ftMap, _indexPath, offset));
 
-    std::vector<std::map<ft::Kmer, ft::KmerClass>> results = _ftMap.getResults();
+    std::vector<std::map<std::string, ft::KmerClass>> results = _ftMap.getResults();
     EXPECT_EQ(results.size(), _ftProps.getNumOfIndexes());
-    std::map<ft::Kmer, ft::KmerClass> result = results.front();
+    std::map<std::string, ft::KmerClass> result = results.front();
     EXPECT_EQ(result.size(), 3);
 
 
@@ -220,18 +220,18 @@ TEST_F(TestFinder, sequentialSearchLocations)
     std::map<fs::path, uint> _indexSet = _ftProps._indexSet;
     _indexPath = _indexSet.begin()->first;
 
-    ft::Kmer kmer = "AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG";
-    ft::Kmer kmer2 = "AAT";
-    ft::Kmer kmer3 = "ATATT";
+    std::string kmer = "AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG";
+    std::string kmer2 = "AAT";
+    std::string kmer3 = "ATATT";
     _ftMap.addKmer(kmer);
     _ftMap.addKmer(kmer2);
     _ftMap.addKmer(kmer3);
 
     EXPECT_NO_THROW(_finder.sequentialSearch(_ftMap, _indexPath, offset));
 
-    std::vector<std::map<ft::Kmer, ft::KmerClass>> results = _ftMap.getResults();
+    std::vector<std::map<std::string, ft::KmerClass>> results = _ftMap.getResults();
     EXPECT_EQ(results.size(), _ftProps.getNumOfIndexes());
-    std::map<ft::Kmer, ft::KmerClass> result = results.front();
+    std::map<std::string, ft::KmerClass> result = results.front();
     EXPECT_EQ(result.size(), 3);
 
 
@@ -285,9 +285,9 @@ TEST_F(TestFinder, sequentialSearchFromIndexProps)
     std::map<fs::path, uint> _indexSet = _ftProps._indexSet;
     _indexPath = _indexSet.begin()->first;
 
-    ft::Kmer kmer = "AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG";
-    ft::Kmer kmer2 = "AAT";
-    ft::Kmer kmer3 = "ATATT";
+    std::string kmer = "AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG";
+    std::string kmer2 = "AAT";
+    std::string kmer3 = "ATATT";
     _ftMap.addKmer(kmer);
     _ftMap.addKmer(kmer2);
     _ftMap.addKmer(kmer3);
@@ -295,9 +295,9 @@ TEST_F(TestFinder, sequentialSearchFromIndexProps)
 
     EXPECT_NO_THROW(_finder.sequentialSearch(_ftMap, _indexPath, offset));
 
-    std::vector<std::map<ft::Kmer, ft::KmerClass>> results = _ftMap.getResults();
+    std::vector<std::map<std::string, ft::KmerClass>> results = _ftMap.getResults();
     EXPECT_EQ(results.size(), _ftProps.getNumOfIndexes());
-    std::map<ft::Kmer, ft::KmerClass> result = results.front();
+    std::map<std::string, ft::KmerClass> result = results.front();
     EXPECT_EQ(result.size(), 3);
     uint roccs = result[kmer].getKPositions().size();
     uint roccs2 = result[kmer2].getKPositions().size();
@@ -350,9 +350,9 @@ TEST_F(TestFinder, parallelSearch1)
     std::cout << "index loaded " << _indexPath << std::endl;
     ft::FTMap _ftMap(_ftProps);
 
-    ft::Kmer kmer = "AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG";
-    ft::Kmer kmer2 = "TTG";
-    ft::Kmer kmer3 = "ATATT";
+    std::string kmer = "AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG";
+    std::string kmer2 = "TTG";
+    std::string kmer3 = "ATATT";
     _ftMap.addKmer(kmer);
     _ftMap.addKmer(kmer2);
     _ftMap.addKmer(kmer3);
@@ -360,9 +360,9 @@ TEST_F(TestFinder, parallelSearch1)
     _finder.parallelSearch(_ftMap, _indexPath, offset);
 
 
-    std::vector<std::map<ft::Kmer, ft::KmerClass>> results = _ftMap.getResults();
+    std::vector<std::map<std::string, ft::KmerClass>> results = _ftMap.getResults();
     EXPECT_EQ(results.size(), _ftProps.getNumOfIndexes());
-    std::map<ft::Kmer, ft::KmerClass> result = results.front();
+    std::map<std::string, ft::KmerClass> result = results.front();
     EXPECT_EQ(result.size(), 3);
     uint roccs = result[kmer].getKPositions().size();
     uint roccs2 = result[kmer2].getKPositions().size();
@@ -405,18 +405,18 @@ TEST_F(TestFinder, parallelSearch2)
     std::cout << "index loaded " << _indexPath << std::endl;
     ft::FTMap _ftMap(_ftProps);
 
-    ft::Kmer kmer = "AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG";
-    ft::Kmer kmer2 = "TTG";
-    ft::Kmer kmer3 = "ATATT";
+    std::string kmer = "AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG";
+    std::string kmer2 = "TTG";
+    std::string kmer3 = "ATATT";
     _ftMap.addKmer(kmer);
     _ftMap.addKmer(kmer2);
     _ftMap.addKmer(kmer3);
 
     _finder.parallelSearch(_ftMap, _indexPath, offset);
 
-    std::vector<std::map<ft::Kmer, ft::KmerClass>> results = _ftMap.getResults();
+    std::vector<std::map<std::string, ft::KmerClass>> results = _ftMap.getResults();
     EXPECT_EQ(results.size(), _ftProps.getNumOfIndexes());
-    std::map<ft::Kmer, ft::KmerClass> result = results.front();
+    std::map<std::string, ft::KmerClass> result = results.front();
     EXPECT_EQ(result.size(), 3);
     uint roccs = result[kmer].getKPositions().size();
     uint roccs2 = result[kmer2].getKPositions().size();

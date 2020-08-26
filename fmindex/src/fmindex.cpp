@@ -18,7 +18,7 @@ void FmIndex::printToStdOut(const std::string& outputString){
 }
 
 //======================================================================
-ft::KmerClass FmIndex::search(ft::Kmer kmer,
+ft::KmerClass FmIndex::search(std::string kmer,
                               u_int maxOcc, bool flagOverCountedKmers)
 {
     // This code is executed in a different thread for multithreaded
@@ -60,7 +60,7 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
     std::string ppfname = preprocessedFasta.stem();
 
     fs::path outputIndex = _props.getOutputFolder();
-    std::string newfilename = _props.getIndexFileName();
+    std::string newfilename = _props.getIndexName();
     newfilename += "_" + ppfname + ".fm9";
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> tmpIndex;

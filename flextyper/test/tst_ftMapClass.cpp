@@ -114,7 +114,7 @@ TEST_F(TestFTMap, TestAddIndexResults)
     testKmer1.addKPosition(123);
     ft::KmerClass testKmer2("CCCC");
     testKmer2.addKPosition(345);
-    std::map<ft::Kmer, ft::KmerClass> indexResults;
+    std::map<std::string, ft::KmerClass> indexResults;
     indexResults["AAAA"]= testKmer1;
     indexResults["CCCC"] = testKmer2;
 
@@ -139,7 +139,7 @@ TEST_F(TestFTMap, TestProcessIndexResults)
     testKmer1.addKPosition(123);
     ft::KmerClass testKmer2("CCCC");
     testKmer2.addKPosition(345);
-    std::map<ft::Kmer, ft::KmerClass> indexResults;
+    std::map<std::string, ft::KmerClass> indexResults;
     indexResults["AAAA"]= testKmer1;
     indexResults["CCCC"] = testKmer2;
 

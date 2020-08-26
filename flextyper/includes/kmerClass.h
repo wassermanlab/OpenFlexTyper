@@ -7,7 +7,6 @@
 #include "ftPropsClass.h"
 
 namespace ft {
-typedef std::string Kmer;
 
 class KmerClass
 {
@@ -24,20 +23,12 @@ public:
     virtual ~KmerClass();
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief properties
-    ////////////////////////////////////////////////////////////////////////
-    std::string _kmer;
-    std::map<ft::FlagType, bool> _kFlags;
-    std::set<long long> _positions;
-    std::set<ft::ReadID> _readIDs;
-
-    ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
     std::string getKmer() const;
     std::map<ft::FlagType, bool> getKFlags()const;
     std::set<long long> getKPositions()const;
-    std::set<ft::ReadID> getReadIDs()const;
+    std::set<ft::ReadID>& getReadIDs()const;
     //uint getKmerMapSize()const;
 
     ////////////////////////////////////////////////////////////////////////
@@ -82,6 +73,14 @@ public:
     bool operator< (const ft::KmerClass &k) const;
     bool operator== (const ft::KmerClass &k) const;
 private:
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief properties
+    ////////////////////////////////////////////////////////////////////////
+    std::string _kmer;
+    std::map<ft::FlagType, bool> _kFlags;
+    std::set<long long> _positions;
+    std::set<ft::ReadID> _readIDs;
+
 
 };
 }

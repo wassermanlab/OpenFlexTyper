@@ -31,7 +31,7 @@ TEST_F(TestQKMap, TestCheckForQuery)
     ft::QueryClass* falseQuery = new ft::QueryClass(1, ft::QueryType::ALT);
     ft::QueryClass* trueQuery2 = new ft::QueryClass(2, ft::QueryType::ALT);
     ft::QueryClass* falseQuery2 = new ft::QueryClass(2, ft::QueryType::REF);
-    std::set<ft::Kmer> kmerSet = {"AAAA","CCCC"};
+    std::set<std::string> kmerSet = {"AAAA","CCCC"};
     _qkMap._map[trueQuery->getQIdT()] = kmerSet;
     _qkMap._map[trueQuery2->getQIdT()] = kmerSet;
 
@@ -61,10 +61,10 @@ TEST_F(TestQKMap, TestRetrieveQueries)
     ft::QIdT query3 = std::make_pair(2, ft::QueryType::REF);
     ft::QIdT query4 = std::make_pair(2, ft::QueryType::ALT);
 
-    ft::Kmer kmer1 ="AAAA";
-    ft::Kmer kmer2 = "CCCC";
-    ft::Kmer kmer3 = "GGGG";
-    ft::Kmer kmer4 = "TTTT";
+    std::string kmer1 ="AAAA";
+    std::string kmer2 = "CCCC";
+    std::string kmer3 = "GGGG";
+    std::string kmer4 = "TTTT";
     _qkMap._map[query1] = {kmer1, kmer2};
     _qkMap._map[query2] = {kmer2, kmer3};
     _qkMap._map[query3] = {kmer1, kmer3};
@@ -92,19 +92,19 @@ TEST_F(TestQKMap, TestRetrieveKmers)
     ft::QIdT query3 = std::make_pair(2, ft::QueryType::REF);
     ft::QIdT query4 = std::make_pair(2, ft::QueryType::ALT);
 
-    ft::Kmer kmer1 ="AAAA";
-    ft::Kmer kmer2 = "CCCC";
-    ft::Kmer kmer3 = "GGGG";
-    ft::Kmer kmer4 = "TTTT";
+    std::string kmer1 ="AAAA";
+    std::string kmer2 = "CCCC";
+    std::string kmer3 = "GGGG";
+    std::string kmer4 = "TTTT";
     _qkMap._map[query1] = {kmer1, kmer2};
     _qkMap._map[query2] = {kmer2, kmer3};
     _qkMap._map[query3] = {kmer1, kmer3};
     _qkMap._map[query4] = {kmer4};
 
-    std::set<ft::Kmer> expectedKmers1 = {kmer1, kmer2};
-    std::set<ft::Kmer> expectedKmers2 = {kmer2, kmer3};
-    std::set<ft::Kmer> expectedKmers3 = {kmer1, kmer3};
-    std::set<ft::Kmer> expectedKmers4 = {kmer4};
+    std::set<std::string> expectedKmers1 = {kmer1, kmer2};
+    std::set<std::string> expectedKmers2 = {kmer2, kmer3};
+    std::set<std::string> expectedKmers3 = {kmer1, kmer3};
+    std::set<std::string> expectedKmers4 = {kmer4};
 
     EXPECT_EQ(expectedKmers1, _qkMap.retrieveKmers(query1));
     EXPECT_EQ(expectedKmers2, _qkMap.retrieveKmers(query2));
@@ -125,13 +125,13 @@ TEST_F(TestQKMap, TestCheckForMatch)
     ft::QueryClass* query1 = new ft::QueryClass(1, ft::QueryType::REF);
     ft::QueryClass* query2 = new ft::QueryClass(1, ft::QueryType::ALT);
     ft::QueryClass* query3 = new ft::QueryClass(2, ft::QueryType::REF);
-    ft::Kmer k1 ="AAAA";
-    ft::Kmer k2 = "CCCC";
-    ft::Kmer k3 = "GGGG";
+    std::string k1 ="AAAA";
+    std::string k2 = "CCCC";
+    std::string k3 = "GGGG";
     ft::KmerClass* kmer1 = new ft::KmerClass("AAAA");
     ft::KmerClass* kmer2 = new ft::KmerClass("CCCC");
     ft::KmerClass* kmer3 = new ft::KmerClass("GGGG");
-    std::set<ft::Kmer> kmerSet = {k1, k2};
+    std::set<std::string> kmerSet = {k1, k2};
     _qkMap._map[q1] = kmerSet;
     _qkMap._map[q2] = kmerSet;
     _qkMap._map[q3] = kmerSet;
@@ -163,9 +163,9 @@ TEST_F(TestQKMap, TestAddQKPair)
     ft::QueryClass* query1 = new ft::QueryClass(1, ft::QueryType::REF);
     ft::QueryClass* query2 = new ft::QueryClass(1, ft::QueryType::ALT);
     ft::QueryClass* query3 = new ft::QueryClass(2, ft::QueryType::REF);
-    ft::Kmer k1 ="AAAA";
-    ft::Kmer k2 = "CCCC";
-    ft::Kmer k3 = "GGGG";
+    std::string k1 ="AAAA";
+    std::string k2 = "CCCC";
+    std::string k3 = "GGGG";
     ft::KmerClass* kmer1 = new ft::KmerClass("AAAA");
     ft::KmerClass* kmer2 = new ft::KmerClass("CCCC");
     ft::KmerClass* kmer3 = new ft::KmerClass("GGGG");

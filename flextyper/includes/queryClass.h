@@ -79,6 +79,19 @@ public:
     bool operator< (const ft::QueryClass &q) const;
     bool operator== (const ft::QueryClass &q) const;
 
+    static const std::string& queryTypeToString (const ft::QueryType& qType) {
+        switch (qType) {
+        case REF:
+           return QUERYTYPE_REF;
+        case ALT:
+           return QUERYTYPE_ALT;
+        case CRO:
+        default:
+           return QUERYTYPE_CRO;
+        }
+    };
+
+
 private:
 };
 }
