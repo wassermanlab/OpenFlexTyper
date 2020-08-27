@@ -94,7 +94,7 @@ TEST_F(TestFTMap, TestAddKmerResults)
 
     ftMap.addKmerResults(testKmer1);
     ft::ReadID testRID = std::make_pair(1, 1);
-    ft::KmerClass kmer = ftMap.getKmer(testKmer1._kmer);
+    ft::KmerClass kmer = ftMap.getKmer(testKmer1.getKmer());
 
     EXPECT_TRUE(kmer.hasFlag(ft::FlagType::ABK));
     EXPECT_TRUE(kmer.hasReadID(testRID));
@@ -114,7 +114,7 @@ TEST_F(TestFTMap, TestAddIndexResults)
     testKmer1.addKPosition(123);
     ft::KmerClass testKmer2("CCCC");
     testKmer2.addKPosition(345);
-    std::map<ft::Kmer, ft::KmerClass> indexResults;
+    std::map<std::string, ft::KmerClass> indexResults;
     indexResults["AAAA"]= testKmer1;
     indexResults["CCCC"] = testKmer2;
 
@@ -139,7 +139,7 @@ TEST_F(TestFTMap, TestProcessIndexResults)
     testKmer1.addKPosition(123);
     ft::KmerClass testKmer2("CCCC");
     testKmer2.addKPosition(345);
-    std::map<ft::Kmer, ft::KmerClass> indexResults;
+    std::map<std::string, ft::KmerClass> indexResults;
     indexResults["AAAA"]= testKmer1;
     indexResults["CCCC"] = testKmer2;
 

@@ -90,7 +90,7 @@ public:
 
     /// Index Props I/O ///
     void countNumOfReads();
-    u_int countLines(fs::path fileToCount);
+
     void saveIndexProps(const fs::path& indexPropsFile) const;
     void loadFromIni(const fs::path inifile);
     u_int getOffsetForIndex(fs::path indexFile);
@@ -108,6 +108,7 @@ private:
     fs::path _ppfFolder; //where to save the pre processed fast files
     fs::path _buildDir;
 
+     //this is the set of generated index files and their offsets
     uint _numOfReads;
     uint _numOfIndexes = 1;
 
@@ -122,7 +123,7 @@ private:
     std::string _indexName = "Index";
     algo::FileType _readFileType;
 
-
+    u_int countLines(fs::path fileToCount);
 
 };
 

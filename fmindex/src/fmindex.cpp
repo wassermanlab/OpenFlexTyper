@@ -18,7 +18,7 @@ void FmIndex::printToStdOut(const std::string& outputString){
 }
 
 //======================================================================
-ft::KmerClass FmIndex::search(ft::Kmer kmer,
+ft::KmerClass FmIndex::search(std::string kmer,
                               u_int maxOcc, bool flagOverCountedKmers)
 {
     // This code is executed in a different thread for multithreaded
@@ -27,7 +27,7 @@ ft::KmerClass FmIndex::search(ft::Kmer kmer,
     //std::cout << "searching index of size " << getIndex().size() << " for " << kmer << std::endl;
     ft::KmerClass kmerResult = ft::KmerClass(kmer);
 
-    size_t occs = sdsl::count(_index, kmerResult._kmer.begin(),  kmerResult._kmer.end());
+    size_t occs = sdsl::count(_index, kmerResult.getKmer().begin(),  kmerResult.getKmer().end());
     std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
 
     // if number kmers > max, flag kmer as "abundant"
@@ -37,7 +37,7 @@ ft::KmerClass FmIndex::search(ft::Kmer kmer,
     }
     if (occs > 0  && occs <= maxOcc) {
         //std::cout << "locating kmer positions " << kmer << " with count " << occs <<  std::endl;
-        auto locations = sdsl::locate(_index, kmerResult._kmer.begin(), kmerResult._kmer.begin()+kmerResult._kmer.length());
+        auto locations = sdsl::locate(_index, kmerResult.getKmer().begin(), kmerResult.getKmer().begin()+kmerResult.getKmer().length());
         if (locations.size() != occs)
         {
             std::runtime_error("number of locations doesnt equal number of occurences for kmer " + kmer );
@@ -60,7 +60,7 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
     std::string ppfname = preprocessedFasta.stem();
 
     fs::path outputIndex = _props.getOutputFolder();
-    std::string newfilename = ppfname + ".fm9";
+    std::string newfilename = _props.getIndexName();
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> tmpIndex;
     outputIndex /= newfilename;

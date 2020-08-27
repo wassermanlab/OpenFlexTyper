@@ -23,7 +23,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief Finder::addResultsFutures
     ////////////////////////////////////////////////////////////////////////
-    virtual void addResultsFutures(std::map<ft::Kmer, ft::KmerClass> & indexResults, ft::KmerClass &tmpResult, uint offset) =0;
+    virtual void addResultsFutures(std::map<std::string, ft::KmerClass> & indexResults, ft::KmerClass &tmpResult, uint offset) =0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Finder::overrideFmIndex

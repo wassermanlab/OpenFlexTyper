@@ -28,7 +28,7 @@ bool QKMap::checkForQuery(const ft::QueryClass& query) const
 std::set<ft::QIdT> QKMap::retrieveQueries(const ft::KmerClass& kmerClass)
 {
     std::set<ft::QIdT> _matchingQueries;
-    ft::Kmer kmer = kmerClass.getKmer();
+    std::string kmer = kmerClass.getKmer();
      for (auto qk : _map){
          if (qk.second.count(kmer) > 0)
          {
@@ -38,7 +38,7 @@ std::set<ft::QIdT> QKMap::retrieveQueries(const ft::KmerClass& kmerClass)
      return _matchingQueries;
 }
 //=======================================================
-std::set<ft::Kmer> QKMap::retrieveKmers(const ft::QIdT& queryIDT){
+std::set<std::string> QKMap::retrieveKmers(const ft::QIdT& queryIDT){
     return _map[queryIDT];
 }
 
@@ -51,8 +51,8 @@ bool QKMap::checkForMatch(const ft::QueryClass& query, const ft::KmerClass& kmer
         //std::cout << "Cannot find query in QKMap" << std::endl;
         return false;
     } else {
-        std::set<ft::Kmer> qkmers = _map.find(qIDT)->second;
-        ft::Kmer testKmer = kmer.getKmer();
+        std::set<std::string> qkmers = _map.find(qIDT)->second;
+        std::string testKmer = kmer.getKmer();
         if ( qkmers.find(testKmer) != qkmers.end()) // found match
         {
             return true;
@@ -63,7 +63,7 @@ bool QKMap::checkForMatch(const ft::QueryClass& query, const ft::KmerClass& kmer
 }
 
 //=======================================================
-void QKMap::addQKPair(const ft::QIdT& qIDT, const ft::Kmer& kmer){
+void QKMap::addQKPair(const ft::QIdT& qIDT, const std::string& kmer){
     if (_map.count(qIDT) > 0){
         //std::cout << " add to existing qIDT" << std::endl;
         _map[qIDT].insert(kmer);

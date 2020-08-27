@@ -1,4 +1,4 @@
-﻿#include "indexPropsClass.h"
+#include "indexPropsClass.h"
 
 namespace algo {
 IndexProps::IndexProps()
@@ -171,7 +171,7 @@ void IndexProps::createPPFSet(){
     u_int start = 0;
     for (auto& ppf : fs::directory_iterator(_ppfFolder)){
         u_int lines = countLines(ppf);
-        printToStdOut("number of lines " + std::to_string(lines));
+        printToStdOut(" number of lines " + std::to_string(lines));
         u_int end = start + lines;
         addPPF(ppf, start, end);
         start += lines;
@@ -182,11 +182,8 @@ void IndexProps::createPPFSet(){
 //====================== INDEX PROPS I/O ======================
 void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) const {
 
-    std::string  savePath = _indexPropsFile.string();
+    printToStdOut("saving index properties " + _indexPropsFile.string());
 
-    printToStdOut("saving index properties " + savePath);
-//    if (_numOfReads ==0 ){
-//    countNumOfReads();}
     QSettings settings(_indexPropsFile.c_str(), QSettings::NativeFormat);
 
     settings.setValue("R1", QString::fromStdString(_R1.string()));
