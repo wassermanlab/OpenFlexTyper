@@ -257,6 +257,13 @@ void FTMap::updateQuery(const ft::QIdT& qIDT, const ft::QueryClass& query) {
 //======================================================
 void FTMap::addQuery(int queryID, ft::QueryType queryType, const std::string& queryString = empty)
 {
+#if 0
+    ft::QIdT testQIDT = std::make_pair(queryID, queryType);
+    ft::QueryClass newquery(queryID, queryType);
+    newquery.setQueryString(queryString);
+    _querySet[testQIDT] = newquery;
+#else
+    //TODO: will there be duplicate added entries? The map will override the previous entry.
     ft::QIdT testQIDT = std::make_pair(queryID, queryType);
     if(!checkForQIDT(testQIDT)){
         ft::QueryClass newquery(queryID, queryType);
@@ -267,6 +274,7 @@ void FTMap::addQuery(int queryID, ft::QueryType queryType, const std::string& qu
         throw std::runtime_error( "FTMap::addQuery already had entry (" + 
                          std::to_string(queryID) + ", " + ft::QueryClass::queryTypeToString(queryType) + ")");
     }
+#endif
 }
 #define QUERIESEND }
 //=======================================================
@@ -378,10 +386,9 @@ void FTMap::processQueryResults(const ft::QIdT& qIDT)
             if (_ftProps.getOverCountedFlag()){addToCount = false;}
         }
 
-        std::set<ft::ReadID>& fwdKmerReadIDs = fwdKmer->getReadIDs();
         //std::cout << "number of fwd ReadIDs " << fwdKmerReadIDs.size() << std::endl;
         if (addToCount){
-            for ( ft::ReadID readID : fwdKmerReadIDs)
+            for ( ft::ReadID readID : fwdKmer->getReadIDs())
             {
                 readIds.insert(readID);
             }
@@ -407,10 +414,9 @@ void FTMap::processQueryResults(const ft::QIdT& qIDT)
                 if (_ftProps.getOverCountedFlag()){addToCount = false;}
             }
 
-            std::set<ft::ReadID>& rcKmerReadIDs = rcKmer->getReadIDs();
             //std::cout << "number of rc ReadIDs " << rcKmerReadIDs.size() << std::endl;
             if (addToCount){
-                for ( ft::ReadID readID : rcKmerReadIDs)
+                for ( ft::ReadID readID : rcKmer->getReadIDs())
                 {
                     readIds.insert(readID);
                     //std::cout << "number of query ReadIDs " << readIds.size() << std::endl;

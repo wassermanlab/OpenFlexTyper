@@ -53,7 +53,7 @@ public:
     /// \param queryString
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    ft::KmerClass search(std::string kmer,
+    ft::KmerClass search(const std::string& kmer,
                          u_int maxOcc = 200,
                          bool flagOverCountedKmers = false);
 

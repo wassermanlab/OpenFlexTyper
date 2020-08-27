@@ -18,7 +18,7 @@ void FmIndex::printToStdOut(const std::string& outputString){
 }
 
 //======================================================================
-ft::KmerClass FmIndex::search(std::string kmer,
+ft::KmerClass FmIndex::search(const std::string& kmer,
                               u_int maxOcc, bool flagOverCountedKmers)
 {
     // This code is executed in a different thread for multithreaded
