@@ -69,7 +69,7 @@ void FTSearch::init(const FTProp& ftProps)
 
     ftMap.addInputQueries(inputQueries);
 
-    printToStdOut( " number of queries in FTMap " + std::to_string(ftMap._querySet.size()));
+    //printToStdOut( " number of queries in FTMap " + std::to_string(ftMap._querySet.size()));
 
     ftMap.genQKMap();
 
