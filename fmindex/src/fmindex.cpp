@@ -27,7 +27,7 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
     //std::cout << "searching index of size " << getIndex().size() << " for " << kmer << std::endl;
     ft::KmerClass kmerResult = ft::KmerClass(kmer);
 
-    size_t occs = sdsl::count(_index, kmer.begin(),  kmer.end());
+    size_t occs = sdsl::count(_index, kmerResult.getKmer().begin(),  kmerResult.getKmer().end());
     std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
 
     // if number kmers > max, flag kmer as "abundant"
@@ -37,7 +37,7 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
     }
     if (occs > 0  && occs <= maxOcc) {
         //std::cout << "locating kmer positions " << kmer << " with count " << occs <<  std::endl;
-        auto locations = sdsl::locate(_index, kmer.begin(), kmer.begin() + kmer.length());
+        auto locations = sdsl::locate(_index, kmerResult.getKmer().begin(), kmerResult.getKmer().begin()+kmerResult.getKmer().length());
         if (locations.size() != occs)
         {
             std::runtime_error("number of locations doesnt equal number of occurences for kmer " + kmer );
@@ -61,12 +61,9 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
 
     fs::path outputIndex = _props.getOutputFolder();
     std::string newfilename = _props.getIndexName();
-    newfilename += "_" + ppfname + ".fm9";
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> tmpIndex;
     outputIndex /= newfilename;
-
-    outputIndex.replace_extension(".fm9");
 
     std::cout << "creating index for " << ppfname << " at " << outputIndex << std::endl;
     if (preprocessedFasta.empty())

@@ -1,4 +1,4 @@
-﻿#include "indexPropsClass.h"
+#include "indexPropsClass.h"
 
 namespace algo {
 IndexProps::IndexProps()
@@ -9,6 +9,7 @@ IndexProps::IndexProps(bool verbose)
     : _verbose(verbose)
 {
     _outputFolder = fs::current_path();
+    _ppfFolder = fs::current_path() /="tmp_ppf";
 }
 
 std::string IndexProps::createBash(){
@@ -19,7 +20,7 @@ std::string IndexProps::createBash(){
     std::string bashargs = "bash ";
     bashargs += preprocess.string();
     bashargs += " -r " + _R1.string();
-    bashargs += " -o " + _outputFolder.string();
+    bashargs += " -o " + _ppfFolder.string();
     bashargs += " -f " + _readSetName;
 
     pathToUtils  /= "bin/";
@@ -68,7 +69,7 @@ void IndexProps::setReadFileType(const algo::FileType& readFileType){_readFileTy
 //====================== FILE GETTERS ======================
 const fs::path& IndexProps::getBuildDir() const {return _buildDir;}
 const fs::path& IndexProps::getOutputFolder()const {return _outputFolder;}
-
+const fs::path& IndexProps::getppfFolder()const {return _ppfFolder;}
 const fs::path& IndexProps::getR1()const {return _R1;}
 const fs::path& IndexProps::getR2()const {return _R2;}
 
@@ -76,10 +77,6 @@ const std::map<fs::path, std::pair<u_int, u_int>>& IndexProps::getPreProcessedFa
 const std::map<fs::path, uint>& IndexProps::getIndexSet() const {return _indexSet;}
 
 //====================== FILE SETTERS ======================
-void IndexProps::setReadFQ(const fs::path& readFile)
-{   printToStdOut("Read FQ set " + fs::absolute(readFile).string());
-    _readFQ = fs::absolute(readFile);   }
-
 bool IndexProps::setR1(const fs::path& readFile)
 {
     fs::path r1 = fs::absolute(readFile);
@@ -90,8 +87,8 @@ bool IndexProps::setR1(const fs::path& readFile)
     _R1 = r1;
     printToStdOut("Set R1 " + _R1.string());
     return true;
-}
 
+}
 bool IndexProps::setR2(const fs::path& readFile)
 {
     fs::path r2 = fs::absolute(readFile);
@@ -124,6 +121,18 @@ void IndexProps::delSpecificReadFasta(const fs::path& _preProcessedFasta){
 void IndexProps::setBuildDir(const fs::path &buildDir)
 {        _buildDir = buildDir;   }
 
+void IndexProps::setppfFolder(const fs::path &ppfFolder)
+{
+    if (!fs::exists(ppfFolder)){
+        printToStdOut("creating output folder in " + ppfFolder.string());
+            try {
+            fs::create_directory(ppfFolder);
+            } catch (std::exception& e ) {
+            throw std::runtime_error("Cannot create output folder " + ppfFolder.string());
+        }
+    }
+    _ppfFolder = ppfFolder;   }
+
 void IndexProps::setOutputFolder(const fs::path& outputFolder)
 {
     fs::path outfolder = outputFolder;
@@ -138,7 +147,6 @@ void IndexProps::setOutputFolder(const fs::path& outputFolder)
     }
     _outputFolder = outfolder;
 }
-
 void IndexProps::addPPF(fs::path _ppf, uint start, uint end){
     printToStdOut("add to _ppFSet " + _ppf.string() + " start " + std::to_string(start) + " end " + std::to_string(end));
     _ppFSet[_ppf] = std::make_pair(start, end);
@@ -159,8 +167,6 @@ void IndexProps::addToIndexSet(fs::path index, uint offset){
 //====================== FILE PREPROCESS ======================
 void IndexProps::createPPFSet(){
 
-    _ppfFolder = _outputFolder;
-    _ppfFolder /= "tmp_ppf";
     printToStdOut("tmp ppf: " + _ppfFolder.string());
     u_int start = 0;
     for (auto& ppf : fs::directory_iterator(_ppfFolder)){
@@ -222,8 +228,8 @@ void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) const {
 
     }
 
-}
 
+  }
 
 //====================== INDEX PROPS I/O ======================
 void IndexProps::loadFromIni(const fs::path inifile){

@@ -87,9 +87,9 @@ public:
         _indexProp.setBuildDir(fs::current_path());
         _indexProp.setOutputFolder("testOutput");
         _indexProp.setReadFileType(algo::FileType::GZ);
-        _indexProp.setIndexName("Index");
+
         _indexProp.setReadSetName("Test");
-        fs::path pPF = fs::current_path() /= "testFiles/Test.fasta";
+        fs::path pPF = fs::current_path() /= "testFiles/Index_Test.fasta";
 
         if (fs::exists(fs::current_path() /= "testOutput/Index_Test.fm9"))
         {

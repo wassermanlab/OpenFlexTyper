@@ -14,7 +14,145 @@ public:
 
 };
 #define TEST_DESCRIPTION(desc) RecordProperty("description", desc)
+////======================================================================
+//TEST_F(TestIndexProp, setOutputFile1)
+//{
+//    TEST_DESCRIPTION("test default outputfile: ${pwd}/Index.fm9");
 
+//    algo::IndexProps* _indexProp = new algo::IndexProps(true);
+//    _indexProp->setOutputFile();
+
+//    fs::path expectedOutputFile = fs::current_path() /= "Index.fm9";
+//    std::string outputFile = _indexProp->getOutputFile();
+
+//    EXPECT_EQ(expectedOutputFile.string(), outputFile);
+
+//}
+////======================================================================
+//TEST_F(TestIndexProp, setOutputFile2)
+//{
+//    TEST_DESCRIPTION("test setOutputFolder: /tmp/outputFile/Index.fm9");
+
+//    algo::IndexProps* _indexProp = new algo::IndexProps(true);
+
+//    fs::path expectedOutputFile = "/tmp/outputFile/Index.fm9";
+//    _indexProp->setOutputFolder(expectedOutputFile.string());
+//    _indexProp->setOutputFile();
+//    std::string outputFile = _indexProp->getOutputFile();
+
+//    bool exist = fs::exists(_indexProp->getOutputFolder());
+
+//    EXPECT_EQ(expectedOutputFile.string(), outputFile);
+//    EXPECT_EQ(true, exist);
+
+//    //remove folder /tmp/outputFile
+//    fs::remove(_indexProp->getOutputFolder());
+//}
+////======================================================================
+//TEST_F(TestIndexProp, setOutputFile3)
+//{
+//    TEST_DESCRIPTION("test setOutputFolder: outputFile/Index.fm9");
+
+//    algo::IndexProps* _indexProp = new algo::IndexProps(true);
+
+//    fs::path expectedOutputFile = fs::current_path() /= "outputFile/Index.fm9";
+//    _indexProp->setOutputFolder(expectedOutputFile.string());
+//    _indexProp->setOutputFile();
+//    std::string outputFile = _indexProp->getOutputFile();
+
+//    bool exist = fs::exists(_indexProp->getOutputFolder());
+
+//    EXPECT_EQ(expectedOutputFile.string(), outputFile);
+//    EXPECT_EQ(true, exist);
+
+//    //remove folder /tmp/outputFile
+//    fs::remove(_indexProp->getOutputFolder());
+//}
+////======================================================================
+//TEST_F(TestIndexProp, setOutputFile4)
+//{
+//    TEST_DESCRIPTION("test setOutputFolder & outputfile: ../Index.fm9");
+
+//    algo::IndexProps* _indexProp = new algo::IndexProps(true);
+
+//    _indexProp->setOutputFolder("../Index.fm9");
+//    _indexProp->setOutputFile();
+//    std::string outputFile = _indexProp->getOutputFile();
+//    fs::path expectedOutputFile = fs::current_path() /= "../Index.fm9";
+
+//    bool exist = fs::exists(_indexProp->getOutputFolder());
+
+//    EXPECT_EQ(expectedOutputFile.string(), outputFile);
+//    EXPECT_EQ(true, exist);
+//}
+////======================================================================
+//TEST_F(TestIndexProp, setOutputFile5)
+//{
+//    TEST_DESCRIPTION("test setIndexFileName: Test.fm9");
+
+//    algo::IndexProps* _indexProp = new algo::IndexProps(true);
+
+//    _indexProp->setIndexFileName("Test");
+
+//    _indexProp->setOutputFile();
+//    fs::path expectedOutputFile = fs::current_path() /= "Test.fm9";
+//    std::string outputFile = _indexProp->getOutputFile();
+
+//    EXPECT_EQ(expectedOutputFile.string(), outputFile);
+//}
+
+////======================================================================
+//TEST_F(TestIndexProp, setOutputFile6)
+//{
+//    TEST_DESCRIPTION("test RecordProperty: Index_Reads.fm9");
+
+//    algo::IndexProps* _indexProp = new algo::IndexProps(true);
+//    _indexProp->setReadSetName("Reads");
+
+//    _indexProp->setOutputFile();
+//    fs::path expectedOutputFile = fs::current_path() /= "Index_Reads.fm9";
+//    std::string outputFile = _indexProp->getOutputFile();
+
+//    EXPECT_EQ(expectedOutputFile.string(), outputFile);
+//}
+////======================================================================
+//TEST_F(TestIndexProp, setOutputFile7)
+//{
+//    TEST_DESCRIPTION("test setReadSetName & setOutputFolder: /tmp/outputFile2/Index_Reads.fm9");
+
+//    algo::IndexProps* _indexProp = new algo::IndexProps(true);
+
+//    fs::path expectedOutputFile = "/tmp/outputFile2/Index_Reads.fm9";
+
+//    _indexProp->setReadSetName("Reads");
+//    _indexProp->setOutputFolder(expectedOutputFile.string());
+//    _indexProp->setOutputFile();
+
+//    std::string outputFile = _indexProp->getOutputFile();
+//    bool exist = fs::exists(_indexProp->getOutputFolder());
+
+//    EXPECT_EQ(expectedOutputFile.string(), outputFile);
+//    EXPECT_EQ(true, exist);
+
+//    //remove folder /tmp/outputFile2
+//    fs::remove(_indexProp->getOutputFolder());
+//}
+////======================================================================
+//TEST_F(TestIndexProp, setOutputFile8)
+//{
+//    TEST_DESCRIPTION("test setReadSetName & setIndexFileName: ${pwd}/Test_Reads.fm9");
+
+//    algo::IndexProps* _indexProp = new algo::IndexProps(true);
+
+//    _indexProp->setReadSetName("Reads");
+//    _indexProp->setIndexFileName("Test");
+//    _indexProp->setOutputFile();
+
+//    fs::path expectedOutputFile = fs::current_path() /= "Test_Reads.fm9";
+//    std::string outputFile = _indexProp->getOutputFile();
+
+//    EXPECT_EQ(expectedOutputFile, outputFile);
+//}
 //======================================================================
 TEST_F(TestIndexProp, setR1)
 {
@@ -70,13 +208,13 @@ TEST_F(TestIndexProp, createBash1)
 
     std::string outputBash = _indexProp->createBash();
 
-    char _r[80], _o[80], _f[80], _u[80];
+    char _r[800], _o[800], _f[800], _u[800];
     //"bash .../preprocess.sh -r <r> -o <o> -f <f> -u <u> "
     std::sscanf(outputBash.c_str(), "%*s %*s %*2s %s %*2s %s %*2s %s %*2s %s", _r, _o, _f, _u);
     std::string r(_r), o(_o), f(_f), u(_u);
 
     std::string expected_r = _indexProp->getR1();
-    std::string expected_o = _indexProp->getOutputFolder();
+    std::string expected_o = _indexProp->getppfFolder();
     std::string expected_f = _indexProp->getReadSetName();
     std::string expected_u = _indexProp->getBuildDir().string() + "/bin/";
 
@@ -109,13 +247,13 @@ TEST_F(TestIndexProp, createBash2)
     _indexProp->setBuildDir("build");
     std::string outputBash = _indexProp->createBash();
 
-    char _r[80], _o[80], _f[80], _u[80], _p[80];
+    char _r[800], _o[800], _f[800], _u[800], _p[800];
     //"bash .../preprocess.sh -r <r> -o <o> -f <f> -u <u>  -p <p>"
     std::sscanf(outputBash.c_str(), "%*s %*s %*2s %s %*2s %s %*2s %s %*2s %s %*2s %s", _r, _o, _f, _u, _p);
     std::string r(_r), o(_o), f(_f), u(_u), p(_p);
 
     std::string expected_r = _indexProp->getR1();
-    std::string expected_o = _indexProp->getOutputFolder();
+    std::string expected_o = _indexProp->getppfFolder();
     std::string expected_f = _indexProp->getReadSetName();
     std::string expected_u = _indexProp->getBuildDir().string() + "/bin/";
     std::string expected_p = _indexProp->getR2();
@@ -146,14 +284,14 @@ TEST_F(TestIndexProp, createBash_withUnzip)
     _indexProp->setReadFileType(algo::FileType::GZ);
     std::string outputBash = _indexProp->createBash();
 
-    char _r[80], _o[80], _f[80], _u[80];
+    char _r[800], _o[800], _f[800], _u[800];
     int z;
     //"bash .../preprocess.sh -r <r> -o <o> -f <f> -u <u>  -z <z>"
     std::sscanf(outputBash.c_str(), "%*s %*s %*2s %s %*2s %s %*2s %s %*2s %s %*2s %d", _r, _o, _f, _u, &z);
     std::string r(_r), o(_o), f(_f), u(_u);
 
     std::string expected_r = _indexProp->getR1();
-    std::string expected_o = _indexProp->getOutputFolder();
+    std::string expected_o = _indexProp->getppfFolder();
     std::string expected_f = _indexProp->getReadSetName();
     std::string expected_u = _indexProp->getBuildDir().string() + "/bin/";
 
@@ -183,14 +321,14 @@ TEST_F(TestIndexProp, createBash_withRevComp)
     _indexProp->setRevCompFlag(true);
     std::string outputBash = _indexProp->createBash();
 
-    char _r[80], _o[80], _f[80], _u[80];
+    char _r[800], _o[800], _f[800], _u[800];
     int c;
     //"bash .../preprocess.sh -r <r> -o <o> -f <f> -u <u>  -c <c>"
     std::sscanf(outputBash.c_str(), "%*s %*s %*2s %s %*2s %s %*2s %s %*2s %s %*2s %d", _r, _o, _f, _u, &c);
     std::string r(_r), o(_o), f(_f), u(_u);
 
     std::string expected_r = _indexProp->getR1();
-    std::string expected_o = _indexProp->getOutputFolder();
+    std::string expected_o = _indexProp->getppfFolder();
     std::string expected_f = _indexProp->getReadSetName();
     std::string expected_u = _indexProp->getBuildDir().string() + "/bin/";
 
@@ -223,7 +361,7 @@ TEST_F(TestIndexProp, createBash_withUnzipPairedRevComp)
     _indexProp->setBuildDir("build");
     std::string outputBash = _indexProp->createBash();
 
-    char _r[80], _o[80], _f[80], _u[80], _p[80];
+    char _r[800], _o[800], _f[800], _u[800], _p[800];
     int z, c;
     //"bash .../preprocess.sh -r <r> -o <o> -f <f> -u <u> -z <z> -p <p> -c <c>"
     std::sscanf(outputBash.c_str(), "%*s %*s %*2s %s %*2s %s %*2s %s %*2s %s %*2s %d %*2s %s %*2s %d",
@@ -231,7 +369,7 @@ TEST_F(TestIndexProp, createBash_withUnzipPairedRevComp)
     std::string r(_r), o(_o), f(_f), u(_u), p(_p);
 
     std::string expected_r = _indexProp->getR1();
-    std::string expected_o = _indexProp->getOutputFolder();
+    std::string expected_o = _indexProp->getppfFolder();
     std::string expected_f = _indexProp->getReadSetName();
     std::string expected_u = _indexProp->getBuildDir().string() + "/bin/";
     std::string expected_p = _indexProp->getR2();
@@ -247,7 +385,7 @@ TEST_F(TestIndexProp, createBash_withUnzipPairedRevComp)
     //cleanup
     _indexProp->delR1();
     _indexProp->delR2();
-    fs::remove("reads");
+    fs::remove_all("reads");
 }
 
 //======================================================================
@@ -266,7 +404,7 @@ TEST_F(TestIndexProp, createBash_withMultipleIndexes)
     //_indexProp->setOutputFile();
     std::string outputBash = _indexProp->createBash();
 
-    char _r[80], _o[80], _f[80], _u[80];
+    char _r[800], _o[800], _f[800], _u[800], _p[800];
     int n;
     //"bash .../preprocess.sh -r <r> -o <o> -f <f> -u <u> -n <n>"
     std::sscanf(outputBash.c_str(), "%*s %*s %*2s %s %*2s %s %*2s %s %*2s %s %*2s %d",
@@ -274,7 +412,7 @@ TEST_F(TestIndexProp, createBash_withMultipleIndexes)
     std::string r(_r), o(_o), f(_f), u(_u);
 
     std::string expected_r = _indexProp->getR1();
-    std::string expected_o = _indexProp->getOutputFolder();
+    std::string expected_o = _indexProp->getppfFolder();
     std::string expected_f = _indexProp->getReadSetName();
     std::string expected_u = _indexProp->getBuildDir().string() + "/bin/";
 
@@ -298,12 +436,12 @@ TEST_F(TestIndexProp, createPPFSet1)
 
     _indexProp->setR1("test.fq.gz");
     _indexProp->setOutputFolder("outputfolder");
+    _indexProp->setppfFolder("outputfolder/tmp_ppf");
 
     _indexProp->setBuildDir("/build");
     _indexProp->setNumOfIndexes(1);
     _indexProp->setReadSetName("test");
     _indexProp->createPPFSet();
-
     std::string expectedPPFN1 =  "outputfolder/tmp_ppf/test.fasta";
     std::map<fs::path, std::pair<u_int, u_int>> outputPPFNs = _indexProp->getPreProcessedFastas();
     std::string outputPPFN1 = outputPPFNs.begin()->first.string() ;
@@ -320,16 +458,16 @@ TEST_F(TestIndexProp, createPPFSet1)
 TEST_F(TestIndexProp, createPPFSet2)
 {
     algo::IndexProps* _indexProp = new algo::IndexProps(true);
-
     std::ofstream("test.fq.gz");
     fs::create_directories("outputfolder/tmp_ppf");
     std::ofstream("outputfolder/tmp_ppf/reads.fasta");
-
     _indexProp->setR1("test.fq.gz");
     _indexProp->setOutputFolder("outputfolder");
+    _indexProp->setppfFolder("outputfolder/tmp_ppf");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(1);
     _indexProp->setReadSetName("reads");
+
 
     _indexProp->createPPFSet();
     std::string expectedPPFN1 =  "outputfolder/tmp_ppf/reads.fasta";
@@ -348,12 +486,10 @@ TEST_F(TestIndexProp, createPPFSet2)
 TEST_F(TestIndexProp, createPPFSet3)
 {
     algo::IndexProps* _indexProp = new algo::IndexProps(true);
-
     std::ofstream("test.fq.gz");
     fs::create_directories("outputfolder/tmp_ppf");
     std::ofstream("outputfolder/tmp_ppf/test_1.fasta");
     std::ofstream("outputfolder/tmp_ppf/test_2.fasta");
-
     _indexProp->setR1("test.fq.gz");
     _indexProp->setReadSetName("test");
     _indexProp->setOutputFolder("outputfolder");
@@ -371,6 +507,7 @@ TEST_F(TestIndexProp, createPPFSet3)
     it++;
     std::string outputPPFN2 = it->first.string();
 
+
     EXPECT_EQ(expectedPPFN1, outputPPFN1);
     EXPECT_EQ(expectedPPFN2, outputPPFN2);
 
@@ -386,9 +523,9 @@ TEST_F(TestIndexProp, createPPFSet4)
     fs::create_directories("outputfolder/tmp_ppf");
     std::ofstream("outputfolder/tmp_ppf/reads_0.fasta");
     std::ofstream("outputfolder/tmp_ppf/reads_1.fasta");
-
     _indexProp->setR1("test.fq.gz");
     _indexProp->setOutputFolder("outputfolder");
+    _indexProp->setppfFolder("outputfolder/tmp_ppf");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(2);
     _indexProp->setReadSetName("reads");
@@ -417,17 +554,16 @@ TEST_F(TestIndexProp, createPPFSet4)
 TEST_F(TestIndexProp, createIndexINI)
 {
     algo::IndexProps* _indexProp = new algo::IndexProps(true);
-
     std::ofstream("test.fq.gz");
     _indexProp->setR1("test.fq.gz");
     _indexProp->setNumOfReads(10);
     _indexProp->setOutputFolder("outputfolder");
+    _indexProp->setppfFolder("outputfolder/tmp_ppf");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(2);
     _indexProp->setIndexName("output");
 
     _indexProp->saveIndexProps("indexProps.ini");
-
     EXPECT_TRUE(fs::exists("indexProps.ini"));
 
     //cleanup
