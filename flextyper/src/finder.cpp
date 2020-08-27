@@ -188,7 +188,7 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
             elts++;
             //std::cout << "getting results future " << std::endl;
 
-            if (tmpResult._positions.size() > 0)
+            if (tmpResult.getKPositions().size() > 0)
             {
                 addResultsFutures(indexResults,tmpResult, offset);
             }
@@ -209,7 +209,7 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
         elts++;
         //std::cout << "getting results future " << std::endl;
 
-        if (tmpResult._positions.size() > 0)
+        if (tmpResult.getKPositions().size() > 0)
         {
             addResultsFutures(indexResults,tmpResult, offset);
         }
@@ -255,10 +255,10 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
                                                    ftProps.getMaxOcc(),
                                                    ftProps.getOverCountedFlag());
 
-       std::cout << "number of positions " << tmpResult._positions.size() << std::endl;
-       if (tmpResult._positions.size() > 0)
+       std::cout << "number of positions " << tmpResult.getKPositions().size() << std::endl;
+       if (tmpResult.getKPositions().size() > 0)
        {
-           std::cout << "number of kmer hits  " << tmpResult._positions.size() << std::endl;
+           std::cout << "number of kmer hits  " << tmpResult.getKPositions().size() << std::endl;
            addResultsFutures(indexResults,tmpResult, offset);
        }
 

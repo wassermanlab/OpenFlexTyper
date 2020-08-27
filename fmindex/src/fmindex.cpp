@@ -18,7 +18,7 @@ void FmIndex::printToStdOut(const std::string& outputString){
 }
 
 //======================================================================
-ft::KmerClass FmIndex::search(std::string kmer,
+ft::KmerClass FmIndex::search(const std::string& kmer,
                               u_int maxOcc, bool flagOverCountedKmers)
 {
     // This code is executed in a different thread for multithreaded
@@ -27,7 +27,7 @@ ft::KmerClass FmIndex::search(std::string kmer,
     //std::cout << "searching index of size " << getIndex().size() << " for " << kmer << std::endl;
     ft::KmerClass kmerResult = ft::KmerClass(kmer);
 
-    size_t occs = sdsl::count(_index, kmerResult._kmer.begin(),  kmerResult._kmer.end());
+    size_t occs = sdsl::count(_index, kmer.begin(),  kmer.end());
     std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
 
     // if number kmers > max, flag kmer as "abundant"
@@ -37,7 +37,7 @@ ft::KmerClass FmIndex::search(std::string kmer,
     }
     if (occs > 0  && occs <= maxOcc) {
         //std::cout << "locating kmer positions " << kmer << " with count " << occs <<  std::endl;
-        auto locations = sdsl::locate(_index, kmerResult._kmer.begin(), kmerResult._kmer.begin()+kmerResult._kmer.length());
+        auto locations = sdsl::locate(_index, kmer.begin(), kmer.begin() + kmer.length());
         if (locations.size() != occs)
         {
             std::runtime_error("number of locations doesnt equal number of occurences for kmer " + kmer );

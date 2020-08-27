@@ -25,10 +25,10 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
-    std::string getKmer() const;
-    std::map<ft::FlagType, bool> getKFlags()const;
-    std::set<long long> getKPositions()const;
-    std::set<ft::ReadID>& getReadIDs()const;
+    const std::string& getKmer() const;
+    const std::map<ft::FlagType, bool>& getKFlags()const;
+    const std::set<long long>& getKPositions()const;
+    const std::set<ft::ReadID>& getReadIDs()const;
     //uint getKmerMapSize()const;
 
     ////////////////////////////////////////////////////////////////////////
@@ -36,7 +36,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     void setKFlags(std::set<ft::FlagType> kFlags);
     void setKPositions(std::set<size_t> kPositions, uint offset = 0);
-    void setReadIDs(std::set<ft::ReadID>readIDs);
+    void setReadIDs(std::set<ft::ReadID> readIDs);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief adders
@@ -57,7 +57,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     bool isKmerEqual(const KmerClass& test) const;
     bool hasKmer(const std::string& test) const;
-    bool hasFlag(const ft::FlagType& flag) const;
+    bool hasFlag(const ft::FlagType& flag);
     bool hasKPosition(const size_t& position) const;
     bool hasReadID(const ft::ReadID& readID) const;
 

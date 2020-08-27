@@ -94,7 +94,7 @@ TEST_F(TestFTMap, TestAddKmerResults)
 
     ftMap.addKmerResults(testKmer1);
     ft::ReadID testRID = std::make_pair(1, 1);
-    ft::KmerClass kmer = ftMap.getKmer(testKmer1._kmer);
+    ft::KmerClass kmer = ftMap.getKmer(testKmer1.getKmer());
 
     EXPECT_TRUE(kmer.hasFlag(ft::FlagType::ABK));
     EXPECT_TRUE(kmer.hasReadID(testRID));
