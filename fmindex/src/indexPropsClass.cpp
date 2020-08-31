@@ -124,11 +124,11 @@ void IndexProps::setBuildDir(const fs::path &buildDir)
 void IndexProps::setppfFolder(const fs::path &ppfFolder)
 {
     if (!fs::exists(ppfFolder)){
-        printToStdOut("creating output folder in " + ppfFolder.string());
+        printToStdOut("creating PPF folder in " + ppfFolder.string());
             try {
             fs::create_directory(ppfFolder);
             } catch (std::exception& e ) {
-            throw std::runtime_error("Cannot create output folder " + ppfFolder.string());
+            throw std::runtime_error("Cannot create PPF folder " + ppfFolder.string());
         }
     }
     _ppfFolder = ppfFolder;   }
@@ -146,6 +146,11 @@ void IndexProps::setOutputFolder(const fs::path& outputFolder)
         }
     }
     _outputFolder = outfolder;
+
+    fs::path newppfFolder = _outputFolder;
+    newppfFolder /= "tmp_ppf";
+    setppfFolder(newppfFolder);
+
 }
 void IndexProps::addPPF(fs::path _ppf, uint start, uint end){
     printToStdOut("add to _ppFSet " + _ppf.string() + " start " + std::to_string(start) + " end " + std::to_string(end));
