@@ -30,7 +30,7 @@ void KmerClass::setKFlags( std::set<ft::FlagType> flags)
         _kFlags[flag] = true;
     }
 }
-void KmerClass::setKPositions( std::set<size_t> kPositions, uint offset)
+void KmerClass::setKPositions(const std::set<long long>& kPositions, uint offset)
 {
     for (auto kPosition : kPositions){
         size_t kPos = kPosition + offset;

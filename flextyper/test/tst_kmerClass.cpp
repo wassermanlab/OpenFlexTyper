@@ -129,6 +129,30 @@ TEST_F(TestKmerClass, convertPosToRead_NotPaired_NotReverseComp)
 
     EXPECT_EQ(expectedReadIDs, testKmerClass->getReadIDs());
 }
+//======================================================================
+TEST_F(TestKmerClass, sdotest)
+{
+    TEST_DESCRIPTION("convert index positions to read ids ");
+
+    std::map<std::string, ft::KmerClass> indexResults;
+    ft::KmerClass tmpResult = ft::KmerClass("AAAA");
+    const std::string& resultkmer = tmpResult.getKmer();
+    indexResults[resultkmer] = tmpResult;
+    ft::KmerClass result = indexResults.find(resultkmer)->second;
+    result.setKPositions({50, 125, 251, 313, 449, 555, 654, 723});
+    indexResults.find(resultkmer)->second = result;
+    ft::KmerClass result2 = indexResults.find(resultkmer)->second;
+        for (long long pos : {50, 125, 251, 313, 449, 555, 654, 723})
+        {
+            //result.addKPosition(pos, offset);
+            bool rc2 = result2.hasKPosition(pos);
+            bool rc = result.hasKPosition(pos);
+            //if(rc != rc2) {
+                std::cout << "failed pos " << pos << " result " << rc << " result2 " << rc2 << std::endl;
+            //}
+        }
+     std::cout << "sdotest done " << std::endl;
+}
 
 //======================================================================
 TEST_F(TestKmerClass, convertPosToReadDirect)

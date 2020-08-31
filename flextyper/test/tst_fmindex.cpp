@@ -63,14 +63,13 @@ TEST_F(TestFMIndex, createFMIndex)
     algo::FmIndex _fmindex;
     std::ofstream("test.fq.gz");
     _indexProp.setR1("test.fq.gz");
-    _indexProp.setBuildDir(fs::current_path().parent_path() /= "build");
-    _indexProp.setOutputFolder(fs::absolute(fs::current_path() /= "testOutput"));
+    _indexProp.setBuildDir("build");
+    _indexProp.setOutputFolder("testOutput");
 
     _indexProp.setReadFileType(algo::FileType::GZ);
     _indexProp.setReadSetName("Test");
 
-    fs::path pPF = fs::absolute(fs::current_path() /= "testFiles/Index_Test.fasta");
-
+    fs::path pPF = fs::absolute("testFiles/Index_Test.fasta");
     fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
 

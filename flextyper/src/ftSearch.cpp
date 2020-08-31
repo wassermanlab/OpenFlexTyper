@@ -1,6 +1,5 @@
 #include "ftSearch.h"
 
-
 namespace ft {
 
 //======================================================================
@@ -52,6 +51,9 @@ if (!exists(ftProps.getOutputFile())) {
 //======================================================================
 void FTSearch::init(const FTProp& ftProps)
 {
+    FTProp::OpenLog("searchIndexes.log");
+    FTProp::Benchmark benchmark = FTProp::Benchmark(0);
+
     ft::FTMap ftMap(ftProps);
     //checkInputFastQ(ftProps);
     checkOutputFile(ftProps);
@@ -65,21 +67,30 @@ void FTSearch::init(const FTProp& ftProps)
         exit(1);
     }
 
-    printToStdOut(" number of queries " + std::to_string(inputQueries.size()));
+    benchmark.now("InputQueries retrieved " + std::to_string(inputQueries.size()) + " DONE ");
 
     ftMap.addInputQueries(inputQueries);
 
-    //printToStdOut( " number of queries in FTMap " + std::to_string(ftMap._querySet.size()));
+    benchmark.now("FTMap AddInputQueries DONE ");
 
     ftMap.genQKMap();
 
-    printToStdOut( "\nsearching..." );
+    benchmark.now("FTMap genQKMap DONE ");
 
     _finder->searchIndexes(ftMap);
 
+    benchmark.now("FTMap SearchIndexes DONE ");
+
     ftMap.processResults();
 
+    benchmark.now("FTMap ProcessResults DONE ");
+
     _writerBridge->saveOutput(ftMap);
+
+    benchmark.now("SaveOutput DONE ");
+
+    FTProp::CloseLog();
+
 }
 
 //======================================================================
