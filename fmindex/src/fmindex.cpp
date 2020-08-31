@@ -54,10 +54,11 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
     std::string ppfname = preprocessedFasta.stem();
 
     fs::path outputIndex = _props.getOutputFolder();
-    std::string newfilename = _props.getIndexName();
+    std::string newfilename = _props.getIndexName() + "_" + ppfname;
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> tmpIndex;
     outputIndex /= newfilename;
+    outputIndex.replace_extension("fm9");
 
     std::cout << "creating index for " << ppfname << " at " << outputIndex << std::endl;
     if (preprocessedFasta.empty())

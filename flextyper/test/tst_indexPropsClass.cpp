@@ -568,8 +568,8 @@ TEST_F(TestIndexProp, createIndexINI)
 
     //cleanup
     _indexProp->delR1();
-    fs::remove(_indexProp->getOutputFolder());
-    fs::remove("indexProps.ini");
+    fs::remove_all(_indexProp->getOutputFolder());
+    fs::remove_all("indexProps.ini");
 }
 
 //======================================================================

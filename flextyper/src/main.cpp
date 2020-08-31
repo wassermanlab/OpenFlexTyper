@@ -205,6 +205,7 @@ int main(int argc, char** argv)
         props->printToStdOut( "PPF Folder "+ props->getppfFolder().string());
         if (!parser.isSet(indexFileName)){
             props->printToStdOut("Index File Name not set");
+            props->printToStdOut("Default Index Name set: " + props->getIndexName());
         }else {
             props->printToStdOut( "Setting Index File Name to " + parser.value(indexFileName).toStdString());
             props->setIndexName(parser.value(indexFileName).toStdString());

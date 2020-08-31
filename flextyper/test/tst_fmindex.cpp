@@ -11,7 +11,7 @@ namespace ft {
 class TestFMIndex : public ::testing::Test {
 protected:
     virtual void SetUp() {
-
+    if (fs::exists("testOutput")){fs::remove_all("testOutput");}
     }
     virtual void TearDown() {}
 
@@ -69,7 +69,7 @@ TEST_F(TestFMIndex, createFMIndex)
     _indexProp.setReadFileType(algo::FileType::GZ);
     _indexProp.setReadSetName("Test");
 
-    fs::path pPF = fs::absolute("testFiles/Index_Test.fasta");
+    fs::path pPF = fs::absolute("testFiles/Test.fasta");
     fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
 
@@ -90,6 +90,7 @@ TEST_F(TestFMIndex, createParallelFMIndex)
     fs::path testIndex = fs::current_path() /= "testOutput/Index_Test.fm9";
     fs::path testIndex2 = fs::current_path() /= "testOutput/Index_Test2.fm9";
     std::cout << "test index " << testIndex.string() << std::endl;
+
     if (fs::exists(testIndex)){ fs::remove(testIndex); }
     if (fs::exists(testIndex2)){ fs::remove(testIndex2); }
     algo::IndexProps _indexProp(true);
@@ -101,13 +102,14 @@ TEST_F(TestFMIndex, createParallelFMIndex)
     _indexProp.setReadSetName("Test");
     _indexProp.setNumOfIndexes(2);
     _indexProp.setReadFileType(algo::FileType::GZ);
+    std::string indexName = "Index_" + _indexProp.getReadSetName();
+    _indexProp.setIndexName(indexName);
 
 
-
-    fs::path index1 = fs::absolute(fs::current_path() /="testFiles/Index_Test.fasta");
+    fs::path index1 = fs::absolute(fs::current_path() /="testFiles/Test.fasta");
 
     _indexProp.addPPF(index1, 0, 10);
-     fs::path index2 = fs::absolute(fs::current_path() /="testFiles/Index_Test2.fasta");
+     fs::path index2 = fs::absolute(fs::current_path() /="testFiles/Test2.fasta");
 
     _indexProp.addPPF(index2, 11, 20);
 
