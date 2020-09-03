@@ -35,7 +35,7 @@ public:
     /// \brief setters
     ////////////////////////////////////////////////////////////////////////
     void setKFlags(std::set<ft::FlagType> kFlags);
-    void setKPositions(std::set<size_t> kPositions, uint offset = 0);
+    void setKPositions(const std::set<long long>& kPositions, uint offset = 0);
     void setReadIDs(std::set<ft::ReadID> readIDs);
 
     ////////////////////////////////////////////////////////////////////////

@@ -30,7 +30,7 @@ void KmerClass::setKFlags( std::set<ft::FlagType> flags)
         _kFlags[flag] = true;
     }
 }
-void KmerClass::setKPositions( std::set<size_t> kPositions, uint offset)
+void KmerClass::setKPositions(const std::set<long long>& kPositions, uint offset)
 {
     for (auto kPosition : kPositions){
         size_t kPos = kPosition + offset;
@@ -80,7 +80,7 @@ bool KmerClass::hasKmer(const std::string& test) const {
     return _kmer == test;
 }
 bool KmerClass::hasFlag(const ft::FlagType& flag) {
-    return _kFlags[flag];
+    return (_kFlags.count(flag) > 0);
 }
 bool KmerClass::hasKPosition(const size_t& kPosition) const{
     const bool is_in = _positions.find(kPosition) != _positions.end();

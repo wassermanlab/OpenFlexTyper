@@ -344,6 +344,22 @@ void FTProp::setOutputFolder(const fs::path& outputFolder)
 
 }
 
+//====================== STATIC FUNCTIONS ======================
+
+std::fstream FTProp::Log;
+void FTProp::OpenLog(const std::string& name)
+{
+    Log.open(name, std::fstream::out);
+    if (!Log || !Log.is_open()) {
+        std::cout << "Couldn't open " << name << " file" << std::endl;
+    }
+}
+
+void FTProp::CloseLog()
+{
+    Log.close();
+}
+
 FTProp::~FTProp()
 {
 }

@@ -8,7 +8,10 @@ namespace algo {
 class TestIndexProp : public ::testing::Test {
 protected:
     virtual void SetUp() {    }
-    virtual void TearDown() {    }
+    virtual void TearDown() {
+     if (fs::exists("testOutput")){fs::remove_all("testOutput");}
+     if (fs::exists("outputFolder")){fs::remove_all("outputFolder");}
+    }
 
 public:
 
@@ -267,7 +270,7 @@ TEST_F(TestIndexProp, createBash2)
     //cleanup
     _indexProp->delR2();
     fs::remove_all("reads");
-    fs::remove("outputFolder");
+
 
 }
 //======================================================================
@@ -398,7 +401,7 @@ TEST_F(TestIndexProp, createBash_withMultipleIndexes)
     std::ofstream("test_R1.fq.gz");
     _indexProp->setR1("test_R1.fq.gz");
     _indexProp->setReadSetName("test");
-    _indexProp->setOutputFolder("outputfolder");
+    _indexProp->setOutputFolder("outputFolder");
     _indexProp->setBuildDir("build");
     _indexProp->setNumOfIndexes(5);
     //_indexProp->setOutputFile();
@@ -429,20 +432,20 @@ TEST_F(TestIndexProp, createBash_withMultipleIndexes)
 TEST_F(TestIndexProp, createPPFSet1)
 {
     algo::IndexProps* _indexProp = new algo::IndexProps(true);
-    fs::create_directory("outputfolder");
-    fs::create_directory("outputfolder/tmp_ppf");
-    std::ofstream("outputfolder/tmp_ppf/test.fasta");
+    fs::create_directory("outputFolder");
+    fs::create_directory("outputFolder/tmp_ppf");
+    std::ofstream("outputFolder/tmp_ppf/test.fasta");
     std::ofstream("test.fq.gz");
 
     _indexProp->setR1("test.fq.gz");
-    _indexProp->setOutputFolder("outputfolder");
-    _indexProp->setppfFolder("outputfolder/tmp_ppf");
+    _indexProp->setOutputFolder("outputFolder");
+    _indexProp->setppfFolder("outputFolder/tmp_ppf");
 
     _indexProp->setBuildDir("/build");
     _indexProp->setNumOfIndexes(1);
     _indexProp->setReadSetName("test");
     _indexProp->createPPFSet();
-    std::string expectedPPFN1 =  "outputfolder/tmp_ppf/test.fasta";
+    std::string expectedPPFN1 =  "outputFolder/tmp_ppf/test.fasta";
     std::map<fs::path, std::pair<u_int, u_int>> outputPPFNs = _indexProp->getPreProcessedFastas();
     std::string outputPPFN1 = outputPPFNs.begin()->first.string() ;
     fs::remove(_indexProp->getR1());
@@ -459,18 +462,18 @@ TEST_F(TestIndexProp, createPPFSet2)
 {
     algo::IndexProps* _indexProp = new algo::IndexProps(true);
     std::ofstream("test.fq.gz");
-    fs::create_directories("outputfolder/tmp_ppf");
-    std::ofstream("outputfolder/tmp_ppf/reads.fasta");
+    fs::create_directories("outputFolder/tmp_ppf");
+    std::ofstream("outputFolder/tmp_ppf/reads.fasta");
     _indexProp->setR1("test.fq.gz");
-    _indexProp->setOutputFolder("outputfolder");
-    _indexProp->setppfFolder("outputfolder/tmp_ppf");
+    _indexProp->setOutputFolder("outputFolder");
+    _indexProp->setppfFolder("outputFolder/tmp_ppf");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(1);
     _indexProp->setReadSetName("reads");
 
 
     _indexProp->createPPFSet();
-    std::string expectedPPFN1 =  "outputfolder/tmp_ppf/reads.fasta";
+    std::string expectedPPFN1 =  "outputFolder/tmp_ppf/reads.fasta";
     std::map<fs::path, std::pair<u_int, u_int>> outputPPFNs = _indexProp->getPreProcessedFastas();
     std::string outputPPFN1 = outputPPFNs.begin()->first.string() ;
 
@@ -487,18 +490,18 @@ TEST_F(TestIndexProp, createPPFSet3)
 {
     algo::IndexProps* _indexProp = new algo::IndexProps(true);
     std::ofstream("test.fq.gz");
-    fs::create_directories("outputfolder/tmp_ppf");
-    std::ofstream("outputfolder/tmp_ppf/test_1.fasta");
-    std::ofstream("outputfolder/tmp_ppf/test_2.fasta");
+    fs::create_directories("outputFolder/tmp_ppf");
+    std::ofstream("outputFolder/tmp_ppf/test_1.fasta");
+    std::ofstream("outputFolder/tmp_ppf/test_2.fasta");
     _indexProp->setR1("test.fq.gz");
     _indexProp->setReadSetName("test");
-    _indexProp->setOutputFolder("outputfolder");
+    _indexProp->setOutputFolder("outputFolder");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(2);
 
     _indexProp->createPPFSet();
-    std::string expectedPPFN1 =  "outputfolder/tmp_ppf/test_1.fasta";
-    std::string expectedPPFN2 =  "outputfolder/tmp_ppf/test_2.fasta";
+    std::string expectedPPFN1 =  "outputFolder/tmp_ppf/test_1.fasta";
+    std::string expectedPPFN2 =  "outputFolder/tmp_ppf/test_2.fasta";
 
     std::map<fs::path, std::pair<u_int, u_int>> outputPPFNs = _indexProp->getPreProcessedFastas();
 
@@ -520,19 +523,19 @@ TEST_F(TestIndexProp, createPPFSet4)
 {
     algo::IndexProps* _indexProp = new algo::IndexProps(true);
     std::ofstream("test.fq.gz");
-    fs::create_directories("outputfolder/tmp_ppf");
-    std::ofstream("outputfolder/tmp_ppf/reads_0.fasta");
-    std::ofstream("outputfolder/tmp_ppf/reads_1.fasta");
+    fs::create_directories("outputFolder/tmp_ppf");
+    std::ofstream("outputFolder/tmp_ppf/reads_0.fasta");
+    std::ofstream("outputFolder/tmp_ppf/reads_1.fasta");
     _indexProp->setR1("test.fq.gz");
-    _indexProp->setOutputFolder("outputfolder");
-    _indexProp->setppfFolder("outputfolder/tmp_ppf");
+    _indexProp->setOutputFolder("outputFolder");
+    _indexProp->setppfFolder("outputFolder/tmp_ppf");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(2);
     _indexProp->setReadSetName("reads");
 
     _indexProp->createPPFSet();
-    std::string expectedPPFN1 =  "outputfolder/tmp_ppf/reads_0.fasta";
-    std::string expectedPPFN2 =  "outputfolder/tmp_ppf/reads_1.fasta";
+    std::string expectedPPFN1 =  "outputFolder/tmp_ppf/reads_0.fasta";
+    std::string expectedPPFN2 =  "outputFolder/tmp_ppf/reads_1.fasta";
 
     std::map<fs::path, std::pair<u_int, u_int>> outputPPFNs = _indexProp->getPreProcessedFastas();
 
@@ -557,8 +560,8 @@ TEST_F(TestIndexProp, createIndexINI)
     std::ofstream("test.fq.gz");
     _indexProp->setR1("test.fq.gz");
     _indexProp->setNumOfReads(10);
-    _indexProp->setOutputFolder("outputfolder");
-    _indexProp->setppfFolder("outputfolder/tmp_ppf");
+    _indexProp->setOutputFolder("outputFolder");
+    _indexProp->setppfFolder("outputFolder/tmp_ppf");
     _indexProp->setBuildDir("../build");
     _indexProp->setNumOfIndexes(2);
     _indexProp->setIndexName("output");
@@ -568,8 +571,8 @@ TEST_F(TestIndexProp, createIndexINI)
 
     //cleanup
     _indexProp->delR1();
-    fs::remove(_indexProp->getOutputFolder());
-    fs::remove("indexProps.ini");
+    fs::remove_all(_indexProp->getOutputFolder());
+    fs::remove_all("indexProps.ini");
 }
 
 //======================================================================

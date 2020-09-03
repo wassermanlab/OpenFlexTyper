@@ -52,7 +52,6 @@ public:
     bool checkForQIDT(const ft::QIdT& testQueryObject) const;
     void addQuery(int queryID, ft::QueryType queryType, const std::string& queryString);
     const ft::QueryClass& getQuery(const ft::QIdT& qIDT) const;
-    void updateQuery(const ft::QIdT& qIDT, const ft::QueryClass& query);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Adds results from parallel search

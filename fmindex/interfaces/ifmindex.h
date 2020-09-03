@@ -57,6 +57,7 @@ public:
     ////////////////////////////////////////////////////////////////////////
     virtual const csa_wt<wt_huff<rrr_vector<256>>, 512, 1024>& getIndex() = 0;
 
+    virtual int indexCount() = 0;
 };
 }
 

@@ -4,6 +4,8 @@
 #include <climits>
 #include <set>
 #include <iostream>
+#include <fstream>
+#include <chrono>
 #include <map>
 #include <experimental/filesystem>
 #include <QSettings>
@@ -39,6 +41,30 @@ public:
     /// \brief ~FTProp
     ////////////////////////////////////////////////////////////////////////
     virtual ~FTProp();
+
+    ////////////////////////////////////////////////////////////////////////
+    /// Benchmark
+    ////////////////////////////////////////////////////////////////////////
+    class Benchmark {
+    public:
+        Benchmark(int indent): _indent(indent) {
+           update();
+        };
+        virtual ~Benchmark() {};
+        void update() {_start = std::chrono::steady_clock::now();};
+        void now(const std::string tag) {
+            _end = std::chrono::steady_clock::now();
+            FTProp::Log << "BM:";
+            for(int i=0; i<_indent; i++)
+                FTProp::Log << "**";
+            FTProp::Log << tag << std::chrono::duration_cast<std::chrono::seconds>(_end - _start).count() << " sec" << std::endl;
+            _start = _end;
+        };
+    private:
+        std::chrono::steady_clock::time_point _start;
+        std::chrono::steady_clock::time_point _end;
+        int _indent;
+    };
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Init
@@ -150,6 +176,11 @@ public:
 
     void setTestProps(const uint numOfReads, const uint readLength, bool _revComp);
     void setOutputFolder(const fs::path& outputFolder);
+
+    static void OpenLog(const std::string& name);
+    static void CloseLog();
+    static std::fstream Log;
+
 private:
     ////////////////////////////////////////////////////////////////////////
     /// \brief fixed properties
@@ -199,8 +230,6 @@ private:
     bool _indexRevComp; //do the index files contain the reverse complement
     bool _matchingReads; //create files that contain reads that match to each query
     bool _verbose; //print to std::cout
-
-
 
 };
 

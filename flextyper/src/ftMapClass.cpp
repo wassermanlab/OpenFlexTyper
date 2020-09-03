@@ -251,10 +251,6 @@ const ft::QueryClass& FTMap::getQuery(const ft::QIdT& qIDT) const {
     }
 }
 //======================================================
-void FTMap::updateQuery(const ft::QIdT& qIDT, const ft::QueryClass& query) {
-    _querySet[qIDT] = query;
-}
-//======================================================
 void FTMap::addQuery(int queryID, ft::QueryType queryType, const std::string& queryString = empty)
 {
 #if 0
@@ -363,8 +359,7 @@ void FTMap::processResults()
 //======================================================
 void FTMap::processQueryResults(const ft::QIdT& qIDT)
 {
-    const ft::QueryClass& query1 = getQuery(qIDT);
-    ft::QueryClass query = query1;  //copy to edit
+    ft::QueryClass query = _querySet.find(qIDT)->second;
 
     // Add results from FWD Search
     std::set<std::string> fwdKmers = _qkMap.retrieveKmers(qIDT);
@@ -426,7 +421,7 @@ void FTMap::processQueryResults(const ft::QIdT& qIDT)
     }
 
     query.setCount(readIds.size());
-    updateQuery(qIDT, query);
+    _querySet.find(qIDT)->second = query;
 }
 
 #define INDEXEND }

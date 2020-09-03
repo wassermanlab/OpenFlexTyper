@@ -24,11 +24,9 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
     // This code is executed in a different thread for multithreaded
     // executions and in main thread for monothreaded applications
 
-    //std::cout << "searching index of size " << getIndex().size() << " for " << kmer << std::endl;
     ft::KmerClass kmerResult = ft::KmerClass(kmer);
 
     size_t occs = sdsl::count(_index, kmerResult.getKmer().begin(),  kmerResult.getKmer().end());
-    std::cout << "Kmer Search count "<< occs << " for " << kmer << std::endl;
 
     // if number kmers > max, flag kmer as "abundant"
     if (occs > maxOcc && flagOverCountedKmers) {
@@ -36,20 +34,16 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
         kmerResult.addKFlag(ft::FlagType::ABK);
     }
     if (occs > 0  && occs <= maxOcc) {
-        //std::cout << "locating kmer positions " << kmer << " with count " << occs <<  std::endl;
         auto locations = sdsl::locate(_index, kmerResult.getKmer().begin(), kmerResult.getKmer().begin()+kmerResult.getKmer().length());
         if (locations.size() != occs)
         {
             std::runtime_error("number of locations doesnt equal number of occurences for kmer " + kmer );
         }
 
-        //std::cout << "adding " << locations.size()<< " hits to kmer positions " << kmer << std::endl;
         for (auto e : locations) {
-            //std::cout << "e " << e << std::endl;
             kmerResult.addKPosition(e);
         }
     }
-    //std::cout << "index search positions  " << kmerResult._positions.size() << std::endl;
     return kmerResult;
 }
 
@@ -60,10 +54,11 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
     std::string ppfname = preprocessedFasta.stem();
 
     fs::path outputIndex = _props.getOutputFolder();
-    std::string newfilename = _props.getIndexName();
+    std::string newfilename = _props.getIndexName() + "_" + ppfname;
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> tmpIndex;
     outputIndex /= newfilename;
+    outputIndex.replace_extension("fm9");
 
     std::cout << "creating index for " << ppfname << " at " << outputIndex << std::endl;
     if (preprocessedFasta.empty())
@@ -73,7 +68,7 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
 
     if (!exists(preprocessedFasta))
     {
-        throw std::runtime_error( "Error: Preprocessed Fasta File doesnt exist " + preprocessedFasta.string());
+        throw std::runtime_error( "Error: Preprocessed Fasta File doesn't exist " + preprocessedFasta.string());
     }
     if (fs::exists(outputIndex))
     {
@@ -161,6 +156,11 @@ void FmIndex::parallelFmIndex(algo::IndexProps& _props)
 
 
     _props.saveIndexProps(indexPropsINI);
+}
+
+int FmIndex::indexCount()
+{
+    return _index.size();
 }
 
 //======================================================================
