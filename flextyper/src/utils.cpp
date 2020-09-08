@@ -127,20 +127,6 @@ std::string Utils::reverseComplement(const std::string& inputString) const
     return reverseComp;
 }
 
-
-//======================================================================
-int Utils::fileIndexToQueryIndex(uint fileIndex)
-{
-    // query index cannot be zero
-    int queryIndex = fileIndex ;
-
-    if (queryIndex <= 0) {
-        exit(1);
-    }
-
-    return queryIndex;
-}
-
 //======================================================================
 std::string Utils::trimmedReadFileName(const fs::path& p)
 {
@@ -154,14 +140,6 @@ std::string Utils::trimmedReadFileName(const fs::path& p)
         filename = result.substr(pos + 1);
     }
     return filename;
-}
-
-//======================================================================
-uint Utils::queryIndexToFileIndex(int queryIndex)
-{
-    // file index can be zero
-    uint fileIndex = abs(queryIndex) ;
-    return fileIndex;
 }
 
 

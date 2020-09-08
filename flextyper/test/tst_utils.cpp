@@ -141,26 +141,6 @@ TEST_F(TestUtils, convertIndexPositionsToReadIDsWithRepeatedPositions)
 
 
 //======================================================================
-TEST_F(TestUtils, fileIndexToQueryIndexWithWeirdCases)
-{
-    TEST_DESCRIPTION("Tests that in case of bad inputs, the program exits correctly");
-
-    int input = -15;
-
-    EXPECT_EXIT(_utils.fileIndexToQueryIndex(input), ::testing::ExitedWithCode(1), "");
-}
-
-//======================================================================
-TEST_F(TestUtils, fileIndexToQueryIndexWithAnotherWeirdCases)
-{
-    TEST_DESCRIPTION("Tests that in case of bad inputs, the program exits correctly");
-
-    int input = -1;
-
-    EXPECT_EXIT(_utils.fileIndexToQueryIndex(input), ::testing::ExitedWithCode(1), "");
-}
-
-//======================================================================
 TEST_F(TestUtils, trimmedReadFileName)
 {
     TEST_DESCRIPTION("This test trims the read filename");

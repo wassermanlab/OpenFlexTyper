@@ -127,7 +127,7 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
         std::cout << "Number of kmers in kmerQueue: " << kmerQueue.size() << std::endl;
     }
 
-    std::cout << "kmer queue created " << std::endl;
+    //std::cout << "kmer queue created " << std::endl;
     std::atomic<int> elts;
     elts = 0;
 
@@ -195,7 +195,7 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
         ft::KmerClass tmpResult = e.get();
         elts++;
         //std::cout << "getting results future " << std::endl;
-
+        std::cout << "number of kpositions " << tmpResult.getKPositions().size() << std::endl;
         if (tmpResult.getKPositions().size() > 0)
         {
             addResultsFutures(indexResults,tmpResult, offset);

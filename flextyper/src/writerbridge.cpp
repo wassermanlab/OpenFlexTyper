@@ -93,10 +93,10 @@ std::string WriterBridge::formatOutputMap()
         }
 
     } else if (!_croData && !_altData){
-        //std::cout << "Ref only" << std::endl;
-        //std::cout << "output REF Map count " << _outputMap["refCount"] << std::endl;
+        std::cout << "Ref only" << std::endl;
+        std::cout << "output REF Map count " << _outputMap["refCount"] << std::endl;
         outputLine = '\t' + _outputMap["refCount"] ;
-        //std::cout << " outputLine " << outputLine <<std::endl;
+
         if (_NUK) {
             outputLine +='\t' + _outputMap["refNUK"]  ;
         }
@@ -104,7 +104,7 @@ std::string WriterBridge::formatOutputMap()
             outputLine +='\t' + _outputMap["refOCK"] ;
         }
     }
-    std::cout << " outputLine " << outputLine <<std::endl;
+    std::cout << "Formatted outputLine " << outputLine <<std::endl;
     return outputLine;
 }
 
@@ -128,7 +128,7 @@ std::string WriterBridge::getFlagKmers(const ft::QueryClass& query, const ft::Fl
 //======================================================================
 void WriterBridge::addQueryToOutput( const ft::QueryClass& query, const std::string prefix)
 {
-    //std::cout << "add query to output Map" << std::endl;
+    std::cout << "add query to output Map" << std::endl;
     u_int count = query.getCount();
     _outputMap[prefix+"Matches"] = "false";
     if (count > 0){
@@ -141,7 +141,7 @@ void WriterBridge::addQueryToOutput( const ft::QueryClass& query, const std::str
     //std::cout << "output Map Matches " << _outputMap[prefix+"Matches"] << std::endl;
 
     _outputMap[prefix+"Count"] = std::to_string(count);
-    //std::cout << "prefix " << prefix << " output Map count " << _outputMap[prefix+"Count"] << std::endl;
+    std::cout << "prefix " << prefix << " output Map count " << _outputMap[prefix+"Count"] << std::endl;
     if (_OCK)
     {
         //std::cout << "Add OCK" << std::endl;
@@ -169,8 +169,8 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
     const fs::path& inputQueryFile = ftProps.getPathToQueryFile();
     const fs::path& outputQueryFile = ftProps.getOutputFile();
 
-    //std::cout << "Input Query File " << inputQueryFile << std::endl;
-    //std::cout << "Output Query File " << outputQueryFile << std::endl;
+    std::cout << "Input Query File " << inputQueryFile << std::endl;
+    std::cout << "Output Query File " << outputQueryFile << std::endl;
     // save counts to output tsv
     std::fstream outputFileStream;
     outputFileStream.open(outputQueryFile, std::ios::out);
@@ -188,14 +188,14 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
     std::string line;
 
     while (getline(queryFileStream, line)) {
-        //std::cout<< "line  " << line << std::endl;
+        std::cout<< "line  " << line.substr(0,10) << std::endl;
         if (line[line.length()-1] == '\n') {
             line.erase(line.length()-1);
         }
 
         // header line <- might be issue if there is >1 header line
         if (line[0] == '#') {
-            //std::cout << "line is a header line" << std::endl;
+            std::cout << "line is a header line" << std::endl;
             std::string header = createHeader();
             line.append(header);
             outputFileStream << line;
@@ -203,16 +203,18 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
         }
 
         std::vector<std::string> splitline = _utils->split(line, '\t');
+        std::cout << "Split line " << splitline[0] << std::endl;
         uint fileIndex = atoi(splitline[0].c_str());
-        int queryIndex = _utils->fileIndexToQueryIndex(fileIndex);
-        //std::cout << "fileIndex " << fileIndex  << " query Index " << queryIndex << std::endl;
+        int queryIndex = fileIndex;
+
+        std::cout << "fileIndex " << fileIndex  << " query Index " << queryIndex << std::endl;
 
         const ft::QueryClass& refQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::REF));
 
 
-        //std::cout << "Ref Query " << refQuery._qID << std::endl;
+        std::cout << "Ref Query " << refQuery._qID << std::endl;
         addQueryToOutput(refQuery, "ref");
-        //std::cout << "prefix ref " << " output Map count " << _outputMap["refCount"] << std::endl;
+        std::cout << "prefix ref " << " output Map count " << _outputMap["refCount"] << std::endl;
         //std::cout << "Check for Alt and Cro" << std::endl;
 
         if (_altData){
@@ -246,7 +248,7 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
         }
 
         std::string outputLine = formatOutputMap();
-        //std::cout << "outputLine  " << outputLine << std::endl;
+        std::cout << "outputLine  " << outputLine << std::endl;
         _outputMap.clear();
 
         line.append(outputLine);

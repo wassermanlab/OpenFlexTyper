@@ -10,3 +10,5 @@ Makefile
 *.autosave
 
 Example/
+
+Test_Example/

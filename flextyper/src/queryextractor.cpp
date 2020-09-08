@@ -65,12 +65,11 @@ std::set<Query> QueryExtractor::getInputQueries(bool refOnly, bool crossover, co
             std::cout << fileIndex << "  " << refSequence.substr(0,10) << "  " << altSequence.substr(0,10) << std::endl;
             //std::cout << "number of queries extracted " << inputQueries.size() << std::endl;
         } else {
-            int queryIndex = _utils->fileIndexToQueryIndex(fileIndex);
             std::string startPointSeq = refSequence.substr(0);
             std::string endPointSeq   = altSequence.substr(0);
             std::string crossoverSeq  = refSequence.substr(0, refSequence.length() / 2) + altSequence.substr(altSequence.length() / 2);
-            inputQueries.insert(std::make_tuple(queryIndex, startPointSeq, endPointSeq, crossoverSeq));
-            std::cout << queryIndex << "  " << startPointSeq.substr(0,10) << "  " << endPointSeq.substr(0,10) << "  " << crossoverSeq.substr(0,10) << std::endl;
+            inputQueries.insert(std::make_tuple(fileIndex, startPointSeq, endPointSeq, crossoverSeq));
+            std::cout << fileIndex << "  " << startPointSeq.substr(0,10) << "  " << endPointSeq.substr(0,10) << "  " << crossoverSeq.substr(0,10) << std::endl;
         }
     }
 

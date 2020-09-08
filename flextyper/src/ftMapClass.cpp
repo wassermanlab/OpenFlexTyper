@@ -349,7 +349,7 @@ void FTMap::processResults()
     for (auto query : _querySet)
     {
         ft::QIdT qIDT = query.first;
-        //std::cout << "Query ID " << qIDT << std::endl;
+
         processQueryResults(qIDT);
 
     }
@@ -419,7 +419,7 @@ void FTMap::processQueryResults(const ft::QIdT& qIDT)
             }
         }
     }
-
+    std::cout << "query count " << readIds.size() << std::endl;
     query.setCount(readIds.size());
     _querySet.find(qIDT)->second = query;
 }
