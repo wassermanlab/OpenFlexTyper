@@ -167,6 +167,7 @@ TEST_F(TestFMIndex, searchFMIndexDirect)
     sdsl::load_from_file(_testindex, "testOutput/Index_Test.fm9");
     auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
     std::cout << "count " << count << " occs " << occs << std::endl;
+    EXPECT_TRUE(occs > 0);
     EXPECT_EQ(count, occs);
     EXPECT_NO_FATAL_FAILURE();
     EXPECT_NO_THROW();
@@ -191,6 +192,7 @@ TEST_F(TestFMIndex, locateInFMIndexDirect)
 
     auto locations = sdsl::locate(_fmindex.getIndex(), kmer.begin(), kmer.end());
 
+    EXPECT_TRUE(occs > 0);
     EXPECT_EQ(occs, locations.size());
     EXPECT_NO_FATAL_FAILURE();
     EXPECT_NO_THROW();
@@ -220,6 +222,7 @@ TEST_F(TestFMIndex, locateInIndexUsingPointers)
     auto occs = sdsl::count(_fmindex->getIndex(), kmer.begin(), kmer.end());
     auto locations = sdsl::locate(_fmindex->getIndex(), kmer.begin(), kmer.end());
     fs::remove(output);
+    EXPECT_TRUE(occs > 0);
     EXPECT_EQ(occs, locations.size());
     EXPECT_NO_FATAL_FAILURE();
     EXPECT_NO_THROW();
@@ -247,6 +250,7 @@ TEST_F(TestFMIndex, searchFMIndexUsingPointer)
     _fmindex->loadIndexFromFile(output);
     auto locations = sdsl::locate(_fmindex->getIndex(), kmer.begin(), kmer.end());
     ft::KmerClass outputKmer = _fmindex->search(kmer, 10000, true);
+    EXPECT_TRUE(locations.size()>0);
     EXPECT_EQ(outputKmer.getKPositions().size(), locations.size());
     EXPECT_NO_FATAL_FAILURE();
     EXPECT_NO_THROW();
