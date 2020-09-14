@@ -13,17 +13,17 @@ void Finder::testIndex(const FTProp& ftProps, const fs::path &indexPath, std::st
 {
     //test the index can be loaded correctly
     std::string testkmer = testkmer2;
-
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
     sdsl::load_from_file(_testindex, indexPath);
-    auto locs2 = sdsl::locate(_testindex, testkmer.begin(), testkmer.begin()+testkmer.length());
-
+    auto occ2 = sdsl::count(_testindex, testkmer);
     ft::KmerClass tmpResult = _fmIndex->search(testkmer,
                                                 ftProps.getMaxOcc(),
                                                 ftProps.getOverCountedFlag());
-    if (tmpResult.getKPositions().size() != locs2.size()) {
+
+    if (tmpResult.getKPositions().size() != occ2) {
         FTProp::Log << "test kmer: " << testkmer << std::endl;
-        FTProp::Log << " ==> Error: Result Positions=" << tmpResult.getKPositions().size() << " not match locations=" << locs2.size() << std::endl;
+        FTProp::Log << " ==> Error: Result Positions=" << tmpResult.getKPositions().size() << " not match locations=" << occ2 << std::endl;
+        throw std::runtime_error("testing index failed ");
     }
 
 }
@@ -230,17 +230,18 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
         FTProp::Log  << "Error ! " << e.what() << std::endl;
     }
     FTProp::Log  << "index loaded " << _fmIndex.indexCount() << std::endl;
-#if 0
+//#if 0
     std::string testKmer = "AAT";
     testIndex(ftProps, indexPath, testKmer);
-    benchmark.now("SequentialSearch TestIndex DONE ");
-#endif
+   // benchmark.now("SequentialSearch TestIndex DONE ");
+//#endif
 
     std::unordered_map<std::string, ft::KmerClass>::const_iterator it = kmerMap.begin();
+    std::cout << "Kmer map loaded, begining search " << std::endl;
     while (it != kmerMap.end())
     {
        std::string kmer = it->first;
-       //FTProp::Log  << " searching for kmer " << kmer << std::endl;
+       FTProp::Log  << " searching for kmer " << kmer << std::endl;
        ft::KmerClass tmpResult = _fmIndex.search(kmer,
                                                    ftProps.getMaxOcc(),
                                                    ftProps.getOverCountedFlag());
@@ -249,7 +250,7 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
            addResultsFutures(indexResults,tmpResult, offset);
        }
        //FTProp::Log  << "  number of positions " << tmpResult.getKPositions().size();
-       //FTProp::Log  << ", number of kmer hits  " << tmpResult.getKPositions().size() << std::endl;
+       FTProp::Log  << ", number of kmer hits  " << tmpResult.getKPositions().size() << std::endl;
 
        it++;
     }
