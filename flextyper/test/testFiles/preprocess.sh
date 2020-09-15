@@ -73,6 +73,7 @@ function createFasta()
                 utilsPath=${utilsPath}seqtk
             fi
         fi
+        rm -f $fastaFile
         #echo "createFasta: creating fasta " ${readFileFQ} "into " $fastaFile
         #echo "createFasta: running ${utilsPath}/seqtk seq -A -C -U ${readFileFQ} | egrep -v '[>]' > ${fastaFile} "
         ${utilsPath}/seqtk seq -A -C -U ${readFileFQ} | egrep -v '[>]' > $fastaFile
