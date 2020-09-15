@@ -29,14 +29,14 @@ public:
         _indexProp.setNumOfReads(10);
         fs::path pPF = fs::current_path() /= "testFiles/Test.fasta";
 
-        if (fs::exists(fs::current_path() /= "testOutput/Index_Test.fm9"))
+        if (fs::exists(fs::current_path() /= "testOutput/Test.fm9"))
         {
-            fs::remove(fs::current_path() /= "testOutput/Index_Test.fm9");
+            fs::remove(fs::current_path() /= "testOutput/Test.fm9");
         }
          fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
         _indexProp.addToIndexSet(output, 0);
          if (saveini){
-             fs::path ini = fs::current_path() /= "testOutput/Index_Test.ini";
+             fs::path ini = fs::current_path() /= "testOutput/Test.ini";
              if (fs::exists(ini))
             {
              fs::remove(ini);
@@ -55,7 +55,7 @@ public:
 TEST_F(TestFMIndex, createFMIndex)
 {
     TEST_DESCRIPTION("This test checks createFMIndex");
-    fs::path testIndex = fs::absolute(fs::current_path() /= "testOutput/Index_Test.fm9");
+    fs::path testIndex = fs::absolute(fs::current_path() /= "testOutput/Test.fm9");
     std::cout << "test index " << testIndex.string() << std::endl;
     if (fs::exists(testIndex)){ fs::remove(testIndex); }
 
@@ -87,8 +87,8 @@ TEST_F(TestFMIndex, createFMIndex)
 TEST_F(TestFMIndex, createParallelFMIndex)
 {
     TEST_DESCRIPTION("create parallel FMIndex");
-    fs::path testIndex = fs::current_path() /= "testOutput/Index_Test.fm9";
-    fs::path testIndex2 = fs::current_path() /= "testOutput/Index_Test2.fm9";
+    fs::path testIndex = fs::current_path() /= "testOutput/Test.fm9";
+    fs::path testIndex2 = fs::current_path() /= "testOutput/Test2.fm9";
     std::cout << "test index " << testIndex.string() << std::endl;
 
     if (fs::exists(testIndex)){ fs::remove(testIndex); }
@@ -137,13 +137,13 @@ TEST_F(TestFMIndex, loadFMIndex)
     TEST_DESCRIPTION("This test checks loadFMIndex");
     CreateIndex();
     algo::FmIndex _fmindex;
-    fs::path index = fs::current_path() /= "testFiles/Index_Test.fm9";
+    fs::path index = fs::current_path() /= "testFiles/Test.fm9";
 
     _fmindex.loadIndexFromFile(index);
 
     std::string kmer = "CCCTGCATGCACTGGATGCACTCTATCCCATTCTGCAGCTTCCTCATTGATGGTCTCTTTTAACATTTGCATGGCTGCTTGATGTCCCCCCAC";
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
-    sdsl::load_from_file(_testindex, "testFiles/Index_Test.fm9");
+    sdsl::load_from_file(_testindex, "testFiles/Test.fm9");
     auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
     std::cout << "occs " << occs << std::endl;
     EXPECT_EQ(occs, 1);
@@ -156,7 +156,7 @@ TEST_F(TestFMIndex, searchFMIndexDirect)
     TEST_DESCRIPTION("Search FMIndex");
     CreateIndex();
     algo::FmIndex _fmindex;
-    fs::path index = fs::current_path() /= "testOutput/Index_Test.fm9";
+    fs::path index = fs::current_path() /= "testOutput/Test.fm9";
     _fmindex.loadIndexFromFile(index);
     std::string kmer = "AAAAC";
     KmerClass testKmer(kmer);
@@ -164,7 +164,7 @@ TEST_F(TestFMIndex, searchFMIndexDirect)
     uint count = resultsKmer.getKPositions().size();
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
-    sdsl::load_from_file(_testindex, "testOutput/Index_Test.fm9");
+    sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
     auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
     std::cout << "count " << count << " occs " << occs << std::endl;
     EXPECT_TRUE(occs > 0);
@@ -179,13 +179,13 @@ TEST_F(TestFMIndex, locateInFMIndexDirect)
     TEST_DESCRIPTION("Locate kmer in FMIndex");
     CreateIndex();
     algo::FmIndex _fmindex;
-    fs::path index = fs::current_path() /= "testOutput/Index_Test.fm9";
+    fs::path index = fs::current_path() /= "testOutput/Test.fm9";
     _fmindex.loadIndexFromFile(index);
     std::string kmer = "AAAAC";
     KmerClass resultsKmer = _fmindex.search(kmer);
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
-    sdsl::load_from_file(_testindex, "testOutput/Index_Test.fm9");
+    sdsl::load_from_file(_testindex, "testOutput/Test.fm9");
     auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
     std::cout << "count for Test.fm9  " << occs << std::endl;
 
@@ -200,7 +200,7 @@ TEST_F(TestFMIndex, locateInFMIndexDirect)
 TEST_F(TestFMIndex, locateInIndexUsingPointers)
 {
     TEST_DESCRIPTION("Locate kmer in Index");
-    fs::path testIndex = fs::current_path() /= "testOutput/Index_Test.fm9";
+    fs::path testIndex = fs::current_path() /= "testOutput/Test.fm9";
     if (fs::exists(testIndex)){ fs::remove(testIndex); }
     algo::IndexProps _indexProp;
     algo::FmIndex _fmindex;
@@ -210,7 +210,7 @@ TEST_F(TestFMIndex, locateInIndexUsingPointers)
     _indexProp.setReadSetName("Test");
 
     _indexProp.setReadFileType(algo::FileType::GZ);
-    fs::path pPF = fs::current_path() /="testFiles/Index_Test.fasta";
+    fs::path pPF = fs::current_path() /="testFiles/Test.fasta";
     std::cout << pPF.string() << std::endl;
     fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
     std::cout << "index output " << output << std::endl;
@@ -231,7 +231,7 @@ TEST_F(TestFMIndex, locateInIndexUsingPointers)
 TEST_F(TestFMIndex, searchFMIndexUsingPointer)
 {
     TEST_DESCRIPTION("search kmer in Index");
-    fs::path testIndex = fs::current_path() /= "testOutput/Index_Test.fm9";
+    fs::path testIndex = fs::current_path() /= "testOutput/Test.fm9";
     if (fs::exists(testIndex)){ fs::remove(testIndex); }
     algo::IndexProps _indexProp;
     algo::FmIndex _fmindex;
@@ -241,7 +241,7 @@ TEST_F(TestFMIndex, searchFMIndexUsingPointer)
     _indexProp.setReadSetName("Test");
 
     _indexProp.setReadFileType(algo::FileType::GZ);
-    fs::path pPF = "testFiles/Index_Test.fasta";
+    fs::path pPF = "testFiles/Test.fasta";
     fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
     std::string kmer = "AA";
     std::cout << "index output " << output << std::endl;
@@ -264,7 +264,7 @@ TEST_F(TestFMIndex, searchUsingSettingsIni)
     algo::IndexProps _indexProp;
     algo::FmIndex _fmindex;
 
-    fs::path testSettings = fs::current_path() /= "testOutput/Index_Test.ini";
+    fs::path testSettings = fs::current_path() /= "testOutput/Test.ini";
     _indexProp.loadFromIni(testSettings);
 
 
