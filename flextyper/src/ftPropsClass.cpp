@@ -24,16 +24,17 @@ void FTProp::init(const fs::path &pathToQueryFile,
                   bool kmerCounts,
                   uint stride,
                   uint maxOccurences,
-                  uint maxThreads,
+                  uint numOfThreads,
                   bool flagOverCountedKmers,
                   bool flagNonUniqueKmers,
                   bool ignoreNonUniqueKmers,
                   bool countAsPairs,
                   bool crossover,
                   bool printSearchTime,
-                  uint maxKmers,
-                  uint totalKmers,
-                  bool printInputs)
+                  uint maxKmersPerQuery,
+                  uint maxTotalKmers,
+                  bool printInputs,
+                  bool matchingReads)
 {
     _pathToQueryFile = pathToQueryFile;
     _kmerSize = kmerSize;
@@ -49,30 +50,76 @@ void FTProp::init(const fs::path &pathToQueryFile,
     _kmerCounts = kmerCounts;
     _stride = stride;
     _maxOccurences = maxOccurences;
-    _maxThreads = maxThreads;
+    _maxThreads = numOfThreads;
     _overcounted = flagOverCountedKmers;
     _nonUnique = flagNonUniqueKmers;
     _ignoreNonUniqueKmers = ignoreNonUniqueKmers;
     _countAsPairs = countAsPairs;
     _crossover = crossover;
     _printSearchTime = printSearchTime;
-    _maxKmers = maxKmers;
-    _maxTotalKmers = totalKmers;
-
+    _maxKmersPerQuery = maxKmersPerQuery;
+    _maxTotalKmers = maxTotalKmers;
+    _matchingReads = matchingReads;
 
     fs::path queryOutputFile = _outputFolder;
-    if (printInputs){ std::cout << "Output query folder " <<   queryOutputFile << std::endl;}
     fs::path queryFileName = _pathToQueryFile.filename();
     queryFileName.replace_extension();
-    if (printInputs){std::cout << "query File Name " << queryFileName << std::endl;}
-    if (printInputs){std::cout << "read set name " << _readSetName << std::endl;}
     queryOutputFile /= queryFileName+= std::string("_") += _readSetName += "_Results.tsv";
-    if (printInputs){std::cout << "Output query file " <<   queryOutputFile << std::endl;}
     _outputFile = queryOutputFile;
 
-    if (printInputs){std::cout << "Query search results will be save in " << _outputFile << std::endl;}
-
-
+    if (printInputs){
+        std::cout << "pathToQueryFile               : " << pathToQueryFile <<  std::endl;
+        std::cout << "kmerSize                      : " << kmerSize <<  std::endl;
+        std::cout << "readLength                    : " << readLength <<  std::endl;
+        std::cout << "indexPropsFile                : " << indexPropsFile <<  std::endl;
+        std::cout << "outputFolder                  : " << outputFolder <<  std::endl;
+        std::cout << "refOnly                       : " << refOnly <<  std::endl;
+        std::cout << "revCompSearch                 : " << revCompSearch <<  std::endl;
+        std::cout << "searchType                    : " << searchType <<  std::endl;
+        std::cout << "multithread                   : " << multithread <<  std::endl;
+        std::cout << "overlap                       : " << overlap <<  std::endl;
+        std::cout << "return_only_positive_matches  : " << returnMatchesOnly <<  std::endl;
+        std::cout << "kmerCounts                    : " << kmerCounts << std::endl;
+        std::cout << "stride                        : " << stride << std::endl;
+        std::cout << "maxOccurences                 : " << maxOccurences << std::endl;
+        std::cout << "numOfThreads                  : " << numOfThreads << std::endl;
+        std::cout << "flagOverCountedKmers          : " << flagOverCountedKmers << std::endl;
+        std::cout << "flagNonUniqueKmers            : " << flagNonUniqueKmers << std::endl;
+        std::cout << "ignoreNonUniqueKmers          : " << ignoreNonUniqueKmers << std::endl;
+        std::cout << "countAsPairs                  : " << countAsPairs << std::endl;
+        std::cout << "printSearchTime               : " << printSearchTime << std::endl;
+        std::cout << "maxKmersPerQuery              : " << maxKmersPerQuery << std::endl;
+        std::cout << "maxTotalKmers                 : " << maxTotalKmers << std::endl;
+        std::cout << "matchingReads                 : " << matchingReads << std::endl;
+        std::cout << "Query search results will be save in " << _outputFile << std::endl;
+    }
+    if (FTProp::Log.is_open()){
+        Log << "======== Settings " << "======== " << std::endl;
+        FTProp::Log << "pathToQueryFile               : " << pathToQueryFile <<  std::endl;
+        FTProp::Log << "kmerSize                      : " << kmerSize <<  std::endl;
+        FTProp::Log << "readLength                    : " << readLength <<  std::endl;
+        FTProp::Log << "indexPropsFile                : " << indexPropsFile <<  std::endl;
+        FTProp::Log << "outputFolder                  : " << outputFolder <<  std::endl;
+        FTProp::Log << "refOnly                       : " << refOnly <<  std::endl;
+        FTProp::Log << "revCompSearch                 : " << revCompSearch <<  std::endl;
+        FTProp::Log << "searchType                    : " << searchType <<  std::endl;
+        FTProp::Log << "multithread                   : " << multithread <<  std::endl;
+        FTProp::Log << "overlap                       : " << overlap <<  std::endl;
+        FTProp::Log << "return_only_positive_matches  : " << returnMatchesOnly <<  std::endl;
+        FTProp::Log << "kmerCounts                    : " << kmerCounts << std::endl;
+        FTProp::Log << "stride                        : " << stride << std::endl;
+        FTProp::Log << "maxOccurences                 : " << maxOccurences << std::endl;
+        FTProp::Log << "numOfThreads                  : " << numOfThreads << std::endl;
+        FTProp::Log << "flagOverCountedKmers          : " << flagOverCountedKmers << std::endl;
+        FTProp::Log << "flagNonUniqueKmers            : " << flagNonUniqueKmers << std::endl;
+        FTProp::Log << "ignoreNonUniqueKmers          : " << ignoreNonUniqueKmers << std::endl;
+        FTProp::Log << "countAsPairs                  : " << countAsPairs << std::endl;
+        FTProp::Log << "printSearchTime               : " << printSearchTime << std::endl;
+        FTProp::Log << "maxKmersPerQuery              : " << maxKmersPerQuery << std::endl;
+        FTProp::Log << "maxTotalKmers                 : " << maxTotalKmers << std::endl;
+        FTProp::Log << "matchingReads                 : " << matchingReads << std::endl;
+        FTProp::Log << "Query search results will be save in " << _outputFile << std::endl;
+    }
 }
 
 void FTProp::setVerbose(bool verbose)
@@ -114,38 +161,13 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
     uint           maxKmersPerQuery        = settings.value("maxKmersPerQuery").toInt();
     uint           maxTotalKmers           = settings.value("maxTotalKmers").toInt();
 
-    if (printInputs){
-    std::cout << "pathToQueryFile               : " << pathToQueryFile <<  std::endl;
-    std::cout << "kmerSize                      : " << kmerSize <<  std::endl;
-    std::cout << "readLength                    : " << readLength <<  std::endl;
-    std::cout << "indexPropsFile                : " << indexPropsFile <<  std::endl;
-    std::cout << "outputFolder                  : " << outputFolder <<  std::endl;
-    std::cout << "refOnly                       : " << refOnly <<  std::endl;
-    std::cout << "revCompSearch                 : " << revCompSearch <<  std::endl;
-    std::cout << "searchType                    : " << searchType <<  std::endl;
-    std::cout << "multithread                   : " << multithread <<  std::endl;
-    std::cout << "overlap                       : " << overlap <<  std::endl;
-    std::cout << "return_only_positive_matches  : " << returnMatchesOnly <<  std::endl;
-    std::cout << "kmerCounts                    : " << kmerCounts << std::endl;
-    std::cout << "stride                        : " << stride << std::endl;
-    std::cout << "maxOccurences                 : " << maxOccurences << std::endl;
-    std::cout << "numOfThreads                  : " << numOfThreads << std::endl;
-    std::cout << "flagOverCountedKmers          : " << flagOverCountedKmers << std::endl;
-    std::cout << "flagNonUniqueKmers            : " << flagNonUniqueKmers << std::endl;
-    std::cout << "ignoreNonUniqueKmers          : " << ignoreNonUniqueKmers << std::endl;
-    std::cout << "countAsPairs                  : " << countAsPairs << std::endl;
-    std::cout << "printSearchTime               : " << printSearchTime << std::endl;
-    std::cout << "maxKmersPerQuery              : " << maxKmersPerQuery << std::endl;
-    std::cout << "maxTotalKmers                 : " << maxTotalKmers << std::endl;
-    std::cout << "matchingReads                 : " << matchingReads << std::endl;
-    }
     init(pathToQueryFile, kmerSize, readLength,
          indexPropsFile, outputFolder, refOnly, revCompSearch,
          searchType, multithread, overlap,
          returnMatchesOnly, kmerCounts, stride,
          maxOccurences, numOfThreads, flagOverCountedKmers, flagNonUniqueKmers,
          ignoreNonUniqueKmers, countAsPairs, crossover, printSearchTime,
-         maxKmersPerQuery, maxTotalKmers, printInputs);
+         maxKmersPerQuery, maxTotalKmers, printInputs, matchingReads);
 }
 
 void FTProp::printToStdOut(const std::string outputString) const {
@@ -269,7 +291,6 @@ std::string FTProp::getIndexFileName() const{return _indexFileName;}
 uint FTProp::getKmerSize() const {return _kmerSize;}
 uint FTProp::getOverlap() const {return _overlap;}
 uint FTProp::getStride() const {return _stride;}
-uint FTProp::getMaxKmers() const {return _maxKmers;}
 uint FTProp::getReadLength() const {return _readLength;}
 uint FTProp::getMaxOcc() const {return _maxOccurences;}
 uint FTProp::getMaxThreads() const {return _maxThreads;}
@@ -353,6 +374,9 @@ void FTProp::OpenLog(const std::string& name)
     if (!Log || !Log.is_open()) {
         std::cout << "Couldn't open " << name << " file" << std::endl;
     }
+    auto start = std::chrono::system_clock::now();
+    std::time_t start_time = std::chrono::system_clock::to_time_t(start);
+    Log << "======== " << std::ctime(&start_time);
 }
 
 void FTProp::CloseLog()

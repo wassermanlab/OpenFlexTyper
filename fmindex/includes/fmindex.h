@@ -17,8 +17,6 @@
 
 namespace algo {
 
-using namespace sdsl;
-
 class FmIndex : public IFmIndex {
 
 public:
@@ -67,7 +65,6 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief parallelFmIndex
     ////////////////////////////////////////////////////////////////////////
-    const csa_wt<wt_huff<rrr_vector<256>>, 512, 1024>& getIndex();
 
     int indexCount();
 

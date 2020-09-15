@@ -24,6 +24,9 @@ FTMap::FTMap(const FTProp& ftProps)
 //======================================================
 #define INITSTART {
 void FTMap::addInputQueries(const std::set<Query> &inputQueries){
+
+    FTProp::Benchmark benchmark = FTProp::Benchmark(0);
+
     for (auto inputQuery : inputQueries) {
         std::string refString = std::get<1>(inputQuery);
         int qID = std::get<0>(inputQuery);
@@ -43,11 +46,13 @@ void FTMap::addInputQueries(const std::set<Query> &inputQueries){
             addQuery(qID, ft::QueryType::CRO, croString);
         }
     }
+
+    benchmark.now("Retrieve Input Queries " + _ftProps.getPathToQueryFile().string() + " DONE ");
 }
 //======================================================
 void FTMap::genQKMap()
 {
-    _ftProps.printToStdOut("generate QK Map" );
+    FTProp::Benchmark benchmark = FTProp::Benchmark(0);
 
     KmerGenerator  _kmerGenerator(_ftProps.getKmerSize(),
                                   _ftProps.getRefOnlyFlag(),
@@ -55,7 +60,7 @@ void FTMap::genQKMap()
                                   _ftProps.getOverlap(),
                                   _ftProps.getStride(),
                                   _ftProps.getKmerCountsFlag(),
-                                  _ftProps.getMaxKmers(),
+                                  _ftProps.getMaxKmersPerQuery(),
                                   _ftProps.isVerbose());
 
     std::map<ft::QIdT, ft::QueryClass>::iterator it = _querySet.begin();
@@ -100,6 +105,8 @@ void FTMap::genQKMap()
 
         it++;
     }
+
+    benchmark.now("Generate QKMap DONE ");
 }
 
 ////======================================================================
@@ -280,10 +287,6 @@ void FTMap::addQuery(int queryID, ft::QueryType queryType, const std::string& qu
 
 void FTMap::addIndexResults(const std::map<std::string, ft::KmerClass>& indexResults)
 {
-    //for (ft::KmerClass result : indexResults)
-    //{
-        //std::cout<< " kmer " << result._kmer << " number of positions: " << result._positions.size() << std::endl;
-    //}
     _searchResults.push_back(indexResults);
 }
 
@@ -340,6 +343,8 @@ void FTMap::processIndexResults(const std::map<std::string, ft::KmerClass>& inde
 //======================================================
 void FTMap::processResults()
 {
+    FTProp::Benchmark benchmark = FTProp::Benchmark(0);
+
     //std::cout << "number of index results to process " << _searchResults.size() << std::endl;
     for (std::map<std::string, ft::KmerClass> indexResult : _searchResults ){
        //std::cout << "Number of kmers for this index " << indexResult.size() << std::endl;
@@ -354,6 +359,7 @@ void FTMap::processResults()
 
     }
 
+    benchmark.now("ProcessResults DONE ");
 }
 
 //======================================================

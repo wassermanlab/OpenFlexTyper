@@ -162,33 +162,31 @@ void WriterBridge::addQueryToOutput( const ft::QueryClass& query, const std::str
 //======================================================================
 void WriterBridge::saveOutput(const ft::FTMap& ftMap)
 {
+    FTProp::Benchmark benchmark = FTProp::Benchmark(0);
+
     const FTProp& ftProps = ftMap.getFTProps();
-    std::cout << "Writing to output file " << ftProps.getOutputFile() << std::endl;
     setOutputOptions(ftMap);
 
     const fs::path& inputQueryFile = ftProps.getPathToQueryFile();
     const fs::path& outputQueryFile = ftProps.getOutputFile();
 
-    std::cout << "Input Query File " << inputQueryFile << std::endl;
-    std::cout << "Output Query File " << outputQueryFile << std::endl;
     // save counts to output tsv
     std::fstream outputFileStream;
     outputFileStream.open(outputQueryFile, std::ios::out);
     if (!outputFileStream || !outputFileStream.is_open()) {
-        std::cout << "Couldn't open output file" << std::endl;
+        FTProp::Log  << "Couldn't open " << outputQueryFile.string() << std::endl;
     }
 
     std::ifstream queryFileStream;
     queryFileStream.open(inputQueryFile, std::ios::in);
 
     if (!queryFileStream || !queryFileStream.is_open()) {
-        std::cout << "Couldn't open query file" << std::endl;
+        FTProp::Log  << "Couldn't open " << inputQueryFile.string() << std::endl;
     }
 
     std::string line;
 
     while (getline(queryFileStream, line)) {
-        std::cout<< "line  " << line.substr(0,10) << std::endl;
         if (line[line.length()-1] == '\n') {
             line.erase(line.length()-1);
         }
@@ -203,7 +201,6 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
         }
 
         std::vector<std::string> splitline = _utils->split(line, '\t');
-        std::cout << "Split line " << splitline[0] << std::endl;
         uint fileIndex = atoi(splitline[0].c_str());
         int queryIndex = fileIndex;
 
@@ -257,6 +254,8 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
         outputFileStream << line;
 
     }
+    outputFileStream.close();
+    benchmark.now("SaveOutput DONE ");
 }
 
 //======================================================================
