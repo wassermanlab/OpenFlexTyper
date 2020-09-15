@@ -26,7 +26,7 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
 
     ft::KmerClass kmerResult = ft::KmerClass(kmer);
 
-    size_t occs = sdsl::count(_index, kmerResult.getKmer().begin(),  kmerResult.getKmer().end());
+    size_t occs = sdsl::count(_index, kmer.begin(),  kmer.end());
     kmerResult.setOCC(occs);
 
     // if number kmers > max, flag kmer as "abundant"
@@ -35,7 +35,7 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
         kmerResult.addKFlag(ft::FlagType::ABK);
     }
     if (occs > 0  && occs <= maxOcc) {
-        auto locations = sdsl::locate(_index, kmerResult.getKmer().begin(), kmerResult.getKmer().begin()+kmerResult.getKmer().length());
+        auto locations = sdsl::locate(_index, kmer.begin(), kmer.end());
         if (locations.size() != occs)
         {
             std::runtime_error("number of locations doesn't equal number of occurences for kmer " + kmer );
