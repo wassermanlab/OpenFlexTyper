@@ -123,7 +123,7 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
                                                 dynamic_cast<algo::FmIndex*>(fmIndex),
                                                 kmer, maxOcc, overCountedFlag));
         it++;
-        if (++j < maxThreads) {
+        if (++j < maxThreads && it != kmerMap.end()) {
             continue;
         }
 
