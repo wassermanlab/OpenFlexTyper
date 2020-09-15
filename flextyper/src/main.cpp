@@ -23,6 +23,11 @@ static void usage()
 
 int main(int argc, char** argv)
 {
+    std::vector<std::string> argList(argv, argv + argc);
+    std::string cmdline;
+    for (const auto &piece : argList)
+        cmdline += piece + " ";
+
     // making cout fast
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
@@ -70,11 +75,14 @@ int main(int argc, char** argv)
         std::cout << "\nconfig File                   : " << configFile   << std::endl;
         bool printInputs = true;
 
+        ft::FTProp::OpenLog("search.log");
+        ft::FTProp::Log << "Running " << cmdline << std::endl;
+
         ft::FTProp props;
         try {
             props.initFromQSettings(configFile, printInputs);
         } catch (std::exception& e) {
-            std::cout << "Config Error: " << e.what() << std::endl;
+            std::cerr << "Config Error: " << e.what() << std::endl;
             return 1;
         }
 
@@ -87,12 +95,12 @@ int main(int argc, char** argv)
         try {
             flexTyperInstance->init(props);
         } catch (std::exception& e) {
-            std::cout << "Error: " << e.what() << std::endl;
+            std::cerr << "Error: " << e.what() << std::endl;
             return 1;
         }
+        free(flexTyperInstance);
 
-
-
+        ft::FTProp::CloseLog();
 
     } else if (command == "index") {
         parser.clearPositionalArguments();

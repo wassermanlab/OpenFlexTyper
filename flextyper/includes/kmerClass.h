@@ -29,6 +29,7 @@ public:
     const std::map<ft::FlagType, bool>& getKFlags()const;
     const std::set<long long>& getKPositions()const;
     const std::set<ft::ReadID>& getReadIDs()const;
+    uint getOCC()const {return _occ;};
     //uint getKmerMapSize()const;
 
     ////////////////////////////////////////////////////////////////////////
@@ -37,6 +38,7 @@ public:
     void setKFlags(std::set<ft::FlagType> kFlags);
     void setKPositions(const std::set<long long>& kPositions, uint offset = 0);
     void setReadIDs(std::set<ft::ReadID> readIDs);
+    void setOCC(uint occ) {_occ=occ;};
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief adders
@@ -80,7 +82,7 @@ private:
     std::map<ft::FlagType, bool> _kFlags;
     std::set<long long> _positions;
     std::set<ft::ReadID> _readIDs;
-
+    uint _occ; //from sdsl::count(_index, _kmer)
 
 };
 }

@@ -26,7 +26,8 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
 
     ft::KmerClass kmerResult = ft::KmerClass(kmer);
 
-    size_t occs = sdsl::count(_index, kmerResult.getKmer().begin(),  kmerResult.getKmer().end());
+    size_t occs = sdsl::count(_index, kmer.begin(),  kmer.end());
+    kmerResult.setOCC(occs);
 
     // if number kmers > max, flag kmer as "abundant"
     if (occs > maxOcc && flagOverCountedKmers) {
@@ -34,10 +35,10 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
         kmerResult.addKFlag(ft::FlagType::ABK);
     }
     if (occs > 0  && occs <= maxOcc) {
-        auto locations = sdsl::locate(_index, kmerResult.getKmer().begin(), kmerResult.getKmer().begin()+kmerResult.getKmer().length());
+        auto locations = sdsl::locate(_index, kmer.begin(), kmer.end());
         if (locations.size() != occs)
         {
-            std::runtime_error("number of locations doesnt equal number of occurences for kmer " + kmer );
+            std::runtime_error("number of locations doesn't equal number of occurences for kmer " + kmer );
         }
 
         for (auto e : locations) {
@@ -75,7 +76,7 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
         throw std::runtime_error( "Error: Index already exists " + outputIndex.string());
     }
 
-    if (!load_from_file(_index, outputIndex)) {
+    if (!sdsl::load_from_file(_index, outputIndex)) {
 
         std::ifstream in(preprocessedFasta);
         if (!in) {
@@ -111,18 +112,11 @@ void FmIndex::loadIndexFromFile(const fs::path& indexname)
     if (!fs::exists(indexname)){
         std::runtime_error("cannot find index at " + indexname.string());
     }
-    if (!load_from_file(_index, fs::absolute(indexname).string())) {
+    if (!sdsl::load_from_file(_index, fs::absolute(indexname).string())) {
         std::runtime_error("Error loading the index, please provide the index file " + indexname.string());
     }
     std::cout << "Index loaded " << _index.size() << std::endl;
 }
-//======================================================================
-const csa_wt<wt_huff<rrr_vector<256>>, 512, 1024>& FmIndex::getIndex(){
-
-    std::cout << "Get Index " << _index.size() << std::endl;
-    return _index;
-}
-
 //======================================================================
 void FmIndex::parallelFmIndex(algo::IndexProps& _props)
 {

@@ -54,10 +54,10 @@ public:
         void update() {_start = std::chrono::steady_clock::now();};
         void now(const std::string tag) {
             _end = std::chrono::steady_clock::now();
-            FTProp::Log << "BM:";
+            FTProp::Log << "Benchmark:";
             for(int i=0; i<_indent; i++)
                 FTProp::Log << "**";
-            FTProp::Log << tag << std::chrono::duration_cast<std::chrono::seconds>(_end - _start).count() << " sec" << std::endl;
+            FTProp::Log << tag << std::chrono::duration_cast<std::chrono::seconds>(_end - _start).count() << " in sec" << std::endl;
             _start = _end;
         };
     private:
@@ -83,7 +83,7 @@ public:
               bool kmerCounts               = false ,
               uint stride                   = 10    ,
               uint maxOccurences            = 200   ,
-              uint maxThreads             = 1     ,
+              uint numOfThreads             = 1     ,
               bool flagOverCountedKmers     = false ,
               bool flagNonUniqueKmers       = false ,
               bool ignoreNonUniqueKmers     = true  ,
@@ -92,7 +92,8 @@ public:
               bool printSearchTime          = false,
               uint maxKmers                 = UINT_MAX,
               uint totalKmers               = UINT_MAX,
-              bool printInputs              = false);
+              bool printInputs              = false,
+              bool matchingReads            = false);
 
     void initFromQSettings(std::string configFile, bool printInputs);
 
@@ -129,7 +130,6 @@ public:
     uint getKmerSize() const;
     uint getOverlap() const;
     uint getStride() const;
-    uint getMaxKmers() const;
     uint getReadLength() const;
     uint getMaxOcc() const;
     uint getMaxThreads() const;
@@ -209,7 +209,6 @@ private:
     uint _overlap;
     uint _stride;
     uint _readLength;
-    uint _maxKmers;
     uint _maxOccurences ;
     uint _maxThreads;
     uint _maxKmersPerQuery;

@@ -51,8 +51,7 @@ if (!exists(ftProps.getOutputFile())) {
 //======================================================================
 void FTSearch::init(const FTProp& ftProps)
 {
-    FTProp::OpenLog("searchIndexes.log");
-    FTProp::Benchmark benchmark = FTProp::Benchmark(0);
+    FTProp::Log << "======== Search Log " << "======== " << std::endl;
 
     ft::FTMap ftMap(ftProps);
     //checkInputFastQ(ftProps);
@@ -67,30 +66,15 @@ void FTSearch::init(const FTProp& ftProps)
         exit(1);
     }
 
-    benchmark.now("InputQueries retrieved " + std::to_string(inputQueries.size()) + " DONE ");
-
     ftMap.addInputQueries(inputQueries);
-
-    benchmark.now("FTMap AddInputQueries DONE ");
 
     ftMap.genQKMap();
 
-    benchmark.now("FTMap genQKMap DONE ");
-
     _finder->searchIndexes(ftMap);
-
-    benchmark.now("FTMap SearchIndexes DONE ");
 
     ftMap.processResults();
 
-    benchmark.now("FTMap ProcessResults DONE ");
-
     _writerBridge->saveOutput(ftMap);
-
-    benchmark.now("SaveOutput DONE ");
-
-    FTProp::CloseLog();
-
 }
 
 //======================================================================
