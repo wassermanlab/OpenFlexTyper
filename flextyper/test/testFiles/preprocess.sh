@@ -53,12 +53,9 @@ function createFasta()
         local outputDir=$4
 
         local fastaFile="$outputDir/${readSetName}.fasta"
-        #echo "createFasta: fasta file :" ${fastaFile}
-        if [[ -f $fastaFile ]] ; then
-                echo 'createFasta: fasta file already exists' ${fastaFile}
-                return
-        fi
 
+        # remove old one
+        rm -f $fastaFile
 
         if [ ! -f ${utilsPath}/seqtk ]; then
             #echo "cant find" ${utilsPath}"seqtk"
@@ -73,7 +70,7 @@ function createFasta()
                 utilsPath=${utilsPath}seqtk
             fi
         fi
-        rm -f $fastaFile
+
         #echo "createFasta: creating fasta " ${readFileFQ} "into " $fastaFile
         #echo "createFasta: running ${utilsPath}/seqtk seq -A -C -U ${readFileFQ} | egrep -v '[>]' > ${fastaFile} "
         ${utilsPath}/seqtk seq -A -C -U ${readFileFQ} | egrep -v '[>]' > $fastaFile
@@ -106,11 +103,8 @@ function createRevComp()
         local rcFastaFile="$outputDir/rc_${readSetName}.fasta"
         echo "createRevComp: RC fasta file :" ${rcFastaFile}
 
-        if [[ -f $rcFastaFile ]]; then
-                echo 'reverse complement file already exists'
-                return
-        fi
-
+        # make sure stale file is removed
+        rm -f $rcFastaFile
 
         if [ ! -f ${utilsPath}/seqtk ]; then
             if [ ! -f ${utilsPath}/seqtk/seqtk ]; then
