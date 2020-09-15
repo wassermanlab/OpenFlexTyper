@@ -186,6 +186,12 @@ function processReadFile(){
         exit 1
     fi
 
+    #Remove existing output Fasta files
+    if [ -f ${outputFastaFile} ];then
+        echo "remove existing fasta file" ${outputFastaFile}
+        rm ${outputFastaFile}
+    fi
+
     #Create Plain Fastas
     createFasta ${readFileFQ} ${readSetName} ${utilsPath} ${outputDir}
 
