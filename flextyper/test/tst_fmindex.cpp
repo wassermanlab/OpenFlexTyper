@@ -137,13 +137,13 @@ TEST_F(TestFMIndex, loadFMIndex)
     TEST_DESCRIPTION("This test checks loadFMIndex");
     CreateIndex();
     algo::FmIndex _fmindex;
-    fs::path index = fs::current_path() /= "testFiles/Index_Test.fm9";
+    fs::path index = fs::current_path() /= "testOutput/Index_Test.fm9";
 
     _fmindex.loadIndexFromFile(index);
 
     std::string kmer = "CCCTGCATGCACTGGATGCACTCTATCCCATTCTGCAGCTTCCTCATTGATGGTCTCTTTTAACATTTGCATGGCTGCTTGATGTCCCCCCAC";
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
-    sdsl::load_from_file(_testindex, "testFiles/Index_Test.fm9");
+    sdsl::load_from_file(_testindex, "testOutput/Index_Test.fm9");
     auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
     std::cout << "occs " << occs << std::endl;
     EXPECT_EQ(occs, 1);
