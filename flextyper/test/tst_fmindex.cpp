@@ -27,7 +27,7 @@ public:
         _indexProp.setReadFileType(algo::FileType::GZ);
         _indexProp.setIndexName("Index");
         _indexProp.setNumOfReads(10);
-        fs::path pPF = fs::current_path() /= "testFiles/Index_Test.fasta";
+        fs::path pPF = fs::current_path() /= "testFiles/Test.fasta";
 
         if (fs::exists(fs::current_path() /= "testOutput/Index_Test.fm9"))
         {
