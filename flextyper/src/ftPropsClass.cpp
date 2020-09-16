@@ -191,7 +191,7 @@ void FTProp::loadIndexProps(const fs::path &_indexPropsFile, bool printInputs){
        _R1 = isettings.value("R1").toString().toStdString();
        _R2 = isettings.value("R2").toString().toStdString();
     } else {
-       _inputFastQ = isettings.value("readFQ").toString().toStdString();
+       _inputFastQ = isettings.value("R1").toString().toStdString();
     }
 
     _numOfReads = isettings.value("numOfReads").toUInt();
