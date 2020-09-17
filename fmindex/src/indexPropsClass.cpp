@@ -109,10 +109,28 @@ bool IndexProps::delR2(){
     return fs::remove(_R2);
 }
 
+void IndexProps::delFQ(){
+    if (_readFileType == algo::FileType::GZ){
+        fs::path _R1FQ = _R1.stem();
+        fs::remove(_R1FQ);
+        fs::path _R2FQ = _R2.stem();
+        fs::remove(_R2FQ);
+    } else if (_readFileType == algo::FileType::FQ)
+    {
+        delR1();
+        delR2();
+    }
+}
+
 void IndexProps::delReadFastas(){
     for (auto _ppf : _ppFSet){
         fs::remove(_ppf.first);
     }
+    if ( fs::is_empty(_ppfFolder)){
+        fs::remove_all(_ppfFolder);
+    }
+
+
 }
 void IndexProps::delSpecificReadFasta(const fs::path& _preProcessedFasta){
     fs::remove(_preProcessedFasta);

@@ -72,6 +72,7 @@ public:
     bool delR1();
     bool delR2();
 
+    void delFQ();
     void delReadFastas();
     void delSpecificReadFasta(const fs::path& _preProcessedFasta);
 

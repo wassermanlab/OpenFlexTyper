@@ -273,6 +273,19 @@ int main(int argc, char** argv)
             std::cout << "Error in FM Index Creation " << e.what() << std::endl;
             return 1;
         }
+
+        if (props->getDelFQFlag()){
+            props->delFQ();
+            std::cout << "Deleting FQ files " << std::endl;
+        }
+        if (props->getDelFastaFlag()){
+            props->delReadFastas();
+            std::cout << "Deleting PPF files " << std::endl;
+
+        }
+
+
+
     }
 
     return 0;
