@@ -136,7 +136,7 @@ void KmerClass::convertPosToReadID(uint readLength, uint numOfReads, bool paired
         //std::cout << "r " << float(r) << " num of Reads "<< float(numOfReads) << std::endl;
         //std::cout << "read Type " << readType << std::endl;
         if (indexRevComp){readType = ceil((readType+1)/2);}
-        //std::cout <<"pos " << pos << " read ID " << rID <<  " read Type " << readType << std::endl;
+
         addReadID(std::make_pair(rID, readType));
     }
     //std::cout << "number of ReadIDs " << _readIDs.size() << std::endl;

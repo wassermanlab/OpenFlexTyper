@@ -100,7 +100,7 @@ void FTMap::genQKMap()
                 }
                 _qkRCMap.addQKPair(it->first, rckmer);
             }       
-        //std::cout<< "size of _qkRCMap " << _qkRCMap._map.size() << std::endl;
+        std::cout<< "size of _qkRCMap " << _qkRCMap._map.size() << std::endl;
         }
 
         it++;
@@ -373,10 +373,48 @@ void FTMap::processQueryResults(const ft::QIdT& qIDT)
     std::set<std::string> fwdKmers = _qkMap.retrieveKmers(qIDT);
     //std::cout << "number of fwd Kmers " << fwdKmers.size() << std::endl;
     std::set<ft::ReadID> readIds;
-    for ( std::string kmerString : fwdKmers)
+    readIds = addKmersToQueryResults(query, fwdKmers,  readIds);
+
+    //std::cout << "query count after fwd kmers added " << readIds.size() << std::endl;
+    //Add results from RC Search
+
+
+    if (_ftProps.getRevCompSearchFlag()){
+        std::set<std::string> rcKmers = _qkRCMap.retrieveKmers(qIDT);
+        readIds = addKmersToQueryResults(query, rcKmers, readIds);
+    }
+
+    //std::cout << "query count after rc kmers added " << readIds.size() << std::endl;
+    int queryCount = calculateQueryCount(readIds);
+    query.setCount(queryCount);
+    _querySet.find(qIDT)->second = query;
+}
+
+//======================================================
+int FTMap::calculateQueryCount(std::set<ft::ReadID> readIDs)
+{
+    int querycount = 0;
+    if (_ftProps.getCountAsPairsFlag()){
+        std::set<int> pairIDs;
+        for (ft::ReadID readID : readIDs){
+            pairIDs.insert(readID.first);
+        }
+        querycount = pairIDs.size();
+    } else {
+        querycount = readIDs.size();
+    }
+    return querycount;
+}
+
+
+//======================================================
+std::set<ft::ReadID> FTMap::addKmersToQueryResults(ft::QueryClass query, std::set<std::string> kmers,  std::set<ft::ReadID> readIds )
+{
+    for ( std::string kmerString : kmers)
     {
         bool addToCount = true;
         ft::KmerClass* fwdKmer = findKmer(kmerString);
+        //std::cout << "kmer found " << fwdKmer->getKmer() << std::endl;
         if(fwdKmer->hasFlag(ft::FlagType::NUK)){
             //std::cout << "Kmer is not unique " << std::endl;
             query.addFlag(ft::FlagType::NUK, fwdKmer->getKmer());
@@ -389,48 +427,19 @@ void FTMap::processQueryResults(const ft::QIdT& qIDT)
             if (_ftProps.getOverCountedFlag()){addToCount = false;}
         }
 
-        //std::cout << "number of fwd ReadIDs " << fwdKmerReadIDs.size() << std::endl;
+        //std::cout << "number of fwd ReadIDs " << readIds.size() << std::endl;
         if (addToCount){
             for ( ft::ReadID readID : fwdKmer->getReadIDs())
             {
                 readIds.insert(readID);
             }
-            //std::cout << "number of query ReadIDs " << readIds.size() << std::endl;
+
         }
     }
-
-    //Add results from RC Search
-    if (_ftProps.getRevCompSearchFlag()){
-        std::set<std::string> rcKmers = _qkMap.retrieveKmers(qIDT);
-        //std::cout << "number of rc Kmers " << rcKmers.size() << std::endl;
-        for (std::string kmerString : rcKmers)
-        {
-            ft::KmerClass* rcKmer = findKmer(kmerString);
-            bool addToCount = true;
-            if(rcKmer->hasFlag(ft::FlagType::NUK)){
-                query.addFlag(ft::FlagType::NUK, rcKmer->getKmer());
-                if (_ftProps.getIgnoreNonUniqueKmersFlag()){addToCount = false;}
-            }
-
-            if (rcKmer->hasFlag(ft::FlagType::OCK)){
-                query.addFlag(ft::FlagType::OCK, rcKmer->getKmer());
-                if (_ftProps.getOverCountedFlag()){addToCount = false;}
-            }
-
-            //std::cout << "number of rc ReadIDs " << rcKmerReadIDs.size() << std::endl;
-            if (addToCount){
-                for ( ft::ReadID readID : rcKmer->getReadIDs())
-                {
-                    readIds.insert(readID);
-                    //std::cout << "number of query ReadIDs " << readIds.size() << std::endl;
-                }
-            }
-        }
-    }
-    std::cout << "query count " << readIds.size() << std::endl;
-    query.setCount(readIds.size());
-    _querySet.find(qIDT)->second = query;
+    std::cout << "number of query ReadIDs " << readIds.size() << std::endl;
+    return readIds;
 }
+
 
 #define INDEXEND }
 bool FTMap::operator()(const ft::QIdT& a, const ft::QIdT& b) const {

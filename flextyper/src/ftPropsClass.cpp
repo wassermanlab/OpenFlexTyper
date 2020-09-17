@@ -264,7 +264,7 @@ void FTProp::initIndexProps( const bool pairedReads,
     if (printInputs){
     std::cout << "Properties loaded from Index File     " <<  std::endl;
     std::cout << "Paired Reads      : " << _pairedReads <<  std::endl;
-    std::cout << "reverse Comp      : " << _indexRevComp <<  std::endl;
+    std::cout << "index contains reverse Comp      : " << _indexRevComp <<  std::endl;
     std::cout << "build Directory   : " << _buildDir <<  std::endl;
     std::cout << "index Directory   : " << _indexDir <<  std::endl;
     std::cout << "read Set Name     : " << _readSetName <<  std::endl;
@@ -327,10 +327,11 @@ const fs::path& FTProp::getR1() const{return _R1;}
 const fs::path& FTProp::getR2() const{return _R2;}
 
 //====================== FILE GETTERS ======================
-void FTProp::setTestProps(const uint numOfReads, const uint readLength, bool revComp){
+void FTProp::setTestProps(const uint numOfReads, const uint readLength, bool revComp, bool countAsPairs){
     _numOfReads = numOfReads;
     _readLength = readLength;
     _indexRevComp = revComp;
+    _countAsPairs = countAsPairs;
 }
 
 void FTProp::setOutputFolder(const fs::path& outputFolder)

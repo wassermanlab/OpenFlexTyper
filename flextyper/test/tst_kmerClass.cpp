@@ -30,21 +30,21 @@ TEST_F(TestKmerClass, KFlag)
     TEST_DESCRIPTION("Add single flag to kmer class");
     ft::KmerClass* testKmerClass = new ft::KmerClass("AAAA");
 
-    std::cout << "no flags" << std::endl;
+    //std::cout << "no flags" << std::endl;
     EXPECT_FALSE(testKmerClass->hasFlag(FlagType::NUK));
     EXPECT_FALSE(testKmerClass->hasFlag(FlagType::OCK));
 
-    std::cout << "set NUK flag" << std::endl;
+    //std::cout << "set NUK flag" << std::endl;
     testKmerClass->setKFlags({FlagType::NUK});
     EXPECT_TRUE(testKmerClass->hasFlag(FlagType::NUK));
     EXPECT_FALSE(testKmerClass->hasFlag(FlagType::OCK));
 
-    std::cout << "add Flag" << std::endl;
+    //std::cout << "add Flag" << std::endl;
     testKmerClass->addKFlag(FlagType::OCK);
     EXPECT_TRUE(testKmerClass->hasFlag(FlagType::OCK));
     EXPECT_FALSE(testKmerClass->hasFlag(FlagType::ABK));
 
-    std::cout << "remove flag" << std::endl;
+    //std::cout << "remove flag" << std::endl;
     testKmerClass->removeKFlag(FlagType::NUK);
     EXPECT_FALSE(testKmerClass->hasFlag(FlagType::NUK));
     EXPECT_TRUE(testKmerClass->hasFlag(FlagType::OCK));
@@ -81,19 +81,32 @@ TEST_F(TestKmerClass,  ReadID)
     ft::ReadID read2 = {2340, 1};
     ft::ReadID read3 = {666, 1};
     ft::ReadID read4 = {924357, 1};
+    ft::ReadID read5 = {1000, 2};
 
     testKmerClass->setReadIDs({read1, read2});
     EXPECT_TRUE(testKmerClass->hasReadID(read1));
     EXPECT_FALSE(testKmerClass->hasReadID(read3));
+    EXPECT_FALSE(testKmerClass->hasReadID(read5));
 
     testKmerClass->addReadID(read3);
     EXPECT_TRUE(testKmerClass->hasReadID(read3));
     EXPECT_FALSE(testKmerClass->hasReadID(read4));
+    EXPECT_FALSE(testKmerClass->hasReadID(read5));
 
     testKmerClass->removeReadID(read2);
     EXPECT_FALSE(testKmerClass->hasReadID(read2));
     EXPECT_TRUE(testKmerClass->hasReadID(read1));
     EXPECT_TRUE(testKmerClass->hasReadID(read3));
+
+    testKmerClass->addReadID(read5);
+    EXPECT_TRUE(testKmerClass->hasReadID(read1));
+    EXPECT_FALSE(testKmerClass->hasReadID(read2));
+    EXPECT_TRUE(testKmerClass->hasReadID(read5));
+
+    testKmerClass->removeReadID(read5);
+    EXPECT_TRUE(testKmerClass->hasReadID(read1));
+    EXPECT_FALSE(testKmerClass->hasReadID(read2));
+    EXPECT_FALSE(testKmerClass->hasReadID(read5));
 
 }
 
@@ -154,9 +167,9 @@ TEST_F(TestKmerClass, sdotest)
             //result.addKPosition(pos, offset);
             bool rc2 = result2.hasKPosition(pos);
             bool rc = result.hasKPosition(pos);
-            //if(rc != rc2) {
+            if(rc != rc2) {
                 std::cout << "failed pos " << pos << " result " << rc << " result2 " << rc2 << std::endl;
-            //}
+            }
         }
      std::cout << "sdotest done " << std::endl;
 }
@@ -217,7 +230,9 @@ TEST_F(TestKmerClass, matchingReadID)
     ft::ReadID c = {2,1};
     ft::ReadID d = {2,2};
     ft::ReadID e = {1,1};
+    ft::ReadID f = {1,2};
     EXPECT_TRUE(testKmerClass->matchingReadID(a,e));
+    EXPECT_TRUE(testKmerClass->matchingReadID(b,f));
     EXPECT_FALSE(testKmerClass->matchingReadID(a,b));
     EXPECT_FALSE(testKmerClass->matchingReadID(a,c));
     EXPECT_FALSE(testKmerClass->matchingReadID(a,d));
