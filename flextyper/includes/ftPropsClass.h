@@ -28,7 +28,7 @@ typedef std::pair<int, QueryType>  QIdT; // int is the query ID
 typedef std::pair<int, int> ReadID; // pair (id, pair 1 or pair 2)
 typedef std::tuple<uint, std::string, std::string, std::string>  Query;
 
-enum FlagType { ABK = 1, OCK, NUK}; // abundant, overcounted, non-unique
+enum FlagType { ABK = 0x0001, OCK = 0x0002, NUK = 0x0003}; // abundant, overcounted, non-unique
 
 class FTProp {
 public:

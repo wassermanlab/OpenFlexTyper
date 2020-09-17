@@ -30,14 +30,21 @@ TEST_F(TestKmerClass, KFlag)
     TEST_DESCRIPTION("Add single flag to kmer class");
     ft::KmerClass* testKmerClass = new ft::KmerClass("AAAA");
 
+    std::cout << "no flags" << std::endl;
+    EXPECT_FALSE(testKmerClass->hasFlag(FlagType::NUK));
+    EXPECT_FALSE(testKmerClass->hasFlag(FlagType::OCK));
+
+    std::cout << "set NUK flag" << std::endl;
     testKmerClass->setKFlags({FlagType::NUK});
     EXPECT_TRUE(testKmerClass->hasFlag(FlagType::NUK));
     EXPECT_FALSE(testKmerClass->hasFlag(FlagType::OCK));
 
+    std::cout << "add Flag" << std::endl;
     testKmerClass->addKFlag(FlagType::OCK);
     EXPECT_TRUE(testKmerClass->hasFlag(FlagType::OCK));
     EXPECT_FALSE(testKmerClass->hasFlag(FlagType::ABK));
 
+    std::cout << "remove flag" << std::endl;
     testKmerClass->removeKFlag(FlagType::NUK);
     EXPECT_FALSE(testKmerClass->hasFlag(FlagType::NUK));
     EXPECT_TRUE(testKmerClass->hasFlag(FlagType::OCK));

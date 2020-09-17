@@ -315,12 +315,13 @@ void FTMap::addKmerResults(const ft::KmerClass& kmerResult)
      }
 
      // add flags
-     for (auto flag : kmerResult.getKFlags())
-     {
-         //std::cout << "result Flag " << flag.first << std::endl;
-         kmer->addKFlag(flag.first);
-     }
 
+     for (std::size_t i = 0; i < kmerResult.getKFlags().size(); ++i) {
+         if ( kmerResult.getKFlags().test(i) ) {
+             //std::cout << "result Flag " << flag.first << std::endl;
+             kmer->addKFlag(ft::FlagType(i));
+         }
+     }
 }
 //======================================================
 void FTMap::processIndexResults(const std::map<std::string, ft::KmerClass>& indexResult)
@@ -366,6 +367,7 @@ void FTMap::processResults()
 void FTMap::processQueryResults(const ft::QIdT& qIDT)
 {
     ft::QueryClass query = _querySet.find(qIDT)->second;
+    FTProp::Benchmark benchmark = FTProp::Benchmark(0);
 
     // Add results from FWD Search
     std::set<std::string> fwdKmers = _qkMap.retrieveKmers(qIDT);

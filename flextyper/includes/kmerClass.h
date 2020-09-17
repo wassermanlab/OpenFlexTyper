@@ -2,6 +2,7 @@
 #define KMERCLASS_H
 
 #include <set>
+#include <bitset>
 #include <iostream>
 #include <map>
 #include "ftPropsClass.h"
@@ -26,7 +27,7 @@ public:
     /// \brief getters
     ////////////////////////////////////////////////////////////////////////
     const std::string& getKmer() const;
-    const std::map<ft::FlagType, bool>& getKFlags()const;
+    const std::bitset<8>& getKFlags()const;
     const std::set<long long>& getKPositions()const;
     const std::set<ft::ReadID>& getReadIDs()const;
     uint getOCC()const {return _occ;};
@@ -79,7 +80,7 @@ private:
     /// \brief properties
     ////////////////////////////////////////////////////////////////////////
     std::string _kmer;
-    std::map<ft::FlagType, bool> _kFlags;
+    std::bitset<8> _kFlags;
     std::set<long long> _positions;
     std::set<ft::ReadID> _readIDs;
     uint _occ; //from sdsl::count(_index, _kmer)

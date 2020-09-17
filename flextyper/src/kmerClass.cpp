@@ -18,7 +18,7 @@ KmerClass::KmerClass(){}
 
 //=================== GETTERS =========================
 const std::string& KmerClass::getKmer() const{return _kmer;}
-const std::map<ft::FlagType, bool>& KmerClass::getKFlags() const {return _kFlags;}
+const std::bitset<8>& KmerClass::getKFlags() const {return _kFlags;}
 const std::set<long long>& KmerClass::getKPositions() const {return _positions;}
 //uint KmerClass::getKmerMapSize() const {return _kmer.size();}
 const std::set<ft::ReadID>& KmerClass::getReadIDs() const {return _readIDs;}
@@ -27,7 +27,7 @@ const std::set<ft::ReadID>& KmerClass::getReadIDs() const {return _readIDs;}
 void KmerClass::setKFlags( std::set<ft::FlagType> flags)
 {
     for (auto flag: flags){
-        _kFlags[flag] = true;
+        _kFlags.set(flag);
     }
 }
 void KmerClass::setKPositions(const std::set<long long>& kPositions, uint offset)
@@ -45,7 +45,7 @@ void KmerClass::setReadIDs(std::set<ft::ReadID> readIDs)
 //===================== ADDERS ==========================
 void KmerClass::addKFlag(const ft::FlagType& flag)
 {
-    _kFlags[flag] = true;
+    _kFlags.set(flag);
 }
 void KmerClass::addKPosition(const size_t& kPosition, const uint& offset)
 {
@@ -63,8 +63,8 @@ void KmerClass::addReadID(const ft::ReadID& readID)
 
 //===================== REMOVERS =======================+
 void KmerClass::removeKFlag(ft::FlagType flag){
-    _kFlags[flag] = false;
-    }
+    _kFlags.reset(flag);
+}
 void KmerClass::removeKPosition(size_t kPosition, uint offset)
 {
     size_t kPos = kPosition + offset;
@@ -80,7 +80,7 @@ bool KmerClass::hasKmer(const std::string& test) const {
     return _kmer == test;
 }
 bool KmerClass::hasFlag(const ft::FlagType& flag) {
-    return (_kFlags.count(flag) > 0);
+    return _kFlags.test(flag);
 }
 bool KmerClass::hasKPosition(const size_t& kPosition) const{
     const bool is_in = _positions.find(kPosition) != _positions.end();

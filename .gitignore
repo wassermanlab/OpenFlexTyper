@@ -12,3 +12,17 @@ Makefile
 Example/
 
 Test_Example/
+
+flextyper/test/indices.txt
+
+flextyper/test/temp.tsv
+
+flextyper/test/.qmake.stash
+
+flextyper/test/testFiles/test.fq.gz
+
+flextyper/test/testOutput/Index_Test.fm9
+
+flextyper/test/testOutput/
+
+flextyper/test/test
