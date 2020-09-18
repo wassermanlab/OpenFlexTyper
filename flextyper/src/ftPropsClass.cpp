@@ -279,6 +279,26 @@ void FTProp::initIndexProps( const bool pairedReads,
     }
 
 
+    if (printInputs){
+        std::cout << "Properties loaded from Index File     " <<  std::endl;
+        std::cout << "Paired Reads      : " << _pairedReads <<  std::endl;
+        std::cout << "reverse Comp      : " << _indexRevComp <<  std::endl;
+        std::cout << "build Directory   : " << _buildDir <<  std::endl;
+        std::cout << "index Directory   : " << _indexDir <<  std::endl;
+        std::cout << "Index File Name   : " << _indexFileName <<  std::endl;
+        std::cout << "read Set Name     : " << _readSetName <<  std::endl;
+        std::cout << "Read FQ           : " << _inputFastQ <<  std::endl;
+        std::cout << "Number of Reads   : " << _numOfReads <<  std::endl;
+        std::cout << "Number of Indexes : " << _numOfIndexes <<  std::endl;
+    if (_pairedReads)
+        {std::cout << "R1                : " << _R1 <<  std::endl;
+         std::cout << "R2                : " << _R2 <<  std::endl;
+        }
+    for (auto index : _indexSet){
+        std::cout << "Index File : " << index.first << " Offset: " << index.second <<  std::endl;
+    }
+    }
+
     if (FTProp::Log.is_open()){
     Log << "Properties loaded from Index File     " <<  std::endl;
     Log << "Paired Reads      : " << _pairedReads <<  std::endl;
