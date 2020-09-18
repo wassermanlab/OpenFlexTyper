@@ -171,8 +171,8 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
 }
 
 void FTProp::printToStdOut(const std::string outputString) const {
-    if (_verbose){
-        std::cout << outputString << std::endl;
+    if (_verbose && FTProp::Log.is_open() ){
+        Log  << outputString << std::endl;
     }
 }
 //================= Load Index Props ========================
@@ -210,24 +210,42 @@ void FTProp::loadIndexProps(const fs::path &_indexPropsFile, bool printInputs){
     isettings.endArray();
     _indexSet = indexSet;
 
-
     if (printInputs){
-    std::cout << "Properties loaded from Index File     " <<  std::endl;
-    std::cout << "Paired Reads      : " << _pairedReads <<  std::endl;
-    std::cout << "reverse Comp      : " << _indexRevComp <<  std::endl;
-    std::cout << "build Directory   : " << _buildDir <<  std::endl;
-    std::cout << "index Directory   : " << _indexDir <<  std::endl;
-    std::cout << "Index File Name   : " << _indexFileName <<  std::endl;
-    std::cout << "read Set Name     : " << _readSetName <<  std::endl;
-    std::cout << "Read FQ           : " << _inputFastQ <<  std::endl;
-    std::cout << "Number of Reads   : " << _numOfReads <<  std::endl;
-    std::cout << "Number of Indexes : " << _numOfIndexes <<  std::endl;
+        std::cout << "Properties loaded from Index File     " <<  std::endl;
+        std::cout << "Paired Reads      : " << _pairedReads <<  std::endl;
+        std::cout << "reverse Comp      : " << _indexRevComp <<  std::endl;
+        std::cout << "build Directory   : " << _buildDir <<  std::endl;
+        std::cout << "index Directory   : " << _indexDir <<  std::endl;
+        std::cout << "Index File Name   : " << _indexFileName <<  std::endl;
+        std::cout << "read Set Name     : " << _readSetName <<  std::endl;
+        std::cout << "Read FQ           : " << _inputFastQ <<  std::endl;
+        std::cout << "Number of Reads   : " << _numOfReads <<  std::endl;
+        std::cout << "Number of Indexes : " << _numOfIndexes <<  std::endl;
     if (_pairedReads)
         {std::cout << "R1                : " << _R1 <<  std::endl;
          std::cout << "R2                : " << _R2 <<  std::endl;
         }
     for (auto index : _indexSet){
         std::cout << "Index File : " << index.first << " Offset: " << index.second <<  std::endl;
+    }
+    }
+    if (FTProp::Log.is_open()){
+        Log << "Properties loaded from Index File     " <<  std::endl;
+        Log << "Paired Reads      : " << _pairedReads <<  std::endl;
+        Log << "reverse Comp      : " << _indexRevComp <<  std::endl;
+        Log << "build Directory   : " << _buildDir <<  std::endl;
+        Log << "index Directory   : " << _indexDir <<  std::endl;
+        Log << "Index File Name   : " << _indexFileName <<  std::endl;
+        Log << "read Set Name     : " << _readSetName <<  std::endl;
+        Log << "Read FQ           : " << _inputFastQ <<  std::endl;
+        Log << "Number of Reads   : " << _numOfReads <<  std::endl;
+        Log << "Number of Indexes : " << _numOfIndexes <<  std::endl;
+    if (_pairedReads)
+        {Log << "R1                : " << _R1 <<  std::endl;
+         Log << "R2                : " << _R2 <<  std::endl;
+        }
+    for (auto index : _indexSet){
+        Log << "Index File : " << index.first << " Offset: " << index.second <<  std::endl;
     }
     }
 
@@ -261,22 +279,22 @@ void FTProp::initIndexProps( const bool pairedReads,
     }
 
 
-    if (printInputs){
-    std::cout << "Properties loaded from Index File     " <<  std::endl;
-    std::cout << "Paired Reads      : " << _pairedReads <<  std::endl;
-    std::cout << "index contains reverse Comp      : " << _indexRevComp <<  std::endl;
-    std::cout << "build Directory   : " << _buildDir <<  std::endl;
-    std::cout << "index Directory   : " << _indexDir <<  std::endl;
-    std::cout << "read Set Name     : " << _readSetName <<  std::endl;
-    std::cout << "Read FQ           : " << _inputFastQ <<  std::endl;
-    std::cout << "Number of Reads   : " << _numOfReads <<  std::endl;
-    std::cout << "Number of Indexes : " << _numOfIndexes <<  std::endl;
+    if (FTProp::Log.is_open()){
+    Log << "Properties loaded from Index File     " <<  std::endl;
+    Log << "Paired Reads      : " << _pairedReads <<  std::endl;
+    Log << "index contains reverse Comp      : " << _indexRevComp <<  std::endl;
+    Log << "build Directory   : " << _buildDir <<  std::endl;
+    Log << "index Directory   : " << _indexDir <<  std::endl;
+    Log << "read Set Name     : " << _readSetName <<  std::endl;
+    Log << "Read FQ           : " << _inputFastQ <<  std::endl;
+    Log << "Number of Reads   : " << _numOfReads <<  std::endl;
+    Log << "Number of Indexes : " << _numOfIndexes <<  std::endl;
     }
 }
 
 //======================================================================
 void FTProp::addToIndexSet(const fs::path& index, u_int offset){
-    std::cout<< "add index to set " << fs::absolute(index) << std::endl;
+    Log << "add index to set " << fs::absolute(index) << std::endl;
 
     if (_indexSet.count(index) == 0){
         _indexSet[index] = offset;
@@ -338,20 +356,20 @@ void FTProp::setOutputFolder(const fs::path& outputFolder)
 {
     fs::path outfolder;
     if (outputFolder == "" or outputFolder =="."){
-        printToStdOut("no output folder set ");
+        Log << "no output folder set " << std::endl;
         outfolder = fs::current_path();
     } else if (outputFolder == "../"){
-        printToStdOut("set as parent path  " + outputFolder.string());
+        Log << "set as parent path  " + outputFolder.string() << std::endl;
         outfolder = fs::current_path().parent_path();
     } else {
-        printToStdOut("set absolute path as output Folder " + outputFolder.string());
+        Log << "set absolute path as output Folder " << outputFolder.string() << std::endl;
         outfolder = fs::absolute(outputFolder);
     }
     _outputFolder = outfolder;
-    printToStdOut(_outputFolder.string());
+    Log << _outputFolder.string();
 
     if (!fs::exists(_outputFolder)){
-     printToStdOut("creating output Folder " +outputFolder.string());
+     Log << "creating output Folder " << outputFolder.string() << std::endl;
          try {
              fs::create_directory(outputFolder);
          } catch (std::exception& e ) {
