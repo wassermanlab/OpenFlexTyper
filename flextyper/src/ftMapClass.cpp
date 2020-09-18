@@ -100,7 +100,7 @@ void FTMap::genQKMap()
                 }
                 _qkRCMap.addQKPair(it->first, rckmer);
             }       
-        std::cout<< "size of _qkRCMap " << _qkRCMap._map.size() << std::endl;
+        //std::cout<< "size of _qkRCMap " << _qkRCMap._map.size() << std::endl;
         }
 
         it++;
