@@ -49,7 +49,7 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
 }
 
 //======================================================================
-fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta)
+std::pair<fs::path, fs::path> FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta)
 {
     std::lock_guard<std::mutex> lock(_mtx);
     std::string ppfname = preprocessedFasta.stem();
@@ -102,7 +102,7 @@ fs::path FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& 
 
     }
 
-    return outputIndex;
+    return std::make_pair(outputIndex, preprocessedFasta);
 }
 
 //======================================================================
@@ -122,7 +122,7 @@ void FmIndex::parallelFmIndex(algo::IndexProps& _props)
 {
     //   fs::path createFMIndex(algo::IndexProps& _props, const fs::path& preprocessedFasta);
     std::cout << "Running FM Index" << std::endl;
-    std::vector<std::future<fs::path>> operations;
+    std::vector<std::future<std::pair<fs::path, fs::path>>> operations;
     std::map<fs::path, std::pair<u_int, u_int>> _ppfs = _props.getPreProcessedFastas();
 
     if  (_props.getNumOfIndexes() != _ppfs.size()){
@@ -138,9 +138,11 @@ void FmIndex::parallelFmIndex(algo::IndexProps& _props)
     }
 
     for (size_t i = 0; i < _ppfs.size(); i++){
-        fs::path outputIndex = operations[i].get();
-        u_int offset = _props.getOffsetForIndex(outputIndex);
-        std::cout << "index created " << outputIndex << std::endl;
+        std::pair<fs::path, fs::path> output = operations[i].get();
+        fs::path outputIndex = output.first;
+        fs::path outputPPF = output.second;
+        u_int offset = _props.getOffsetForIndex(outputPPF);
+        std::cout << "index created " << outputIndex << " with offset " << offset <<  std::endl;
         _props.addToIndexSet(outputIndex, offset);
        }
     fs::path indexPropsINI =  _props.getOutputFolder();

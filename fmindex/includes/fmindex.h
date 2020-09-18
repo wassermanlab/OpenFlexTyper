@@ -37,7 +37,7 @@ public:
     /// \brief createFMIndex
     /// \param stringToIndex
     ////////////////////////////////////////////////////////////////////////
-    fs::path createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta);
+    std::pair<fs::path, fs::path> createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief loadIndexFromFile

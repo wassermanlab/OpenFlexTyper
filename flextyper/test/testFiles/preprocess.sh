@@ -139,18 +139,18 @@ function createRevComp()
 
 ##########################################
 function splitReadFiles() {
-    local readfilename=$1
-    local readname=$2
-    local readdir=$(dirname $readfilename)
-    local subIndexes=$3
-    local digits=${#subIndexes}
+    local outputReadFile=$1
+    local readSetName=$2
+    local numberOfIndexes=$3
+    local ppfDir=$4
 
-    #echo "splitReadFiles: read dir " readdir
-    #echo "splitReadFiles: read name " readname
-    #echo "splitReadFiles: subIndexes " subIndexes
+    echo "splitReadFiles: outputReadFile " $outputReadFile
+    echo "splitReadFiles: read name " $readSetName
+    echo "splitReadFiles: numberOfIndexes " $numberOfIndexes
+    echo "splitReadFiles: ppfDir " $ppfDir
 
-    split "${readdir}/${readname}.fasta" -n "l/${subIndexes}" -a $((digits)) -d ${readdir}/output_ --additional-suffix=.fasta
-
+    split "${outputReadFile}" -n "l/${numberOfIndexes}" -a $((digits)) -d ${ppfDir}/"${readSetName}_" --additional-suffix=.fasta
+    rm $outputReadFile
 }
 
 ##########################################
@@ -272,7 +272,7 @@ function main() {
         #Split Read Files
         if [ ${numIndexes} -gt 1 ]; then
             #echo "splitting Read Files into " ${numIndexes}
-            splitReadFiles ${outputReadFile} ${readSetName} ${numIndexes}
+            splitReadFiles ${outputReadFile} ${readSetName} ${numIndexes} ${ppfDir}
         fi
 
         if [ -f $outputReadFile ]

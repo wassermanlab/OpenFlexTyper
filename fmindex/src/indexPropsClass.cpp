@@ -348,11 +348,9 @@ u_int IndexProps::countLines(fs::path fileToCount){
 
 }
 //======================================================================
-u_int IndexProps::getOffsetForIndex(fs::path indexFile)
+u_int IndexProps::getOffsetForIndex(fs::path ppf)
 {
-    fs::path fastaFile = indexFile.replace_extension(".fasta");
-
-    std::pair<u_int, u_int> offset = _ppFSet[fastaFile];
+    std::pair<u_int, u_int> offset = _ppFSet[ppf];
 
     return offset.first;
 }
