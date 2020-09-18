@@ -126,7 +126,7 @@ int main(int argc, char** argv)
         readPairFileName.setValueName("readPairFileName");
         parser.addOption(readPairFileName);
 
-        QCommandLineOption numOfIndexes(QStringList() << "n" << "numOfIndexes" , QCoreApplication::translate("main", "the input file is in fq format "));
+        QCommandLineOption numOfIndexes(QStringList() << "n" << "numOfIndexes" , QCoreApplication::translate("main", "split the reads into n indexes "));
         numOfIndexes.setValueName("numOfIndexes");
         parser.addOption(numOfIndexes);
 
