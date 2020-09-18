@@ -54,7 +54,6 @@ void FTSearch::init(const FTProp& ftProps)
     FTProp::Log << "======== Search Log " << "======== " << std::endl;
 
     ft::FTMap ftMap(ftProps);
-    //checkInputFastQ(ftProps);
     checkOutputFile(ftProps);
     printToStdOut("extracting queries " );
     std::set<Query> inputQueries;

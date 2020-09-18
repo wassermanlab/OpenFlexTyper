@@ -20,7 +20,6 @@ KmerClass::KmerClass(){}
 const std::string& KmerClass::getKmer() const{return _kmer;}
 const std::bitset<8>& KmerClass::getKFlags() const {return _kFlags;}
 const std::set<long long>& KmerClass::getKPositions() const {return _positions;}
-//uint KmerClass::getKmerMapSize() const {return _kmer.size();}
 const std::set<ft::ReadID>& KmerClass::getReadIDs() const {return _readIDs;}
 
 //================== SETTERS ===========================
@@ -95,26 +94,20 @@ bool KmerClass::matchingReadID(const ft::ReadID &a, const ft::ReadID &b) const
 bool KmerClass::hasReadID(const ft::ReadID& read ) const {
 
     bool is_in = false;
-
     for (ft::ReadID rID : getReadIDs())
     {
-        //std::cout << "existing rID " << rID.first << " pair " << rID.second << std::endl;
-        if (matchingReadID(rID, read) == true)
+       if (matchingReadID(rID, read) == true)
         {
             is_in = true;
             continue;
         }
     }
-    //std::cout << "Read ID " << read.first << " pair " << read.second << " is_in " << is_in << std::endl;
     return is_in;
 }
 
 //====================== CONVERT ========================
 void KmerClass::convertPosToReadID(uint readLength, uint numOfReads, bool pairedReads, bool indexRevComp)
 {
-
-    //std::cout << "conver Pos to ReadID " <<std::endl;
-    //std::cout << "number of positions " << _positions.size() << std::endl;
     if (readLength == 0)
     {
         std::cout << "ERROR: Read Length not set " << std::endl;
@@ -133,13 +126,12 @@ void KmerClass::convertPosToReadID(uint readLength, uint numOfReads, bool paired
         int rID = r%numOfReads;
         rID +=1;
         u_int readType = std::ceil((r+1)/float(numOfReads));
-        //std::cout << "r " << float(r) << " num of Reads "<< float(numOfReads) << std::endl;
-        //std::cout << "read Type " << readType << std::endl;
+
         if (indexRevComp){readType = ceil((readType+1)/2);}
 
         addReadID(std::make_pair(rID, readType));
     }
-    //std::cout << "number of ReadIDs " << _readIDs.size() << std::endl;
+
 }
 
 //===================== OVERLOAD ========================

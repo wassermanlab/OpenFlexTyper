@@ -29,10 +29,9 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
     size_t occs = sdsl::count(_index, kmer.begin(),  kmer.end());
     kmerResult.setOCC(occs);
 
-    // if number kmers > max, flag kmer as "abundant"
+    // if number kmers > max, flag kmer as "over counted"
     if (occs > maxOcc && flagOverCountedKmers) {
         kmerResult.addKFlag(ft::FlagType::OCK);
-        //std::cout << "OCK flag added " << kmerResult.hasFlag(ft::FlagType::OCK) << std::endl;
     }
     if (occs > 0  && occs <= maxOcc) {
         auto locations = sdsl::locate(_index, kmer.begin(), kmer.end());
@@ -124,9 +123,7 @@ void FmIndex::parallelFmIndex(algo::IndexProps& _props)
     //   fs::path createFMIndex(algo::IndexProps& _props, const fs::path& preprocessedFasta);
     std::cout << "Running FM Index" << std::endl;
     std::vector<std::future<fs::path>> operations;
-    //std::cout << "number of files to index  " << _props.getNumOfIndexes() << std::endl;
     std::map<fs::path, std::pair<u_int, u_int>> _ppfs = _props.getPreProcessedFastas();
-    //std::cout << "number of files found  " << _ppfs.size() << std::endl;
 
     if  (_props.getNumOfIndexes() != _ppfs.size()){
         std::cout << "Error: wrong number of files found "<< std::endl;

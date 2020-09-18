@@ -34,7 +34,6 @@ std::string WriterBridge::createHeader()
 {
     std::string header;
     if (_croData) {
-        //std::cout << "CrossOver Header" << std::endl;
         header = '\t' + std::string("Start_Count") + '\t' + std::string("Crossover_Count") + '\t' + std::string("End_Count");
         if (_NUK) {
             header += '\t' + std::string("Start_Non_Unique_Kmers") + '\t' + std::string("Crossover_Non_Unique_Kmers") + '\t' + std::string("End_Non_Unique_Kmers");
@@ -43,7 +42,6 @@ std::string WriterBridge::createHeader()
             header += '\t' + std::string("Start_Over_Counted_Kmers") + '\t' + std::string("Crossover_Over_Counted_Kmers") + '\t' + std::string("End_Over_Counted_Kmers");
         }
     } else if (!_croData && _altData){
-        //std::cout << "Ref and Alt Header" << std::endl;
         header = '\t' + std::string("Ref_Count") + '\t' + std::string("Alt_Count");
 
         if (_NUK) {
@@ -53,7 +51,6 @@ std::string WriterBridge::createHeader()
             header += '\t' + std::string("Ref_Over_Counted_Kmers") + '\t' + std::string("Alt_Over_Counted_Kmers");
         }
     } else if (!_croData && !_altData){
-        //std::cout << "Ref Only Header" << std::endl;
         header = '\t' + std::string("Ref_Count");
         if (_NUK) {
             header += '\t' + std::string("Ref_Non_Unique_Kmers");
@@ -63,7 +60,6 @@ std::string WriterBridge::createHeader()
         }
     }
     header += '\n';
-    //std::cout << header << std::endl;
     return header;
 }
 //======================================================================
@@ -71,8 +67,6 @@ std::string WriterBridge::formatOutputMap()
 {
     std::string outputLine = "";
     if (_croData) {
-        //std::cout << "Ref , alt and cro " << std::endl;
-        //std::cout << "output CRO Map count " << _outputMap["croCount"] << std::endl;
         outputLine = '\t' + _outputMap["refCount"] + '\t' + _outputMap["croCount"]  + '\t' + _outputMap["altCount"] ;
         if (_NUK) {
             outputLine +='\t' + _outputMap["refNUK"] + '\t' + _outputMap["croNUK"]  + '\t' + _outputMap["altNUK"] ;
@@ -82,8 +76,6 @@ std::string WriterBridge::formatOutputMap()
         }
 
     } else if (!_croData && _altData){
-        //std::cout << "Ref and Alt" << std::endl;
-        //std::cout << "output alt Map count " << _outputMap["altCount"] << std::endl;
         outputLine = '\t' + _outputMap["refCount"] + '\t' + _outputMap["altCount"] ;
         if (_NUK) {
             outputLine +='\t' + _outputMap["refNUK"] + '\t' + _outputMap["altNUK"] ;
@@ -93,8 +85,6 @@ std::string WriterBridge::formatOutputMap()
         }
 
     } else if (!_croData && !_altData){
-        //std::cout << "Ref only" << std::endl;
-        //std::cout << "output REF Map count " << _outputMap["refCount"] << std::endl;
         outputLine = '\t' + _outputMap["refCount"] ;
 
         if (_NUK) {
@@ -104,58 +94,45 @@ std::string WriterBridge::formatOutputMap()
             outputLine +='\t' + _outputMap["refOCK"] ;
         }
     }
-    //std::cout << "Formatted outputLine " << outputLine <<std::endl;
     return outputLine;
 }
 
 //======================================================================
 std::string WriterBridge::getFlagKmers(const ft::QueryClass& query, const ft::FlagType flag)
 {
-    //std::cout << "add flag kmers " << std::endl;
     std::string queryFlagK;
     if (query.hasFlag(flag)){
         std::set<std::string> flagKmers = query.getFlagKmers(flag);
-        //std::cout << "Number of flag kmers " << flagKmers.size() << std::endl;
         queryFlagK = _utils->joinString(query.getFlagKmers(flag));
-
     } else {
         //std::cout<< "Query doesnt have that flag" << std::endl;
     }
-    //std::cout << "formatted string " << queryFlagK << std::endl;
     return queryFlagK;
 }
 
 //======================================================================
 void WriterBridge::addQueryToOutput( const ft::QueryClass& query, const std::string prefix)
 {
-    //std::cout << "add query to output Map" << std::endl;
     u_int count = query.getCount();
     _outputMap[prefix+"Matches"] = "false";
     if (count > 0){
         _outputMap[prefix+"Matches"] = "true";
-        //std::cout << "Output Map Matches " << _outputMap[prefix+"Matches"] << std::endl;
     } else {
-        _outputMap[prefix+"Matches"] = "false";
-        //std::cout << "No output Map Matches " << _outputMap[prefix+"Matches"] << std::endl;
+        _outputMap[prefix+"Matches"] = "false"; 
     }
-    //std::cout << "output Map Matches " << _outputMap[prefix+"Matches"] << std::endl;
 
     _outputMap[prefix+"Count"] = std::to_string(count);
-    //std::cout << "prefix " << prefix << " output Map count " << _outputMap[prefix+"Count"] << std::endl;
+
     if (_OCK)
     {
-        //std::cout << "Add OCK" << std::endl;
          std::string refOCK = getFlagKmers(query, ft::FlagType::OCK);
         _outputMap[prefix+"OCK"] = refOCK;
-        //std::cout << "OCKs  " << refOCK << std::endl;
     }
 
     if (_NUK)
     {
-        //std::cout << "Add NUK" << std::endl;
         std::string refNUK = getFlagKmers(query, ft::FlagType::NUK);
         _outputMap[prefix+"NUK"] = refNUK;
-        //std::cout << "NUKs  " << refNUK << std::endl;
     }
 }
 
@@ -203,36 +180,23 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
         std::vector<std::string> splitline = _utils->split(line, '\t');
         uint fileIndex = atoi(splitline[0].c_str());
         int queryIndex = fileIndex;
-
-        //std::cout << "fileIndex " << fileIndex  << " query Index " << queryIndex << std::endl;
-
         const ft::QueryClass& refQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::REF));
-
-
-        //std::cout << "Ref Query " << refQuery._qID << std::endl;
         addQueryToOutput(refQuery, "ref");
-        //std::cout << "prefix ref " << " output Map count " << _outputMap["refCount"] << std::endl;
-        //std::cout << "Check for Alt and Cro" << std::endl;
+
 
         if (_altData){
-            //std::cout << "Alt Query " << std::endl;
             const ft::QueryClass& altQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::ALT));
-            //std::cout << "Alt Query " << altQuery._qID << std::endl;
             addQueryToOutput(altQuery, "alt");
-            //std::cout << "output Alt Map count " << _outputMap["altCount"] << std::endl;
         }
 
         if (_croData){
-            //std::cout << "Cro Query " << std::endl;
             const ft::QueryClass& croQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::CRO));
             addQueryToOutput(croQuery, "cro");
-            //std::cout << "output CRO Map count " << _outputMap["croCount"] << std::endl;
         }
 
         if (_MatchesOnly)
         {
             // if no matches for any of the expected data sets then skip
-
             bool skip = true;
             if (_refData &&  _outputMap["refMatches"] == "true"){skip = false;} //ref counts found, dont skip
             if (_altData &&  _outputMap["altMatches"] == "true"){skip = false;} //alt counts found, dont skip
@@ -245,12 +209,10 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
         }
 
         std::string outputLine = formatOutputMap();
-        //std::cout << "outputLine  " << outputLine << std::endl;
         _outputMap.clear();
 
         line.append(outputLine);
         line.append("\n");
-        //std::cout << line << std::endl;
         outputFileStream << line;
 
     }

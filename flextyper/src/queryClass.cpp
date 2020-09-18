@@ -81,9 +81,7 @@ bool QueryClass::hasFlag(const ft::FlagType& flag) const{
 bool QueryClass::hasKmerFlag(const ft::FlagType& flag, const std::string& kmer) const
 {
     if (hasFlag(flag)){
-        //std::cout << "has flag" << std::endl;
         std::set<std::string> flagKmers = _qFlags.find(flag)->second;
-        //std::cout << "number of flag kmers " << flagKmers.size() << std::endl;
         const bool is_in = flagKmers.find(kmer) != flagKmers.end();
         return is_in;
     } else {

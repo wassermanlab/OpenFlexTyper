@@ -40,8 +40,6 @@ std::vector<std::string> Utils::split(const std::string& strToSplit, char delime
 //======================================================================
 std::set<fs::path> Utils::getSetOfIndexes(const fs::path& indexList)
 {
-    // std::cout << indexList << std::endl;
-
     // get the paths to the indexes
     std::set<fs::path> setOfIndexes;
     std::ifstream file(indexList);
@@ -51,30 +49,12 @@ std::set<fs::path> Utils::getSetOfIndexes(const fs::path& indexList)
         while (std::getline(file, line)) {
             line.erase(std::remove(line.begin(), line.end(), '"'), line.end());
             setOfIndexes.emplace(line);
-            // std::cout << "adding : " << line.c_str() << std::endl;
         }
     }
     file.close();
     return setOfIndexes;
 }
 
-//======================================================================
-std::set<size_t> Utils::convertIndexPositionsToReadIDs(std::set<long long> indexPositions, uint readLength)
-{
-    // takes a set of index positions and converts each element to the readID
-    // my concern is that we need to know which index it is to know whether its 5100000 or what
-    std::set<size_t> readIDs;
-    // std::cout << "initial size : " << indexPositions.size() << ", readLength : " << readLength << std::endl;
-
-    // std::remove("occurences.txt");
-    for (auto indexPos : indexPositions) {
-        auto r = (size_t) std::ceil(indexPos / (readLength + 1));
-        // std::cout << indexPos << " -> " << r << std::endl;
-        readIDs.insert(r);
-    }
-
-    return readIDs;
-}
 
 //======================================================================
 std::set<std::string> Utils::convertReadIDsToReadNames(const fs::path& indexMapFile, std::set<size_t> readIDs)
@@ -126,22 +106,6 @@ std::string Utils::reverseComplement(const std::string& inputString) const
 
     return reverseComp;
 }
-
-//======================================================================
-std::string Utils::trimmedReadFileName(const fs::path& p)
-{
-    std::string result;
-    for(auto& e : p) {
-        result = e;
-    }
-    size_t pos = result.find_last_of("_");
-    std::string filename = result;
-    if (pos != std::string::npos) {
-        filename = result.substr(pos + 1);
-    }
-    return filename;
-}
-
 
 //======================================================================
 Utils::~Utils()

@@ -31,7 +31,7 @@ std::set<Query> QueryExtractor::getInputQueries(bool refOnly, bool crossover, co
 
         std::vector<std::string> splitline = _utils->split(line, '\t');
         uint fileIndex = atoi(splitline[0].c_str());
-        //std::cout << "file Index " << fileIndex << std::endl;
+
         std::string refSequence;
         std::string altSequence;
 
@@ -59,11 +59,8 @@ std::set<Query> QueryExtractor::getInputQueries(bool refOnly, bool crossover, co
         }
 
         if (!crossover) {
-            //std::cout << "add ref/alt sequences " << fileIndex << std::endl;
-            //std::cout << "number of queries extracted " << inputQueries.size() << std::endl;
             inputQueries.insert(std::make_tuple(fileIndex, refSequence, altSequence, "" /* is empty */));
             std::cout << fileIndex << "  " << refSequence.substr(0,10) << "  " << altSequence.substr(0,10) << std::endl;
-            //std::cout << "number of queries extracted " << inputQueries.size() << std::endl;
         } else {
             std::string startPointSeq = refSequence.substr(0);
             std::string endPointSeq   = altSequence.substr(0);
@@ -74,7 +71,7 @@ std::set<Query> QueryExtractor::getInputQueries(bool refOnly, bool crossover, co
     }
 
     queryFileStream.close();
-    //std::cout << "number of queries extracted " << inputQueries.size() << std::endl;
+
     return (inputQueries);
 }
 

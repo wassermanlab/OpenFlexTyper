@@ -47,15 +47,13 @@ std::set<std::string> KmerGenerator::genSlidingSearchStrings(const std::string& 
             break;
         if (queryString == ".") continue;
         std::string searchString = queryString.substr(i, _kmerSize);
-        //std::cout << "kmer string  " << searchString << std::endl;
+
         if (!searchString.empty()) {
             _counter[searchString]++;
             searchStrings.insert(searchString);
         }
         count++;
-        // std::cout << "Nominal : Trying : " << queryString << ".substr(" << start << ", " << kmerSize << ");" << std::endl;
     }
-    //std::cout << "Number of kmers  " << searchStrings.size() << std::endl;
     return searchStrings;
 }
 
@@ -83,7 +81,6 @@ std::set<std::string> KmerGenerator::genCenteredSearchStrings(const std::string&
             break;
         if (i + _kmerSize < queryString.size()) {
             std::string searchString = queryString.substr(i, _kmerSize);
-            //std::cout << "kmer string  " << searchString << std::endl;
             _counter[searchString]++;
             searchStrings.insert(searchString);
         }
@@ -131,7 +128,6 @@ std::set<std::string> KmerGenerator::genSearchKmers(const ft::QueryClass& queryO
         std::cout << "Error during the ID creation !" << std::endl;
     }
 
-    //std::cout << "Number of kmers  " << searchKmers.size() << std::endl;
     return searchKmers;
 }
 
