@@ -48,7 +48,7 @@ public:
     void printToStdOut(const std::string outputString) const;
 
 public:
-    void checkInputFastQ(FTProp ftProps);
+
     void checkOutputFile(FTProp ftProps);
     void overrideUtils(std::shared_ptr<IUtils> utils);
     void overrideWriterBridge(std::shared_ptr<IWriterBridge> writerBridge);

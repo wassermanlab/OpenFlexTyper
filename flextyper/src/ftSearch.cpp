@@ -17,15 +17,6 @@ void FTSearch::printToStdOut(const std::string outputString) const {
         std::cout << outputString << std::endl;
     }
 }
-//======================================================================
-void FTSearch::checkInputFastQ(FTProp ftProps){
-
-    // want to remove the "Indexes_" at the beginning
-
-if (ftProps.getInputFastQ().empty()) {
-    ftProps.getInputFastQ().stem() = _utils->trimmedReadFileName(ftProps.getIndexDir());
-}
-}
 
 //======================================================================
 void FTSearch::checkOutputFile(FTProp ftProps){
