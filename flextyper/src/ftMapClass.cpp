@@ -316,9 +316,9 @@ void FTMap::addKmerResults(const ft::KmerClass& kmerResult)
 
      // add flags
 
-     for (std::size_t i = 0; i < kmerResult.getKFlags().size(); ++i) {
+     for (std::size_t i = 0; i < 8; ++i) {
          if ( kmerResult.getKFlags().test(i) ) {
-             //std::cout << "result Flag " << flag.first << std::endl;
+             //std::cout << "addKmerResults: result Flag " << ft::FlagType(i) << std::endl;
              kmer->addKFlag(ft::FlagType(i));
          }
      }
@@ -414,21 +414,28 @@ std::set<ft::ReadID> FTMap::addKmersToQueryResults(ft::QueryClass query, std::se
     {
         bool addToCount = true;
         ft::KmerClass* fwdKmer = findKmer(kmerString);
-        //std::cout << "kmer found " << fwdKmer->getKmer() << std::endl;
+
+        //std::cout << "kmer found " << fwdKmer->getKmer() << " with count " << fwdKmer->getOCC()<<  std::endl;
+        //std::cout << "over counted " << fwdKmer->hasFlag(ft::FlagType::OCK) << std::endl;
+        //std::cout << "abundant " << fwdKmer->hasFlag(ft::FlagType::ABK) << std::endl;
+        //std::cout << "NUK " << fwdKmer->hasFlag(ft::FlagType::NUK)  << std::endl;
+        if (fwdKmer->hasFlag(ft::FlagType::OCK)){
+            //std::cout << "Kmer is overcounted " << std::endl;
+            query.addFlag(ft::FlagType::OCK, fwdKmer->getKmer());
+            if (_ftProps.getOverCountedFlag()){addToCount = false;}
+            //std::cout << "OCK add to count " << addToCount << std::endl;
+        }
+
         if(fwdKmer->hasFlag(ft::FlagType::NUK)){
             //std::cout << "Kmer is not unique " << std::endl;
             query.addFlag(ft::FlagType::NUK, fwdKmer->getKmer());
             if (_ftProps.getIgnoreNonUniqueKmersFlag()){addToCount = false;}
         }
 
-        if (fwdKmer->hasFlag(ft::FlagType::OCK)){
-            //std::cout << "Kmer is overcounted " << std::endl;
-            query.addFlag(ft::FlagType::OCK, fwdKmer->getKmer());
-            if (_ftProps.getOverCountedFlag()){addToCount = false;}
-        }
-
         //std::cout << "number of fwd ReadIDs " << readIds.size() << std::endl;
-        if (addToCount){
+        if (addToCount == true){
+
+            //std::cout << "count kmer " << fwdKmer->getKmer() << " with count " << fwdKmer->getOCC() << " with " << fwdKmer->getReadIDs().size() << " OCC FLAG " << fwdKmer->hasFlag(ft::FlagType::OCK) << std::endl;
             for ( ft::ReadID readID : fwdKmer->getReadIDs())
             {
                 readIds.insert(readID);
@@ -436,7 +443,7 @@ std::set<ft::ReadID> FTMap::addKmersToQueryResults(ft::QueryClass query, std::se
 
         }
     }
-    std::cout << "number of query ReadIDs " << readIds.size() << std::endl;
+    //std::cout << "number of query ReadIDs " << readIds.size() << std::endl;
     return readIds;
 }
 

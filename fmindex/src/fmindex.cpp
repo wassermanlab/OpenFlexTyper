@@ -31,8 +31,8 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
 
     // if number kmers > max, flag kmer as "abundant"
     if (occs > maxOcc && flagOverCountedKmers) {
-        std::cout << "Kmer flagged as Abundant " << kmer << std::endl;
-        kmerResult.addKFlag(ft::FlagType::ABK);
+        kmerResult.addKFlag(ft::FlagType::OCK);
+        //std::cout << "OCK flag added " << kmerResult.hasFlag(ft::FlagType::OCK) << std::endl;
     }
     if (occs > 0  && occs <= maxOcc) {
         auto locations = sdsl::locate(_index, kmer.begin(), kmer.end());
@@ -45,6 +45,7 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
             kmerResult.addKPosition(e);
         }
     }
+
     return kmerResult;
 }
 
