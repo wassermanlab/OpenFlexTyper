@@ -155,6 +155,38 @@ TEST_F(TestFTMap, TestProcessIndexResults)
 }
 
 //======================================================================
+TEST_F(TestFTMap, TestProcessIndexResults_multipleIndexes )
+{
+    TEST_DESCRIPTION("Process Index Results");
+    //void processIndexResults(std::set<ft::KmerClass> indexResults, uint readLength);
+    ft::FTProp _ftProps;
+    _ftProps.initFromQSettings("Test_Settings.ini", false);
+    _ftProps.setTestProps(20, 100, false);
+    ft::FTMap ftMap(_ftProps);
+
+    ft::KmerClass testKmer1("AAAA");
+    testKmer1.addKPosition(123);
+    ft::KmerClass testKmer2("CCCC");
+    testKmer2.addKPosition(345);
+    std::map<std::string, ft::KmerClass> indexResults;
+    indexResults["AAAA"]= testKmer1;
+    indexResults["CCCC"] = testKmer2;
+
+    ftMap.processIndexResults(indexResults);
+
+    ft::KmerClass outputKmer = ftMap.getKmer("AAAA");
+    ft::KmerClass outputKmer2 = ftMap.getKmer("CCCC");
+
+    EXPECT_TRUE(ftMap.checkForKmer("AAAA"));
+    EXPECT_TRUE(ftMap.checkForKmer("CCCC"));
+    EXPECT_TRUE(outputKmer.hasReadID(std::make_pair(2, 1)));
+    EXPECT_TRUE(outputKmer2.hasReadID(std::make_pair(4, 1)));
+}
+
+
+
+
+//======================================================================
 TEST_F(TestFTMap, TestaddKmersToQueryResults )
 {
    TEST_DESCRIPTION("Process Query Results");

@@ -40,6 +40,7 @@ void IndexProps::printToStdOut(std::string outputString) const{
 //================= PARAMETER GETTERS ========================
 uint IndexProps::getNumOfIndexes() const {return _numOfIndexes;}
 uint IndexProps::getNumOfReads() const {return _numOfReads;}
+uint IndexProps::getReadLength() const {return _readLength;}
 
 bool IndexProps::getDelFQFlag() const {return _delFQ;}
 bool IndexProps::getDelFastaFlag() const {return _delFasta;}
@@ -54,6 +55,7 @@ const algo::FileType& IndexProps::getReadFileType()const {return _readFileType;}
 //==================== PARAMETER SETTERS ===================
 void IndexProps::setNumOfIndexes(uint numOfIndexes) {_numOfIndexes = numOfIndexes;}
 void IndexProps::setNumOfReads(uint numOfReads) {_numOfReads = numOfReads;}
+void IndexProps::setReadLength(uint readLength) {_readLength = readLength;}
 
 void IndexProps::setDelFQFlag(bool delFQ){ _delFQ = delFQ;}
 void IndexProps::setDelFastaFlag(bool delFasta){ _delFasta = delFasta;}
@@ -216,6 +218,7 @@ void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) const {
     settings.setValue("indexDirectory", QString::fromStdString(_outputFolder.string()));
     settings.setValue("buildDirectory", QString::fromStdString(_buildDir.string()));
     settings.setValue("numOfReads", _numOfReads);
+    settings.setValue("readLength", _readLength);
     settings.setValue("numOfIndexes", _numOfIndexes);
     settings.setValue("revComp", _revComp);
     settings.setValue("pairedReads", _pairedReads);
@@ -243,6 +246,7 @@ void IndexProps::saveIndexProps(const fs::path& _indexPropsFile) const {
     std::cout << "Index File Name   : " << settings.value("indexName").toString().toStdString() <<  std::endl;
     std::cout << "read Set Name     : " << settings.value("readSetName").toString().toStdString() <<  std::endl;
     std::cout << "Number of Reads   : " << settings.value("numOfReads").toString().toStdString() <<  std::endl;
+    std::cout << "Read Length   : " << settings.value("readLength").toString().toStdString() <<  std::endl;
     std::cout << "Number of Indexes : " << settings.value("numOfIndexes").toString().toStdString() <<  std::endl;
     if (_pairedReads)
         {std::cout << "R1                : " << settings.value("R1").toString().toStdString() <<  std::endl;
@@ -293,7 +297,7 @@ void IndexProps::loadFromIni(const fs::path inifile){
     std::cout << "index Directory   : " << _indexDir <<  std::endl;
     std::cout << "Index File Name   : " << _indexName <<  std::endl;
     std::cout << "read Set Name     : " << _readSetName <<  std::endl;
-
+    std::cout << "read Length     : " << _readLength <<  std::endl;
     std::cout << "Number of Reads   : " << _numOfReads <<  std::endl;
     std::cout << "Number of Indexes : " << _numOfIndexes <<  std::endl;
     if (_pairedReads)
@@ -307,7 +311,7 @@ void IndexProps::loadFromIni(const fs::path inifile){
 
     setR1(_R1);
     setR2(_R2);
-
+    setReadLength(_readLength);
     setBuildDir(_buildDir);
     setNumOfReads(_numOfReads);
     setNumOfIndexes(_numOfIndexes);
@@ -334,6 +338,15 @@ void IndexProps::countNumOfReads() {
 
 }
 //======================================================================
+void IndexProps::countReadLength(fs::path readFile){
+    std::ifstream in(readFile);
+    std::string line;
+    std::getline(in, line);
+    setReadLength(line.size());
+    in.close();
+}
+
+//======================================================================
 u_int IndexProps::countLines(fs::path fileToCount){
     std::ifstream in(fileToCount);
     u_int n = 0;
@@ -350,9 +363,10 @@ u_int IndexProps::countLines(fs::path fileToCount){
 //======================================================================
 u_int IndexProps::getOffsetForIndex(fs::path ppf)
 {
-    std::pair<u_int, u_int> offset = _ppFSet[ppf];
+    std::pair<u_int, u_int> reads = _ppFSet[ppf];
+    u_int offset = reads.first * (_readLength + 1);
 
-    return offset.first;
+    return offset;
 }
 
 

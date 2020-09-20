@@ -33,7 +33,7 @@ public:
         {
             fs::remove(fs::current_path() /= "testOutput/Index_Test.fm9");
         }
-         fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
+         fs::path output = _fmindex.createFMIndex(_indexProp, pPF ).first;
         _indexProp.addToIndexSet(output, 0);
          if (saveini){
              fs::path ini = fs::current_path() /= "testOutput/Index_Test.ini";
@@ -70,7 +70,7 @@ TEST_F(TestFMIndex, createFMIndex)
     _indexProp.setReadSetName("Test");
 
     fs::path pPF = fs::absolute("testFiles/Test.fasta");
-    fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
+    fs::path output = _fmindex.createFMIndex(_indexProp, pPF ).first;
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
 
     std::string kmer = "AAAATAGTACTTTCCTGATTCCAGCACTGACTAATTTATCTACTTGTTCA";
@@ -212,7 +212,7 @@ TEST_F(TestFMIndex, locateInIndexUsingPointers)
     _indexProp.setReadFileType(algo::FileType::GZ);
     fs::path pPF = fs::current_path() /="testFiles/Test.fasta";
     std::cout << pPF.string() << std::endl;
-    fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
+    fs::path output = _fmindex.createFMIndex(_indexProp, pPF ).first;
     std::cout << "index output " << output << std::endl;
     std::string kmer = "AA";
     _fmindex.loadIndexFromFile(output);
@@ -242,7 +242,7 @@ TEST_F(TestFMIndex, searchFMIndexUsingPointer)
 
     _indexProp.setReadFileType(algo::FileType::GZ);
     fs::path pPF = "testFiles/Test.fasta";
-    fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
+    fs::path output = _fmindex.createFMIndex(_indexProp, pPF ).first;
     std::string kmer = "AA";
     std::cout << "index output " << output << std::endl;
     _fmindex.loadIndexFromFile(output);

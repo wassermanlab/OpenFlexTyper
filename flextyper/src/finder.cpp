@@ -47,7 +47,7 @@ void Finder::indexSequentialSearch(FTMap &ftMap)
         u_int offset = item.second;
         sequentialSearch(ftMap, indexPath, offset);
     }
-
+    FTProp::Log << "(I) Search Completed for all indexes " << std::endl;
 }
 
 //======================================================================
@@ -71,12 +71,13 @@ void Finder::addResultsFutures(std::map<std::string, ft::KmerClass> & indexResul
     if (it != indexResults.end())
     {
         ft::KmerClass result = it->second;
-        const std::set<long long>& positions = tmpResult.getKPositions();
-        result.setKPositions(positions, offset);
+        for (auto pos : tmpResult.getKPositions()){
+            result.addKPosition(pos, offset);
+        }
+
         int occ = result.getOCC();
         occ += tmpResult.getOCC();
         result.setOCC(occ);
-        std::cout << "kmer " << result.getKmer() << " with count " << occ << std::endl;
         for (std::size_t i = 0; i < 8; ++i) {
             if ( tmpResult.getKFlags().test(i) ) {
                 result.addKFlag(ft::FlagType(i));
@@ -84,6 +85,8 @@ void Finder::addResultsFutures(std::map<std::string, ft::KmerClass> & indexResul
         }
         it->second = result;
     } else {
+        const std::set<long long>& positions = tmpResult.getKPositions();
+        tmpResult.setKPositions(positions, offset);
         indexResults[resultkmer] = tmpResult;
     }
 }
@@ -153,7 +156,7 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
     const FTProp& ftProps = ftMap.getFTProps();
     uint maxOcc = ftProps.getMaxOcc();
     uint overCountedFlag = ftProps.getOverCountedFlag();
-
+    std::cout << "index " << indexPath << " with offset " << offset << std::endl;
     const std::unordered_map<std::string, ft::KmerClass>& kmerMap = ftMap.getKmerSet();
 
     algo::IFmIndex* fmIndex = new algo::FmIndex(ftProps.isVerbose());
@@ -175,7 +178,9 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
     {
        std::string kmer = it->first;
        ft::KmerClass tmpResult = fmIndex->search(kmer, maxOcc, overCountedFlag);
+       //FTProp::Log  << "(I) Kmer Search completed " << kmer << std::endl;
        addResultsFutures(indexResults,tmpResult, offset);
+       //FTProp::Log  << "(I) Kmer results added  " << kmer << std::endl;
        it++;
     }
 

@@ -30,6 +30,7 @@ public:
     /// Parameter Getters ///
     uint getNumOfIndexes() const;
     uint getNumOfReads() const;
+    uint getReadLength() const;
 
     bool getDelFQFlag() const;
     bool getDelFastaFlag() const;
@@ -43,6 +44,7 @@ public:
     /// Parameter Setters ///
     void setNumOfIndexes(uint numIndexes);
     void setNumOfReads(uint numOfReads);
+    void setReadLength(uint readLength);
 
     void setDelFQFlag(bool delFQFlag);
     void setDelFastaFlag(bool delFastaFlag);
@@ -91,6 +93,7 @@ public:
 
     /// Index Props I/O ///
     void countNumOfReads();
+    void countReadLength(fs::path readFile);
 
     void saveIndexProps(const fs::path& indexPropsFile) const;
     void loadFromIni(const fs::path inifile);
@@ -111,6 +114,7 @@ private:
 
      //this is the set of generated index files and their offsets
     uint _numOfReads;
+    uint _readLength;
     uint _numOfIndexes = 1;
 
     bool _revComp = 0;

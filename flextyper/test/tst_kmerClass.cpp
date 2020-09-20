@@ -25,6 +25,18 @@ TEST_F(TestKmerClass, getKmer)
 }
 
 //======================================================================
+TEST_F(TestKmerClass, setKPos)
+{
+    TEST_DESCRIPTION("get Kmer string");
+    //void KmerClass::setKPositions(const std::set<long long>& kPositions, uint offset)
+    std::string kmer = "AAAA";
+    ft::KmerClass testKmerClass(kmer);
+    std::string resultkmer = testKmerClass.getKmer();
+    EXPECT_EQ(resultkmer, kmer);
+}
+
+
+//======================================================================
 TEST_F(TestKmerClass, KFlag)
 {
     TEST_DESCRIPTION("Add single flag to kmer class");

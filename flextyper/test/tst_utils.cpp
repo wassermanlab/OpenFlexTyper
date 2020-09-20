@@ -111,57 +111,5 @@ TEST_F(TestUtils, getSetOfIndexes)
     EXPECT_EQ(output, expectedPaths);
 }
 
-//======================================================================
-TEST_F(TestUtils, convertIndexPositionsToReadIDs)
-{
-    TEST_DESCRIPTION("This test tests the capacity to convert Index position to readID");
-
-    set<long long> input {1, 2, 878, 55465, 5456, 56654};
-    uint readLen = 100;
-    set<size_t> expectedPositions {0, 8, 54, 549, 560};
-
-    set<size_t> output = _utils.convertIndexPositionsToReadIDs(input, readLen);
-
-    EXPECT_EQ(output, expectedPositions);
-}
-
-//======================================================================
-TEST_F(TestUtils, convertIndexPositionsToReadIDsWithRepeatedPositions)
-{
-    TEST_DESCRIPTION("Tests the capacity to convert Index position to readID");
-
-    set<long long> input {1, 2, 878, 55465, 5456, 56654, 56654, 56654};
-    uint readLen = 100;
-    set<size_t> expectedPositions {0, 8, 54, 549, 560};
-
-    set<size_t> output = _utils.convertIndexPositionsToReadIDs(input, readLen);
-
-    EXPECT_EQ(output, expectedPositions);
-}
-
-
-//======================================================================
-TEST_F(TestUtils, trimmedReadFileName)
-{
-    TEST_DESCRIPTION("This test trims the read filename");
-
-    fs::path input ("Indexes_ERR123456.fasta");
-    string expectedOutput("ERR123456.fasta");
-    string output = _utils.trimmedReadFileName(input);
-
-    EXPECT_EQ(output, expectedOutput);
-}
-
-//======================================================================
-TEST_F(TestUtils, trimmedReadFileNameWithoutNeedToRoRemovePattern)
-{
-    TEST_DESCRIPTION("This test makes sure the read filename is not changes if there is no need to trim");
-
-    fs::path input ("ERR123456.fasta");
-    string expectedOutput("ERR123456.fasta");
-    string output = _utils.trimmedReadFileName(input);
-
-    EXPECT_EQ(output, expectedOutput);
-}
 
 }

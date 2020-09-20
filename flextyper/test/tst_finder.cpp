@@ -95,7 +95,7 @@ public:
         {
             fs::remove(fs::current_path() /= "testOutput/Index_Test.fm9");
         }
-         fs::path output = _fmindex.createFMIndex(_indexProp, pPF );
+         fs::path output = _fmindex.createFMIndex(_indexProp, pPF ).first;
         _indexProp.addToIndexSet(output, 0);
          if (saveini){
              fs::path ini = fs::current_path() /= "testOutput/Index_Test.ini";

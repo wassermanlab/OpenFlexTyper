@@ -130,6 +130,10 @@ int main(int argc, char** argv)
         numOfIndexes.setValueName("numOfIndexes");
         parser.addOption(numOfIndexes);
 
+        QCommandLineOption readLength(QStringList() << "l" << "readLength" , QCoreApplication::translate("main", "read length "));
+        readLength.setValueName("readLength");
+        parser.addOption(readLength);
+
         QCommandLineOption readFastq(QStringList() << "fq" << "fastq" , QCoreApplication::translate("main", "the input file is in fq format "));
         parser.addOption(readFastq);
 
@@ -238,7 +242,6 @@ int main(int argc, char** argv)
         }
 
 
-
         // call bash script to manipulate the input files
         std::string bashargs = props->createBash();
         std::cout << "bash args " << bashargs << std::endl;
@@ -264,6 +267,14 @@ int main(int argc, char** argv)
         // count number of reads in read set
         props->countNumOfReads();
 
+        // set the read length, or count from PPF
+        if (parser.isSet(readLength))
+        { u_int length = std::stoi(parser.value(readLength).toStdString());
+            props->setReadLength(length);
+        } else {
+            fs::path ppf = props->getPreProcessedFastas().begin()->first;
+            props->countReadLength(ppf);
+        }
 
         algo::FmIndex fmIndexObj;
 
