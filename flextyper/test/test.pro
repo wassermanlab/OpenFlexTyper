@@ -50,4 +50,4 @@ SOURCES += tst_queryextractor.cpp           \
            tst_finder.cpp                   \
            tst_kmergenerator.cpp            \
 
-SOURCES += mock/mock_fmindex.cpp            \
+SOURCES +=            \
