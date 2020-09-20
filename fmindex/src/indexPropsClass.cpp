@@ -199,7 +199,7 @@ void IndexProps::createPPFSet(){
         printToStdOut(" number of lines " + std::to_string(lines));
         u_int end = start + lines;
         addPPF(ppf, start, end);
-        start += lines;
+        start += lines + 1;
     }
     _numOfReads = start;
 }
@@ -365,7 +365,6 @@ u_int IndexProps::getOffsetForIndex(fs::path ppf)
 {
     std::pair<u_int, u_int> reads = _ppFSet[ppf];
     u_int offset = reads.first * (_readLength + 1);
-
     return offset;
 }
 
