@@ -161,7 +161,7 @@ TEST_F(TestFinder, sequentialSearch)
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
                   indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
-                  returnMatchesOnly, kmerCounts, stride,
+                  returnMatchesOnly, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
                   ignoreNonUniqueKmers, crossover);
     _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,indexFileName, readSetName,
@@ -216,7 +216,7 @@ TEST_F(TestFinder, sequentialSearchLocations)
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
                   indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
-                  returnMatchesOnly, kmerCounts, stride,
+                  returnMatchesOnly, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
                   ignoreNonUniqueKmers, crossover);
     _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,indexFileName, readSetName,
@@ -282,7 +282,7 @@ TEST_F(TestFinder, sequentialSearchFromIndexProps)
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
                   indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
-                  returnMatchesOnly, kmerCounts, stride,
+                  returnMatchesOnly, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
                   ignoreNonUniqueKmers, crossover, false, 3000, 3000000000, true);
 
@@ -335,7 +335,7 @@ TEST_F(TestFinder, DISABLED_sequentialSearchMultipleIndex)
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
                   indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
-                  returnMatchesOnly, kmerCounts, stride,
+                  returnMatchesOnly, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
                   ignoreNonUniqueKmers, crossover, false, 3000, 3000000000, true);
     _ftProps.addToIndexSet("testOutput/Index_Test.fm9", 0);
@@ -391,7 +391,7 @@ TEST_F(TestFinder, parallelSearch1)
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
                   indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
-                  returnMatchesOnly, kmerCounts, stride,
+                  returnMatchesOnly, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
                   ignoreNonUniqueKmers, crossover);
 
@@ -452,7 +452,7 @@ TEST_F(TestFinder, parallelSearch2)
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
                   indexPropsFile,outputFolder,refOnly, revCompSearch,
                   searchType, multithread, overlap,
-                  returnMatchesOnly, kmerCounts, stride,
+                  returnMatchesOnly, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
                   ignoreNonUniqueKmers, crossover);
 

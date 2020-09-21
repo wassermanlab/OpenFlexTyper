@@ -81,7 +81,6 @@ public:
               bool multithread              = false ,
               uint overlap                  = 0     ,
               bool returnMatchesOnly        = false ,
-              bool kmerCounts               = false ,
               uint stride                   = 10    ,
               uint maxOccurences            = 200   ,
               uint numOfThreads             = 1     ,
@@ -152,13 +151,9 @@ public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief Flag getters
     ////////////////////////////////////////////////////////////////////////
-    bool getKmerCountsFlag() const;
     bool getMultithreadFlag() const;
     bool getRefOnlyFlag() const;
     bool getMatchesOnlyFlag() const;
-    //bool getOverCountedFlag() const;
-    //bool getNonUniqueFlag() const;
-    //bool getIgnoreNonUniqueKmersFlag() const;
     bool getCrossoverFlag() const;
     bool getPrintSearchTimeFlag() const;
     bool getPairedReadFlag() const;
@@ -228,14 +223,9 @@ private:
     std::bitset<8> _flagsToOutput;
     std::bitset<8> _flagsToNotCount;
 
-    bool _kmerCounts;
     bool _multithread; //run search in parallel
     bool _refOnly; // single sequence for each query
     bool _matchesOnly; // only output positive hits
-    //bool _overcounted; //output a list of OCK
-    //bool _nonUnique; //output a list of NUK
-    //bool _ignoreNonUniqueKmers; //discount the NUK
-    //bool _ignoreOverCountedKmers;
     bool _crossover; //search for crossover counts
     bool _printSearchTime;
     bool _pairedReads; // paired reads

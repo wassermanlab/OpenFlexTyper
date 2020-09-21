@@ -119,7 +119,7 @@ std::string WriterBridge::getFlagKmers(const ft::QueryClass& query, const ft::Fl
     std::set<std::string> flagKmers = query.getFlagKmers(flag);
     std::cout << "Query has " << flagKmers.size() << " flag kmers " << std::endl;
     if (flagKmers.size() > 0){
-    queryFlagK = joinString(flagKmers, ",");
+    queryFlagK = joinString(flagKmers, ", ");
     }
 
     return queryFlagK;

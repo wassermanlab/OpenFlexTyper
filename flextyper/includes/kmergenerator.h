@@ -21,7 +21,7 @@ public:
                     const SearchType& _searchType ,
                     const uint& _overlap = 0,
                     const uint& _stride = 1,
-                    const bool& _kmerCounts = false,
+                    //const bool& _kmerCounts = false,
                     const uint& _maxKmers = 1000000000,
                     const bool& _verbose = false);
 
@@ -64,7 +64,7 @@ public:
     SearchType getSearchType() const;
     uint getOverlap() const;
     uint getStride() const;
-    bool getKmerCountsFlag() const;
+    //bool getKmerCountsFlag() const;
     uint getMaxKmers() const;
 
 private:
@@ -78,7 +78,7 @@ private:
     SearchType _searchType;
     uint _overlap;
     uint _stride;
-    bool _kmerCounts;
+    //bool _kmerCounts;
     uint _maxKmers;
     bool _verbose;
 

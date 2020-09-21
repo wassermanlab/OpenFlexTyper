@@ -58,7 +58,7 @@ void FTMap::genQKMap()
                                   _ftProps.getSearchType(),
                                   _ftProps.getOverlap(),
                                   _ftProps.getStride(),
-                                  _ftProps.getKmerCountsFlag(),
+                                  //_ftProps.getKmerCountsFlag(),
                                   _ftProps.getMaxKmersPerQuery(),
                                   _ftProps.isVerbose());
 

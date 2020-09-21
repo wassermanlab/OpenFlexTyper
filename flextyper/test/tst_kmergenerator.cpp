@@ -32,17 +32,15 @@ TEST_F(TestKmerGenerator, init)
     SearchType _searchType = SLIDING;
     uint _overlap = 0;
     uint _stride = 1;
-    bool _kmerCounts = false;
     uint _maxKmers  = 30;
 
-    KmerGenerator _kgen(_kmerSize, _refOnly, _searchType, _overlap, _stride, _kmerCounts, _maxKmers);
+    KmerGenerator _kgen(_kmerSize, _refOnly, _searchType, _overlap, _stride,  _maxKmers);
 
     EXPECT_EQ(_kmerSize, _kgen.getKmerSize());
     EXPECT_EQ(_refOnly, _kgen.getRefOnly());
     EXPECT_EQ(_searchType, _kgen.getSearchType());
     EXPECT_EQ(_overlap, _kgen.getOverlap());
     EXPECT_EQ(_stride, _kgen.getStride());
-    EXPECT_EQ(_kmerCounts, _kgen.getKmerCountsFlag());
     EXPECT_EQ(_maxKmers, _kgen.getMaxKmers());
 
 }
@@ -56,9 +54,8 @@ TEST_F(TestKmerGenerator, genSlidingSearchStrings)
     SearchType _searchType = SLIDING;
     uint _overlap = 0;
     uint _stride = 1;
-    bool _kmerCounts = false;
     uint _maxKmers  = 30;
-    KmerGenerator _kgen(_kmerSize, _refOnly, _searchType, _overlap, _stride, _kmerCounts, _maxKmers);
+    KmerGenerator _kgen(_kmerSize, _refOnly, _searchType, _overlap, _stride, _maxKmers);
 
     std::string queryString = "AAAAATCCCCC";
 
@@ -79,10 +76,9 @@ TEST_F(TestKmerGenerator, genCenteredSearchStrings)
     SearchType _searchType = CENTERED;
     uint _overlap = 0;
     uint _stride = 1;
-    bool _kmerCounts = false;
     uint _maxKmers  = 30;
 
-    KmerGenerator _kgen(_kmerSize, _refOnly, _searchType, _overlap, _stride, _kmerCounts, _maxKmers);
+    KmerGenerator _kgen(_kmerSize, _refOnly, _searchType, _overlap, _stride, _maxKmers);
 
     //input: const std::string& queryString, uint kmerSize, uint overlap, uint stride, bool kmerCounts, uint maxKmers
     std::string queryString = "AAAAATCCCCC";

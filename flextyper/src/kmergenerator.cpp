@@ -8,7 +8,7 @@ KmerGenerator::KmerGenerator(const uint& kmerSize ,
                              const SearchType& searchType ,
                              const uint& overlap ,
                              const uint& stride,
-                             const bool& kmerCounts,
+                             //const bool& kmerCounts,
                              const uint& maxKmers,
                              const bool &verbose)
     : _kmerSize(kmerSize) ,
@@ -16,7 +16,7 @@ KmerGenerator::KmerGenerator(const uint& kmerSize ,
     _searchType(searchType),
     _overlap(overlap),
     _stride(stride),
-    _kmerCounts(kmerCounts),
+    //_kmerCounts(kmerCounts),
     _maxKmers(maxKmers),
     _verbose(verbose)
 {
@@ -28,7 +28,7 @@ bool KmerGenerator::getRefOnly() const {return _refOnly;}
 SearchType KmerGenerator::getSearchType() const {return _searchType;}
 uint KmerGenerator::getOverlap() const {return _overlap;}
 uint KmerGenerator::getStride() const {return _stride;}
-bool KmerGenerator::getKmerCountsFlag() const {return _kmerCounts;}
+//bool KmerGenerator::getKmerCountsFlag() const {return _kmerCounts;}
 uint KmerGenerator::getMaxKmers() const {return _maxKmers;}
 
 //======================================================================
@@ -104,7 +104,7 @@ std::set<std::string> KmerGenerator::genSearchKmers(const ft::QueryClass& queryO
             std::cout << "Search Type " << _searchType << std::endl;
             std::cout << "Overlap  " << _overlap << std::endl;
             std::cout << "Stride " << _stride << std::endl;
-            std::cout << "kmer Counts " << _kmerCounts << std::endl;
+            //std::cout << "kmer Counts " << _kmerCounts << std::endl;
             std::cout << "MaxKmers  " << _maxKmers << std::endl;
 
     }

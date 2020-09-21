@@ -21,7 +21,6 @@ void FTProp::init(const fs::path &pathToQueryFile,
                   bool multithread,
                   uint overlap,
                   bool returnMatchesOnly,
-                  bool kmerCounts,
                   uint stride,
                   uint maxOccurences,
                   uint numOfThreads,
@@ -48,14 +47,9 @@ void FTProp::init(const fs::path &pathToQueryFile,
     _multithread = multithread;
     _overlap = overlap;
     _matchesOnly = returnMatchesOnly;
-    _kmerCounts = kmerCounts;
     _stride = stride;
     _maxOccurences = maxOccurences;
     _maxThreads = numOfThreads;
-    //_outputNonUnique = outputNonUniqueKmers;
-    //_outputOverCounted = outputOverCountedKmers;
-    //_ignoreNonUniqueKmers = ignoreNonUniqueKmers;
-    //_ignoreOverCountedKmers = ignoreOverCountedKmers;
     _countAsPairs = countAsPairs;
     _crossover = crossover;
     _printSearchTime = printSearchTime;
@@ -87,7 +81,6 @@ void FTProp::init(const fs::path &pathToQueryFile,
         std::cout << "multithread                   : " << multithread <<  std::endl;
         std::cout << "overlap                       : " << overlap <<  std::endl;
         std::cout << "return_only_positive_matches  : " << returnMatchesOnly <<  std::endl;
-        std::cout << "kmerCounts                    : " << kmerCounts << std::endl;
         std::cout << "stride                        : " << stride << std::endl;
         std::cout << "maxOccurences                 : " << maxOccurences << std::endl;
         std::cout << "numOfThreads                  : " << numOfThreads << std::endl;
@@ -115,7 +108,6 @@ void FTProp::init(const fs::path &pathToQueryFile,
         FTProp::Log << "multithread                   : " << multithread <<  std::endl;
         FTProp::Log << "overlap                       : " << overlap <<  std::endl;
         FTProp::Log << "return_only_positive_matches  : " << returnMatchesOnly <<  std::endl;
-        FTProp::Log << "kmerCounts                    : " << kmerCounts << std::endl;
         FTProp::Log << "stride                        : " << stride << std::endl;
         FTProp::Log << "maxOccurences                 : " << maxOccurences << std::endl;
         FTProp::Log << "numOfThreads                  : " << numOfThreads << std::endl;
@@ -158,7 +150,6 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
     bool           matchingReads           = settings.value("matchingReads").toBool();
     uint           overlap                 = settings.value("overlap").toInt();
     bool           returnMatchesOnly       = settings.value("return_only_positive_matches").toBool();
-    bool           kmerCounts              = settings.value("kmerCounts").toBool();
     uint           stride                  = settings.value("stride").toInt();
     uint           maxOccurences           = settings.value("maxOccurences").toInt();
     uint           numOfThreads            = settings.value("numOfThreads").toInt();
@@ -175,7 +166,7 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
     init(pathToQueryFile, kmerSize, readLength,
          indexPropsFile, outputFolder, refOnly, revCompSearch,
          searchType, multithread, overlap,
-         returnMatchesOnly, kmerCounts, stride,
+         returnMatchesOnly, stride,
          maxOccurences, numOfThreads, outputNonUniqueKmers, outputOverCountedKmers,
          ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover, printSearchTime,
          maxKmersPerQuery, maxTotalKmers, printInputs, matchingReads);
@@ -349,13 +340,9 @@ uint FTProp::getNumOfIndexes() const {return _numOfIndexes;}
 uint FTProp::getNumOfReads() const {return _numOfReads;}
 
 //====================== FLAG GETTERS ======================
-bool FTProp::getKmerCountsFlag() const {return _kmerCounts;}
 bool FTProp::getMultithreadFlag() const {return _multithread;}
 bool FTProp::getRefOnlyFlag() const {return _refOnly;}
 bool FTProp::getMatchesOnlyFlag() const {return _matchesOnly;}
-//bool FTProp::getOverCountedFlag() const {return _overcounted;}
-//bool FTProp::getNonUniqueFlag() const {return _nonUnique;}
-//bool FTProp::getIgnoreNonUniqueKmersFlag() const {return _ignoreNonUniqueKmers;}
 bool FTProp::getCrossoverFlag() const {return _crossover;}
 bool FTProp::getPrintSearchTimeFlag() const {return _matchesOnly;}
 bool FTProp::getPairedReadFlag() const {return _pairedReads;}
@@ -414,7 +401,6 @@ void FTProp::setOutputFolder(const fs::path& outputFolder)
     {
         throw std::runtime_error("Cannot create output folder " + _outputFolder.string());
     }
-
 }
 
 void FTProp::setFlagToOutput(ft::FlagType flag)
