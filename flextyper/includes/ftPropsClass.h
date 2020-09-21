@@ -85,12 +85,13 @@ public:
               uint stride                   = 10    ,
               uint maxOccurences            = 200   ,
               uint numOfThreads             = 1     ,
-              bool flagOverCountedKmers     = false ,
               bool flagNonUniqueKmers       = false ,
+              bool flagOverCountedKmers     = false ,
               bool ignoreNonUniqueKmers     = true  ,
-              bool countAsPairs             = false,
+              bool ignoreOverCountedKmers   = true  ,
+              bool countAsPairs             = false ,
               bool crossover                = false ,
-              bool printSearchTime          = false,
+              bool printSearchTime          = false ,
               uint maxKmers                 = UINT_MAX,
               uint totalKmers               = UINT_MAX,
               bool printInputs              = false,
@@ -232,6 +233,7 @@ private:
     bool _overcounted; //output a list of OCK
     bool _nonUnique; //output a list of NUK
     bool _ignoreNonUniqueKmers; //discount the NUK
+    bool _ignoreOverCountedKmers;
     bool _crossover; //search for crossover counts
     bool _printSearchTime;
     bool _pairedReads; // paired reads

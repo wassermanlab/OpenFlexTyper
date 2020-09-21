@@ -24,8 +24,10 @@ protected:
         stride                   = 10    ;
         maxOccurences            = 200   ;
         maxThreads               = 1     ;
+        flagNonUniqueKmers       = false ;
         flagOverCountedKmers     = false ;
         ignoreNonUniqueKmers     = true  ;
+        ignoreOverCountedKmers   = true  ;
         countAsPairs             = false ;
         crossover                = false ;
         pairedReads = false;
@@ -58,9 +60,10 @@ protected:
     uint stride;
     uint maxOccurences;
     uint maxThreads;
-    bool flagOverCountedKmers;
     bool flagNonUniqueKmers;
+    bool flagOverCountedKmers;
     bool ignoreNonUniqueKmers;
+    bool ignoreOverCountedKmers;
     bool countAsPairs;
     bool crossover;
     bool pairedReads;
@@ -88,11 +91,11 @@ TEST_F(TestWriterBridge, setOutputOptions)
     //void setOutputOptions(const ft::FTMap& ftMap);
     ft::FTProp _ftProps;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
-                  ignoreNonUniqueKmers, countAsPairs, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
     WriterBridge _writerBridge;
     _writerBridge.setOutputOptions(_ftMap);
@@ -122,8 +125,8 @@ TEST_F(TestWriterBridge, createHeaderRef1)
                   indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
-                  ignoreNonUniqueKmers, countAsPairs, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
     WriterBridge _writerBridge;
     _writerBridge.setOutputOptions(_ftMap);
@@ -150,11 +153,11 @@ TEST_F(TestWriterBridge, createHeaderRef2)
     ignoreNonUniqueKmers = false;
     countAsPairs = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
-                  ignoreNonUniqueKmers, countAsPairs, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
     WriterBridge _writerBridge;
     _writerBridge.setOutputOptions(_ftMap);
@@ -181,11 +184,11 @@ TEST_F(TestWriterBridge, createHeaderRef3)
     ignoreNonUniqueKmers = true;
     countAsPairs = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
-                  ignoreNonUniqueKmers, countAsPairs, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
     WriterBridge _writerBridge;
     _writerBridge.setOutputOptions(_ftMap);
@@ -215,8 +218,8 @@ TEST_F(TestWriterBridge, createHeaderRef4)
                   indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
-                  ignoreNonUniqueKmers, countAsPairs, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
     WriterBridge _writerBridge;
     _writerBridge.setOutputOptions(_ftMap);
@@ -240,8 +243,8 @@ TEST_F(TestWriterBridge, createHeaderRA1)
                   indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
-                  ignoreNonUniqueKmers, countAsPairs, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
     WriterBridge _writerBridge;
     _writerBridge.setOutputOptions(_ftMap);
@@ -268,11 +271,11 @@ TEST_F(TestWriterBridge, createHeaderRA2)
     ignoreNonUniqueKmers = false;
     countAsPairs = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
-                  ignoreNonUniqueKmers, countAsPairs, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
     WriterBridge _writerBridge;
     _writerBridge.setOutputOptions(_ftMap);
@@ -301,8 +304,8 @@ TEST_F(TestWriterBridge, createHeaderRA3)
                   indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
-                  ignoreNonUniqueKmers, countAsPairs, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
     WriterBridge _writerBridge;
     _writerBridge.setOutputOptions(_ftMap);
@@ -331,8 +334,8 @@ TEST_F(TestWriterBridge, createHeaderRA4)
                   indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
-                  ignoreNonUniqueKmers, countAsPairs, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
     WriterBridge _writerBridge;
     _writerBridge.setOutputOptions(_ftMap);
@@ -363,8 +366,8 @@ TEST_F(TestWriterBridge, createHeaderCRO1)
                   indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
-                  ignoreNonUniqueKmers, countAsPairs, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
         WriterBridge _writerBridge;
         _writerBridge.setOutputOptions(_ftMap);
@@ -393,8 +396,8 @@ TEST_F(TestWriterBridge, createHeaderCRO2)
                   indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
-                  ignoreNonUniqueKmers, countAsPairs, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
     WriterBridge _writerBridge;
 
@@ -418,16 +421,17 @@ TEST_F(TestWriterBridge, createHeaderCRO3)
     ft::FTProp _ftProps;
     refOnly = false;
     crossover = true;
-    flagOverCountedKmers = false;
     flagNonUniqueKmers = true;
+    flagOverCountedKmers = false;
     ignoreNonUniqueKmers = true;
+    ignoreOverCountedKmers = true;
     countAsPairs = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
                   indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
-                  ignoreNonUniqueKmers, countAsPairs, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
     WriterBridge _writerBridge;
     _writerBridge.setOutputOptions(_ftMap);
@@ -456,11 +460,11 @@ TEST_F(TestWriterBridge, createHeaderCRO4)
     ignoreNonUniqueKmers = true;
     countAsPairs = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
-                  ignoreNonUniqueKmers, countAsPairs, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
     WriterBridge _writerBridge;
     _writerBridge.setOutputOptions(_ftMap);
@@ -609,11 +613,11 @@ TEST_F(TestWriterBridge, addQueryToOutput2)
     flagOverCountedKmers = true;
     ignoreNonUniqueKmers = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly,revCompSearch ,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers,
-                  ignoreNonUniqueKmers, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
     WriterBridge _writerBridge;
     _writerBridge.setOutputOptions(_ftMap);
@@ -704,11 +708,11 @@ TEST_F(TestWriterBridge, formatOutputMap3)
     ignoreNonUniqueKmers = false;
     countAsPairs = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
-                  ignoreNonUniqueKmers, countAsPairs, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
     WriterBridge _writerBridge;
     _writerBridge.setOutputOptions(_ftMap);
@@ -735,11 +739,11 @@ TEST_F(TestWriterBridge, formatOutputMap4)
     flagNonUniqueKmers = false;
     ignoreNonUniqueKmers = false;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
-                  ignoreNonUniqueKmers, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
     WriterBridge _writerBridge;
     _writerBridge.setOutputOptions(_ftMap);
@@ -762,11 +766,11 @@ TEST_F(TestWriterBridge, formatOutputMap5)
     flagNonUniqueKmers = true;
     ignoreNonUniqueKmers = true;
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  indexPropsFile,outputFolder,refOnly,revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
-                  maxOccurences, maxThreads, flagOverCountedKmers, flagNonUniqueKmers,
-                  ignoreNonUniqueKmers, crossover);
+                  maxOccurences, maxThreads, flagNonUniqueKmers, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover);
     ft::FTMap _ftMap(_ftProps);
     WriterBridge _writerBridge;
     _writerBridge.setOutputOptions(_ftMap);
