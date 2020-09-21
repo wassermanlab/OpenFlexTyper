@@ -311,12 +311,12 @@ std::set<ft::ReadID> FTMap::addKmersToQueryResults(ft::QueryClass query, std::se
         ft::KmerClass* fwdKmer = findKmer(kmerString);
         if (fwdKmer->hasFlag(ft::FlagType::OCK)){
             query.addFlag(ft::FlagType::OCK, fwdKmer->getKmer());
-            if (_ftProps.getOverCountedFlag()){addToCount = false;}
+            if (! _ftProps.countFlag(ft::FlagType::OCK)){addToCount = false;}
         }
 
         if(fwdKmer->hasFlag(ft::FlagType::NUK)){
             query.addFlag(ft::FlagType::NUK, fwdKmer->getKmer());
-            if (_ftProps.getIgnoreNonUniqueKmersFlag()){addToCount = false;}
+            if (! _ftProps.countFlag(ft::FlagType::NUK)){addToCount = false;}
         }
 
         if (addToCount == true){

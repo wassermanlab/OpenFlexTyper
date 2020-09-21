@@ -19,7 +19,7 @@ void FmIndex::printToStdOut(const std::string& outputString){
 
 //======================================================================
 ft::KmerClass FmIndex::search(const std::string& kmer,
-                              u_int maxOcc, bool flagOverCountedKmers)
+                              u_int maxOcc)
 {
     // This code is executed in a different thread for multithreaded
     // executions and in main thread for monothreaded applications
@@ -30,7 +30,7 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
     kmerResult.setOCC(occs);
 
     // if number kmers > max, flag kmer as "over counted"
-    if (occs > maxOcc && flagOverCountedKmers) {
+    if (occs > maxOcc ) {
         kmerResult.addKFlag(ft::FlagType::OCK);
     }
     if (occs > 0  && occs <= maxOcc) {

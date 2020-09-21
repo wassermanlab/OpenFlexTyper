@@ -13,15 +13,12 @@ void Finder::testIndex(const FTProp& ftProps, algo::IFmIndex* fmIndex, const fs:
     (void)indexPath;
     //test the index can be loaded correctly
 
-    bool overCountedFlag = ftProps.getOverCountedFlag();
+
     ft::KmerClass tmpResult = fmIndex->search(testkmer,
-                                                ftProps.getMaxOcc(),
-                                                overCountedFlag);
+                                                ftProps.getMaxOcc());
     if (tmpResult.getKPositions().size() == 0) {
         FTProp::Log << "(E) testIndex " << testkmer << " Error" << std::endl;
         FTProp::Log << "(E) occ(" << tmpResult.getOCC() << ") < MaxOcc(" << ftProps.getMaxOcc() << ") cause the search to drop" <<  std::endl;
-        if (overCountedFlag == false)
-            FTProp::Log << "(I) getOverCountedFlag: " << overCountedFlag << " won't set ABK " << std::endl;
         throw std::runtime_error("testing index failed ");
     }
 
@@ -99,7 +96,6 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
 
     const FTProp& ftProps = ftMap.getFTProps();
     uint maxOcc = ftProps.getMaxOcc();
-    uint overCountedFlag = ftProps.getOverCountedFlag();
     uint maxThreads = ftProps.getMaxThreads();
 
     algo::IFmIndex* fmIndex = new algo::FmIndex(ftProps.isVerbose());

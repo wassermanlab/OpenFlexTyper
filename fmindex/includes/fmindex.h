@@ -52,8 +52,8 @@ public:
     /// \return
     ////////////////////////////////////////////////////////////////////////
     ft::KmerClass search(const std::string& kmer,
-                         u_int maxOcc = 200,
-                         bool flagOverCountedKmers = false);
+                         u_int maxOcc = 200
+                         );
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief parallelFmIndex

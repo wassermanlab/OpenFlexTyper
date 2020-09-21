@@ -246,7 +246,7 @@ TEST_F(TestFMIndex, searchFMIndexUsingPointer)
     std::string kmer = "AA";
     std::cout << "index output " << output << std::endl;
     _fmindex.loadIndexFromFile(output);
-    KmerClass resultsKmer = _fmindex.search(kmer, 10000, true);
+    KmerClass resultsKmer = _fmindex.search(kmer, 10000);
     fs::remove(output);
 
     EXPECT_TRUE(resultsKmer.getKPositions().size() > 0);
@@ -272,7 +272,7 @@ TEST_F(TestFMIndex, searchUsingSettingsIni)
     std::cout << "index path " << index << std::endl;
     std::string kmer = "CCCTGCATGCACTGGATGCACTCTATCCCATTCTGCAGCTTCCTCATTGATGGTCTCTTTTAACATTTGCATGGCTGCTTGATGTCCCCCCAC";
     _fmindex.loadIndexFromFile(index);
-    ft::KmerClass outputKmer = _fmindex.search(kmer, 10000, true);
+    ft::KmerClass outputKmer = _fmindex.search(kmer, 10000);
     EXPECT_TRUE(outputKmer.getKPositions().size()>0);
     EXPECT_NO_FATAL_FAILURE();
     EXPECT_NO_THROW();

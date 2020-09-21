@@ -24,8 +24,8 @@ void WriterBridge::setOutputOptions(const ft::FTMap& ftMap)
     _refData = true;
     if (!ftProps.getRefOnlyFlag()){ _altData = true;}
     if (ftProps.getCrossoverFlag()){_croData = true;}
-    if (ftProps.getOverCountedFlag()){_OCK = true;}
-    if (ftProps.getNonUniqueFlag()){_NUK = true;}
+    if (ftProps.outputFlag(ft::FlagType::OCK)){_OCK = true;}
+    if (ftProps.outputFlag(ft::FlagType::NUK)){_NUK = true;}
     if (ftProps.getMatchesOnlyFlag()){_MatchesOnly = true;}
 }
 

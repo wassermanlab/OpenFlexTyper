@@ -49,8 +49,7 @@ public:
     /// \return
     ////////////////////////////////////////////////////////////////////////
     virtual ft::KmerClass search(const std::string& kmer,
-                                 u_int maxOccurences = 200,
-                                 bool flagOverCountedKmers = false) = 0;
+                                 u_int maxOccurences = 200) = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief parallelFmIndex

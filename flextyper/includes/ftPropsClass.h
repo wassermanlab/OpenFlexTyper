@@ -85,8 +85,8 @@ public:
               uint stride                   = 10    ,
               uint maxOccurences            = 200   ,
               uint numOfThreads             = 1     ,
-              bool flagNonUniqueKmers       = false ,
-              bool flagOverCountedKmers     = false ,
+              bool outputNonUniqueKmers       = false ,
+              bool outputOverCountedKmers     = false ,
               bool ignoreNonUniqueKmers     = true  ,
               bool ignoreOverCountedKmers   = true  ,
               bool countAsPairs             = false ,
@@ -142,6 +142,8 @@ public:
 
     const std::bitset<8>& getFlagsToOutput() const;
     const std::bitset<8>& getFlagsToNotCount() const;
+    bool countFlag(ft::FlagType flag) const;
+    bool outputFlag(ft::FlagType flag) const;
     void setFlagToOutput(ft::FlagType flag);
     void setFlagToNotCount(ft::FlagType flag);
     void resetFlagToOutput(ft::FlagType flag);
@@ -154,9 +156,9 @@ public:
     bool getMultithreadFlag() const;
     bool getRefOnlyFlag() const;
     bool getMatchesOnlyFlag() const;
-    bool getOverCountedFlag() const;
-    bool getNonUniqueFlag() const;
-    bool getIgnoreNonUniqueKmersFlag() const;
+    //bool getOverCountedFlag() const;
+    //bool getNonUniqueFlag() const;
+    //bool getIgnoreNonUniqueKmersFlag() const;
     bool getCrossoverFlag() const;
     bool getPrintSearchTimeFlag() const;
     bool getPairedReadFlag() const;
@@ -230,10 +232,10 @@ private:
     bool _multithread; //run search in parallel
     bool _refOnly; // single sequence for each query
     bool _matchesOnly; // only output positive hits
-    bool _overcounted; //output a list of OCK
-    bool _nonUnique; //output a list of NUK
-    bool _ignoreNonUniqueKmers; //discount the NUK
-    bool _ignoreOverCountedKmers;
+    //bool _overcounted; //output a list of OCK
+    //bool _nonUnique; //output a list of NUK
+    //bool _ignoreNonUniqueKmers; //discount the NUK
+    //bool _ignoreOverCountedKmers;
     bool _crossover; //search for crossover counts
     bool _printSearchTime;
     bool _pairedReads; // paired reads
