@@ -36,6 +36,7 @@ INCLUDEPATH += flextyper/includes                     \
                fmindex/interfaces                   \
 
 HEADERS    += flextyper/includes/utils.h              \
+    flextyper/includes/LogClass.h \
               flextyper/includes/ftMapClass.h \
               flextyper/includes/ftPropsClass.h \
               flextyper/includes/ftSearch.h \

@@ -1,11 +1,11 @@
 #include <gtest/gtest.h>
 #include "finder.cpp"
-#include "mock/mock_fmindex.cpp"
+
 
 
 using namespace std;
 using namespace ft;
-using ::testing::AtLeast;
+
 
 namespace ft {
 class TestFinder : public ::testing::Test {
@@ -79,7 +79,7 @@ protected:
     bool printInputs;
 
 public:
-    void CreateIndex(bool saveini = false){
+    void CreateIndex(uint numOfIndexes = 1, bool saveini = false){
         algo::IndexProps _indexProp(true);
         algo::FmIndex _fmindex;
         std::ofstream("testFiles/test.fq.gz");
@@ -96,7 +96,18 @@ public:
             fs::remove(fs::current_path() /= "testOutput/Index_Test.fm9");
         }
          fs::path output = _fmindex.createFMIndex(_indexProp, pPF ).first;
-        _indexProp.addToIndexSet(output, 0);
+
+         for (  u_int i = 0; i < numOfIndexes; i++ ){
+
+             fs::path nextindex = output;
+             if (i>0){
+                 std::string newfilename = "testOutput/Index_Test" + std::to_string(i) + ".fm9";
+                 nextindex = newfilename;
+                 fs::copy_file(output, nextindex);
+             }
+             std::cout << " i " << nextindex << std::endl;
+            _indexProp.addToIndexSet(nextindex, i*10);
+         }
          if (saveini){
              fs::path ini = fs::current_path() /= "testOutput/Index_Test.ini";
              if (fs::exists(ini))
@@ -130,16 +141,13 @@ TEST_F(TestFinder, addResultsFutures)
                              inputFastQ, numOfReads,numOfIndexes);
 
     ft::FTMap _ftMap(_ftProps);
-
-
     _ftMap.addKmer("AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG");
     _ftMap.addKmer("AAT");
     _ftMap.addKmer("ATATT");
 
 
+
 }
-
-
 
 //======================================================================
 TEST_F(TestFinder, sequentialSearch)
@@ -315,6 +323,58 @@ TEST_F(TestFinder, sequentialSearchFromIndexProps)
 
 }
 
+//======================================================================
+TEST_F(TestFinder, DISABLED_sequentialSearchMultipleIndex)
+{
+    TEST_DESCRIPTION("This test checks that the function searchSequentially");
+    //void Finder::sequentialSearch(ft::FTMap &ftMap, const fs::path &indexPath, long long offset)
+    CreateIndex(2);
+    Finder _finder;
+    ft::FTProp _ftProps;
+    indexPropsFile = "testFiles/Test.ini";
+    _ftProps.init(pathToQueryFile,kmerSize,readLength,
+                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  searchType, multithread, overlap,
+                  returnMatchesOnly, kmerCounts, stride,
+                  maxOccurences, maxThreads, flagOverCountedKmers,
+                  ignoreNonUniqueKmers, crossover, false, 3000, 3000000000, true);
+    _ftProps.addToIndexSet("testOutput/Index_Test.fm9", 0);
+    _ftProps.addToIndexSet("testOutput/Index_Test.fm9", 11);
+    ft::FTMap _ftMap(_ftProps);
+
+    std::map<fs::path, uint> _indexSet = _ftProps._indexSet;
+
+    std::string kmer = "AATTACTGTGATATTTCTCATGTTCATCTTGGGCCTTATCTATTCCATCTAAAAATAGTACTTTCCTGATTCCAG";
+    std::string kmer2 = "AAT";
+    std::string kmer3 = "ATATT";
+    _ftMap.addKmer(kmer);
+    _ftMap.addKmer(kmer2);
+    _ftMap.addKmer(kmer3);
+    EXPECT_EQ(_ftMap.getFTProps().getNumOfIndexes(), 2);
+    EXPECT_EQ(_indexSet.size(), 2);
+    EXPECT_NO_THROW(_finder.searchIndexes(_ftMap));
+
+    std::vector<std::map<std::string, ft::KmerClass>> results = _ftMap.getResults();
+    EXPECT_EQ(results.size(), _ftProps.getNumOfIndexes());
+    for (auto result : _ftMap.getResults())
+    {
+    EXPECT_EQ(result.size(), 3);
+    uint roccs = result[kmer].getKPositions().size();
+    uint roccs2 = result[kmer2].getKPositions().size();
+    uint roccs3 = result[kmer3].getKPositions().size();
+
+    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
+    sdsl::load_from_file(_testindex, "testOutput/Index_Test.fm9");
+    auto occs = sdsl::count(_testindex, kmer.begin(), kmer.end());
+    auto occs2 = sdsl::count(_testindex, kmer2.begin(), kmer2.end());
+    auto occs3 = sdsl::count(_testindex, kmer3.begin(), kmer3.end());
+
+    EXPECT_EQ(occs, roccs);
+    EXPECT_EQ(occs2, roccs2);
+    EXPECT_EQ(occs3, roccs3);
+    }
+
+}
 
 
 //======================================================================

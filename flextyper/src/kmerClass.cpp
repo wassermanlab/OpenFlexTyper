@@ -29,26 +29,24 @@ void KmerClass::setKFlags( std::set<ft::FlagType> flags)
         _kFlags.set(flag);
     }
 }
-void KmerClass::setKPositions(const std::set<long long>& kPositions, uint offset)
+void KmerClass::setKPositions(const std::set<long long>& kPositions)
 {
-    if (offset > 0 ){
-    //std::cout << "number of positions : " << kPositions.size() << std::endl;
-    }
-    std::set < long long > positions = getKPositions();
-    uint i = 0;
-    for (long long kPosition : kPositions){
-        long long kPos = kPosition + offset;
-        //if (offset > 0){
-        //std::cout << "add " << i << "th position : " << kPosition << " with kPos " << kPos << std::endl;
-        //}
-        positions.insert(kPos);
-        i++;
-       }
-    _positions = positions;
+    _positions = kPositions;
 }
 void KmerClass::setReadIDs(std::set<ft::ReadID> readIDs)
 {
         _readIDs = readIDs;
+}
+
+void KmerClass::adjustPosForOffset(uint offset)
+{
+    std::set < long long > positions ;
+    std::set < long long > kPositions = getKPositions();
+    for (long long kPosition : kPositions){
+        long long kPos = kPosition + offset;
+        positions.insert(kPos);
+       }
+    setKPositions(positions);
 }
 
 //===================== ADDERS ==========================
@@ -60,9 +58,6 @@ void KmerClass::addKPosition(const size_t& kPosition, const uint& offset)
 {
     size_t kPos = kPosition + offset;
     _positions.insert(kPos);
-    if (offset > 0 ){
-    //std::cout << "size of positions : " << _positions.size() << " after inserting " << kPos << std::endl;
-    }
 }
 void KmerClass::addReadID(const ft::ReadID& readID)
 {
