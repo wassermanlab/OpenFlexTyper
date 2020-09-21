@@ -21,8 +21,7 @@ std::set<Query> QueryExtractor::getInputQueries(bool refOnly, bool crossover, co
     std::cout << "path to query file : " << pathToQueryFile << std::endl;
     std::ifstream queryFileStream(pathToQueryFile);
     if (!queryFileStream.is_open()) {
-        throw std::runtime_error( "Couldn't open queryFile");
-        exit(1);
+        LogClass::ThrowRuntimeError( "Couldn't open queryFile");
     }
     std::string line;
 
@@ -48,14 +47,12 @@ std::set<Query> QueryExtractor::getInputQueries(bool refOnly, bool crossover, co
         std::size_t rfound = refSequence.find_first_not_of("acgtACGT");
         if (rfound != std::string::npos)
         {
-             throw std::runtime_error("invalid query sequences: Ref sequence contains invalid characters ");
-            exit(1);
+            LogClass::ThrowRuntimeError("invalid query sequences: Ref sequence contains invalid characters ");
         }
         std::size_t afound = altSequence.find_first_not_of("acgtACGT");
         if (afound != std::string::npos)
         {
-             throw std::runtime_error("invalid query sequences: Alt sequence contains invalid characters ");
-            exit(1);
+            LogClass::ThrowRuntimeError("invalid query sequences: Alt sequence contains invalid characters ");
         }
 
         if (!crossover) {

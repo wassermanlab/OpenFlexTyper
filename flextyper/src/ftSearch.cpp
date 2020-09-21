@@ -42,7 +42,7 @@ if (!exists(ftProps.getOutputFile())) {
 //======================================================================
 void FTSearch::init(const FTProp& ftProps)
 {
-    FTProp::Log << "======== Search Log " << "======== " << std::endl;
+    LogClass::Log << "======== Search Log " << "======== " << std::endl;
 
     ft::FTMap ftMap(ftProps);
     checkOutputFile(ftProps);

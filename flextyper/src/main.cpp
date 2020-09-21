@@ -75,8 +75,8 @@ int main(int argc, char** argv)
         std::cout << "\nconfig File                   : " << configFile   << std::endl;
         bool printInputs = true;
 
-        ft::FTProp::OpenLog("search.log");
-        ft::FTProp::Log << "Running " << cmdline << std::endl;
+        ft::LogClass::OpenLog("search.log");
+        ft::LogClass::Log << "Running " << cmdline << std::endl;
 
         ft::FTProp props;
         try {
@@ -100,7 +100,7 @@ int main(int argc, char** argv)
         }
         free(flexTyperInstance);
 
-        ft::FTProp::CloseLog();
+        ft::LogClass::CloseLog();
 
     } else if (command == "index") {
         parser.clearPositionalArguments();
