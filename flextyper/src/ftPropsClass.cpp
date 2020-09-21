@@ -352,6 +352,8 @@ bool FTProp::getCountAsPairsFlag() const {return _countAsPairs;}
 bool FTProp::getRevCompSearchFlag() const {return _revCompSearch;}
 bool FTProp::getIndexRevCompFlag() const {return _indexRevComp;}
 bool FTProp::getMatchingReadsFlag() const{return _matchingReads;}
+const std::bitset<8>& FTProp::getFlagsToOutput() const {return _flagsToOutput;}
+const std::bitset<8>& FTProp::getFlagsToNotCount() const {return _flagsToNotCount;}
 
 //====================== FILE GETTERS ======================
 const fs::path& FTProp::getPathToQueryFile() const {return _pathToQueryFile;}
@@ -403,6 +405,24 @@ void FTProp::setOutputFolder(const fs::path& outputFolder)
     }
 
 }
+
+void FTProp::setFlagToOutput(ft::FlagType flag)
+{
+    _flagsToOutput.set(flag);
+}
+void FTProp::setFlagToNotCount(ft::FlagType flag)
+{
+    _flagsToNotCount.set(flag);
+}
+void FTProp::resetFlagToOutput(ft::FlagType flag)
+{
+    _flagsToOutput.reset(flag);
+}
+void FTProp::resetFlagToNotCount(ft::FlagType flag)
+{
+    _flagsToNotCount.reset(flag);
+}
+
 
 //====================== STATIC FUNCTIONS ======================
 

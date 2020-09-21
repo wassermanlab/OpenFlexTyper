@@ -3,6 +3,7 @@
 
 #include <climits>
 #include <set>
+#include <bitset>
 #include <iostream>
 #include <fstream>
 #include <chrono>
@@ -138,6 +139,13 @@ public:
     uint getNumOfIndexes() const;
     uint getNumOfReads() const;
 
+    const std::bitset<8>& getFlagsToOutput() const;
+    const std::bitset<8>& getFlagsToNotCount() const;
+    void setFlagToOutput(ft::FlagType flag);
+    void setFlagToNotCount(ft::FlagType flag);
+    void resetFlagToOutput(ft::FlagType flag);
+    void resetFlagToNotCount(ft::FlagType flag);
+
     ////////////////////////////////////////////////////////////////////////
     /// \brief Flag getters
     ////////////////////////////////////////////////////////////////////////
@@ -213,6 +221,9 @@ private:
     uint _maxThreads;
     uint _maxKmersPerQuery;
     uint _maxTotalKmers;
+
+    std::bitset<8> _flagsToOutput;
+    std::bitset<8> _flagsToNotCount;
 
     bool _kmerCounts;
     bool _multithread; //run search in parallel

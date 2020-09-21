@@ -62,8 +62,6 @@ void FTSearch::init(const FTProp& ftProps)
 
     _finder->searchIndexes(ftMap);
 
-    printToStdOut("search complete ");
-
     ftMap.processResults();
 
     _writerBridge->saveOutput(ftMap);
