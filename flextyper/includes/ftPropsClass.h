@@ -10,6 +10,7 @@
 #include <map>
 #include <experimental/filesystem>
 #include <QSettings>
+#include <LogClass.h>
 
 namespace fs = std::experimental::filesystem;
 
@@ -43,29 +44,6 @@ public:
     ////////////////////////////////////////////////////////////////////////
     virtual ~FTProp();
 
-    ////////////////////////////////////////////////////////////////////////
-    /// Benchmark
-    ////////////////////////////////////////////////////////////////////////
-    class Benchmark {
-    public:
-        Benchmark(int indent): _indent(indent) {
-           update();
-        };
-        virtual ~Benchmark() {};
-        void update() {_start = std::chrono::steady_clock::now();};
-        void now(const std::string tag) {
-            _end = std::chrono::steady_clock::now();
-            FTProp::Log << "Benchmark:";
-            for(int i=0; i<_indent; i++)
-                FTProp::Log << "**";
-            FTProp::Log << tag << std::chrono::duration_cast<std::chrono::seconds>(_end - _start).count() << " in sec" << std::endl;
-            _start = _end;
-        };
-    private:
-        std::chrono::steady_clock::time_point _start;
-        std::chrono::steady_clock::time_point _end;
-        int _indent;
-    };
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Init
@@ -182,10 +160,6 @@ public:
 
     void setTestProps(const uint numOfReads, const uint readLength, bool _revComp, bool countAsPairs = false);
     void setOutputFolder(const fs::path& outputFolder);
-
-    static void OpenLog(const std::string& name);
-    static void CloseLog();
-    static std::fstream Log;
 
 private:
     ////////////////////////////////////////////////////////////////////////

@@ -117,7 +117,7 @@ std::set<std::string> KmerGenerator::genSearchKmers(const ft::QueryClass& queryO
     } else if (_searchType == SLIDING) {
         searchKmers = genSlidingSearchStrings(queryObj._qstring);
     } else {
-        throw std::runtime_error("Search Type not recognised");
+        LogClass::ThrowRuntimeError("Search Type not recognised");
     }
     if (_verbose)
     {

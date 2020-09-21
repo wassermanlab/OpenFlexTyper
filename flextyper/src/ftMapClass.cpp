@@ -25,7 +25,7 @@ FTMap::FTMap(const FTProp& ftProps)
 #define INITSTART {
 void FTMap::addInputQueries(const std::set<Query> &inputQueries){
 
-    FTProp::Benchmark benchmark = FTProp::Benchmark(0);
+    LogClass::Benchmark benchmark;
 
     for (auto inputQuery : inputQueries) {
         std::string refString = std::get<1>(inputQuery);
@@ -51,7 +51,7 @@ void FTMap::addInputQueries(const std::set<Query> &inputQueries){
 //======================================================
 void FTMap::genQKMap()
 {
-    FTProp::Benchmark benchmark = FTProp::Benchmark(0);
+    LogClass::Benchmark benchmark;
 
     KmerGenerator  _kmerGenerator(_ftProps.getKmerSize(),
                                   _ftProps.getRefOnlyFlag(),
@@ -127,11 +127,10 @@ ft::KmerClass* FTMap::findKmer(const std::string& testKmer)
 //======================================================
 const ft::KmerClass& FTMap::getKmer(const std::string& kmerString) const
 {
-    if (_kmerSet.count(kmerString)>0) {
-        return  _kmerSet.find(kmerString)->second;
-    } else {
-        std::cout << "Kmer Doesnt Exist" << std::endl;
- }
+    if (_kmerSet.count(kmerString) == 0) {
+        LogClass::ThrowRuntimeError("Kmer Doesnt Exist");
+    }
+    return  _kmerSet.find(kmerString)->second;
 }
 //======================================================
 void FTMap::addKmer(const std::string &kmer)
@@ -161,35 +160,23 @@ bool FTMap::checkForQIDT(const ft::QIdT& testQIDTObject) const
 //======================================================
 const ft::QueryClass& FTMap::getQuery(const ft::QIdT& qIDT) const {
 
-    if(_querySet.count(qIDT)>0){
-        return _querySet.find(qIDT)->second;
-    }
-    else {
-        throw std::runtime_error( "FTMap::getQuery can't find (" + 
+    if(_querySet.count(qIDT) == 0){
+        LogClass::ThrowRuntimeError( "FTMap::getQuery can't find (" + 
                          std::to_string(qIDT.first) + ", " + ft::QueryClass::queryTypeToString(qIDT.second) + ")");
     }
+    return _querySet.find(qIDT)->second;
 }
 //======================================================
 void FTMap::addQuery(int queryID, ft::QueryType queryType, const std::string& queryString = empty)
 {
-#if 0
     ft::QIdT testQIDT = std::make_pair(queryID, queryType);
+    if(checkForQIDT(testQIDT)){
+        LogClass::ThrowRuntimeError( "FTMap::addQuery already had entry (" + 
+                         std::to_string(queryID) + ", " + ft::QueryClass::queryTypeToString(queryType) + ")");
+    }
     ft::QueryClass newquery(queryID, queryType);
     newquery.setQueryString(queryString);
     _querySet[testQIDT] = newquery;
-#else
-    //TODO: will there be duplicate added entries? The map will override the previous entry.
-    ft::QIdT testQIDT = std::make_pair(queryID, queryType);
-    if(!checkForQIDT(testQIDT)){
-        ft::QueryClass newquery(queryID, queryType);
-        newquery.setQueryString(queryString);
-        _querySet[testQIDT] = newquery;
-    }
-    else {
-        throw std::runtime_error( "FTMap::addQuery already had entry (" + 
-                         std::to_string(queryID) + ", " + ft::QueryClass::queryTypeToString(queryType) + ")");
-    }
-#endif
 }
 #define QUERIESEND }
 //=======================================================
@@ -246,7 +233,7 @@ void FTMap::processIndexResults(const std::map<std::string, ft::KmerClass>& inde
 //======================================================
 void FTMap::processResults()
 {
-    FTProp::Benchmark benchmark = FTProp::Benchmark(0);
+    LogClass::Benchmark benchmark;
 
     for (std::map<std::string, ft::KmerClass> indexResult : _searchResults )
     {
@@ -266,7 +253,6 @@ void FTMap::processResults()
 void FTMap::processQueryResults(const ft::QIdT& qIDT)
 {
     ft::QueryClass query = _querySet.find(qIDT)->second;
-    FTProp::Benchmark benchmark = FTProp::Benchmark(0);
 
     // Add results from FWD Search
     std::set<std::string> fwdKmers = _qkMap.retrieveKmers(qIDT);

@@ -95,32 +95,32 @@ void FTProp::init(const fs::path &pathToQueryFile,
         std::cout << "matchingReads                 : " << matchingReads << std::endl;
         std::cout << "Query search results will be save in " << _outputFile << std::endl;
     }
-    if (FTProp::Log.is_open()){
-        Log << "======== Settings " << "======== " << std::endl;
-        FTProp::Log << "pathToQueryFile               : " << pathToQueryFile <<  std::endl;
-        FTProp::Log << "kmerSize                      : " << kmerSize <<  std::endl;
-        FTProp::Log << "readLength                    : " << readLength <<  std::endl;
-        FTProp::Log << "indexPropsFile                : " << indexPropsFile <<  std::endl;
-        FTProp::Log << "outputFolder                  : " << outputFolder <<  std::endl;
-        FTProp::Log << "refOnly                       : " << refOnly <<  std::endl;
-        FTProp::Log << "revCompSearch                 : " << revCompSearch <<  std::endl;
-        FTProp::Log << "searchType                    : " << searchType <<  std::endl;
-        FTProp::Log << "multithread                   : " << multithread <<  std::endl;
-        FTProp::Log << "overlap                       : " << overlap <<  std::endl;
-        FTProp::Log << "return_only_positive_matches  : " << returnMatchesOnly <<  std::endl;
-        FTProp::Log << "stride                        : " << stride << std::endl;
-        FTProp::Log << "maxOccurences                 : " << maxOccurences << std::endl;
-        FTProp::Log << "numOfThreads                  : " << numOfThreads << std::endl;
-        FTProp::Log << "outputNonUniqueKmers            : " << outputNonUniqueKmers << std::endl;
-        FTProp::Log << "outputOverCountedKmers          : " << outputOverCountedKmers << std::endl;
-        FTProp::Log << "ignoreNonUniqueKmers          : " << ignoreNonUniqueKmers << std::endl;
-        FTProp::Log << "ignoreOverCountedkmers        : " << ignoreOverCountedKmers << std::endl;
-        FTProp::Log << "countAsPairs                  : " << countAsPairs << std::endl;
-        FTProp::Log << "printSearchTime               : " << printSearchTime << std::endl;
-        FTProp::Log << "maxKmersPerQuery              : " << maxKmersPerQuery << std::endl;
-        FTProp::Log << "maxTotalKmers                 : " << maxTotalKmers << std::endl;
-        FTProp::Log << "matchingReads                 : " << matchingReads << std::endl;
-        FTProp::Log << "Query search results will be save in " << _outputFile << std::endl;
+    if (LogClass::Log.is_open()){
+        LogClass::Log << "======== Settings " << "======== " << std::endl;
+        LogClass::Log << "pathToQueryFile               : " << pathToQueryFile <<  std::endl;
+        LogClass::Log << "kmerSize                      : " << kmerSize <<  std::endl;
+        LogClass::Log << "readLength                    : " << readLength <<  std::endl;
+        LogClass::Log << "indexPropsFile                : " << indexPropsFile <<  std::endl;
+        LogClass::Log << "outputFolder                  : " << outputFolder <<  std::endl;
+        LogClass::Log << "refOnly                       : " << refOnly <<  std::endl;
+        LogClass::Log << "revCompSearch                 : " << revCompSearch <<  std::endl;
+        LogClass::Log << "searchType                    : " << searchType <<  std::endl;
+        LogClass::Log << "multithread                   : " << multithread <<  std::endl;
+        LogClass::Log << "overlap                       : " << overlap <<  std::endl;
+        LogClass::Log << "return_only_positive_matches  : " << returnMatchesOnly <<  std::endl;
+        LogClass::Log << "stride                        : " << stride << std::endl;
+        LogClass::Log << "maxOccurences                 : " << maxOccurences << std::endl;
+        LogClass::Log << "numOfThreads                  : " << numOfThreads << std::endl;
+        LogClass::Log << "flagNonUniqueKmers            : " << flagNonUniqueKmers << std::endl;
+        LogClass::Log << "flagOverCountedKmers          : " << flagOverCountedKmers << std::endl;
+        LogClass::Log << "ignoreNonUniqueKmers          : " << ignoreNonUniqueKmers << std::endl;
+        LogClass::Log << "ignoreOverCountedkmers        : " << ignoreOverCountedKmers << std::endl;
+        LogClass::Log << "countAsPairs                  : " << countAsPairs << std::endl;
+        LogClass::Log << "printSearchTime               : " << printSearchTime << std::endl;
+        LogClass::Log << "maxKmersPerQuery              : " << maxKmersPerQuery << std::endl;
+        LogClass::Log << "maxTotalKmers                 : " << maxTotalKmers << std::endl;
+        LogClass::Log << "matchingReads                 : " << matchingReads << std::endl;
+        LogClass::Log << "Query search results will be save in " << _outputFile << std::endl;
     }
 }
 
@@ -173,8 +173,8 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
 }
 
 void FTProp::printToStdOut(const std::string outputString) const {
-    if (_verbose && FTProp::Log.is_open() ){
-        Log  << outputString << std::endl;
+    if (_verbose && LogClass::Log.is_open() ){
+        LogClass::Log  << outputString << std::endl;
     }
 }
 //================= Load Index Props ========================
@@ -231,23 +231,23 @@ void FTProp::loadIndexProps(const fs::path &_indexPropsFile, bool printInputs){
         std::cout << "Index File : " << index.first << " Offset: " << index.second <<  std::endl;
     }
     }
-    if (FTProp::Log.is_open()){
-        Log << "Properties loaded from Index File     " <<  std::endl;
-        Log << "Paired Reads      : " << _pairedReads <<  std::endl;
-        Log << "reverse Comp      : " << _indexRevComp <<  std::endl;
-        Log << "build Directory   : " << _buildDir <<  std::endl;
-        Log << "index Directory   : " << _indexDir <<  std::endl;
-        Log << "Index File Name   : " << _indexFileName <<  std::endl;
-        Log << "read Set Name     : " << _readSetName <<  std::endl;
-        Log << "Read FQ           : " << _inputFastQ <<  std::endl;
-        Log << "Number of Reads   : " << _numOfReads <<  std::endl;
-        Log << "Number of Indexes : " << _numOfIndexes <<  std::endl;
+    if (LogClass::Log.is_open()){
+        LogClass::Log << "Properties loaded from Index File     " <<  std::endl;
+        LogClass::Log << "Paired Reads      : " << _pairedReads <<  std::endl;
+        LogClass::Log << "reverse Comp      : " << _indexRevComp <<  std::endl;
+        LogClass::Log << "build Directory   : " << _buildDir <<  std::endl;
+        LogClass::Log << "index Directory   : " << _indexDir <<  std::endl;
+        LogClass::Log << "Index File Name   : " << _indexFileName <<  std::endl;
+        LogClass::Log << "read Set Name     : " << _readSetName <<  std::endl;
+        LogClass::Log << "Read FQ           : " << _inputFastQ <<  std::endl;
+        LogClass::Log << "Number of Reads   : " << _numOfReads <<  std::endl;
+        LogClass::Log << "Number of Indexes : " << _numOfIndexes <<  std::endl;
     if (_pairedReads)
-        {Log << "R1                : " << _R1 <<  std::endl;
-         Log << "R2                : " << _R2 <<  std::endl;
+        {LogClass::Log << "R1                : " << _R1 <<  std::endl;
+         LogClass::Log << "R2                : " << _R2 <<  std::endl;
         }
     for (auto index : _indexSet){
-        Log << "Index File : " << index.first << " Offset: " << index.second <<  std::endl;
+        LogClass::Log << "Index File : " << index.first << " Offset: " << index.second <<  std::endl;
     }
     }
 
@@ -277,7 +277,7 @@ void FTProp::initIndexProps( const bool pairedReads,
 
     if (_countAsPairs && !_pairedReads)
     {
-        throw std::runtime_error("Error: Cannot count as pairs as input reads arent paired");
+        LogClass::ThrowRuntimeError("Error: Cannot count as pairs as input reads arent paired");
     }
 
 
@@ -301,22 +301,22 @@ void FTProp::initIndexProps( const bool pairedReads,
     }
     }
 
-    if (FTProp::Log.is_open()){
-    Log << "Properties loaded from Index File     " <<  std::endl;
-    Log << "Paired Reads      : " << _pairedReads <<  std::endl;
-    Log << "index contains reverse Comp      : " << _indexRevComp <<  std::endl;
-    Log << "build Directory   : " << _buildDir <<  std::endl;
-    Log << "index Directory   : " << _indexDir <<  std::endl;
-    Log << "read Set Name     : " << _readSetName <<  std::endl;
-    Log << "Read FQ           : " << _inputFastQ <<  std::endl;
-    Log << "Number of Reads   : " << _numOfReads <<  std::endl;
-    Log << "Number of Indexes : " << _numOfIndexes <<  std::endl;
+    if (LogClass::Log.is_open()){
+    LogClass::Log << "Properties loaded from Index File     " <<  std::endl;
+    LogClass::Log << "Paired Reads      : " << _pairedReads <<  std::endl;
+    LogClass::Log << "index contains reverse Comp      : " << _indexRevComp <<  std::endl;
+    LogClass::Log << "build Directory   : " << _buildDir <<  std::endl;
+    LogClass::Log << "index Directory   : " << _indexDir <<  std::endl;
+    LogClass::Log << "read Set Name     : " << _readSetName <<  std::endl;
+    LogClass::Log << "Read FQ           : " << _inputFastQ <<  std::endl;
+    LogClass::Log << "Number of Reads   : " << _numOfReads <<  std::endl;
+    LogClass::Log << "Number of Indexes : " << _numOfIndexes <<  std::endl;
     }
 }
 
 //======================================================================
 void FTProp::addToIndexSet(const fs::path& index, u_int offset){
-    Log << "add index to set " << fs::absolute(index) << std::endl;
+    LogClass::Log << "add index to set " << fs::absolute(index) << std::endl;
 
     if (_indexSet.count(index) == 0){
         _indexSet[index] = offset;
@@ -376,30 +376,30 @@ void FTProp::setOutputFolder(const fs::path& outputFolder)
 {
     fs::path outfolder;
     if (outputFolder == "" or outputFolder =="."){
-        Log << "no output folder set " << std::endl;
+        LogClass::Log << "no output folder set " << std::endl;
         outfolder = fs::current_path();
     } else if (outputFolder == "../"){
-        Log << "set as parent path  " + outputFolder.string() << std::endl;
+        LogClass::Log << "set as parent path  " + outputFolder.string() << std::endl;
         outfolder = fs::current_path().parent_path();
     } else {
-        Log << "set absolute path as output Folder " << outputFolder.string() << std::endl;
+        LogClass::Log << "set absolute path as output Folder " << outputFolder.string() << std::endl;
         outfolder = fs::absolute(outputFolder);
     }
     _outputFolder = outfolder;
-    Log << _outputFolder.string();
+    LogClass::Log << _outputFolder.string();
 
     if (!fs::exists(_outputFolder)){
-     Log << "creating output Folder " << outputFolder.string() << std::endl;
+     LogClass::Log << "creating output Folder " << outputFolder.string() << std::endl;
          try {
              fs::create_directory(outputFolder);
          } catch (std::exception& e ) {
-             throw std::runtime_error("Cannot create output folder " + _outputFolder.string());
+             LogClass::ThrowRuntimeError("Cannot create output folder " + _outputFolder.string());
          }
     }
 
     if (!fs::exists(_outputFolder))
     {
-        throw std::runtime_error("Cannot create output folder " + _outputFolder.string());
+        LogClass::ThrowRuntimeError("Cannot create output folder " + _outputFolder.string());
     }
 }
 
@@ -434,22 +434,8 @@ void FTProp::resetFlagToNotCount(ft::FlagType flag)
 
 //====================== STATIC FUNCTIONS ======================
 
-std::fstream FTProp::Log;
-void FTProp::OpenLog(const std::string& name)
-{
-    Log.open(name, std::fstream::out);
-    if (!Log || !Log.is_open()) {
-        std::cout << "Couldn't open " << name << " file" << std::endl;
-    }
-    auto start = std::chrono::system_clock::now();
-    std::time_t start_time = std::chrono::system_clock::to_time_t(start);
-    Log << "======== " << std::ctime(&start_time);
-}
+std::fstream LogClass::Log;
 
-void FTProp::CloseLog()
-{
-    Log.close();
-}
 
 FTProp::~FTProp()
 {

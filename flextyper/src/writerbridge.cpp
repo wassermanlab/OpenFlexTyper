@@ -158,7 +158,7 @@ void WriterBridge::addQueryToOutput( const ft::QueryClass& query, const std::str
 //======================================================================
 void WriterBridge::saveOutput(const ft::FTMap& ftMap)
 {
-    FTProp::Benchmark benchmark = FTProp::Benchmark(0);
+    LogClass::Benchmark benchmark;
 
     const FTProp& ftProps = ftMap.getFTProps();
     setOutputOptions(ftMap);
@@ -170,14 +170,14 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
     std::fstream outputFileStream;
     outputFileStream.open(outputQueryFile, std::ios::out);
     if (!outputFileStream || !outputFileStream.is_open()) {
-        FTProp::Log  << "Couldn't open " << outputQueryFile.string() << std::endl;
+        LogClass::Log  << "Couldn't open " << outputQueryFile.string() << std::endl;
     }
 
     std::ifstream queryFileStream;
     queryFileStream.open(inputQueryFile, std::ios::in);
 
     if (!queryFileStream || !queryFileStream.is_open()) {
-        FTProp::Log  << "Couldn't open " << inputQueryFile.string() << std::endl;
+        LogClass::Log  << "Couldn't open " << inputQueryFile.string() << std::endl;
     }
 
     std::string line;

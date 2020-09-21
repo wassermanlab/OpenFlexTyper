@@ -42,6 +42,8 @@ public:
     void setReadIDs(std::set<ft::ReadID> readIDs);
     void setOCC(uint occ) {_occ=occ;};
 
+    void adjustPositionsWithOffset(uint offset);
+
     ////////////////////////////////////////////////////////////////////////
     /// \brief adders
     ////////////////////////////////////////////////////////////////////////
@@ -85,6 +87,7 @@ private:
     std::set<long long> _positions;
     std::set<ft::ReadID> _readIDs;
     uint _occ; //from sdsl::count(_index, _kmer)
+    bool _isOffsetAdjusted;
 
 };
 }
