@@ -50,7 +50,7 @@ void QueryClass::addFlags(const ft::FlagType& flagType, const std::set<std::stri
 void QueryClass::addFlag(const ft::FlagType& flagType, const std::string& kmer){
     std::cout << "adding flag  " << flagType << " to query for " << kmer << std::endl;
         _qFlags[flagType].insert(kmer);
-    std::cout << "added flag  " << _qFlags[flagType].count(kmer) << std::endl;
+    std::cout << "added flag (map count) = " << _qFlags[flagType].count(kmer) << std::endl;
 }
 //===================== REMOVERS ==========================
 void QueryClass::removeFlag(ft::FlagType flagType){

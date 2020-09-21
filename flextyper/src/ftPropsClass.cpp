@@ -111,8 +111,8 @@ void FTProp::init(const fs::path &pathToQueryFile,
         LogClass::Log << "stride                        : " << stride << std::endl;
         LogClass::Log << "maxOccurences                 : " << maxOccurences << std::endl;
         LogClass::Log << "numOfThreads                  : " << numOfThreads << std::endl;
-        LogClass::Log << "flagNonUniqueKmers            : " << flagNonUniqueKmers << std::endl;
-        LogClass::Log << "flagOverCountedKmers          : " << flagOverCountedKmers << std::endl;
+        LogClass::Log << "outputNonUniqueKmers            : " << outputNonUniqueKmers << std::endl;
+        LogClass::Log << "outputOverCountedKmers          : " << outputOverCountedKmers << std::endl;
         LogClass::Log << "ignoreNonUniqueKmers          : " << ignoreNonUniqueKmers << std::endl;
         LogClass::Log << "ignoreOverCountedkmers        : " << ignoreOverCountedKmers << std::endl;
         LogClass::Log << "countAsPairs                  : " << countAsPairs << std::endl;

@@ -114,11 +114,15 @@ bool IndexProps::delR2(){
 void IndexProps::delFQ(){
     if (_readFileType == algo::FileType::GZ){
         fs::path _R1FQ = _R1.stem();
+        printToStdOut("deleted " + _R1FQ.string());
         fs::remove(_R1FQ);
         fs::path _R2FQ = _R2.stem();
+        printToStdOut("deleted " + _R2FQ.string());
         fs::remove(_R2FQ);
     } else if (_readFileType == algo::FileType::FQ)
     {
+        printToStdOut("deleted " + _R1.string());
+        printToStdOut("deleted " + _R2.string());
         delR1();
         delR2();
     }

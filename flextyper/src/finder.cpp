@@ -19,8 +19,6 @@ void Finder::testIndex(const FTProp& ftProps, algo::IFmIndex* fmIndex, const fs:
     if (tmpResult.getKPositions().size() == 0) {
         LogClass::Log << "(E) testIndex " << testkmer << " Error" << std::endl;
         LogClass::Log << "(E) occ(" << tmpResult.getOCC() << ") < MaxOcc(" << ftProps.getMaxOcc() << ") cause the search to drop" <<  std::endl;
-        if (overCountedFlag == false)
-            LogClass::Log << "(I) getOverCountedFlag: " << overCountedFlag << " won't set ABK " << std::endl;
         LogClass::ThrowRuntimeError("testing index failed ");
     }
 
@@ -65,27 +63,27 @@ void Finder::indexParallelSearch(FTMap &ftMap)
 //======================================================================
 void Finder::addResultsFutures(std::map<std::string, ft::KmerClass> & indexResults, ft::KmerClass &tmpResult, uint offset)
 {
-    const std::string& resultkmer = tmpResult.getKmer();
-    std::map<std::string, ft::KmerClass>::iterator it = indexResults.find(resultkmer);
-    if (it != indexResults.end())
-    {
-        ft::KmerClass result = it->second;
+//    const std::string& resultkmer = tmpResult.getKmer();
+//    std::map<std::string, ft::KmerClass>::iterator it = indexResults.find(resultkmer);
+//    if (it != indexResults.end())
+//    {
+//        ft::KmerClass result = it->second;
 
+//        tmpResult.adjustPositionsWithOffset(offset);
+//        result.setKPositions(tmpResult.getKPositions());
+
+//        result.setOCC(result.getOCC() + tmpResult.getOCC());
+
+//        for (std::size_t i = 0; i < 8; ++i) {
+//            if ( tmpResult.getKFlags().test(i) ) {
+//                result.addKFlag(ft::FlagType(i));
+//            }
+//        }
+//        it->second = result;
+//    } else {
         tmpResult.adjustPositionsWithOffset(offset);
-        result.setKPositions(tmpResult.getKPositions());
-
-        result.setOCC(result.getOCC() + tmpResult.getOCC());
-
-        for (std::size_t i = 0; i < 8; ++i) {
-            if ( tmpResult.getKFlags().test(i) ) {
-                result.addKFlag(ft::FlagType(i));
-            }
-        }
-        it->second = result;
-    } else {
-        tmpResult.adjustPositionsWithOffset(offset);
-        indexResults[resultkmer] = tmpResult;
-    }
+        indexResults[tmpResult.getKmer()] = tmpResult;
+//    }
 }
 
 //======================================================================
