@@ -34,9 +34,7 @@ function buildFlexTyper()
         bash Miniconda3-latest-Linux-x86_64.sh -b -p $MINI_CONDA_INSTALL_DIR
 
 	source ${MINI_CONDA_INSTALL_DIR}/etc/profile.d/conda.sh
-        if [ ! -f $DIR/OpenFlexTyper_CondaEnv.yml ]; then
 	conda env create --prefix ${OPT_DIR}/openFlexTyper -f $DIR/OpenFlexTyper_CondaEnv.yml 
-        fi
 	cd $DIR
 	conda activate opt/openFlexTyper
 	mkdir -p build
