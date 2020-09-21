@@ -29,6 +29,19 @@ void WriterBridge::setOutputOptions(const ft::FTMap& ftMap)
     if (ftProps.getMatchesOnlyFlag()){_MatchesOnly = true;}
 }
 
+std::string WriterBridge::joinString(const std::set<std::string>& setOfStr, std::string delimeter)
+{
+    std::string output;
+    std::set<std::string>::iterator it = setOfStr.begin();
+
+    while (it != std::prev(setOfStr.end()))
+    {
+        output += (*it++) + delimeter;
+    }
+    output += *std::prev(setOfStr.end());
+    return output;
+}
+
 //======================================================================
 std::string WriterBridge::createHeader()
 {
@@ -100,13 +113,15 @@ std::string WriterBridge::formatOutputMap()
 //======================================================================
 std::string WriterBridge::getFlagKmers(const ft::QueryClass& query, const ft::FlagType flag)
 {
+
     std::string queryFlagK;
-    if (query.hasFlag(flag)){
-        std::set<std::string> flagKmers = query.getFlagKmers(flag);
-        queryFlagK = _utils->joinString(query.getFlagKmers(flag));
-    } else {
-        //std::cout<< "Query doesnt have that flag" << std::endl;
+
+    std::set<std::string> flagKmers = query.getFlagKmers(flag);
+    std::cout << "Query has " << flagKmers.size() << " flag kmers " << std::endl;
+    if (flagKmers.size() > 0){
+    queryFlagK = joinString(flagKmers, ",");
     }
+
     return queryFlagK;
 }
 
@@ -125,13 +140,17 @@ void WriterBridge::addQueryToOutput( const ft::QueryClass& query, const std::str
 
     if (_OCK)
     {
+        std::cout << "get overCounted Kmers" << std::endl;
          std::string refOCK = getFlagKmers(query, ft::FlagType::OCK);
+        std::cout << "OCK " << refOCK << std::endl;
         _outputMap[prefix+"OCK"] = refOCK;
     }
 
     if (_NUK)
     {
+        std::cout << "get NonUnique Kmers" << std::endl;
         std::string refNUK = getFlagKmers(query, ft::FlagType::NUK);
+        std::cout << "NUK " << refNUK << std::endl;
         _outputMap[prefix+"NUK"] = refNUK;
     }
 }

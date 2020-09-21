@@ -17,6 +17,8 @@ public:
     WriterBridge();
 
     void setOutputOptions(const ft::FTMap& ftMap);
+    std::string joinString(const std::set<std::string>& setOfStr, std::string delimeter);
+
     std::string createHeader();
     std::string formatOutputMap();
     std::string getFlagKmers(const ft::QueryClass& query, const ft::FlagType flag);

@@ -42,12 +42,15 @@ void QueryClass::setFlags(const std::map<ft::FlagType, std::set<std::string>>& f
 
 //===================== ADDERS ==========================
 void QueryClass::addFlags(const ft::FlagType& flagType, const std::set<std::string>& kmers){
+    std::cout << "adding flags " << flagType << " to query for " << *kmers.begin() << std::endl;
     for (auto kmer :kmers){
         _qFlags[flagType].insert(kmer);
     }
 }
 void QueryClass::addFlag(const ft::FlagType& flagType, const std::string& kmer){
+    std::cout << "adding flag  " << flagType << " to query for " << kmer << std::endl;
         _qFlags[flagType].insert(kmer);
+    std::cout << "added flag  " << _qFlags[flagType].count(kmer) << std::endl;
 }
 //===================== REMOVERS ==========================
 void QueryClass::removeFlag(ft::FlagType flagType){
