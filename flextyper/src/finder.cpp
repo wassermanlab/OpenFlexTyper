@@ -63,27 +63,27 @@ void Finder::indexParallelSearch(FTMap &ftMap)
 //======================================================================
 void Finder::addResultsFutures(std::map<std::string, ft::KmerClass> & indexResults, ft::KmerClass &tmpResult, uint offset)
 {
-//    const std::string& resultkmer = tmpResult.getKmer();
-//    std::map<std::string, ft::KmerClass>::iterator it = indexResults.find(resultkmer);
-//    if (it != indexResults.end())
-//    {
-//        ft::KmerClass result = it->second;
+    const std::string& resultkmer = tmpResult.getKmer();
+    std::map<std::string, ft::KmerClass>::iterator it = indexResults.find(resultkmer);
+    if (it != indexResults.end())
+    {
+        ft::KmerClass result = it->second;
 
-//        tmpResult.adjustPositionsWithOffset(offset);
-//        result.setKPositions(tmpResult.getKPositions());
+        tmpResult.adjustPositionsWithOffset(offset);
+        result.setKPositions(tmpResult.getKPositions());
 
-//        result.setOCC(result.getOCC() + tmpResult.getOCC());
+        result.setOCC(result.getOCC() + tmpResult.getOCC());
 
-//        for (std::size_t i = 0; i < 8; ++i) {
-//            if ( tmpResult.getKFlags().test(i) ) {
-//                result.addKFlag(ft::FlagType(i));
-//            }
-//        }
-//        it->second = result;
-//    } else {
+        for (std::size_t i = 0; i < 8; ++i) {
+            if ( tmpResult.getKFlags().test(i) ) {
+                result.addKFlag(ft::FlagType(i));
+            }
+        }
+        it->second = result;
+    } else {
         tmpResult.adjustPositionsWithOffset(offset);
         indexResults[tmpResult.getKmer()] = tmpResult;
-//    }
+    }
 }
 
 //======================================================================
