@@ -115,11 +115,9 @@ std::string WriterBridge::getFlagKmers(const ft::QueryClass& query, const ft::Fl
 {
 
     std::string queryFlagK;
-
     std::set<std::string> flagKmers = query.getFlagKmers(flag);
-    std::cout << "Query has " << flagKmers.size() << " flag kmers " << std::endl;
     if (flagKmers.size() > 0){
-    queryFlagK = joinString(flagKmers, ", ");
+    queryFlagK = joinString(flagKmers, ",");
     }
 
     return queryFlagK;
@@ -140,17 +138,13 @@ void WriterBridge::addQueryToOutput( const ft::QueryClass& query, const std::str
 
     if (_OCK)
     {
-        std::cout << "get overCounted Kmers" << std::endl;
          std::string refOCK = getFlagKmers(query, ft::FlagType::OCK);
-        std::cout << "OCK " << refOCK << std::endl;
         _outputMap[prefix+"OCK"] = refOCK;
     }
 
     if (_NUK)
     {
-        std::cout << "get NonUnique Kmers" << std::endl;
         std::string refNUK = getFlagKmers(query, ft::FlagType::NUK);
-        std::cout << "NUK " << refNUK << std::endl;
         _outputMap[prefix+"NUK"] = refNUK;
     }
 }
@@ -182,6 +176,9 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
 
     std::string line;
 
+
+
+
     while (getline(queryFileStream, line)) {
         if (line[line.length()-1] == '\n') {
             line.erase(line.length()-1);
@@ -198,18 +195,20 @@ void WriterBridge::saveOutput(const ft::FTMap& ftMap)
 
         std::vector<std::string> splitline = _utils->split(line, '\t');
         uint fileIndex = atoi(splitline[0].c_str());
-        int queryIndex = fileIndex;
-        const ft::QueryClass& refQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::REF));
-        addQueryToOutput(refQuery, "ref");
 
+        ft::QIdT _refQIdT = std::make_pair(fileIndex, ft::QueryType::REF);
+        const ft::QueryClass& _refQuery = ftMap.getQuery(_refQIdT);
+        addQueryToOutput(_refQuery, "ref");
 
         if (_altData){
-            const ft::QueryClass& altQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::ALT));
+            ft::QIdT _altQIdT = std::make_pair(fileIndex, ft::QueryType::ALT);
+            const ft::QueryClass& altQuery = ftMap.getQuery(_altQIdT);
             addQueryToOutput(altQuery, "alt");
         }
 
         if (_croData){
-            const ft::QueryClass& croQuery = ftMap.getQuery(std::make_pair(queryIndex, ft::QueryType::CRO));
+            ft::QIdT _croQIdT = std::make_pair(fileIndex, ft::QueryType::CRO);
+            const ft::QueryClass& croQuery = ftMap.getQuery(_croQIdT);
             addQueryToOutput(croQuery, "cro");
         }
 

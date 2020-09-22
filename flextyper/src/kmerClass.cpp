@@ -54,17 +54,6 @@ void KmerClass::setReadIDs(std::set<ft::ReadID> readIDs)
         _readIDs = readIDs;
 }
 
-void KmerClass::adjustPosForOffset(uint offset)
-{
-    std::set < long long > positions ;
-    std::set < long long > kPositions = getKPositions();
-    for (long long kPosition : kPositions){
-        long long kPos = kPosition + offset;
-        positions.insert(kPos);
-       }
-    setKPositions(positions);
-}
-
 //===================== ADDERS ==========================
 void KmerClass::addKFlag(const ft::FlagType& flag)
 {

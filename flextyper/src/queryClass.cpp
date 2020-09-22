@@ -7,7 +7,8 @@ namespace ft {
 
 QueryClass::QueryClass(int queryID, ft::QueryType queryType)
     : _qID(queryID),
-      _qType(queryType)
+      _qType(queryType),
+      _qFlags()
 {
 }
 
@@ -23,7 +24,7 @@ const std::set<std::string> QueryClass::getFlagKmers(const ft::FlagType flag) co
     if (hasFlag(flag)){
         return _qFlags.find(flag)->second;
     } else {
-        std::cout << "query doesnt have flag" << std::endl;
+        //std::cout << "query doesnt have flag" << std::endl;
         return {};
     }
 }
@@ -41,16 +42,15 @@ void QueryClass::setFlags(const std::map<ft::FlagType, std::set<std::string>>& f
 }
 
 //===================== ADDERS ==========================
-void QueryClass::addFlags(const ft::FlagType& flagType, const std::set<std::string>& kmers){
-    std::cout << "adding flags " << flagType << " to query for " << *kmers.begin() << std::endl;
+void QueryClass::addFlags(const ft::FlagType& flagType, const std::set<std::string>& kmers)
+{
     for (auto kmer :kmers){
         _qFlags[flagType].insert(kmer);
     }
 }
-void QueryClass::addFlag(const ft::FlagType& flagType, const std::string& kmer){
-    std::cout << "adding flag  " << flagType << " to query for " << kmer << std::endl;
+void QueryClass::addFlag(const ft::FlagType& flagType, const std::string& kmer)
+{
         _qFlags[flagType].insert(kmer);
-    std::cout << "added flag (map count) = " << _qFlags[flagType].count(kmer) << std::endl;
 }
 //===================== REMOVERS ==========================
 void QueryClass::removeFlag(ft::FlagType flagType){

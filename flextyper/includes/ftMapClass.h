@@ -62,7 +62,7 @@ public:
     void processResults();
     void processIndexResults(const std::map<std::string, ft::KmerClass>& indexResults);
     void processQueryResults(const ft::QIdT& qIDT);
-    std::set<ft::ReadID> addKmersToQueryResults(ft::QueryClass query, std::set<std::string> kmers,  std::set<ft::ReadID> readIds);
+    std::set<ft::ReadID> addKmersToQueryResults(ft::QueryClass& query, std::set<std::string> kmers,  std::set<ft::ReadID> readIds);
     int calculateQueryCount(std::set<ft::ReadID> readIds);
 
 

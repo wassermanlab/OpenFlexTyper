@@ -253,7 +253,6 @@ void FTMap::processResults()
 void FTMap::processQueryResults(const ft::QIdT& qIDT)
 {
     ft::QueryClass query = _querySet.find(qIDT)->second;
-
     // Add results from FWD Search
     std::set<std::string> fwdKmers = _qkMap.retrieveKmers(qIDT);
     std::set<ft::ReadID> readIds;
@@ -289,7 +288,7 @@ int FTMap::calculateQueryCount(std::set<ft::ReadID> readIDs)
 
 
 //======================================================
-std::set<ft::ReadID> FTMap::addKmersToQueryResults(ft::QueryClass query, std::set<std::string> kmers,  std::set<ft::ReadID> readIds )
+std::set<ft::ReadID> FTMap::addKmersToQueryResults(ft::QueryClass& query, std::set<std::string> kmers,  std::set<ft::ReadID> readIds )
 {
     for ( std::string kmerString : kmers)
     {
