@@ -69,6 +69,8 @@ void FTProp::init(const fs::path &pathToQueryFile,
     queryOutputFile /= queryFileName+= std::string("_") += _readSetName += "_Results.tsv";
     _outputFile = queryOutputFile;
 
+    if (_searchType == CENTERED && _overlap == 0){ LogClass::ThrowRuntimeError("overlap must be > 0 for centered search");}
+
     if (printInputs){
         std::cout << "pathToQueryFile               : " << pathToQueryFile <<  std::endl;
         std::cout << "kmerSize                      : " << kmerSize <<  std::endl;
