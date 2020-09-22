@@ -511,7 +511,7 @@ TEST_F(TestWriterBridge, getFlagKmers)
     std::set<std::string > flagKmers = {"AAAA", "CCCC"};
     refQuery.addFlags(ft::FlagType::OCK, flagKmers );
     std::string outputFlags = _writerBridge.getFlagKmers(refQuery, ft::FlagType::OCK);
-    std::string expectedFlags = "AAAA, CCCC";
+    std::string expectedFlags = "AAAA,CCCC";
     EXPECT_EQ(outputFlags, expectedFlags);
 
 }
@@ -538,7 +538,7 @@ TEST_F(TestWriterBridge, getFlagKmers2)
     altQuery.addFlags(ft::FlagType::NUK, flagKmers );
 
     std::string outputFlags = _writerBridge.getFlagKmers(altQuery, ft::FlagType::NUK);
-    std::string expectedFlags = "AAAA, CCCC";
+    std::string expectedFlags = "AAAA,CCCC";
 
     EXPECT_EQ(outputFlags, expectedFlags);
 }
@@ -630,7 +630,7 @@ TEST_F(TestWriterBridge, addQueryToOutput2)
 
     EXPECT_EQ(outputMap["altMatches"], "true");
     EXPECT_EQ(outputMap["altCount"], std::to_string(13456));
-    EXPECT_EQ(outputMap["altOCK"], "AAAA, CCCC");
+    EXPECT_EQ(outputMap["altOCK"], "AAAA,CCCC");
     EXPECT_EQ(outputMap["altNUK"], "");
 
 }
@@ -752,7 +752,7 @@ TEST_F(TestWriterBridge, formatOutputMap4)
     std::set<std::string > flagKmers = {"AAAA", "CCCC"};
     refQuery.addFlags(ft::FlagType::OCK, flagKmers );
     _writerBridge.addQueryToOutput(refQuery, "ref");
-    std::string expected = '\t' + std::string("12") + '\t' + std::string("AAAA, CCCC");
+    std::string expected = '\t' + std::string("12") + '\t' + std::string("AAAA,CCCC");
     std::string output = _writerBridge.formatOutputMap();
     EXPECT_EQ(expected, output);
 }
@@ -779,7 +779,7 @@ TEST_F(TestWriterBridge, formatOutputMap5)
     std::set<std::string > flagKmers = {"GGGG", "TTTT"};
     refQuery.addFlags(ft::FlagType::NUK, flagKmers );
     _writerBridge.addQueryToOutput(refQuery, "ref");
-    std::string expected = '\t' + std::string("12") + '\t' + std::string("GGGG, TTTT");
+    std::string expected = '\t' + std::string("12") + '\t' + std::string("GGGG,TTTT");
     std::string output = _writerBridge.formatOutputMap();
     EXPECT_EQ(expected, output);
 }
@@ -808,7 +808,7 @@ TEST_F(TestWriterBridge, formatOutputMap6)
     std::set<std::string > flagKmers2 = {"GGGG", "TTTT"};
     refQuery.addFlags(ft::FlagType::NUK, flagKmers2 );
     _writerBridge.addQueryToOutput(refQuery, "ref");
-    std::string expected = '\t' + std::string("12") + '\t' + std::string("GGGG, TTTT") + '\t' + std::string("AAAA, CCCC");
+    std::string expected = '\t' + std::string("12") + '\t' + std::string("GGGG,TTTT") + '\t' + std::string("AAAA,CCCC");
     std::string output = _writerBridge.formatOutputMap();
     EXPECT_EQ(expected, output);
 }
@@ -844,7 +844,7 @@ TEST_F(TestWriterBridge, formatOutputMap7)
     std::set<std::string > flagKmers4 = {"GGTT", "TTGG"};
     altQuery.addFlags(ft::FlagType::NUK, flagKmers4 );
     _writerBridge.addQueryToOutput(altQuery, "alt");
-    std::string expected = '\t' + std::string("12") + '\t' + std::string("34") +'\t' + std::string("GGGG, TTTT") + '\t' + std::string("GGTT, TTGG") +'\t' + std::string("AAAA, CCCC") + '\t' + std::string("AACC, CCAA");
+    std::string expected = '\t' + std::string("12") + '\t' + std::string("34") +'\t' + std::string("GGGG,TTTT") + '\t' + std::string("GGTT,TTGG") +'\t' + std::string("AAAA,CCCC") + '\t' + std::string("AACC,CCAA");
     std::string output = _writerBridge.formatOutputMap();
     EXPECT_EQ(expected, output);
 }
