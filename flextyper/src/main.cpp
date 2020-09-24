@@ -57,51 +57,77 @@ int main(int argc, char** argv)
     {
         parser.clearPositionalArguments();
         parser.addHelpOption();
-        parser.addPositionalArgument("configuration file", "file containing search configurations", "");
-        QCommandLineOption config = QCommandLineOption(QStringList() << "c" << "config",   QCoreApplication::translate("main", "Please provide configuration file"));
-        config.setValueName("config");
-        parser.addOption(config);
-        parser.addPositionalArgument("output file", "save output to filename", "");
-        QCommandLineOption outputFileName = QCommandLineOption(QStringList() << "o" << "output",   QCoreApplication::translate("main", "Please provide filename to save the output into"));
-        config.setValueName("outputFileName");
-        parser.addOption(outputFileName);
-        QCommandLineOption verbose(QStringList() << "v" << "verbose" , QCoreApplication::translate("main", "prints debugging messages"));
-        parser.addOption(verbose);
+        parser.addPositionalArgument("outputFile", QCoreApplication::translate("main","fm9 dataset"));
 
-        QCommandLineOption kmerSize(QStringList() << "k" << "kmer" , QCoreApplication::translate("main", "kmer size to override the config "));
-        parser.addOption(kmerSize);
-        QCommandLineOption stride(QStringList() << "w" << "stride" , QCoreApplication::translate("main", "stride to override the config "));
-        parser.addOption(stride);
-        QCommandLineOption maxOcc(QStringList() << "m" << "maxOcc" , QCoreApplication::translate("main", "maxOcc to override the config "));
-        parser.addOption(maxOcc);
-        QCommandLineOption uniq(QStringList() << "u" << "unique" , QCoreApplication::translate("main", "ignore nonunique kmers to override the config "));
-        parser.addOption(uniq);
-
+        parser.addOptions({
+            {{"v", "verbose"},  QCoreApplication::translate("main", "prints debugging messages")},
+            {{"c", "config"},   QCoreApplication::translate("main", "ini file to use"),
+                                QCoreApplication::translate("main", "file")},
+            {{"k", "kmerSize"}, QCoreApplication::translate("main", "kmer size"),
+                                QCoreApplication::translate("main", "value")},
+            {{"s", "stride"},   QCoreApplication::translate("main", "stride"),
+                                QCoreApplication::translate("main", "value")},
+            {{"m", "maxOcc"},   QCoreApplication::translate("main", "maxOcc"),
+                                QCoreApplication::translate("main", "value")},
+            {{"u", "unique"},   QCoreApplication::translate("main", "ignore nonunique kmers")},
+        });
 
         parser.process(aps);
-        if (!parser.isSet(config))   {
-            std::cerr << "-c or --config     is required for " << std::endl;
-            parser.showHelp(); return 1;
+
+        ft::FTProp::CmdLineArg cmdArg = {};
+        cmdArg.iniFile = "setting.ini";
+
+        const QStringList positionalArguments = parser.positionalArguments();
+        if (positionalArguments.isEmpty()) {
+            std::cerr << "invalid parameters" << std::endl;
+            parser.showHelp();
+            return 1;
         }
+        //first argument is search
+        cmdArg.outputFile = positionalArguments.at(1).toStdString();
 
-        // file locations
-        std::string configFile    = parser.value(config).toStdString();
-        std::cout << "\nconfig File                   : " << configFile   << std::endl;
-        bool printInputs = true;
+        cmdArg.verbose = parser.isSet("verbose");
+        cmdArg.unique = parser.isSet("unique");
+        if (parser.isSet("c"))
+            cmdArg.iniFile = parser.value("c").toStdString();
+        if (parser.isSet("k"))
+            cmdArg.kmerSize = parser.value("k").toInt();
+        if (parser.isSet("s"))
+            cmdArg.stride = parser.value("s").toInt();
+        if (parser.isSet("m"))
+            cmdArg.maxOccurences = parser.value("m").toInt();
 
-
-        if (!parser.isSet(outputFileName)){
-        ft::LogClass::OpenLog("search.log");
-        } else {
-
-            ft::LogClass::OpenLog(parser.value(outputFileName).toStdString() + ".log");
+        std::string logName = cmdArg.outputFile + ".log";
+        if (parser.isSet("k") || parser.isSet("s") || parser.isSet("m") || parser.isSet("u")) {
+            logName = cmdArg.outputFile + "_" + 
+                      (cmdArg.kmerSize != 0 ? ("m"+parser.value("k").toStdString()):"") + 
+                      (cmdArg.stride ? ("s"+parser.value("s").toStdString()):"") + 
+                      (cmdArg.maxOccurences ? ("m"+parser.value("m").toStdString()):"") + 
+                      (cmdArg.unique ? "u":"") + 
+                      ".log";
         }
+#if 0 //remove after testing
+    for(int i=0 ; i < positionalArguments.length() ; i++) {
+        std::cout << i << ": " << positionalArguments.at(i).toStdString() << std::endl;
+    }
+    std::cout << "verbose: " << parser.isSet("verbose") << std::endl;
+    std::cout << "unique: " << parser.isSet("unique") << std::endl;
+    std::cout << "c: " << parser.isSet("c") << " " << cmdArg.iniFile << std::endl;
+    std::cout << "k: " << parser.isSet("k") << " " << cmdArg.kmerSize << std::endl;
+    std::cout << "s: " << parser.isSet("s") << " " << cmdArg.stride << std::endl;
+    std::cout << "m: " << parser.isSet("m") << " " << cmdArg.maxOccurences << std::endl;
+    std::cout << "LogName : " << logName << std::endl;
+    exit(1);
+#endif
+
+
+        ft::LogClass::OpenLog(logName);
 
         ft::LogClass::Log << "Running " << cmdline << std::endl;
 
         ft::FTProp props;
         try {
-            props.initFromQSettings(configFile, parser.value(outputFileName).toStdString(), printInputs);
+            props.initFromQSettings(cmdArg);
         } catch (std::exception& e) {
             std::cerr << "Config Error: " << e.what() << std::endl;
             return 1;
