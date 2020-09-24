@@ -146,7 +146,7 @@ void FmIndex::parallelFmIndex(algo::IndexProps& _props)
         _props.addToIndexSet(outputIndex, offset);
        }
     fs::path indexPropsINI =  _props.getOutputFolder();
-    indexPropsINI /= _props.getIndexName() + "_" + _props.getReadSetName() + ".ini";
+    indexPropsINI /= _props.getIndexName() + "_" + _props.getReadSetName() + "_index.ini";
 
 
     _props.saveIndexProps(indexPropsINI);
