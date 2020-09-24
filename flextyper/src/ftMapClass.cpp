@@ -68,7 +68,7 @@ void FTMap::genQKMap()
         ft::QueryClass query = it->second;
         std::set<std::string> kmers = (_kmerGenerator.genSearchKmers(query));
 
-        _ftProps.printToStdOut( "generated " + std::to_string(kmers.size()) + " kmers " );
+        //_ftProps.printToStdOut( "generated " + std::to_string(kmers.size()) + " kmers " );
 
         for (std::string kmer : kmers)
         {

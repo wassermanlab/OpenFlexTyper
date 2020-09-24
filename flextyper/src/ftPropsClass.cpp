@@ -15,6 +15,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
                   uint readLength,
                   const fs::path &indexPropsFile,
                   const fs::path &outputFolder,
+                  const fs::path &outputFile,
                   bool refOnly,
                   bool revCompSearch,
                   SearchType searchType,
@@ -56,6 +57,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
     _maxKmersPerQuery = maxKmersPerQuery;
     _maxTotalKmers = maxTotalKmers;
     _matchingReads = matchingReads;
+    _outputFile = outputFile;
 
     if (outputOverCountedKmers){setFlagToOutput(ft::FlagType::OCK);}
     if (outputNonUniqueKmers){setFlagToOutput(ft::FlagType::NUK);}
@@ -63,11 +65,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
     if (ignoreOverCountedKmers){setFlagToNotCount(ft::FlagType::OCK);}
     if (ignoreNonUniqueKmers){setFlagToNotCount(ft::FlagType::NUK);}
 
-    fs::path queryOutputFile = _outputFolder;
-    fs::path queryFileName = _pathToQueryFile.filename();
-    queryFileName.replace_extension();
-    queryOutputFile /= queryFileName+= std::string("_") += _readSetName += "_Results.tsv";
-    _outputFile = queryOutputFile;
+
 
     if (_searchType == CENTERED && _overlap == 0){ LogClass::ThrowRuntimeError("overlap must be > 0 for centered search");}
 
@@ -86,8 +84,8 @@ void FTProp::init(const fs::path &pathToQueryFile,
         std::cout << "stride                        : " << stride << std::endl;
         std::cout << "maxOccurences                 : " << maxOccurences << std::endl;
         std::cout << "numOfThreads                  : " << numOfThreads << std::endl;
-        std::cout << "outputNonUniqueKmers            : " << outputNonUniqueKmers << std::endl;
-        std::cout << "outputOverCountedKmers          : " << outputOverCountedKmers << std::endl;
+        std::cout << "outputNonUniqueKmers          : " << outputNonUniqueKmers << std::endl;
+        std::cout << "outputOverCountedKmers        : " << outputOverCountedKmers << std::endl;
         std::cout << "ignoreNonUniqueKmers          : " << ignoreNonUniqueKmers << std::endl;
         std::cout << "ignoreOverCountedkmers        : " << ignoreOverCountedKmers << std::endl;
         std::cout << "countAsPairs                  : " << countAsPairs << std::endl;
@@ -113,8 +111,8 @@ void FTProp::init(const fs::path &pathToQueryFile,
         LogClass::Log << "stride                        : " << stride << std::endl;
         LogClass::Log << "maxOccurences                 : " << maxOccurences << std::endl;
         LogClass::Log << "numOfThreads                  : " << numOfThreads << std::endl;
-        LogClass::Log << "outputNonUniqueKmers            : " << outputNonUniqueKmers << std::endl;
-        LogClass::Log << "outputOverCountedKmers          : " << outputOverCountedKmers << std::endl;
+        LogClass::Log << "outputNonUniqueKmers          : " << outputNonUniqueKmers << std::endl;
+        LogClass::Log << "outputOverCountedKmers        : " << outputOverCountedKmers << std::endl;
         LogClass::Log << "ignoreNonUniqueKmers          : " << ignoreNonUniqueKmers << std::endl;
         LogClass::Log << "ignoreOverCountedkmers        : " << ignoreOverCountedKmers << std::endl;
         LogClass::Log << "countAsPairs                  : " << countAsPairs << std::endl;
@@ -135,7 +133,7 @@ bool FTProp::isVerbose() const
     return _verbose;
 }
 //================= INIT From Q SETTINGS ========================
-void FTProp::initFromQSettings (std::string configFile, bool printInputs){
+void FTProp::initFromQSettings (std::string configFile, std::string outputFileName, bool printInputs){
 
     QString m_sSettingsFile(configFile.c_str());
     QSettings settings(m_sSettingsFile, QSettings::NativeFormat);
@@ -165,13 +163,25 @@ void FTProp::initFromQSettings (std::string configFile, bool printInputs){
     uint           maxKmersPerQuery        = settings.value("maxKmersPerQuery").toInt();
     uint           maxTotalKmers           = settings.value("maxTotalKmers").toInt();
 
+    fs::path queryOutputFile;
+    if (outputFileName == ""){
+        queryOutputFile = _outputFolder;
+        fs::path queryFileName = _pathToQueryFile.filename();
+        queryFileName.replace_extension();
+        queryOutputFile /= queryFileName+= std::string("_") += _readSetName += "_Results.tsv";
+    }
+    else {
+        queryOutputFile = outputFileName;
+    }
+
     init(pathToQueryFile, kmerSize, readLength,
-         indexPropsFile, outputFolder, refOnly, revCompSearch,
+         indexPropsFile, outputFolder, queryOutputFile, refOnly, revCompSearch,
          searchType, multithread, overlap,
          returnMatchesOnly, stride,
          maxOccurences, numOfThreads, outputNonUniqueKmers, outputOverCountedKmers,
          ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover, printSearchTime,
          maxKmersPerQuery, maxTotalKmers, printInputs, matchingReads);
+
 }
 
 void FTProp::printToStdOut(const std::string outputString) const {

@@ -52,6 +52,7 @@ public:
               uint kmerSize                         ,
               uint readLength                       ,
               const fs::path& indexPropsFile        ,
+              const fs::path& outputFolder          ,
               const fs::path& outputFile            ,
               bool refOnly                          ,
               bool revCompSearch                    ,
@@ -74,7 +75,7 @@ public:
               bool printInputs              = false,
               bool matchingReads            = false);
 
-    void initFromQSettings(std::string configFile, bool printInputs);
+    void initFromQSettings(std::string configFile, std::string outputFileName, bool printInputs);
 
     void setVerbose(bool verbose);
     ////////////////////////////////////////////////////////////////////////

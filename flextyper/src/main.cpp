@@ -61,6 +61,10 @@ int main(int argc, char** argv)
         QCommandLineOption config = QCommandLineOption(QStringList() << "c" << "config",   QCoreApplication::translate("main", "Please provide configuration file"));
         config.setValueName("config");
         parser.addOption(config);
+        parser.addPositionalArgument("output file", "save output to filename", "");
+        QCommandLineOption outputFileName = QCommandLineOption(QStringList() << "o" << "output",   QCoreApplication::translate("main", "Please provide filename to save the output into"));
+        config.setValueName("outputFileName");
+        parser.addOption(outputFileName);
         QCommandLineOption verbose(QStringList() << "v" << "verbose" , QCoreApplication::translate("main", "prints debugging messages"));
         parser.addOption(verbose);
         parser.process(aps);
@@ -75,12 +79,19 @@ int main(int argc, char** argv)
         std::cout << "\nconfig File                   : " << configFile   << std::endl;
         bool printInputs = true;
 
+
+        if (!parser.isSet(outputFileName)){
         ft::LogClass::OpenLog("search.log");
+        } else {
+
+            ft::LogClass::OpenLog(parser.value(outputFileName).toStdString() + ".log");
+        }
+
         ft::LogClass::Log << "Running " << cmdline << std::endl;
 
         ft::FTProp props;
         try {
-            props.initFromQSettings(configFile, printInputs);
+            props.initFromQSettings(configFile, parser.value(outputFileName).toStdString(), printInputs);
         } catch (std::exception& e) {
             std::cerr << "Config Error: " << e.what() << std::endl;
             return 1;

@@ -20,9 +20,9 @@ protected:
         outputFolder = "testOutput";
         refOnly = false;
         revCompSearch = false;
-        searchType = CENTERED;
+        searchType = SLIDING;
         multithread              = false ;
-        overlap                  = 0     ;
+        overlap                  = 1     ;
         returnMatchesOnly        = false ;
         kmerCounts               = false ;
         stride                   = 10    ;
@@ -53,6 +53,7 @@ protected:
     uint readLength;
     fs::path indexPropsFile ;
     fs::path outputFolder;
+    fs::path outputFile;
     bool refOnly ;
     bool revCompSearch;
     SearchType searchType;
@@ -132,7 +133,7 @@ TEST_F(TestFinder, addResultsFutures)
     ft::FTProp _ftProps;
 
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  indexPropsFile,outputFolder, outputFile, refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
@@ -159,9 +160,9 @@ TEST_F(TestFinder, sequentialSearch)
     ft::FTProp _ftProps;
 
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  indexPropsFile,outputFolder, outputFile, refOnly, revCompSearch,
                   searchType, multithread, overlap,
-                  returnMatchesOnly, stride,
+                  returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
                   ignoreNonUniqueKmers, crossover);
     _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,indexFileName, readSetName,
@@ -214,9 +215,9 @@ TEST_F(TestFinder, sequentialSearchLocations)
     ft::FTProp _ftProps;
 
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  indexPropsFile,outputFolder, outputFile, refOnly, revCompSearch,
                   searchType, multithread, overlap,
-                  returnMatchesOnly, stride,
+                  returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
                   ignoreNonUniqueKmers, crossover);
     _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,indexFileName, readSetName,
@@ -280,7 +281,7 @@ TEST_F(TestFinder, sequentialSearchFromIndexProps)
     ft::FTProp _ftProps;
     indexPropsFile = "testFiles/Test.ini";
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  indexPropsFile,outputFolder, outputFile, refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
@@ -333,7 +334,7 @@ TEST_F(TestFinder, DISABLED_sequentialSearchMultipleIndex)
     ft::FTProp _ftProps;
     indexPropsFile = "testFiles/Test.ini";
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  indexPropsFile,outputFolder, outputFile, refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
@@ -389,7 +390,7 @@ TEST_F(TestFinder, parallelSearch1)
     maxThreads = 2;
     indexPropsFile = "testOutput/Index_Test.ini";
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  indexPropsFile,outputFolder, outputFile, refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
@@ -450,7 +451,7 @@ TEST_F(TestFinder, parallelSearch2)
     maxThreads = 3;
     indexPropsFile = "testFiles/Test.ini";
     _ftProps.init(pathToQueryFile,kmerSize,readLength,
-                  indexPropsFile,outputFolder,refOnly, revCompSearch,
+                  indexPropsFile,outputFolder, outputFile, refOnly, revCompSearch,
                   searchType, multithread, overlap,
                   returnMatchesOnly, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,

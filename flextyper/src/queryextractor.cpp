@@ -41,8 +41,8 @@ std::set<Query> QueryExtractor::getInputQueries(bool refOnly, bool crossover, co
             refSequence = splitline[1];
             altSequence = splitline[2];
         }
-        std::cout << "Ref sequence " << refSequence.substr(0,10) << std::endl;
-        std::cout << "Alt sequence " << altSequence.substr(0,10) << std::endl;
+        //std::cout << "Ref sequence " << refSequence.substr(0,10) << std::endl;
+        //std::cout << "Alt sequence " << altSequence.substr(0,10) << std::endl;
 
         std::size_t rfound = refSequence.find_first_not_of("acgtACGT");
         if (rfound != std::string::npos)
@@ -63,7 +63,7 @@ std::set<Query> QueryExtractor::getInputQueries(bool refOnly, bool crossover, co
             std::string endPointSeq   = altSequence.substr(0);
             std::string crossoverSeq  = refSequence.substr(0, refSequence.length() / 2) + altSequence.substr(altSequence.length() / 2);
             inputQueries.insert(std::make_tuple(fileIndex, startPointSeq, endPointSeq, crossoverSeq));
-            std::cout << fileIndex << "  " << startPointSeq.substr(0,10) << "  " << endPointSeq.substr(0,10) << "  " << crossoverSeq.substr(0,10) << std::endl;
+            //std::cout << fileIndex << "  " << startPointSeq.substr(0,10) << "  " << endPointSeq.substr(0,10) << "  " << crossoverSeq.substr(0,10) << std::endl;
         }
     }
 
