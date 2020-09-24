@@ -4,7 +4,6 @@ import sys
 import math
 import pysam
 from pybedtools import BedTool
-from string import maketrans
 
 
 
@@ -25,7 +24,7 @@ class Variant:
 				for pileUpRead in pileupcolumn.pileups:
 					if pileUpRead.is_del == 1:
 						self.indelReads = self.indelReads + 1
-                                                self.coverage = self.coverage + 1
+						self.coverage = self.coverage + 1
 					else:
 						self.nucDict[pileUpRead.alignment.seq[pileUpRead.query_position]] = self.nucDict[pileUpRead.alignment.seq[pileUpRead.query_position]] + 1
 						self.coverage = self.coverage + 1
@@ -43,53 +42,53 @@ class Variant:
 #def GetNucDictFromBAM(BAM,CHROM,POS):
 #    samfile = pysam.AlignmentFile(BAM,"rb")
 #    for pileupcolumn in samfile.pileup(CHROM,POS,POS+1):
-#        print "coverage is %d"%pileupcolumn.n
-#        for pileupread in pileupcolumn.pileups:
-#            if not pileupread.is_del and not pileupread.is_refskip:
-#                # query position is None if is_del or is_refskip is set.
-#                print ('\tbase in read %s = %s' % (pileupread.alignment.query_name,pileupread.alignment.query_sequence[pileupread.query_position]))
-#                samfile.close()
+#	print "coverage is %d"%pileupcolumn.n
+#	for pileupread in pileupcolumn.pileups:
+#	    if not pileupread.is_del and not pileupread.is_refskip:
+#		# query position is None if is_del or is_refskip is set.
+#		print ('\tbase in read %s = %s' % (pileupread.alignment.query_name,pileupread.alignment.query_sequence[pileupread.query_position]))
+#		samfile.close()
 
 
 
 def CoverageFromQuery(ARGS):
 
-"""
-This function will take in the bam file, and read the coverage over positions as defined by the input.tsv files.
-
-Input tsv files are in standardized format:
-#Index Reference   Alternate   Chrom   Pos Ref Alt Identifier  DataType
-0   TTTCTCCAAATACAGATCCAATGTCTTCACTTGTCTATTAAATGCCTCCCATTCCAAATATGATTACCTCTCCCCAGCTCCAATTAAGTCCCTTCTTTCCCCTCTTACTACCGCTTTCTTCCATGTGCCTCTTACAACACCATGGAGACATTTTTCATTTGTGCTTCTTTCATGCAGTTAGCCAAGCTTGTCAAGTTTTTTTTTTTTTGAAAAAAAAAAAAAATACATACATATATATATATATAATTTTTTTTCCCCTCACTATGTTGCCCAGATTGGTCTTGAACTACCGGGCTCAAGT   TTTCTCCAAATACAGATCCAATGTCTTCACTTGTCTATTAAATGCCTCCCATTCCAAATATGATTACCTCTCCCCAGCTCCAATTAAGTCCCTTCTTTCCCCTCTTACTACCGCTTTCTTCCATGTGCCTCTTACAACACCATGGAGACACTTTTCATTTGTGCTTCTTTCATGCAGTTAGCCAAGCTTGTCAAGTTTTTTTTTTTTTGAAAAAAAAAAAAAATACATACATATATATATATATAATTTTTTTTCCCCTCACTATGTTGCCCAGATTGGTCTTGAACTACCGGGCTCAAGT   16  27557749    T   C   rs7198785_S-3AAAA   cytoscan
-
-# It will then produce an output which adds a coverage for ref and alt bases
-"""
-        query = open(ARGS.Query,'r')
-        outFile = open(ARGS.o,'w')
+	"""
+	This function will take in the bam file, and read the coverage over positions as defined by the input.tsv files.
+	
+	Input tsv files are in standardized format:
+	#Index Reference   Alternate   Chrom   Pos Ref Alt Identifier  DataType
+	0   TTTCTCCAAATACAGATCCAATGTCTTCACTTGTCTATTAAATGCCTCCCATTCCAAATATGATTACCTCTCCCCAGCTCCAATTAAGTCCCTTCTTTCCCCTCTTACTACCGCTTTCTTCCATGTGCCTCTTACAACACCATGGAGACATTTTTCATTTGTGCTTCTTTCATGCAGTTAGCCAAGCTTGTCAAGTTTTTTTTTTTTTGAAAAAAAAAAAAAATACATACATATATATATATATAATTTTTTTTCCCCTCACTATGTTGCCCAGATTGGTCTTGAACTACCGGGCTCAAGT   TTTCTCCAAATACAGATCCAATGTCTTCACTTGTCTATTAAATGCCTCCCATTCCAAATATGATTACCTCTCCCCAGCTCCAATTAAGTCCCTTCTTTCCCCTCTTACTACCGCTTTCTTCCATGTGCCTCTTACAACACCATGGAGACACTTTTCATTTGTGCTTCTTTCATGCAGTTAGCCAAGCTTGTCAAGTTTTTTTTTTTTTGAAAAAAAAAAAAAATACATACATATATATATATATAATTTTTTTTCCCCTCACTATGTTGCCCAGATTGGTCTTGAACTACCGGGCTCAAGT   16  27557749    T   C   rs7198785_S-3AAAA   cytoscan
+	
+	# It will then produce an output which adds a coverage for ref and alt bases
+	"""
+	query = open(ARGS.Query,'r')
+	outFile = open(ARGS.o,'w')
 	
 	# Open the bam file
-        samfile = pysam.Samfile(ARGS.bam,"rb")		
-        
-        # output TSV will have this header
+	samfile = pysam.Samfile(ARGS.bam,"rb")		
+	
+	# output TSV will have this header
 	outFile.write("#Index\tReference\tAlternate\tChrom\tPos\tRef\tAlt\tIdentifier\tDataType\tRefCoverageFromBam\tAltCoverageFromBam\tTotalCoverageFromBam\n")
 	for line in query:
 		line = line.strip('\r')
-                line = line.strip('\n')
-                if line[0] != '#':
+		line = line.strip('\n')
+		if line[0] != '#':
 			columns = line.split('\t')
 			chromosome = columns[3]
-                        if ARGS.Genome=='hg19': 
-                            chromosome = 'chr'+chromosome
-                        elif ARGS.Genome=='GRCh37':
-                            chromosome = chromosome
-                        else:
-                            print "You did not select a viable genome"
-                            sys.exit()
-                        try:
+			if ARGS.Genome=='hg19': 
+			    chromosome = 'chr'+chromosome
+			elif ARGS.Genome=='GRCh37':
+			    chromosome = chromosome
+			else:
+			    print("You did not select a viable genome")
+			    sys.exit()
+			try:
 			    varPos = int(columns[4])
-                        except:
-                            continue
-                        refBase = columns[5]
-                        altBase = columns[6]
+			except:
+			    continue
+			refBase = columns[5]
+			altBase = columns[6]
 			#populate the variant class
 			varMan = Variant(chromosome,varPos,samfile)
 
@@ -97,13 +96,13 @@ Input tsv files are in standardized format:
 				varMan.getInfo()
 			except(ValueError):
 				outFile.write("%s\t.\t.\n"%(line))
-                                continue
-                        if altBase != '.':
-                            AltCount = varMan.nucDict[altBase]
-                        else:
-                            AltCount = 0
-                        RefCount = varMan.nucDict[refBase]
-                        Coverage = varMan.coverage
+				continue
+			if altBase != '.':
+			    AltCount = varMan.nucDict[altBase]
+			else:
+			    AltCount = 0
+			RefCount = varMan.nucDict[refBase]
+			Coverage = varMan.coverage
 			outFile.write("%s\t%d\t%d\t%d\n"%(line,RefCount,AltCount,Coverage))
 
 if __name__  == "__main__":	
@@ -111,9 +110,9 @@ if __name__  == "__main__":
 	parser.add_argument("-bam",help="input your bam file",type=str)
 	parser.add_argument("-o",help="name of the ouput file",type=str)
 	parser.add_argument("--ID",help="name of the sample ID",type=str)
-        parser.add_argument("-Q","--Query",help="name of your input query file. Usually either SProbe_Cyto_Merged.cytoquery.tsv or CProbe_Cyto_Merged.cytoquery.tsv",type=str)
-        parser.add_argument("-G","--Genome",help="Either choose hg19 || GRCh37",required=True)
+	parser.add_argument("-Q","--Query",help="name of your input query file. Usually either SProbe_Cyto_Merged.cytoquery.tsv or CProbe_Cyto_Merged.cytoquery.tsv",type=str)
+	parser.add_argument("-G","--Genome",help="Either choose hg19 || GRCh37",required=True)
 
 	args = parser.parse_args()
-        CoverageFromQuery(args)
+	CoverageFromQuery(args)
 
