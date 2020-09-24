@@ -133,9 +133,9 @@ bool FTProp::isVerbose() const
     return _verbose;
 }
 //================= INIT From Q SETTINGS ========================
-void FTProp::initFromQSettings (std::string configFile, std::string outputFileName, bool printInputs){
+void FTProp::initFromQSettings (FTProp::CmdLineArg& arg){
 
-    QString m_sSettingsFile(configFile.c_str());
+    QString m_sSettingsFile(arg.iniFile.c_str());
     QSettings settings(m_sSettingsFile, QSettings::NativeFormat);
 
     fs::path       pathToQueryFile         = settings.value("queryFile").toString().toStdString();
@@ -164,15 +164,21 @@ void FTProp::initFromQSettings (std::string configFile, std::string outputFileNa
     uint           maxTotalKmers           = settings.value("maxTotalKmers").toInt();
 
     fs::path queryOutputFile;
-    if (outputFileName == ""){
+    if (arg.outputFile.empty()){
         queryOutputFile = _outputFolder;
         fs::path queryFileName = _pathToQueryFile.filename();
         queryFileName.replace_extension();
         queryOutputFile /= queryFileName+= std::string("_") += _readSetName += "_Results.tsv";
     }
     else {
-        queryOutputFile = outputFileName;
+        queryOutputFile = arg.outputFile;
     }
+    if (arg.kmerSize)
+        kmerSize = arg.kmerSize;
+    if (arg.stride)
+        stride = arg.stride;
+    if (arg.maxOccurences)
+        maxOccurences = arg.maxOccurences;
 
     init(pathToQueryFile, kmerSize, readLength,
          indexPropsFile, outputFolder, queryOutputFile, refOnly, revCompSearch,
@@ -180,7 +186,7 @@ void FTProp::initFromQSettings (std::string configFile, std::string outputFileNa
          returnMatchesOnly, stride,
          maxOccurences, numOfThreads, outputNonUniqueKmers, outputOverCountedKmers,
          ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover, printSearchTime,
-         maxKmersPerQuery, maxTotalKmers, printInputs, matchingReads);
+         maxKmersPerQuery, maxTotalKmers, arg.verbose, matchingReads);
 
 }
 

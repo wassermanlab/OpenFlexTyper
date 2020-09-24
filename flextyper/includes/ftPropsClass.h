@@ -44,6 +44,15 @@ public:
     ////////////////////////////////////////////////////////////////////////
     virtual ~FTProp();
 
+    struct CmdLineArg {
+        std::string outputFile;
+        std::string iniFile;
+        uint kmerSize;
+        uint stride;
+        uint maxOccurences;
+        bool unique;
+        bool verbose;
+    };
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief Init
@@ -75,7 +84,7 @@ public:
               bool printInputs              = false,
               bool matchingReads            = false);
 
-    void initFromQSettings(std::string configFile, std::string outputFileName, bool printInputs);
+    void initFromQSettings(FTProp::CmdLineArg& arg);
 
     void setVerbose(bool verbose);
     ////////////////////////////////////////////////////////////////////////
