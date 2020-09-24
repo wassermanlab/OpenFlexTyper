@@ -78,8 +78,8 @@ int main(int argc, char** argv)
         cmdArg.iniFile = "setting.ini";
 
         const QStringList positionalArguments = parser.positionalArguments();
-        if (positionalArguments.isEmpty()) {
-            std::cerr << "invalid parameters" << std::endl;
+        if (positionalArguments.size() != 2) {
+            std::cerr << "missing the outputFile" << std::endl;
             parser.showHelp();
             return 1;
         }
