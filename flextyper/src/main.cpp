@@ -67,8 +67,18 @@ int main(int argc, char** argv)
         parser.addOption(outputFileName);
         QCommandLineOption verbose(QStringList() << "v" << "verbose" , QCoreApplication::translate("main", "prints debugging messages"));
         parser.addOption(verbose);
-        parser.process(aps);
 
+        QCommandLineOption kmerSize(QStringList() << "k" << "kmer" , QCoreApplication::translate("main", "kmer size to override the config "));
+        parser.addOption(kmerSize);
+        QCommandLineOption stride(QStringList() << "w" << "stride" , QCoreApplication::translate("main", "stride to override the config "));
+        parser.addOption(stride);
+        QCommandLineOption maxOcc(QStringList() << "m" << "maxOcc" , QCoreApplication::translate("main", "maxOcc to override the config "));
+        parser.addOption(maxOcc);
+        QCommandLineOption uniq(QStringList() << "u" << "unique" , QCoreApplication::translate("main", "ignore nonunique kmers to override the config "));
+        parser.addOption(uniq);
+
+
+        parser.process(aps);
         if (!parser.isSet(config))   {
             std::cerr << "-c or --config     is required for " << std::endl;
             parser.showHelp(); return 1;
