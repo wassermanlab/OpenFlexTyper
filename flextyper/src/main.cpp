@@ -175,10 +175,10 @@ int main(int argc, char** argv)
             {{"fq", "fastq"},           QCoreApplication::translate("main", "input file is in fq format")},
             {{"fa", "fasta"},           QCoreApplication::translate("main", "input file is in fasta format")},
             {{"gz", "fq.gz"},           QCoreApplication::translate("main", "input file is in fq.gz format")},
-            {{"c", "rev", "revComp", "revCompFlag"},   QCoreApplication::translate("main", "include the rev comp in the index")},
-            {{"dfq", "delFQ", "delfq", "delFastQ", "delfastq","delFQFlag" },   QCoreApplication::translate("main", "delete the fq files once the index is built")},
-            {{"dfa", "delFA", "delfa", "delFa", "delFasta", "delfasta", "delFastaFlag"},   QCoreApplication::translate("main", "delete the fa fastas once the index is built")},
-            {{"v", "verbose"},  QCoreApplication::translate("main", "prints debugging messages")},
+            {{"c", "revComp"},          QCoreApplication::translate("main", "include the rev comp in the index")},
+            {{"dfq", "delFQ" },         QCoreApplication::translate("main", "delete the fq files once the index is built")},
+            {{"dfa", "delFasta"},       QCoreApplication::translate("main", "delete the fa fastas once the index is built")},
+            {{"v", "verbose"},          QCoreApplication::translate("main", "prints debugging messages")},
             });
 
         parser.process(aps);
@@ -250,9 +250,9 @@ int main(int argc, char** argv)
         }
 
         //set parameters
-        props->setRevCompFlag(parser.isSet("revCompFlag"));
-        props->setDelFQFlag(parser.isSet("delFQFlag"));
-        props->setDelFastaFlag(parser.isSet("delFastaFlag"));
+        props->setRevCompFlag(parser.isSet("revComp"));
+        props->setDelFQFlag(parser.isSet("delFQ"));
+        props->setDelFastaFlag(parser.isSet("delFasta"));
 
         if (!parser.isSet(readFileName)) {
             std::cerr << "-r or --readfile is required for indexing" << std::endl;
