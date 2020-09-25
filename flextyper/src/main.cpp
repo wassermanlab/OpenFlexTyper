@@ -35,7 +35,7 @@ int main(int argc, char** argv)
     QCoreApplication aps(argc, argv);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setApplicationName("flextyper");
-    QCoreApplication::setApplicationVersion("version 0.2");
+    QCoreApplication::setApplicationVersion("version 1.0");
     QCommandLineParser parser;
 
 
@@ -100,11 +100,19 @@ int main(int argc, char** argv)
         std::string logName = cmdArg.outputFile + ".log";
         if (parser.isSet("k") || parser.isSet("s") || parser.isSet("m") || parser.isSet("u")) {
             logName = cmdArg.outputFile + "_" + 
-                      (cmdArg.kmerSize != 0 ? ("m"+parser.value("k").toStdString()):"") + 
+                      (cmdArg.kmerSize != 0 ? ("k"+parser.value("k").toStdString()):"") +
                       (cmdArg.stride ? ("s"+parser.value("s").toStdString()):"") + 
                       (cmdArg.maxOccurences ? ("m"+parser.value("m").toStdString()):"") + 
                       (cmdArg.unique ? "u":"") + 
                       ".log";
+        }
+
+        if (parser.isSet("k") || parser.isSet("s") || parser.isSet("m") || parser.isSet("u")) {
+            cmdArg.outputFile += "_" +
+                  (cmdArg.kmerSize != 0 ? ("k"+parser.value("k").toStdString()):"") +
+                  (cmdArg.stride ? ("s"+parser.value("s").toStdString()):"") +
+                  (cmdArg.maxOccurences ? ("m"+parser.value("m").toStdString()):"") +
+                  (cmdArg.unique ? "u":"");
         }
 #if 0 //remove after testing
     for(int i=0 ; i < positionalArguments.length() ; i++) {
@@ -133,11 +141,6 @@ int main(int argc, char** argv)
             return 1;
         }
 
-        if (props.getInputFastQ().empty()) {
-            std::cerr << "you need to provide the read file location\n";
-            return 1;
-        }
-
         ft::FTSearch *flexTyperInstance = new ft::FTSearch();
         try {
             flexTyperInstance->init(props);
@@ -158,55 +161,31 @@ int main(int argc, char** argv)
         readFileName.setValueName("readFileName");
         parser.addOption(readFileName);
 
-        //parser.addPositionalArgument("outputDir", "contains the ouput directory for the index", "");
-        QCommandLineOption outputDir = QCommandLineOption(QStringList() << "o" << "outindexDir", QCoreApplication::translate("main", "Please provide the output index directory"));
-        outputDir.setValueName("outputDir");
-        parser.addOption(outputDir);
-
-        //parser.addPositionalArgument("indexFileName", "contains the filename for the index", "");
-        QCommandLineOption indexFileName = QCommandLineOption(QStringList() << "x" << "indexFileName",   QCoreApplication::translate("main", "Please provide the index filename (!without .fm9 extension)"));
-        indexFileName.setValueName("indexFileName");
-        parser.addOption(indexFileName);
-
-
-        QCommandLineOption readPairFileName = QCommandLineOption(QStringList() << "p" << "readPairfile", QCoreApplication::translate("main", "Please provide the name of the paired read file"));
-        readPairFileName.setValueName("readPairFileName");
-        parser.addOption(readPairFileName);
-
-        QCommandLineOption numOfIndexes(QStringList() << "n" << "numOfIndexes" , QCoreApplication::translate("main", "split the reads into n indexes "));
-        numOfIndexes.setValueName("numOfIndexes");
-        parser.addOption(numOfIndexes);
-
-        QCommandLineOption readLength(QStringList() << "l" << "readLength" , QCoreApplication::translate("main", "read length "));
-        readLength.setValueName("readLength");
-        parser.addOption(readLength);
-
-        QCommandLineOption readFastq(QStringList() << "fq" << "fastq" , QCoreApplication::translate("main", "the input file is in fq format "));
-        parser.addOption(readFastq);
-
-        QCommandLineOption readFasta(QStringList() << "fa" << "fasta" , QCoreApplication::translate("main", "the input file is in fasta format"));
-        parser.addOption(readFasta);
-
-        QCommandLineOption readZip(QStringList() << "gz" << "fastqgz" , QCoreApplication::translate("main", "the input file is in fq.gz format"));
-        parser.addOption(readZip);
-
-        QCommandLineOption revCompFlag(QStringList() << "c" << "rev" << "revComp", QCoreApplication::translate("main", "identifies whether to include the rev complement in the index"));
-        parser.addOption(revCompFlag);
-
-        QCommandLineOption delFQFlag(QStringList() << "dfq" << "delFQ" << "delFastQ", QCoreApplication::translate("main", "delete the FQ once the index is built"));
-        parser.addOption(delFQFlag);
-
-        QCommandLineOption delFastaFlag(QStringList() << "dfa" << "delFA" << "delFasta", QCoreApplication::translate("main", "deletes the preprocess fasta once the index is built"));
-        parser.addOption(delFastaFlag);
-
-        QCommandLineOption verbose(QStringList() << "v" << "verbose" , QCoreApplication::translate("main", "prints debugging messages"));
-        parser.addOption(verbose);
+        parser.addOptions({
+            {{"o", "outputDir"},        QCoreApplication::translate("main", " output index directory"),
+                                        QCoreApplication::translate("main", "directory")},
+            {{"x", "indexFileName"},    QCoreApplication::translate("main", "index filename (!without .fm9 extension)"),
+                                        QCoreApplication::translate("main", "file")},
+            {{"p", "readPairfile"},     QCoreApplication::translate("main", "name of the paired read file"),
+                                        QCoreApplication::translate("main", "file")},
+            {{"n", "numOfIndexes"},     QCoreApplication::translate("main", "split the reads into n indexes"),
+                                        QCoreApplication::translate("main", "value")},
+            {{"l", "readLength"},       QCoreApplication::translate("main", "read length"),
+                                        QCoreApplication::translate("main", "value")},
+            {{"fq", "fastq"},           QCoreApplication::translate("main", "input file is in fq format")},
+            {{"fa", "fasta"},           QCoreApplication::translate("main", "input file is in fasta format")},
+            {{"gz", "fq.gz"},           QCoreApplication::translate("main", "input file is in fq.gz format")},
+            {{"c", "rev", "revComp", "revCompFlag"},   QCoreApplication::translate("main", "include the rev comp in the index")},
+            {{"dfq", "delFQ", "delfq", "delFastQ", "delfastq","delFQFlag" },   QCoreApplication::translate("main", "delete the fq files once the index is built")},
+            {{"dfa", "delFA", "delfa", "delFa", "delFasta", "delfasta", "delFastaFlag"},   QCoreApplication::translate("main", "delete the fa fastas once the index is built")},
+            {{"v", "verbose"},  QCoreApplication::translate("main", "prints debugging messages")},
+            });
 
         parser.process(aps);
 
         algo::IndexProps *props = new algo::IndexProps();
 
-        props->setVerboseFlag(parser.isSet(verbose));
+        props->setVerboseFlag(parser.isSet("verbose"));
 
         fs::path buildDir = QCoreApplication::applicationDirPath().toStdString();
         props->setBuildDir(buildDir);
@@ -218,25 +197,25 @@ int main(int argc, char** argv)
 
         props->setR1(readFile);
 
-        if (parser.isSet(readZip))
+        if (parser.isSet("fq.gz"))
         {  props->setReadFileType(algo::FileType::GZ);
             props->setReadSetName(readFile.stem().replace_extension());}
 
-        else if (parser.isSet(readFastq))
+        else if (parser.isSet("fq"))
         {  props->setReadFileType(algo::FileType::FQ);
             props->setReadSetName(readFile.stem());}
-        else if (parser.isSet(readFasta))
+        else if (parser.isSet("fa"))
         {  props->setReadFileType(algo::FileType::FA);}
         else
         { std::cout << "Error: Please specify the read file type " << std::endl;
             return 1;
         }
 
-        props->setPairedReadsFlag(parser.isSet(readPairFileName));
+        props->setPairedReadsFlag(parser.isSet("p"));
 
         if (props->getPairedReadsFlag())
         {
-            props->setR2(parser.value(readPairFileName).toStdString());
+            props->setR2(parser.value("p").toStdString());
             std::string readsetName = props->getReadSetName();
             props->setReadSetName(readsetName.substr(0,readsetName.size()-2));
             props->printToStdOut("R2 " + props->getR2().string());
@@ -245,7 +224,7 @@ int main(int argc, char** argv)
          props->printToStdOut( "read set Name " + props->getReadSetName());
 
         //set output values
-        if (!parser.isSet(outputDir)){
+        if (!parser.isSet("outputDir")){
             props->printToStdOut( "Output Folder not set");
             if (readFile.parent_path() != "" ){
             props->printToStdOut( "Setting Output Folder to readFile directory " + readFile.parent_path().string());
@@ -255,25 +234,25 @@ int main(int argc, char** argv)
                 props->setOutputFolder(fs::current_path());
             }
         }else{
-        props->setOutputFolder(parser.value(outputDir).toStdString());
+        props->setOutputFolder(parser.value("outputDir").toStdString());
         }
         props->printToStdOut( "Output Folder "+ props->getOutputFolder().string());
         fs::path ppfFolder = props->getOutputFolder();
         ppfFolder /= "tmp_ppf";
         props->setppfFolder(ppfFolder);
         props->printToStdOut( "PPF Folder "+ props->getppfFolder().string());
-        if (!parser.isSet(indexFileName)){
+        if (!parser.isSet("indexFileName")){
             props->printToStdOut("Index File Name not set");
             props->printToStdOut("Default Index Name set: " + props->getIndexName());
         }else {
-            props->printToStdOut( "Setting Index File Name to " + parser.value(indexFileName).toStdString());
-            props->setIndexName(parser.value(indexFileName).toStdString());
+            props->printToStdOut( "Setting Index File Name to " + parser.value("indexFileName").toStdString());
+            props->setIndexName(parser.value("indexFileName").toStdString());
         }
 
         //set parameters
-        props->setRevCompFlag(parser.isSet(revCompFlag));
-        props->setDelFQFlag(parser.isSet(delFQFlag));
-        props->setDelFastaFlag(parser.isSet(delFastaFlag));
+        props->setRevCompFlag(parser.isSet("revCompFlag"));
+        props->setDelFQFlag(parser.isSet("delFQFlag"));
+        props->setDelFastaFlag(parser.isSet("delFastaFlag"));
 
         if (!parser.isSet(readFileName)) {
             std::cerr << "-r or --readfile is required for indexing" << std::endl;
@@ -281,8 +260,8 @@ int main(int argc, char** argv)
             return 1;
         }
 
-        if (parser.isSet(numOfIndexes))
-        { u_int numOfIndicies = std::stoi(parser.value(numOfIndexes).toStdString());
+        if (parser.isSet("numOfIndexes"))
+        { u_int numOfIndicies = std::stoi(parser.value("numOfIndexes").toStdString());
             props->setNumOfIndexes(numOfIndicies);
         } else {
             props->setNumOfIndexes(1);
@@ -315,8 +294,8 @@ int main(int argc, char** argv)
         props->countNumOfReads();
 
         // set the read length, or count from PPF
-        if (parser.isSet(readLength))
-        { u_int length = std::stoi(parser.value(readLength).toStdString());
+        if (parser.isSet("readLength"))
+        { u_int length = std::stoi(parser.value("readLength").toStdString());
             props->setReadLength(length);
         } else {
             fs::path ppf = props->getPreProcessedFastas().begin()->first;

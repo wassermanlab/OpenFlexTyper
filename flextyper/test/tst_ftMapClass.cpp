@@ -14,7 +14,8 @@ protected:
     virtual void TearDown() {}
 
 public:
-
+    FTProp::CmdLineArg arg;
+    // Test_Settings.ini, output.tsv, false
 };
 
 #define TEST_DESCRIPTION(desc) RecordProperty("description", desc)
@@ -25,7 +26,8 @@ TEST_F(TestFTMap, TestCheckKmer)
 {
     TEST_DESCRIPTION("Check Kmer");
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini", "output.tsv", false);
+
+    _ftProps.initFromQSettings(arg);
     ft::FTMap ftMap(_ftProps);
 
     ftMap.addKmer("AAAA");
@@ -39,7 +41,7 @@ TEST_F(TestFTMap, TestCheckQIDT)
     TEST_DESCRIPTION("check QIdT");
     //bool checkQIDT(ft::QIdT testQueryObject);
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini","output.tsv", false);
+    _ftProps.initFromQSettings(arg);
     ft::FTMap ftMap(_ftProps);
 
     ftMap.addQuery(1, ft::QueryType::REF);
@@ -68,7 +70,7 @@ TEST_F(TestFTMap, TestAddQuery)
     TEST_DESCRIPTION("Add Query");
     //void addQuery(ft::QueryClass query);
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini","output.tsv", false);
+    _ftProps.initFromQSettings(arg);
     ft::FTMap ftMap(_ftProps);
     ftMap.addQuery(1, ft::QueryType::REF);
     ft::QIdT testGoodQIdT = std::make_pair(1, ft::QueryType::REF);
@@ -85,7 +87,7 @@ TEST_F(TestFTMap, TestAddKmerResults)
     TEST_DESCRIPTION("Add Kmer Results");
     //void FTMap::addKmerResults(ft::KmerClass kmerResult)
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini","output.tsv", false);
+    _ftProps.initFromQSettings(arg);
     ft::FTMap ftMap(_ftProps);
 
     ft::KmerClass testKmer1("AAAA");
@@ -107,7 +109,7 @@ TEST_F(TestFTMap, TestAddIndexResults)
     TEST_DESCRIPTION("Add Index Results");
     //void addIndexResults(std::set<ft::KmerClass> indexResults);
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini","output.tsv", false);
+    _ftProps.initFromQSettings(arg);
     ft::FTMap ftMap(_ftProps);
 
     ft::KmerClass testKmer1("AAAA");
@@ -131,7 +133,7 @@ TEST_F(TestFTMap, TestProcessIndexResults)
     TEST_DESCRIPTION("Process Index Results");
     //void processIndexResults(std::set<ft::KmerClass> indexResults, uint readLength);
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini","output.tsv", false);
+    _ftProps.initFromQSettings(arg);
     _ftProps.setTestProps(20, 100, false);
     ft::FTMap ftMap(_ftProps);
 
@@ -160,7 +162,7 @@ TEST_F(TestFTMap, TestProcessIndexResults_multipleIndexes )
     TEST_DESCRIPTION("Process Index Results");
     //void processIndexResults(std::set<ft::KmerClass> indexResults, uint readLength);
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini","output.tsv", false);
+    _ftProps.initFromQSettings(arg);
     _ftProps.setTestProps(20, 100, false);
     ft::FTMap ftMap(_ftProps);
 
@@ -193,7 +195,7 @@ TEST_F(TestFTMap, TestaddKmersToQueryResults )
     // std::set<ft::ReadID> addKmersToQueryResults(ft::QueryClass query, std::set<std::string> kmers,  std::set<ft::ReadID> readIds);
 
    ft::FTProp _ftProps;
-   _ftProps.initFromQSettings("Test_Settings.ini","output.tsv", false);
+    _ftProps.initFromQSettings(arg);
    _ftProps.setTestProps(20, 100, false);
    ft::FTMap ftMap(_ftProps);
    ft::QueryClass query1(1, ft::QueryType::REF);
@@ -228,7 +230,7 @@ TEST_F(TestFTMap, TestcalculateQueryCount_singles )
     // int FTMap::calculateQueryCount(std::set<ft::ReadID> readIDs)
 
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini","output.tsv", false);
+    _ftProps.initFromQSettings(arg);
     _ftProps.setTestProps(20, 100, false);
     ft::FTMap ftMap(_ftProps);
 
@@ -251,7 +253,7 @@ TEST_F(TestFTMap, TestcalculateQueryCount_pairs )
     // int FTMap::calculateQueryCount(std::set<ft::ReadID> readIDs)
 
     ft::FTProp _ftProps;
-    _ftProps.initFromQSettings("Test_Settings.ini","output.tsv", false);
+    _ftProps.initFromQSettings(arg);
     _ftProps.setTestProps(20, 100, false, true);
     ft::FTMap ftMap(_ftProps);
 
