@@ -42,7 +42,12 @@ std::set<std::string> KmerGenerator::genSlidingSearchStrings(const std::string& 
             break;
         if (queryString == ".") continue;
         std::string searchString = queryString.substr(i, _kmerSize);
-
+        size_t nfound = searchString.find_first_of("nN");
+        if (nfound != std::string::npos)
+        {
+            LogClass::Log << "kmer ignored as contains N " << searchString << std::endl;
+            continue;
+        }
         if (!searchString.empty()) {
             _counter[searchString]++;
             searchStrings.insert(searchString);
@@ -74,6 +79,12 @@ std::set<std::string> KmerGenerator::genCenteredSearchStrings(const std::string&
             break;
         if (i + _kmerSize < queryString.size()) {
             std::string searchString = queryString.substr(i, _kmerSize);
+            size_t nfound = searchString.find_first_of("nN");
+            if (nfound != std::string::npos)
+            {
+                LogClass::Log << "kmer ignored as contains N " << searchString << std::endl;
+                continue;
+            }
             _counter[searchString]++;
             searchStrings.insert(searchString);
         }

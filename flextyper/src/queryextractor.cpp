@@ -44,12 +44,23 @@ std::set<Query> QueryExtractor::getInputQueries(bool refOnly, bool crossover, co
         //std::cout << "Ref sequence " << refSequence.substr(0,10) << std::endl;
         //std::cout << "Alt sequence " << altSequence.substr(0,10) << std::endl;
 
-        std::size_t rfound = refSequence.find_first_not_of("acgtACGT");
+        std::size_t rfound = refSequence.find_first_not_of("acgtnACGTN");
+        std::size_t rnfound = refSequence.find_first_of("nN");
+        if (rnfound != std::string::npos)
+        {
+            LogClass::Log << "Ref Sequence contains Ns, Kmers generated with N's will be ignored" << std::endl;
+        }
         if (rfound != std::string::npos)
         {
+
             LogClass::ThrowRuntimeError("invalid query sequences: Ref sequence contains invalid characters ");
         }
-        std::size_t afound = altSequence.find_first_not_of("acgtACGT");
+        std::size_t afound = altSequence.find_first_not_of("acgtnACGTN");
+        std::size_t anfound = refSequence.find_first_of("nN");
+        if (anfound != std::string::npos)
+        {
+            LogClass::Log << "Alt Sequence contains Ns, Kmers generated with N's will be ignored" << std::endl;
+        }
         if (afound != std::string::npos)
         {
             LogClass::ThrowRuntimeError("invalid query sequences: Alt sequence contains invalid characters ");
