@@ -179,6 +179,8 @@ void FTProp::initFromQSettings (FTProp::CmdLineArg& arg){
         stride = arg.stride;
     if (arg.maxOccurences)
         maxOccurences = arg.maxOccurences;
+    if (arg.unique)
+        ignoreNonUniqueKmers = arg.unique;
 
     init(pathToQueryFile, kmerSize, readLength,
          indexPropsFile, outputFolder, queryOutputFile, refOnly, revCompSearch,
