@@ -67,23 +67,11 @@ void Finder::addResultsFutures(std::map<std::string, ft::KmerClass> & indexResul
     std::map<std::string, ft::KmerClass>::iterator it = indexResults.find(resultkmer);
     if (it != indexResults.end())
     {
-        ft::KmerClass result = it->second;
-
-        tmpResult.adjustPositionsWithOffset(offset);
-        result.setKPositions(tmpResult.getKPositions());
-
-        result.setOCC(result.getOCC() + tmpResult.getOCC());
-
-        for (std::size_t i = 0; i < 8; ++i) {
-            if ( tmpResult.getKFlags().test(i) ) {
-                result.addKFlag(ft::FlagType(i));
-            }
-        }
-        it->second = result;
-    } else {
-        tmpResult.adjustPositionsWithOffset(offset);
-        indexResults[tmpResult.getKmer()] = tmpResult;
+        LogClass::ThrowRuntimeError("addResults " + resultkmer + " already inserted");
     }
+
+    tmpResult.adjustPositionsWithOffset(offset);
+    indexResults[tmpResult.getKmer()] = tmpResult;
 }
 
 //======================================================================
@@ -108,7 +96,7 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
         LogClass::Log << "(E) load " << e.what() << std::endl;
     }
 
-    LogClass::Log << "(I) parallelSearch: loaded " << indexPath.string() << std::endl;
+    LogClass::Log << "(I) paralle: loaded " << indexPath.string() << std::endl;
 
     // create a vector of futures
     std::vector<std::future<ft::KmerClass>> resultsFutures;
@@ -116,6 +104,7 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
     uint elts = 0;
 
     std::unordered_map<std::string, ft::KmerClass>::const_iterator it = kmerMap.begin();
+    std::cout << "parallelSearch " << kmerMap.size() << std::endl;
     while (it != kmerMap.end())
     {
         std::string kmer = it->first;

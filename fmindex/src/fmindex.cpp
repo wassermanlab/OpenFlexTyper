@@ -16,7 +16,7 @@ void FmIndex::printToStdOut(const std::string& outputString){
     if (_verbose)
     { std::cout << outputString << std::endl;  }
 }
-
+#if 0
 //======================================================================
 ft::KmerClass FmIndex::search(const std::string& kmer,
                               u_int maxOcc)
@@ -47,6 +47,33 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
 
     return kmerResult;
 }
+#else
+//======================================================================
+ft::KmerClass FmIndex::search(const std::string& kmer,
+                              u_int maxOcc)
+{
+    // This code is executed in a different thread for multithreaded
+    // executions and in main thread for monothreaded applications
+
+    ft::KmerClass kmerResult = ft::KmerClass(kmer);
+
+    size_t occ_begin, occ_end, occs;
+    occs = backward_search(_index, 0, _index.size()-1, kmer.begin(),  kmer.end(), occ_begin, occ_end);
+
+    kmerResult.setOCC(occs);
+
+    // if number kmers > max, flag kmer as "over counted"
+    if (occs > maxOcc ) {
+        kmerResult.addKFlag(ft::FlagType::OCK);
+    }
+    if (occs > 0  && occs <= maxOcc) {
+        for (size_t i=0; i < occs; ++i) {
+            kmerResult.addKPosition(_index[occ_begin+i]);
+        }
+    }
+    return kmerResult;
+}
+#endif
 
 //======================================================================
 std::pair<fs::path, fs::path> FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta)
