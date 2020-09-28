@@ -1,7 +1,5 @@
 ////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2019, Wasserman lab
-/// \brief This file contains the declaration of finder class. It contains
-///             functions used to search for kmers inside the FmIndex
+/// \copyright Copyright (c) 2020, Wasserman lab
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef __FINDER_H__

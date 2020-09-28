@@ -1,7 +1,5 @@
 ////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2019, Wasserman lab
-/// \brief This file contains the declaration of utils.h, it contains
-///             all utility functions needed to perform fast typer searches
+/// \copyright Copyright (c) 2020, Wasserman lab
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef __IUTILS_H__
