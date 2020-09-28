@@ -208,6 +208,11 @@ void FTMap::addKmerResults(const ft::KmerClass& kmerResult)
          }
      }
 
+     // add overcounted flag if combined maxOcc is too high
+     if (kmer->getReadIDs().size() > _ftProps.getMaxOcc()){
+         kmer->addKFlag(ft::FlagType::OCK);
+     }
+
      // add flags
      for (std::size_t i = 0; i < 8; ++i) {
          if ( kmerResult.getKFlags().test(i) ) {
