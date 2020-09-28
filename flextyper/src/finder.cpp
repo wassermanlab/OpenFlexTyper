@@ -96,7 +96,7 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
         LogClass::Log << "(E) load " << e.what() << std::endl;
     }
 
-    LogClass::Log << "(I) paralle: loaded " << indexPath.string() << std::endl;
+    LogClass::Log << "(I) parallel: loaded " << indexPath.string() << std::endl;
 
     // create a vector of futures
     std::vector<std::future<ft::KmerClass>> resultsFutures;
