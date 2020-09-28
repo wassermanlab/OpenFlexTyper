@@ -12,10 +12,6 @@ FmIndex::FmIndex(bool verbose)
     : _verbose(verbose)
 {}
 
-void FmIndex::printToStdOut(const std::string& outputString){
-    if (_verbose)
-    { std::cout << outputString << std::endl;  }
-}
 #if 0
 //======================================================================
 ft::KmerClass FmIndex::search(const std::string& kmer,

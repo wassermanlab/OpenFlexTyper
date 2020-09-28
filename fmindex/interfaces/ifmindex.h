@@ -20,7 +20,7 @@ class IFmIndex {
 public:
 
     virtual ~IFmIndex() {}
-    virtual void printToStdOut(const std::string& outputString) = 0 ;
+
     ////////////////////////////////////////////////////////////////////////
     /// \brief  createFMIndex
     /// \param  stringToIndex
