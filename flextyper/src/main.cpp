@@ -114,7 +114,7 @@ int main(int argc, char** argv)
                   (cmdArg.maxOccurences ? ("m"+parser.value("m").toStdString()):"") +
                   (cmdArg.unique ? "u":"");
         }
-//#if 0 //remove after testing
+#if 0 //remove after testing
     for(int i=0 ; i < positionalArguments.length() ; i++) {
         std::cout << i << ": " << positionalArguments.at(i).toStdString() << std::endl;
     }
@@ -125,8 +125,8 @@ int main(int argc, char** argv)
     std::cout << "s: " << parser.isSet("s") << " " << cmdArg.stride << std::endl;
     std::cout << "m: " << parser.isSet("m") << " " << cmdArg.maxOccurences << std::endl;
     std::cout << "LogName : " << logName << std::endl;
-    //exit(1);
-//#endif
+    exit(1);
+#endif
 
 
         ft::LogClass::OpenLog(logName);
