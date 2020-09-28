@@ -125,7 +125,7 @@ int main(int argc, char** argv)
     std::cout << "s: " << parser.isSet("s") << " " << cmdArg.stride << std::endl;
     std::cout << "m: " << parser.isSet("m") << " " << cmdArg.maxOccurences << std::endl;
     std::cout << "LogName : " << logName << std::endl;
-    exit(1);
+    //exit(1);
 //#endif
 
 
