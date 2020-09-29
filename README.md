@@ -47,11 +47,6 @@ The output files from FlexTyper can be formatted into commonly used formats, e.g
 
 To learn more, see the fmformatter directory [here](https://github.com/wassermanlab/OpenFlexTyper/tree/master/fmformatter)
 
-## Demo
-
-![](docs/FlexTyper_test.gif)
-
-
 ## Contributers
 
 [<img alt="tixii" src="https://avatars2.githubusercontent.com/u/7527871?s=460&v=4" width="117">](https://github.com/tixii/) |
@@ -71,7 +66,7 @@ For more information about FlexTyper, please refer to our online documentation o
 
 The MIT License (MIT)
 
-Copyright (c) 2019, Wasserman lab
+Copyright (c) 2020, Wasserman lab
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
