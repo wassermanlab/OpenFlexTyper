@@ -55,12 +55,10 @@ void Finder::indexSequentialSearch(FTMap &ftMap)
 void Finder::indexParallelSearch(FTMap &ftMap)
 {
     std::map<fs::path, uint> indexes = ftMap.getFTProps().getIndexSet();
-    std::map<fs::path, uint>::iterator it = indexes.begin();
-    while ( it != indexes.end()) {
-        fs::path indexPath = it->first;
-        uint offset = it->second;
+    for (std::pair<fs::path, u_int> item : indexes){
+        fs::path indexPath = item.first;
+        u_int offset = item.second;
         parallelSearch(ftMap, indexPath, offset);
-        it++;
     }
 }
 
@@ -96,11 +94,10 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
 
     try {
         fmIndex->loadIndexFromFile(indexPath);
+        benchmark.now("parallelSearch: loaded  " + indexPath.string() + " Done");
     } catch (std::exception& e) {
         LogClass::Log << "(E) load " << e.what() << std::endl;
     }
-
-    LogClass::Log << "(I) parallel: loaded " << indexPath.string() << std::endl;
 
     // create a vector of futures
     std::vector<std::future<ft::KmerClass>> resultsFutures;
@@ -133,6 +130,7 @@ void Finder::parallelSearch(FTMap &ftMap, const fs::path &indexPath,
     ftMap.addIndexResults(indexResults);
     LogClass::Log  << "(I) number of indexes processed " << indexResults.size() << std::endl;
     benchmark.now("parallelSearch DONE ");
+    delete fmIndex;
 }
 
 //======================================================================
@@ -151,10 +149,10 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
 
     try {
         fmIndex->loadIndexFromFile(fs::absolute(indexPath));
+        benchmark.now("sequentialSearch: loaded  " + indexPath.string() + " Done");
     } catch (std::exception& e) {
         LogClass::Log << "(E) load " << e.what() << std::endl;
     }
-    LogClass::Log << "(I) sequentialSearch: loaded " << indexPath.string() << std::endl;
 
 
     std::unordered_map<std::string, ft::KmerClass>::const_iterator it = kmerMap.begin();
@@ -174,7 +172,7 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
     LogClass::Log  << "(I) number of indexes processed " << indexResults.size() << std::endl;
     benchmark.now("sequentialSearch DONE ");
 
-    indexResults.clear();
+    delete fmIndex;
 }
 
 
