@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "indexPropsClass.h"
+#include "LogClass.h"
 
 namespace algo {
 IndexProps::IndexProps()
@@ -156,10 +157,11 @@ void IndexProps::setBuildDir(const fs::path &buildDir)
 void IndexProps::setppfFolder(const fs::path &ppfFolder)
 {
     if (!fs::exists(ppfFolder)){
+        printToStdOut("creating PPF folder in " + ppfFolder.string());
         try {
             fs::create_directory(ppfFolder);
         } catch (std::exception& e ) {
-            throw std::runtime_error("Cannot create PPF folder " + ppfFolder.string());
+            ft::LogClass::ThrowRuntimeError("Cannot create PPF folder " + ppfFolder.string());
         }
     }
     _ppfFolder = ppfFolder;
@@ -170,10 +172,11 @@ void IndexProps::setOutputFolder(const fs::path& outputFolder)
     fs::path outfolder = outputFolder;
 
     if (!fs::exists(outfolder)){
+        printToStdOut("creating output folder in " + outfolder.string());
         try {
             fs::create_directory(outfolder);
         } catch (std::exception& e ) {
-            throw std::runtime_error("Cannot create output folder " + outfolder.string());
+            ft::LogClass::ThrowRuntimeError("Cannot create output folder " + outfolder.string());
         }
     }
     _outputFolder = outfolder;
@@ -187,7 +190,7 @@ void IndexProps::addPPF(fs::path _ppf, uint start, uint end)
     _ppFSet[_ppf] = std::make_pair(start, end);
     if (_ppFSet.count(_ppf) == 0)
     {
-        throw std::runtime_error("Couldnt add " + _ppf.string() + "to _ppFSet");
+        ft::LogClass::ThrowRuntimeError("Couldnt add " + _ppf.string() + "to _ppFSet");
     }
 }
 
@@ -347,7 +350,7 @@ void IndexProps::countNumOfReads() {
     }
     if (reads == 0)
     {
-        throw std::runtime_error("Pre Processed Fasta files contain no reads");
+        ft::LogClass::ThrowRuntimeError("Pre Processed Fasta files contain no reads");
     }
     _numOfReads = reads;
 

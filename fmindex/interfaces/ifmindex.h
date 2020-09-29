@@ -24,7 +24,6 @@ class IFmIndex {
 public:
 
     virtual ~IFmIndex() {}
-
     ////////////////////////////////////////////////////////////////////////
     /// \brief  createFMIndex
     /// \param  stringToIndex

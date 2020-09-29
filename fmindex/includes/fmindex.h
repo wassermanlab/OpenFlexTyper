@@ -13,8 +13,6 @@
 #include "ifmindex.h"
 #include <sdsl/suffix_arrays.hpp>
 #include <mutex>
-#include "ftMapClass.h"
-#include "ftPropsClass.h"
 #include "indexPropsClass.h"
 
 
@@ -28,8 +26,6 @@ public:
     ////////////////////////////////////////////////////////////////////////
     FmIndex();
     FmIndex(bool verbose);
-
-    bool _verbose = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief ~FmIndex destructor
@@ -86,6 +82,8 @@ private:
     const FmIndex& operator=(const FmIndex& other);
 
 private:
+    bool _verbose = 0;
+
     ////////////////////////////////////////////////////////////////////////
     /// \brief This is the structure of our FmIndex.
     ///        csa     : compressed suffix array
@@ -95,6 +93,7 @@ private:
     ///        https://github.com/simongog/sdsl-lite
     ////////////////////////////////////////////////////////////////////////
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _index;
+    long long *_indexPosition;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief mtx
@@ -105,11 +104,6 @@ private:
     /// \brief _kmerMapSize
     ////////////////////////////////////////////////////////////////////////
     size_t _kmerMapSize;
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief _counter
-    ////////////////////////////////////////////////////////////////////////
-    std::map<std::string, u_int> _counter;
 };
 }
 

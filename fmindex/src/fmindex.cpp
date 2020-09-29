@@ -16,38 +16,6 @@ FmIndex::FmIndex(bool verbose)
     : _verbose(verbose)
 {}
 
-#if 0
-//======================================================================
-ft::KmerClass FmIndex::search(const std::string& kmer,
-                              u_int maxOcc)
-{
-    // This code is executed in a different thread for multithreaded
-    // executions and in main thread for monothreaded applications
-
-    ft::KmerClass kmerResult = ft::KmerClass(kmer);
-
-    size_t occs = sdsl::count(_index, kmer.begin(),  kmer.end());
-    kmerResult.setOCC(occs);
-
-    // if number kmers > max, flag kmer as "over counted"
-    if (occs > maxOcc ) {
-        kmerResult.addKFlag(ft::FlagType::OCK);
-    }
-    if (occs > 0  && occs <= maxOcc) {
-        auto locations = sdsl::locate(_index, kmer.begin(), kmer.end());
-        if (locations.size() != occs)
-        {
-            std::runtime_error("number of locations doesn't equal number of occurences for kmer " + kmer );
-        }
-
-        for (auto e : locations) {
-            kmerResult.addKPosition(e);
-        }
-    }
-
-    return kmerResult;
-}
-#else
 //======================================================================
 ft::KmerClass FmIndex::search(const std::string& kmer,
                               u_int maxOcc)
@@ -66,14 +34,24 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
     if (occs > maxOcc ) {
         kmerResult.addKFlag(ft::FlagType::OCK);
     }
+
     if (occs > 0  && occs <= maxOcc) {
-        for (size_t i=0; i < occs; ++i) {
-            kmerResult.addKPosition(_index[occ_begin+i]);
+        //occ_end is not always correct
+        occ_end = occ_begin + occs;
+        for (size_t i=occ_begin; i < occ_end; ++i) {
+#if 0
+            if (_indexPosition[i] == 0) {
+                //accessing _index[] will compute for position
+                _indexPosition[i] = _index[i];
+            }
+            kmerResult.addKPosition(_indexPosition[i]);
+#else
+            kmerResult.addKPosition(_index[i]);
+#endif
         }
     }
     return kmerResult;
 }
-#endif
 
 //======================================================================
 std::pair<fs::path, fs::path> FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta)
@@ -91,42 +69,43 @@ std::pair<fs::path, fs::path> FmIndex::createFMIndex(const algo::IndexProps& _pr
     ft::LogClass::Log << "creating index for " << ppfname << " at " << outputIndex << std::endl;
     if (preprocessedFasta.empty())
     {
-        throw std::runtime_error( "Error: Preprocessed Fasta File is empty " + preprocessedFasta.string());
+        ft::LogClass::ThrowRuntimeError("Error: Preprocessed Fasta File is empty " + preprocessedFasta.string());
     }
 
     if (!exists(preprocessedFasta))
     {
-        throw std::runtime_error( "Error: Preprocessed Fasta File doesn't exist " + preprocessedFasta.string());
+        ft::LogClass::ThrowRuntimeError("Error: Preprocessed Fasta File doesn't exist " + preprocessedFasta.string());
     }
     if (fs::exists(outputIndex))
     {
-        throw std::runtime_error( "Error: Index already exists " + outputIndex.string());
+        ft::LogClass::ThrowRuntimeError( "Error: Index already exists " + outputIndex.string());
     }
 
     if (!sdsl::load_from_file(_index, outputIndex)) {
+        //make storage for _indexPosition
+        //_indexPosition = new long long(_index.size());
+        //std::fill(_indexPosition, _indexPosition+_index.size(), 0);
 
         std::ifstream in(preprocessedFasta);
         if (!in) {
-            throw std::runtime_error( "Error: Cannot load to ifstream " + preprocessedFasta.string());
+            ft::LogClass::ThrowRuntimeError("Error: Cannot load to ifstream " + preprocessedFasta.string());
         }
         if (!fs::exists(_props.getOutputFolder())){
 
-            throw std::runtime_error( "Error: output Folder doesnt exist " + _props.getOutputFolder().string());
+            ft::LogClass::ThrowRuntimeError("Error: output Folder doesnt exist " + _props.getOutputFolder().string());
         }
 
         try {
             construct(tmpIndex, preprocessedFasta, 1);
         } catch (std::exception& e) {
-            std::cout << "Error in FM Index Creation " << e.what() << std::endl;
-            throw std::runtime_error(e.what());
+            ft::LogClass::ThrowRuntimeError("Error in FM Index Creation " + std::string(e.what()));
         }
 
         try {
             store_to_file(tmpIndex, outputIndex);
         } catch (std::exception& e) {
-            std::cout << "Error while saving FM Index " << e.what() << std::endl;
+            ft::LogClass::ThrowRuntimeError("Error while saving FM Index " + std::string(e.what()));
         }
-
     }
 
     return std::make_pair(outputIndex, preprocessedFasta);
@@ -142,7 +121,11 @@ void FmIndex::loadIndexFromFile(const fs::path& indexname)
     if (!sdsl::load_from_file(_index, fs::absolute(indexname).string())) {
         std::runtime_error("Error loading the index, please provide the index file " + indexname.string());
     }
-    ft::LogClass::Log << "Index loaded " << _index.size() << std::endl;
+    //make storage for _indexPosition
+    //_indexPosition = new long long(_index.size());
+    //std::fill(_indexPosition, _indexPosition+_index.size(), 0);
+
+    std::cout << "Index loaded " << _index.size() << std::endl;
 }
 //======================================================================
 void FmIndex::parallelFmIndex(algo::IndexProps& _props)
@@ -186,5 +169,6 @@ int FmIndex::indexCount()
 //======================================================================
 FmIndex::~FmIndex()
 {
+    //free(_indexPosition);
 }
 }
