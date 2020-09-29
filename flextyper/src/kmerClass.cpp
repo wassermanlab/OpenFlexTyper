@@ -107,7 +107,7 @@ bool KmerClass::matchingReadID(const ft::ReadID &a, const ft::ReadID &b) const
 bool KmerClass::hasReadID(const ft::ReadID& read ) const {
 
     bool is_in = false;
-    for (ft::ReadID rID : getReadIDs())
+    for (const ft::ReadID& rID : getReadIDs())
     {
        if (matchingReadID(rID, read) == true)
         {
