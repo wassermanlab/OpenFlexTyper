@@ -48,7 +48,7 @@ void QueryClass::setFlags(const std::map<ft::FlagType, std::set<std::string>>& f
 //===================== ADDERS ==========================
 void QueryClass::addFlags(const ft::FlagType& flagType, const std::set<std::string>& kmers)
 {
-    for (auto& kmer :kmers){
+    for (auto kmer :kmers){
         _qFlags[flagType].insert(kmer);
     }
 }
