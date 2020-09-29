@@ -48,12 +48,6 @@ The output files from FlexTyper can be formatted into commonly used formats, e.g
 To learn more, see the fmformatter directory [here](https://github.com/wassermanlab/OpenFlexTyper/tree/master/fmformatter)
 
 ## Contributers
-
-[<img alt="tixii" src="https://avatars2.githubusercontent.com/u/7527871?s=460&v=4" width="117">](https://github.com/tixii/) |
-[<img alt="Phil" src="https://avatars1.githubusercontent.com/u/16579982?s=460&v=4" width="117">](https://github.com/Phillip-a-richmond) |
-[<img alt="kounkou" src="https://avatars0.githubusercontent.com/u/2589171?s=460&v=4" width="117">](https://github.com/kounkou) |
-[<img alt="tamario" src="https://avatars2.githubusercontent.com/u/15660317?s=460&v=4" width="117">](https://github.com/tamario) |
-:---: | :---: | :---: | :---: | 
 [Alice Kaye](https://github.com/tixii) | [Phillip Richmond](https://github.com/Phillip-a-richmond) | [Jacques Kounkou](https://github.com/kounkou) | [Tamar Av-Shalom](https://github.com/tamario)
 
 
