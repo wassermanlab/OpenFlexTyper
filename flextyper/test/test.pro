@@ -9,6 +9,14 @@ LIBS        += -lgtest -lgtest_main -lgmock       \
                -ldivsufsort
 CONFIG      += c++17
 
+
+outputDir.commands = $(MKDIR) $$OUT_PWD/testFiles ; $(COPY_DIR) $$PWD/testFiles/* $$OUT_PWD/testFiles/
+first.depends = $(first) outputDir
+export(first.depends)
+export(outputDir.commands)
+QMAKE_EXTRA_TARGETS += first outputDir
+
+
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -23,17 +31,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH += ../includes                  \
                ../src                       \
                ../../fmindex/includes/      \
+               ../../fmindex/interfaces/      \
                ../../fmindex/src/           \
                ../interfaces/               \
                ../mock/                     \
 
 # Input
 SOURCES += tst_queryextractor.cpp           \
+    tst_fmindex.cpp \
+    tst_ftMapClass.cpp \
+    tst_ftPropsClass.cpp \
+    tst_indexPropsClass.cpp \
+    tst_kmerClass.cpp \
+    tst_qkMapClass.cpp \
+    tst_queryClass.cpp \
            tst_writerbridge.cpp             \
-           tst_resultprocessor.cpp          \
            tst_utils.cpp                    \
            tst_finder.cpp                   \
-           tst_stat.cpp                     \
            tst_kmergenerator.cpp            \
 
-SOURCES += mock/mock_fmindex.cpp            \
+SOURCES +=            \

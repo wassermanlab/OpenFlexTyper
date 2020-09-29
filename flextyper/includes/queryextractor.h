@@ -1,8 +1,11 @@
+////////////////////////////////////////////////////////////////////////
+/// \copyright Copyright (c) 2020, Wasserman lab
+////////////////////////////////////////////////////////////////////////
+
 #ifndef __QUERY_EXTRACTOR_H__
 #define __QUERY_EXTRACTOR_H__
 
 #include <set>
-#include "typedefs.h"
 #include <experimental/filesystem>
 #include "utils.h"
 #include "iutils.h"
@@ -12,11 +15,7 @@
 namespace fs = std::experimental::filesystem;
 
 namespace ft {
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2019, Wasserman lab
-/// \author    Godfrain Jacques Kounkou
-/// \brief This file contains the declaration of queryextractor class
-////////////////////////////////////////////////////////////////////////
+
 class QueryExtractor : public IQueryExtractor {
 public:
     ////////////////////////////////////////////////////////////////////////
@@ -28,24 +27,6 @@ public:
     /// \brief ~QueryExtractor
     ////////////////////////////////////////////////////////////////////////
     virtual ~QueryExtractor();
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief getInputQueriesRoutine
-    /// \param refSequence
-    /// \param altSequence
-    /// \param fileIndex
-    /// \param inputQueries
-    ////////////////////////////////////////////////////////////////////////
-    void getInputQueriesRoutine(const std::string& refSequence, const std::string& altSequence, uint fileIndex, std::set<Query>& inputQueries);
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief getStartAndEndPointSequences
-    /// \param startPointRef
-    /// \param endPointRef
-    /// \param fileIndex
-    /// \param inputQueries
-    ////////////////////////////////////////////////////////////////////////
-    void getStartAndEndPointSequences(const std::string& startPointRef, const std::string& endPointRef, uint fileIndex, std::set<Query>& inputQueries);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief getInputQueries

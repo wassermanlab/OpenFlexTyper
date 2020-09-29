@@ -1,7 +1,10 @@
+////////////////////////////////////////////////////////////////////////
+/// \copyright Copyright (c) 2020, Wasserman lab
+////////////////////////////////////////////////////////////////////////
+
 #ifndef __FINDER_H__
 #define __FINDER_H__
 
-#include "typedefs.h"
 #include <experimental/filesystem>
 #include "fmindex.h"
 #include "ifmindex.h"
@@ -11,12 +14,7 @@
 namespace fs = std::experimental::filesystem;
 
 namespace ft {
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2019, Wasserman lab
-/// \author    Godfrain Jacques Kounkou
-/// \brief This file contains the declaration of finder class. It contains
-///             functions used to search for kmers inside the FmIndex
-////////////////////////////////////////////////////////////////////////
+
 class Finder : public IFinder {
 public:
     ////////////////////////////////////////////////////////////////////////
@@ -40,105 +38,46 @@ public:
     /// \param other
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    const Finder& operator=(const Finder& other) = delete;
+    const Finder& operator=(const Finder &other) = delete;
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief searchMonoIndex
-    /// \param indexPosResults
-    /// \param kmerMap
-    /// \param indexPath
-    /// \param indexFileLocation
-    /// \param maxOccurences
-    /// \param parallel
-    /// \param threadNumber
+    /// \brief searchIndexes
     ////////////////////////////////////////////////////////////////////////
-    void searchMonoIndex(ResultsMap& indexPosResults, const KmerMap &kmerMap, const fs::path& indexPath,
-                         const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
-                         bool printSearchTime);
+    void searchIndexes(ft::FTMap &ftMap);
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief searchMultipleIndexes
-    /// \param indexPosResults
-    /// \param kmerMap
-    /// \param indexPaths
-    /// \param indexFileLocation
-    /// \param maxOccurences
-    /// \param parallel
-    /// \param threadNumber
-    ////////////////////////////////////////////////////////////////////////
-    void searchMultipleIndexes(ResultsMap& indexPosResults, const KmerMap& kmerMap, const std::set<fs::path>& indexPaths,
-                               const std::string& indexFileLocation, uint maxOccurences, bool parallel, uint threadNumber,
-                               bool printSearchTime, long long offset);
-
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief Finder::overrideFmIndex
-    /// \param fmIndex
-    ////////////////////////////////////////////////////////////////////////
-    void overrideFmIndex(std::shared_ptr<algo::IFmIndex> fmIndex);
-
-
-public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief parallelSearch is a core function to search in parallel. This function
     ///        can be used by higher level functions.
-    /// \param indexPosResults
-    /// \param indexFileLocation
-    /// \param kmerMap
-    /// \param indexPath
-    /// \param maxOcc
-    /// \param threadNumber
     ////////////////////////////////////////////////////////////////////////
-    void parallelSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                        fs::path indexPath, uint maxOcc, uint threadNumber, bool printSearchTime, long long offset);
+    void parallelSearch(FTMap &ftMap,
+                        const fs::path &indexPath, long long offset);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief sequentialSearch searches for kmers inside a single FmIndex
     ///        in a sequential way.
-    /// \param indexPosResults
-    /// \param indexFileLocation
-    /// \param kmerMap
-    /// \param indexPath
-    /// \param maxOcc
     ////////////////////////////////////////////////////////////////////////
-    void sequentialSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                          fs::path indexPath, uint maxOcc, bool printSearchTime, long long offset);
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief multipleIndexesParallelSearch searches for kmers inside multiple
-    ///        indexes in parallel
-    /// \param indexPosResults
-    /// \param indexFileLocation
-    /// \param kmerMap
-    /// \param indexPath
-    /// \param maxOcc
-    /// \param threadNumber
-    ////////////////////////////////////////////////////////////////////////
-    void multipleIndexesParallelSearch(ResultsMap &indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                                       const std::set<fs::path>& indexPath, uint maxOcc, uint threadNumber, bool printSearchTime, long long offset);
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief multipleIndexesSequentialSearch searches for kmers inside a multiple
-    ///        FmIndexes in q sequential way
-    /// \param indexPosResults
-    /// \param indexFileLocation
-    /// \param kmerMap
-    /// \param indexPath
-    /// \param maxOcc
-    ////////////////////////////////////////////////////////////////////////
-    void multipleIndexesSequentialSearch(ResultsMap& indexPosResults, const fs::path& indexFileLocation, const KmerMap& kmerMap,
-                                         std::set<fs::path> indexPath, uint maxOcc, bool printSearchTime, long long offset);
+    void sequentialSearch(ft::FTMap &ftMap,
+                          const fs::path &indexPath,long long offset);
 
 private:
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief fmIndex
-    ////////////////////////////////////////////////////////////////////////
-    algo::IFmIndex* _fmIndex;
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief fmIndex
+    /// \brief Finder::addResultsFutures
+    /// \param fmIndex
     ////////////////////////////////////////////////////////////////////////
-    algo::FmIndex _ownedFmIndex;
+    void addResultsFutures(std::map<std::string, ft::KmerClass> & indexResults, ft::KmerClass &tmpResult, uint offset);
+
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief indexParallelSearch searches for kmers in parallel
+    ////////////////////////////////////////////////////////////////////////
+    void indexParallelSearch(ft::FTMap &ftMap);
+
+    ////////////////////////////////////////////////////////////////////////
+    /// \brief indexSequentialSearch searches for kmers sequentially
+    ////////////////////////////////////////////////////////////////////////
+    void indexSequentialSearch(ft::FTMap &ftMap);
+
+    void testIndex(const FTProp& ftProps, algo::IFmIndex* fmIndex, const fs::path &indexPath, std::string &testkmer);
 };
 }
 

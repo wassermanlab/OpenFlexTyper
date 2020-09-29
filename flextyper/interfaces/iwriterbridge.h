@@ -1,27 +1,35 @@
+////////////////////////////////////////////////////////////////////////
+/// \copyright Copyright (c) 2020, Wasserman lab
+////////////////////////////////////////////////////////////////////////
+
 #ifndef __IWRITER_BRIDGE_H__
 #define __IWRITER_BRIDGE_H__
 
-#include "typedefs.h"
+#include "ftMapClass.h"
+#include "queryClass.h"
 #include <experimental/filesystem>
 #include "utils.h"
 
 namespace fs = std::experimental::filesystem;
 
 namespace ft {
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2019, Wasserman lab
-/// \author    Godfrain Jacques Kounkou
-/// \brief This file contains the declaration of writerbridge.h, it contains
-///             all utility functions needed to writes results to result file
-////////////////////////////////////////////////////////////////////////
+
 class IWriterBridge {
 public:
+    virtual ~IWriterBridge() {}
+
+    virtual void setOutputOptions(const ft::FTMap& ftMap) = 0;
+    virtual std::string createHeader() = 0;
+    virtual std::string formatOutputMap() = 0;
+    virtual std::string getFlagKmers(const ft::QueryClass& query, const ft::FlagType flag) = 0;
+    virtual void addQueryToOutput(const ft::QueryClass& query, const std::string prefix)  = 0;
+
+
+
     ////////////////////////////////////////////////////////////////////////
     /// \brief saveQueryOutput
-    /// \param allCounts
-    /// \param returnMatchesOnly
     ////////////////////////////////////////////////////////////////////////
-    virtual void saveQueryOutput(MapOfCounts allCounts, bool returnMatchesOnly, bool crossover, const fs::path& pathToQueryFile, const fs::path& queryOutputFile) = 0;
+    virtual void saveOutput(const ft::FTMap& ftMap) = 0;
 };
 }
 

@@ -1,9 +1,8 @@
+////////////////////////////////////////////////////////////////////////
+/// \copyright Copyright (c) 2020, Wasserman lab
+////////////////////////////////////////////////////////////////////////
+
 #include "fmindex.h"
-#include <time.h>
-#include <future>
-#include <chrono>
-#include <iostream>
-#include <fstream>
 
 using namespace std::chrono;
 
@@ -11,156 +10,165 @@ namespace algo {
 
 //======================================================================
 FmIndex::FmIndex()
-    : _stats(&_ownedStats)
 {
 }
+FmIndex::FmIndex(bool verbose)
+    : _verbose(verbose)
+{}
 
 //======================================================================
-void FmIndex::setKmerMapSize(size_t kmerMapSize)
-{
-    _kmerMapSize = kmerMapSize;
-}
-
-//======================================================================
-void FmIndex::generateReadsMap(const std::string& filename)
-{
-    std::ifstream in(filename);
-    std::ofstream ou("map_file");
-
-    size_t readid = 0;
-    size_t start  = 0;
-    size_t llen   = 0;
-
-    std::string line;
-    if (in.is_open() && ou.is_open()) {
-
-        // header
-        // ou << "length\t" << "readid\t" << "start\t" << "end" << '\n';
-
-        while (getline(in, line)) {
-            // std::cout << line << std::endl;
-            ou << llen << "\t" << readid++ << "\t" << start  << "\t" << start + line.length() - 2 << '\n';
-            llen  += line.length();
-            start += line.length();
-        }
-
-        in.close();
-        ou.close();
-    }
-}
-
-//======================================================================
-std::tuple<std::set<size_t>, std::set<std::pair<int, ft::QueryType>>> FmIndex::search(const std::string& query, const std::set<std::pair<int, ft::QueryType> > &queryIds,
-                                                            const std::string& /* filename */, const std::string& /* indexDirectory */,
-                                                            u_int maxOcc, size_t i, bool printSearchTime)
+ft::KmerClass FmIndex::search(const std::string& kmer,
+                              u_int maxOcc)
 {
     // This code is executed in a different thread for multithreaded
     // executions and in main thread for monothreaded applications
 
-    std::set<size_t> result;
+    ft::KmerClass kmerResult = ft::KmerClass(kmer);
 
-    auto start = high_resolution_clock::now();
+    size_t occ_begin, occ_end, occs;
+    occs = backward_search(_index, 0, _index.size()-1, kmer.begin(),  kmer.end(), occ_begin, occ_end);
 
-    size_t occs = count(_fmindex, query.begin(), query.end());
+    kmerResult.setOCC(occs);
 
-    _mtx.lock();
-    std::cout << '\r' << float(((float)i * 100) / _kmerMapSize) << " % " << std::flush;
-    _mtx.unlock();
+    // if number kmers > max, flag kmer as "over counted"
+    if (occs > maxOcc ) {
+        kmerResult.addKFlag(ft::FlagType::OCK);
+    }
 
     if (occs > 0  && occs <= maxOcc) {
-        auto locations = sdsl::locate(_fmindex, query.begin(), query.begin() + query.length());
-        for (auto e : locations) {
-            // std::cout << e << " --> " << (e / 59) + 1 << std::endl;
-            result.insert(e);
+        //occ_end is not always correct
+        occ_end = occ_begin + occs;
+        for (size_t i=occ_begin; i < occ_end; ++i) {
+#if 0
+            if (_indexPosition[i] == 0) {
+                //accessing _index[] will compute for position
+                _indexPosition[i] = _index[i];
+            }
+            kmerResult.addKPosition(_indexPosition[i]);
+#else
+            kmerResult.addKPosition(_index[i]);
+#endif
         }
     }
-
-    auto stop = high_resolution_clock::now();
-    auto duration = duration_cast<microseconds>(stop - start);
-
-    if (printSearchTime) {
-        _stats->printKmerSearchTimeToFile("tmp.log", query, duration.count());
-    }
-
-    return std::make_tuple(result, queryIds);
+    return kmerResult;
 }
 
 //======================================================================
-std::map<std::string, std::set<size_t>> FmIndex::searchmany(const std::vector<std::string>& queries,
-                                                            const std::string& /* filename */,
-                                                            const std::string& /* indexDirectory */)
-{
-    std::map<std::string, std::set<size_t>> results;
-
-    for (auto queryString : queries) {
-        std::set<size_t> r;
-        results.insert(std::make_pair(queryString, r));
-    }
-
-    return results;
-}
-
-//======================================================================
-fs::path FmIndex::createFMIndex(const fs::path& fileToIndex, const fs::path& output, const fs::path& indexList)
+std::pair<fs::path, fs::path> FmIndex::createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta)
 {
     std::lock_guard<std::mutex> lock(_mtx);
+    std::string ppfname = preprocessedFasta.stem();
 
-    if (!load_from_file(_fmindex, output)) {
-        std::ifstream in(fileToIndex);
+    fs::path outputIndex = _props.getOutputFolder();
+    std::string newfilename = _props.getIndexName() + "_" + ppfname;
+
+    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> tmpIndex;
+    outputIndex /= newfilename;
+    outputIndex.replace_extension("fm9");
+
+    ft::LogClass::Log << "creating index for " << ppfname << " at " << outputIndex << std::endl;
+    if (preprocessedFasta.empty())
+    {
+        ft::LogClass::ThrowRuntimeError("Error: Preprocessed Fasta File is empty " + preprocessedFasta.string());
+    }
+
+    if (!exists(preprocessedFasta))
+    {
+        ft::LogClass::ThrowRuntimeError("Error: Preprocessed Fasta File doesn't exist " + preprocessedFasta.string());
+    }
+    if (fs::exists(outputIndex))
+    {
+        ft::LogClass::ThrowRuntimeError( "Error: Index already exists " + outputIndex.string());
+    }
+
+    if (!sdsl::load_from_file(_index, outputIndex)) {
+        //make storage for _indexPosition
+        //_indexPosition = new long long(_index.size());
+        //std::fill(_indexPosition, _indexPosition+_index.size(), 0);
+
+        std::ifstream in(preprocessedFasta);
         if (!in) {
-            std::cout << "ERROR: File " << fileToIndex << " does not exist. Exit." << std::endl;
-            return "";
+            ft::LogClass::ThrowRuntimeError("Error: Cannot load to ifstream " + preprocessedFasta.string());
         }
-        // mtx.lock();
-        std::cout << "No index " << output << " located. Building index now." << std::endl;
-        // mtx.unlock();
-        construct(_fmindex, fileToIndex, 1);
-        store_to_file(_fmindex, output);
+        if (!fs::exists(_props.getOutputFolder())){
+
+            ft::LogClass::ThrowRuntimeError("Error: output Folder doesnt exist " + _props.getOutputFolder().string());
+        }
+
+        try {
+            construct(tmpIndex, preprocessedFasta, 1);
+        } catch (std::exception& e) {
+            ft::LogClass::ThrowRuntimeError("Error in FM Index Creation " + std::string(e.what()));
+        }
+
+        try {
+            store_to_file(tmpIndex, outputIndex);
+        } catch (std::exception& e) {
+            ft::LogClass::ThrowRuntimeError("Error while saving FM Index " + std::string(e.what()));
+        }
     }
 
-    std::ofstream indxl (indexList, std::ios::app);
-    if (indxl.is_open()) {
-        indxl << output.string() << std::endl;
-    }
-    indxl.close();
-
-    // mtx.lock();
-    // std::cout << "Index construction complete in " << index_file << " index requires " << size_in_mega_bytes(_fm_index) << " MiB." << std::endl;
-    // mtx.unlock();
-
-    return output;
+    return std::make_pair(outputIndex, preprocessedFasta);
 }
 
 //======================================================================
-void FmIndex::loadIndexFromFile(const std::string& indexname)
+void FmIndex::loadIndexFromFile(const fs::path& indexname)
 {
-    if (!load_from_file(_fmindex, indexname)) {
-        std::cerr << "Error loading the index, please provide the index file";
+    ft::LogClass::Log << "load index from file " << indexname << std::endl;
+    if (!fs::exists(indexname)){
+        std::runtime_error("cannot find index at " + indexname.string());
     }
+    if (!sdsl::load_from_file(_index, fs::absolute(indexname).string())) {
+        std::runtime_error("Error loading the index, please provide the index file " + indexname.string());
+    }
+    //make storage for _indexPosition
+    //_indexPosition = new long long(_index.size());
+    //std::fill(_indexPosition, _indexPosition+_index.size(), 0);
+
+    std::cout << "Index loaded " << _index.size() << std::endl;
+}
+//======================================================================
+void FmIndex::parallelFmIndex(algo::IndexProps& _props)
+{
+    //   fs::path createFMIndex(algo::IndexProps& _props, const fs::path& preprocessedFasta);
+    std::cout << "Running FM Index" << std::endl;
+    std::vector<std::future<std::pair<fs::path, fs::path>>> operations;
+    std::map<fs::path, std::pair<u_int, u_int>> _ppfs = _props.getPreProcessedFastas();
+
+    if  (_props.getNumOfIndexes() != _ppfs.size()){
+        throw std::runtime_error("Error: wrong number of files found ");
+    }
+    for (auto _ppf : _props.getPreProcessedFastas()){
+        ft::LogClass::Log << "indexing " << _ppf.first << std::endl;
+        operations.push_back(std::async(std::launch::async,
+                                        &FmIndex::createFMIndex,
+                                        this,
+                                        _props,
+                                        _ppf.first));
+    }
+
+    for (size_t i = 0; i < _ppfs.size(); i++){
+        std::pair<fs::path, fs::path> output = operations[i].get();
+        fs::path outputIndex = output.first;
+        fs::path outputPPF = output.second;
+        u_int offset = _props.getOffsetForIndex(outputPPF);
+        ft::LogClass::Log << "index created " << outputIndex << " with offset " << offset <<  std::endl;
+        _props.addToIndexSet(outputIndex, offset);
+       }
+    fs::path indexPropsINI =  _props.getOutputFolder();
+    indexPropsINI /= _props.getIndexName() + "_" + _props.getReadSetName() + "_index.ini";
+
+    _props.saveIndexProps(indexPropsINI);
 }
 
-//======================================================================
-void FmIndex::parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList)
+int FmIndex::indexCount()
 {
-    std::vector<std::future<fs::path>> operations;
-
-    for (size_t i = 0; i < filenames.size(); i++)
-        operations.push_back(std::async(std::launch::async, &FmIndex::createFMIndex, this,
-                                        filenames[i], indexNames[i], indexList));
-
-    for (size_t i = 0; i < filenames.size(); i++)
-        operations[i].get();
-}
-
-//======================================================================
-void FmIndex::overrideStats(std::shared_ptr<ft::IStats> stats)
-{
-    _stats = stats.get();
+    return _index.size();
 }
 
 //======================================================================
 FmIndex::~FmIndex()
 {
-    std::rename("tmp.log", "kmerSearchTime.log");
+    //free(_indexPosition);
 }
 }

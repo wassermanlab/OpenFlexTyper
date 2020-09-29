@@ -8,6 +8,14 @@ CONFIG      += c++17
 LIBS        += -lstdc++fs -lsdsl -ldivsufsort64     \
                -ldivsufsort \
 
+
+outputDir.commands = $(MKDIR) $$OUT_PWD/testFiles ; $(COPY_DIR) $$PWD/flextyper/test/testFiles/* $$OUT_PWD/testFiles/ ; $(COPY_DIR) $$PWD/flextyper/test/testFiles/preprocess.sh $$OUT_PWD
+first.depends = $(first) outputDir
+export(first.depends)
+export(outputDir.commands)
+QMAKE_EXTRA_TARGETS += first outputDir
+
+
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -25,35 +33,61 @@ INCLUDEPATH += flextyper/includes                     \
 	       opt/miniconda3/include                 \
                fmindex/includes                       \
                flextyper/interfaces                   \
+               fmindex/interfaces                   \
 
 HEADERS    += flextyper/includes/utils.h              \
-              flextyper/includes/ftsearch.h           \
-              flextyper/includes/typedefs.h           \
-              fmindex/includes/ifmindex.h             \
-              fmindex/includes/fmindex.h              \
-              flextyper/includes/stats.h              \
+    flextyper/includes/LogClass.h \
+              flextyper/includes/ftMapClass.h \
+              flextyper/includes/ftPropsClass.h \
+              flextyper/includes/ftSearch.h \
+              flextyper/includes/kmerClass.h \
+    flextyper/includes/qkMapClass.h \
+              flextyper/includes/queryClass.h \
               flextyper/includes/writerbridge.h       \
               flextyper/includes/kmergenerator.h      \
               flextyper/includes/finder.h             \
-              flextyper/includes/resultprocessor.h    \
               flextyper/includes/queryextractor.h     \
+              fmindex/includes/fmindex.h              \
+              fmindex/includes/indexPropsClass.h      \
 
 HEADERS    += flextyper/interfaces/ikmergenerator.h   \
               flextyper/interfaces/iqueryextractor.h  \
-              flextyper/interfaces/iresultprocessor.h \
-              flextyper/interfaces/istats.h           \
               flextyper/interfaces/iutils.h           \
               flextyper/interfaces/iwriterbridge.h    \
               flextyper/interfaces/ifinder.h          \
+              fmindex/interfaces/iindexPropsClass.h   \
+              fmindex/interfaces/ifmindex.h \
 
-
-SOURCES     += flextyper/src/stats.cpp                \
+SOURCES     +=                \
+              flextyper/src/ftMapClass.cpp \
+              flextyper/src/ftPropsClass.cpp \
+              flextyper/src/ftSearch.cpp \
+              flextyper/src/kmerClass.cpp \
+              flextyper/src/qkMapClass.cpp \
+              flextyper/src/queryClass.cpp \
                flextyper/src/utils.cpp                \
                fmindex/src/fmindex.cpp                \
-               flextyper/src/ftsearch.cpp             \
                flextyper/src/main.cpp                 \
                flextyper/src/writerbridge.cpp         \
                flextyper/src/kmergenerator.cpp        \
                flextyper/src/finder.cpp               \
-               flextyper/src/resultprocessor.cpp      \
                flextyper/src/queryextractor.cpp       \
+              fmindex/src/indexPropsClass.cpp
+
+DISTFILES += \
+    flextyper/test/testFiles/MixedVirus_100.fasta \
+    flextyper/test/testFiles/MixedVirus_100_1.fq.gz \
+    flextyper/test/testFiles/MixedVirus_100_2.fq.gz \
+    flextyper/test/testFiles/Setting.ini \
+    flextyper/test/testFiles/Test.fasta \
+    flextyper/test/testFiles/Test.fm9 \
+    flextyper/test/testFiles/TestQueries.txt \
+    flextyper/test/testFiles/Test_1.fq.gz \
+    flextyper/test/testFiles/Test_2.fq.gz \
+    flextyper/test/testFiles/Test_Settings.ini \
+    flextyper/test/testFiles/Test_indexProps.ini \
+    flextyper/test/testFiles/indexProps.ini \
+    flextyper/test/testFiles/preprocess.sh \
+    install.sh \
+
+

@@ -1,29 +1,22 @@
 ////////////////////////////////////////////////////////////////////////
-///
-/// Copyright (c) 2018, Wasserman lab
-///
-/// FILE        fmindex.h
-///
-/// DESCRIPTION This file contains the implementation of the fmindex class
-///
-/// Initial version @ Godfrain Jacques KOUNKOU
-///
+/// \copyright Copyright (c) 2020, Wasserman lab
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef __FM_INDEX_H__
 #define __FM_INDEX_H__
-
+#include <time.h>
+#include <future>
+#include <chrono>
+#include <fstream>
 #include <vector>
 #include <iostream>
 #include "ifmindex.h"
 #include <sdsl/suffix_arrays.hpp>
 #include <mutex>
-#include "typedefs.h"
-#include "stats.h"
+#include "indexPropsClass.h"
+
 
 namespace algo {
-
-using namespace sdsl;
 
 class FmIndex : public IFmIndex {
 
@@ -32,6 +25,7 @@ public:
     /// \brief FmIndex constructor
     ////////////////////////////////////////////////////////////////////////
     FmIndex();
+    FmIndex(bool verbose);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief ~FmIndex destructor
@@ -42,13 +36,13 @@ public:
     /// \brief createFMIndex
     /// \param stringToIndex
     ////////////////////////////////////////////////////////////////////////
-    fs::path createFMIndex(const fs::path& fileToIndex, const fs::path& output, const fs::path& indexList);
+    std::pair<fs::path, fs::path> createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief loadIndexFromFile
     /// \param indexname
     ////////////////////////////////////////////////////////////////////////
-    void loadIndexFromFile(const std::string& indexname);
+    void loadIndexFromFile(const fs::path& indexname);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief search
@@ -56,40 +50,22 @@ public:
     /// \param queryString
     /// \return
     ////////////////////////////////////////////////////////////////////////
-    std::tuple<std::set<size_t>, std::set<std::pair<int, ft::QueryType> > > search(const std::string& queryString,
-                                                                                   const std::set<std::pair<int, ft::QueryType>> &queryIds,
-                                                                                   const std::string& = "indexFile",
-                                                                                   const std::string& = "/tmp/", u_int maxOcc = 200, size_t i = 0,
-                                                                                   bool printSearchTime = false);
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief search
-    /// \param filename
-    /// \param queryString
-    /// \return
-    ////////////////////////////////////////////////////////////////////////
-    std::map<std::string, std::set<size_t> > searchmany(const std::vector<std::string>& queryString,
-                                                        const std::string& = "indexFile",
-                                                        const std::string& = "/tmp/");
+    ft::KmerClass search(const std::string& kmer,
+                         u_int maxOcc = 200
+                         );
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief parallelFmIndex
     /// \param filenames
     /// \param indexNames
     ////////////////////////////////////////////////////////////////////////
-    void parallelFmIndex(std::vector<fs::path> filenames, std::vector<fs::path> indexNames, const fs::path& indexList);
+    void parallelFmIndex(algo::IndexProps& _props);
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief generate the Reads Mapping
-    /// \param filename
+    /// \brief parallelFmIndex
     ////////////////////////////////////////////////////////////////////////
-    void generateReadsMap(const std::string& filename);
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief setKmerMapSize
-    /// \param kmerMapSize
-    ////////////////////////////////////////////////////////////////////////
-    void setKmerMapSize(size_t kmerMapSize);
+    int indexCount();
 
 private:
     ////////////////////////////////////////////////////////////////////////
@@ -105,13 +81,9 @@ private:
     ////////////////////////////////////////////////////////////////////////
     const FmIndex& operator=(const FmIndex& other);
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief overrideStats
-    /// \param stats
-    ////////////////////////////////////////////////////////////////////////
-    void overrideStats(std::shared_ptr<ft::IStats> stats);
-
 private:
+    bool _verbose = 0;
+
     ////////////////////////////////////////////////////////////////////////
     /// \brief This is the structure of our FmIndex.
     ///        csa     : compressed suffix array
@@ -120,7 +92,8 @@ private:
     ///        For more information, please refere to :
     ///        https://github.com/simongog/sdsl-lite
     ////////////////////////////////////////////////////////////////////////
-    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _fmindex;
+    csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _index;
+    long long *_indexPosition;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief mtx
@@ -131,21 +104,6 @@ private:
     /// \brief _kmerMapSize
     ////////////////////////////////////////////////////////////////////////
     size_t _kmerMapSize;
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief _ownedStats
-    ////////////////////////////////////////////////////////////////////////
-    ft::Stats _ownedStats;
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief _stats
-    ////////////////////////////////////////////////////////////////////////
-    ft::IStats* _stats;
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief _counter
-    ////////////////////////////////////////////////////////////////////////
-    std::map<std::string, u_int> _counter;
 };
 }
 
