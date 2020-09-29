@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////////////////////////
+/// \copyright Copyright (c) 2020, Wasserman lab
+////////////////////////////////////////////////////////////////////////
+
 #include "fmindex.h"
 
 using namespace std::chrono;
@@ -84,7 +88,7 @@ std::pair<fs::path, fs::path> FmIndex::createFMIndex(const algo::IndexProps& _pr
     outputIndex /= newfilename;
     outputIndex.replace_extension("fm9");
 
-    std::cout << "creating index for " << ppfname << " at " << outputIndex << std::endl;
+    ft::LogClass::Log << "creating index for " << ppfname << " at " << outputIndex << std::endl;
     if (preprocessedFasta.empty())
     {
         throw std::runtime_error( "Error: Preprocessed Fasta File is empty " + preprocessedFasta.string());
@@ -131,14 +135,14 @@ std::pair<fs::path, fs::path> FmIndex::createFMIndex(const algo::IndexProps& _pr
 //======================================================================
 void FmIndex::loadIndexFromFile(const fs::path& indexname)
 {
-    std::cout << "load index from file " << indexname << std::endl;
+    ft::LogClass::Log << "load index from file " << indexname << std::endl;
     if (!fs::exists(indexname)){
         std::runtime_error("cannot find index at " + indexname.string());
     }
     if (!sdsl::load_from_file(_index, fs::absolute(indexname).string())) {
         std::runtime_error("Error loading the index, please provide the index file " + indexname.string());
     }
-    std::cout << "Index loaded " << _index.size() << std::endl;
+    ft::LogClass::Log << "Index loaded " << _index.size() << std::endl;
 }
 //======================================================================
 void FmIndex::parallelFmIndex(algo::IndexProps& _props)
@@ -149,10 +153,10 @@ void FmIndex::parallelFmIndex(algo::IndexProps& _props)
     std::map<fs::path, std::pair<u_int, u_int>> _ppfs = _props.getPreProcessedFastas();
 
     if  (_props.getNumOfIndexes() != _ppfs.size()){
-        std::cout << "Error: wrong number of files found "<< std::endl;
+        throw std::runtime_error("Error: wrong number of files found ");
     }
     for (auto _ppf : _props.getPreProcessedFastas()){
-        std::cout << "indexing " << _ppf.first << std::endl;
+        ft::LogClass::Log << "indexing " << _ppf.first << std::endl;
         operations.push_back(std::async(std::launch::async,
                                         &FmIndex::createFMIndex,
                                         this,
@@ -165,12 +169,11 @@ void FmIndex::parallelFmIndex(algo::IndexProps& _props)
         fs::path outputIndex = output.first;
         fs::path outputPPF = output.second;
         u_int offset = _props.getOffsetForIndex(outputPPF);
-        std::cout << "index created " << outputIndex << " with offset " << offset <<  std::endl;
+        ft::LogClass::Log << "index created " << outputIndex << " with offset " << offset <<  std::endl;
         _props.addToIndexSet(outputIndex, offset);
        }
     fs::path indexPropsINI =  _props.getOutputFolder();
     indexPropsINI /= _props.getIndexName() + "_" + _props.getReadSetName() + "_index.ini";
-
 
     _props.saveIndexProps(indexPropsINI);
 }

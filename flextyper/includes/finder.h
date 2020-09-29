@@ -68,19 +68,16 @@ private:
     void addResultsFutures(std::map<std::string, ft::KmerClass> & indexResults, ft::KmerClass &tmpResult, uint offset);
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief multipleIndexesParallelSearch searches for kmers inside multiple
-    ///        indexes in parallel
+    /// \brief indexParallelSearch searches for kmers in parallel
     ////////////////////////////////////////////////////////////////////////
     void indexParallelSearch(ft::FTMap &ftMap);
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief multipleIndexesSequentialSearch searches for kmers inside a multiple
-    ///        FmIndexes in q sequential way
+    /// \brief indexSequentialSearch searches for kmers sequentially
     ////////////////////////////////////////////////////////////////////////
     void indexSequentialSearch(ft::FTMap &ftMap);
 
     void testIndex(const FTProp& ftProps, algo::IFmIndex* fmIndex, const fs::path &indexPath, std::string &testkmer);
-
 };
 }
 

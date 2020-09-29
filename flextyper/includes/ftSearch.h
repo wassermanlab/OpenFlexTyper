@@ -44,8 +44,6 @@ public:
     void init(const FTProp& ftProp);
     void printToStdOut(const std::string outputString) const;
 
-public:
-
     void checkOutputFile(FTProp ftProps);
     void overrideUtils(std::shared_ptr<IUtils> utils);
     void overrideWriterBridge(std::shared_ptr<IWriterBridge> writerBridge);

@@ -37,22 +37,6 @@ public:
     virtual std::vector<std::string> split(const std::string& strToSplit, char delimeter) = 0;
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief  getSetOfIndicies
-    /// \param  indexList Filename
-    /// \return returns a set of paths corresponding to indexes
-    ////////////////////////////////////////////////////////////////////////
-    virtual std::set<fs::path> getSetOfIndexes(const fs::path& indexList = "indices.txt") = 0;
-
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief  convertReadIDsToReadNames
-    /// \param  indexMapFile
-    /// \param  readIDs
-    /// \return
-    ////////////////////////////////////////////////////////////////////////
-    virtual std::set<std::string> convertReadIDsToReadNames(const fs::path& indexMapFile, std::set<size_t> readIDs) = 0;
-
-    ////////////////////////////////////////////////////////////////////////
     /// \brief  FTSearch::reverseComplement
     /// \param  inputString
     /// \return returns the reverse complement sequence

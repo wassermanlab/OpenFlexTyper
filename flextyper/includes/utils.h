@@ -47,28 +47,11 @@ public:
     std::vector<std::string> split(const std::string& strToSplit, char delimeter);
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief  getSetOfIndicies
-    /// \param  indexList Filename
-    /// \return returns a set of paths corresponding to indexes
-    ////////////////////////////////////////////////////////////////////////
-    std::set<fs::path> getSetOfIndexes(const fs::path& indexList = "indices.txt");
-
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief  convertReadIDsToReadNames
-    /// \param  indexMapFile
-    /// \param  readIDs
-    /// \return
-    ////////////////////////////////////////////////////////////////////////
-    std::set<std::string> convertReadIDsToReadNames(const fs::path& indexMapFile, std::set<size_t> readIDs);
-
-    ////////////////////////////////////////////////////////////////////////
     /// \brief  FTSearch::reverseComplement
     /// \param  inputString
     /// \return returns the reverse complement sequence
     ////////////////////////////////////////////////////////////////////////
     std::string reverseComplement(const std::string& inputString) const;
-
 
 };
 }

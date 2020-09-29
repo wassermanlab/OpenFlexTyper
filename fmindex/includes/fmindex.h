@@ -18,7 +18,6 @@
 #include "indexPropsClass.h"
 
 
-
 namespace algo {
 
 class FmIndex : public IFmIndex {

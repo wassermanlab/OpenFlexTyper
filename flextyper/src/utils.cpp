@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////////////////////////
+/// \copyright Copyright (c) 2020, Wasserman lab
+////////////////////////////////////////////////////////////////////////
+
 #include "utils.h"
 #include <fstream>
 #include <algorithm>
@@ -8,7 +12,6 @@ namespace ft {
 Utils::Utils()
 {
 }
-
 
 //======================================================================
 std::string Utils::joinString(const std::set<std::string>& setOfStr, std::string delimeter)
@@ -35,49 +38,6 @@ std::vector<std::string> Utils::split(const std::string& strToSplit, char delime
         splitString.push_back(item);
     }
     return splitString;
-}
-
-//======================================================================
-std::set<fs::path> Utils::getSetOfIndexes(const fs::path& indexList)
-{
-    // get the paths to the indexes
-    std::set<fs::path> setOfIndexes;
-    std::ifstream file(indexList);
-    std::string line;
-
-    if (file.is_open()) {
-        while (std::getline(file, line)) {
-            line.erase(std::remove(line.begin(), line.end(), '"'), line.end());
-            setOfIndexes.emplace(line);
-        }
-    }
-    file.close();
-    return setOfIndexes;
-}
-
-
-//======================================================================
-std::set<std::string> Utils::convertReadIDsToReadNames(const fs::path& indexMapFile, std::set<size_t> readIDs)
-{
-    // take a set of read IDs and return the set of readNames
-    std::set<std::string> readNames;
-    //go to map file for the index, and take the line at for that read Number
-
-    std::ifstream file(indexMapFile);
-    std::string line;
-
-    if (file.is_open()) {
-        int i = 0;
-        while (std::getline(file, line)) {
-            if (readIDs.find(i) != readIDs.end()) {
-                readNames.insert(line);
-            }
-            i++;
-        }
-    }
-    file.close();
-
-    return readNames;
 }
 
 //======================================================================

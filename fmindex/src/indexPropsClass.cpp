@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////////////////////////
+/// \copyright Copyright (c) 2020, Wasserman lab
+////////////////////////////////////////////////////////////////////////
+
 #include "indexPropsClass.h"
 
 namespace algo {
@@ -35,7 +39,7 @@ std::string IndexProps::createBash(){
 
 void IndexProps::printToStdOut(std::string outputString) const{
     if (_verbose)
-    { std::cout << outputString << std::endl;  }
+    { ft::LogClass::Log << outputString << std::endl;  }
 }
 //================= PARAMETER GETTERS ========================
 uint IndexProps::getNumOfIndexes() const {return _numOfIndexes;}
@@ -103,11 +107,12 @@ bool IndexProps::setR2(const fs::path& readFile)
     return true;
 }
 
-
-bool IndexProps::delR1(){
+bool IndexProps::delR1()
+{
     return fs::remove(_R1);
 }
-bool IndexProps::delR2(){
+bool IndexProps::delR2()
+{
     return fs::remove(_R2);
 }
 
@@ -128,70 +133,76 @@ void IndexProps::delFQ(){
     }
 }
 
-void IndexProps::delReadFastas(){
+void IndexProps::delReadFastas()
+{
     for (auto _ppf : _ppFSet){
         fs::remove(_ppf.first);
     }
     if ( fs::is_empty(_ppfFolder)){
         fs::remove_all(_ppfFolder);
     }
-
-
 }
-void IndexProps::delSpecificReadFasta(const fs::path& _preProcessedFasta){
+
+void IndexProps::delSpecificReadFasta(const fs::path& _preProcessedFasta)
+{
     fs::remove(_preProcessedFasta);
 }
 
 void IndexProps::setBuildDir(const fs::path &buildDir)
-{        _buildDir = buildDir;   }
+{
+    _buildDir = buildDir;
+}
 
 void IndexProps::setppfFolder(const fs::path &ppfFolder)
 {
     if (!fs::exists(ppfFolder)){
-        printToStdOut("creating PPF folder in " + ppfFolder.string());
-            try {
+        try {
             fs::create_directory(ppfFolder);
-            } catch (std::exception& e ) {
+        } catch (std::exception& e ) {
             throw std::runtime_error("Cannot create PPF folder " + ppfFolder.string());
         }
     }
-    _ppfFolder = ppfFolder;   }
+    _ppfFolder = ppfFolder;
+}
 
 void IndexProps::setOutputFolder(const fs::path& outputFolder)
 {
     fs::path outfolder = outputFolder;
-    printToStdOut("Output Folder " + fs::absolute(outfolder).string());
+
     if (!fs::exists(outfolder)){
-        printToStdOut("creating output folder in " + outfolder.string());
-            try {
+        try {
             fs::create_directory(outfolder);
-            } catch (std::exception& e ) {
+        } catch (std::exception& e ) {
             throw std::runtime_error("Cannot create output folder " + outfolder.string());
         }
     }
     _outputFolder = outfolder;
-
     fs::path newppfFolder = _outputFolder;
     newppfFolder /= "tmp_ppf";
     setppfFolder(newppfFolder);
-
 }
-void IndexProps::addPPF(fs::path _ppf, uint start, uint end){
-    printToStdOut("add to _ppFSet " + _ppf.string() + " start " + std::to_string(start) + " end " + std::to_string(end));
+
+void IndexProps::addPPF(fs::path _ppf, uint start, uint end)
+{
     _ppFSet[_ppf] = std::make_pair(start, end);
     if (_ppFSet.count(_ppf) == 0)
     {
         throw std::runtime_error("Couldnt add " + _ppf.string() + "to _ppFSet");
     }
 }
+
 void IndexProps::setPreProcessedFastas(std::map<fs::path, std::pair<u_int, u_int>>& preProcessedFastas)
 {       _ppFSet = preProcessedFastas; }
+
 void IndexProps::setIndexSet(std::map<fs::path, uint>& indexes)
-{        _indexSet = indexes;   }
-void IndexProps::addToIndexSet(fs::path index, uint offset){
-    _indexSet[index] = offset;
+{
+    _indexSet = indexes;
 }
 
+void IndexProps::addToIndexSet(fs::path index, uint offset)
+{
+    _indexSet[index] = offset;
+}
 
 //====================== FILE PREPROCESS ======================
 void IndexProps::createPPFSet(){

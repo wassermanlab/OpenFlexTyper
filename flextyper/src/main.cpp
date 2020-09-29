@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////////////////////////
+/// \copyright Copyright (c) 2020, Wasserman lab
+////////////////////////////////////////////////////////////////////////
+
 #include <QCommandLineParser>
 #include <QSettings>
 #include <iostream>
@@ -182,6 +186,10 @@ int main(int argc, char** argv)
             });
 
         parser.process(aps);
+        std::string logName = "Index.log";
+        ft::LogClass::OpenLog(logName);
+
+        ft::LogClass::Log << "Running " << cmdline << std::endl;
 
         algo::IndexProps *props = new algo::IndexProps();
 
@@ -189,11 +197,11 @@ int main(int argc, char** argv)
 
         fs::path buildDir = QCoreApplication::applicationDirPath().toStdString();
         props->setBuildDir(buildDir);
-        props->printToStdOut("Build directory " + props->getBuildDir().string());
+        ft::LogClass::Log << "Build directory " << props->getBuildDir().string() << std::endl;
 
         //set Read Files
         fs::path readFile = parser.value(readFileName).toStdString();
-        props->printToStdOut("R1 " + readFile.string());
+        ft::LogClass::Log << "R1 " << readFile.string() << std::endl;
 
         props->setR1(readFile);
 
@@ -207,7 +215,7 @@ int main(int argc, char** argv)
         else if (parser.isSet("fa"))
         {  props->setReadFileType(algo::FileType::FA);}
         else
-        { std::cout << "Error: Please specify the read file type " << std::endl;
+        { std::cerr << "Error: Please specify the read file type " << std::endl;
             return 1;
         }
 
@@ -218,34 +226,34 @@ int main(int argc, char** argv)
             props->setR2(parser.value("p").toStdString());
             std::string readsetName = props->getReadSetName();
             props->setReadSetName(readsetName.substr(0,readsetName.size()-2));
-            props->printToStdOut("R2 " + props->getR2().string());
+            ft::LogClass::Log << "R2 " << props->getR2().string() << std::endl;
         }
 
-         props->printToStdOut( "read set Name " + props->getReadSetName());
+         ft::LogClass::Log << "read set Name " << props->getReadSetName() << std::endl;
 
         //set output values
         if (!parser.isSet("outputDir")){
-            props->printToStdOut( "Output Folder not set");
+            ft::LogClass::Log <<"Output Folder not set" << std::endl;
             if (readFile.parent_path() != "" ){
-            props->printToStdOut( "Setting Output Folder to readFile directory " + readFile.parent_path().string());
+            ft::LogClass::Log << "Setting Output Folder to readFile directory " << readFile.parent_path().string() << std::endl;
             props->setOutputFolder(readFile.parent_path());
             }else {
-                props->printToStdOut( "Setting Output Folder to current path" + fs::current_path().string());
+                ft::LogClass::Log << "Setting Output Folder to current path" << fs::current_path().string() << std::endl;
                 props->setOutputFolder(fs::current_path());
             }
         }else{
         props->setOutputFolder(parser.value("outputDir").toStdString());
         }
-        props->printToStdOut( "Output Folder "+ props->getOutputFolder().string());
+        ft::LogClass::Log << "Output Folder " << props->getOutputFolder().string() << std::endl;
         fs::path ppfFolder = props->getOutputFolder();
         ppfFolder /= "tmp_ppf";
         props->setppfFolder(ppfFolder);
-        props->printToStdOut( "PPF Folder "+ props->getppfFolder().string());
+        ft::LogClass::Log << "PPF Folder " << props->getppfFolder().string() << std::endl;
         if (!parser.isSet("indexFileName")){
-            props->printToStdOut("Index File Name not set");
-            props->printToStdOut("Default Index Name set: " + props->getIndexName());
+            ft::LogClass::Log << "Index File Name not set" << std::endl;
+            ft::LogClass::Log << "Default Index Name set: " << props->getIndexName() << std::endl;
         }else {
-            props->printToStdOut( "Setting Index File Name to " + parser.value("indexFileName").toStdString());
+            ft::LogClass::Log << "Setting Index File Name to " << parser.value("indexFileName").toStdString() << std::endl;
             props->setIndexName(parser.value("indexFileName").toStdString());
         }
 
@@ -270,18 +278,18 @@ int main(int argc, char** argv)
 
         // call bash script to manipulate the input files
         std::string bashargs = props->createBash();
-        std::cout << "bash args " << bashargs << std::endl;
+        ft::LogClass::Log << "bash args " << bashargs << std::endl;
         fs::path preprocess = props->getBuildDir();
         preprocess /= "preprocess.sh";
 
-        std::cout << "Preprocess path " << preprocess.string() << std::endl;
+        ft::LogClass::Log << "Preprocess path " << preprocess.string() << std::endl;
 
         if (fs::exists(preprocess)){
             try {
-                props->printToStdOut( "running preprocess.sh with " + bashargs);
+                ft::LogClass::Log << "running preprocess.sh with " << bashargs << std::endl;
                 system(bashargs.c_str());
             } catch (std::exception& e) {
-                std::cout << "Error in preprocessing " << e.what() << std::endl;
+                std::cerr << "Error in preprocessing " << e.what() << std::endl;
             }
 
         } else {
@@ -307,21 +315,22 @@ int main(int argc, char** argv)
         try {
             fmIndexObj.parallelFmIndex(*props);
         } catch (std::exception& e) {
-            std::cout << "Error in FM Index Creation " << e.what() << std::endl;
+            std::cerr << "Error in FM Index Creation " << e.what() << std::endl;
             return 1;
         }
 
-        if (props->getDelFQFlag()){
+        if (props->getDelFQFlag())
+        {
             props->delFQ();
-            std::cout << "Deleting FQ files " << std::endl;
+            ft::LogClass::Log << "Deleted FQ files " << std::endl;
         }
-        if (props->getDelFastaFlag()){
+        if (props->getDelFastaFlag())
+        {
             props->delReadFastas();
-            std::cout << "Deleting PPF files " << std::endl;
-
+            ft::LogClass::Log << "Deleted PPF files " << std::endl;
         }
 
-
+        ft::LogClass::CloseLog();
 
     }
 

@@ -95,10 +95,8 @@ public:
         }
     };
 
-
 private:
 };
 }
-
 
 #endif // QUERYCLASS_H

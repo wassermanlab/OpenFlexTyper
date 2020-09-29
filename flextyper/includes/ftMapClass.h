@@ -58,8 +58,7 @@ public:
     const ft::QueryClass& getQuery(const ft::QIdT& qIDT) const;
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief Adds results from parallel search
-    /// All kmer results from a single index
+    /// \brief Functions to process Results
     ////////////////////////////////////////////////////////////////////////
     void addIndexResults(const std::map<std::string, ft::KmerClass> & indexResults);
     void addKmerResults(const ft::KmerClass& kmerResult);
@@ -68,7 +67,6 @@ public:
     void processQueryResults(const ft::QIdT& qIDT);
     std::set<ft::ReadID> addKmersToQueryResults(ft::QueryClass& query, std::set<std::string> kmers,  std::set<ft::ReadID> readIds);
     int calculateQueryCount(std::set<ft::ReadID> readIds);
-
 
 private:
     ////////////////////////////////////////////////////////////////////////
@@ -80,7 +78,6 @@ private:
     QKMap _qkMap;
     QKMap _qkRCMap;
     std::vector<std::map<std::string, ft::KmerClass>> _searchResults;
-
 
     void createKmer(const std::string& kmer);
     ft::KmerClass* findKmer(const std::string& kmer);

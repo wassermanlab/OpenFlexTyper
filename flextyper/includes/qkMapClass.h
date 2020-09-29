@@ -13,7 +13,6 @@
 #include "kmerClass.h"
 #include "queryClass.h"
 
-
 namespace ft {
 
 class QKMap
@@ -45,7 +44,6 @@ public:
     void addQKPair(const ft::QIdT& qIDT, const std::string& kmer);
 
 private:
-
 
 };
 }

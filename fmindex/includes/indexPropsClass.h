@@ -11,7 +11,6 @@
 #include <experimental/filesystem>
 #include <QSettings>
 
-
 namespace fs = std::experimental::filesystem;
 
 

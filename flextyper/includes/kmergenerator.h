@@ -14,7 +14,6 @@
 
 namespace ft {
 
-
 class KmerGenerator  {
 public:
     ////////////////////////////////////////////////////////////////////////
@@ -28,7 +27,6 @@ public:
                     //const bool& _kmerCounts = false,
                     const uint& _maxKmers = 1000000000,
                     const bool& _verbose = false);
-
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief ~KmerGenerator
