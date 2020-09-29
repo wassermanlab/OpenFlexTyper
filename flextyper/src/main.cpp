@@ -42,7 +42,6 @@ int main(int argc, char** argv)
     QCoreApplication::setApplicationVersion("version 1.0");
     QCommandLineParser parser;
 
-
     if (argc <= 2) {
         usage();
         return 0;

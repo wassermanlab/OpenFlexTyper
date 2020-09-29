@@ -61,6 +61,12 @@ Then run the second script:
 sh ex_2.sh
 ```
 
+Expected Counts for the MixedVirus_100.fq set:
+Virus | Expected Count | Setting1
+-|-|-
+HIV-1 | 6100 | 4713
+U21941.1 (HPV 70) | 5200 | 4054
+FR751031.1 (HPV 68b) | 5200 | 4057
 
 ## Example 2 - SNV detection
 *Under construction*
