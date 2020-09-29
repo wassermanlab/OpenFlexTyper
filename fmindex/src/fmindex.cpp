@@ -39,11 +39,15 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
         //occ_end is not always correct
         occ_end = occ_begin + occs;
         for (size_t i=occ_begin; i < occ_end; ++i) {
+#if 0
             if (_indexPosition[i] == 0) {
                 //accessing _index[] will compute for position
                 _indexPosition[i] = _index[i];
             }
             kmerResult.addKPosition(_indexPosition[i]);
+#else
+            kmerResult.addKPosition(_index[i]);
+#endif
         }
     }
     return kmerResult;
@@ -79,8 +83,8 @@ std::pair<fs::path, fs::path> FmIndex::createFMIndex(const algo::IndexProps& _pr
 
     if (!sdsl::load_from_file(_index, outputIndex)) {
         //make storage for _indexPosition
-        _indexPosition = new long long[_index.size()];
-        memset(_indexPosition, 0, sizeof(long long)*_index.size());
+        //_indexPosition = new long long(_index.size());
+        //std::fill(_indexPosition, _indexPosition+_index.size(), 0);
 
         std::ifstream in(preprocessedFasta);
         if (!in) {
@@ -118,8 +122,8 @@ void FmIndex::loadIndexFromFile(const fs::path& indexname)
         std::runtime_error("Error loading the index, please provide the index file " + indexname.string());
     }
     //make storage for _indexPosition
-    _indexPosition = new long long[_index.size()];
-    memset(_indexPosition, 0, sizeof(long long)*_index.size());
+    //_indexPosition = new long long(_index.size());
+    //std::fill(_indexPosition, _indexPosition+_index.size(), 0);
 
     std::cout << "Index loaded " << _index.size() << std::endl;
 }
@@ -165,6 +169,6 @@ int FmIndex::indexCount()
 //======================================================================
 FmIndex::~FmIndex()
 {
-    delete [] _indexPosition;
+    //free(_indexPosition);
 }
 }
