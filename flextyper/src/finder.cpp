@@ -174,8 +174,6 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
     ftMap.addIndexResults(indexResults);
     LogClass::Log  << "(I) number of indexes processed " << indexResults.size() << std::endl;
     benchmark.now("sequentialSearch DONE ");
-
-    indexResults.clear();
     delete fmIndex;
 }
 
