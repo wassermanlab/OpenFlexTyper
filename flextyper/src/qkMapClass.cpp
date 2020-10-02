@@ -42,7 +42,7 @@ std::set<ft::QIdT> QKMap::retrieveQueries(const ft::KmerClass& kmerClass)
      return _matchingQueries;
 }
 //=======================================================
-const std::set<std::string>& QKMap::retrieveKmers(const ft::QIdT& queryIDT){
+std::set<std::string> QKMap::retrieveKmers(const ft::QIdT& queryIDT){
     return _map[queryIDT];
 }
 

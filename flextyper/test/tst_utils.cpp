@@ -97,5 +97,19 @@ TEST_F(TestUtils, reverseComplimentWithBadNucleotide)
     EXPECT_EQ(output, expectedOutput);
 }
 
+//======================================================================
+TEST_F(TestUtils, getSetOfIndexes)
+{
+    TEST_DESCRIPTION("Tests the capacity to get the set of indexes");
+
+    fs::path input ("indices.txt");
+    set<fs::path> expectedPaths { "test_index_1.fm9",
+                                  "test_index_2.fm9"};
+
+    set<fs::path> output = _utils.getSetOfIndexes(input);
+
+    EXPECT_EQ(output, expectedPaths);
+}
+
 
 }
