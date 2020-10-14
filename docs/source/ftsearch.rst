@@ -4,4 +4,4 @@ FTSearch
 FTSearch
 -----------
 
-.. doxygenfile:: ftsearch.h
+.. doxygenfile:: ftSearch.h
