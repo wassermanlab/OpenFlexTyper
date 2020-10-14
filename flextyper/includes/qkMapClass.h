@@ -23,25 +23,21 @@ public:
     ////////////////////////////////////////////////////////////////////////
     QKMap();
     virtual ~QKMap();
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief properties
-    ////////////////////////////////////////////////////////////////////////
     std::map<ft::QIdT, std::set<std::string>> _map;
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief getters
+    /// \private
     ////////////////////////////////////////////////////////////////////////
     const std::map<ft::QIdT, std::set<std::string>>& getQKMap();
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief Access functions for _qkMap
+    /// \section Access functions for _qkMap
     ////////////////////////////////////////////////////////////////////////
-    std::set<ft::QIdT> retrieveQueries(const ft::KmerClass& kmer);
-    std::set<std::string> retrieveKmers(const ft::QIdT& queryIDT);
-    bool checkForMatch(const ft::QueryClass& query, const ft::KmerClass &kmer) const;
-    bool checkForQuery(const ft::QueryClass& query) const;
-    void addQKPair(const ft::QIdT& qIDT, const std::string& kmer);
+    std::set<ft::QIdT> retrieveQueries(const ft::KmerClass& kmer); /// \fn
+    std::set<std::string> retrieveKmers(const ft::QIdT& queryIDT); /// \fn
+    bool checkForMatch(const ft::QueryClass& query, const ft::KmerClass &kmer) const; /// \fn
+    bool checkForQuery(const ft::QueryClass& query) const; /// \fn
+    void addQKPair(const ft::QIdT& qIDT, const std::string& kmer); /// \fn
 
 private:
 

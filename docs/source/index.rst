@@ -13,22 +13,22 @@ genome versions, and applications. We anticipate that FlexTyper’s utility will
 variants of interest continue to expand.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
    requirements
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
    quick_start_installation
  
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
    getting_started      
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
    code_source_documentation      
 
