@@ -1,7 +1,4 @@
-ftPropsClass
+FTPropsClass
 =============
-
-ftPropsClass
------------
 
 .. doxygenfile:: ftPropsClass.h

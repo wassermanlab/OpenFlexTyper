@@ -1,7 +1,4 @@
-ftMapClass
+FTMapClass
 =============
-
-ftMapClass
------------
 
 .. doxygenfile:: ftMapClass.h
