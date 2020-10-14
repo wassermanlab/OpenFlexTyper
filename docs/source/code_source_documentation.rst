@@ -14,7 +14,7 @@ Code source documentation
    iwriterbridge.rst
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: APIs
    :name: sec-general
 
