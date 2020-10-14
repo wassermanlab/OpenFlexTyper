@@ -10,8 +10,6 @@ Code source documentation
    ifinder.rst
    ikmergenerator.rst
    iqueryextractor.rst
-   iresultprocessor.rst
-   istats.rst
    iutils.rst
    iwriterbridge.rst
 
@@ -21,11 +19,13 @@ Code source documentation
    :name: sec-general
 
    finder.rst
-   ftsearch.rst
+   ftMapClass.rst
+   ftPropsClass.rst
+   ftSearch.rst
+   kmerClass.rst
    kmergenerator.rst
+   qkMapClass.rst
+   queryClass.rst
    queryextractor.rst
-   resultprocessor.rst
-   stats.rst
-   typedefs.rst
    utils.rst
    writerbridge.rst

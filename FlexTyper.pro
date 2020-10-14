@@ -82,6 +82,7 @@ DISTFILES += \
     docs/source/code_source_documentation.rst \
     docs/source/conf.py \
     docs/source/finder.rst \
+    docs/source/ftMapClass.rst \
     docs/source/ftsearch.rst \
     docs/source/getting_started.rst \
     docs/source/index.rst \
