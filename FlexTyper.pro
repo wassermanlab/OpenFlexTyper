@@ -83,12 +83,16 @@ DISTFILES += \
     docs/source/conf.py \
     docs/source/finder.rst \
     docs/source/ftMapClass.rst \
-    docs/source/ftsearch.rst \
+    docs/source/ftPropsClass.rst \
+    docs/source/ftSearch.rst \
     docs/source/getting_started.rst \
     docs/source/index.rst \
+    docs/source/kmerClass.rst \
     docs/source/kmergenerator.rst \
     docs/source/make.bat \
     docs/source/openFlexTyper.cfg \
+    docs/source/qkMapClass.rst \
+    docs/source/queryClass.rst \
     docs/source/queryextractor.rst \
     docs/source/quick_start_installation.rst \
     docs/source/requirements.rst \
