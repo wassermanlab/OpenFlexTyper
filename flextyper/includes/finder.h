@@ -18,43 +18,35 @@ namespace ft {
 class Finder : public IFinder {
 public:
     ////////////////////////////////////////////////////////////////////////
-    /// \brief Finder
+    /// \class Finder
     ////////////////////////////////////////////////////////////////////////
     Finder();
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief ~Finder
-    ////////////////////////////////////////////////////////////////////////
     virtual ~Finder();
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief Finder
-    /// \param other
-    ////////////////////////////////////////////////////////////////////////
     Finder(const Finder& other) = delete;
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief operator =
-    /// \param other
-    /// \return
-    ////////////////////////////////////////////////////////////////////////
     const Finder& operator=(const Finder &other) = delete;
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief searchIndexes
+    /// \brief Main search function based on the parameters set in FTMap
     ////////////////////////////////////////////////////////////////////////
     void searchIndexes(ft::FTMap &ftMap);
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief parallelSearch is a core function to search in parallel. This function
-    ///        can be used by higher level functions.
+    /// \brief parallelSearch searches kmers in parallel in a single index.
+    /// \details parallelSearch will search each kmer in parallel across a single index using asynchronous programming
+    /// \param FTMap: The search class containing parameters and results
+    /// \param indexPath: the index to search
+    /// \param offset: the position offset of the index
+    /// \result adds the results of the search to the FTMap
     ////////////////////////////////////////////////////////////////////////
     void parallelSearch(FTMap &ftMap,
                         const fs::path &indexPath, long long offset);
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief sequentialSearch searches for kmers inside a single FmIndex
-    ///        in a sequential way.
+    /// \brief sequentialSearch searches kmers sequentially in a single index.
+    /// \param FTMap: The search class containing parameters and results
+    /// \param indexPath: the index to search
+    /// \param offset: the position offset of the index
+    /// \result adds the results of the search to the FTMap
     ////////////////////////////////////////////////////////////////////////
     void sequentialSearch(ft::FTMap &ftMap,
                           const fs::path &indexPath,long long offset);
@@ -62,18 +54,17 @@ public:
 private:
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief Finder::addResultsFutures
-    /// \param fmIndex
+    /// \brief add results from an index to FTMap
     ////////////////////////////////////////////////////////////////////////
     void addResultsFutures(std::map<std::string, ft::KmerClass> & indexResults, ft::KmerClass &tmpResult, uint offset);
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief indexParallelSearch searches for kmers in parallel
+    /// \brief indexParallelSearch searches across all indexes in parallel
     ////////////////////////////////////////////////////////////////////////
     void indexParallelSearch(ft::FTMap &ftMap);
 
     ////////////////////////////////////////////////////////////////////////
-    /// \brief indexSequentialSearch searches for kmers sequentially
+    /// \brief indexSequentialSearch searches across all indexes sequentially
     ////////////////////////////////////////////////////////////////////////
     void indexSequentialSearch(ft::FTMap &ftMap);
 
