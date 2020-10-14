@@ -3,7 +3,7 @@ Code source documentation
 ***************************
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Interfaces
    :name: sec-general
 
@@ -14,7 +14,7 @@ Code source documentation
    iwriterbridge.rst
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: APIs
    :name: sec-general
    mapClasses.rst
