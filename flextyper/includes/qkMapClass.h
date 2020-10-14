@@ -26,14 +26,21 @@ public:
     std::map<ft::QIdT, std::set<std::string>> _map;
 
     ////////////////////////////////////////////////////////////////////////
-    /// \private
+    /// \skip
     ////////////////////////////////////////////////////////////////////////
     const std::map<ft::QIdT, std::set<std::string>>& getQKMap();
 
     ////////////////////////////////////////////////////////////////////////
-    /// \section Access functions for _qkMap
+    /// \section
+    /// \brief Access functions for _qkMap
     ////////////////////////////////////////////////////////////////////////
-    std::set<ft::QIdT> retrieveQueries(const ft::KmerClass& kmer); /// \fn
+    ///
+    /// \fn retrieveQueries
+    ///
+    std::set<ft::QIdT> retrieveQueries(const ft::KmerClass& kmer);
+    ///
+    /// \fn retrieveKmers
+    ///
     std::set<std::string> retrieveKmers(const ft::QIdT& queryIDT); /// \fn
     bool checkForMatch(const ft::QueryClass& query, const ft::KmerClass &kmer) const; /// \fn
     bool checkForQuery(const ft::QueryClass& query) const; /// \fn
