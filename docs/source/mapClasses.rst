@@ -1,19 +1,19 @@
 Map Classes
 =============
 
-The map classes provide the basic mechanisms by which different data classes are linked withing FlexTyper.
+The map classes provide the basic mechanisms by which different data classes are linked within FlexTyper.
 There are two main types:
 
-- 'Query-Kmer Map'_
-- FlexTyper Map_
+- Query-Kmer Map (qkMap_)
+- FlexTyper Map (ftMap_)
 
-.. _Query-Kmer Map:
+.. _qkMap:
 Query-Kmer Map
 -----------
 
 .. doxygenfile:: qkMapClass.h
 
-.. _FlexTyper Map:
+.. _ftMap:
 FlexTyper Map
 -----------
 .. doxygenfile:: ftMapClass.h
