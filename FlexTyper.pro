@@ -90,6 +90,7 @@ DISTFILES += \
     docs/source/kmerClass.rst \
     docs/source/kmergenerator.rst \
     docs/source/make.bat \
+    docs/source/mapClasses.rst \
     docs/source/openFlexTyper.cfg \
     docs/source/qkMapClass.rst \
     docs/source/queryClass.rst \

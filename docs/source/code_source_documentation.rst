@@ -17,7 +17,7 @@ Code source documentation
    :maxdepth: 1
    :caption: APIs
    :name: sec-general
-
+   mapClasses.rst
    finder.rst
    ftMapClass.rst
    ftPropsClass.rst
