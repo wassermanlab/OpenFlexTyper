@@ -5,15 +5,15 @@ The map classes provide the basic mechanisms by which different data classes are
 There are two main types:
 
 - 'Query-Kmer Map'_
-- 'FlexTyper Map'_
+- FlexTyper Map_
 
-.. _target_qkMapClass:
+.. _Query-Kmer Map:
 Query-Kmer Map
 -----------
 
 .. doxygenfile:: qkMapClass.h
 
-.. _target_ftMapClass:
+.. _FlexTyper Map:
 FlexTyper Map
 -----------
 .. doxygenfile:: ftMapClass.h
