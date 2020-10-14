@@ -1,9 +1,10 @@
 Map Classes
 =============
-Query-Kmer Map
------------
-.. doxygenfile:: qkMapClass.h
+.. toctree::
+    Query-Kmer Map
+    -----------
+    .. doxygenfile:: qkMapClass.h
 
-FlexTyper Map
------------
-.. doxygenfile:: ftMapClass.h
+    FlexTyper Map
+    -----------
+    .. doxygenfile:: ftMapClass.h

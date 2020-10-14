@@ -1,6 +1,6 @@
 Algorithms
 =============
-finder
+Finder
 -----------
 .. doxygenfile:: finder.h
 
