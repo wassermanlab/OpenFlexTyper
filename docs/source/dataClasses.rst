@@ -4,10 +4,10 @@ Kmer Class
 -----------
 .. doxygenfile:: kmerClass.h
 
-QueryClass
+Query Class
 -----------
 .. doxygenfile:: queryClass.h
 
-FTProps Class
+FlexTyper Props Class
 -----------
 .. doxygenfile:: ftPropsClass.h

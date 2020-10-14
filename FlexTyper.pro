@@ -83,6 +83,7 @@ DISTFILES += \
     docs/source/code_source_documentation.rst \
     docs/source/conf.py \
     docs/source/dataClasses.rst \
+    docs/source/fmindex.rst \
     docs/source/getting_started.rst \
     docs/source/index.rst \
     docs/source/make.bat \

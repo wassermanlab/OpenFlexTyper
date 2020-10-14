@@ -10,4 +10,4 @@ Code source documentation
    mapClasses.rst
    dataClasses.rst
    algorithms.rst
-
+   fmindex.rst

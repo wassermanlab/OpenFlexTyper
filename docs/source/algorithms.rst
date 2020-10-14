@@ -4,7 +4,7 @@ finder
 -----------
 .. doxygenfile:: finder.h
 
-ftSearch
+FlexTyper Search
 -----------
 .. doxygenfile:: ftSearch.h
 
