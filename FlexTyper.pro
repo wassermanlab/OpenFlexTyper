@@ -79,26 +79,17 @@ DISTFILES += \
     docs/FlexTyper_test.gif \
     docs/images/FmTyper_Overview.png \
     docs/requirements.txt \
+    docs/source/algorithms.rst \
     docs/source/code_source_documentation.rst \
     docs/source/conf.py \
-    docs/source/finder.rst \
-    docs/source/ftMapClass.rst \
-    docs/source/ftPropsClass.rst \
-    docs/source/ftSearch.rst \
+    docs/source/dataClasses.rst \
     docs/source/getting_started.rst \
     docs/source/index.rst \
-    docs/source/kmerClass.rst \
-    docs/source/kmergenerator.rst \
     docs/source/make.bat \
     docs/source/mapClasses.rst \
     docs/source/openFlexTyper.cfg \
-    docs/source/qkMapClass.rst \
-    docs/source/queryClass.rst \
-    docs/source/queryextractor.rst \
     docs/source/quick_start_installation.rst \
     docs/source/requirements.rst \
-    docs/source/utils.rst \
-    docs/source/writerbridge.rst \
     flextyper/test/testFiles/MixedVirus_100.fasta \
     flextyper/test/testFiles/MixedVirus_100_1.fq.gz \
     flextyper/test/testFiles/MixedVirus_100_2.fq.gz \

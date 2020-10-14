@@ -1,4 +1,0 @@
-Finder
-=============
-
-.. doxygenfile:: finder.h
