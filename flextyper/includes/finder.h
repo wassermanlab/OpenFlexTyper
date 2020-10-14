@@ -51,6 +51,7 @@ public:
     void sequentialSearch(ft::FTMap &ftMap,
                           const fs::path &indexPath,long long offset);
 
+/// \privatesection
 private:
 
     ////////////////////////////////////////////////////////////////////////
@@ -67,6 +68,7 @@ private:
     /// \brief indexSequentialSearch searches across all indexes sequentially
     ////////////////////////////////////////////////////////////////////////
     void indexSequentialSearch(ft::FTMap &ftMap);
+
 
     void testIndex(const FTProp& ftProps, algo::IFmIndex* fmIndex, const fs::path &indexPath, std::string &testkmer);
 };

@@ -75,6 +75,24 @@ SOURCES     +=                \
               fmindex/src/indexPropsClass.cpp
 
 DISTFILES += \
+    docs/FastTyper_Overview.pdf \
+    docs/FlexTyper_test.gif \
+    docs/images/FmTyper_Overview.png \
+    docs/requirements.txt \
+    docs/source/code_source_documentation.rst \
+    docs/source/conf.py \
+    docs/source/finder.rst \
+    docs/source/ftsearch.rst \
+    docs/source/getting_started.rst \
+    docs/source/index.rst \
+    docs/source/kmergenerator.rst \
+    docs/source/make.bat \
+    docs/source/openFlexTyper.cfg \
+    docs/source/queryextractor.rst \
+    docs/source/quick_start_installation.rst \
+    docs/source/requirements.rst \
+    docs/source/utils.rst \
+    docs/source/writerbridge.rst \
     flextyper/test/testFiles/MixedVirus_100.fasta \
     flextyper/test/testFiles/MixedVirus_100_1.fq.gz \
     flextyper/test/testFiles/MixedVirus_100_2.fq.gz \
