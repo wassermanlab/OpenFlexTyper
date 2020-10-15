@@ -1,13 +1,12 @@
 Data Classes
 =============
-Kmer Class
------------
-.. doxygenfile:: kmerClass.h
+.. toctree::
+        kmerClass
 
-Query Class
------------
-.. doxygenfile:: queryClass.h
+.. toctree::
+        queryClass
 
-FlexTyper Props Class
------------
-.. doxygenfile:: ftPropsClass.h
+.. toctree::
+        ftPropsClass
+
+
