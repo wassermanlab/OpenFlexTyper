@@ -84,11 +84,14 @@ DISTFILES += \
     docs/source/conf.py \
     docs/source/dataClasses.rst \
     docs/source/fmindex.rst \
+    docs/source/ftPropsClass.rst \
     docs/source/getting_started.rst \
     docs/source/index.rst \
+    docs/source/kmerClass.rst \
     docs/source/make.bat \
     docs/source/mapClasses.rst \
     docs/source/openFlexTyper.cfg \
+    docs/source/queryClass.rst \
     docs/source/quick_start_installation.rst \
     docs/source/requirements.rst \
     flextyper/test/testFiles/MixedVirus_100.fasta \
