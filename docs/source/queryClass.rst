@@ -1,6 +1,6 @@
 Query Class
 =============
 
-.. doxygenclass:: queryClass
+.. doxygenclass:: ft.queryClass
     :namespace: ft
 
