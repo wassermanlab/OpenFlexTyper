@@ -1,5 +1,6 @@
 Query Class
 =============
 
-.. doxygenfile:: queryClass.h
+.. doxygenclass:: queryClass
+    :project: flextyper
 
