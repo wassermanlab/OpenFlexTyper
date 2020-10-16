@@ -2,5 +2,5 @@ Query Class
 =============
 
 .. doxygenclass:: queryClass
-    :project: flextyper
+    :namespace: ft
 
