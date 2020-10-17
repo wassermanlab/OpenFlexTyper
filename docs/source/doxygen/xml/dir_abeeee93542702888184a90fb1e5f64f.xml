@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="dir_abeeee93542702888184a90fb1e5f64f" kind="dir">
+    <compoundname>/home/tixii/Git/OpenFlexTyper/flextyper/test</compoundname>
+    <innerfile refid="tst__finder_8cpp">tst_finder.cpp</innerfile>
+    <innerfile refid="tst__fmindex_8cpp">tst_fmindex.cpp</innerfile>
+    <innerfile refid="tst__ftMapClass_8cpp">tst_ftMapClass.cpp</innerfile>
+    <innerfile refid="tst__ftPropsClass_8cpp">tst_ftPropsClass.cpp</innerfile>
+    <innerfile refid="tst__indexPropsClass_8cpp">tst_indexPropsClass.cpp</innerfile>
+    <innerfile refid="tst__kmerClass_8cpp">tst_kmerClass.cpp</innerfile>
+    <innerfile refid="tst__kmergenerator_8cpp">tst_kmergenerator.cpp</innerfile>
+    <innerfile refid="tst__performances_8cpp">tst_performances.cpp</innerfile>
+    <innerfile refid="tst__qkMapClass_8cpp">tst_qkMapClass.cpp</innerfile>
+    <innerfile refid="tst__queryClass_8cpp">tst_queryClass.cpp</innerfile>
+    <innerfile refid="tst__queryextractor_8cpp">tst_queryextractor.cpp</innerfile>
+    <innerfile refid="tst__utils_8cpp">tst_utils.cpp</innerfile>
+    <innerfile refid="tst__writerbridge_8cpp">tst_writerbridge.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/"/>
+  </compounddef>
+</doxygen>

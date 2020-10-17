@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="structft_1_1FTProp_1_1CmdLineArg" kind="struct" language="C++" prot="public">
+    <compoundname>ft::FTProp::CmdLineArg</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structft_1_1FTProp_1_1CmdLineArg_1af2ddc2f684e12e04c102f7f18778c170" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ft::FTProp::CmdLineArg::outputFile</definition>
+        <argsstring></argsstring>
+        <name>outputFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="52" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structft_1_1FTProp_1_1CmdLineArg_1ab0e2d718585aafb8efa6333e2fba8f0d" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ft::FTProp::CmdLineArg::iniFile</definition>
+        <argsstring></argsstring>
+        <name>iniFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="53" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structft_1_1FTProp_1_1CmdLineArg_1a567962da2b5f17789af77e4d33bf9a98" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::FTProp::CmdLineArg::kmerSize</definition>
+        <argsstring></argsstring>
+        <name>kmerSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="54" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structft_1_1FTProp_1_1CmdLineArg_1a024105188a31daa8346621d89bc3cc3c" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::FTProp::CmdLineArg::stride</definition>
+        <argsstring></argsstring>
+        <name>stride</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="55" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structft_1_1FTProp_1_1CmdLineArg_1a5659a3614f203470a249f9eb70bc8724" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::FTProp::CmdLineArg::maxOccurences</definition>
+        <argsstring></argsstring>
+        <name>maxOccurences</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="56" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structft_1_1FTProp_1_1CmdLineArg_1a952454555484121c6f13359e9c9aefc2" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::FTProp::CmdLineArg::unique</definition>
+        <argsstring></argsstring>
+        <name>unique</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="57" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structft_1_1FTProp_1_1CmdLineArg_1a2437f4172e8151083a2c9bec1de980ff" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::FTProp::CmdLineArg::verbose</definition>
+        <argsstring></argsstring>
+        <name>verbose</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="58" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="51" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="51" bodyend="59"/>
+    <listofallmembers>
+      <member refid="structft_1_1FTProp_1_1CmdLineArg_1ab0e2d718585aafb8efa6333e2fba8f0d" prot="public" virt="non-virtual"><scope>ft::FTProp::CmdLineArg</scope><name>iniFile</name></member>
+      <member refid="structft_1_1FTProp_1_1CmdLineArg_1a567962da2b5f17789af77e4d33bf9a98" prot="public" virt="non-virtual"><scope>ft::FTProp::CmdLineArg</scope><name>kmerSize</name></member>
+      <member refid="structft_1_1FTProp_1_1CmdLineArg_1a5659a3614f203470a249f9eb70bc8724" prot="public" virt="non-virtual"><scope>ft::FTProp::CmdLineArg</scope><name>maxOccurences</name></member>
+      <member refid="structft_1_1FTProp_1_1CmdLineArg_1af2ddc2f684e12e04c102f7f18778c170" prot="public" virt="non-virtual"><scope>ft::FTProp::CmdLineArg</scope><name>outputFile</name></member>
+      <member refid="structft_1_1FTProp_1_1CmdLineArg_1a024105188a31daa8346621d89bc3cc3c" prot="public" virt="non-virtual"><scope>ft::FTProp::CmdLineArg</scope><name>stride</name></member>
+      <member refid="structft_1_1FTProp_1_1CmdLineArg_1a952454555484121c6f13359e9c9aefc2" prot="public" virt="non-virtual"><scope>ft::FTProp::CmdLineArg</scope><name>unique</name></member>
+      <member refid="structft_1_1FTProp_1_1CmdLineArg_1a2437f4172e8151083a2c9bec1de980ff" prot="public" virt="non-virtual"><scope>ft::FTProp::CmdLineArg</scope><name>verbose</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

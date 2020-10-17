@@ -1,0 +1,1487 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classft_1_1FTProp" kind="class" language="C++" prot="public">
+    <compoundname>ft::FTProp</compoundname>
+    <innerclass refid="structft_1_1FTProp_1_1CmdLineArg" prot="public">ft::FTProp::CmdLineArg</innerclass>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classft_1_1FTProp_1a19b8c836629249472701249acb005d7a" prot="public" static="no" mutable="no">
+        <type>std::map&lt; fs::path, uint &gt;</type>
+        <definition>std::map&lt;fs::path, uint&gt; ft::FTProp::_indexSet</definition>
+        <argsstring></argsstring>
+        <name>_indexSet</name>
+        <briefdescription>
+<para>malliable properties </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="113" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classft_1_1FTProp_1ad049e7e67e8c589fd564457c50cc9be0" prot="private" static="no" mutable="no">
+        <type>SearchType</type>
+        <definition>SearchType ft::FTProp::_searchType</definition>
+        <argsstring></argsstring>
+        <name>_searchType</name>
+        <briefdescription>
+<para>fixed properties </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="183" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="183" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a224ceb2429282b0f0967f6cfafa51031" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ft::FTProp::_readSetName</definition>
+        <argsstring></argsstring>
+        <name>_readSetName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="184" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1ad979cd6d6d9f4d0af0daa86c0bf46260" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ft::FTProp::_indexFileName</definition>
+        <argsstring></argsstring>
+        <name>_indexFileName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="185" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="185" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a3aacdda37cc4c08590a86d39347c31f7" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::FTProp::_numOfReads</definition>
+        <argsstring></argsstring>
+        <name>_numOfReads</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="187" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1ab72ba08d77188173fc5438abff2fcd67" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::FTProp::_numOfIndexes</definition>
+        <argsstring></argsstring>
+        <name>_numOfIndexes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="188" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="188" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a27a6a5525f01294fcc5cefdc91cc8cc0" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::FTProp::_pathToQueryFile</definition>
+        <argsstring></argsstring>
+        <name>_pathToQueryFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="190" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1ab7c665220faae447794fedda299b139e" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::FTProp::_buildDir</definition>
+        <argsstring></argsstring>
+        <name>_buildDir</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="192" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="192" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a4403ba0f4922c59c69230743d87a93cd" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::FTProp::_indexDir</definition>
+        <argsstring></argsstring>
+        <name>_indexDir</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="193" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a343cbc94f9ba8fb898e3c4c024daee64" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::FTProp::_R1</definition>
+        <argsstring></argsstring>
+        <name>_R1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="195" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a370be7ab04cf2c174ad676fb68d51161" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::FTProp::_R2</definition>
+        <argsstring></argsstring>
+        <name>_R2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="196" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="196" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1af6518dcaa54339f3da07a119d96c77c2" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::FTProp::_inputFastQ</definition>
+        <argsstring></argsstring>
+        <name>_inputFastQ</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="197" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a2eec96b653fffa4a8845137fafa86ac7" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::FTProp::_outputFolder</definition>
+        <argsstring></argsstring>
+        <name>_outputFolder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="199" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1aba53202a4d43acbec43d889bb121c3f2" prot="private" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::FTProp::_outputFile</definition>
+        <argsstring></argsstring>
+        <name>_outputFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="200" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="200" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a65d8d4541b07951bacd72f7ffeac8ec1" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::FTProp::_kmerSize</definition>
+        <argsstring></argsstring>
+        <name>_kmerSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="202" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="202" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a8f2de6df2f55ebd2843a066fc76fc11e" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::FTProp::_overlap</definition>
+        <argsstring></argsstring>
+        <name>_overlap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="203" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="203" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a6db59ffd496953d9548111e8263bc5fd" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::FTProp::_stride</definition>
+        <argsstring></argsstring>
+        <name>_stride</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="204" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="204" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1aba7055592bb8670b79f038902bfd61dd" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::FTProp::_readLength</definition>
+        <argsstring></argsstring>
+        <name>_readLength</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="205" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="205" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a91e43edf0a274390ec07de56bedcf96f" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::FTProp::_maxOccurences</definition>
+        <argsstring></argsstring>
+        <name>_maxOccurences</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="206" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="206" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a1619954b4197a9819131dc017e92112c" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::FTProp::_maxThreads</definition>
+        <argsstring></argsstring>
+        <name>_maxThreads</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="207" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="207" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a4f83888ce1ce7cac9ecf0490b7619272" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::FTProp::_maxKmersPerQuery</definition>
+        <argsstring></argsstring>
+        <name>_maxKmersPerQuery</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="208" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1afd068a8b6c09f76eb4051785b0973684" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::FTProp::_maxTotalKmers</definition>
+        <argsstring></argsstring>
+        <name>_maxTotalKmers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="209" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="209" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a642de2c84ae980561627cf3a991eb1cd" prot="private" static="no" mutable="no">
+        <type>std::bitset&lt; 8 &gt;</type>
+        <definition>std::bitset&lt;8&gt; ft::FTProp::_flagsToOutput</definition>
+        <argsstring></argsstring>
+        <name>_flagsToOutput</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="211" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="211" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1aeca7124f643d00a6a4d35e80fe34416e" prot="private" static="no" mutable="no">
+        <type>std::bitset&lt; 8 &gt;</type>
+        <definition>std::bitset&lt;8&gt; ft::FTProp::_flagsToNotCount</definition>
+        <argsstring></argsstring>
+        <name>_flagsToNotCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="212" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="212" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1ad4e0a60f20c7f6141892448e7cc0507e" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::FTProp::_multithread</definition>
+        <argsstring></argsstring>
+        <name>_multithread</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="214" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="214" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1acc7d5dac24bf7e6fd2f00f55a75a3b25" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::FTProp::_refOnly</definition>
+        <argsstring></argsstring>
+        <name>_refOnly</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="215" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="215" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1ab54daa7d4e48f4fdbb8f4fb37225e794" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::FTProp::_matchesOnly</definition>
+        <argsstring></argsstring>
+        <name>_matchesOnly</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="216" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="216" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a68f31b75344d9dbe0d7d5bfe4c2b309f" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::FTProp::_crossover</definition>
+        <argsstring></argsstring>
+        <name>_crossover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="217" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="217" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1ada43753f85210ecbf5f5df156020c086" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::FTProp::_printSearchTime</definition>
+        <argsstring></argsstring>
+        <name>_printSearchTime</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="218" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="218" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1ac71b6ed06165c68698a31757c314ceda" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::FTProp::_pairedReads</definition>
+        <argsstring></argsstring>
+        <name>_pairedReads</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="219" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="219" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a6ca5846517e0745c8c9955eec7a09b7d" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::FTProp::_countAsPairs</definition>
+        <argsstring></argsstring>
+        <name>_countAsPairs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="220" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="220" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1ac0326580f7a6797e5ef61dbe07b5f0f5" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::FTProp::_revCompSearch</definition>
+        <argsstring></argsstring>
+        <name>_revCompSearch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="221" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="221" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1a332fb6c6b4eb62efaecf5a809d8ed356" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::FTProp::_indexRevComp</definition>
+        <argsstring></argsstring>
+        <name>_indexRevComp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="222" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="222" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1ae75551e70cdfdd994b6a9671ea9b24b2" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::FTProp::_matchingReads</definition>
+        <argsstring></argsstring>
+        <name>_matchingReads</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="223" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="223" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1FTProp_1addfd284043d656c280bf3dcf3d8096fe" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::FTProp::_verbose</definition>
+        <argsstring></argsstring>
+        <name>_verbose</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="224" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="224" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classft_1_1FTProp_1ac016ad94a1f167d70e5c56e1239f1165" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ft::FTProp::FTProp</definition>
+        <argsstring>()</argsstring>
+        <name>FTProp</name>
+        <briefdescription>
+<para>FTProp. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="44" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="12" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1aa6b77574b807f4cb2afdde38b1ecfa9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>ft::FTProp::~FTProp</definition>
+        <argsstring>()</argsstring>
+        <name>~FTProp</name>
+        <briefdescription>
+<para>~FTProp </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="49" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="464" bodyend="466"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1acb8244b41f4c7f037409707de66fe43d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::FTProp::init</definition>
+        <argsstring>(const fs::path &amp;pathToQueryFile, uint kmerSize, uint readLength, const fs::path &amp;indexPropsFile, const fs::path &amp;outputFolder, const fs::path &amp;outputFile, bool refOnly, bool revCompSearch, SearchType searchType, bool multithread=false, uint overlap=0, bool returnMatchesOnly=false, uint stride=10, uint maxOccurences=200, uint numOfThreads=1, bool outputNonUniqueKmers=false, bool outputOverCountedKmers=false, bool ignoreNonUniqueKmers=true, bool ignoreOverCountedKmers=true, bool countAsPairs=false, bool crossover=false, bool printSearchTime=false, uint maxKmers=UINT_MAX, uint totalKmers=UINT_MAX, bool printInputs=false, bool matchingReads=false)</argsstring>
+        <name>init</name>
+        <param>
+          <type>const fs::path &amp;</type>
+          <declname>pathToQueryFile</declname>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>kmerSize</declname>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>readLength</declname>
+        </param>
+        <param>
+          <type>const fs::path &amp;</type>
+          <declname>indexPropsFile</declname>
+        </param>
+        <param>
+          <type>const fs::path &amp;</type>
+          <declname>outputFolder</declname>
+        </param>
+        <param>
+          <type>const fs::path &amp;</type>
+          <declname>outputFile</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>refOnly</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>revCompSearch</declname>
+        </param>
+        <param>
+          <type>SearchType</type>
+          <declname>searchType</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>multithread</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>overlap</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>returnMatchesOnly</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>stride</declname>
+          <defval>10</defval>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>maxOccurences</declname>
+          <defval>200</defval>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>numOfThreads</declname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>outputNonUniqueKmers</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>outputOverCountedKmers</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>ignoreNonUniqueKmers</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>ignoreOverCountedKmers</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>countAsPairs</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>crossover</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>printSearchTime</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>maxKmers</declname>
+          <defval>UINT_MAX</defval>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>totalKmers</declname>
+          <defval>UINT_MAX</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>printInputs</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>matchingReads</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Init. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="64" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="17" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a14ea79b8525f56b20e0c5eab6501dbda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::FTProp::initFromQSettings</definition>
+        <argsstring>(FTProp::CmdLineArg &amp;arg)</argsstring>
+        <name>initFromQSettings</name>
+        <param>
+          <type>FTProp::CmdLineArg &amp;</type>
+          <declname>arg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="91" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="140" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1af661f167a130682047f0890a470c0ebc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::FTProp::setVerbose</definition>
+        <argsstring>(bool verbose)</argsstring>
+        <name>setVerbose</name>
+        <param>
+          <type>bool</type>
+          <declname>verbose</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="93" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="131" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a6e950a041bf2203ff7755f03f08b8d9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::FTProp::loadIndexProps</definition>
+        <argsstring>(const fs::path &amp;_indexPropsFile, bool printInputs)</argsstring>
+        <name>loadIndexProps</name>
+        <param>
+          <type>const fs::path &amp;</type>
+          <declname>_indexPropsFile</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>printInputs</declname>
+        </param>
+        <briefdescription>
+<para>Import Index Properties from INI. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="97" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="205" bodyend="278"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1adef82d00bed9adcb51635d232c9fcc8d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::FTProp::initIndexProps</definition>
+        <argsstring>(const bool pairedReads, const bool revComp, fs::path buildDir, fs::path indexDir, std::string indexFileName, std::string readSetName, fs::path inputFastQ, uint numOfReads, uint numOfIndexes, bool printInputs=false)</argsstring>
+        <name>initIndexProps</name>
+        <param>
+          <type>const bool</type>
+          <declname>pairedReads</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>revComp</declname>
+        </param>
+        <param>
+          <type>fs::path</type>
+          <declname>buildDir</declname>
+        </param>
+        <param>
+          <type>fs::path</type>
+          <declname>indexDir</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>indexFileName</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>readSetName</declname>
+        </param>
+        <param>
+          <type>fs::path</type>
+          <declname>inputFastQ</declname>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>numOfReads</declname>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>numOfIndexes</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>printInputs</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="98" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="281" bodyend="339"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a2570a3ceda229ee89bab927e3b1b7d31" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::FTProp::printToStdOut</definition>
+        <argsstring>(const std::string outputString) const</argsstring>
+        <name>printToStdOut</name>
+        <param>
+          <type>const std::string</type>
+          <declname>outputString</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="109" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="199" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1ac80c7bca31143ac2e3b2ee89b11ea45a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SearchType</type>
+        <definition>SearchType ft::FTProp::getSearchType</definition>
+        <argsstring>() const</argsstring>
+        <name>getSearchType</name>
+        <briefdescription>
+<para>Parameter getters and setters. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="118" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="352" bodyend="352"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1abaabd7e8fce73c21e850d162122cfedb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ft::FTProp::getReadSetName</definition>
+        <argsstring>() const</argsstring>
+        <name>getReadSetName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="120" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="353" bodyend="353"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1af71c469f9963c11e8c3348863cc57d26" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ft::FTProp::getIndexFileName</definition>
+        <argsstring>() const</argsstring>
+        <name>getIndexFileName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="121" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="354" bodyend="354"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a9c7181d62a25c552bd9871c95f8c6ed8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint ft::FTProp::getKmerSize</definition>
+        <argsstring>() const</argsstring>
+        <name>getKmerSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="123" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="355" bodyend="355"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a38d3741143084a60694fcec989471b3e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint ft::FTProp::getOverlap</definition>
+        <argsstring>() const</argsstring>
+        <name>getOverlap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="124" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="356" bodyend="356"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a31ad687ef24e572067337c26429ef9c8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint ft::FTProp::getStride</definition>
+        <argsstring>() const</argsstring>
+        <name>getStride</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="125" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="357" bodyend="357"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a42b17257c0e2a823175d9890ad8c3f8d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint ft::FTProp::getReadLength</definition>
+        <argsstring>() const</argsstring>
+        <name>getReadLength</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="126" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="358" bodyend="358"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a8ec647c9c62dc02c40ae926dca3b8eb8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint ft::FTProp::getMaxOcc</definition>
+        <argsstring>() const</argsstring>
+        <name>getMaxOcc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="127" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="359" bodyend="359"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1addea0e38d4382d1ae676104b36a05797" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint ft::FTProp::getMaxThreads</definition>
+        <argsstring>() const</argsstring>
+        <name>getMaxThreads</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="128" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="360" bodyend="360"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a80fd2e07d29e35d0112fd0b7210666da" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint ft::FTProp::getMaxKmersPerQuery</definition>
+        <argsstring>() const</argsstring>
+        <name>getMaxKmersPerQuery</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="129" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="361" bodyend="361"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a0d21b1540f91b01d71555a3efb1bb989" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint ft::FTProp::getMaxTotalKmers</definition>
+        <argsstring>() const</argsstring>
+        <name>getMaxTotalKmers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="130" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="362" bodyend="362"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a9740503fda6438c74492b78c51ff45ec" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint ft::FTProp::getNumOfIndexes</definition>
+        <argsstring>() const</argsstring>
+        <name>getNumOfIndexes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="131" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="363" bodyend="363"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a69fbbf3e40cea64aead08c50e04ba513" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint ft::FTProp::getNumOfReads</definition>
+        <argsstring>() const</argsstring>
+        <name>getNumOfReads</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="132" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="364" bodyend="364"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a51e1b3f818d4950468fef2f2935af915" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::bitset&lt; 8 &gt; &amp;</type>
+        <definition>const std::bitset&lt; 8 &gt; &amp; ft::FTProp::getFlagsToOutput</definition>
+        <argsstring>() const</argsstring>
+        <name>getFlagsToOutput</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="134" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="377" bodyend="377"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a8f59f86b8063dfb43d760368c33650d8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::bitset&lt; 8 &gt; &amp;</type>
+        <definition>const std::bitset&lt; 8 &gt; &amp; ft::FTProp::getFlagsToNotCount</definition>
+        <argsstring>() const</argsstring>
+        <name>getFlagsToNotCount</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="135" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="378" bodyend="378"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a9d9febdd8e43d98dc1660319d647f899" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::FTProp::countFlag</definition>
+        <argsstring>(ft::FlagType flag) const</argsstring>
+        <name>countFlag</name>
+        <param>
+          <type>ft::FlagType</type>
+          <declname>flag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="136" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="439" bodyend="442"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a76617feb28bd260b6f736a64313bd7a0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::FTProp::outputFlag</definition>
+        <argsstring>(ft::FlagType flag) const</argsstring>
+        <name>outputFlag</name>
+        <param>
+          <type>ft::FlagType</type>
+          <declname>flag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="137" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="443" bodyend="446"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a048b57bf597db83b3bf21aea720b4102" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::FTProp::setFlagToOutput</definition>
+        <argsstring>(ft::FlagType flag)</argsstring>
+        <name>setFlagToOutput</name>
+        <param>
+          <type>ft::FlagType</type>
+          <declname>flag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="138" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="430" bodyend="433"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1ab30d099a9b888218ea0974f786195093" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::FTProp::setFlagToNotCount</definition>
+        <argsstring>(ft::FlagType flag)</argsstring>
+        <name>setFlagToNotCount</name>
+        <param>
+          <type>ft::FlagType</type>
+          <declname>flag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="139" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="434" bodyend="437"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1af61ffbf767ee8abd1843d652fb72ae4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::FTProp::resetFlagToOutput</definition>
+        <argsstring>(ft::FlagType flag)</argsstring>
+        <name>resetFlagToOutput</name>
+        <param>
+          <type>ft::FlagType</type>
+          <declname>flag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="140" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="449" bodyend="452"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1adc1baf05f4d00883ee9a79c41101c37c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::FTProp::resetFlagToNotCount</definition>
+        <argsstring>(ft::FlagType flag)</argsstring>
+        <name>resetFlagToNotCount</name>
+        <param>
+          <type>ft::FlagType</type>
+          <declname>flag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="141" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="453" bodyend="456"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a925ebad4efbd88f70a912f5a851a0d4f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::FTProp::getMultithreadFlag</definition>
+        <argsstring>() const</argsstring>
+        <name>getMultithreadFlag</name>
+        <briefdescription>
+<para>Flag getters. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="146" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="367" bodyend="367"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a488d04b564bd3f2b1a634d6de3f8b28d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::FTProp::getRefOnlyFlag</definition>
+        <argsstring>() const</argsstring>
+        <name>getRefOnlyFlag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="147" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="368" bodyend="368"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a7cfaaa5690e6f9fede9cc6df44661f1f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::FTProp::getMatchesOnlyFlag</definition>
+        <argsstring>() const</argsstring>
+        <name>getMatchesOnlyFlag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="148" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="369" bodyend="369"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1aad837aa2fa8b055020ed48c26d57662f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::FTProp::getCrossoverFlag</definition>
+        <argsstring>() const</argsstring>
+        <name>getCrossoverFlag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="149" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="370" bodyend="370"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a7b9d2a73658176a78bca2afb44c1b528" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::FTProp::getPrintSearchTimeFlag</definition>
+        <argsstring>() const</argsstring>
+        <name>getPrintSearchTimeFlag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="150" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="371" bodyend="371"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1ada693d977809d869f1bf97f1b3108d42" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::FTProp::getPairedReadFlag</definition>
+        <argsstring>() const</argsstring>
+        <name>getPairedReadFlag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="151" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="372" bodyend="372"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a6cbdb4e73baa900f9e57dfff639aff47" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::FTProp::getCountAsPairsFlag</definition>
+        <argsstring>() const</argsstring>
+        <name>getCountAsPairsFlag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="152" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="373" bodyend="373"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a18cb2b83f57d9b05c661eaf0baf3d790" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::FTProp::getRevCompSearchFlag</definition>
+        <argsstring>() const</argsstring>
+        <name>getRevCompSearchFlag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="153" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="374" bodyend="374"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a4a58ecc0ce12557239bc5e25211445f6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::FTProp::getIndexRevCompFlag</definition>
+        <argsstring>() const</argsstring>
+        <name>getIndexRevCompFlag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="154" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="375" bodyend="375"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a73777df5d746cae9dce68a75f231dfff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::FTProp::getMatchingReadsFlag</definition>
+        <argsstring>() const</argsstring>
+        <name>getMatchingReadsFlag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="155" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="376" bodyend="376"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1aa8550511f88a6eddcd31385160ab8d76" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::FTProp::isVerbose</definition>
+        <argsstring>() const</argsstring>
+        <name>isVerbose</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="157" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="135" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a2df081cdef16952e76c4c13fb3299e65" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const fs::path &amp;</type>
+        <definition>const fs::path &amp; ft::FTProp::getPathToQueryFile</definition>
+        <argsstring>() const</argsstring>
+        <name>getPathToQueryFile</name>
+        <briefdescription>
+<para>File getters. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="162" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="381" bodyend="381"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a0c42e30a80e17d04a2001a2adeec5133" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const fs::path &amp;</type>
+        <definition>const fs::path &amp; ft::FTProp::getIndexDir</definition>
+        <argsstring>() const</argsstring>
+        <name>getIndexDir</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="163" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="382" bodyend="382"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1aca0486b4f7e21a50ce2d84e790c33bc8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const fs::path &amp;</type>
+        <definition>const fs::path &amp; ft::FTProp::getOutputFolder</definition>
+        <argsstring>() const</argsstring>
+        <name>getOutputFolder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="164" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="383" bodyend="383"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a72bed219f41deb43edab8bce77da364d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const fs::path &amp;</type>
+        <definition>const fs::path&amp; ft::FTProp::getMatchingReadFQ</definition>
+        <argsstring>() const</argsstring>
+        <name>getMatchingReadFQ</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="165" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a4755ce7b02a256f80d0d58ffc70f74e1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const fs::path &amp;</type>
+        <definition>const fs::path &amp; ft::FTProp::getInputFastQ</definition>
+        <argsstring>() const</argsstring>
+        <name>getInputFastQ</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="166" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="385" bodyend="385"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a60e603cb60ad3b9cc5f4a92379ad6ae0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const fs::path &amp;</type>
+        <definition>const fs::path &amp; ft::FTProp::getOutputFile</definition>
+        <argsstring>() const</argsstring>
+        <name>getOutputFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="167" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="384" bodyend="384"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a1d3bf6d120c2281c918c35fad3e57e64" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::map&lt; fs::path, uint &gt; &amp;</type>
+        <definition>const std::map&lt; fs::path, uint &gt; &amp; ft::FTProp::getIndexSet</definition>
+        <argsstring>() const</argsstring>
+        <name>getIndexSet</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="168" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="386" bodyend="386"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a468edb361da970e6e172017c051d2b7b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const fs::path &amp;</type>
+        <definition>const fs::path &amp; ft::FTProp::getBuildDir</definition>
+        <argsstring>() const</argsstring>
+        <name>getBuildDir</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="169" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="387" bodyend="387"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a6757334bf2e701cee6825414c7db1ddb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const fs::path &amp;</type>
+        <definition>const fs::path &amp; ft::FTProp::getR1</definition>
+        <argsstring>() const</argsstring>
+        <name>getR1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="170" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="388" bodyend="388"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a50981f934581cdeee55692d71b0ecc8a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const fs::path &amp;</type>
+        <definition>const fs::path &amp; ft::FTProp::getR2</definition>
+        <argsstring>() const</argsstring>
+        <name>getR2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="171" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="389" bodyend="389"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1aeaf3fb5f862dc4c5f9bbe23c03f34473" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::FTProp::addToIndexSet</definition>
+        <argsstring>(const fs::path &amp;index, u_int offset)</argsstring>
+        <name>addToIndexSet</name>
+        <param>
+          <type>const fs::path &amp;</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>u_int</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="173" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="342" bodyend="349"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1acc55d9efe8d6d7e17e4bb3d44b5737b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::FTProp::setTestProps</definition>
+        <argsstring>(const uint numOfReads, const uint readLength, bool _revComp, bool countAsPairs=false)</argsstring>
+        <name>setTestProps</name>
+        <param>
+          <type>const uint</type>
+          <declname>numOfReads</declname>
+        </param>
+        <param>
+          <type>const uint</type>
+          <declname>readLength</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>_revComp</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>countAsPairs</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="175" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="392" bodyend="397"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1FTProp_1a0ce04bff783d9ea6288318b457c6552f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::FTProp::setOutputFolder</definition>
+        <argsstring>(const fs::path &amp;outputFolder)</argsstring>
+        <name>setOutputFolder</name>
+        <param>
+          <type>const fs::path &amp;</type>
+          <declname>outputFolder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="176" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/ftPropsClass.cpp" bodystart="399" bodyend="428"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" line="39" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftPropsClass.h" bodystart="39" bodyend="226"/>
+    <listofallmembers>
+      <member refid="classft_1_1FTProp_1ab7c665220faae447794fedda299b139e" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_buildDir</name></member>
+      <member refid="classft_1_1FTProp_1a6ca5846517e0745c8c9955eec7a09b7d" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_countAsPairs</name></member>
+      <member refid="classft_1_1FTProp_1a68f31b75344d9dbe0d7d5bfe4c2b309f" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_crossover</name></member>
+      <member refid="classft_1_1FTProp_1aeca7124f643d00a6a4d35e80fe34416e" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_flagsToNotCount</name></member>
+      <member refid="classft_1_1FTProp_1a642de2c84ae980561627cf3a991eb1cd" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_flagsToOutput</name></member>
+      <member refid="classft_1_1FTProp_1a4403ba0f4922c59c69230743d87a93cd" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_indexDir</name></member>
+      <member refid="classft_1_1FTProp_1ad979cd6d6d9f4d0af0daa86c0bf46260" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_indexFileName</name></member>
+      <member refid="classft_1_1FTProp_1a332fb6c6b4eb62efaecf5a809d8ed356" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_indexRevComp</name></member>
+      <member refid="classft_1_1FTProp_1a19b8c836629249472701249acb005d7a" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>_indexSet</name></member>
+      <member refid="classft_1_1FTProp_1af6518dcaa54339f3da07a119d96c77c2" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_inputFastQ</name></member>
+      <member refid="classft_1_1FTProp_1a65d8d4541b07951bacd72f7ffeac8ec1" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_kmerSize</name></member>
+      <member refid="classft_1_1FTProp_1ab54daa7d4e48f4fdbb8f4fb37225e794" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_matchesOnly</name></member>
+      <member refid="classft_1_1FTProp_1ae75551e70cdfdd994b6a9671ea9b24b2" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_matchingReads</name></member>
+      <member refid="classft_1_1FTProp_1a4f83888ce1ce7cac9ecf0490b7619272" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_maxKmersPerQuery</name></member>
+      <member refid="classft_1_1FTProp_1a91e43edf0a274390ec07de56bedcf96f" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_maxOccurences</name></member>
+      <member refid="classft_1_1FTProp_1a1619954b4197a9819131dc017e92112c" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_maxThreads</name></member>
+      <member refid="classft_1_1FTProp_1afd068a8b6c09f76eb4051785b0973684" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_maxTotalKmers</name></member>
+      <member refid="classft_1_1FTProp_1ad4e0a60f20c7f6141892448e7cc0507e" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_multithread</name></member>
+      <member refid="classft_1_1FTProp_1ab72ba08d77188173fc5438abff2fcd67" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_numOfIndexes</name></member>
+      <member refid="classft_1_1FTProp_1a3aacdda37cc4c08590a86d39347c31f7" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_numOfReads</name></member>
+      <member refid="classft_1_1FTProp_1aba53202a4d43acbec43d889bb121c3f2" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_outputFile</name></member>
+      <member refid="classft_1_1FTProp_1a2eec96b653fffa4a8845137fafa86ac7" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_outputFolder</name></member>
+      <member refid="classft_1_1FTProp_1a8f2de6df2f55ebd2843a066fc76fc11e" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_overlap</name></member>
+      <member refid="classft_1_1FTProp_1ac71b6ed06165c68698a31757c314ceda" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_pairedReads</name></member>
+      <member refid="classft_1_1FTProp_1a27a6a5525f01294fcc5cefdc91cc8cc0" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_pathToQueryFile</name></member>
+      <member refid="classft_1_1FTProp_1ada43753f85210ecbf5f5df156020c086" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_printSearchTime</name></member>
+      <member refid="classft_1_1FTProp_1a343cbc94f9ba8fb898e3c4c024daee64" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_R1</name></member>
+      <member refid="classft_1_1FTProp_1a370be7ab04cf2c174ad676fb68d51161" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_R2</name></member>
+      <member refid="classft_1_1FTProp_1aba7055592bb8670b79f038902bfd61dd" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_readLength</name></member>
+      <member refid="classft_1_1FTProp_1a224ceb2429282b0f0967f6cfafa51031" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_readSetName</name></member>
+      <member refid="classft_1_1FTProp_1acc7d5dac24bf7e6fd2f00f55a75a3b25" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_refOnly</name></member>
+      <member refid="classft_1_1FTProp_1ac0326580f7a6797e5ef61dbe07b5f0f5" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_revCompSearch</name></member>
+      <member refid="classft_1_1FTProp_1ad049e7e67e8c589fd564457c50cc9be0" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_searchType</name></member>
+      <member refid="classft_1_1FTProp_1a6db59ffd496953d9548111e8263bc5fd" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_stride</name></member>
+      <member refid="classft_1_1FTProp_1addfd284043d656c280bf3dcf3d8096fe" prot="private" virt="non-virtual"><scope>ft::FTProp</scope><name>_verbose</name></member>
+      <member refid="classft_1_1FTProp_1aeaf3fb5f862dc4c5f9bbe23c03f34473" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>addToIndexSet</name></member>
+      <member refid="classft_1_1FTProp_1a9d9febdd8e43d98dc1660319d647f899" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>countFlag</name></member>
+      <member refid="classft_1_1FTProp_1ac016ad94a1f167d70e5c56e1239f1165" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>FTProp</name></member>
+      <member refid="classft_1_1FTProp_1a468edb361da970e6e172017c051d2b7b" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getBuildDir</name></member>
+      <member refid="classft_1_1FTProp_1a6cbdb4e73baa900f9e57dfff639aff47" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getCountAsPairsFlag</name></member>
+      <member refid="classft_1_1FTProp_1aad837aa2fa8b055020ed48c26d57662f" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getCrossoverFlag</name></member>
+      <member refid="classft_1_1FTProp_1a8f59f86b8063dfb43d760368c33650d8" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getFlagsToNotCount</name></member>
+      <member refid="classft_1_1FTProp_1a51e1b3f818d4950468fef2f2935af915" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getFlagsToOutput</name></member>
+      <member refid="classft_1_1FTProp_1a0c42e30a80e17d04a2001a2adeec5133" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getIndexDir</name></member>
+      <member refid="classft_1_1FTProp_1af71c469f9963c11e8c3348863cc57d26" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getIndexFileName</name></member>
+      <member refid="classft_1_1FTProp_1a4a58ecc0ce12557239bc5e25211445f6" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getIndexRevCompFlag</name></member>
+      <member refid="classft_1_1FTProp_1a1d3bf6d120c2281c918c35fad3e57e64" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getIndexSet</name></member>
+      <member refid="classft_1_1FTProp_1a4755ce7b02a256f80d0d58ffc70f74e1" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getInputFastQ</name></member>
+      <member refid="classft_1_1FTProp_1a9c7181d62a25c552bd9871c95f8c6ed8" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getKmerSize</name></member>
+      <member refid="classft_1_1FTProp_1a7cfaaa5690e6f9fede9cc6df44661f1f" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getMatchesOnlyFlag</name></member>
+      <member refid="classft_1_1FTProp_1a72bed219f41deb43edab8bce77da364d" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getMatchingReadFQ</name></member>
+      <member refid="classft_1_1FTProp_1a73777df5d746cae9dce68a75f231dfff" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getMatchingReadsFlag</name></member>
+      <member refid="classft_1_1FTProp_1a80fd2e07d29e35d0112fd0b7210666da" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getMaxKmersPerQuery</name></member>
+      <member refid="classft_1_1FTProp_1a8ec647c9c62dc02c40ae926dca3b8eb8" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getMaxOcc</name></member>
+      <member refid="classft_1_1FTProp_1addea0e38d4382d1ae676104b36a05797" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getMaxThreads</name></member>
+      <member refid="classft_1_1FTProp_1a0d21b1540f91b01d71555a3efb1bb989" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getMaxTotalKmers</name></member>
+      <member refid="classft_1_1FTProp_1a925ebad4efbd88f70a912f5a851a0d4f" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getMultithreadFlag</name></member>
+      <member refid="classft_1_1FTProp_1a9740503fda6438c74492b78c51ff45ec" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getNumOfIndexes</name></member>
+      <member refid="classft_1_1FTProp_1a69fbbf3e40cea64aead08c50e04ba513" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getNumOfReads</name></member>
+      <member refid="classft_1_1FTProp_1a60e603cb60ad3b9cc5f4a92379ad6ae0" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getOutputFile</name></member>
+      <member refid="classft_1_1FTProp_1aca0486b4f7e21a50ce2d84e790c33bc8" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getOutputFolder</name></member>
+      <member refid="classft_1_1FTProp_1a38d3741143084a60694fcec989471b3e" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getOverlap</name></member>
+      <member refid="classft_1_1FTProp_1ada693d977809d869f1bf97f1b3108d42" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getPairedReadFlag</name></member>
+      <member refid="classft_1_1FTProp_1a2df081cdef16952e76c4c13fb3299e65" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getPathToQueryFile</name></member>
+      <member refid="classft_1_1FTProp_1a7b9d2a73658176a78bca2afb44c1b528" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getPrintSearchTimeFlag</name></member>
+      <member refid="classft_1_1FTProp_1a6757334bf2e701cee6825414c7db1ddb" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getR1</name></member>
+      <member refid="classft_1_1FTProp_1a50981f934581cdeee55692d71b0ecc8a" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getR2</name></member>
+      <member refid="classft_1_1FTProp_1a42b17257c0e2a823175d9890ad8c3f8d" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getReadLength</name></member>
+      <member refid="classft_1_1FTProp_1abaabd7e8fce73c21e850d162122cfedb" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getReadSetName</name></member>
+      <member refid="classft_1_1FTProp_1a488d04b564bd3f2b1a634d6de3f8b28d" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getRefOnlyFlag</name></member>
+      <member refid="classft_1_1FTProp_1a18cb2b83f57d9b05c661eaf0baf3d790" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getRevCompSearchFlag</name></member>
+      <member refid="classft_1_1FTProp_1ac80c7bca31143ac2e3b2ee89b11ea45a" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getSearchType</name></member>
+      <member refid="classft_1_1FTProp_1a31ad687ef24e572067337c26429ef9c8" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>getStride</name></member>
+      <member refid="classft_1_1FTProp_1acb8244b41f4c7f037409707de66fe43d" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>init</name></member>
+      <member refid="classft_1_1FTProp_1a14ea79b8525f56b20e0c5eab6501dbda" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>initFromQSettings</name></member>
+      <member refid="classft_1_1FTProp_1adef82d00bed9adcb51635d232c9fcc8d" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>initIndexProps</name></member>
+      <member refid="classft_1_1FTProp_1aa8550511f88a6eddcd31385160ab8d76" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>isVerbose</name></member>
+      <member refid="classft_1_1FTProp_1a6e950a041bf2203ff7755f03f08b8d9f" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>loadIndexProps</name></member>
+      <member refid="classft_1_1FTProp_1a76617feb28bd260b6f736a64313bd7a0" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>outputFlag</name></member>
+      <member refid="classft_1_1FTProp_1a2570a3ceda229ee89bab927e3b1b7d31" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>printToStdOut</name></member>
+      <member refid="classft_1_1FTProp_1adc1baf05f4d00883ee9a79c41101c37c" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>resetFlagToNotCount</name></member>
+      <member refid="classft_1_1FTProp_1af61ffbf767ee8abd1843d652fb72ae4f" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>resetFlagToOutput</name></member>
+      <member refid="classft_1_1FTProp_1ab30d099a9b888218ea0974f786195093" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>setFlagToNotCount</name></member>
+      <member refid="classft_1_1FTProp_1a048b57bf597db83b3bf21aea720b4102" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>setFlagToOutput</name></member>
+      <member refid="classft_1_1FTProp_1a0ce04bff783d9ea6288318b457c6552f" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>setOutputFolder</name></member>
+      <member refid="classft_1_1FTProp_1acc55d9efe8d6d7e17e4bb3d44b5737b0" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>setTestProps</name></member>
+      <member refid="classft_1_1FTProp_1af661f167a130682047f0890a470c0ebc" prot="public" virt="non-virtual"><scope>ft::FTProp</scope><name>setVerbose</name></member>
+      <member refid="classft_1_1FTProp_1aa6b77574b807f4cb2afdde38b1ecfa9d" prot="public" virt="virtual"><scope>ft::FTProp</scope><name>~FTProp</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

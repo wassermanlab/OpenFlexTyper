@@ -1,0 +1,193 @@
+.TH "ft::QueryClass" 3 "Fri Oct 16 2020" "FlexTyper" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ft::QueryClass \- A class that contains information for one query ID, Type pair\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <queryClass\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBQueryClass\fP (int queryID, ft::QueryType queryType)"
+.br
+.ti -1c
+.RI "\fBQueryClass\fP ()"
+.br
+.ti -1c
+.RI "virtual \fB~QueryClass\fP ()"
+.br
+.RI "Class Destructor\&. "
+.in -1c
+.PP
+.RI "\fBGetters\fP"
+.br
+Constant functions to return properties of the query 
+.PP
+.in +1c
+.in +1c
+.ti -1c
+.RI "int \fBgetqID\fP () const"
+.br
+.ti -1c
+.RI "QueryType \fBgetqType\fP () const"
+.br
+.ti -1c
+.RI "std::string \fBgetQueryString\fP () const"
+.br
+.ti -1c
+.RI "int \fBgetCount\fP () const"
+.br
+.ti -1c
+.RI "std::map< ft::FlagType, std::set< std::string > > \fBgetQFlags\fP () const"
+.br
+.ti -1c
+.RI "ft::QIdT \fBgetQIdT\fP () const"
+.br
+.ti -1c
+.RI "const std::set< std::string > \fBgetFlagKmers\fP (const ft::FlagType flag) const"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fBSetters\fP"
+.br
+Non-constant functions to update properties of the query class 
+.PP
+.in +1c
+.in +1c
+.ti -1c
+.RI "void \fBsetQueryString\fP (std::string queryString)"
+.br
+.ti -1c
+.RI "void \fBsetCount\fP (int count)"
+.br
+.ti -1c
+.RI "void \fBsetFlags\fP (const std::map< ft::FlagType, std::set< std::string >> &qFlags)"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fBAdders\fP"
+.br
+Non-constant functions to add properties to the query class 
+.PP
+.in +1c
+.in +1c
+.ti -1c
+.RI "void \fBaddFlags\fP (const ft::FlagType &flagType, const std::set< std::string > &kmers)"
+.br
+.ti -1c
+.RI "void \fBaddFlag\fP (const ft::FlagType &flagType, const std::string &kmer)"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fBRemovers\fP"
+.br
+Non-constant functions to remove properties from the query class 
+.PP
+.in +1c
+.in +1c
+.ti -1c
+.RI "void \fBremoveFlag\fP (ft::FlagType flagType)"
+.br
+.ti -1c
+.RI "void \fBremoveKmerFlag\fP (const ft::FlagType &flagTyper, const std::string &kmers)"
+.br
+.ti -1c
+.RI "void \fBremoveCount\fP ()"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fBCheckers\fP"
+.br
+Constant functions to check the properties of the query class 
+.PP
+.in +1c
+.in +1c
+.ti -1c
+.RI "bool \fBisQIdTEqual\fP (const ft::QIdT &test) const"
+.br
+.ti -1c
+.RI "bool \fBhasQueryID\fP (const int &qid) const"
+.br
+.ti -1c
+.RI "bool \fBhasQueryType\fP (const ft::QueryType &qType) const"
+.br
+.ti -1c
+.RI "bool \fBhasFlag\fP (const ft::FlagType &flag) const"
+.br
+.ti -1c
+.RI "bool \fBhasKmerFlag\fP (const ft::FlagType &flag, const std::string &kmer) const"
+.br
+.ti -1c
+.RI "bool \fBhasNonZeroCount\fP () const"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fBOverloaded Operators\fP"
+.br
+Constant functions that define how to compare two query classes for equality 
+.PP
+.in +1c
+.in +1c
+.ti -1c
+.RI "bool \fBoperator<\fP (const \fBft::QueryClass\fP &q) const"
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBft::QueryClass\fP &q) const"
+.br
+.in -1c
+.in -1c
+.SS "Public Attributes"
+
+.PP
+.RI "\fBProperties\fP"
+.br
+
+.PP
+.in +1c
+.in +1c
+.ti -1c
+.RI "int \fB_qID\fP"
+.br
+.ti -1c
+.RI "QueryType \fB_qType\fP"
+.br
+.ti -1c
+.RI "std::string \fB_qstring\fP"
+.br
+.ti -1c
+.RI "int \fB_count\fP"
+.br
+.ti -1c
+.RI "std::map< ft::FlagType, std::set< std::string > > \fB_qFlags\fP"
+.br
+.in -1c
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "ft::QueryClass::QueryClass (int queryID, ft::QueryType queryType)"
+Constructor 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIint\fP query ID as an integer 
+.br
+\fIft::QueryType\fP query type {REF, ALT, CRO} 
+.RE
+.PP
+
+.SS "ft::QueryClass::QueryClass ()"
+This is an overloaded member function, provided for convenience\&. It differs from the above function only in what argument(s) it accepts\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for FlexTyper from the source code\&.

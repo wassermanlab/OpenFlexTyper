@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="dir_a01961c752b72418ee8e0e9450d385a0" kind="dir">
+    <compoundname>/home/tixii/Git/OpenFlexTyper/fmindex/src</compoundname>
+    <innerfile refid="fmindex_8cpp">fmindex.cpp</innerfile>
+    <innerfile refid="indexPropsClass_8cpp">indexPropsClass.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/fmindex/src/"/>
+  </compounddef>
+</doxygen>

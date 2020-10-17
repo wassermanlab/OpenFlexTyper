@@ -1,0 +1,521 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classft_1_1TestFinder" kind="class" language="C++" prot="public">
+    <compoundname>ft::TestFinder</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Test</basecompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classft_1_1TestFinder_1a9c08577218977c883ed6626c5f682897" prot="protected" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::TestFinder::_indexPath</definition>
+        <argsstring></argsstring>
+        <name>_indexPath</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="49" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1a3178d73eb53a8591db799b30ccd40d8e" prot="protected" static="no" mutable="no">
+        <type>u_int</type>
+        <definition>u_int ft::TestFinder::offset</definition>
+        <argsstring></argsstring>
+        <name>offset</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="50" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1abbc30bdb8b0609c5bd0339912b2e8395" prot="protected" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::TestFinder::pathToQueryFile</definition>
+        <argsstring></argsstring>
+        <name>pathToQueryFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="51" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1aed7f1cd887ce4618bed295b9c31d9afe" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::TestFinder::kmerSize</definition>
+        <argsstring></argsstring>
+        <name>kmerSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="52" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1a95f99a001ad2ece7b0c52dd6168f2439" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::TestFinder::readLength</definition>
+        <argsstring></argsstring>
+        <name>readLength</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="53" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1a983ebf562b69980bd30f1fa3679eda51" prot="protected" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::TestFinder::indexPropsFile</definition>
+        <argsstring></argsstring>
+        <name>indexPropsFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="54" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1a9ac70afe4826d9b03c03c41212cfdd61" prot="protected" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::TestFinder::outputFolder</definition>
+        <argsstring></argsstring>
+        <name>outputFolder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="55" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1ae2dcfb004f3a26098fc9601d30df3595" prot="protected" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::TestFinder::outputFile</definition>
+        <argsstring></argsstring>
+        <name>outputFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="56" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1ab60c0ca4e314574d76daed1962dbd7a1" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestFinder::refOnly</definition>
+        <argsstring></argsstring>
+        <name>refOnly</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="57" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1a586a4694f2ee6b3cd95d9c1ad5afc8a0" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestFinder::revCompSearch</definition>
+        <argsstring></argsstring>
+        <name>revCompSearch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="58" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1a7bf42e47012aeb28f69282e554b128a3" prot="protected" static="no" mutable="no">
+        <type>SearchType</type>
+        <definition>SearchType ft::TestFinder::searchType</definition>
+        <argsstring></argsstring>
+        <name>searchType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="59" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1ad22f26e585349a5ff59db3154f357362" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestFinder::multithread</definition>
+        <argsstring></argsstring>
+        <name>multithread</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="60" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1ab3538b3b4ae245ff075e5b5856ed8a76" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::TestFinder::overlap</definition>
+        <argsstring></argsstring>
+        <name>overlap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="61" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1a977548255332e00b6c5795dfab234b11" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestFinder::returnMatchesOnly</definition>
+        <argsstring></argsstring>
+        <name>returnMatchesOnly</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="62" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1ab5e238312b0c17d5179823da2430eead" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestFinder::kmerCounts</definition>
+        <argsstring></argsstring>
+        <name>kmerCounts</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="63" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1af59718059735fd9f32a98cecbc749121" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::TestFinder::stride</definition>
+        <argsstring></argsstring>
+        <name>stride</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="64" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1a6f1c1bf90a709170da5606bf2086622b" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::TestFinder::maxOccurences</definition>
+        <argsstring></argsstring>
+        <name>maxOccurences</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="65" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1a8e57d6451d9973133a82ba32849e075b" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::TestFinder::maxThreads</definition>
+        <argsstring></argsstring>
+        <name>maxThreads</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="66" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1a1e36d426f8711d8bf97a7cd13bd7e0df" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestFinder::flagOverCountedKmers</definition>
+        <argsstring></argsstring>
+        <name>flagOverCountedKmers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="67" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1afb8e391a4885a4104a8ec3ce0b9db104" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestFinder::ignoreNonUniqueKmers</definition>
+        <argsstring></argsstring>
+        <name>ignoreNonUniqueKmers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="68" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1a6873ee3c4a18f4066b7718c309956e5c" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestFinder::countAsPairs</definition>
+        <argsstring></argsstring>
+        <name>countAsPairs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="69" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1aba944fb629303ba26ad55195d13f09fa" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestFinder::crossover</definition>
+        <argsstring></argsstring>
+        <name>crossover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="70" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1ae2624da2661d9e48ed0e82272afb94be" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestFinder::pairedReads</definition>
+        <argsstring></argsstring>
+        <name>pairedReads</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="71" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1aae658d0f5ba6489f433345753cabaa80" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestFinder::revComp</definition>
+        <argsstring></argsstring>
+        <name>revComp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="72" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1a386b0e72165bfbf6ebb6e317deb9e2aa" prot="protected" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::TestFinder::buildDir</definition>
+        <argsstring></argsstring>
+        <name>buildDir</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="73" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1ae2ff52dbde189a7e3c9e20bd226df8aa" prot="protected" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::TestFinder::indexDir</definition>
+        <argsstring></argsstring>
+        <name>indexDir</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="74" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1ab7cb285f517c6b198b4f789e591db04e" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ft::TestFinder::indexFileName</definition>
+        <argsstring></argsstring>
+        <name>indexFileName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="75" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1a3d403209133f5dc3006382d4186bf7a1" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ft::TestFinder::readSetName</definition>
+        <argsstring></argsstring>
+        <name>readSetName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="76" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1acff369d38e4e9979ff4ce4bd316f075d" prot="protected" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::TestFinder::inputFastQ</definition>
+        <argsstring></argsstring>
+        <name>inputFastQ</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="77" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1aa43af9d4b178fe11d8e8753a221137f8" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::TestFinder::numOfReads</definition>
+        <argsstring></argsstring>
+        <name>numOfReads</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="78" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1abfb8762db9b3123f3d3c7efd9f98ac50" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::TestFinder::numOfIndexes</definition>
+        <argsstring></argsstring>
+        <name>numOfIndexes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="79" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestFinder_1a3e1648310d28ef45712cdf871612ad01" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestFinder::printInputs</definition>
+        <argsstring></argsstring>
+        <name>printInputs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="80" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classft_1_1TestFinder_1ab25f1e3ba9f054c737d0146aeac0241b" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void ft::TestFinder::SetUp</definition>
+        <argsstring>()</argsstring>
+        <name>SetUp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="13" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="13" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1TestFinder_1a19b22aa8104853ad773c683835c488b5" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void ft::TestFinder::TearDown</definition>
+        <argsstring>()</argsstring>
+        <name>TearDown</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="47" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="47" bodyend="47"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classft_1_1TestFinder_1af741392044cca62188b8a1a88674bfee" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::TestFinder::CreateIndex</definition>
+        <argsstring>(uint numOfIndexes=1, bool saveini=false)</argsstring>
+        <name>CreateIndex</name>
+        <param>
+          <type>uint</type>
+          <declname>numOfIndexes</declname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>saveini</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="83" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="83" bodyend="120"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" line="11" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_finder.cpp" bodystart="11" bodyend="121"/>
+    <listofallmembers>
+      <member refid="classft_1_1TestFinder_1a9c08577218977c883ed6626c5f682897" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>_indexPath</name></member>
+      <member refid="classft_1_1TestFinder_1a386b0e72165bfbf6ebb6e317deb9e2aa" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>buildDir</name></member>
+      <member refid="classft_1_1TestFinder_1a6873ee3c4a18f4066b7718c309956e5c" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>countAsPairs</name></member>
+      <member refid="classft_1_1TestFinder_1af741392044cca62188b8a1a88674bfee" prot="public" virt="non-virtual"><scope>ft::TestFinder</scope><name>CreateIndex</name></member>
+      <member refid="classft_1_1TestFinder_1aba944fb629303ba26ad55195d13f09fa" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>crossover</name></member>
+      <member refid="classft_1_1TestFinder_1a1e36d426f8711d8bf97a7cd13bd7e0df" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>flagOverCountedKmers</name></member>
+      <member refid="classft_1_1TestFinder_1afb8e391a4885a4104a8ec3ce0b9db104" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>ignoreNonUniqueKmers</name></member>
+      <member refid="classft_1_1TestFinder_1ae2ff52dbde189a7e3c9e20bd226df8aa" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>indexDir</name></member>
+      <member refid="classft_1_1TestFinder_1ab7cb285f517c6b198b4f789e591db04e" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>indexFileName</name></member>
+      <member refid="classft_1_1TestFinder_1a983ebf562b69980bd30f1fa3679eda51" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>indexPropsFile</name></member>
+      <member refid="classft_1_1TestFinder_1acff369d38e4e9979ff4ce4bd316f075d" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>inputFastQ</name></member>
+      <member refid="classft_1_1TestFinder_1ab5e238312b0c17d5179823da2430eead" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>kmerCounts</name></member>
+      <member refid="classft_1_1TestFinder_1aed7f1cd887ce4618bed295b9c31d9afe" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>kmerSize</name></member>
+      <member refid="classft_1_1TestFinder_1a6f1c1bf90a709170da5606bf2086622b" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>maxOccurences</name></member>
+      <member refid="classft_1_1TestFinder_1a8e57d6451d9973133a82ba32849e075b" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>maxThreads</name></member>
+      <member refid="classft_1_1TestFinder_1ad22f26e585349a5ff59db3154f357362" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>multithread</name></member>
+      <member refid="classft_1_1TestFinder_1abfb8762db9b3123f3d3c7efd9f98ac50" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>numOfIndexes</name></member>
+      <member refid="classft_1_1TestFinder_1aa43af9d4b178fe11d8e8753a221137f8" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>numOfReads</name></member>
+      <member refid="classft_1_1TestFinder_1a3178d73eb53a8591db799b30ccd40d8e" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>offset</name></member>
+      <member refid="classft_1_1TestFinder_1ae2dcfb004f3a26098fc9601d30df3595" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>outputFile</name></member>
+      <member refid="classft_1_1TestFinder_1a9ac70afe4826d9b03c03c41212cfdd61" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>outputFolder</name></member>
+      <member refid="classft_1_1TestFinder_1ab3538b3b4ae245ff075e5b5856ed8a76" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>overlap</name></member>
+      <member refid="classft_1_1TestFinder_1ae2624da2661d9e48ed0e82272afb94be" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>pairedReads</name></member>
+      <member refid="classft_1_1TestFinder_1abbc30bdb8b0609c5bd0339912b2e8395" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>pathToQueryFile</name></member>
+      <member refid="classft_1_1TestFinder_1a3e1648310d28ef45712cdf871612ad01" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>printInputs</name></member>
+      <member refid="classft_1_1TestFinder_1a95f99a001ad2ece7b0c52dd6168f2439" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>readLength</name></member>
+      <member refid="classft_1_1TestFinder_1a3d403209133f5dc3006382d4186bf7a1" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>readSetName</name></member>
+      <member refid="classft_1_1TestFinder_1ab60c0ca4e314574d76daed1962dbd7a1" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>refOnly</name></member>
+      <member refid="classft_1_1TestFinder_1a977548255332e00b6c5795dfab234b11" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>returnMatchesOnly</name></member>
+      <member refid="classft_1_1TestFinder_1aae658d0f5ba6489f433345753cabaa80" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>revComp</name></member>
+      <member refid="classft_1_1TestFinder_1a586a4694f2ee6b3cd95d9c1ad5afc8a0" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>revCompSearch</name></member>
+      <member refid="classft_1_1TestFinder_1a7bf42e47012aeb28f69282e554b128a3" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>searchType</name></member>
+      <member refid="classft_1_1TestFinder_1ab25f1e3ba9f054c737d0146aeac0241b" prot="protected" virt="virtual"><scope>ft::TestFinder</scope><name>SetUp</name></member>
+      <member refid="classft_1_1TestFinder_1af59718059735fd9f32a98cecbc749121" prot="protected" virt="non-virtual"><scope>ft::TestFinder</scope><name>stride</name></member>
+      <member refid="classft_1_1TestFinder_1a19b22aa8104853ad773c683835c488b5" prot="protected" virt="virtual"><scope>ft::TestFinder</scope><name>TearDown</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

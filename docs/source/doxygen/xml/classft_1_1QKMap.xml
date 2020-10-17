@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classft_1_1QKMap" kind="class" language="C++" prot="public">
+    <compoundname>ft::QKMap</compoundname>
+      <sectiondef kind="user-defined">
+      <header>QKMapClass</header>
+      <memberdef kind="variable" id="classft_1_1QKMap_1a94a8fed4625412a49a9f9333d6576a99" prot="public" static="no" mutable="no">
+        <type>std::map&lt; ft::QIdT, std::set&lt; std::string &gt; &gt;</type>
+        <definition>std::map&lt;ft::QIdT, std::set&lt;std::string&gt; &gt; ft::QKMap::_map</definition>
+        <argsstring></argsstring>
+        <name>_map</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/qkMapClass.h" line="23" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/qkMapClass.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1QKMap_1a5c8600394843f44874b24b9bb03e70a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ft::QKMap::QKMap</definition>
+        <argsstring>()</argsstring>
+        <name>QKMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/qkMapClass.h" line="20" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/qkMapClass.cpp" bodystart="13" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1QKMap_1a31145a0b72461517d55b659be784779c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>ft::QKMap::~QKMap</definition>
+        <argsstring>()</argsstring>
+        <name>~QKMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/qkMapClass.h" line="21" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/qkMapClass.cpp" bodystart="80" bodyend="80"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>getQKMap</header>
+      <description><para>retrieve the qkmap</para><para><simplesect kind="return"><para>_map </para></simplesect>
+</para></description>
+      <memberdef kind="function" id="classft_1_1QKMap_1a0a58edaf2b7043cf13dffb2356a46d15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::map&lt; ft::QIdT, std::set&lt; std::string &gt; &gt; &amp;</type>
+        <definition>const std::map&lt;ft::QIdT, std::set&lt;std::string&gt; &gt;&amp; ft::QKMap::getQKMap</definition>
+        <argsstring>()</argsstring>
+        <name>getQKMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/qkMapClass.h" line="34" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>retrieveQueries</header>
+      <description><para>retrieve queries that map to a specific Kmer</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>kmer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>set of query Ids </para></simplesect>
+</para></description>
+      <memberdef kind="function" id="classft_1_1QKMap_1aac1356011a6c787a048e64bc9bda28bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::set&lt; ft::QIdT &gt;</type>
+        <definition>std::set&lt; ft::QIdT &gt; ft::QKMap::retrieveQueries</definition>
+        <argsstring>(const ft::KmerClass &amp;kmer)</argsstring>
+        <name>retrieveQueries</name>
+        <param>
+          <type>const ft::KmerClass &amp;</type>
+          <declname>kmer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/qkMapClass.h" line="47" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/qkMapClass.cpp" bodystart="32" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1QKMap_1ae586863733683750ffc89daa444b528a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>std::set&lt; std::string &gt; ft::QKMap::retrieveKmers</definition>
+        <argsstring>(const ft::QIdT &amp;queryIDT)</argsstring>
+        <name>retrieveKmers</name>
+        <param>
+          <type>const ft::QIdT &amp;</type>
+          <declname>queryIDT</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/qkMapClass.h" line="48" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/qkMapClass.cpp" bodystart="45" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1QKMap_1af5674868b3265f66b017f8bbbe486739" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::QKMap::checkForMatch</definition>
+        <argsstring>(const ft::QueryClass &amp;query, const ft::KmerClass &amp;kmer) const</argsstring>
+        <name>checkForMatch</name>
+        <param>
+          <type>const <ref refid="classft_1_1QueryClass" kindref="compound">ft::QueryClass</ref> &amp;</type>
+          <declname>query</declname>
+        </param>
+        <param>
+          <type>const ft::KmerClass &amp;</type>
+          <declname>kmer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/qkMapClass.h" line="49" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/qkMapClass.cpp" bodystart="50" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1QKMap_1a17b2a83a9fc48e26707533ed6736acc6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::QKMap::checkForQuery</definition>
+        <argsstring>(const ft::QueryClass &amp;query) const</argsstring>
+        <name>checkForQuery</name>
+        <param>
+          <type>const <ref refid="classft_1_1QueryClass" kindref="compound">ft::QueryClass</ref> &amp;</type>
+          <declname>query</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/qkMapClass.h" line="50" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/qkMapClass.cpp" bodystart="21" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1QKMap_1ab3d8eb37baf3af56dbf89efbb136afe4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::QKMap::addQKPair</definition>
+        <argsstring>(const ft::QIdT &amp;qIDT, const std::string &amp;kmer)</argsstring>
+        <name>addQKPair</name>
+        <param>
+          <type>const ft::QIdT &amp;</type>
+          <declname>qIDT</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>kmer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/qkMapClass.h" line="51" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/qkMapClass.cpp" bodystart="70" bodyend="76"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/qkMapClass.h" line="15" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/qkMapClass.h" bodystart="14" bodyend="55"/>
+    <listofallmembers>
+      <member refid="classft_1_1QKMap_1a94a8fed4625412a49a9f9333d6576a99" prot="public" virt="non-virtual"><scope>ft::QKMap</scope><name>_map</name></member>
+      <member refid="classft_1_1QKMap_1ab3d8eb37baf3af56dbf89efbb136afe4" prot="public" virt="non-virtual"><scope>ft::QKMap</scope><name>addQKPair</name></member>
+      <member refid="classft_1_1QKMap_1af5674868b3265f66b017f8bbbe486739" prot="public" virt="non-virtual"><scope>ft::QKMap</scope><name>checkForMatch</name></member>
+      <member refid="classft_1_1QKMap_1a17b2a83a9fc48e26707533ed6736acc6" prot="public" virt="non-virtual"><scope>ft::QKMap</scope><name>checkForQuery</name></member>
+      <member refid="classft_1_1QKMap_1a0a58edaf2b7043cf13dffb2356a46d15" prot="public" virt="non-virtual"><scope>ft::QKMap</scope><name>getQKMap</name></member>
+      <member refid="classft_1_1QKMap_1a5c8600394843f44874b24b9bb03e70a6" prot="public" virt="non-virtual"><scope>ft::QKMap</scope><name>QKMap</name></member>
+      <member refid="classft_1_1QKMap_1ae586863733683750ffc89daa444b528a" prot="public" virt="non-virtual"><scope>ft::QKMap</scope><name>retrieveKmers</name></member>
+      <member refid="classft_1_1QKMap_1aac1356011a6c787a048e64bc9bda28bf" prot="public" virt="non-virtual"><scope>ft::QKMap</scope><name>retrieveQueries</name></member>
+      <member refid="classft_1_1QKMap_1a31145a0b72461517d55b659be784779c" prot="public" virt="virtual"><scope>ft::QKMap</scope><name>~QKMap</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

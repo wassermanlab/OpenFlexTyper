@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="dir_57d30f01f8d322dcd44078c08e582deb" kind="dir">
+    <compoundname>/home/tixii/Git/OpenFlexTyper/flextyper/includes</compoundname>
+    <innerfile refid="finder_8h">finder.h</innerfile>
+    <innerfile refid="ftMapClass_8h">ftMapClass.h</innerfile>
+    <innerfile refid="ftPropsClass_8h">ftPropsClass.h</innerfile>
+    <innerfile refid="ftSearch_8h">ftSearch.h</innerfile>
+    <innerfile refid="kmerClass_8h">kmerClass.h</innerfile>
+    <innerfile refid="kmergenerator_8h">kmergenerator.h</innerfile>
+    <innerfile refid="LogClass_8h">LogClass.h</innerfile>
+    <innerfile refid="qkMapClass_8h">qkMapClass.h</innerfile>
+    <innerfile refid="queryClass_8h">queryClass.h</innerfile>
+    <innerfile refid="queryextractor_8h">queryextractor.h</innerfile>
+    <innerfile refid="utils_8h">utils.h</innerfile>
+    <innerfile refid="writerbridge_8h">writerbridge.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/"/>
+  </compounddef>
+</doxygen>

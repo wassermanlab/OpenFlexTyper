@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classft_1_1TestKmerGenerator" kind="class" language="C++" prot="public">
+    <compoundname>ft::TestKmerGenerator</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Test</basecompoundref>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classft_1_1TestKmerGenerator_1ad7b2c9e8e84cf5f474552bcb50996bd6" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void ft::TestKmerGenerator::SetUp</definition>
+        <argsstring>()</argsstring>
+        <name>SetUp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_kmergenerator.cpp" line="11" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_kmergenerator.cpp" bodystart="11" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1TestKmerGenerator_1a2f912c553c0ac13eb8f53f2671847228" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void ft::TestKmerGenerator::TearDown</definition>
+        <argsstring>()</argsstring>
+        <name>TearDown</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_kmergenerator.cpp" line="15" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_kmergenerator.cpp" bodystart="15" bodyend="16"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_kmergenerator.cpp" line="9" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_kmergenerator.cpp" bodystart="9" bodyend="20"/>
+    <listofallmembers>
+      <member refid="classft_1_1TestKmerGenerator_1ad7b2c9e8e84cf5f474552bcb50996bd6" prot="protected" virt="virtual"><scope>ft::TestKmerGenerator</scope><name>SetUp</name></member>
+      <member refid="classft_1_1TestKmerGenerator_1a2f912c553c0ac13eb8f53f2671847228" prot="protected" virt="virtual"><scope>ft::TestKmerGenerator</scope><name>TearDown</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

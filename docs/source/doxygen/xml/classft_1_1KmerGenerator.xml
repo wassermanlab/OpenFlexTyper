@@ -1,0 +1,396 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classft_1_1KmerGenerator" kind="class" language="C++" prot="public">
+    <compoundname>ft::KmerGenerator</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classft_1_1KmerGenerator_1a0f05bd1807efcaca384ab510b84ed920" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, uint &gt;</type>
+        <definition>std::map&lt;std::string, uint&gt; ft::KmerGenerator::_counter</definition>
+        <argsstring></argsstring>
+        <name>_counter</name>
+        <briefdescription>
+<para>_counter </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="76" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1KmerGenerator_1a116846c5028ffc65df089ed3010b742f" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::KmerGenerator::_kmerSize</definition>
+        <argsstring></argsstring>
+        <name>_kmerSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="78" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1KmerGenerator_1a3d47cc74c2cfe56a86e8e7bb63331b01" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::KmerGenerator::_refOnly</definition>
+        <argsstring></argsstring>
+        <name>_refOnly</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="79" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1KmerGenerator_1a8d30693f361b5366b22ff101bc840122" prot="private" static="no" mutable="no">
+        <type>SearchType</type>
+        <definition>SearchType ft::KmerGenerator::_searchType</definition>
+        <argsstring></argsstring>
+        <name>_searchType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="80" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1KmerGenerator_1ac6d1b02139394d245f4d48f9eb4ae92c" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::KmerGenerator::_overlap</definition>
+        <argsstring></argsstring>
+        <name>_overlap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="81" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1KmerGenerator_1aed388884a321736b49ddf14bb83d7ffb" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::KmerGenerator::_stride</definition>
+        <argsstring></argsstring>
+        <name>_stride</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="82" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1KmerGenerator_1a8c81ab251d2009a9869cd9ef3f223578" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::KmerGenerator::_maxKmers</definition>
+        <argsstring></argsstring>
+        <name>_maxKmers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="84" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1KmerGenerator_1ace19e7c07f932dfd5672a0192131a3e0" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::KmerGenerator::_verbose</definition>
+        <argsstring></argsstring>
+        <name>_verbose</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="85" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classft_1_1KmerGenerator_1aa03f5634ac923c17b552b5915b9ab903" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ft::KmerGenerator::KmerGenerator</definition>
+        <argsstring>(const uint &amp;_kmerSize, const bool &amp;_refOnly, const SearchType &amp;_searchType, const uint &amp;_overlap=0, const uint &amp;_stride=1, const uint &amp;_maxKmers=1000000000, const bool &amp;_verbose=false)</argsstring>
+        <name>KmerGenerator</name>
+        <param>
+          <type>const uint &amp;</type>
+          <declname>_kmerSize</declname>
+        </param>
+        <param>
+          <type>const bool &amp;</type>
+          <declname>_refOnly</declname>
+        </param>
+        <param>
+          <type>const SearchType &amp;</type>
+          <declname>_searchType</declname>
+        </param>
+        <param>
+          <type>const uint &amp;</type>
+          <declname>_overlap</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>const uint &amp;</type>
+          <declname>_stride</declname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>const uint &amp;</type>
+          <declname>_maxKmers</declname>
+          <defval>1000000000</defval>
+        </param>
+        <param>
+          <type>const bool &amp;</type>
+          <declname>_verbose</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>KmerGenerator. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="22" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmergenerator.cpp" bodystart="10" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerGenerator_1ad5a06081298b0b6afc4d01aca24affaf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>ft::KmerGenerator::~KmerGenerator</definition>
+        <argsstring>()</argsstring>
+        <name>~KmerGenerator</name>
+        <briefdescription>
+<para>~KmerGenerator </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="34" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmergenerator.cpp" bodystart="138" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerGenerator_1a10c9d846c03e731cb922ba29d293e4f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>std::set&lt; std::string &gt; ft::KmerGenerator::genSlidingSearchStrings</definition>
+        <argsstring>(const std::string &amp;queryString)</argsstring>
+        <name>genSlidingSearchStrings</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>queryString</declname>
+        </param>
+        <briefdescription>
+<para>genSlidingSearchStrings </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>queryString</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>kmerSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="43" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmergenerator.cpp" bodystart="36" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerGenerator_1a3bbccae28b484619d2cb903dde71a6c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>std::set&lt; std::string &gt; ft::KmerGenerator::genCenteredSearchStrings</definition>
+        <argsstring>(const std::string &amp;queryString)</argsstring>
+        <name>genCenteredSearchStrings</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>queryString</declname>
+        </param>
+        <briefdescription>
+<para>genCenteredSearchStrings </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>queryString</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>kmerSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>overlap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stride</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="53" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmergenerator.cpp" bodystart="65" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerGenerator_1a94e99accde0e475047fee9fca795982d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>std::set&lt; std::string &gt; ft::KmerGenerator::genSearchKmers</definition>
+        <argsstring>(const ft::QueryClass &amp;queryObj)</argsstring>
+        <name>genSearchKmers</name>
+        <param>
+          <type>const <ref refid="classft_1_1QueryClass" kindref="compound">ft::QueryClass</ref> &amp;</type>
+          <declname>queryObj</declname>
+        </param>
+        <briefdescription>
+<para>genSearchKmers </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>inputQuery</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Kmer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Properties </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="61" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmergenerator.cpp" bodystart="101" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerGenerator_1abf4d9744daa132ac596f0e193f1392f5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint ft::KmerGenerator::getKmerSize</definition>
+        <argsstring>() const</argsstring>
+        <name>getKmerSize</name>
+        <briefdescription>
+<para>Getters ///. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="64" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmergenerator.cpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerGenerator_1a84aa769ac6e00ad5d66eeda9d1f74da2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::KmerGenerator::getRefOnly</definition>
+        <argsstring>() const</argsstring>
+        <name>getRefOnly</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="65" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmergenerator.cpp" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerGenerator_1ae8e7c112280b459dbd01f1d9a672e604" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>SearchType</type>
+        <definition>SearchType ft::KmerGenerator::getSearchType</definition>
+        <argsstring>() const</argsstring>
+        <name>getSearchType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="66" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmergenerator.cpp" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerGenerator_1a006ee71b4f2ad633281279ab0ec94224" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint ft::KmerGenerator::getOverlap</definition>
+        <argsstring>() const</argsstring>
+        <name>getOverlap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="67" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmergenerator.cpp" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerGenerator_1aac102da94942b4e54b0d4897194d4822" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint ft::KmerGenerator::getStride</definition>
+        <argsstring>() const</argsstring>
+        <name>getStride</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="68" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmergenerator.cpp" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerGenerator_1a32cfbeb3ed9f747b744708f7a0ff9d21" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint ft::KmerGenerator::getMaxKmers</definition>
+        <argsstring>() const</argsstring>
+        <name>getMaxKmers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="70" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmergenerator.cpp" bodystart="33" bodyend="33"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" line="17" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmergenerator.h" bodystart="17" bodyend="87"/>
+    <listofallmembers>
+      <member refid="classft_1_1KmerGenerator_1a0f05bd1807efcaca384ab510b84ed920" prot="private" virt="non-virtual"><scope>ft::KmerGenerator</scope><name>_counter</name></member>
+      <member refid="classft_1_1KmerGenerator_1a116846c5028ffc65df089ed3010b742f" prot="private" virt="non-virtual"><scope>ft::KmerGenerator</scope><name>_kmerSize</name></member>
+      <member refid="classft_1_1KmerGenerator_1a8c81ab251d2009a9869cd9ef3f223578" prot="private" virt="non-virtual"><scope>ft::KmerGenerator</scope><name>_maxKmers</name></member>
+      <member refid="classft_1_1KmerGenerator_1ac6d1b02139394d245f4d48f9eb4ae92c" prot="private" virt="non-virtual"><scope>ft::KmerGenerator</scope><name>_overlap</name></member>
+      <member refid="classft_1_1KmerGenerator_1a3d47cc74c2cfe56a86e8e7bb63331b01" prot="private" virt="non-virtual"><scope>ft::KmerGenerator</scope><name>_refOnly</name></member>
+      <member refid="classft_1_1KmerGenerator_1a8d30693f361b5366b22ff101bc840122" prot="private" virt="non-virtual"><scope>ft::KmerGenerator</scope><name>_searchType</name></member>
+      <member refid="classft_1_1KmerGenerator_1aed388884a321736b49ddf14bb83d7ffb" prot="private" virt="non-virtual"><scope>ft::KmerGenerator</scope><name>_stride</name></member>
+      <member refid="classft_1_1KmerGenerator_1ace19e7c07f932dfd5672a0192131a3e0" prot="private" virt="non-virtual"><scope>ft::KmerGenerator</scope><name>_verbose</name></member>
+      <member refid="classft_1_1KmerGenerator_1a3bbccae28b484619d2cb903dde71a6c8" prot="public" virt="virtual"><scope>ft::KmerGenerator</scope><name>genCenteredSearchStrings</name></member>
+      <member refid="classft_1_1KmerGenerator_1a94e99accde0e475047fee9fca795982d" prot="public" virt="virtual"><scope>ft::KmerGenerator</scope><name>genSearchKmers</name></member>
+      <member refid="classft_1_1KmerGenerator_1a10c9d846c03e731cb922ba29d293e4f5" prot="public" virt="virtual"><scope>ft::KmerGenerator</scope><name>genSlidingSearchStrings</name></member>
+      <member refid="classft_1_1KmerGenerator_1abf4d9744daa132ac596f0e193f1392f5" prot="public" virt="non-virtual"><scope>ft::KmerGenerator</scope><name>getKmerSize</name></member>
+      <member refid="classft_1_1KmerGenerator_1a32cfbeb3ed9f747b744708f7a0ff9d21" prot="public" virt="non-virtual"><scope>ft::KmerGenerator</scope><name>getMaxKmers</name></member>
+      <member refid="classft_1_1KmerGenerator_1a006ee71b4f2ad633281279ab0ec94224" prot="public" virt="non-virtual"><scope>ft::KmerGenerator</scope><name>getOverlap</name></member>
+      <member refid="classft_1_1KmerGenerator_1a84aa769ac6e00ad5d66eeda9d1f74da2" prot="public" virt="non-virtual"><scope>ft::KmerGenerator</scope><name>getRefOnly</name></member>
+      <member refid="classft_1_1KmerGenerator_1ae8e7c112280b459dbd01f1d9a672e604" prot="public" virt="non-virtual"><scope>ft::KmerGenerator</scope><name>getSearchType</name></member>
+      <member refid="classft_1_1KmerGenerator_1aac102da94942b4e54b0d4897194d4822" prot="public" virt="non-virtual"><scope>ft::KmerGenerator</scope><name>getStride</name></member>
+      <member refid="classft_1_1KmerGenerator_1aa03f5634ac923c17b552b5915b9ab903" prot="public" virt="non-virtual"><scope>ft::KmerGenerator</scope><name>KmerGenerator</name></member>
+      <member refid="classft_1_1KmerGenerator_1ad5a06081298b0b6afc4d01aca24affaf" prot="public" virt="virtual"><scope>ft::KmerGenerator</scope><name>~KmerGenerator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

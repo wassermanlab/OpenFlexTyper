@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classft_1_1Utils" kind="class" language="C++" prot="public">
+    <compoundname>ft::Utils</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">ft::IUtils</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classft_1_1Utils_1a13665f4778cff98c4bf37506db29aedc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ft::Utils::Utils</definition>
+        <argsstring>()</argsstring>
+        <name>Utils</name>
+        <briefdescription>
+<para>Utils constructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/utils.h" line="26" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/utils.cpp" bodystart="12" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1Utils_1a2b891397906b1675c2dae05c9617066c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>ft::Utils::~Utils</definition>
+        <argsstring>()</argsstring>
+        <name>~Utils</name>
+        <briefdescription>
+<para>Utils destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/utils.h" line="31" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/utils.cpp" bodystart="71" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1Utils_1a94f22f2357e65a20f877035682b7853a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ft::Utils::joinString</definition>
+        <argsstring>(const std::set&lt; std::string &gt; &amp;setOfStr, std::string delimeter=&quot;, &quot;)</argsstring>
+        <name>joinString</name>
+        <param>
+          <type>const std::set&lt; std::string &gt; &amp;</type>
+          <declname>setOfStr</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>delimeter</declname>
+          <defval>&quot;, &quot;</defval>
+        </param>
+        <briefdescription>
+<para>join </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>setOfStr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delimeter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/utils.h" line="39" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/utils.cpp" bodystart="17" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1Utils_1a91e281fca61b777a0912b80295aff576" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt; std::string &gt; ft::Utils::split</definition>
+        <argsstring>(const std::string &amp;strToSplit, char delimeter)</argsstring>
+        <name>split</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>strToSplit</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>delimeter</declname>
+        </param>
+        <briefdescription>
+<para>split </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>strToSplit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delimeter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>returns tokens obtained from the given string </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/utils.h" line="47" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/utils.cpp" bodystart="31" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1Utils_1a3888f35d197e8894a09c47a5930e6863" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ft::Utils::reverseComplement</definition>
+        <argsstring>(const std::string &amp;inputString) const</argsstring>
+        <name>reverseComplement</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>inputString</declname>
+        </param>
+        <briefdescription>
+<para>FTSearch::reverseComplement. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>inputString</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>returns the reverse complement sequence </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/utils.h" line="54" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/utils.cpp" bodystart="44" bodyend="68"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/utils.h" line="21" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/utils.h" bodystart="21" bodyend="56"/>
+    <listofallmembers>
+      <member refid="classft_1_1Utils_1a94f22f2357e65a20f877035682b7853a" prot="public" virt="non-virtual"><scope>ft::Utils</scope><name>joinString</name></member>
+      <member refid="classft_1_1Utils_1a3888f35d197e8894a09c47a5930e6863" prot="public" virt="non-virtual"><scope>ft::Utils</scope><name>reverseComplement</name></member>
+      <member refid="classft_1_1Utils_1a91e281fca61b777a0912b80295aff576" prot="public" virt="non-virtual"><scope>ft::Utils</scope><name>split</name></member>
+      <member refid="classft_1_1Utils_1a13665f4778cff98c4bf37506db29aedc" prot="public" virt="non-virtual"><scope>ft::Utils</scope><name>Utils</name></member>
+      <member refid="classft_1_1IUtils_1aa8670974e6e0855396dc48f090f1a205" prot="public" virt="virtual"><scope>ft::Utils</scope><name>~IUtils</name></member>
+      <member refid="classft_1_1Utils_1a2b891397906b1675c2dae05c9617066c" prot="public" virt="virtual"><scope>ft::Utils</scope><name>~Utils</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

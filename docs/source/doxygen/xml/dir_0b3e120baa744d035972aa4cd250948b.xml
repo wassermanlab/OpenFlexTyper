@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="dir_0b3e120baa744d035972aa4cd250948b" kind="dir">
+    <compoundname>/home/tixii/Git/OpenFlexTyper/flextyper</compoundname>
+    <innerdir refid="dir_57d30f01f8d322dcd44078c08e582deb">/home/tixii/Git/OpenFlexTyper/flextyper/includes</innerdir>
+    <innerdir refid="dir_7bf2402a8af41b486ce9560dc7977406">/home/tixii/Git/OpenFlexTyper/flextyper/interfaces</innerdir>
+    <innerdir refid="dir_8b6da71c64309460702d1a974a460fde">/home/tixii/Git/OpenFlexTyper/flextyper/src</innerdir>
+    <innerdir refid="dir_abeeee93542702888184a90fb1e5f64f">/home/tixii/Git/OpenFlexTyper/flextyper/test</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/"/>
+  </compounddef>
+</doxygen>

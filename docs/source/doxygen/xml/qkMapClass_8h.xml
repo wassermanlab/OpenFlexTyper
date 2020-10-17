@@ -1,0 +1,290 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="qkMapClass_8h" kind="file" language="C++">
+    <compoundname>qkMapClass.h</compoundname>
+    <includes local="no">set</includes>
+    <includes local="no">iostream</includes>
+    <includes local="no">unordered_map</includes>
+    <includes local="no">future</includes>
+    <includes local="no">vector</includes>
+    <includes refid="kmerClass_8h" local="yes">kmerClass.h</includes>
+    <includes refid="queryClass_8h" local="yes">queryClass.h</includes>
+    <includedby refid="ftMapClass_8h" local="yes">/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftMapClass.h</includedby>
+    <includedby refid="qkMapClass_8cpp" local="yes">/home/tixii/Git/OpenFlexTyper/flextyper/src/qkMapClass.cpp</includedby>
+    <incdepgraph>
+      <node id="230">
+        <label>QSettings</label>
+      </node>
+      <node id="231">
+        <label>LogClass.h</label>
+        <link refid="LogClass_8h_source"/>
+        <childnode refid="218" relation="include">
+        </childnode>
+        <childnode refid="227" relation="include">
+        </childnode>
+        <childnode refid="228" relation="include">
+        </childnode>
+      </node>
+      <node id="224">
+        <label>map</label>
+      </node>
+      <node id="227">
+        <label>fstream</label>
+      </node>
+      <node id="232">
+        <label>queryClass.h</label>
+        <link refid="queryClass_8h_source"/>
+        <childnode refid="217" relation="include">
+        </childnode>
+        <childnode refid="218" relation="include">
+        </childnode>
+        <childnode refid="224" relation="include">
+        </childnode>
+        <childnode refid="225" relation="include">
+        </childnode>
+      </node>
+      <node id="216">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/includes/qkMapClass.h</label>
+        <link refid="qkMapClass_8h"/>
+        <childnode refid="217" relation="include">
+        </childnode>
+        <childnode refid="218" relation="include">
+        </childnode>
+        <childnode refid="219" relation="include">
+        </childnode>
+        <childnode refid="220" relation="include">
+        </childnode>
+        <childnode refid="221" relation="include">
+        </childnode>
+        <childnode refid="222" relation="include">
+        </childnode>
+        <childnode refid="232" relation="include">
+        </childnode>
+      </node>
+      <node id="223">
+        <label>bitset</label>
+      </node>
+      <node id="220">
+        <label>future</label>
+      </node>
+      <node id="222">
+        <label>kmerClass.h</label>
+        <link refid="kmerClass_8h_source"/>
+        <childnode refid="217" relation="include">
+        </childnode>
+        <childnode refid="223" relation="include">
+        </childnode>
+        <childnode refid="218" relation="include">
+        </childnode>
+        <childnode refid="224" relation="include">
+        </childnode>
+        <childnode refid="225" relation="include">
+        </childnode>
+      </node>
+      <node id="221">
+        <label>vector</label>
+      </node>
+      <node id="218">
+        <label>iostream</label>
+      </node>
+      <node id="225">
+        <label>ftPropsClass.h</label>
+        <link refid="ftPropsClass_8h_source"/>
+        <childnode refid="226" relation="include">
+        </childnode>
+        <childnode refid="217" relation="include">
+        </childnode>
+        <childnode refid="223" relation="include">
+        </childnode>
+        <childnode refid="218" relation="include">
+        </childnode>
+        <childnode refid="227" relation="include">
+        </childnode>
+        <childnode refid="228" relation="include">
+        </childnode>
+        <childnode refid="224" relation="include">
+        </childnode>
+        <childnode refid="229" relation="include">
+        </childnode>
+        <childnode refid="230" relation="include">
+        </childnode>
+        <childnode refid="231" relation="include">
+        </childnode>
+      </node>
+      <node id="219">
+        <label>unordered_map</label>
+      </node>
+      <node id="226">
+        <label>climits</label>
+      </node>
+      <node id="228">
+        <label>chrono</label>
+      </node>
+      <node id="217">
+        <label>set</label>
+      </node>
+      <node id="229">
+        <label>experimental/filesystem</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="239">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/iutils.h</label>
+        <link refid="iutils_8h_source"/>
+        <childnode refid="240" relation="include">
+        </childnode>
+        <childnode refid="235" relation="include">
+        </childnode>
+        <childnode refid="236" relation="include">
+        </childnode>
+        <childnode refid="241" relation="include">
+        </childnode>
+      </node>
+      <node id="235">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftSearch.h</label>
+        <link refid="ftSearch_8h_source"/>
+      </node>
+      <node id="236">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/includes/writerbridge.h</label>
+        <link refid="writerbridge_8h_source"/>
+        <childnode refid="235" relation="include">
+        </childnode>
+      </node>
+      <node id="238">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/includes/finder.h</label>
+        <link refid="finder_8h_source"/>
+        <childnode refid="235" relation="include">
+        </childnode>
+      </node>
+      <node id="233">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/includes/qkMapClass.h</label>
+        <link refid="qkMapClass_8h"/>
+        <childnode refid="234" relation="include">
+        </childnode>
+      </node>
+      <node id="243">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/iwriterbridge.h</label>
+        <link refid="iwriterbridge_8h_source"/>
+        <childnode refid="236" relation="include">
+        </childnode>
+        <childnode refid="235" relation="include">
+        </childnode>
+      </node>
+      <node id="245">
+        <label>/home/tixii/Git/OpenFlexTyper/fmindex/includes/fmindex.h</label>
+        <link refid="fmindex_8h_source"/>
+        <childnode refid="238" relation="include">
+        </childnode>
+        <childnode refid="237" relation="include">
+        </childnode>
+      </node>
+      <node id="240">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/includes/utils.h</label>
+        <link refid="utils_8h_source"/>
+        <childnode refid="234" relation="include">
+        </childnode>
+        <childnode refid="235" relation="include">
+        </childnode>
+        <childnode refid="236" relation="include">
+        </childnode>
+        <childnode refid="241" relation="include">
+        </childnode>
+        <childnode refid="242" relation="include">
+        </childnode>
+        <childnode refid="243" relation="include">
+        </childnode>
+      </node>
+      <node id="242">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/iqueryextractor.h</label>
+        <link refid="iqueryextractor_8h_source"/>
+        <childnode refid="241" relation="include">
+        </childnode>
+        <childnode refid="235" relation="include">
+        </childnode>
+      </node>
+      <node id="237">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/ifinder.h</label>
+        <link refid="ifinder_8h_source"/>
+        <childnode refid="238" relation="include">
+        </childnode>
+        <childnode refid="235" relation="include">
+        </childnode>
+      </node>
+      <node id="244">
+        <label>/home/tixii/Git/OpenFlexTyper/fmindex/interfaces/ifmindex.h</label>
+        <link refid="ifmindex_8h_source"/>
+        <childnode refid="238" relation="include">
+        </childnode>
+        <childnode refid="237" relation="include">
+        </childnode>
+        <childnode refid="245" relation="include">
+        </childnode>
+      </node>
+      <node id="234">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftMapClass.h</label>
+        <link refid="ftMapClass_8h_source"/>
+        <childnode refid="235" relation="include">
+        </childnode>
+        <childnode refid="236" relation="include">
+        </childnode>
+        <childnode refid="237" relation="include">
+        </childnode>
+        <childnode refid="239" relation="include">
+        </childnode>
+        <childnode refid="243" relation="include">
+        </childnode>
+        <childnode refid="244" relation="include">
+        </childnode>
+      </node>
+      <node id="241">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/includes/queryextractor.h</label>
+        <link refid="queryextractor_8h_source"/>
+        <childnode refid="235" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classft_1_1QKMap" prot="public">ft::QKMap</innerclass>
+    <innernamespace refid="namespaceft">ft</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>QKMAPCLASS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>QKMAPCLASS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;set&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;future&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;kmerClass.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;queryClass.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceft" kindref="compound">ft</ref><sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">QKMap</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>QKMap();</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>~QKMap();</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>std::map&lt;ft::QIdT,<sp/>std::set&lt;std::string&gt;&gt;<sp/>_map;</highlight></codeline>
+<codeline lineno="28"></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::map&lt;ft::QIdT,<sp/>std::set&lt;std::string&gt;&gt;&amp;<sp/>getQKMap();</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>std::set&lt;ft::QIdT&gt;<sp/>retrieveQueries(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ft::KmerClass&amp;<sp/>kmer);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>std::set&lt;std::string&gt;<sp/>retrieveKmers(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ft::QIdT&amp;<sp/>queryIDT);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>checkForMatch(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classft_1_1QueryClass" kindref="compound">ft::QueryClass</ref>&amp;<sp/>query,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ft::KmerClass<sp/>&amp;kmer)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>checkForQuery(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classft_1_1QueryClass" kindref="compound">ft::QueryClass</ref>&amp;<sp/>query)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>addQKPair(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ft::QIdT&amp;<sp/>qIDT,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>kmer);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>QKMAPCLASS_H</highlight></codeline>
+    </programlisting>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/qkMapClass.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,291 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classft_1_1Finder" kind="class" language="C++" prot="public">
+    <compoundname>ft::Finder</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">ft::IFinder</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classft_1_1Finder_1aed8a16707a851a5349d2024dcb38ae9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ft::Finder::Finder</definition>
+        <argsstring>()</argsstring>
+        <name>Finder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/finder.h" line="23" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/finder.cpp" bodystart="10" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1Finder_1a5d948aa73a3386b1ef03b4d9c6bb7f66" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>ft::Finder::~Finder</definition>
+        <argsstring>()</argsstring>
+        <name>~Finder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/finder.h" line="24" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/finder.cpp" bodystart="182" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1Finder_1a7d122875846c01fc9ec093a6f26912a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ft::Finder::Finder</definition>
+        <argsstring>(const Finder &amp;other)=delete</argsstring>
+        <name>Finder</name>
+        <param>
+          <type>const Finder &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/finder.h" line="25" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1Finder_1a0fa60f4fcdd23deef0a7e01ae8dc74e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const Finder &amp;</type>
+        <definition>const Finder&amp; ft::Finder::operator=</definition>
+        <argsstring>(const Finder &amp;other)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const Finder &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/finder.h" line="26" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1Finder_1a1afa3ee89c9f035100bd485ff19490d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::Finder::searchIndexes</definition>
+        <argsstring>(ft::FTMap &amp;ftMap)</argsstring>
+        <name>searchIndexes</name>
+        <param>
+          <type>ft::FTMap &amp;</type>
+          <declname>ftMap</declname>
+        </param>
+        <briefdescription>
+<para>Main search function based on the parameters set in FTMap. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/finder.h" line="31" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/finder.cpp" bodystart="31" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1Finder_1a6c7ea2f50c7f4d14142cbf1947b37d0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::Finder::parallelSearch</definition>
+        <argsstring>(FTMap &amp;ftMap, const fs::path &amp;indexPath, long long offset)</argsstring>
+        <name>parallelSearch</name>
+        <param>
+          <type>FTMap &amp;</type>
+          <declname>ftMap</declname>
+        </param>
+        <param>
+          <type>const fs::path &amp;</type>
+          <declname>indexPath</declname>
+        </param>
+        <param>
+          <type>long long</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+<para>parallelSearch searches kmers in parallel in a single index. </para>        </briefdescription>
+        <detaileddescription>
+<para>parallelSearch will search each kmer in parallel across a single index using asynchronous programming <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>FTMap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The search class containing parameters and results </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>indexPath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the index to search </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the position offset of the index </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>adds the results of the search to the FTMap </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/finder.h" line="41" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/finder.cpp" bodystart="82" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1Finder_1a07ee3c13bf05505c1000e13cd64ac2f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::Finder::sequentialSearch</definition>
+        <argsstring>(ft::FTMap &amp;ftMap, const fs::path &amp;indexPath, long long offset)</argsstring>
+        <name>sequentialSearch</name>
+        <param>
+          <type>ft::FTMap &amp;</type>
+          <declname>ftMap</declname>
+        </param>
+        <param>
+          <type>const fs::path &amp;</type>
+          <declname>indexPath</declname>
+        </param>
+        <param>
+          <type>long long</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+<para>sequentialSearch searches kmers sequentially in a single index. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>FTMap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The search class containing parameters and results </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>indexPath</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the index to search </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the position offset of the index </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>adds the results of the search to the FTMap </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/finder.h" line="51" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/finder.cpp" bodystart="140" bodyend="178"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classft_1_1Finder_1a9c767201be1a645343b6cd2d9b0329df" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::Finder::addResultsFutures</definition>
+        <argsstring>(std::map&lt; std::string, ft::KmerClass &gt; &amp;indexResults, ft::KmerClass &amp;tmpResult, uint offset)</argsstring>
+        <name>addResultsFutures</name>
+        <param>
+          <type>std::map&lt; std::string, ft::KmerClass &gt; &amp;</type>
+          <declname>indexResults</declname>
+        </param>
+        <param>
+          <type>ft::KmerClass &amp;</type>
+          <declname>tmpResult</declname>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+<para>add results from an index to FTMap </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/finder.h" line="60" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/finder.cpp" bodystart="68" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1Finder_1a5504510de30c26bf31d0a15bbc4607fe" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::Finder::indexParallelSearch</definition>
+        <argsstring>(ft::FTMap &amp;ftMap)</argsstring>
+        <name>indexParallelSearch</name>
+        <param>
+          <type>ft::FTMap &amp;</type>
+          <declname>ftMap</declname>
+        </param>
+        <briefdescription>
+<para>indexParallelSearch searches across all indexes in parallel </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/finder.h" line="65" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/finder.cpp" bodystart="55" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1Finder_1aa3eecfefe2db4a0694e9767a6a898c9b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::Finder::indexSequentialSearch</definition>
+        <argsstring>(ft::FTMap &amp;ftMap)</argsstring>
+        <name>indexSequentialSearch</name>
+        <param>
+          <type>ft::FTMap &amp;</type>
+          <declname>ftMap</declname>
+        </param>
+        <briefdescription>
+<para>indexSequentialSearch searches across all indexes sequentially </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/finder.h" line="70" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/finder.cpp" bodystart="43" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1Finder_1ae80962bd5dafda5901325f42cc159a7e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::Finder::testIndex</definition>
+        <argsstring>(const FTProp &amp;ftProps, algo::IFmIndex *fmIndex, const fs::path &amp;indexPath, std::string &amp;testkmer)</argsstring>
+        <name>testIndex</name>
+        <param>
+          <type>const FTProp &amp;</type>
+          <declname>ftProps</declname>
+        </param>
+        <param>
+          <type>algo::IFmIndex *</type>
+          <declname>fmIndex</declname>
+        </param>
+        <param>
+          <type>const fs::path &amp;</type>
+          <declname>indexPath</declname>
+        </param>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>testkmer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/finder.h" line="73" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/finder.cpp" bodystart="15" bodyend="29"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/finder.h" line="20" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/finder.h" bodystart="20" bodyend="74"/>
+    <listofallmembers>
+      <member refid="classft_1_1Finder_1a9c767201be1a645343b6cd2d9b0329df" prot="private" virt="non-virtual"><scope>ft::Finder</scope><name>addResultsFutures</name></member>
+      <member refid="classft_1_1Finder_1aed8a16707a851a5349d2024dcb38ae9b" prot="public" virt="non-virtual"><scope>ft::Finder</scope><name>Finder</name></member>
+      <member refid="classft_1_1Finder_1a7d122875846c01fc9ec093a6f26912a0" prot="public" virt="non-virtual"><scope>ft::Finder</scope><name>Finder</name></member>
+      <member refid="classft_1_1Finder_1a5504510de30c26bf31d0a15bbc4607fe" prot="private" virt="non-virtual"><scope>ft::Finder</scope><name>indexParallelSearch</name></member>
+      <member refid="classft_1_1Finder_1aa3eecfefe2db4a0694e9767a6a898c9b" prot="private" virt="non-virtual"><scope>ft::Finder</scope><name>indexSequentialSearch</name></member>
+      <member refid="classft_1_1Finder_1a0fa60f4fcdd23deef0a7e01ae8dc74e0" prot="public" virt="non-virtual"><scope>ft::Finder</scope><name>operator=</name></member>
+      <member refid="classft_1_1Finder_1a6c7ea2f50c7f4d14142cbf1947b37d0e" prot="public" virt="non-virtual"><scope>ft::Finder</scope><name>parallelSearch</name></member>
+      <member refid="classft_1_1Finder_1a1afa3ee89c9f035100bd485ff19490d2" prot="public" virt="non-virtual"><scope>ft::Finder</scope><name>searchIndexes</name></member>
+      <member refid="classft_1_1Finder_1a07ee3c13bf05505c1000e13cd64ac2f8" prot="public" virt="non-virtual"><scope>ft::Finder</scope><name>sequentialSearch</name></member>
+      <member refid="classft_1_1Finder_1ae80962bd5dafda5901325f42cc159a7e" prot="private" virt="non-virtual"><scope>ft::Finder</scope><name>testIndex</name></member>
+      <member refid="classft_1_1Finder_1a5d948aa73a3386b1ef03b4d9c6bb7f66" prot="public" virt="virtual"><scope>ft::Finder</scope><name>~Finder</name></member>
+      <member refid="classft_1_1IFinder_1abadf665c903cb8997e8ed7b19c689c67" prot="public" virt="virtual"><scope>ft::Finder</scope><name>~IFinder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

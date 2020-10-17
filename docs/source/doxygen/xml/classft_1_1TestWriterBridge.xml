@@ -1,0 +1,509 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classft_1_1TestWriterBridge" kind="class" language="C++" prot="public">
+    <compoundname>ft::TestWriterBridge</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Test</basecompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1af214b3c0af0cbea9ef3383df115776e1" prot="protected" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::TestWriterBridge::_indexPath</definition>
+        <argsstring></argsstring>
+        <name>_indexPath</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="46" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a90e4ccacf89b500e1c5efeb1cc98092d" prot="protected" static="no" mutable="no">
+        <type>u_int</type>
+        <definition>u_int ft::TestWriterBridge::offset</definition>
+        <argsstring></argsstring>
+        <name>offset</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="47" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a9b83bde4d92c57c8fe3566794c7eaf29" prot="protected" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::TestWriterBridge::pathToQueryFile</definition>
+        <argsstring></argsstring>
+        <name>pathToQueryFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="48" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a1668ff8550f62219cb9836ce375ff6bd" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::TestWriterBridge::kmerSize</definition>
+        <argsstring></argsstring>
+        <name>kmerSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="49" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1acb0a110e31860ecdf4437f1b691584fc" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::TestWriterBridge::readLength</definition>
+        <argsstring></argsstring>
+        <name>readLength</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="50" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1ad75870cf74647dc2e295bed50e483aa0" prot="protected" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::TestWriterBridge::indexPropsFile</definition>
+        <argsstring></argsstring>
+        <name>indexPropsFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="51" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a1c0356cb9abd31c49ea420db18dba020" prot="protected" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::TestWriterBridge::outputFolder</definition>
+        <argsstring></argsstring>
+        <name>outputFolder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="52" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a62d24f597ec89d59cc9edf5b93761ca2" prot="protected" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::TestWriterBridge::outputFileName</definition>
+        <argsstring></argsstring>
+        <name>outputFileName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="53" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a0285b7bea57eaa2eca5be6012b18e18c" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestWriterBridge::refOnly</definition>
+        <argsstring></argsstring>
+        <name>refOnly</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="54" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a6cae6f3597ed1def10b483966278c3c5" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestWriterBridge::revCompSearch</definition>
+        <argsstring></argsstring>
+        <name>revCompSearch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="55" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a17d5588fa478c240da77372c6cf71796" prot="protected" static="no" mutable="no">
+        <type>SearchType</type>
+        <definition>SearchType ft::TestWriterBridge::searchType</definition>
+        <argsstring></argsstring>
+        <name>searchType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="56" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a1a404537faacddc5d4ae06ed9d5f4f72" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestWriterBridge::multithread</definition>
+        <argsstring></argsstring>
+        <name>multithread</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="57" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a71af33a50d803c82c6a9a008bca717f7" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::TestWriterBridge::overlap</definition>
+        <argsstring></argsstring>
+        <name>overlap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="58" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a135c1d60c58fea0ff8acd80cd34ec254" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestWriterBridge::returnMatchesOnly</definition>
+        <argsstring></argsstring>
+        <name>returnMatchesOnly</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="59" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a69c64e5586d0c2784ccf49ca5f52612a" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestWriterBridge::kmerCounts</definition>
+        <argsstring></argsstring>
+        <name>kmerCounts</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="60" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a2e5edbd0b340e20a344a2d5848d9fa2d" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::TestWriterBridge::stride</definition>
+        <argsstring></argsstring>
+        <name>stride</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="61" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a66d9b069f5628bda0240afa84a66d99b" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::TestWriterBridge::maxOccurences</definition>
+        <argsstring></argsstring>
+        <name>maxOccurences</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="62" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a4fb4846450d852f7bd71b8d3516d1aac" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::TestWriterBridge::maxThreads</definition>
+        <argsstring></argsstring>
+        <name>maxThreads</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="63" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1af6d30b13745c02a946d8efb3a5c86e57" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestWriterBridge::flagNonUniqueKmers</definition>
+        <argsstring></argsstring>
+        <name>flagNonUniqueKmers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="64" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a778b2f06cedabd1ef449755c0c20dc68" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestWriterBridge::flagOverCountedKmers</definition>
+        <argsstring></argsstring>
+        <name>flagOverCountedKmers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="65" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1ae63c20354d950a54cd7a6f2b1ae1618b" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestWriterBridge::ignoreNonUniqueKmers</definition>
+        <argsstring></argsstring>
+        <name>ignoreNonUniqueKmers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="66" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a3a2a9c959457f49c6217ade5f17907fa" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestWriterBridge::ignoreOverCountedKmers</definition>
+        <argsstring></argsstring>
+        <name>ignoreOverCountedKmers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="67" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a2f3438faa1f123786553b38b22787993" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestWriterBridge::countAsPairs</definition>
+        <argsstring></argsstring>
+        <name>countAsPairs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="68" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a357eb301644b18effcf19ee0428509de" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestWriterBridge::crossover</definition>
+        <argsstring></argsstring>
+        <name>crossover</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="69" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a163f3b49921dda0f91ec77658884cab2" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestWriterBridge::pairedReads</definition>
+        <argsstring></argsstring>
+        <name>pairedReads</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="70" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1ab704c4e4ef4e32ca08e32aa5e1710a1d" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestWriterBridge::revComp</definition>
+        <argsstring></argsstring>
+        <name>revComp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="71" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1aa1f0022ff2e06a3fe181c3ff666c4bb1" prot="protected" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::TestWriterBridge::buildDir</definition>
+        <argsstring></argsstring>
+        <name>buildDir</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="72" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a190769edda15d1c96b50b640108305d0" prot="protected" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::TestWriterBridge::indexDir</definition>
+        <argsstring></argsstring>
+        <name>indexDir</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="73" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a29155131b2086abfcd227ff72ebd1f14" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ft::TestWriterBridge::readSetName</definition>
+        <argsstring></argsstring>
+        <name>readSetName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="74" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1af8292e3b319f51713d2b23f9a4e28523" prot="protected" static="no" mutable="no">
+        <type>fs::path</type>
+        <definition>fs::path ft::TestWriterBridge::inputFastQ</definition>
+        <argsstring></argsstring>
+        <name>inputFastQ</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="75" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1aecf3fc973e1f847202f3046f709df3d3" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::TestWriterBridge::numOfReads</definition>
+        <argsstring></argsstring>
+        <name>numOfReads</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="76" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1afabcf8d0fba00327b23052a3cd8de560" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::TestWriterBridge::numOfIndexes</definition>
+        <argsstring></argsstring>
+        <name>numOfIndexes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="77" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1TestWriterBridge_1a2bdb33df70b244c07cc640687485e3e1" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::TestWriterBridge::printInputs</definition>
+        <argsstring></argsstring>
+        <name>printInputs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="78" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classft_1_1TestWriterBridge_1a6dc7afc3053fca97b6594b987cc4c631" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void ft::TestWriterBridge::SetUp</definition>
+        <argsstring>()</argsstring>
+        <name>SetUp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="10" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="10" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1TestWriterBridge_1ab2ea7c73edd26c8a930e14d0fdc2f5e5" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void ft::TestWriterBridge::TearDown</definition>
+        <argsstring>()</argsstring>
+        <name>TearDown</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="44" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="44" bodyend="44"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" line="8" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_writerbridge.cpp" bodystart="8" bodyend="83"/>
+    <listofallmembers>
+      <member refid="classft_1_1TestWriterBridge_1af214b3c0af0cbea9ef3383df115776e1" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>_indexPath</name></member>
+      <member refid="classft_1_1TestWriterBridge_1aa1f0022ff2e06a3fe181c3ff666c4bb1" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>buildDir</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a2f3438faa1f123786553b38b22787993" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>countAsPairs</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a357eb301644b18effcf19ee0428509de" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>crossover</name></member>
+      <member refid="classft_1_1TestWriterBridge_1af6d30b13745c02a946d8efb3a5c86e57" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>flagNonUniqueKmers</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a778b2f06cedabd1ef449755c0c20dc68" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>flagOverCountedKmers</name></member>
+      <member refid="classft_1_1TestWriterBridge_1ae63c20354d950a54cd7a6f2b1ae1618b" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>ignoreNonUniqueKmers</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a3a2a9c959457f49c6217ade5f17907fa" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>ignoreOverCountedKmers</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a190769edda15d1c96b50b640108305d0" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>indexDir</name></member>
+      <member refid="classft_1_1TestWriterBridge_1ad75870cf74647dc2e295bed50e483aa0" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>indexPropsFile</name></member>
+      <member refid="classft_1_1TestWriterBridge_1af8292e3b319f51713d2b23f9a4e28523" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>inputFastQ</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a69c64e5586d0c2784ccf49ca5f52612a" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>kmerCounts</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a1668ff8550f62219cb9836ce375ff6bd" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>kmerSize</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a66d9b069f5628bda0240afa84a66d99b" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>maxOccurences</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a4fb4846450d852f7bd71b8d3516d1aac" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>maxThreads</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a1a404537faacddc5d4ae06ed9d5f4f72" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>multithread</name></member>
+      <member refid="classft_1_1TestWriterBridge_1afabcf8d0fba00327b23052a3cd8de560" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>numOfIndexes</name></member>
+      <member refid="classft_1_1TestWriterBridge_1aecf3fc973e1f847202f3046f709df3d3" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>numOfReads</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a90e4ccacf89b500e1c5efeb1cc98092d" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>offset</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a62d24f597ec89d59cc9edf5b93761ca2" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>outputFileName</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a1c0356cb9abd31c49ea420db18dba020" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>outputFolder</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a71af33a50d803c82c6a9a008bca717f7" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>overlap</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a163f3b49921dda0f91ec77658884cab2" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>pairedReads</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a9b83bde4d92c57c8fe3566794c7eaf29" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>pathToQueryFile</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a2bdb33df70b244c07cc640687485e3e1" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>printInputs</name></member>
+      <member refid="classft_1_1TestWriterBridge_1acb0a110e31860ecdf4437f1b691584fc" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>readLength</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a29155131b2086abfcd227ff72ebd1f14" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>readSetName</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a0285b7bea57eaa2eca5be6012b18e18c" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>refOnly</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a135c1d60c58fea0ff8acd80cd34ec254" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>returnMatchesOnly</name></member>
+      <member refid="classft_1_1TestWriterBridge_1ab704c4e4ef4e32ca08e32aa5e1710a1d" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>revComp</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a6cae6f3597ed1def10b483966278c3c5" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>revCompSearch</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a17d5588fa478c240da77372c6cf71796" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>searchType</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a6dc7afc3053fca97b6594b987cc4c631" prot="protected" virt="virtual"><scope>ft::TestWriterBridge</scope><name>SetUp</name></member>
+      <member refid="classft_1_1TestWriterBridge_1a2e5edbd0b340e20a344a2d5848d9fa2d" prot="protected" virt="non-virtual"><scope>ft::TestWriterBridge</scope><name>stride</name></member>
+      <member refid="classft_1_1TestWriterBridge_1ab2ea7c73edd26c8a930e14d0fdc2f5e5" prot="protected" virt="virtual"><scope>ft::TestWriterBridge</scope><name>TearDown</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

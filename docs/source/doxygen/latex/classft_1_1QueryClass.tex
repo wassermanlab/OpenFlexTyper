@@ -1,0 +1,162 @@
+\hypertarget{classft_1_1QueryClass}{}\section{ft\+:\+:Query\+Class Class Reference}
+\label{classft_1_1QueryClass}\index{ft\+::\+Query\+Class@{ft\+::\+Query\+Class}}
+
+
+A class that contains information for one query ID, Type pair.  
+
+
+
+
+{\ttfamily \#include $<$query\+Class.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classft_1_1QueryClass_acb92ce2a1c98cdc3d54ef12276b953a1}{Query\+Class} (int query\+ID, ft\+::\+Query\+Type query\+Type)
+\item 
+\hyperlink{classft_1_1QueryClass_a9fdd93df1f397146c31e4c0bd16bf7e2}{Query\+Class} ()
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_ad75bea7c483469be7a8a522626903e88}\label{classft_1_1QueryClass_ad75bea7c483469be7a8a522626903e88}} 
+virtual \hyperlink{classft_1_1QueryClass_ad75bea7c483469be7a8a522626903e88}{$\sim$\+Query\+Class} ()
+\begin{DoxyCompactList}\small\item\em Class Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Getters}\par
+{\em Constant functions to return properties of the query }\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_acaa6da245b9a173676de47010d799a0a}\label{classft_1_1QueryClass_acaa6da245b9a173676de47010d799a0a}} 
+int {\bfseries getq\+ID} () const
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_a1d4f6c36f91606a8e7e0cca964efeb51}\label{classft_1_1QueryClass_a1d4f6c36f91606a8e7e0cca964efeb51}} 
+Query\+Type {\bfseries getq\+Type} () const
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_a950e54ff6a88ce6edbd4188e86ff023d}\label{classft_1_1QueryClass_a950e54ff6a88ce6edbd4188e86ff023d}} 
+std\+::string {\bfseries get\+Query\+String} () const
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_a38209ba16bb6a5e6b172da6d2c7cf387}\label{classft_1_1QueryClass_a38209ba16bb6a5e6b172da6d2c7cf387}} 
+int {\bfseries get\+Count} () const
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_a6ca899bb19efd164dcea1f253a2d5461}\label{classft_1_1QueryClass_a6ca899bb19efd164dcea1f253a2d5461}} 
+std\+::map$<$ ft\+::\+Flag\+Type, std\+::set$<$ std\+::string $>$ $>$ {\bfseries get\+Q\+Flags} () const
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_ad8f41508a315185067241c6865bc415d}\label{classft_1_1QueryClass_ad8f41508a315185067241c6865bc415d}} 
+ft\+::\+Q\+IdT {\bfseries get\+Q\+IdT} () const
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_a584b1134e196f765170048ab03d958df}\label{classft_1_1QueryClass_a584b1134e196f765170048ab03d958df}} 
+const std\+::set$<$ std\+::string $>$ {\bfseries get\+Flag\+Kmers} (const ft\+::\+Flag\+Type flag) const
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Setters}\par
+{\em Non-\/constant functions to update properties of the query class }\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_a2d4767f9210425e22019f16688c53b33}\label{classft_1_1QueryClass_a2d4767f9210425e22019f16688c53b33}} 
+void {\bfseries set\+Query\+String} (std\+::string query\+String)
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_a6ace5b35bc915b612ff4111261db914d}\label{classft_1_1QueryClass_a6ace5b35bc915b612ff4111261db914d}} 
+void {\bfseries set\+Count} (int count)
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_aec124edd8fcf0f347f7243dfb14c0973}\label{classft_1_1QueryClass_aec124edd8fcf0f347f7243dfb14c0973}} 
+void {\bfseries set\+Flags} (const std\+::map$<$ ft\+::\+Flag\+Type, std\+::set$<$ std\+::string $>$$>$ \&q\+Flags)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Adders}\par
+{\em Non-\/constant functions to add properties to the query class }\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_ae9c88ff1d7b1b22746a8ada4397e5ff3}\label{classft_1_1QueryClass_ae9c88ff1d7b1b22746a8ada4397e5ff3}} 
+void {\bfseries add\+Flags} (const ft\+::\+Flag\+Type \&flag\+Type, const std\+::set$<$ std\+::string $>$ \&kmers)
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_a7cbdbc868f70aa19d8294dc8a12105c3}\label{classft_1_1QueryClass_a7cbdbc868f70aa19d8294dc8a12105c3}} 
+void {\bfseries add\+Flag} (const ft\+::\+Flag\+Type \&flag\+Type, const std\+::string \&kmer)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Removers}\par
+{\em Non-\/constant functions to remove properties from the query class }\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_aeed393478364d0a9418e0b1865edf496}\label{classft_1_1QueryClass_aeed393478364d0a9418e0b1865edf496}} 
+void {\bfseries remove\+Flag} (ft\+::\+Flag\+Type flag\+Type)
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_afbc6473d32447770ab7b904a2f92d5a0}\label{classft_1_1QueryClass_afbc6473d32447770ab7b904a2f92d5a0}} 
+void {\bfseries remove\+Kmer\+Flag} (const ft\+::\+Flag\+Type \&flag\+Typer, const std\+::string \&kmers)
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_a91b12e43c13037fd0eb53bb2cee0668f}\label{classft_1_1QueryClass_a91b12e43c13037fd0eb53bb2cee0668f}} 
+void {\bfseries remove\+Count} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Checkers}\par
+{\em Constant functions to check the properties of the query class }\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_a1ad56026188dfc5f3f5b98ea4987ef67}\label{classft_1_1QueryClass_a1ad56026188dfc5f3f5b98ea4987ef67}} 
+bool {\bfseries is\+Q\+Id\+T\+Equal} (const ft\+::\+Q\+IdT \&test) const
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_a87a0c8acc939a89dc7bcd41b55b301a7}\label{classft_1_1QueryClass_a87a0c8acc939a89dc7bcd41b55b301a7}} 
+bool {\bfseries has\+Query\+ID} (const int \&qid) const
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_ad0ec9e7dd966e6c87f8938b0788f138d}\label{classft_1_1QueryClass_ad0ec9e7dd966e6c87f8938b0788f138d}} 
+bool {\bfseries has\+Query\+Type} (const ft\+::\+Query\+Type \&q\+Type) const
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_af2ec1d0d60024a99045d3b7ec3461431}\label{classft_1_1QueryClass_af2ec1d0d60024a99045d3b7ec3461431}} 
+bool {\bfseries has\+Flag} (const ft\+::\+Flag\+Type \&flag) const
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_ae67d5016fbc2890b84386887baeaf0c5}\label{classft_1_1QueryClass_ae67d5016fbc2890b84386887baeaf0c5}} 
+bool {\bfseries has\+Kmer\+Flag} (const ft\+::\+Flag\+Type \&flag, const std\+::string \&kmer) const
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_acff58f8c543a1b0c6bee421f704ebb0a}\label{classft_1_1QueryClass_acff58f8c543a1b0c6bee421f704ebb0a}} 
+bool {\bfseries has\+Non\+Zero\+Count} () const
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Overloaded Operators}\par
+{\em Constant functions that define how to compare two query classes for equality }\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_a4fc2a6ea3bd6c15fa94d90b1b23a111c}\label{classft_1_1QueryClass_a4fc2a6ea3bd6c15fa94d90b1b23a111c}} 
+bool {\bfseries operator$<$} (const \hyperlink{classft_1_1QueryClass}{ft\+::\+Query\+Class} \&q) const
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_af0b9bb01cfa9aa8e4e178b4757c5c369}\label{classft_1_1QueryClass_af0b9bb01cfa9aa8e4e178b4757c5c369}} 
+bool {\bfseries operator==} (const \hyperlink{classft_1_1QueryClass}{ft\+::\+Query\+Class} \&q) const
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Public Attributes}
+\begin{Indent}\textbf{ Properties}\par
+{\em }\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_a716850d5f5342efa29db377664d91fa5}\label{classft_1_1QueryClass_a716850d5f5342efa29db377664d91fa5}} 
+int {\bfseries \+\_\+q\+ID}
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_a2e09bd62c3ce3e912324686574bbc539}\label{classft_1_1QueryClass_a2e09bd62c3ce3e912324686574bbc539}} 
+Query\+Type {\bfseries \+\_\+q\+Type}
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_aa98d9c482be47f13efa0ef8e9c420f49}\label{classft_1_1QueryClass_aa98d9c482be47f13efa0ef8e9c420f49}} 
+std\+::string {\bfseries \+\_\+qstring}
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_aecd6980f48c087fcc90751918400b8ef}\label{classft_1_1QueryClass_aecd6980f48c087fcc90751918400b8ef}} 
+int {\bfseries \+\_\+count}
+\item 
+\mbox{\Hypertarget{classft_1_1QueryClass_adfaa73588cd843c25b2d6c29a9cc3715}\label{classft_1_1QueryClass_adfaa73588cd843c25b2d6c29a9cc3715}} 
+std\+::map$<$ ft\+::\+Flag\+Type, std\+::set$<$ std\+::string $>$ $>$ {\bfseries \+\_\+q\+Flags}
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classft_1_1QueryClass_acb92ce2a1c98cdc3d54ef12276b953a1}\label{classft_1_1QueryClass_acb92ce2a1c98cdc3d54ef12276b953a1}} 
+\index{ft\+::\+Query\+Class@{ft\+::\+Query\+Class}!Query\+Class@{Query\+Class}}
+\index{Query\+Class@{Query\+Class}!ft\+::\+Query\+Class@{ft\+::\+Query\+Class}}
+\subsubsection{\texorpdfstring{Query\+Class()}{QueryClass()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily ft\+::\+Query\+Class\+::\+Query\+Class (\begin{DoxyParamCaption}\item[{int}]{query\+ID,  }\item[{ft\+::\+Query\+Type}]{query\+Type }\end{DoxyParamCaption})}
+
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em int} & query ID as an integer \\
+\hline
+{\em ft\+::\+Query\+Type} & query type \{R\+EF, A\+LT, C\+RO\} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classft_1_1QueryClass_a9fdd93df1f397146c31e4c0bd16bf7e2}\label{classft_1_1QueryClass_a9fdd93df1f397146c31e4c0bd16bf7e2}} 
+\index{ft\+::\+Query\+Class@{ft\+::\+Query\+Class}!Query\+Class@{Query\+Class}}
+\index{Query\+Class@{Query\+Class}!ft\+::\+Query\+Class@{ft\+::\+Query\+Class}}
+\subsubsection{\texorpdfstring{Query\+Class()}{QueryClass()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily ft\+::\+Query\+Class\+::\+Query\+Class (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/tixii/\+Git/\+Open\+Flex\+Typer/flextyper/includes/query\+Class.\+h\item 
+/home/tixii/\+Git/\+Open\+Flex\+Typer/flextyper/src/query\+Class.\+cpp\end{DoxyCompactItemize}

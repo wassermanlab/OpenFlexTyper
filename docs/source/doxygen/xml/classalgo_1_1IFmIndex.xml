@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classalgo_1_1IFmIndex" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>algo::IFmIndex</compoundname>
+    <derivedcompoundref refid="classalgo_1_1FmIndex" prot="public" virt="non-virtual">algo::FmIndex</derivedcompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classalgo_1_1IFmIndex_1a9934efd8cd1f0a96720774ac7043ca58" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual algo::IFmIndex::~IFmIndex</definition>
+        <argsstring>()</argsstring>
+        <name>~IFmIndex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/fmindex/interfaces/ifmindex.h" line="26" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/fmindex/interfaces/ifmindex.h" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classalgo_1_1IFmIndex_1a6e535089e2570fb7d1772f43aa00fd8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::pair&lt; fs::path, fs::path &gt;</type>
+        <definition>virtual std::pair&lt;fs::path, fs::path&gt; algo::IFmIndex::createFMIndex</definition>
+        <argsstring>(const algo::IndexProps &amp;_props, const fs::path &amp;preprocessedFasta)=0</argsstring>
+        <name>createFMIndex</name>
+        <param>
+          <type>const algo::IndexProps &amp;</type>
+          <declname>_props</declname>
+        </param>
+        <param>
+          <type>const fs::path &amp;</type>
+          <declname>preprocessedFasta</declname>
+        </param>
+        <briefdescription>
+<para>createFMIndex </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stringToIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The function will return the name of the generated index </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/fmindex/interfaces/ifmindex.h" line="32" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classalgo_1_1IFmIndex_1a5ced4c3e06f6aace5068aeb10a53c16f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void algo::IFmIndex::loadIndexFromFile</definition>
+        <argsstring>(const fs::path &amp;indexname)=0</argsstring>
+        <name>loadIndexFromFile</name>
+        <param>
+          <type>const fs::path &amp;</type>
+          <declname>indexname</declname>
+        </param>
+        <briefdescription>
+<para>loadIndexFromFile </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>indexname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/fmindex/interfaces/ifmindex.h" line="38" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classalgo_1_1IFmIndex_1ac71625b838118351c44801949454a9fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void algo::IFmIndex::parallelFmIndex</definition>
+        <argsstring>(algo::IndexProps &amp;_props)=0</argsstring>
+        <name>parallelFmIndex</name>
+        <param>
+          <type>algo::IndexProps &amp;</type>
+          <declname>_props</declname>
+        </param>
+        <briefdescription>
+<para>parallelFmIndex </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filenames</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>indexNames</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>outputFolder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/fmindex/interfaces/ifmindex.h" line="46" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classalgo_1_1IFmIndex_1a7a2769c3082c445c8e884115c9d51c7c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>ft::KmerClass</type>
+        <definition>virtual ft::KmerClass algo::IFmIndex::search</definition>
+        <argsstring>(const std::string &amp;kmer, u_int maxOccurences=200)=0</argsstring>
+        <name>search</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>kmer</declname>
+        </param>
+        <param>
+          <type>u_int</type>
+          <declname>maxOccurences</declname>
+          <defval>200</defval>
+        </param>
+        <briefdescription>
+<para>search </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>queryString</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/fmindex/interfaces/ifmindex.h" line="54" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classalgo_1_1IFmIndex_1a947444aefb420f1de03a9f8aa8619536" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>int</type>
+        <definition>virtual int algo::IFmIndex::indexCount</definition>
+        <argsstring>()=0</argsstring>
+        <name>indexCount</name>
+        <briefdescription>
+<para>parallelFmIndex </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/fmindex/interfaces/ifmindex.h" line="61" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/fmindex/interfaces/ifmindex.h" line="22" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/fmindex/interfaces/ifmindex.h" bodystart="22" bodyend="62"/>
+    <listofallmembers>
+      <member refid="classalgo_1_1IFmIndex_1a6e535089e2570fb7d1772f43aa00fd8e" prot="public" virt="pure-virtual"><scope>algo::IFmIndex</scope><name>createFMIndex</name></member>
+      <member refid="classalgo_1_1IFmIndex_1a947444aefb420f1de03a9f8aa8619536" prot="public" virt="pure-virtual"><scope>algo::IFmIndex</scope><name>indexCount</name></member>
+      <member refid="classalgo_1_1IFmIndex_1a5ced4c3e06f6aace5068aeb10a53c16f" prot="public" virt="pure-virtual"><scope>algo::IFmIndex</scope><name>loadIndexFromFile</name></member>
+      <member refid="classalgo_1_1IFmIndex_1ac71625b838118351c44801949454a9fa" prot="public" virt="pure-virtual"><scope>algo::IFmIndex</scope><name>parallelFmIndex</name></member>
+      <member refid="classalgo_1_1IFmIndex_1a7a2769c3082c445c8e884115c9d51c7c" prot="public" virt="pure-virtual"><scope>algo::IFmIndex</scope><name>search</name></member>
+      <member refid="classalgo_1_1IFmIndex_1a9934efd8cd1f0a96720774ac7043ca58" prot="public" virt="virtual"><scope>algo::IFmIndex</scope><name>~IFmIndex</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

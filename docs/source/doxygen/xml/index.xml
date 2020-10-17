@@ -1,0 +1,887 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.13">
+  <compound refid="classft_1_1LogClass_1_1Benchmark" kind="class"><name>ft::LogClass::Benchmark</name>
+    <member refid="classft_1_1LogClass_1_1Benchmark_1a5afa18be45e172c99f382990dbe6984c" kind="variable"><name>_start</name></member>
+    <member refid="classft_1_1LogClass_1_1Benchmark_1ace0647c96cb987d44df132d9d3ce048d" kind="variable"><name>_end</name></member>
+    <member refid="classft_1_1LogClass_1_1Benchmark_1a1aaa0b43e0449e00e87b10bf487dcd66" kind="function"><name>Benchmark</name></member>
+    <member refid="classft_1_1LogClass_1_1Benchmark_1a5df530dcdc613d295011b695fe5ae4cf" kind="function"><name>~Benchmark</name></member>
+    <member refid="classft_1_1LogClass_1_1Benchmark_1abc9158252baec0f8a59ebdc1fb046966" kind="function"><name>update</name></member>
+    <member refid="classft_1_1LogClass_1_1Benchmark_1a6ff2d2d42f26f1f291e7124bb59c37a5" kind="function"><name>now</name></member>
+  </compound>
+  <compound refid="structft_1_1FTProp_1_1CmdLineArg" kind="struct"><name>ft::FTProp::CmdLineArg</name>
+    <member refid="structft_1_1FTProp_1_1CmdLineArg_1af2ddc2f684e12e04c102f7f18778c170" kind="variable"><name>outputFile</name></member>
+    <member refid="structft_1_1FTProp_1_1CmdLineArg_1ab0e2d718585aafb8efa6333e2fba8f0d" kind="variable"><name>iniFile</name></member>
+    <member refid="structft_1_1FTProp_1_1CmdLineArg_1a567962da2b5f17789af77e4d33bf9a98" kind="variable"><name>kmerSize</name></member>
+    <member refid="structft_1_1FTProp_1_1CmdLineArg_1a024105188a31daa8346621d89bc3cc3c" kind="variable"><name>stride</name></member>
+    <member refid="structft_1_1FTProp_1_1CmdLineArg_1a5659a3614f203470a249f9eb70bc8724" kind="variable"><name>maxOccurences</name></member>
+    <member refid="structft_1_1FTProp_1_1CmdLineArg_1a952454555484121c6f13359e9c9aefc2" kind="variable"><name>unique</name></member>
+    <member refid="structft_1_1FTProp_1_1CmdLineArg_1a2437f4172e8151083a2c9bec1de980ff" kind="variable"><name>verbose</name></member>
+  </compound>
+  <compound refid="classft_1_1Finder" kind="class"><name>ft::Finder</name>
+    <member refid="classft_1_1Finder_1aed8a16707a851a5349d2024dcb38ae9b" kind="function"><name>Finder</name></member>
+    <member refid="classft_1_1Finder_1a5d948aa73a3386b1ef03b4d9c6bb7f66" kind="function"><name>~Finder</name></member>
+    <member refid="classft_1_1Finder_1a7d122875846c01fc9ec093a6f26912a0" kind="function"><name>Finder</name></member>
+    <member refid="classft_1_1Finder_1a0fa60f4fcdd23deef0a7e01ae8dc74e0" kind="function"><name>operator=</name></member>
+    <member refid="classft_1_1Finder_1a1afa3ee89c9f035100bd485ff19490d2" kind="function"><name>searchIndexes</name></member>
+    <member refid="classft_1_1Finder_1a6c7ea2f50c7f4d14142cbf1947b37d0e" kind="function"><name>parallelSearch</name></member>
+    <member refid="classft_1_1Finder_1a07ee3c13bf05505c1000e13cd64ac2f8" kind="function"><name>sequentialSearch</name></member>
+    <member refid="classft_1_1Finder_1a9c767201be1a645343b6cd2d9b0329df" kind="function"><name>addResultsFutures</name></member>
+    <member refid="classft_1_1Finder_1a5504510de30c26bf31d0a15bbc4607fe" kind="function"><name>indexParallelSearch</name></member>
+    <member refid="classft_1_1Finder_1aa3eecfefe2db4a0694e9767a6a898c9b" kind="function"><name>indexSequentialSearch</name></member>
+    <member refid="classft_1_1Finder_1ae80962bd5dafda5901325f42cc159a7e" kind="function"><name>testIndex</name></member>
+  </compound>
+  <compound refid="classalgo_1_1FmIndex" kind="class"><name>algo::FmIndex</name>
+    <member refid="classalgo_1_1FmIndex_1aabff5e669f5dedbcffdc99ae1fcb160f" kind="variable"><name>_verbose</name></member>
+    <member refid="classalgo_1_1FmIndex_1acf89089364de96f5a528d1ee809f9af3" kind="variable"><name>_index</name></member>
+    <member refid="classalgo_1_1FmIndex_1a5f51dfe85be14e5de6c3acb6a0364337" kind="variable"><name>_indexPosition</name></member>
+    <member refid="classalgo_1_1FmIndex_1ad895043464fcd44a1ddc97550ac8c85a" kind="variable"><name>_mtx</name></member>
+    <member refid="classalgo_1_1FmIndex_1a4af4320623a12a605631970024337b22" kind="variable"><name>_kmerMapSize</name></member>
+    <member refid="classalgo_1_1FmIndex_1a787358e6089fa445930e6cb35d883c65" kind="function"><name>FmIndex</name></member>
+    <member refid="classalgo_1_1FmIndex_1ac838a3440a7d42b601dc67c96e06a476" kind="function"><name>FmIndex</name></member>
+    <member refid="classalgo_1_1FmIndex_1a36a930c9cf7e6583c9ace0709195bad0" kind="function"><name>~FmIndex</name></member>
+    <member refid="classalgo_1_1FmIndex_1a13b884f30a3a0209b2ee025fbfcfe6a4" kind="function"><name>createFMIndex</name></member>
+    <member refid="classalgo_1_1FmIndex_1aa6376481450ba69f7bc521544ce0ddab" kind="function"><name>loadIndexFromFile</name></member>
+    <member refid="classalgo_1_1FmIndex_1a77553572cf09d50c336aa75758bcae62" kind="function"><name>search</name></member>
+    <member refid="classalgo_1_1FmIndex_1abb6b033e7f7cca38ee751a969f439f58" kind="function"><name>parallelFmIndex</name></member>
+    <member refid="classalgo_1_1FmIndex_1a2a370ef5e6311df542785b40452983ce" kind="function"><name>indexCount</name></member>
+    <member refid="classalgo_1_1FmIndex_1a283b02df1ea490955d73ca1314ba0355" kind="function"><name>FmIndex</name></member>
+    <member refid="classalgo_1_1FmIndex_1a083d8973b3b1f41e8a0d46dccf745296" kind="function"><name>operator=</name></member>
+  </compound>
+  <compound refid="classft_1_1FTMap" kind="class"><name>ft::FTMap</name>
+    <member refid="classft_1_1FTMap_1ad59a81e9a0fb2d09587d5389aa96ee0f" kind="variable"><name>_ftProps</name></member>
+    <member refid="classft_1_1FTMap_1a99b50ad4d70bc11048bfd6cecd6c3c0d" kind="variable"><name>_kmerSet</name></member>
+    <member refid="classft_1_1FTMap_1a2aea4aadba0417832b448d7b093c2917" kind="variable"><name>_querySet</name></member>
+    <member refid="classft_1_1FTMap_1a60a4a87b4a6be05def7d00a22df038a4" kind="variable"><name>_qkMap</name></member>
+    <member refid="classft_1_1FTMap_1a65de36bf418310b3521a7a43f75ae106" kind="variable"><name>_qkRCMap</name></member>
+    <member refid="classft_1_1FTMap_1a397705aba212b670410f286d53b44717" kind="variable"><name>_searchResults</name></member>
+    <member refid="classft_1_1FTMap_1a002d58b1637db268bc65c4cddff2dd59" kind="function"><name>FTMap</name></member>
+    <member refid="classft_1_1FTMap_1a88c9a888ed99268f037f785f78ce58ab" kind="function"><name>~FTMap</name></member>
+    <member refid="classft_1_1FTMap_1ad1e6b1a99758408832bb6902869e46b4" kind="function"><name>addInputQueries</name></member>
+    <member refid="classft_1_1FTMap_1a235e96a2d4d455e833a62aeefd04a134" kind="function"><name>genQKMap</name></member>
+    <member refid="classft_1_1FTMap_1a181cb6de6d7ca49ccd24dadcdd04de95" kind="function"><name>getResults</name></member>
+    <member refid="classft_1_1FTMap_1a88d77b21d34375a335f915c2142de694" kind="function"><name>getFTProps</name></member>
+    <member refid="classft_1_1FTMap_1ad812dd455ca0029bc14e751ce9136bd9" kind="function"><name>getKmerSet</name></member>
+    <member refid="classft_1_1FTMap_1a32e84dce6613508b70b408028442ac33" kind="function"><name>checkForKmer</name></member>
+    <member refid="classft_1_1FTMap_1a2edf8da312921a3eec6320b44b85bdc9" kind="function"><name>addKmer</name></member>
+    <member refid="classft_1_1FTMap_1ae40304f05338e599a6e6e808c6845cf5" kind="function"><name>getKmer</name></member>
+    <member refid="classft_1_1FTMap_1aafcb69938b9919a5971f016b486bcba1" kind="function"><name>checkForQIDT</name></member>
+    <member refid="classft_1_1FTMap_1a5b67e9ba46f06d8ed77c440e5951d4f6" kind="function"><name>addQuery</name></member>
+    <member refid="classft_1_1FTMap_1a90cf98c96224ff1e4534f44947e9545f" kind="function"><name>getQuery</name></member>
+    <member refid="classft_1_1FTMap_1a339e0eb2fd789aafd4c206445ca2c37a" kind="function"><name>addIndexResults</name></member>
+    <member refid="classft_1_1FTMap_1ab4531f2e0ef99a05db196247afd357ad" kind="function"><name>addKmerResults</name></member>
+    <member refid="classft_1_1FTMap_1a86c3d4e64b4afefc36fce285ba1eddb1" kind="function"><name>processResults</name></member>
+    <member refid="classft_1_1FTMap_1aac81344701698c1c2a4755ba87218595" kind="function"><name>processIndexResults</name></member>
+    <member refid="classft_1_1FTMap_1a40049b9e934f4766eedc2c4bbf48f9ba" kind="function"><name>processQueryResults</name></member>
+    <member refid="classft_1_1FTMap_1ada6c77b74bc825082982d7bcd0f86894" kind="function"><name>addKmersToQueryResults</name></member>
+    <member refid="classft_1_1FTMap_1a81554a1b60c9be4b739dff4a84d43d34" kind="function"><name>calculateQueryCount</name></member>
+    <member refid="classft_1_1FTMap_1ae13aab502b8835d12e0e86fffc2d2211" kind="function"><name>createKmer</name></member>
+    <member refid="classft_1_1FTMap_1a42e7416ee19624522135664ffc6b4ee0" kind="function"><name>findKmer</name></member>
+    <member refid="classft_1_1FTMap_1aadcc11c56e00612cb6ff904139fe849d" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classft_1_1FTProp" kind="class"><name>ft::FTProp</name>
+    <member refid="classft_1_1FTProp_1a19b8c836629249472701249acb005d7a" kind="variable"><name>_indexSet</name></member>
+    <member refid="classft_1_1FTProp_1ad049e7e67e8c589fd564457c50cc9be0" kind="variable"><name>_searchType</name></member>
+    <member refid="classft_1_1FTProp_1a224ceb2429282b0f0967f6cfafa51031" kind="variable"><name>_readSetName</name></member>
+    <member refid="classft_1_1FTProp_1ad979cd6d6d9f4d0af0daa86c0bf46260" kind="variable"><name>_indexFileName</name></member>
+    <member refid="classft_1_1FTProp_1a3aacdda37cc4c08590a86d39347c31f7" kind="variable"><name>_numOfReads</name></member>
+    <member refid="classft_1_1FTProp_1ab72ba08d77188173fc5438abff2fcd67" kind="variable"><name>_numOfIndexes</name></member>
+    <member refid="classft_1_1FTProp_1a27a6a5525f01294fcc5cefdc91cc8cc0" kind="variable"><name>_pathToQueryFile</name></member>
+    <member refid="classft_1_1FTProp_1ab7c665220faae447794fedda299b139e" kind="variable"><name>_buildDir</name></member>
+    <member refid="classft_1_1FTProp_1a4403ba0f4922c59c69230743d87a93cd" kind="variable"><name>_indexDir</name></member>
+    <member refid="classft_1_1FTProp_1a343cbc94f9ba8fb898e3c4c024daee64" kind="variable"><name>_R1</name></member>
+    <member refid="classft_1_1FTProp_1a370be7ab04cf2c174ad676fb68d51161" kind="variable"><name>_R2</name></member>
+    <member refid="classft_1_1FTProp_1af6518dcaa54339f3da07a119d96c77c2" kind="variable"><name>_inputFastQ</name></member>
+    <member refid="classft_1_1FTProp_1a2eec96b653fffa4a8845137fafa86ac7" kind="variable"><name>_outputFolder</name></member>
+    <member refid="classft_1_1FTProp_1aba53202a4d43acbec43d889bb121c3f2" kind="variable"><name>_outputFile</name></member>
+    <member refid="classft_1_1FTProp_1a65d8d4541b07951bacd72f7ffeac8ec1" kind="variable"><name>_kmerSize</name></member>
+    <member refid="classft_1_1FTProp_1a8f2de6df2f55ebd2843a066fc76fc11e" kind="variable"><name>_overlap</name></member>
+    <member refid="classft_1_1FTProp_1a6db59ffd496953d9548111e8263bc5fd" kind="variable"><name>_stride</name></member>
+    <member refid="classft_1_1FTProp_1aba7055592bb8670b79f038902bfd61dd" kind="variable"><name>_readLength</name></member>
+    <member refid="classft_1_1FTProp_1a91e43edf0a274390ec07de56bedcf96f" kind="variable"><name>_maxOccurences</name></member>
+    <member refid="classft_1_1FTProp_1a1619954b4197a9819131dc017e92112c" kind="variable"><name>_maxThreads</name></member>
+    <member refid="classft_1_1FTProp_1a4f83888ce1ce7cac9ecf0490b7619272" kind="variable"><name>_maxKmersPerQuery</name></member>
+    <member refid="classft_1_1FTProp_1afd068a8b6c09f76eb4051785b0973684" kind="variable"><name>_maxTotalKmers</name></member>
+    <member refid="classft_1_1FTProp_1a642de2c84ae980561627cf3a991eb1cd" kind="variable"><name>_flagsToOutput</name></member>
+    <member refid="classft_1_1FTProp_1aeca7124f643d00a6a4d35e80fe34416e" kind="variable"><name>_flagsToNotCount</name></member>
+    <member refid="classft_1_1FTProp_1ad4e0a60f20c7f6141892448e7cc0507e" kind="variable"><name>_multithread</name></member>
+    <member refid="classft_1_1FTProp_1acc7d5dac24bf7e6fd2f00f55a75a3b25" kind="variable"><name>_refOnly</name></member>
+    <member refid="classft_1_1FTProp_1ab54daa7d4e48f4fdbb8f4fb37225e794" kind="variable"><name>_matchesOnly</name></member>
+    <member refid="classft_1_1FTProp_1a68f31b75344d9dbe0d7d5bfe4c2b309f" kind="variable"><name>_crossover</name></member>
+    <member refid="classft_1_1FTProp_1ada43753f85210ecbf5f5df156020c086" kind="variable"><name>_printSearchTime</name></member>
+    <member refid="classft_1_1FTProp_1ac71b6ed06165c68698a31757c314ceda" kind="variable"><name>_pairedReads</name></member>
+    <member refid="classft_1_1FTProp_1a6ca5846517e0745c8c9955eec7a09b7d" kind="variable"><name>_countAsPairs</name></member>
+    <member refid="classft_1_1FTProp_1ac0326580f7a6797e5ef61dbe07b5f0f5" kind="variable"><name>_revCompSearch</name></member>
+    <member refid="classft_1_1FTProp_1a332fb6c6b4eb62efaecf5a809d8ed356" kind="variable"><name>_indexRevComp</name></member>
+    <member refid="classft_1_1FTProp_1ae75551e70cdfdd994b6a9671ea9b24b2" kind="variable"><name>_matchingReads</name></member>
+    <member refid="classft_1_1FTProp_1addfd284043d656c280bf3dcf3d8096fe" kind="variable"><name>_verbose</name></member>
+    <member refid="classft_1_1FTProp_1ac016ad94a1f167d70e5c56e1239f1165" kind="function"><name>FTProp</name></member>
+    <member refid="classft_1_1FTProp_1aa6b77574b807f4cb2afdde38b1ecfa9d" kind="function"><name>~FTProp</name></member>
+    <member refid="classft_1_1FTProp_1acb8244b41f4c7f037409707de66fe43d" kind="function"><name>init</name></member>
+    <member refid="classft_1_1FTProp_1a14ea79b8525f56b20e0c5eab6501dbda" kind="function"><name>initFromQSettings</name></member>
+    <member refid="classft_1_1FTProp_1af661f167a130682047f0890a470c0ebc" kind="function"><name>setVerbose</name></member>
+    <member refid="classft_1_1FTProp_1a6e950a041bf2203ff7755f03f08b8d9f" kind="function"><name>loadIndexProps</name></member>
+    <member refid="classft_1_1FTProp_1adef82d00bed9adcb51635d232c9fcc8d" kind="function"><name>initIndexProps</name></member>
+    <member refid="classft_1_1FTProp_1a2570a3ceda229ee89bab927e3b1b7d31" kind="function"><name>printToStdOut</name></member>
+    <member refid="classft_1_1FTProp_1ac80c7bca31143ac2e3b2ee89b11ea45a" kind="function"><name>getSearchType</name></member>
+    <member refid="classft_1_1FTProp_1abaabd7e8fce73c21e850d162122cfedb" kind="function"><name>getReadSetName</name></member>
+    <member refid="classft_1_1FTProp_1af71c469f9963c11e8c3348863cc57d26" kind="function"><name>getIndexFileName</name></member>
+    <member refid="classft_1_1FTProp_1a9c7181d62a25c552bd9871c95f8c6ed8" kind="function"><name>getKmerSize</name></member>
+    <member refid="classft_1_1FTProp_1a38d3741143084a60694fcec989471b3e" kind="function"><name>getOverlap</name></member>
+    <member refid="classft_1_1FTProp_1a31ad687ef24e572067337c26429ef9c8" kind="function"><name>getStride</name></member>
+    <member refid="classft_1_1FTProp_1a42b17257c0e2a823175d9890ad8c3f8d" kind="function"><name>getReadLength</name></member>
+    <member refid="classft_1_1FTProp_1a8ec647c9c62dc02c40ae926dca3b8eb8" kind="function"><name>getMaxOcc</name></member>
+    <member refid="classft_1_1FTProp_1addea0e38d4382d1ae676104b36a05797" kind="function"><name>getMaxThreads</name></member>
+    <member refid="classft_1_1FTProp_1a80fd2e07d29e35d0112fd0b7210666da" kind="function"><name>getMaxKmersPerQuery</name></member>
+    <member refid="classft_1_1FTProp_1a0d21b1540f91b01d71555a3efb1bb989" kind="function"><name>getMaxTotalKmers</name></member>
+    <member refid="classft_1_1FTProp_1a9740503fda6438c74492b78c51ff45ec" kind="function"><name>getNumOfIndexes</name></member>
+    <member refid="classft_1_1FTProp_1a69fbbf3e40cea64aead08c50e04ba513" kind="function"><name>getNumOfReads</name></member>
+    <member refid="classft_1_1FTProp_1a51e1b3f818d4950468fef2f2935af915" kind="function"><name>getFlagsToOutput</name></member>
+    <member refid="classft_1_1FTProp_1a8f59f86b8063dfb43d760368c33650d8" kind="function"><name>getFlagsToNotCount</name></member>
+    <member refid="classft_1_1FTProp_1a9d9febdd8e43d98dc1660319d647f899" kind="function"><name>countFlag</name></member>
+    <member refid="classft_1_1FTProp_1a76617feb28bd260b6f736a64313bd7a0" kind="function"><name>outputFlag</name></member>
+    <member refid="classft_1_1FTProp_1a048b57bf597db83b3bf21aea720b4102" kind="function"><name>setFlagToOutput</name></member>
+    <member refid="classft_1_1FTProp_1ab30d099a9b888218ea0974f786195093" kind="function"><name>setFlagToNotCount</name></member>
+    <member refid="classft_1_1FTProp_1af61ffbf767ee8abd1843d652fb72ae4f" kind="function"><name>resetFlagToOutput</name></member>
+    <member refid="classft_1_1FTProp_1adc1baf05f4d00883ee9a79c41101c37c" kind="function"><name>resetFlagToNotCount</name></member>
+    <member refid="classft_1_1FTProp_1a925ebad4efbd88f70a912f5a851a0d4f" kind="function"><name>getMultithreadFlag</name></member>
+    <member refid="classft_1_1FTProp_1a488d04b564bd3f2b1a634d6de3f8b28d" kind="function"><name>getRefOnlyFlag</name></member>
+    <member refid="classft_1_1FTProp_1a7cfaaa5690e6f9fede9cc6df44661f1f" kind="function"><name>getMatchesOnlyFlag</name></member>
+    <member refid="classft_1_1FTProp_1aad837aa2fa8b055020ed48c26d57662f" kind="function"><name>getCrossoverFlag</name></member>
+    <member refid="classft_1_1FTProp_1a7b9d2a73658176a78bca2afb44c1b528" kind="function"><name>getPrintSearchTimeFlag</name></member>
+    <member refid="classft_1_1FTProp_1ada693d977809d869f1bf97f1b3108d42" kind="function"><name>getPairedReadFlag</name></member>
+    <member refid="classft_1_1FTProp_1a6cbdb4e73baa900f9e57dfff639aff47" kind="function"><name>getCountAsPairsFlag</name></member>
+    <member refid="classft_1_1FTProp_1a18cb2b83f57d9b05c661eaf0baf3d790" kind="function"><name>getRevCompSearchFlag</name></member>
+    <member refid="classft_1_1FTProp_1a4a58ecc0ce12557239bc5e25211445f6" kind="function"><name>getIndexRevCompFlag</name></member>
+    <member refid="classft_1_1FTProp_1a73777df5d746cae9dce68a75f231dfff" kind="function"><name>getMatchingReadsFlag</name></member>
+    <member refid="classft_1_1FTProp_1aa8550511f88a6eddcd31385160ab8d76" kind="function"><name>isVerbose</name></member>
+    <member refid="classft_1_1FTProp_1a2df081cdef16952e76c4c13fb3299e65" kind="function"><name>getPathToQueryFile</name></member>
+    <member refid="classft_1_1FTProp_1a0c42e30a80e17d04a2001a2adeec5133" kind="function"><name>getIndexDir</name></member>
+    <member refid="classft_1_1FTProp_1aca0486b4f7e21a50ce2d84e790c33bc8" kind="function"><name>getOutputFolder</name></member>
+    <member refid="classft_1_1FTProp_1a72bed219f41deb43edab8bce77da364d" kind="function"><name>getMatchingReadFQ</name></member>
+    <member refid="classft_1_1FTProp_1a4755ce7b02a256f80d0d58ffc70f74e1" kind="function"><name>getInputFastQ</name></member>
+    <member refid="classft_1_1FTProp_1a60e603cb60ad3b9cc5f4a92379ad6ae0" kind="function"><name>getOutputFile</name></member>
+    <member refid="classft_1_1FTProp_1a1d3bf6d120c2281c918c35fad3e57e64" kind="function"><name>getIndexSet</name></member>
+    <member refid="classft_1_1FTProp_1a468edb361da970e6e172017c051d2b7b" kind="function"><name>getBuildDir</name></member>
+    <member refid="classft_1_1FTProp_1a6757334bf2e701cee6825414c7db1ddb" kind="function"><name>getR1</name></member>
+    <member refid="classft_1_1FTProp_1a50981f934581cdeee55692d71b0ecc8a" kind="function"><name>getR2</name></member>
+    <member refid="classft_1_1FTProp_1aeaf3fb5f862dc4c5f9bbe23c03f34473" kind="function"><name>addToIndexSet</name></member>
+    <member refid="classft_1_1FTProp_1acc55d9efe8d6d7e17e4bb3d44b5737b0" kind="function"><name>setTestProps</name></member>
+    <member refid="classft_1_1FTProp_1a0ce04bff783d9ea6288318b457c6552f" kind="function"><name>setOutputFolder</name></member>
+  </compound>
+  <compound refid="classft_1_1FTSearch" kind="class"><name>ft::FTSearch</name>
+    <member refid="classft_1_1FTSearch_1a93d3d8edfdb2af3f4707a7d688479a6a" kind="variable"><name>_readFile</name></member>
+    <member refid="classft_1_1FTSearch_1a7e1bab023cbf4aa7d858f77b0c0f273d" kind="variable"><name>_counter</name></member>
+    <member refid="classft_1_1FTSearch_1a7f3599507612a1bc00096a91c89e2f48" kind="variable"><name>_ownedUtils</name></member>
+    <member refid="classft_1_1FTSearch_1a90db09a53616e274c8167b55c7613b3e" kind="variable"><name>_utils</name></member>
+    <member refid="classft_1_1FTSearch_1af0222d2df8ae4582aba1bab3fa638b0f" kind="variable"><name>_ownedWriterBridge</name></member>
+    <member refid="classft_1_1FTSearch_1a57b101d56da06c3351a8493dc9cca56b" kind="variable"><name>_writerBridge</name></member>
+    <member refid="classft_1_1FTSearch_1a278a98a8dcbafbe046f1c0ec01fa7f02" kind="variable"><name>_ownedFinder</name></member>
+    <member refid="classft_1_1FTSearch_1ac69c0618f474f4cfaaaae9cee1202ae6" kind="variable"><name>_finder</name></member>
+    <member refid="classft_1_1FTSearch_1a26b52cd26df28dce41bfcbf4709fb844" kind="variable"><name>_ownedQueryExtractor</name></member>
+    <member refid="classft_1_1FTSearch_1a97c8a110db4824f30bb388922434bc7b" kind="variable"><name>_queryExtractor</name></member>
+    <member refid="classft_1_1FTSearch_1aca1d39e068f42c374e8c8ab5d655834d" kind="variable"><name>_verbose</name></member>
+    <member refid="classft_1_1FTSearch_1afc6941460e146a29a22400dc5c14e761" kind="function"><name>FTSearch</name></member>
+    <member refid="classft_1_1FTSearch_1a6604aba254f49c5346412c82c7b93b3b" kind="function"><name>~FTSearch</name></member>
+    <member refid="classft_1_1FTSearch_1a495e545a07f1b1d97d14ff33b7d5f644" kind="function"><name>init</name></member>
+    <member refid="classft_1_1FTSearch_1adf9fda15d578f114b4e5d61ae16e8828" kind="function"><name>printToStdOut</name></member>
+    <member refid="classft_1_1FTSearch_1a406f1b2bda93281c2c4210d3f4fe78c9" kind="function"><name>checkOutputFile</name></member>
+    <member refid="classft_1_1FTSearch_1a3a1e6ea737089c1c349800c37ee9eb77" kind="function"><name>overrideUtils</name></member>
+    <member refid="classft_1_1FTSearch_1a3fdc9f7f429b9fc11eaeac6adc78e0c1" kind="function"><name>overrideWriterBridge</name></member>
+    <member refid="classft_1_1FTSearch_1ab3bd99677df993bfd77aad551e2c7763" kind="function"><name>overrideFinder</name></member>
+    <member refid="classft_1_1FTSearch_1aa6471bf5d94a150758f4c5e55e31d108" kind="function"><name>overrideQueryExtractor</name></member>
+  </compound>
+  <compound refid="classft_1_1IFinder" kind="class"><name>ft::IFinder</name>
+    <member refid="classft_1_1IFinder_1abadf665c903cb8997e8ed7b19c689c67" kind="function"><name>~IFinder</name></member>
+    <member refid="classft_1_1IFinder_1a88afb90afbf4684558800bc1d17f97ca" kind="function"><name>searchIndexes</name></member>
+  </compound>
+  <compound refid="classalgo_1_1IFmIndex" kind="class"><name>algo::IFmIndex</name>
+    <member refid="classalgo_1_1IFmIndex_1a9934efd8cd1f0a96720774ac7043ca58" kind="function"><name>~IFmIndex</name></member>
+    <member refid="classalgo_1_1IFmIndex_1a6e535089e2570fb7d1772f43aa00fd8e" kind="function"><name>createFMIndex</name></member>
+    <member refid="classalgo_1_1IFmIndex_1a5ced4c3e06f6aace5068aeb10a53c16f" kind="function"><name>loadIndexFromFile</name></member>
+    <member refid="classalgo_1_1IFmIndex_1ac71625b838118351c44801949454a9fa" kind="function"><name>parallelFmIndex</name></member>
+    <member refid="classalgo_1_1IFmIndex_1a7a2769c3082c445c8e884115c9d51c7c" kind="function"><name>search</name></member>
+    <member refid="classalgo_1_1IFmIndex_1a947444aefb420f1de03a9f8aa8619536" kind="function"><name>indexCount</name></member>
+  </compound>
+  <compound refid="classft_1_1IKmerGenerator" kind="class"><name>ft::IKmerGenerator</name>
+    <member refid="classft_1_1IKmerGenerator_1a0d8f694589221c62796426dba6a8b00c" kind="function"><name>~IKmerGenerator</name></member>
+    <member refid="classft_1_1IKmerGenerator_1a1aad625b31b17f106a1d7d810cf6a6a6" kind="function"><name>init</name></member>
+    <member refid="classft_1_1IKmerGenerator_1a4af12a660e2b1eea2c3e0e6d267d74f9" kind="function"><name>genSlidingSearchStrings</name></member>
+    <member refid="classft_1_1IKmerGenerator_1a5f735234fe16cb973c91a00b7a47ebb0" kind="function"><name>genCenteredSearchStrings</name></member>
+    <member refid="classft_1_1IKmerGenerator_1ad29f100e572eb069d1dfca76027b1cc3" kind="function"><name>genSearchKmers</name></member>
+  </compound>
+  <compound refid="classalgo_1_1IndexProps" kind="class"><name>algo::IndexProps</name>
+    <member refid="classalgo_1_1IndexProps_1a8d6310efbfe3cc7ba62c81a7517f17e7" kind="variable"><name>_R1</name></member>
+    <member refid="classalgo_1_1IndexProps_1a3c54724c0e0164103125376abb68d8b5" kind="variable"><name>_R2</name></member>
+    <member refid="classalgo_1_1IndexProps_1a81097d24b131915b828f525da251237b" kind="variable"><name>_ppFSet</name></member>
+    <member refid="classalgo_1_1IndexProps_1abda2c5051bb97f42ef4ddefc6be9c464" kind="variable"><name>_indexSet</name></member>
+    <member refid="classalgo_1_1IndexProps_1a7bd039f1abbca071fd827ff43a003b93" kind="variable"><name>_outputFolder</name></member>
+    <member refid="classalgo_1_1IndexProps_1a98a3168ffd64c58d45e0c78f8680df70" kind="variable"><name>_ppfFolder</name></member>
+    <member refid="classalgo_1_1IndexProps_1a7a2444541b111e721ff09bbee21207ac" kind="variable"><name>_buildDir</name></member>
+    <member refid="classalgo_1_1IndexProps_1a1b9bbf3b6d8dce80a5fdb35dfab14e2d" kind="variable"><name>_numOfReads</name></member>
+    <member refid="classalgo_1_1IndexProps_1abb7b946f0fc798c6e620ea54c8493605" kind="variable"><name>_readLength</name></member>
+    <member refid="classalgo_1_1IndexProps_1ae6cf95f39c21153e0fdf0b1c892e729f" kind="variable"><name>_numOfIndexes</name></member>
+    <member refid="classalgo_1_1IndexProps_1a8acda5b4f47c1cc4ba912d7a943cd269" kind="variable"><name>_revComp</name></member>
+    <member refid="classalgo_1_1IndexProps_1a1b74fcdc4c1c1daef44e9f0427296a8e" kind="variable"><name>_pairedReads</name></member>
+    <member refid="classalgo_1_1IndexProps_1a35e73bfe9e2de78e94a4371a01b9a4d6" kind="variable"><name>_delFQ</name></member>
+    <member refid="classalgo_1_1IndexProps_1a1e8c157d3f2d8c50243887deacba02fc" kind="variable"><name>_delFasta</name></member>
+    <member refid="classalgo_1_1IndexProps_1acb316496546759ec236999735b72ab3c" kind="variable"><name>_verbose</name></member>
+    <member refid="classalgo_1_1IndexProps_1aa81d1649d871cbd602b2a03d7024d1c2" kind="variable"><name>_readSetName</name></member>
+    <member refid="classalgo_1_1IndexProps_1aabe73024de9966b234ec4ab36b4f6cb9" kind="variable"><name>_indexName</name></member>
+    <member refid="classalgo_1_1IndexProps_1ae7ccb6f5863a149d7c9695a8f1ec0392" kind="variable"><name>_readFileType</name></member>
+    <member refid="classalgo_1_1IndexProps_1a1164241d64412bab78139c9ee650f1c9" kind="function"><name>IndexProps</name></member>
+    <member refid="classalgo_1_1IndexProps_1ab63fea4e456b1487ce884226b96c9d41" kind="function"><name>IndexProps</name></member>
+    <member refid="classalgo_1_1IndexProps_1a71394d5887a5f8ce878d5d40149b010f" kind="function"><name>~IndexProps</name></member>
+    <member refid="classalgo_1_1IndexProps_1a963dfe32c74c18787d3a6db9537efea3" kind="function"><name>createBash</name></member>
+    <member refid="classalgo_1_1IndexProps_1a37d6764b6deda1d4ea7a26b81decf16c" kind="function"><name>printToStdOut</name></member>
+    <member refid="classalgo_1_1IndexProps_1aa4d5ceae1c632fe71c8694e9f4b8b7bc" kind="function"><name>getNumOfIndexes</name></member>
+    <member refid="classalgo_1_1IndexProps_1a2ea053dc571941c25cb9a31b44124bd9" kind="function"><name>getNumOfReads</name></member>
+    <member refid="classalgo_1_1IndexProps_1ae3f822542a67c03a71090293b13548b5" kind="function"><name>getReadLength</name></member>
+    <member refid="classalgo_1_1IndexProps_1a2c30d20fd6ccd8ede0efce5bfa311ac9" kind="function"><name>getDelFQFlag</name></member>
+    <member refid="classalgo_1_1IndexProps_1ab7812f5c52789706dc03504858483202" kind="function"><name>getDelFastaFlag</name></member>
+    <member refid="classalgo_1_1IndexProps_1a0a375597b09cec532abd35c5ac4e17e7" kind="function"><name>getRevCompFlag</name></member>
+    <member refid="classalgo_1_1IndexProps_1a1b6de579870189643b9d15372195bdf6" kind="function"><name>getPairedReadsFlag</name></member>
+    <member refid="classalgo_1_1IndexProps_1a1b549337c647b1cfc97fb65fb7de642e" kind="function"><name>getReadSetName</name></member>
+    <member refid="classalgo_1_1IndexProps_1a33a1e5bcb658ca2bd6078d7ddd5b1fd8" kind="function"><name>getIndexName</name></member>
+    <member refid="classalgo_1_1IndexProps_1aa983c43bcbdde88e5e26058f20d8392b" kind="function"><name>getReadFileType</name></member>
+    <member refid="classalgo_1_1IndexProps_1afabfdb544297f20d8aa7bdbcff978bae" kind="function"><name>setNumOfIndexes</name></member>
+    <member refid="classalgo_1_1IndexProps_1a3abfa5c2d54356386afd6694467de63e" kind="function"><name>setNumOfReads</name></member>
+    <member refid="classalgo_1_1IndexProps_1a155125532f633f7c42a35f8c9938b91e" kind="function"><name>setReadLength</name></member>
+    <member refid="classalgo_1_1IndexProps_1a7478d58764c1d33d5eb5788c4c1fd924" kind="function"><name>setDelFQFlag</name></member>
+    <member refid="classalgo_1_1IndexProps_1a4b411f06afcf10c1265f904841abef4f" kind="function"><name>setDelFastaFlag</name></member>
+    <member refid="classalgo_1_1IndexProps_1a6237646a24e3216b64b8ffa91896e3c5" kind="function"><name>setRevCompFlag</name></member>
+    <member refid="classalgo_1_1IndexProps_1a49a64638d42161cd535807abb8e33fc0" kind="function"><name>setPairedReadsFlag</name></member>
+    <member refid="classalgo_1_1IndexProps_1a6f80168f9b077e1d3232e05add4d4f76" kind="function"><name>setVerboseFlag</name></member>
+    <member refid="classalgo_1_1IndexProps_1a56f31b1ce0195c3f45054ecfdfc788bb" kind="function"><name>setReadSetName</name></member>
+    <member refid="classalgo_1_1IndexProps_1ac4c35643ef01f639776cd59e8e32be52" kind="function"><name>setReadFileType</name></member>
+    <member refid="classalgo_1_1IndexProps_1a6bcda7527448a4de3d01f1971da6b512" kind="function"><name>getR1</name></member>
+    <member refid="classalgo_1_1IndexProps_1aaf656164c1bcb8e8cd3c5c363430edff" kind="function"><name>getR2</name></member>
+    <member refid="classalgo_1_1IndexProps_1a44da1f2e0a581b2047272cf7902d0a91" kind="function"><name>getBuildDir</name></member>
+    <member refid="classalgo_1_1IndexProps_1a265d6235a61c3cdf6418ce428e384d2b" kind="function"><name>getOutputFolder</name></member>
+    <member refid="classalgo_1_1IndexProps_1a11c4bea1da66bf90dc94927ce0304f9f" kind="function"><name>getppfFolder</name></member>
+    <member refid="classalgo_1_1IndexProps_1a11daba391ac72775a61d82fff1c57088" kind="function"><name>getPreProcessedFastas</name></member>
+    <member refid="classalgo_1_1IndexProps_1ab0421d36de715312dc861d5507687554" kind="function"><name>getIndexSet</name></member>
+    <member refid="classalgo_1_1IndexProps_1a843b6d78bd3c8fa70cf4ffe6f07b0bd0" kind="function"><name>setR1</name></member>
+    <member refid="classalgo_1_1IndexProps_1a7254f19ded830a1963133cc95d94c681" kind="function"><name>setR2</name></member>
+    <member refid="classalgo_1_1IndexProps_1af08e83bc5dc8e689255ed538fda8a673" kind="function"><name>delR1</name></member>
+    <member refid="classalgo_1_1IndexProps_1a695d3e51b000be3015c559fb6c1bdb65" kind="function"><name>delR2</name></member>
+    <member refid="classalgo_1_1IndexProps_1aee6a78fca1ebf3ee7bf4225e6dc14123" kind="function"><name>delFQ</name></member>
+    <member refid="classalgo_1_1IndexProps_1ad0e2a40a4a6048096d3decfbe81c376c" kind="function"><name>delReadFastas</name></member>
+    <member refid="classalgo_1_1IndexProps_1a116d5fd7f970d6365e7854fa0b3a1b2a" kind="function"><name>delSpecificReadFasta</name></member>
+    <member refid="classalgo_1_1IndexProps_1af47a3f1cd44618e482b02b986ccb3463" kind="function"><name>setBuildDir</name></member>
+    <member refid="classalgo_1_1IndexProps_1a4287704e6c74d184546b81bed74bd7f9" kind="function"><name>setIndexName</name></member>
+    <member refid="classalgo_1_1IndexProps_1ab9f16f8d651a7ea05dbbebdc08024940" kind="function"><name>setOutputFolder</name></member>
+    <member refid="classalgo_1_1IndexProps_1a092c027a0f072fa04b5e9f90ca030fa7" kind="function"><name>setppfFolder</name></member>
+    <member refid="classalgo_1_1IndexProps_1a01a197a00aa155734f380a5f50b65062" kind="function"><name>setPreProcessedFastas</name></member>
+    <member refid="classalgo_1_1IndexProps_1a3ad2dd02ad6778e53f53ab99d7db08a9" kind="function"><name>addPPF</name></member>
+    <member refid="classalgo_1_1IndexProps_1a6baca3e74edca4b8f72e70c2655a22b4" kind="function"><name>setIndexSet</name></member>
+    <member refid="classalgo_1_1IndexProps_1ac7af53b1591127e0758812ca360a656b" kind="function"><name>addToIndexSet</name></member>
+    <member refid="classalgo_1_1IndexProps_1a77ba869b2d387340ff763c54b07bb977" kind="function"><name>createPPFSet</name></member>
+    <member refid="classalgo_1_1IndexProps_1adba80bea83cf74a343b5dfbbc6fd959c" kind="function"><name>countNumOfReads</name></member>
+    <member refid="classalgo_1_1IndexProps_1add592ec9c17a3820ab15440415d9eed6" kind="function"><name>countReadLength</name></member>
+    <member refid="classalgo_1_1IndexProps_1a88cbcd129ea4eedd80a54de0f12aef0e" kind="function"><name>saveIndexProps</name></member>
+    <member refid="classalgo_1_1IndexProps_1a25de62a232a3115cebf2f16fff71592c" kind="function"><name>loadFromIni</name></member>
+    <member refid="classalgo_1_1IndexProps_1ab88f7febe34dc6121b76cfd71921e4d8" kind="function"><name>getOffsetForIndex</name></member>
+    <member refid="classalgo_1_1IndexProps_1acca1ee59ceef12ebb058a2f836e868e4" kind="function"><name>countLines</name></member>
+  </compound>
+  <compound refid="classft_1_1IQueryExtractor" kind="class"><name>ft::IQueryExtractor</name>
+    <member refid="classft_1_1IQueryExtractor_1ad2ef1b639baa5a23e53bf7a249c63761" kind="function"><name>~IQueryExtractor</name></member>
+    <member refid="classft_1_1IQueryExtractor_1a02db04936b322df8f9f9874c043691d2" kind="function"><name>getInputQueries</name></member>
+  </compound>
+  <compound refid="classft_1_1IUtils" kind="class"><name>ft::IUtils</name>
+    <member refid="classft_1_1IUtils_1aa8670974e6e0855396dc48f090f1a205" kind="function"><name>~IUtils</name></member>
+    <member refid="classft_1_1IUtils_1a27bf824acf0eb6ce051b9a728568b192" kind="function"><name>joinString</name></member>
+    <member refid="classft_1_1IUtils_1a9f89e2bd1ef5f9b949e2237d42c66bc5" kind="function"><name>split</name></member>
+    <member refid="classft_1_1IUtils_1a972716915e10223056c0bbe7a4aa9f3c" kind="function"><name>reverseComplement</name></member>
+  </compound>
+  <compound refid="classft_1_1IWriterBridge" kind="class"><name>ft::IWriterBridge</name>
+    <member refid="classft_1_1IWriterBridge_1a828266e79b16b6175161a2111453227a" kind="function"><name>~IWriterBridge</name></member>
+    <member refid="classft_1_1IWriterBridge_1a290a8c259c14b69e1dc825a94052b976" kind="function"><name>setOutputOptions</name></member>
+    <member refid="classft_1_1IWriterBridge_1a1825c80895eeb84a1ec661164af76401" kind="function"><name>createHeader</name></member>
+    <member refid="classft_1_1IWriterBridge_1aa86d7e57761efd17b97402cd6f809e0c" kind="function"><name>formatOutputMap</name></member>
+    <member refid="classft_1_1IWriterBridge_1a18eb9a039e80bf799c18ebfe8b913ecd" kind="function"><name>getFlagKmers</name></member>
+    <member refid="classft_1_1IWriterBridge_1a3064bf463da30c3bc407908125afafff" kind="function"><name>addQueryToOutput</name></member>
+    <member refid="classft_1_1IWriterBridge_1a1e58c75a1f0bb0b7e22eed18aec0cab1" kind="function"><name>saveOutput</name></member>
+  </compound>
+  <compound refid="classft_1_1KmerClass" kind="class"><name>ft::KmerClass</name>
+    <member refid="classft_1_1KmerClass_1a547c73b44dde28edc45b4ef23c042333" kind="variable"><name>_kmer</name></member>
+    <member refid="classft_1_1KmerClass_1abc8f0915743b929c06d716f2a921563b" kind="variable"><name>_kFlags</name></member>
+    <member refid="classft_1_1KmerClass_1a0b668cd5cc4f2a3bb8f5a835e32371a2" kind="variable"><name>_positions</name></member>
+    <member refid="classft_1_1KmerClass_1ae5147a81357b3e0caedb21c22a518a8e" kind="variable"><name>_readIDs</name></member>
+    <member refid="classft_1_1KmerClass_1aa417eb8b8c9694ca4290b33ad7f92d84" kind="variable"><name>_occ</name></member>
+    <member refid="classft_1_1KmerClass_1a78fb5b6831e2e725365bd0f7335147d6" kind="variable"><name>_isOffsetAdjusted</name></member>
+    <member refid="classft_1_1KmerClass_1a53afab97476f5abfc6e4605206291db9" kind="function"><name>KmerClass</name></member>
+    <member refid="classft_1_1KmerClass_1a476730429bbc011f9c060cd93f4d74d1" kind="function"><name>KmerClass</name></member>
+    <member refid="classft_1_1KmerClass_1a46cad2c13be01d3569be6170d6ada52d" kind="function"><name>~KmerClass</name></member>
+    <member refid="classft_1_1KmerClass_1aa465dd9303f06ebd2b18137b12701d57" kind="function"><name>getKmer</name></member>
+    <member refid="classft_1_1KmerClass_1af4e48ac297a33df76c1d2f098ddb86e3" kind="function"><name>getKFlags</name></member>
+    <member refid="classft_1_1KmerClass_1a2b12bbb71276b39f4d5e940e85d3b5e7" kind="function"><name>getKPositions</name></member>
+    <member refid="classft_1_1KmerClass_1ad92076bada01a126750cfc2680804d8c" kind="function"><name>getReadIDs</name></member>
+    <member refid="classft_1_1KmerClass_1a4f56b088336562dbb9b73ad56d19fe72" kind="function"><name>getOCC</name></member>
+    <member refid="classft_1_1KmerClass_1a9bc4ba0c03cc2e9b32b6d2c5e30c2f1a" kind="function"><name>setKFlags</name></member>
+    <member refid="classft_1_1KmerClass_1adc3eb86682972debc5f85f97bc9e2d4a" kind="function"><name>setKPositions</name></member>
+    <member refid="classft_1_1KmerClass_1a33f04144d7786843374804753070c288" kind="function"><name>adjustPosForOffset</name></member>
+    <member refid="classft_1_1KmerClass_1a02865138e829af5c70fce597170a123f" kind="function"><name>setReadIDs</name></member>
+    <member refid="classft_1_1KmerClass_1a30a2b9b6a0c438e4903e3ecafa5c5366" kind="function"><name>setOCC</name></member>
+    <member refid="classft_1_1KmerClass_1a122ef7c5f4e0500d1cbe73628820f2ae" kind="function"><name>adjustPositionsWithOffset</name></member>
+    <member refid="classft_1_1KmerClass_1a686aaf14d2a49904ccee25fa0b305039" kind="function"><name>addKFlag</name></member>
+    <member refid="classft_1_1KmerClass_1a1a9b7b2776429d9e0c9916b38e8ac2fb" kind="function"><name>addKPosition</name></member>
+    <member refid="classft_1_1KmerClass_1afa821b3a22f4ceffa601f2ff640058fe" kind="function"><name>addReadID</name></member>
+    <member refid="classft_1_1KmerClass_1a054551df636b2f93b7b5ec6a25a98f63" kind="function"><name>removeKFlag</name></member>
+    <member refid="classft_1_1KmerClass_1ac68ffdc07b42d9fe1ce20dab203b43ea" kind="function"><name>removeKPosition</name></member>
+    <member refid="classft_1_1KmerClass_1ab6b00c19f866fa136509edf2e337fa49" kind="function"><name>removeReadID</name></member>
+    <member refid="classft_1_1KmerClass_1add76ed8b87b9b0c3388a08854daa69bb" kind="function"><name>isKmerEqual</name></member>
+    <member refid="classft_1_1KmerClass_1a136e084b75580c7f4d1c08f55be7af58" kind="function"><name>hasKmer</name></member>
+    <member refid="classft_1_1KmerClass_1a30d34b1a159eb8d7a2b694746a4a40a5" kind="function"><name>hasFlag</name></member>
+    <member refid="classft_1_1KmerClass_1ac8e76eea15363527e12e333ece65a49f" kind="function"><name>hasKPosition</name></member>
+    <member refid="classft_1_1KmerClass_1a1567d31439d309b2a7ba3ad37aeb70ad" kind="function"><name>hasReadID</name></member>
+    <member refid="classft_1_1KmerClass_1ab96111b0cd9f994260b71810ff4a7097" kind="function"><name>convertPosToReadID</name></member>
+    <member refid="classft_1_1KmerClass_1a2eb7a0a8d13da061544b8b606d08054e" kind="function"><name>matchingReadID</name></member>
+    <member refid="classft_1_1KmerClass_1a87ce5da0c32d8c73a9c8b91048d817c5" kind="function"><name>operator&lt;</name></member>
+    <member refid="classft_1_1KmerClass_1acd19effd9f92d2d02fb25917737e1dae" kind="function"><name>operator==</name></member>
+  </compound>
+  <compound refid="classft_1_1KmerGenerator" kind="class"><name>ft::KmerGenerator</name>
+    <member refid="classft_1_1KmerGenerator_1a0f05bd1807efcaca384ab510b84ed920" kind="variable"><name>_counter</name></member>
+    <member refid="classft_1_1KmerGenerator_1a116846c5028ffc65df089ed3010b742f" kind="variable"><name>_kmerSize</name></member>
+    <member refid="classft_1_1KmerGenerator_1a3d47cc74c2cfe56a86e8e7bb63331b01" kind="variable"><name>_refOnly</name></member>
+    <member refid="classft_1_1KmerGenerator_1a8d30693f361b5366b22ff101bc840122" kind="variable"><name>_searchType</name></member>
+    <member refid="classft_1_1KmerGenerator_1ac6d1b02139394d245f4d48f9eb4ae92c" kind="variable"><name>_overlap</name></member>
+    <member refid="classft_1_1KmerGenerator_1aed388884a321736b49ddf14bb83d7ffb" kind="variable"><name>_stride</name></member>
+    <member refid="classft_1_1KmerGenerator_1a8c81ab251d2009a9869cd9ef3f223578" kind="variable"><name>_maxKmers</name></member>
+    <member refid="classft_1_1KmerGenerator_1ace19e7c07f932dfd5672a0192131a3e0" kind="variable"><name>_verbose</name></member>
+    <member refid="classft_1_1KmerGenerator_1aa03f5634ac923c17b552b5915b9ab903" kind="function"><name>KmerGenerator</name></member>
+    <member refid="classft_1_1KmerGenerator_1ad5a06081298b0b6afc4d01aca24affaf" kind="function"><name>~KmerGenerator</name></member>
+    <member refid="classft_1_1KmerGenerator_1a10c9d846c03e731cb922ba29d293e4f5" kind="function"><name>genSlidingSearchStrings</name></member>
+    <member refid="classft_1_1KmerGenerator_1a3bbccae28b484619d2cb903dde71a6c8" kind="function"><name>genCenteredSearchStrings</name></member>
+    <member refid="classft_1_1KmerGenerator_1a94e99accde0e475047fee9fca795982d" kind="function"><name>genSearchKmers</name></member>
+    <member refid="classft_1_1KmerGenerator_1abf4d9744daa132ac596f0e193f1392f5" kind="function"><name>getKmerSize</name></member>
+    <member refid="classft_1_1KmerGenerator_1a84aa769ac6e00ad5d66eeda9d1f74da2" kind="function"><name>getRefOnly</name></member>
+    <member refid="classft_1_1KmerGenerator_1ae8e7c112280b459dbd01f1d9a672e604" kind="function"><name>getSearchType</name></member>
+    <member refid="classft_1_1KmerGenerator_1a006ee71b4f2ad633281279ab0ec94224" kind="function"><name>getOverlap</name></member>
+    <member refid="classft_1_1KmerGenerator_1aac102da94942b4e54b0d4897194d4822" kind="function"><name>getStride</name></member>
+    <member refid="classft_1_1KmerGenerator_1a32cfbeb3ed9f747b744708f7a0ff9d21" kind="function"><name>getMaxKmers</name></member>
+  </compound>
+  <compound refid="classft_1_1LogClass" kind="class"><name>ft::LogClass</name>
+    <member refid="classft_1_1LogClass_1a924e3c3bde5980d439a5f853f14ee58f" kind="variable"><name>Log</name></member>
+    <member refid="classft_1_1LogClass_1adeee310a646c32f0ac8ffd8258b21f6f" kind="function"><name>LogClass</name></member>
+    <member refid="classft_1_1LogClass_1af43272b9c1c69cf3958a2e285564617e" kind="function"><name>~LogClass</name></member>
+    <member refid="classft_1_1LogClass_1a5fa7aa969e501abbaa11d9a9675fcf01" kind="function"><name>OpenLog</name></member>
+    <member refid="classft_1_1LogClass_1a519c950746dd82f610f1158618bbd8cf" kind="function"><name>CloseLog</name></member>
+    <member refid="classft_1_1LogClass_1a378f01fe3d36ca41fdc4a465ed5c42b0" kind="function"><name>ThrowRuntimeError</name></member>
+  </compound>
+  <compound refid="classft_1_1QKMap" kind="class"><name>ft::QKMap</name>
+    <member refid="classft_1_1QKMap_1a94a8fed4625412a49a9f9333d6576a99" kind="variable"><name>_map</name></member>
+    <member refid="classft_1_1QKMap_1a5c8600394843f44874b24b9bb03e70a6" kind="function"><name>QKMap</name></member>
+    <member refid="classft_1_1QKMap_1a31145a0b72461517d55b659be784779c" kind="function"><name>~QKMap</name></member>
+    <member refid="classft_1_1QKMap_1a0a58edaf2b7043cf13dffb2356a46d15" kind="function"><name>getQKMap</name></member>
+    <member refid="classft_1_1QKMap_1aac1356011a6c787a048e64bc9bda28bf" kind="function"><name>retrieveQueries</name></member>
+    <member refid="classft_1_1QKMap_1ae586863733683750ffc89daa444b528a" kind="function"><name>retrieveKmers</name></member>
+    <member refid="classft_1_1QKMap_1af5674868b3265f66b017f8bbbe486739" kind="function"><name>checkForMatch</name></member>
+    <member refid="classft_1_1QKMap_1a17b2a83a9fc48e26707533ed6736acc6" kind="function"><name>checkForQuery</name></member>
+    <member refid="classft_1_1QKMap_1ab3d8eb37baf3af56dbf89efbb136afe4" kind="function"><name>addQKPair</name></member>
+  </compound>
+  <compound refid="classft_1_1QueryClass" kind="class"><name>ft::QueryClass</name>
+    <member refid="classft_1_1QueryClass_1a716850d5f5342efa29db377664d91fa5" kind="variable"><name>_qID</name></member>
+    <member refid="classft_1_1QueryClass_1a2e09bd62c3ce3e912324686574bbc539" kind="variable"><name>_qType</name></member>
+    <member refid="classft_1_1QueryClass_1aa98d9c482be47f13efa0ef8e9c420f49" kind="variable"><name>_qstring</name></member>
+    <member refid="classft_1_1QueryClass_1aecd6980f48c087fcc90751918400b8ef" kind="variable"><name>_count</name></member>
+    <member refid="classft_1_1QueryClass_1adfaa73588cd843c25b2d6c29a9cc3715" kind="variable"><name>_qFlags</name></member>
+    <member refid="classft_1_1QueryClass_1acaa6da245b9a173676de47010d799a0a" kind="function"><name>getqID</name></member>
+    <member refid="classft_1_1QueryClass_1a1d4f6c36f91606a8e7e0cca964efeb51" kind="function"><name>getqType</name></member>
+    <member refid="classft_1_1QueryClass_1a950e54ff6a88ce6edbd4188e86ff023d" kind="function"><name>getQueryString</name></member>
+    <member refid="classft_1_1QueryClass_1a38209ba16bb6a5e6b172da6d2c7cf387" kind="function"><name>getCount</name></member>
+    <member refid="classft_1_1QueryClass_1a6ca899bb19efd164dcea1f253a2d5461" kind="function"><name>getQFlags</name></member>
+    <member refid="classft_1_1QueryClass_1ad8f41508a315185067241c6865bc415d" kind="function"><name>getQIdT</name></member>
+    <member refid="classft_1_1QueryClass_1a584b1134e196f765170048ab03d958df" kind="function"><name>getFlagKmers</name></member>
+    <member refid="classft_1_1QueryClass_1a2d4767f9210425e22019f16688c53b33" kind="function"><name>setQueryString</name></member>
+    <member refid="classft_1_1QueryClass_1a6ace5b35bc915b612ff4111261db914d" kind="function"><name>setCount</name></member>
+    <member refid="classft_1_1QueryClass_1aec124edd8fcf0f347f7243dfb14c0973" kind="function"><name>setFlags</name></member>
+    <member refid="classft_1_1QueryClass_1ae9c88ff1d7b1b22746a8ada4397e5ff3" kind="function"><name>addFlags</name></member>
+    <member refid="classft_1_1QueryClass_1a7cbdbc868f70aa19d8294dc8a12105c3" kind="function"><name>addFlag</name></member>
+    <member refid="classft_1_1QueryClass_1aeed393478364d0a9418e0b1865edf496" kind="function"><name>removeFlag</name></member>
+    <member refid="classft_1_1QueryClass_1afbc6473d32447770ab7b904a2f92d5a0" kind="function"><name>removeKmerFlag</name></member>
+    <member refid="classft_1_1QueryClass_1a91b12e43c13037fd0eb53bb2cee0668f" kind="function"><name>removeCount</name></member>
+    <member refid="classft_1_1QueryClass_1a1ad56026188dfc5f3f5b98ea4987ef67" kind="function"><name>isQIdTEqual</name></member>
+    <member refid="classft_1_1QueryClass_1a87a0c8acc939a89dc7bcd41b55b301a7" kind="function"><name>hasQueryID</name></member>
+    <member refid="classft_1_1QueryClass_1ad0ec9e7dd966e6c87f8938b0788f138d" kind="function"><name>hasQueryType</name></member>
+    <member refid="classft_1_1QueryClass_1af2ec1d0d60024a99045d3b7ec3461431" kind="function"><name>hasFlag</name></member>
+    <member refid="classft_1_1QueryClass_1ae67d5016fbc2890b84386887baeaf0c5" kind="function"><name>hasKmerFlag</name></member>
+    <member refid="classft_1_1QueryClass_1acff58f8c543a1b0c6bee421f704ebb0a" kind="function"><name>hasNonZeroCount</name></member>
+    <member refid="classft_1_1QueryClass_1a4fc2a6ea3bd6c15fa94d90b1b23a111c" kind="function"><name>operator&lt;</name></member>
+    <member refid="classft_1_1QueryClass_1af0b9bb01cfa9aa8e4e178b4757c5c369" kind="function"><name>operator==</name></member>
+    <member refid="classft_1_1QueryClass_1acb92ce2a1c98cdc3d54ef12276b953a1" kind="function"><name>QueryClass</name></member>
+    <member refid="classft_1_1QueryClass_1a9fdd93df1f397146c31e4c0bd16bf7e2" kind="function"><name>QueryClass</name></member>
+    <member refid="classft_1_1QueryClass_1ad75bea7c483469be7a8a522626903e88" kind="function"><name>~QueryClass</name></member>
+    <member refid="classft_1_1QueryClass_1a0aa8b70ebe8f02bfd8f13939ba819ad8" kind="function"><name>queryTypeToString</name></member>
+  </compound>
+  <compound refid="classft_1_1QueryExtractor" kind="class"><name>ft::QueryExtractor</name>
+    <member refid="classft_1_1QueryExtractor_1add52ce44cc182c2461adcf3062a7b46a" kind="variable"><name>_ownedUtils</name></member>
+    <member refid="classft_1_1QueryExtractor_1a92055ebba8dd36f38c2aa93989401f22" kind="variable"><name>_utils</name></member>
+    <member refid="classft_1_1QueryExtractor_1ae7b7702876a910f0346897464965941f" kind="function"><name>QueryExtractor</name></member>
+    <member refid="classft_1_1QueryExtractor_1aa2b3d08a3fdabf409196c8c99e2fea83" kind="function"><name>~QueryExtractor</name></member>
+    <member refid="classft_1_1QueryExtractor_1a5cc90faf57cc87a62f7489c2ba88d0e9" kind="function"><name>getInputQueries</name></member>
+    <member refid="classft_1_1QueryExtractor_1a8e41a56849685145716109d9fd96edd2" kind="function"><name>overrideUtils</name></member>
+  </compound>
+  <compound refid="classft_1_1TestFinder" kind="class"><name>ft::TestFinder</name>
+    <member refid="classft_1_1TestFinder_1a9c08577218977c883ed6626c5f682897" kind="variable"><name>_indexPath</name></member>
+    <member refid="classft_1_1TestFinder_1a3178d73eb53a8591db799b30ccd40d8e" kind="variable"><name>offset</name></member>
+    <member refid="classft_1_1TestFinder_1abbc30bdb8b0609c5bd0339912b2e8395" kind="variable"><name>pathToQueryFile</name></member>
+    <member refid="classft_1_1TestFinder_1aed7f1cd887ce4618bed295b9c31d9afe" kind="variable"><name>kmerSize</name></member>
+    <member refid="classft_1_1TestFinder_1a95f99a001ad2ece7b0c52dd6168f2439" kind="variable"><name>readLength</name></member>
+    <member refid="classft_1_1TestFinder_1a983ebf562b69980bd30f1fa3679eda51" kind="variable"><name>indexPropsFile</name></member>
+    <member refid="classft_1_1TestFinder_1a9ac70afe4826d9b03c03c41212cfdd61" kind="variable"><name>outputFolder</name></member>
+    <member refid="classft_1_1TestFinder_1ae2dcfb004f3a26098fc9601d30df3595" kind="variable"><name>outputFile</name></member>
+    <member refid="classft_1_1TestFinder_1ab60c0ca4e314574d76daed1962dbd7a1" kind="variable"><name>refOnly</name></member>
+    <member refid="classft_1_1TestFinder_1a586a4694f2ee6b3cd95d9c1ad5afc8a0" kind="variable"><name>revCompSearch</name></member>
+    <member refid="classft_1_1TestFinder_1a7bf42e47012aeb28f69282e554b128a3" kind="variable"><name>searchType</name></member>
+    <member refid="classft_1_1TestFinder_1ad22f26e585349a5ff59db3154f357362" kind="variable"><name>multithread</name></member>
+    <member refid="classft_1_1TestFinder_1ab3538b3b4ae245ff075e5b5856ed8a76" kind="variable"><name>overlap</name></member>
+    <member refid="classft_1_1TestFinder_1a977548255332e00b6c5795dfab234b11" kind="variable"><name>returnMatchesOnly</name></member>
+    <member refid="classft_1_1TestFinder_1ab5e238312b0c17d5179823da2430eead" kind="variable"><name>kmerCounts</name></member>
+    <member refid="classft_1_1TestFinder_1af59718059735fd9f32a98cecbc749121" kind="variable"><name>stride</name></member>
+    <member refid="classft_1_1TestFinder_1a6f1c1bf90a709170da5606bf2086622b" kind="variable"><name>maxOccurences</name></member>
+    <member refid="classft_1_1TestFinder_1a8e57d6451d9973133a82ba32849e075b" kind="variable"><name>maxThreads</name></member>
+    <member refid="classft_1_1TestFinder_1a1e36d426f8711d8bf97a7cd13bd7e0df" kind="variable"><name>flagOverCountedKmers</name></member>
+    <member refid="classft_1_1TestFinder_1afb8e391a4885a4104a8ec3ce0b9db104" kind="variable"><name>ignoreNonUniqueKmers</name></member>
+    <member refid="classft_1_1TestFinder_1a6873ee3c4a18f4066b7718c309956e5c" kind="variable"><name>countAsPairs</name></member>
+    <member refid="classft_1_1TestFinder_1aba944fb629303ba26ad55195d13f09fa" kind="variable"><name>crossover</name></member>
+    <member refid="classft_1_1TestFinder_1ae2624da2661d9e48ed0e82272afb94be" kind="variable"><name>pairedReads</name></member>
+    <member refid="classft_1_1TestFinder_1aae658d0f5ba6489f433345753cabaa80" kind="variable"><name>revComp</name></member>
+    <member refid="classft_1_1TestFinder_1a386b0e72165bfbf6ebb6e317deb9e2aa" kind="variable"><name>buildDir</name></member>
+    <member refid="classft_1_1TestFinder_1ae2ff52dbde189a7e3c9e20bd226df8aa" kind="variable"><name>indexDir</name></member>
+    <member refid="classft_1_1TestFinder_1ab7cb285f517c6b198b4f789e591db04e" kind="variable"><name>indexFileName</name></member>
+    <member refid="classft_1_1TestFinder_1a3d403209133f5dc3006382d4186bf7a1" kind="variable"><name>readSetName</name></member>
+    <member refid="classft_1_1TestFinder_1acff369d38e4e9979ff4ce4bd316f075d" kind="variable"><name>inputFastQ</name></member>
+    <member refid="classft_1_1TestFinder_1aa43af9d4b178fe11d8e8753a221137f8" kind="variable"><name>numOfReads</name></member>
+    <member refid="classft_1_1TestFinder_1abfb8762db9b3123f3d3c7efd9f98ac50" kind="variable"><name>numOfIndexes</name></member>
+    <member refid="classft_1_1TestFinder_1a3e1648310d28ef45712cdf871612ad01" kind="variable"><name>printInputs</name></member>
+    <member refid="classft_1_1TestFinder_1ab25f1e3ba9f054c737d0146aeac0241b" kind="function"><name>SetUp</name></member>
+    <member refid="classft_1_1TestFinder_1a19b22aa8104853ad773c683835c488b5" kind="function"><name>TearDown</name></member>
+    <member refid="classft_1_1TestFinder_1af741392044cca62188b8a1a88674bfee" kind="function"><name>CreateIndex</name></member>
+  </compound>
+  <compound refid="classft_1_1TestFMIndex" kind="class"><name>ft::TestFMIndex</name>
+    <member refid="classft_1_1TestFMIndex_1a9c5286832132ff8b880bbc84de245bf8" kind="function"><name>SetUp</name></member>
+    <member refid="classft_1_1TestFMIndex_1ac52d4d9e8660b505014e631032ad6b56" kind="function"><name>TearDown</name></member>
+    <member refid="classft_1_1TestFMIndex_1a9d8c51c13ccd44a197a6ce8b2e6af1ca" kind="function"><name>CreateIndex</name></member>
+  </compound>
+  <compound refid="classft_1_1TestFTMap" kind="class"><name>ft::TestFTMap</name>
+    <member refid="classft_1_1TestFTMap_1aa0cf44a8b3977ef371ed2823b867802e" kind="variable"><name>arg</name></member>
+    <member refid="classft_1_1TestFTMap_1a62d912bb9e652bc5840d6159748aa263" kind="function"><name>SetUp</name></member>
+    <member refid="classft_1_1TestFTMap_1a1d189b22d1dc83e66a4a0115ba338e68" kind="function"><name>TearDown</name></member>
+  </compound>
+  <compound refid="classft_1_1TestFTProps" kind="class"><name>ft::TestFTProps</name>
+    <member refid="classft_1_1TestFTProps_1abf724d6675be020e7f6100ac40f896f3" kind="function"><name>SetUp</name></member>
+    <member refid="classft_1_1TestFTProps_1af0708a7e9d9f4f6d3043cac90f7f4dd6" kind="function"><name>TearDown</name></member>
+  </compound>
+  <compound refid="classalgo_1_1TestIndexProp" kind="class"><name>algo::TestIndexProp</name>
+    <member refid="classalgo_1_1TestIndexProp_1ade66a23a7970f16ffb7d3a3b3bef72c0" kind="function"><name>SetUp</name></member>
+    <member refid="classalgo_1_1TestIndexProp_1aa8f599f8af0056571fde6ce14f5e2390" kind="function"><name>TearDown</name></member>
+  </compound>
+  <compound refid="classft_1_1TestKmerClass" kind="class"><name>ft::TestKmerClass</name>
+    <member refid="classft_1_1TestKmerClass_1ae64211d1f7056b7e370569e588b1cc68" kind="function"><name>SetUp</name></member>
+    <member refid="classft_1_1TestKmerClass_1a516a54f04d687d9f68896f8de42c4001" kind="function"><name>TearDown</name></member>
+  </compound>
+  <compound refid="classft_1_1TestKmerGenerator" kind="class"><name>ft::TestKmerGenerator</name>
+    <member refid="classft_1_1TestKmerGenerator_1ad7b2c9e8e84cf5f474552bcb50996bd6" kind="function"><name>SetUp</name></member>
+    <member refid="classft_1_1TestKmerGenerator_1a2f912c553c0ac13eb8f53f2671847228" kind="function"><name>TearDown</name></member>
+  </compound>
+  <compound refid="classft_1_1TestPerformances" kind="class"><name>ft::TestPerformances</name>
+    <member refid="classft_1_1TestPerformances_1aafac80a158c64b79bb4c11add8a5394c" kind="function"><name>SetUp</name></member>
+    <member refid="classft_1_1TestPerformances_1a20f001587de351b36fba235637c88380" kind="function"><name>TeadDown</name></member>
+    <member refid="classft_1_1TestPerformances_1af36aa8d6fc0ef71de461dbe41025bead" kind="function"><name>generateKmersFromQueries</name></member>
+  </compound>
+  <compound refid="classft_1_1TestQKMap" kind="class"><name>ft::TestQKMap</name>
+    <member refid="classft_1_1TestQKMap_1a681a0a756cf74a7b831b173f76cdf644" kind="function"><name>SetUp</name></member>
+    <member refid="classft_1_1TestQKMap_1a6f82b59f936cc1b4703402b3176c122c" kind="function"><name>TearDown</name></member>
+  </compound>
+  <compound refid="classft_1_1TestQueryClass" kind="class"><name>ft::TestQueryClass</name>
+    <member refid="classft_1_1TestQueryClass_1a5e185791fafb5664e10c5f755427c390" kind="function"><name>SetUp</name></member>
+    <member refid="classft_1_1TestQueryClass_1ab4e4e38fbf705d9bb4d4f6ba305a1bb5" kind="function"><name>TearDown</name></member>
+  </compound>
+  <compound refid="classft_1_1TestQueryExtractor" kind="class"><name>ft::TestQueryExtractor</name>
+    <member refid="classft_1_1TestQueryExtractor_1a245d0d17cd01c2d1833082a54b999b01" kind="variable"><name>_queryExtractor</name></member>
+    <member refid="classft_1_1TestQueryExtractor_1a76949aa79171652e4f63c949b198ede4" kind="function"><name>SetUp</name></member>
+    <member refid="classft_1_1TestQueryExtractor_1aaf7010fd65a62881cb66125dc621c3b8" kind="function"><name>TearDown</name></member>
+  </compound>
+  <compound refid="classft_1_1TestUtils" kind="class"><name>ft::TestUtils</name>
+    <member refid="classft_1_1TestUtils_1aceb4111c42dac6bf2823e505c03d0782" kind="variable"><name>_utils</name></member>
+    <member refid="classft_1_1TestUtils_1a11b72ae9cfe05cebf3db32d45104f3b9" kind="function"><name>SetUp</name></member>
+    <member refid="classft_1_1TestUtils_1a39d7bad3a0ff4253db961b2999b7e98e" kind="function"><name>TearDown</name></member>
+  </compound>
+  <compound refid="classft_1_1TestWriterBridge" kind="class"><name>ft::TestWriterBridge</name>
+    <member refid="classft_1_1TestWriterBridge_1af214b3c0af0cbea9ef3383df115776e1" kind="variable"><name>_indexPath</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a90e4ccacf89b500e1c5efeb1cc98092d" kind="variable"><name>offset</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a9b83bde4d92c57c8fe3566794c7eaf29" kind="variable"><name>pathToQueryFile</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a1668ff8550f62219cb9836ce375ff6bd" kind="variable"><name>kmerSize</name></member>
+    <member refid="classft_1_1TestWriterBridge_1acb0a110e31860ecdf4437f1b691584fc" kind="variable"><name>readLength</name></member>
+    <member refid="classft_1_1TestWriterBridge_1ad75870cf74647dc2e295bed50e483aa0" kind="variable"><name>indexPropsFile</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a1c0356cb9abd31c49ea420db18dba020" kind="variable"><name>outputFolder</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a62d24f597ec89d59cc9edf5b93761ca2" kind="variable"><name>outputFileName</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a0285b7bea57eaa2eca5be6012b18e18c" kind="variable"><name>refOnly</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a6cae6f3597ed1def10b483966278c3c5" kind="variable"><name>revCompSearch</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a17d5588fa478c240da77372c6cf71796" kind="variable"><name>searchType</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a1a404537faacddc5d4ae06ed9d5f4f72" kind="variable"><name>multithread</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a71af33a50d803c82c6a9a008bca717f7" kind="variable"><name>overlap</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a135c1d60c58fea0ff8acd80cd34ec254" kind="variable"><name>returnMatchesOnly</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a69c64e5586d0c2784ccf49ca5f52612a" kind="variable"><name>kmerCounts</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a2e5edbd0b340e20a344a2d5848d9fa2d" kind="variable"><name>stride</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a66d9b069f5628bda0240afa84a66d99b" kind="variable"><name>maxOccurences</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a4fb4846450d852f7bd71b8d3516d1aac" kind="variable"><name>maxThreads</name></member>
+    <member refid="classft_1_1TestWriterBridge_1af6d30b13745c02a946d8efb3a5c86e57" kind="variable"><name>flagNonUniqueKmers</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a778b2f06cedabd1ef449755c0c20dc68" kind="variable"><name>flagOverCountedKmers</name></member>
+    <member refid="classft_1_1TestWriterBridge_1ae63c20354d950a54cd7a6f2b1ae1618b" kind="variable"><name>ignoreNonUniqueKmers</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a3a2a9c959457f49c6217ade5f17907fa" kind="variable"><name>ignoreOverCountedKmers</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a2f3438faa1f123786553b38b22787993" kind="variable"><name>countAsPairs</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a357eb301644b18effcf19ee0428509de" kind="variable"><name>crossover</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a163f3b49921dda0f91ec77658884cab2" kind="variable"><name>pairedReads</name></member>
+    <member refid="classft_1_1TestWriterBridge_1ab704c4e4ef4e32ca08e32aa5e1710a1d" kind="variable"><name>revComp</name></member>
+    <member refid="classft_1_1TestWriterBridge_1aa1f0022ff2e06a3fe181c3ff666c4bb1" kind="variable"><name>buildDir</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a190769edda15d1c96b50b640108305d0" kind="variable"><name>indexDir</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a29155131b2086abfcd227ff72ebd1f14" kind="variable"><name>readSetName</name></member>
+    <member refid="classft_1_1TestWriterBridge_1af8292e3b319f51713d2b23f9a4e28523" kind="variable"><name>inputFastQ</name></member>
+    <member refid="classft_1_1TestWriterBridge_1aecf3fc973e1f847202f3046f709df3d3" kind="variable"><name>numOfReads</name></member>
+    <member refid="classft_1_1TestWriterBridge_1afabcf8d0fba00327b23052a3cd8de560" kind="variable"><name>numOfIndexes</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a2bdb33df70b244c07cc640687485e3e1" kind="variable"><name>printInputs</name></member>
+    <member refid="classft_1_1TestWriterBridge_1a6dc7afc3053fca97b6594b987cc4c631" kind="function"><name>SetUp</name></member>
+    <member refid="classft_1_1TestWriterBridge_1ab2ea7c73edd26c8a930e14d0fdc2f5e5" kind="function"><name>TearDown</name></member>
+  </compound>
+  <compound refid="classft_1_1Utils" kind="class"><name>ft::Utils</name>
+    <member refid="classft_1_1Utils_1a13665f4778cff98c4bf37506db29aedc" kind="function"><name>Utils</name></member>
+    <member refid="classft_1_1Utils_1a2b891397906b1675c2dae05c9617066c" kind="function"><name>~Utils</name></member>
+    <member refid="classft_1_1Utils_1a94f22f2357e65a20f877035682b7853a" kind="function"><name>joinString</name></member>
+    <member refid="classft_1_1Utils_1a91e281fca61b777a0912b80295aff576" kind="function"><name>split</name></member>
+    <member refid="classft_1_1Utils_1a3888f35d197e8894a09c47a5930e6863" kind="function"><name>reverseComplement</name></member>
+  </compound>
+  <compound refid="classft_1_1WriterBridge" kind="class"><name>ft::WriterBridge</name>
+    <member refid="classft_1_1WriterBridge_1ac26abe49b5735a7606d3f35f8e739b54" kind="variable"><name>_outputMap</name></member>
+    <member refid="classft_1_1WriterBridge_1aa7f14a5a78bc02c3d2d335ea6fd6551c" kind="variable"><name>_refData</name></member>
+    <member refid="classft_1_1WriterBridge_1a35f1ee70b5cf8a615fd2755a0b8f2e6e" kind="variable"><name>_altData</name></member>
+    <member refid="classft_1_1WriterBridge_1a71f1852d2c5a88eeaecdc6b88a2589b6" kind="variable"><name>_croData</name></member>
+    <member refid="classft_1_1WriterBridge_1afd9d345e63f8d15716398da90667c904" kind="variable"><name>_OCK</name></member>
+    <member refid="classft_1_1WriterBridge_1ac46e53bb62fa008c82870abcc911ab0f" kind="variable"><name>_NUK</name></member>
+    <member refid="classft_1_1WriterBridge_1a923f58eb548643d442b5ed78407c2772" kind="variable"><name>_MatchesOnly</name></member>
+    <member refid="classft_1_1WriterBridge_1ae1d6c3c91ff137eec9837453cccef35b" kind="variable"><name>_ownedUtils</name></member>
+    <member refid="classft_1_1WriterBridge_1aaf56338f35575e78aaf00631e47c1acb" kind="variable"><name>_utils</name></member>
+    <member refid="classft_1_1WriterBridge_1a0eeda9329e954102f205fe25fc8df4d2" kind="function"><name>WriterBridge</name></member>
+    <member refid="classft_1_1WriterBridge_1a6effaca40d409aa3082b6118ba067ff0" kind="function"><name>setOutputOptions</name></member>
+    <member refid="classft_1_1WriterBridge_1a96a714333ae278471593bd3058ce1b10" kind="function"><name>joinString</name></member>
+    <member refid="classft_1_1WriterBridge_1a604a1234e25a832a3c99a59f19c5e343" kind="function"><name>createHeader</name></member>
+    <member refid="classft_1_1WriterBridge_1a5f4f151f4bbbba67b0be2cdc07181ac2" kind="function"><name>formatOutputMap</name></member>
+    <member refid="classft_1_1WriterBridge_1a13f03654691a5310c03a7939c7ab4cc6" kind="function"><name>getFlagKmers</name></member>
+    <member refid="classft_1_1WriterBridge_1a086d459e1a7da3047725e0859d8f6459" kind="function"><name>addQueryToOutput</name></member>
+    <member refid="classft_1_1WriterBridge_1ae356c5fcee4372efc2106e7688c39de6" kind="function"><name>saveOutput</name></member>
+    <member refid="classft_1_1WriterBridge_1a06a1a687fd83a6f22017b6ac15634567" kind="function"><name>~WriterBridge</name></member>
+    <member refid="classft_1_1WriterBridge_1ada08b8b3cc2f384985433d59e487d0a8" kind="function"><name>overrideUtils</name></member>
+    <member refid="classft_1_1WriterBridge_1a9ef07b9d8fac864938b02b7c93d4b03e" kind="function"><name>getRefData</name></member>
+    <member refid="classft_1_1WriterBridge_1a99a48d9f4f47d8ac42ab9f31f6753b21" kind="function"><name>getAltData</name></member>
+    <member refid="classft_1_1WriterBridge_1a698f13d13976a5a8c342e5747b000f0f" kind="function"><name>getCroData</name></member>
+    <member refid="classft_1_1WriterBridge_1ad3992a4bb1bf866f79ce4417d70452cf" kind="function"><name>getOCKFlag</name></member>
+    <member refid="classft_1_1WriterBridge_1a4d8b714e71d559eb12d6acae121e8117" kind="function"><name>getNUKFlag</name></member>
+    <member refid="classft_1_1WriterBridge_1a2069ced154382924be41fe87a9a018ba" kind="function"><name>getMatchesOnlyFlag</name></member>
+    <member refid="classft_1_1WriterBridge_1a4d6443eee5477f1fc17bf39b03d7b4fb" kind="function"><name>getOutputMap</name></member>
+  </compound>
+  <compound refid="namespacealgo" kind="namespace"><name>algo</name>
+    <member refid="namespacealgo_1a6b4fac28989b7916c43dab0a041ad28a" kind="enum"><name>FileType</name></member>
+    <member refid="namespacealgo_1a6b4fac28989b7916c43dab0a041ad28aa6761bb0330503c255ecf8e0c32e86109" kind="enumvalue"><name>FQ</name></member>
+    <member refid="namespacealgo_1a6b4fac28989b7916c43dab0a041ad28aa49a9f42e51c5b9529da5a7ae81c91a0b" kind="enumvalue"><name>FA</name></member>
+    <member refid="namespacealgo_1a6b4fac28989b7916c43dab0a041ad28aa1feeb4d117292f4666ccc410f7046cd8" kind="enumvalue"><name>GZ</name></member>
+    <member refid="namespacealgo_1afba776145999e3099bb67679383821fa" kind="typedef"><name>Position</name></member>
+    <member refid="namespacealgo_1a631f8793417466c15f75c5bfecaa39eb" kind="function"><name>TEST_F</name></member>
+    <member refid="namespacealgo_1acf29469f2958d314d1bd27d5de2941ea" kind="function"><name>TEST_F</name></member>
+    <member refid="namespacealgo_1a11dc7be28d7129e261ac666c7ff1da59" kind="function"><name>TEST_F</name></member>
+    <member refid="namespacealgo_1ad3c549607b67a76e2e9e969a268c6961" kind="function"><name>TEST_F</name></member>
+    <member refid="namespacealgo_1ac247a785700a04dfd8cfc0fca176af9a" kind="function"><name>TEST_F</name></member>
+    <member refid="namespacealgo_1ac27adcfae8916315d76dfc8b426cc997" kind="function"><name>TEST_F</name></member>
+    <member refid="namespacealgo_1aacd3aa3e88cfeb9c9f8a9fba2227b2be" kind="function"><name>TEST_F</name></member>
+    <member refid="namespacealgo_1a584ee74ffca1b664cbed6722275d946d" kind="function"><name>TEST_F</name></member>
+    <member refid="namespacealgo_1a0816ab7918b6bbe4b1476375f16d415f" kind="function"><name>TEST_F</name></member>
+    <member refid="namespacealgo_1ab4d77baa7d14e1cb72b14f2f499bf527" kind="function"><name>TEST_F</name></member>
+    <member refid="namespacealgo_1ad4d9a0adc47b514861ff67fbb42914a2" kind="function"><name>TEST_F</name></member>
+    <member refid="namespacealgo_1abe77ffdb5695e22bf7d619671617779f" kind="function"><name>TEST_F</name></member>
+    <member refid="namespacealgo_1a052d8feeebb30c9f57c1acc63fda41aa" kind="function"><name>TEST_F</name></member>
+    <member refid="namespacealgo_1ab027614457b005f0c10309e8acb90335" kind="function"><name>TEST_F</name></member>
+  </compound>
+  <compound refid="namespacechrono" kind="namespace"><name>chrono</name>
+  </compound>
+  <compound refid="namespaceft" kind="namespace"><name>ft</name>
+    <member refid="namespaceft_1a135502532817988b39ef4cf7fa8de4ef" kind="enum"><name>QueryType</name></member>
+    <member refid="namespaceft_1a135502532817988b39ef4cf7fa8de4efabacd4eefbf7b6b6a3d66d408e72124fb" kind="enumvalue"><name>REF</name></member>
+    <member refid="namespaceft_1a135502532817988b39ef4cf7fa8de4efa90d879c3fbd6e505528a7c5bf03cff9f" kind="enumvalue"><name>ALT</name></member>
+    <member refid="namespaceft_1a135502532817988b39ef4cf7fa8de4efad82f1659a6500abd0de8fc40435fe0b0" kind="enumvalue"><name>CRO</name></member>
+    <member refid="namespaceft_1a371f21c04bbe031460655bcdbdb33607" kind="enum"><name>Orientation</name></member>
+    <member refid="namespaceft_1a371f21c04bbe031460655bcdbdb33607a280ebc8e5a11bc830834aa622b58831d" kind="enumvalue"><name>FWD</name></member>
+    <member refid="namespaceft_1a371f21c04bbe031460655bcdbdb33607a98db9c2fa881bfb9835d305d20dda7fb" kind="enumvalue"><name>REV</name></member>
+    <member refid="namespaceft_1a14896be8ae2ee9003d83a74d84ea8531" kind="enum"><name>FlagType</name></member>
+    <member refid="namespaceft_1a14896be8ae2ee9003d83a74d84ea8531a38dcc98ed74b28e8e517a8b2fd1e87f6" kind="enumvalue"><name>ABK</name></member>
+    <member refid="namespaceft_1a14896be8ae2ee9003d83a74d84ea8531a3a16a55c4cd1937e301040b88df316b1" kind="enumvalue"><name>OCK</name></member>
+    <member refid="namespaceft_1a14896be8ae2ee9003d83a74d84ea8531a409aa8a32227f65228f18a0bcd3bf906" kind="enumvalue"><name>NUK</name></member>
+    <member refid="namespaceft_1a551458287e6637cef7ca86a01a4f4ab6" kind="typedef"><name>SearchType</name></member>
+    <member refid="namespaceft_1ab2e703bc2884235ab4c8a4d84457cdd5" kind="typedef"><name>QIdT</name></member>
+    <member refid="namespaceft_1ab0149b24322cd3584bbce2f7e6147d28" kind="typedef"><name>ReadID</name></member>
+    <member refid="namespaceft_1a32c47747d7ec6be48a310bf233d54ef2" kind="typedef"><name>Query</name></member>
+    <member refid="namespaceft_1a91bd26e7648960a505838194b45fd82e" kind="variable"><name>CENTERED</name></member>
+    <member refid="namespaceft_1a6dd6a9db13c9a3e48b86c939e5a0bab7" kind="variable"><name>SLIDING</name></member>
+    <member refid="namespaceft_1a105b038f77816e4b840a8f9753e74d77" kind="variable"><name>QUERYTYPE_REF</name></member>
+    <member refid="namespaceft_1a1e9b4ab39d1d148c6fd0c1da14822058" kind="variable"><name>QUERYTYPE_ALT</name></member>
+    <member refid="namespaceft_1a433cc6eb622dd2b5aa0fd8225d7dacd3" kind="variable"><name>QUERYTYPE_CRO</name></member>
+    <member refid="namespaceft_1a2e3de0e4a1edf43790f2deecb0eebe76" kind="variable"><name>empty</name></member>
+    <member refid="namespaceft_1a8ce784daad1e81fa4dfd603d961985b1" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a3623052ee78ab6201cd725f9afc00a92" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a03441f17eb31c89de5556879aefc5012" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a19ff629212b6fddc6f7a26dce85966c4" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1af0ee45769d0dfffb98b9689ddaa4c80a" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a7be066dd08fdfa4cf0301f7fe06c1d90" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ab61e2e0fed51694e251d0bc3ef14a7ee" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a2e40458a29416e91e86f453ce0b31d9e" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1aafaa7f30d3c4922a86800507c6ecbd7e" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a5376e328e482f8adc89b69e99c7c61b0" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a32ce70345f1db3653ca9e52b9e15e771" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a16082fc76d67f3840152de70f16e8357" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ab293f6451e67a16b79157676c6fac709" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a8fab4fb3c8379bfd6a53f72c3122bc4d" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a6751ffe5c0b1c8833ab02bda31ad5756" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1afb7eb2377c6a68274e52cfe13e6c974e" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a9ee30eb850fdbfff46367b1de65e7ea8" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a993d442903e7880038bc98574c8496ec" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ae270cb8c55f0efce19094354e5dae61d" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ac922af3e65e5aae4222b4100ba010e48" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a690692672a77efeed386a6e0627819fb" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1aac32d0dbbfca7d51b7961b7b133469d1" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a278ab3498179c40ba8ceb3d12b56b654" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a05542ae486054486890917d63802c05f" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a0febbea3622639a73d803f7bf0e1d5d8" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ad70c8ffff42105291d5c5f1abd40e326" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a5941ddd9cbf552bf55fbda2bce0a3e03" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1aa89676d1d5390ef622ecd23fa8eebf2d" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1acec87117ae8777e0f75331059aa7707e" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a8091d787e6cd5b7a678d1e54758be4f2" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a1e04c41431a05445494c746b921d77e4" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a2a99b414fc6a59c7d4ab73bc84760b06" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a10d2b6a86eddf90e5ffc63b51c343726" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1af291389db6013892744c8435f448365a" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1aae40bd7ec0525dc6b8e7267d95441cb1" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ad52f50034057f39322dce5089ee6af81" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ac2959537b7cc3187e951f48a8b0bb4e0" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ad00ee5f9f06f28579c0899c7bf94596e" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a308d1b528ba231d2be8f46a69f740311" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a161bd0f345f9f63e924ff136c4f725bb" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a9749c4afb18efa2af5f1ae053d62b9de" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a52328a32b9e7416f344cee75c51a9b85" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a792b635a1c8e5c8626e4b3eaa99b8a64" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a6b1f9c18faed6961ab71c668deba6a8a" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a6021fafb2ccbfd60affae94f1ef0b7f9" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a95b6d5bac49594d5007c5fa8ce9de795" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1aa6f2d028d456b05f6471cdbca68ca7de" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a81a153284ace85282852b2c8f5c20d4a" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1afde0c40500638ad39740c8a2a464d5b1" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a58a62e0862ed5d7546b31f56569a3a5d" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a891878c5e915d300790f741c175e93ee" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a5079eb56446190217e4ce6e601c42c37" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a26bba462cd3baab5f4cef2ac17b1b154" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a8475e7f04dce626dc69e93f559cca19e" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a854d8b07247682864a4a776b8b8b7f73" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1adec9fb4c55f039df21c089d44b882128" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a35a21c3b593e2148c0861318c7fb43ee" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a7c30260efda53908969d4840df9a0064" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a54241d3d7d49372b524f6f9c3f956683" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a0c27b7d6f17332297317e893ee387d82" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a341b116c2c89e9328bfd4f0765c3fac1" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1aac28ed5355d7bce3269ce1f1c570c512" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1aff0cd93edbd9df5ee2d1a4177c4befae" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a2be0b65701ab01596d00ea8425fadd4c" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1aceb00efae46f89f260083b2b89cb79ea" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ac1981637a91580678a39064f70c4b758" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a694255dbc2de5290f7d290d69e048ebb" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a9dae9878dc95b6a6f1d713d6796fe156" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a9292ce1beb248edbc28765efa1fbcc94" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a52c098fee00b2655a9274aacc9572137" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1abea5ff45ec856462c6ba1fd98484e059" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a7dcfc20b64f6ac9059362360e25a401a" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a436bf9cf070187f37d1df2024f503686" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a11185ae3d5e2a737afe176fdc3c3a329" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1affbe26e8348b7152aa20a1d5b6e8e66c" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1aac3a3bf3b76aca07740b8bb206193c36" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1acf483ec9ea17b153f5e0963bca397c8b" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ab5955cec1b035980c10a994e838f8a9c" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ab1ae8df77e73a40769072e035bb9066c" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ae0773431ddf2d331e07a5ea4e2f79368" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ac3b0dd1179a0670dd612af350d655bb0" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a790099a3e84566c80d610b2bd01a76d9" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a403b36b109a36f71c6a7ff5a6dfd746d" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1abb9a2b84b5a8f204f9b449271fec5580" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a0fec8c70ccc59b7d5970abe0cd559b52" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a2162e456fcaad676282d8402d4e799e9" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ac93868f2978a8594633f59c22f1339fb" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a8feb20105db77bdcea302d7384331ebc" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ad7c104219b165a8f2889f261e2746ff3" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ad4bedd8eafd5561619b700a355dda794" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a3783828124605c32a7602147e1bd1128" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1af83ebbb8fc57afb27aef20803da66d20" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1acba9ac553f076d8872e0e9421ec06d2d" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1ac8916af02a005c5824862544e77db7d5" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1af302b8463d547c02ec313a3c92948738" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1afe941c6d38015677d61e7e8ccd3562e1" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a7cb9642a145224fbaa2d73b3ac68c5e4" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a2dbe0e39a50dea80bb8668da9bee5e8f" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a389e52e11aea21e04af2a928d14df8a3" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a63e94405f25b696dedd41e9ba4bed979" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a2e9871397eac93b0fdc09a89fcb3fd5b" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a3dab1dd7d6d24fb20b1a386b424013b8" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a6b7764273d3ea1e20a0b22af5f4d8153" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a7185bd47a991002905db01cdecaa594c" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1af834aff4844dd493085559d6be736278" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a9516dd9a76ccca88d08cb7f7a00bce52" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a4e3bbd1bf68e00c3e150465bb635547b" kind="function"><name>TEST_F</name></member>
+    <member refid="namespaceft_1a668d7f5e9c1e34c006aa65961d583163" kind="function"><name>TEST_F</name></member>
+  </compound>
+  <compound refid="namespacesdsl" kind="namespace"><name>sdsl</name>
+  </compound>
+  <compound refid="namespacestd" kind="namespace"><name>std</name>
+  </compound>
+  <compound refid="namespacestd_1_1chrono" kind="namespace"><name>std::chrono</name>
+  </compound>
+  <compound refid="finder_8h" kind="file"><name>finder.h</name>
+  </compound>
+  <compound refid="ftMapClass_8h" kind="file"><name>ftMapClass.h</name>
+  </compound>
+  <compound refid="ftPropsClass_8h" kind="file"><name>ftPropsClass.h</name>
+  </compound>
+  <compound refid="ftSearch_8h" kind="file"><name>ftSearch.h</name>
+  </compound>
+  <compound refid="kmerClass_8h" kind="file"><name>kmerClass.h</name>
+  </compound>
+  <compound refid="kmergenerator_8h" kind="file"><name>kmergenerator.h</name>
+  </compound>
+  <compound refid="LogClass_8h" kind="file"><name>LogClass.h</name>
+  </compound>
+  <compound refid="qkMapClass_8h" kind="file"><name>qkMapClass.h</name>
+  </compound>
+  <compound refid="queryClass_8h" kind="file"><name>queryClass.h</name>
+  </compound>
+  <compound refid="queryextractor_8h" kind="file"><name>queryextractor.h</name>
+  </compound>
+  <compound refid="utils_8h" kind="file"><name>utils.h</name>
+  </compound>
+  <compound refid="writerbridge_8h" kind="file"><name>writerbridge.h</name>
+  </compound>
+  <compound refid="ifinder_8h" kind="file"><name>ifinder.h</name>
+  </compound>
+  <compound refid="ikmergenerator_8h" kind="file"><name>ikmergenerator.h</name>
+  </compound>
+  <compound refid="iqueryextractor_8h" kind="file"><name>iqueryextractor.h</name>
+  </compound>
+  <compound refid="iutils_8h" kind="file"><name>iutils.h</name>
+  </compound>
+  <compound refid="iwriterbridge_8h" kind="file"><name>iwriterbridge.h</name>
+  </compound>
+  <compound refid="finder_8cpp" kind="file"><name>finder.cpp</name>
+  </compound>
+  <compound refid="ftMapClass_8cpp" kind="file"><name>ftMapClass.cpp</name>
+    <member refid="ftMapClass_8cpp_1a008c4f923febae88ecd1a28fcff6e7ac" kind="define"><name>INITSTART</name></member>
+    <member refid="ftMapClass_8cpp_1acc4289c2f09842966f298d342af6e479" kind="define"><name>INITEND</name></member>
+    <member refid="ftMapClass_8cpp_1ac2c5838f1cc063791144d4d07f79a862" kind="define"><name>KMERSTART</name></member>
+    <member refid="ftMapClass_8cpp_1ae3979256e66c50a02403d901f7659863" kind="define"><name>KMERSEND</name></member>
+    <member refid="ftMapClass_8cpp_1a046c571ddec7d9d917c27e253d7a1c77" kind="define"><name>QUERIESSTART</name></member>
+    <member refid="ftMapClass_8cpp_1ac342a5fecc748c2964151860c6f3dc5a" kind="define"><name>QUERIESEND</name></member>
+    <member refid="ftMapClass_8cpp_1a666831e4f9ea56a21bc39e8940c370f1" kind="define"><name>INDEXSTART</name></member>
+    <member refid="ftMapClass_8cpp_1a0bec7faf1bc6cfbe9ec6ab0188c4fd04" kind="define"><name>INDEXEND</name></member>
+  </compound>
+  <compound refid="ftPropsClass_8cpp" kind="file"><name>ftPropsClass.cpp</name>
+  </compound>
+  <compound refid="ftSearch_8cpp" kind="file"><name>ftSearch.cpp</name>
+  </compound>
+  <compound refid="kmerClass_8cpp" kind="file"><name>kmerClass.cpp</name>
+  </compound>
+  <compound refid="kmergenerator_8cpp" kind="file"><name>kmergenerator.cpp</name>
+  </compound>
+  <compound refid="main_8cpp" kind="file"><name>main.cpp</name>
+    <member refid="main_8cpp_1a64a6014565bb3e03294ec4a952d5add0" kind="function"><name>usage</name></member>
+    <member refid="main_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="qkMapClass_8cpp" kind="file"><name>qkMapClass.cpp</name>
+  </compound>
+  <compound refid="queryClass_8cpp" kind="file"><name>queryClass.cpp</name>
+  </compound>
+  <compound refid="queryextractor_8cpp" kind="file"><name>queryextractor.cpp</name>
+  </compound>
+  <compound refid="utils_8cpp" kind="file"><name>utils.cpp</name>
+  </compound>
+  <compound refid="writerbridge_8cpp" kind="file"><name>writerbridge.cpp</name>
+  </compound>
+  <compound refid="tst__finder_8cpp" kind="file"><name>tst_finder.cpp</name>
+    <member refid="tst__finder_8cpp_1a940ad85d9d45ed5e3cb30708b4add8c5" kind="define"><name>TEST_DESCRIPTION</name></member>
+  </compound>
+  <compound refid="tst__fmindex_8cpp" kind="file"><name>tst_fmindex.cpp</name>
+    <member refid="tst__fmindex_8cpp_1a940ad85d9d45ed5e3cb30708b4add8c5" kind="define"><name>TEST_DESCRIPTION</name></member>
+  </compound>
+  <compound refid="tst__ftMapClass_8cpp" kind="file"><name>tst_ftMapClass.cpp</name>
+    <member refid="tst__ftMapClass_8cpp_1a940ad85d9d45ed5e3cb30708b4add8c5" kind="define"><name>TEST_DESCRIPTION</name></member>
+  </compound>
+  <compound refid="tst__ftPropsClass_8cpp" kind="file"><name>tst_ftPropsClass.cpp</name>
+    <member refid="tst__ftPropsClass_8cpp_1a940ad85d9d45ed5e3cb30708b4add8c5" kind="define"><name>TEST_DESCRIPTION</name></member>
+  </compound>
+  <compound refid="tst__indexPropsClass_8cpp" kind="file"><name>tst_indexPropsClass.cpp</name>
+    <member refid="tst__indexPropsClass_8cpp_1a940ad85d9d45ed5e3cb30708b4add8c5" kind="define"><name>TEST_DESCRIPTION</name></member>
+  </compound>
+  <compound refid="tst__kmerClass_8cpp" kind="file"><name>tst_kmerClass.cpp</name>
+    <member refid="tst__kmerClass_8cpp_1a940ad85d9d45ed5e3cb30708b4add8c5" kind="define"><name>TEST_DESCRIPTION</name></member>
+  </compound>
+  <compound refid="tst__kmergenerator_8cpp" kind="file"><name>tst_kmergenerator.cpp</name>
+    <member refid="tst__kmergenerator_8cpp_1a940ad85d9d45ed5e3cb30708b4add8c5" kind="define"><name>TEST_DESCRIPTION</name></member>
+  </compound>
+  <compound refid="tst__performances_8cpp" kind="file"><name>tst_performances.cpp</name>
+    <member refid="tst__performances_8cpp_1a940ad85d9d45ed5e3cb30708b4add8c5" kind="define"><name>TEST_DESCRIPTION</name></member>
+  </compound>
+  <compound refid="tst__qkMapClass_8cpp" kind="file"><name>tst_qkMapClass.cpp</name>
+    <member refid="tst__qkMapClass_8cpp_1a940ad85d9d45ed5e3cb30708b4add8c5" kind="define"><name>TEST_DESCRIPTION</name></member>
+  </compound>
+  <compound refid="tst__queryClass_8cpp" kind="file"><name>tst_queryClass.cpp</name>
+    <member refid="tst__queryClass_8cpp_1a940ad85d9d45ed5e3cb30708b4add8c5" kind="define"><name>TEST_DESCRIPTION</name></member>
+  </compound>
+  <compound refid="tst__queryextractor_8cpp" kind="file"><name>tst_queryextractor.cpp</name>
+    <member refid="tst__queryextractor_8cpp_1a940ad85d9d45ed5e3cb30708b4add8c5" kind="define"><name>TEST_DESCRIPTION</name></member>
+  </compound>
+  <compound refid="tst__utils_8cpp" kind="file"><name>tst_utils.cpp</name>
+    <member refid="tst__utils_8cpp_1a940ad85d9d45ed5e3cb30708b4add8c5" kind="define"><name>TEST_DESCRIPTION</name></member>
+  </compound>
+  <compound refid="tst__writerbridge_8cpp" kind="file"><name>tst_writerbridge.cpp</name>
+    <member refid="tst__writerbridge_8cpp_1a940ad85d9d45ed5e3cb30708b4add8c5" kind="define"><name>TEST_DESCRIPTION</name></member>
+    <member refid="tst__writerbridge_8cpp_1a200aa6de4c1aef67377a037091f21a10" kind="define"><name>HeaderTesting</name></member>
+    <member refid="tst__writerbridge_8cpp_1a69117a057e1e669a3ae34a9e60bf4361" kind="define"><name>EndHeaderTest</name></member>
+    <member refid="tst__writerbridge_8cpp_1a2f74b92263e8a6fc35387c384133d02d" kind="define"><name>flagTesting</name></member>
+    <member refid="tst__writerbridge_8cpp_1a21d923fc12cf75545806a25efb0ccef1" kind="define"><name>flagTestingEnd</name></member>
+    <member refid="tst__writerbridge_8cpp_1aad9d3e71bdab30aa4aebb20b0e86bf7a" kind="define"><name>addQueryTesting</name></member>
+    <member refid="tst__writerbridge_8cpp_1a685cdad51869af9924a2cd2a22fa81f1" kind="define"><name>formatOutputTestingEnd</name></member>
+    <member refid="tst__writerbridge_8cpp_1a0d6def97bc801f5aec4328d7947df0f3" kind="define"><name>formatOutputTesting</name></member>
+    <member refid="tst__writerbridge_8cpp_1a685cdad51869af9924a2cd2a22fa81f1" kind="define"><name>formatOutputTestingEnd</name></member>
+  </compound>
+  <compound refid="fmindex_8h" kind="file"><name>fmindex.h</name>
+  </compound>
+  <compound refid="indexPropsClass_8h" kind="file"><name>indexPropsClass.h</name>
+  </compound>
+  <compound refid="ifmindex_8h" kind="file"><name>ifmindex.h</name>
+  </compound>
+  <compound refid="iindexPropsClass_8h" kind="file"><name>iindexPropsClass.h</name>
+  </compound>
+  <compound refid="fmindex_8cpp" kind="file"><name>fmindex.cpp</name>
+  </compound>
+  <compound refid="indexPropsClass_8cpp" kind="file"><name>indexPropsClass.cpp</name>
+  </compound>
+  <compound refid="dir_0b3e120baa744d035972aa4cd250948b" kind="dir"><name>/home/tixii/Git/OpenFlexTyper/flextyper</name>
+  </compound>
+  <compound refid="dir_56b4f6f3718823e8c85b86ac4931a04d" kind="dir"><name>/home/tixii/Git/OpenFlexTyper/fmindex</name>
+  </compound>
+  <compound refid="dir_57d30f01f8d322dcd44078c08e582deb" kind="dir"><name>/home/tixii/Git/OpenFlexTyper/flextyper/includes</name>
+  </compound>
+  <compound refid="dir_f3e179c4f010001a956780962eebab76" kind="dir"><name>/home/tixii/Git/OpenFlexTyper/fmindex/includes</name>
+  </compound>
+  <compound refid="dir_6e692d058ff2f5956e1d50f0106a0535" kind="dir"><name>/home/tixii/Git/OpenFlexTyper/fmindex/interfaces</name>
+  </compound>
+  <compound refid="dir_7bf2402a8af41b486ce9560dc7977406" kind="dir"><name>/home/tixii/Git/OpenFlexTyper/flextyper/interfaces</name>
+  </compound>
+  <compound refid="dir_8b6da71c64309460702d1a974a460fde" kind="dir"><name>/home/tixii/Git/OpenFlexTyper/flextyper/src</name>
+  </compound>
+  <compound refid="dir_a01961c752b72418ee8e0e9450d385a0" kind="dir"><name>/home/tixii/Git/OpenFlexTyper/fmindex/src</name>
+  </compound>
+  <compound refid="dir_abeeee93542702888184a90fb1e5f64f" kind="dir"><name>/home/tixii/Git/OpenFlexTyper/flextyper/test</name>
+  </compound>
+</doxygenindex>

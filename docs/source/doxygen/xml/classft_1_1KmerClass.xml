@@ -1,0 +1,623 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classft_1_1KmerClass" kind="class" language="C++" prot="public">
+    <compoundname>ft::KmerClass</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classft_1_1KmerClass_1a547c73b44dde28edc45b4ef23c042333" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ft::KmerClass::_kmer</definition>
+        <argsstring></argsstring>
+        <name>_kmer</name>
+        <briefdescription>
+<para>properties </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="90" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1KmerClass_1abc8f0915743b929c06d716f2a921563b" prot="private" static="no" mutable="no">
+        <type>std::bitset&lt; 8 &gt;</type>
+        <definition>std::bitset&lt;8&gt; ft::KmerClass::_kFlags</definition>
+        <argsstring></argsstring>
+        <name>_kFlags</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="91" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1KmerClass_1a0b668cd5cc4f2a3bb8f5a835e32371a2" prot="private" static="no" mutable="no">
+        <type>std::set&lt; long long &gt;</type>
+        <definition>std::set&lt;long long&gt; ft::KmerClass::_positions</definition>
+        <argsstring></argsstring>
+        <name>_positions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="92" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1KmerClass_1ae5147a81357b3e0caedb21c22a518a8e" prot="private" static="no" mutable="no">
+        <type>std::set&lt; ft::ReadID &gt;</type>
+        <definition>std::set&lt;ft::ReadID&gt; ft::KmerClass::_readIDs</definition>
+        <argsstring></argsstring>
+        <name>_readIDs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="93" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1KmerClass_1aa417eb8b8c9694ca4290b33ad7f92d84" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint ft::KmerClass::_occ</definition>
+        <argsstring></argsstring>
+        <name>_occ</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="94" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classft_1_1KmerClass_1a78fb5b6831e2e725365bd0f7335147d6" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ft::KmerClass::_isOffsetAdjusted</definition>
+        <argsstring></argsstring>
+        <name>_isOffsetAdjusted</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="95" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classft_1_1KmerClass_1a53afab97476f5abfc6e4605206291db9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ft::KmerClass::KmerClass</definition>
+        <argsstring>(std::string kmer)</argsstring>
+        <name>KmerClass</name>
+        <param>
+          <type>std::string</type>
+          <declname>kmer</declname>
+        </param>
+        <briefdescription>
+<para>KmerClass. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="22" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="14" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a476730429bbc011f9c060cd93f4d74d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ft::KmerClass::KmerClass</definition>
+        <argsstring>()</argsstring>
+        <name>KmerClass</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="23" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a46cad2c13be01d3569be6170d6ada52d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>ft::KmerClass::~KmerClass</definition>
+        <argsstring>()</argsstring>
+        <name>~KmerClass</name>
+        <briefdescription>
+<para>~KmerClass </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="28" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="167" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1aa465dd9303f06ebd2b18137b12701d57" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; ft::KmerClass::getKmer</definition>
+        <argsstring>() const</argsstring>
+        <name>getKmer</name>
+        <briefdescription>
+<para>getters </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="33" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1af4e48ac297a33df76c1d2f098ddb86e3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::bitset&lt; 8 &gt; &amp;</type>
+        <definition>const std::bitset&lt; 8 &gt; &amp; ft::KmerClass::getKFlags</definition>
+        <argsstring>() const</argsstring>
+        <name>getKFlags</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="34" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a2b12bbb71276b39f4d5e940e85d3b5e7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::set&lt; long long &gt; &amp;</type>
+        <definition>const std::set&lt; long long &gt; &amp; ft::KmerClass::getKPositions</definition>
+        <argsstring>() const</argsstring>
+        <name>getKPositions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="35" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1ad92076bada01a126750cfc2680804d8c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::set&lt; ft::ReadID &gt; &amp;</type>
+        <definition>const std::set&lt; ft::ReadID &gt; &amp; ft::KmerClass::getReadIDs</definition>
+        <argsstring>() const</argsstring>
+        <name>getReadIDs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="36" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a4f56b088336562dbb9b73ad56d19fe72" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint ft::KmerClass::getOCC</definition>
+        <argsstring>() const</argsstring>
+        <name>getOCC</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="37" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a9bc4ba0c03cc2e9b32b6d2c5e30c2f1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::KmerClass::setKFlags</definition>
+        <argsstring>(std::set&lt; ft::FlagType &gt; kFlags)</argsstring>
+        <name>setKFlags</name>
+        <param>
+          <type>std::set&lt; ft::FlagType &gt;</type>
+          <declname>kFlags</declname>
+        </param>
+        <briefdescription>
+<para>setters </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="43" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="31" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1adc3eb86682972debc5f85f97bc9e2d4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::KmerClass::setKPositions</definition>
+        <argsstring>(const std::set&lt; long long &gt; &amp;kPositions)</argsstring>
+        <name>setKPositions</name>
+        <param>
+          <type>const std::set&lt; long long &gt; &amp;</type>
+          <declname>kPositions</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="44" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="37" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a33f04144d7786843374804753070c288" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::KmerClass::adjustPosForOffset</definition>
+        <argsstring>(uint offset=0)</argsstring>
+        <name>adjustPosForOffset</name>
+        <param>
+          <type>uint</type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="45" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a02865138e829af5c70fce597170a123f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::KmerClass::setReadIDs</definition>
+        <argsstring>(std::set&lt; ft::ReadID &gt; readIDs)</argsstring>
+        <name>setReadIDs</name>
+        <param>
+          <type>std::set&lt; ft::ReadID &gt;</type>
+          <declname>readIDs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="46" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="56" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a30a2b9b6a0c438e4903e3ecafa5c5366" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::KmerClass::setOCC</definition>
+        <argsstring>(uint occ)</argsstring>
+        <name>setOCC</name>
+        <param>
+          <type>uint</type>
+          <declname>occ</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="47" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a122ef7c5f4e0500d1cbe73628820f2ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::KmerClass::adjustPositionsWithOffset</definition>
+        <argsstring>(uint offset)</argsstring>
+        <name>adjustPositionsWithOffset</name>
+        <param>
+          <type>uint</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="49" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="43" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a686aaf14d2a49904ccee25fa0b305039" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::KmerClass::addKFlag</definition>
+        <argsstring>(const ft::FlagType &amp;kFlag)</argsstring>
+        <name>addKFlag</name>
+        <param>
+          <type>const ft::FlagType &amp;</type>
+          <declname>kFlag</declname>
+        </param>
+        <briefdescription>
+<para>adders </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="54" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="62" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a1a9b7b2776429d9e0c9916b38e8ac2fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::KmerClass::addKPosition</definition>
+        <argsstring>(const size_t &amp;kPosition, const uint &amp;offset=0)</argsstring>
+        <name>addKPosition</name>
+        <param>
+          <type>const size_t &amp;</type>
+          <declname>kPosition</declname>
+        </param>
+        <param>
+          <type>const uint &amp;</type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="55" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="66" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1afa821b3a22f4ceffa601f2ff640058fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::KmerClass::addReadID</definition>
+        <argsstring>(const ft::ReadID &amp;readID)</argsstring>
+        <name>addReadID</name>
+        <param>
+          <type>const ft::ReadID &amp;</type>
+          <declname>readID</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="56" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="71" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a054551df636b2f93b7b5ec6a25a98f63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::KmerClass::removeKFlag</definition>
+        <argsstring>(ft::FlagType kFlag)</argsstring>
+        <name>removeKFlag</name>
+        <param>
+          <type>ft::FlagType</type>
+          <declname>kFlag</declname>
+        </param>
+        <briefdescription>
+<para>removers </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="61" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="81" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1ac68ffdc07b42d9fe1ce20dab203b43ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::KmerClass::removeKPosition</definition>
+        <argsstring>(size_t kPosition, uint offset=0)</argsstring>
+        <name>removeKPosition</name>
+        <param>
+          <type>size_t</type>
+          <declname>kPosition</declname>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="62" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="84" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1ab6b00c19f866fa136509edf2e337fa49" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::KmerClass::removeReadID</definition>
+        <argsstring>(ft::ReadID readID)</argsstring>
+        <name>removeReadID</name>
+        <param>
+          <type>ft::ReadID</type>
+          <declname>readID</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="63" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="89" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1add76ed8b87b9b0c3388a08854daa69bb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::KmerClass::isKmerEqual</definition>
+        <argsstring>(const KmerClass &amp;test) const</argsstring>
+        <name>isKmerEqual</name>
+        <param>
+          <type>const KmerClass &amp;</type>
+          <declname>test</declname>
+        </param>
+        <briefdescription>
+<para>checkers </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="68" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="92" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a136e084b75580c7f4d1c08f55be7af58" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::KmerClass::hasKmer</definition>
+        <argsstring>(const std::string &amp;test) const</argsstring>
+        <name>hasKmer</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>test</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="69" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="95" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a30d34b1a159eb8d7a2b694746a4a40a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::KmerClass::hasFlag</definition>
+        <argsstring>(const ft::FlagType &amp;flag)</argsstring>
+        <name>hasFlag</name>
+        <param>
+          <type>const ft::FlagType &amp;</type>
+          <declname>flag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="70" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="98" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1ac8e76eea15363527e12e333ece65a49f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::KmerClass::hasKPosition</definition>
+        <argsstring>(const size_t &amp;position) const</argsstring>
+        <name>hasKPosition</name>
+        <param>
+          <type>const size_t &amp;</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="71" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="101" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a1567d31439d309b2a7ba3ad37aeb70ad" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::KmerClass::hasReadID</definition>
+        <argsstring>(const ft::ReadID &amp;readID) const</argsstring>
+        <name>hasReadID</name>
+        <param>
+          <type>const ft::ReadID &amp;</type>
+          <declname>readID</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="72" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="111" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1ab96111b0cd9f994260b71810ff4a7097" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ft::KmerClass::convertPosToReadID</definition>
+        <argsstring>(uint readLength, uint numOfReads, bool pairedReads, bool indexRevComp=false)</argsstring>
+        <name>convertPosToReadID</name>
+        <param>
+          <type>uint</type>
+          <declname>readLength</declname>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>numOfReads</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>pairedReads</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>indexRevComp</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>convert </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="77" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="126" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a2eb7a0a8d13da061544b8b606d08054e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::KmerClass::matchingReadID</definition>
+        <argsstring>(const ft::ReadID &amp;a, const ft::ReadID &amp;b) const</argsstring>
+        <name>matchingReadID</name>
+        <param>
+          <type>const ft::ReadID &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const ft::ReadID &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="78" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="106" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1a87ce5da0c32d8c73a9c8b91048d817c5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::KmerClass::operator&lt;</definition>
+        <argsstring>(const ft::KmerClass &amp;k) const</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const ft::KmerClass &amp;</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+<para>overload </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="83" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="155" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1KmerClass_1acd19effd9f92d2d02fb25917737e1dae" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ft::KmerClass::operator==</definition>
+        <argsstring>(const ft::KmerClass &amp;k) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const ft::KmerClass &amp;</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="84" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/src/kmerClass.cpp" bodystart="165" bodyend="165"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" line="17" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/includes/kmerClass.h" bodystart="16" bodyend="97"/>
+    <listofallmembers>
+      <member refid="classft_1_1KmerClass_1a78fb5b6831e2e725365bd0f7335147d6" prot="private" virt="non-virtual"><scope>ft::KmerClass</scope><name>_isOffsetAdjusted</name></member>
+      <member refid="classft_1_1KmerClass_1abc8f0915743b929c06d716f2a921563b" prot="private" virt="non-virtual"><scope>ft::KmerClass</scope><name>_kFlags</name></member>
+      <member refid="classft_1_1KmerClass_1a547c73b44dde28edc45b4ef23c042333" prot="private" virt="non-virtual"><scope>ft::KmerClass</scope><name>_kmer</name></member>
+      <member refid="classft_1_1KmerClass_1aa417eb8b8c9694ca4290b33ad7f92d84" prot="private" virt="non-virtual"><scope>ft::KmerClass</scope><name>_occ</name></member>
+      <member refid="classft_1_1KmerClass_1a0b668cd5cc4f2a3bb8f5a835e32371a2" prot="private" virt="non-virtual"><scope>ft::KmerClass</scope><name>_positions</name></member>
+      <member refid="classft_1_1KmerClass_1ae5147a81357b3e0caedb21c22a518a8e" prot="private" virt="non-virtual"><scope>ft::KmerClass</scope><name>_readIDs</name></member>
+      <member refid="classft_1_1KmerClass_1a686aaf14d2a49904ccee25fa0b305039" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>addKFlag</name></member>
+      <member refid="classft_1_1KmerClass_1a1a9b7b2776429d9e0c9916b38e8ac2fb" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>addKPosition</name></member>
+      <member refid="classft_1_1KmerClass_1afa821b3a22f4ceffa601f2ff640058fe" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>addReadID</name></member>
+      <member refid="classft_1_1KmerClass_1a33f04144d7786843374804753070c288" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>adjustPosForOffset</name></member>
+      <member refid="classft_1_1KmerClass_1a122ef7c5f4e0500d1cbe73628820f2ae" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>adjustPositionsWithOffset</name></member>
+      <member refid="classft_1_1KmerClass_1ab96111b0cd9f994260b71810ff4a7097" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>convertPosToReadID</name></member>
+      <member refid="classft_1_1KmerClass_1af4e48ac297a33df76c1d2f098ddb86e3" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>getKFlags</name></member>
+      <member refid="classft_1_1KmerClass_1aa465dd9303f06ebd2b18137b12701d57" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>getKmer</name></member>
+      <member refid="classft_1_1KmerClass_1a2b12bbb71276b39f4d5e940e85d3b5e7" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>getKPositions</name></member>
+      <member refid="classft_1_1KmerClass_1a4f56b088336562dbb9b73ad56d19fe72" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>getOCC</name></member>
+      <member refid="classft_1_1KmerClass_1ad92076bada01a126750cfc2680804d8c" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>getReadIDs</name></member>
+      <member refid="classft_1_1KmerClass_1a30d34b1a159eb8d7a2b694746a4a40a5" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>hasFlag</name></member>
+      <member refid="classft_1_1KmerClass_1a136e084b75580c7f4d1c08f55be7af58" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>hasKmer</name></member>
+      <member refid="classft_1_1KmerClass_1ac8e76eea15363527e12e333ece65a49f" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>hasKPosition</name></member>
+      <member refid="classft_1_1KmerClass_1a1567d31439d309b2a7ba3ad37aeb70ad" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>hasReadID</name></member>
+      <member refid="classft_1_1KmerClass_1add76ed8b87b9b0c3388a08854daa69bb" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>isKmerEqual</name></member>
+      <member refid="classft_1_1KmerClass_1a53afab97476f5abfc6e4605206291db9" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>KmerClass</name></member>
+      <member refid="classft_1_1KmerClass_1a476730429bbc011f9c060cd93f4d74d1" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>KmerClass</name></member>
+      <member refid="classft_1_1KmerClass_1a2eb7a0a8d13da061544b8b606d08054e" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>matchingReadID</name></member>
+      <member refid="classft_1_1KmerClass_1a87ce5da0c32d8c73a9c8b91048d817c5" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>operator&lt;</name></member>
+      <member refid="classft_1_1KmerClass_1acd19effd9f92d2d02fb25917737e1dae" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>operator==</name></member>
+      <member refid="classft_1_1KmerClass_1a054551df636b2f93b7b5ec6a25a98f63" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>removeKFlag</name></member>
+      <member refid="classft_1_1KmerClass_1ac68ffdc07b42d9fe1ce20dab203b43ea" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>removeKPosition</name></member>
+      <member refid="classft_1_1KmerClass_1ab6b00c19f866fa136509edf2e337fa49" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>removeReadID</name></member>
+      <member refid="classft_1_1KmerClass_1a9bc4ba0c03cc2e9b32b6d2c5e30c2f1a" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>setKFlags</name></member>
+      <member refid="classft_1_1KmerClass_1adc3eb86682972debc5f85f97bc9e2d4a" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>setKPositions</name></member>
+      <member refid="classft_1_1KmerClass_1a30a2b9b6a0c438e4903e3ecafa5c5366" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>setOCC</name></member>
+      <member refid="classft_1_1KmerClass_1a02865138e829af5c70fce597170a123f" prot="public" virt="non-virtual"><scope>ft::KmerClass</scope><name>setReadIDs</name></member>
+      <member refid="classft_1_1KmerClass_1a46cad2c13be01d3569be6170d6ada52d" prot="public" virt="virtual"><scope>ft::KmerClass</scope><name>~KmerClass</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

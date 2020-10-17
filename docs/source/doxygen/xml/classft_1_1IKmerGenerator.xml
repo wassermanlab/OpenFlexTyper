@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classft_1_1IKmerGenerator" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>ft::IKmerGenerator</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classft_1_1IKmerGenerator_1a0d8f694589221c62796426dba6a8b00c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual ft::IKmerGenerator::~IKmerGenerator</definition>
+        <argsstring>()</argsstring>
+        <name>~IKmerGenerator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/ikmergenerator.h" line="18" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/ikmergenerator.h" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1IKmerGenerator_1a1aad625b31b17f106a1d7d810cf6a6a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ft::IKmerGenerator::init</definition>
+        <argsstring>(const uint &amp;_kmerSize, const bool &amp;_refOnly, const SearchType &amp;_searchType, const uint &amp;_overlap, const uint &amp;_stride, const bool &amp;_kmerCounts, const uint &amp;_maxKmers)=0</argsstring>
+        <name>init</name>
+        <param>
+          <type>const uint &amp;</type>
+          <declname>_kmerSize</declname>
+        </param>
+        <param>
+          <type>const bool &amp;</type>
+          <declname>_refOnly</declname>
+        </param>
+        <param>
+          <type>const SearchType &amp;</type>
+          <declname>_searchType</declname>
+        </param>
+        <param>
+          <type>const uint &amp;</type>
+          <declname>_overlap</declname>
+        </param>
+        <param>
+          <type>const uint &amp;</type>
+          <declname>_stride</declname>
+        </param>
+        <param>
+          <type>const bool &amp;</type>
+          <declname>_kmerCounts</declname>
+        </param>
+        <param>
+          <type>const uint &amp;</type>
+          <declname>_maxKmers</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/ikmergenerator.h" line="20" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1IKmerGenerator_1a4af12a660e2b1eea2c3e0e6d267d74f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>virtual std::set&lt;std::string&gt; ft::IKmerGenerator::genSlidingSearchStrings</definition>
+        <argsstring>(const std::string &amp;queryString)=0</argsstring>
+        <name>genSlidingSearchStrings</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>queryString</declname>
+        </param>
+        <briefdescription>
+<para>genSlidingSearchStrings </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/ikmergenerator.h" line="31" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1IKmerGenerator_1a5f735234fe16cb973c91a00b7a47ebb0" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>virtual std::set&lt;std::string&gt; ft::IKmerGenerator::genCenteredSearchStrings</definition>
+        <argsstring>(const std::string &amp;queryString)=0</argsstring>
+        <name>genCenteredSearchStrings</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>queryString</declname>
+        </param>
+        <briefdescription>
+<para>genCenteredSearchStrings </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/ikmergenerator.h" line="36" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1IKmerGenerator_1ad29f100e572eb069d1dfca76027b1cc3" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>virtual std::set&lt;std::string&gt; ft::IKmerGenerator::genSearchKmers</definition>
+        <argsstring>(const ft::QueryClass &amp;queryObj)=0</argsstring>
+        <name>genSearchKmers</name>
+        <param>
+          <type>const <ref refid="classft_1_1QueryClass" kindref="compound">ft::QueryClass</ref> &amp;</type>
+          <declname>queryObj</declname>
+        </param>
+        <briefdescription>
+<para>genSearchKmers </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/ikmergenerator.h" line="41" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/ikmergenerator.h" line="16" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/ikmergenerator.h" bodystart="16" bodyend="43"/>
+    <listofallmembers>
+      <member refid="classft_1_1IKmerGenerator_1a5f735234fe16cb973c91a00b7a47ebb0" prot="public" virt="pure-virtual"><scope>ft::IKmerGenerator</scope><name>genCenteredSearchStrings</name></member>
+      <member refid="classft_1_1IKmerGenerator_1ad29f100e572eb069d1dfca76027b1cc3" prot="public" virt="pure-virtual"><scope>ft::IKmerGenerator</scope><name>genSearchKmers</name></member>
+      <member refid="classft_1_1IKmerGenerator_1a4af12a660e2b1eea2c3e0e6d267d74f9" prot="public" virt="pure-virtual"><scope>ft::IKmerGenerator</scope><name>genSlidingSearchStrings</name></member>
+      <member refid="classft_1_1IKmerGenerator_1a1aad625b31b17f106a1d7d810cf6a6a6" prot="public" virt="pure-virtual"><scope>ft::IKmerGenerator</scope><name>init</name></member>
+      <member refid="classft_1_1IKmerGenerator_1a0d8f694589221c62796426dba6a8b00c" prot="public" virt="virtual"><scope>ft::IKmerGenerator</scope><name>~IKmerGenerator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

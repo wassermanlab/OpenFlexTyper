@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="dir_8b6da71c64309460702d1a974a460fde" kind="dir">
+    <compoundname>/home/tixii/Git/OpenFlexTyper/flextyper/src</compoundname>
+    <innerfile refid="finder_8cpp">finder.cpp</innerfile>
+    <innerfile refid="ftMapClass_8cpp">ftMapClass.cpp</innerfile>
+    <innerfile refid="ftPropsClass_8cpp">ftPropsClass.cpp</innerfile>
+    <innerfile refid="ftSearch_8cpp">ftSearch.cpp</innerfile>
+    <innerfile refid="kmerClass_8cpp">kmerClass.cpp</innerfile>
+    <innerfile refid="kmergenerator_8cpp">kmergenerator.cpp</innerfile>
+    <innerfile refid="main_8cpp">main.cpp</innerfile>
+    <innerfile refid="qkMapClass_8cpp">qkMapClass.cpp</innerfile>
+    <innerfile refid="queryClass_8cpp">queryClass.cpp</innerfile>
+    <innerfile refid="queryextractor_8cpp">queryextractor.cpp</innerfile>
+    <innerfile refid="utils_8cpp">utils.cpp</innerfile>
+    <innerfile refid="writerbridge_8cpp">writerbridge.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/src/"/>
+  </compounddef>
+</doxygen>

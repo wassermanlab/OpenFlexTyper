@@ -1,0 +1,385 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="utils_8h" kind="file" language="C++">
+    <compoundname>utils.h</compoundname>
+    <includes local="no">vector</includes>
+    <includes local="no">string</includes>
+    <includes local="no">experimental/filesystem</includes>
+    <includes local="no">set</includes>
+    <includes local="no">cmath</includes>
+    <includes refid="iutils_8h" local="yes">iutils.h</includes>
+    <includedby refid="ftMapClass_8h" local="yes">/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftMapClass.h</includedby>
+    <includedby refid="ftSearch_8h" local="yes">/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftSearch.h</includedby>
+    <includedby refid="writerbridge_8h" local="yes">/home/tixii/Git/OpenFlexTyper/flextyper/includes/writerbridge.h</includedby>
+    <includedby refid="queryextractor_8h" local="yes">/home/tixii/Git/OpenFlexTyper/flextyper/includes/queryextractor.h</includedby>
+    <includedby refid="iqueryextractor_8h" local="yes">/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/iqueryextractor.h</includedby>
+    <includedby refid="iwriterbridge_8h" local="yes">/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/iwriterbridge.h</includedby>
+    <includedby refid="utils_8cpp" local="yes">/home/tixii/Git/OpenFlexTyper/flextyper/src/utils.cpp</includedby>
+    <includedby refid="tst__performances_8cpp" local="yes">/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_performances.cpp</includedby>
+    <incdepgraph>
+      <node id="319">
+        <label>QSettings</label>
+      </node>
+      <node id="324">
+        <label>kmergenerator.h</label>
+        <link refid="kmergenerator_8h_source"/>
+        <childnode refid="306" relation="include">
+        </childnode>
+        <childnode refid="304" relation="include">
+        </childnode>
+        <childnode refid="311" relation="include">
+        </childnode>
+        <childnode refid="325" relation="include">
+        </childnode>
+        <childnode refid="321" relation="include">
+        </childnode>
+        <childnode refid="315" relation="include">
+        </childnode>
+      </node>
+      <node id="308">
+        <label>iutils.h</label>
+        <link refid="iutils_8h_source"/>
+        <childnode refid="303" relation="include">
+        </childnode>
+        <childnode refid="304" relation="include">
+        </childnode>
+        <childnode refid="305" relation="include">
+        </childnode>
+        <childnode refid="306" relation="include">
+        </childnode>
+        <childnode refid="309" relation="include">
+        </childnode>
+        <childnode refid="307" relation="include">
+        </childnode>
+      </node>
+      <node id="307">
+        <label>cmath</label>
+      </node>
+      <node id="304">
+        <label>string</label>
+      </node>
+      <node id="320">
+        <label>LogClass.h</label>
+        <link refid="LogClass_8h_source"/>
+        <childnode refid="310" relation="include">
+        </childnode>
+        <childnode refid="317" relation="include">
+        </childnode>
+        <childnode refid="318" relation="include">
+        </childnode>
+      </node>
+      <node id="311">
+        <label>map</label>
+      </node>
+      <node id="317">
+        <label>fstream</label>
+      </node>
+      <node id="321">
+        <label>queryClass.h</label>
+        <link refid="queryClass_8h_source"/>
+        <childnode refid="306" relation="include">
+        </childnode>
+        <childnode refid="310" relation="include">
+        </childnode>
+        <childnode refid="311" relation="include">
+        </childnode>
+        <childnode refid="315" relation="include">
+        </childnode>
+      </node>
+      <node id="322">
+        <label>qkMapClass.h</label>
+        <link refid="qkMapClass_8h_source"/>
+        <childnode refid="306" relation="include">
+        </childnode>
+        <childnode refid="310" relation="include">
+        </childnode>
+        <childnode refid="323" relation="include">
+        </childnode>
+        <childnode refid="312" relation="include">
+        </childnode>
+        <childnode refid="303" relation="include">
+        </childnode>
+        <childnode refid="313" relation="include">
+        </childnode>
+        <childnode refid="321" relation="include">
+        </childnode>
+      </node>
+      <node id="314">
+        <label>bitset</label>
+      </node>
+      <node id="312">
+        <label>future</label>
+      </node>
+      <node id="313">
+        <label>kmerClass.h</label>
+        <link refid="kmerClass_8h_source"/>
+        <childnode refid="306" relation="include">
+        </childnode>
+        <childnode refid="314" relation="include">
+        </childnode>
+        <childnode refid="310" relation="include">
+        </childnode>
+        <childnode refid="311" relation="include">
+        </childnode>
+        <childnode refid="315" relation="include">
+        </childnode>
+      </node>
+      <node id="303">
+        <label>vector</label>
+      </node>
+      <node id="325">
+        <label>ikmergenerator.h</label>
+        <link refid="ikmergenerator_8h_source"/>
+        <childnode refid="306" relation="include">
+        </childnode>
+        <childnode refid="304" relation="include">
+        </childnode>
+        <childnode refid="311" relation="include">
+        </childnode>
+        <childnode refid="315" relation="include">
+        </childnode>
+        <childnode refid="321" relation="include">
+        </childnode>
+      </node>
+      <node id="310">
+        <label>iostream</label>
+      </node>
+      <node id="302">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/includes/utils.h</label>
+        <link refid="utils_8h"/>
+        <childnode refid="303" relation="include">
+        </childnode>
+        <childnode refid="304" relation="include">
+        </childnode>
+        <childnode refid="305" relation="include">
+        </childnode>
+        <childnode refid="306" relation="include">
+        </childnode>
+        <childnode refid="307" relation="include">
+        </childnode>
+        <childnode refid="308" relation="include">
+        </childnode>
+      </node>
+      <node id="315">
+        <label>ftPropsClass.h</label>
+        <link refid="ftPropsClass_8h_source"/>
+        <childnode refid="316" relation="include">
+        </childnode>
+        <childnode refid="306" relation="include">
+        </childnode>
+        <childnode refid="314" relation="include">
+        </childnode>
+        <childnode refid="310" relation="include">
+        </childnode>
+        <childnode refid="317" relation="include">
+        </childnode>
+        <childnode refid="318" relation="include">
+        </childnode>
+        <childnode refid="311" relation="include">
+        </childnode>
+        <childnode refid="305" relation="include">
+        </childnode>
+        <childnode refid="319" relation="include">
+        </childnode>
+        <childnode refid="320" relation="include">
+        </childnode>
+      </node>
+      <node id="323">
+        <label>unordered_map</label>
+      </node>
+      <node id="316">
+        <label>climits</label>
+      </node>
+      <node id="318">
+        <label>chrono</label>
+      </node>
+      <node id="306">
+        <label>set</label>
+      </node>
+      <node id="309">
+        <label>ftMapClass.h</label>
+        <link refid="ftMapClass_8h_source"/>
+        <childnode refid="306" relation="include">
+        </childnode>
+        <childnode refid="310" relation="include">
+        </childnode>
+        <childnode refid="311" relation="include">
+        </childnode>
+        <childnode refid="312" relation="include">
+        </childnode>
+        <childnode refid="303" relation="include">
+        </childnode>
+        <childnode refid="313" relation="include">
+        </childnode>
+        <childnode refid="321" relation="include">
+        </childnode>
+        <childnode refid="322" relation="include">
+        </childnode>
+        <childnode refid="315" relation="include">
+        </childnode>
+        <childnode refid="324" relation="include">
+        </childnode>
+        <childnode refid="302" relation="include">
+        </childnode>
+        <childnode refid="323" relation="include">
+        </childnode>
+      </node>
+      <node id="305">
+        <label>experimental/filesystem</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="332">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/iutils.h</label>
+        <link refid="iutils_8h_source"/>
+        <childnode refid="326" relation="include">
+        </childnode>
+        <childnode refid="328" relation="include">
+        </childnode>
+        <childnode refid="329" relation="include">
+        </childnode>
+        <childnode refid="333" relation="include">
+        </childnode>
+      </node>
+      <node id="328">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftSearch.h</label>
+        <link refid="ftSearch_8h_source"/>
+      </node>
+      <node id="329">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/includes/writerbridge.h</label>
+        <link refid="writerbridge_8h_source"/>
+        <childnode refid="328" relation="include">
+        </childnode>
+      </node>
+      <node id="331">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/includes/finder.h</label>
+        <link refid="finder_8h_source"/>
+        <childnode refid="328" relation="include">
+        </childnode>
+      </node>
+      <node id="334">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/iwriterbridge.h</label>
+        <link refid="iwriterbridge_8h_source"/>
+        <childnode refid="329" relation="include">
+        </childnode>
+        <childnode refid="328" relation="include">
+        </childnode>
+      </node>
+      <node id="336">
+        <label>/home/tixii/Git/OpenFlexTyper/fmindex/includes/fmindex.h</label>
+        <link refid="fmindex_8h_source"/>
+        <childnode refid="331" relation="include">
+        </childnode>
+        <childnode refid="330" relation="include">
+        </childnode>
+      </node>
+      <node id="326">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/includes/utils.h</label>
+        <link refid="utils_8h"/>
+        <childnode refid="327" relation="include">
+        </childnode>
+        <childnode refid="328" relation="include">
+        </childnode>
+        <childnode refid="329" relation="include">
+        </childnode>
+        <childnode refid="333" relation="include">
+        </childnode>
+        <childnode refid="337" relation="include">
+        </childnode>
+        <childnode refid="334" relation="include">
+        </childnode>
+      </node>
+      <node id="337">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/iqueryextractor.h</label>
+        <link refid="iqueryextractor_8h_source"/>
+        <childnode refid="333" relation="include">
+        </childnode>
+        <childnode refid="328" relation="include">
+        </childnode>
+      </node>
+      <node id="330">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/interfaces/ifinder.h</label>
+        <link refid="ifinder_8h_source"/>
+        <childnode refid="331" relation="include">
+        </childnode>
+        <childnode refid="328" relation="include">
+        </childnode>
+      </node>
+      <node id="335">
+        <label>/home/tixii/Git/OpenFlexTyper/fmindex/interfaces/ifmindex.h</label>
+        <link refid="ifmindex_8h_source"/>
+        <childnode refid="331" relation="include">
+        </childnode>
+        <childnode refid="330" relation="include">
+        </childnode>
+        <childnode refid="336" relation="include">
+        </childnode>
+      </node>
+      <node id="327">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/includes/ftMapClass.h</label>
+        <link refid="ftMapClass_8h_source"/>
+        <childnode refid="328" relation="include">
+        </childnode>
+        <childnode refid="329" relation="include">
+        </childnode>
+        <childnode refid="330" relation="include">
+        </childnode>
+        <childnode refid="332" relation="include">
+        </childnode>
+        <childnode refid="334" relation="include">
+        </childnode>
+        <childnode refid="335" relation="include">
+        </childnode>
+      </node>
+      <node id="333">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/includes/queryextractor.h</label>
+        <link refid="queryextractor_8h_source"/>
+        <childnode refid="328" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classft_1_1Utils" prot="public">ft::Utils</innerclass>
+    <innernamespace refid="namespaceft">ft</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>__UTILS_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__UTILS_H__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;experimental/filesystem&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;set&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cmath&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;iutils.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">fs<sp/>=<sp/>std::experimental::filesystem;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceft" kindref="compound">ft</ref><sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Utils<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>IUtils<sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>Utils();</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>~Utils();</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>joinString(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::set&lt;std::string&gt;&amp;<sp/>setOfStr,<sp/>std::string<sp/>delimeter<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;,<sp/>&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/>split(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>strToSplit,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>delimeter);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>reverseComplement(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>inputString)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="57"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//<sp/>end<sp/>of<sp/>Utils</highlight></codeline>
+    </programlisting>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/includes/utils.h"/>
+  </compounddef>
+</doxygen>

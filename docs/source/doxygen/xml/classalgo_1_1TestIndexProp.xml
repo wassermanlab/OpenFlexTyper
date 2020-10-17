@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classalgo_1_1TestIndexProp" kind="class" language="C++" prot="public">
+    <compoundname>algo::TestIndexProp</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Test</basecompoundref>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classalgo_1_1TestIndexProp_1ade66a23a7970f16ffb7d3a3b3bef72c0" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void algo::TestIndexProp::SetUp</definition>
+        <argsstring>()</argsstring>
+        <name>SetUp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="10" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="10" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classalgo_1_1TestIndexProp_1aa8f599f8af0056571fde6ce14f5e2390" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void algo::TestIndexProp::TearDown</definition>
+        <argsstring>()</argsstring>
+        <name>TearDown</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="11" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="11" bodyend="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="8" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="8" bodyend="18"/>
+    <listofallmembers>
+      <member refid="classalgo_1_1TestIndexProp_1ade66a23a7970f16ffb7d3a3b3bef72c0" prot="protected" virt="virtual"><scope>algo::TestIndexProp</scope><name>SetUp</name></member>
+      <member refid="classalgo_1_1TestIndexProp_1aa8f599f8af0056571fde6ce14f5e2390" prot="protected" virt="virtual"><scope>algo::TestIndexProp</scope><name>TearDown</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

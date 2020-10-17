@@ -1,0 +1,333 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="namespacealgo" kind="namespace" language="C++">
+    <compoundname>algo</compoundname>
+    <innerclass refid="classalgo_1_1FmIndex" prot="public">algo::FmIndex</innerclass>
+    <innerclass refid="classalgo_1_1IFmIndex" prot="public">algo::IFmIndex</innerclass>
+    <innerclass refid="classalgo_1_1IndexProps" prot="public">algo::IndexProps</innerclass>
+    <innerclass refid="classalgo_1_1TestIndexProp" prot="public">algo::TestIndexProp</innerclass>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacealgo_1a6b4fac28989b7916c43dab0a041ad28a" prot="public" static="no">
+        <name>FileType</name>
+        <enumvalue id="namespacealgo_1a6b4fac28989b7916c43dab0a041ad28aa6761bb0330503c255ecf8e0c32e86109" prot="public">
+          <name>FQ</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacealgo_1a6b4fac28989b7916c43dab0a041ad28aa49a9f42e51c5b9529da5a7ae81c91a0b" prot="public">
+          <name>FA</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacealgo_1a6b4fac28989b7916c43dab0a041ad28aa1feeb4d117292f4666ccc410f7046cd8" prot="public">
+          <name>GZ</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/fmindex/includes/indexPropsClass.h" line="20" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/fmindex/includes/indexPropsClass.h" bodystart="20" bodyend="20"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacealgo_1afba776145999e3099bb67679383821fa" prot="public" static="no">
+        <type>unsigned int</type>
+        <definition>typedef unsigned int algo::Position</definition>
+        <argsstring></argsstring>
+        <name>Position</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/fmindex/interfaces/ifmindex.h" line="20" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/fmindex/interfaces/ifmindex.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacealgo_1a631f8793417466c15f75c5bfecaa39eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>algo::TEST_F</definition>
+        <argsstring>(TestIndexProp, setR1)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type>TestIndexProp</type>
+        </param>
+        <param>
+          <type>setR1</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="160" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="160" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacealgo_1acf29469f2958d314d1bd27d5de2941ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>algo::TEST_F</definition>
+        <argsstring>(TestIndexProp, setR2)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type>TestIndexProp</type>
+        </param>
+        <param>
+          <type>setR2</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="180" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="180" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacealgo_1a11dc7be28d7129e261ac666c7ff1da59" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>algo::TEST_F</definition>
+        <argsstring>(TestIndexProp, createBash1)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type>TestIndexProp</type>
+        </param>
+        <param>
+          <type>createBash1</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="200" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="200" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacealgo_1ad3c549607b67a76e2e9e969a268c6961" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>algo::TEST_F</definition>
+        <argsstring>(TestIndexProp, createBash2)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type>TestIndexProp</type>
+        </param>
+        <param>
+          <type>createBash2</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="233" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="233" bodyend="275"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacealgo_1ac247a785700a04dfd8cfc0fca176af9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>algo::TEST_F</definition>
+        <argsstring>(TestIndexProp, createBash_withUnzip)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type>TestIndexProp</type>
+        </param>
+        <param>
+          <type>createBash_withUnzip</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="277" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="277" bodyend="311"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacealgo_1ac27adcfae8916315d76dfc8b426cc997" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>algo::TEST_F</definition>
+        <argsstring>(TestIndexProp, createBash_withRevComp)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type>TestIndexProp</type>
+        </param>
+        <param>
+          <type>createBash_withRevComp</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="314" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="314" bodyend="346"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacealgo_1aacd3aa3e88cfeb9c9f8a9fba2227b2be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>algo::TEST_F</definition>
+        <argsstring>(TestIndexProp, createBash_withUnzipPairedRevComp)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type>TestIndexProp</type>
+        </param>
+        <param>
+          <type>createBash_withUnzipPairedRevComp</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="348" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="348" bodyend="392"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacealgo_1a584ee74ffca1b664cbed6722275d946d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>algo::TEST_F</definition>
+        <argsstring>(TestIndexProp, createBash_withMultipleIndexes)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type>TestIndexProp</type>
+        </param>
+        <param>
+          <type>createBash_withMultipleIndexes</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="395" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="395" bodyend="430"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacealgo_1a0816ab7918b6bbe4b1476375f16d415f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>algo::TEST_F</definition>
+        <argsstring>(TestIndexProp, createPPFSet1)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type>TestIndexProp</type>
+        </param>
+        <param>
+          <type>createPPFSet1</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="432" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="432" bodyend="459"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacealgo_1ab4d77baa7d14e1cb72b14f2f499bf527" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>algo::TEST_F</definition>
+        <argsstring>(TestIndexProp, createPPFSet2)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type>TestIndexProp</type>
+        </param>
+        <param>
+          <type>createPPFSet2</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="461" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="461" bodyend="487"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacealgo_1ad4d9a0adc47b514861ff67fbb42914a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>algo::TEST_F</definition>
+        <argsstring>(TestIndexProp, createPPFSet3)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type>TestIndexProp</type>
+        </param>
+        <param>
+          <type>createPPFSet3</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="489" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="489" bodyend="520"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacealgo_1abe77ffdb5695e22bf7d619671617779f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>algo::TEST_F</definition>
+        <argsstring>(TestIndexProp, createPPFSet4)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type>TestIndexProp</type>
+        </param>
+        <param>
+          <type>createPPFSet4</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="522" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="522" bodyend="553"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacealgo_1a052d8feeebb30c9f57c1acc63fda41aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>algo::TEST_F</definition>
+        <argsstring>(TestIndexProp, createIndexINI)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type>TestIndexProp</type>
+        </param>
+        <param>
+          <type>createIndexINI</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="557" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="557" bodyend="576"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacealgo_1ab027614457b005f0c10309e8acb90335" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>algo::TEST_F</definition>
+        <argsstring>(TestIndexProp, countReads)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type>TestIndexProp</type>
+        </param>
+        <param>
+          <type>countReads</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="579" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" bodystart="579" bodyend="586"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="copyright"><para>Copyright (c) 2020, Wasserman lab </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_indexPropsClass.cpp" line="6" column="1"/>
+  </compounddef>
+</doxygen>

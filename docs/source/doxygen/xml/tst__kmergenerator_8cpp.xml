@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="tst__kmergenerator_8cpp" kind="file" language="C++">
+    <compoundname>tst_kmergenerator.cpp</compoundname>
+    <includes local="no">gtest/gtest.h</includes>
+    <includes refid="kmergenerator_8cpp" local="yes">kmergenerator.cpp</includes>
+    <includes local="no">climits</includes>
+    <incdepgraph>
+      <node id="856">
+        <label>gtest/gtest.h</label>
+      </node>
+      <node id="855">
+        <label>/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_kmergenerator.cpp</label>
+        <link refid="tst__kmergenerator_8cpp"/>
+        <childnode refid="856" relation="include">
+        </childnode>
+        <childnode refid="857" relation="include">
+        </childnode>
+      </node>
+      <node id="857">
+        <label>climits</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classft_1_1TestKmerGenerator" prot="public">ft::TestKmerGenerator</innerclass>
+    <innernamespace refid="namespaceft">ft</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="tst__kmergenerator_8cpp_1a940ad85d9d45ed5e3cb30708b4add8c5" prot="public" static="no">
+        <name>TEST_DESCRIPTION</name>
+        <param><defname>desc</defname></param>
+        <initializer>RecordProperty(&quot;description&quot;, desc)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_kmergenerator.cpp" line="22" column="9" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_kmergenerator.cpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;gtest/gtest.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;kmergenerator.cpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;climits&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacestd" kindref="compound">std</ref>;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespaceft" kindref="compound">ft</ref><sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TestKmerGenerator<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>::testing::Test<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetUp()<sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TearDown()<sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TEST_DESCRIPTION(desc)<sp/>RecordProperty(&quot;description&quot;,<sp/>desc)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//======================================================================</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal">TEST_F(TestKmerGenerator,<sp/>init)</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>TEST_DESCRIPTION(</highlight><highlight class="stringliteral">&quot;genSlidingSearchStrings&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>uint<sp/>_kmerSize<sp/>=<sp/>5;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_refOnly<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>SearchType<sp/>_searchType<sp/>=<sp/>SLIDING;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>uint<sp/>_overlap<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>uint<sp/>_stride<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>uint<sp/>_maxKmers<sp/><sp/>=<sp/>30;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>KmerGenerator<sp/>_kgen(_kmerSize,<sp/>_refOnly,<sp/>_searchType,<sp/>_overlap,<sp/>_stride,<sp/><sp/>_maxKmers);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(_kmerSize,<sp/>_kgen.getKmerSize());</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(_refOnly,<sp/>_kgen.getRefOnly());</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(_searchType,<sp/>_kgen.getSearchType());</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(_overlap,<sp/>_kgen.getOverlap());</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(_stride,<sp/>_kgen.getStride());</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(_maxKmers,<sp/>_kgen.getMaxKmers());</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="comment">//======================================================================</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal">TEST_F(TestKmerGenerator,<sp/>genSlidingSearchStrings)</highlight></codeline>
+<codeline lineno="50"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>TEST_DESCRIPTION(</highlight><highlight class="stringliteral">&quot;genSlidingSearchStrings&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>uint<sp/>_kmerSize<sp/>=<sp/>5;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_refOnly<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>SearchType<sp/>_searchType<sp/>=<sp/>SLIDING;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>uint<sp/>_overlap<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>uint<sp/>_stride<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>uint<sp/>_maxKmers<sp/><sp/>=<sp/>30;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>KmerGenerator<sp/>_kgen(_kmerSize,<sp/>_refOnly,<sp/>_searchType,<sp/>_overlap,<sp/>_stride,<sp/>_maxKmers);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>queryString<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;AAAAATCCCCC&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>std::set&lt;std::string&gt;<sp/>expectedResult<sp/>=<sp/>{</highlight><highlight class="stringliteral">&quot;AAAAA&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;AAAAT&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;AAATC&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;AATCC&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;ATCCC&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;TCCCC&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;CCCCC&quot;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>std::set&lt;std::string&gt;<sp/>results<sp/>=<sp/>_kgen.genSlidingSearchStrings(queryString);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(results,<sp/>expectedResult);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="comment">//======================================================================</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal">TEST_F(TestKmerGenerator,<sp/>genCenteredSearchStrings)</highlight></codeline>
+<codeline lineno="70"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>TEST_DESCRIPTION(</highlight><highlight class="stringliteral">&quot;genCenteredSearchStrings&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>uint<sp/>_kmerSize<sp/>=<sp/>5;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_refOnly<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>SearchType<sp/>_searchType<sp/>=<sp/>CENTERED;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>uint<sp/>_overlap<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>uint<sp/>_stride<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>uint<sp/>_maxKmers<sp/><sp/>=<sp/>30;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>KmerGenerator<sp/>_kgen(_kmerSize,<sp/>_refOnly,<sp/>_searchType,<sp/>_overlap,<sp/>_stride,<sp/>_maxKmers);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//input:<sp/>const<sp/>std::string&amp;<sp/>queryString,<sp/>uint<sp/>kmerSize,<sp/>uint<sp/>overlap,<sp/>uint<sp/>stride,<sp/>bool<sp/>kmerCounts,<sp/>uint<sp/>maxKmers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>queryString<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;AAAAATCCCCC&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>std::set&lt;std::string&gt;<sp/>expectedResults<sp/>=<sp/>{</highlight><highlight class="stringliteral">&quot;AAAAT&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;AAATC&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;AATCC&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;ATCCC&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;TCCCC&quot;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>std::set&lt;std::string&gt;<sp/>results<sp/>=<sp/>_kgen.genCenteredSearchStrings(queryString);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_EQ(results,<sp/>expectedResults);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_kmergenerator.cpp"/>
+  </compounddef>
+</doxygen>

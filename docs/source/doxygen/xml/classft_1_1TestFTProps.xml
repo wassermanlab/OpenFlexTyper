@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.13">
+  <compounddef id="classft_1_1TestFTProps" kind="class" language="C++" prot="public">
+    <compoundname>ft::TestFTProps</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Test</basecompoundref>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classft_1_1TestFTProps_1abf724d6675be020e7f6100ac40f896f3" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void ft::TestFTProps::SetUp</definition>
+        <argsstring>()</argsstring>
+        <name>SetUp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_ftPropsClass.cpp" line="13" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_ftPropsClass.cpp" bodystart="13" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classft_1_1TestFTProps_1af0708a7e9d9f4f6d3043cac90f7f4dd6" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void ft::TestFTProps::TearDown</definition>
+        <argsstring>()</argsstring>
+        <name>TearDown</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_ftPropsClass.cpp" line="14" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_ftPropsClass.cpp" bodystart="14" bodyend="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_ftPropsClass.cpp" line="11" column="1" bodyfile="/home/tixii/Git/OpenFlexTyper/flextyper/test/tst_ftPropsClass.cpp" bodystart="11" bodyend="18"/>
+    <listofallmembers>
+      <member refid="classft_1_1TestFTProps_1abf724d6675be020e7f6100ac40f896f3" prot="protected" virt="virtual"><scope>ft::TestFTProps</scope><name>SetUp</name></member>
+      <member refid="classft_1_1TestFTProps_1af0708a7e9d9f4f6d3043cac90f7f4dd6" prot="protected" virt="virtual"><scope>ft::TestFTProps</scope><name>TearDown</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
