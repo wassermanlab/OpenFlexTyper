@@ -26,8 +26,7 @@ public:
     virtual ~Finder();
     const Finder& operator=(const Finder &other) = delete;
 
-    /// \name Search Indexes
-    /// \fn
+    /// \fn Search Indexes
     /// \public
     /// \brief Main search function based on the parameters set in FTMap
     /// \param ft::FTMap ftMap containing all the search properties
