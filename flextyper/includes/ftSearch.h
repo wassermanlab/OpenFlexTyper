@@ -25,6 +25,7 @@
 namespace fs = std::experimental::filesystem;
 
 namespace ft {
+
 ////////////////////////////////////////////////////////////////////////
 /// \class FTSearch
 /// \brief A class that handles the flow of a single search
