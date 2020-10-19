@@ -67,7 +67,7 @@ public:
     /// Constructor
     FTProp();
 
-    /// Class Destructor
+    /// Destructor
     virtual ~FTProp();
 
     /// \struct
