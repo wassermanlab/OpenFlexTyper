@@ -11,9 +11,9 @@
 #include <algorithm>
 #include "ifinder.h"
 
-namespace fs = std::experimental::filesystem;
-
 namespace ft {
+
+namespace fs = std::experimental::filesystem;
 
 ////////////////////////////////////////////////////////////////////////
 /// \class Finder
