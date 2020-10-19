@@ -15,7 +15,8 @@ namespace fs = std::experimental::filesystem;
 /// \class Finder
 /// \brief A class that handles the main search functions
 ////////////////////////////////////////////////////////////////////////
-class Finder : public IFinder {
+class Finder : public IFinder
+{
 public:
     /// Constructor
     Finder();
@@ -25,7 +26,8 @@ public:
     virtual ~Finder();
     const Finder& operator=(const Finder &other) = delete;
 
-    /// \fn search Indexes
+    /// \name Search Indexes
+    /// \fn
     /// \public
     /// \brief Main search function based on the parameters set in FTMap
     /// \param ft::FTMap ftMap containing all the search properties

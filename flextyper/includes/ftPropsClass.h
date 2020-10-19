@@ -62,7 +62,8 @@ enum FlagType { ABK = 0x0001, OCK = 0x0002, NUK = 0x0003};
 /// \class FTProp
 /// \brief A class that contains all the properties for a FlexTyper instance
 ////////////////////////////////////////////////////////////////////////
-class FTProp {
+class FTProp
+{
 public:
     /// Constructor
     FTProp();
@@ -137,9 +138,10 @@ public:
                          bool printInputs = false);
     /// @}
 
-    /// \variable
+
     /// Malliable map containing the paths of indexes to be processed
     std::map<fs::path, uint> _indexSet; ///< map of index path to index offsets
+
     /// @name Getters
     /// Constant functions to return properties of the query
     /// @{
