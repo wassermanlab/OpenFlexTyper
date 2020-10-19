@@ -6,7 +6,8 @@ name: Doxygen Action
 # events but only for the master branch
 on:
   push:
-    branches: [ Tixii ]
+    branches: [ master ]
+  
 
 
   
