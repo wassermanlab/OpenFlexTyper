@@ -55,12 +55,12 @@ DISABLE_INDEX        = NO
 # If the EXTRACT_ALL tag is set to YES all classes and functions will be
 # included in the documentation, even if no documentation was available.
 
-EXTRACT_ALL          = NO
+EXTRACT_ALL          = YES
 
 # If the EXTRACT_PRIVATE tag is set to YES all private members of a class
 # will be included in the documentation.
 
-EXTRACT_PRIVATE      = NO
+EXTRACT_PRIVATE      = YES
 
 # If the HIDE_UNDOC_MEMBERS tag is set to YES, Doxygen will hide all
 # undocumented members inside documented classes or files.

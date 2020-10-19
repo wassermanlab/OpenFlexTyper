@@ -31,7 +31,7 @@ public:
     /// @name Properties
     /// @{
     /// \public
-    /// \variable
+    /// \var
     int _qID;
     QueryType _qType;
     std::string _qstring;
