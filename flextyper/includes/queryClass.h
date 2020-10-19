@@ -12,8 +12,6 @@ namespace ft {
 /// \class QueryClass
 /// \brief A class that contains information for one query ID, Type pair
 ////////////////////////////////////////////////////////////////////////
-
-
 class QueryClass
 {
 
