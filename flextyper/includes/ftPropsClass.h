@@ -22,34 +22,36 @@ namespace ft {
 namespace fs = std::experimental::filesystem;
 
 
+/// \enum Orientation
+enum Orientation {FWD = 1, REV}; ///< Match orientation, FWD or Reverse Complement
 
-enum Orientation {FWD = 1, REV};
-
-typedef std::string     SearchType;             // SearchType declaration
-const   std::string     CENTERED = "CENTERED";  // search type centered approach
-const   std::string     SLIDING  = "SLIDING";   // search type sliding approach
+/// \typedef Search Type
+typedef std::string     SearchType;             ///< SearchType declaration
+const   std::string     CENTERED = "CENTERED";  ///< search type centered approach
+const   std::string     SLIDING  = "SLIDING";   ///< search type sliding approach
 
 /// \name Query Type
 /// Enumeration of Query Type: Reference, Alternate, CrossOver
 /// @{
 ///
 enum QueryType {REF = 1, ALT, CRO};
-const   std::string QUERYTYPE_REF  = "REF";
-const   std::string QUERYTYPE_ALT  = "ALT";
-const   std::string QUERYTYPE_CRO  = "CRO";
+const   std::string QUERYTYPE_REF  = "REF"; /// \skip
+const   std::string QUERYTYPE_ALT  = "ALT"; /// \skip
+const   std::string QUERYTYPE_CRO  = "CRO"; /// \skip
 /// @}
 
 /// \typedef QIdT
-/// Pair to create a unique ID: (Query Number, Query Type)
+/// \brief Pair to create a unique ID: (Query Number, Query Type)
 typedef std::pair<int, QueryType>  QIdT; // int is the query ID
+
 /// \typedef ReadID
-/// Pair to create a unique Read ID: (Read Number, Read Pair)
+/// \brief Pair to create a unique Read ID: (Read Number, Read Pair)
 /// Read Pair is either 1 or 2, so that a Read Pair can be identified by a single id.
 /// e.g. Read 1 from "_1" is identified by (1,1) and its corresponding pair from "_2" (1,2)
 typedef std::pair<int, int> ReadID; // pair (id, pair 1 or pair 2)
 
 /// \typedef Query
-/// A tuple of QueryID, Ref string, Alt string, Cro String
+/// \brief A tuple of QueryID, Ref string, Alt string, Cro String
 typedef std::tuple<uint, std::string, std::string, std::string>  Query;
 
 /// \enum FlagType
@@ -254,17 +256,17 @@ private:
     std::bitset<8> _flagsToOutput;
     std::bitset<8> _flagsToNotCount;
 
-    bool _multithread; //run search in parallel
-    bool _refOnly; // single sequence for each query
-    bool _matchesOnly; // only output positive hits
+    bool _multithread; ///< run search in parallel
+    bool _refOnly; ///< single sequence for each query
+    bool _matchesOnly; //?< only output positive hits
     bool _crossover; //search for crossover counts
     bool _printSearchTime;
-    bool _pairedReads; // paired reads
-    bool _countAsPairs; // only count one hit per read pair
-    bool _revCompSearch; //generate and search for _qkRCMap
-    bool _indexRevComp; //do the index files contain the reverse complement
-    bool _matchingReads; //create files that contain reads that match to each query
-    bool _verbose; //print to std::cout
+    bool _pairedReads; ///< paired reads
+    bool _countAsPairs; ///< only count one hit per read pair
+    bool _revCompSearch; ///< generate and search for _qkRCMap
+    bool _indexRevComp; ///< do the index files contain the reverse complement
+    bool _matchingReads; ///< create files that contain reads that match to each query
+    bool _verbose; ///< print to std::cout
     /// @}
 
 };
