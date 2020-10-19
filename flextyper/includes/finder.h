@@ -26,13 +26,14 @@ public:
     virtual ~Finder();
     const Finder& operator=(const Finder &other) = delete;
 
-    /// \fn Search Indexes
+    /// \name Search Indexes
+    /// \fn
     /// \public
     /// \brief Main search function based on the parameters set in FTMap
     /// \param ft::FTMap ftMap containing all the search properties
     void searchIndexes(ft::FTMap &ftMap);
 
-    /// \fn Parallel Search
+    /// \name Parallel Search
     /// \brief parallelSearch searches kmers in parallel in a single index.
     /// \public
     /// \details parallelSearch will search each kmer in parallel across a single index using asynchronous programming
@@ -43,7 +44,7 @@ public:
     void parallelSearch(FTMap &ftMap,
                         const fs::path &indexPath, long long offset);
 
-    /// \fn Sequential Search
+    /// \name Sequential Search
     /// \public
     /// \brief sequentialSearch searches kmers sequentially in a single index.
     /// \param FTMap: The search class containing parameters and results
