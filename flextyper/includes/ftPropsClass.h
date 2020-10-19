@@ -16,38 +16,61 @@
 #include <QSettings>
 #include <LogClass.h>
 
-namespace fs = std::experimental::filesystem;
 
 namespace ft {
 
+namespace fs = std::experimental::filesystem;
+
+
+/// \enum Orientation
+enum Orientation {FWD = 1, REV}; ///< Match orientation, FWD or Reverse Complement
+
+/// \typedef Search Type
+typedef std::string     SearchType;             ///< SearchType declaration
+const   std::string     CENTERED = "CENTERED";  ///< search type centered approach
+const   std::string     SLIDING  = "SLIDING";   ///< search type sliding approach
+
+/// \name Query Type
+/// Enumeration of Query Type: Reference, Alternate, CrossOver
+/// @{
+///
 enum QueryType {REF = 1, ALT, CRO};
-enum Orientation {FWD = 1, REV};
-typedef std::string     SearchType;             // SearchType declaration
-const   std::string     CENTERED = "CENTERED";  // search type centered approach
-const   std::string     SLIDING  = "SLIDING";   // search type sliding approach
+const   std::string QUERYTYPE_REF  = "REF"; /// \skip
+const   std::string QUERYTYPE_ALT  = "ALT"; /// \skip
+const   std::string QUERYTYPE_CRO  = "CRO"; /// \skip
+/// @}
 
-const   std::string QUERYTYPE_REF  = "REF";
-const   std::string QUERYTYPE_ALT  = "ALT";
-const   std::string QUERYTYPE_CRO  = "CRO";
-
+/// \typedef QIdT
+/// \brief Pair to create a unique ID: (Query Number, Query Type)
 typedef std::pair<int, QueryType>  QIdT; // int is the query ID
+
+/// \typedef ReadID
+/// \brief Pair to create a unique Read ID: (Read Number, Read Pair)
+/// Read Pair is either 1 or 2, so that a Read Pair can be identified by a single id.
+/// e.g. Read 1 from "_1" is identified by (1,1) and its corresponding pair from "_2" (1,2)
 typedef std::pair<int, int> ReadID; // pair (id, pair 1 or pair 2)
+
+/// \typedef Query
+/// \brief A tuple of QueryID, Ref string, Alt string, Cro String
 typedef std::tuple<uint, std::string, std::string, std::string>  Query;
 
-enum FlagType { ABK = 0x0001, OCK = 0x0002, NUK = 0x0003}; // abundant, overcounted, non-unique
+/// \enum FlagType
+/// bitwise representation of the kmer flag types: Abundant (ABK), Overcounted (OCK), Non-Unique (NUK)
+enum FlagType { ABK = 0x0001, OCK = 0x0002, NUK = 0x0003};
 
+////////////////////////////////////////////////////////////////////////
+/// \class FTProp
+/// \brief A class that contains all the properties for a FlexTyper instance
+////////////////////////////////////////////////////////////////////////
 class FTProp {
 public:
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief FTProp
-    ////////////////////////////////////////////////////////////////////////
+    /// Constructor
     FTProp();
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief ~FTProp
-    ////////////////////////////////////////////////////////////////////////
+    /// Destructor
     virtual ~FTProp();
 
+    /// \struct
     struct CmdLineArg {
         std::string outputFile;
         std::string iniFile;
@@ -58,9 +81,11 @@ public:
         bool verbose;
     };
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief Init
-    ////////////////////////////////////////////////////////////////////////
+    /// @name Init
+    /// Initialise the properties from cmd line or settings file
+    /// @{
+    /// \public
+    /// \fn
     void init(const fs::path& pathToQueryFile       ,
               uint kmerSize                         ,
               uint readLength                       ,
@@ -89,11 +114,16 @@ public:
               bool matchingReads            = false);
 
     void initFromQSettings(FTProp::CmdLineArg& arg);
+    /// @}
 
     void setVerbose(bool verbose);
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief Import Index Properties from INI
-    ////////////////////////////////////////////////////////////////////////
+    void printToStdOut(const std::string outputString) const;
+
+    /// @name Index Init
+    /// Load properties from the Index ini file
+    /// @{
+    /// \public
+    /// \fn
     void loadIndexProps(const fs::path& _indexPropsFile, bool printInputs);
     void initIndexProps( const bool pairedReads,
                          const bool revComp,
@@ -105,16 +135,16 @@ public:
                          uint numOfReads,
                          uint numOfIndexes,
                          bool printInputs = false);
+    /// @}
 
-    void printToStdOut(const std::string outputString) const;
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief malliable properties
-    ////////////////////////////////////////////////////////////////////////
-    std::map<fs::path, uint> _indexSet; //index path, index offset
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief Parameter getters and setters
-    ////////////////////////////////////////////////////////////////////////
+    /// \variable
+    /// Malliable map containing the paths of indexes to be processed
+    std::map<fs::path, uint> _indexSet; ///< map of index path to index offsets
+    /// @name Getters
+    /// Constant functions to return properties of the query
+    /// @{
+    /// \public
+    /// \fn
     SearchType getSearchType() const;
 
     std::string getReadSetName()const ;
@@ -130,7 +160,13 @@ public:
     uint getMaxTotalKmers() const;
     uint getNumOfIndexes() const;
     uint getNumOfReads() const;
+    /// @}
 
+    /// @name Flags
+    /// Functions to add/remove flag properties
+    /// @{
+    /// \public
+    /// \fn
     const std::bitset<8>& getFlagsToOutput() const;
     const std::bitset<8>& getFlagsToNotCount() const;
     bool countFlag(ft::FlagType flag) const;
@@ -139,10 +175,13 @@ public:
     void setFlagToNotCount(ft::FlagType flag);
     void resetFlagToOutput(ft::FlagType flag);
     void resetFlagToNotCount(ft::FlagType flag);
+    /// @}
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief Flag getters
-    ////////////////////////////////////////////////////////////////////////
+    /// @name Flag Getters
+    /// Constant functions to get flag values
+    /// @{
+    /// \public
+    /// \fn
     bool getMultithreadFlag() const;
     bool getRefOnlyFlag() const;
     bool getMatchesOnlyFlag() const;
@@ -153,12 +192,14 @@ public:
     bool getRevCompSearchFlag() const;
     bool getIndexRevCompFlag() const;
     bool getMatchingReadsFlag() const;
-
+    /// @}
     bool isVerbose() const;
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief File getters
-    ////////////////////////////////////////////////////////////////////////
 
+    /// @name File Getters
+    /// Constant functions to get file paths
+    /// @{
+    /// \public
+    /// \fn
     const fs::path& getPathToQueryFile() const;
     const fs::path& getIndexDir() const;
     const fs::path& getOutputFolder() const;
@@ -169,6 +210,7 @@ public:
     const fs::path& getBuildDir() const;
     const fs::path& getR1() const;
     const fs::path& getR2() const;
+    /// @}
 
     void addToIndexSet(const fs::path& index, u_int offset);
 
@@ -176,15 +218,16 @@ public:
     void setOutputFolder(const fs::path& outputFolder);
 
 private:
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief fixed properties
-    ////////////////////////////////////////////////////////////////////////
-
+    /// @name Properties
+    /// Fixed Properties set during init
+    /// @{
+    /// \private
+    /// \var
     SearchType _searchType;
     std::string _readSetName;
     std::string _indexFileName;
 
-    uint _numOfReads; // total individual reads, note: if countAsPairs, then equal to the number of Pairs of reads.
+    uint _numOfReads; ///< total individual reads, note: if countAsPairs, then equal to the number of Pairs of reads.
     uint _numOfIndexes;
 
     fs::path _pathToQueryFile;
@@ -211,17 +254,18 @@ private:
     std::bitset<8> _flagsToOutput;
     std::bitset<8> _flagsToNotCount;
 
-    bool _multithread; //run search in parallel
-    bool _refOnly; // single sequence for each query
-    bool _matchesOnly; // only output positive hits
+    bool _multithread; ///< run search in parallel
+    bool _refOnly; ///< single sequence for each query
+    bool _matchesOnly; //?< only output positive hits
     bool _crossover; //search for crossover counts
     bool _printSearchTime;
-    bool _pairedReads; // paired reads
-    bool _countAsPairs; // only count one hit per read pair
-    bool _revCompSearch; //generate and search for _qkRCMap
-    bool _indexRevComp; //do the index files contain the reverse complement
-    bool _matchingReads; //create files that contain reads that match to each query
-    bool _verbose; //print to std::cout
+    bool _pairedReads; ///< paired reads
+    bool _countAsPairs; ///< only count one hit per read pair
+    bool _revCompSearch; ///< generate and search for _qkRCMap
+    bool _indexRevComp; ///< do the index files contain the reverse complement
+    bool _matchingReads; ///< create files that contain reads that match to each query
+    bool _verbose; ///< print to std::cout
+    /// @}
 
 };
 
