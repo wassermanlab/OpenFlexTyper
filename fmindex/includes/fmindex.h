@@ -31,6 +31,7 @@ public:
     virtual ~FmIndex();
 
     /// \fn
+    /// \public
     /// Generate the FmIndex for a preprocessed Fasta File
     /// \param algo::IndexProps Index Properties
     /// \param fs::path filesystem path to the preprocessed Fasta
@@ -38,11 +39,13 @@ public:
     std::pair<fs::path, fs::path> createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta);
 
     /// \fn
+    /// \public
     /// \brief loadIndexFromFile
     /// \param indexname
     void loadIndexFromFile(const fs::path& indexname);
 
     /// \fn
+    /// \public
     /// \brief search within an index file for a kmer
     /// \param string Kmer
     /// \param u_int max Occurence, default 200
@@ -52,6 +55,7 @@ public:
                          );
 
     /// \fn
+    /// \public
     /// \brief create all the indexes for an input set
     /// \param algo::IndexProps Index Properties
     void parallelFmIndex(algo::IndexProps& _props);
