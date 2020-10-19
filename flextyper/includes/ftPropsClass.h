@@ -16,27 +16,45 @@
 #include <QSettings>
 #include <LogClass.h>
 
+
+namespace ft {
+
 namespace fs = std::experimental::filesystem;
 
 
 
-namespace ft {
-
-enum QueryType {REF = 1, ALT, CRO};
 enum Orientation {FWD = 1, REV};
+
 typedef std::string     SearchType;             // SearchType declaration
 const   std::string     CENTERED = "CENTERED";  // search type centered approach
 const   std::string     SLIDING  = "SLIDING";   // search type sliding approach
 
+/// \name Query Type
+/// Enumeration of Query Type: Reference, Alternate, CrossOver
+/// @{
+///
+enum QueryType {REF = 1, ALT, CRO};
 const   std::string QUERYTYPE_REF  = "REF";
 const   std::string QUERYTYPE_ALT  = "ALT";
 const   std::string QUERYTYPE_CRO  = "CRO";
+/// @}
 
+/// \typedef QIdT
+/// Pair to create a unique ID: (Query Number, Query Type)
 typedef std::pair<int, QueryType>  QIdT; // int is the query ID
+/// \typedef ReadID
+/// Pair to create a unique Read ID: (Read Number, Read Pair)
+/// Read Pair is either 1 or 2, so that a Read Pair can be identified by a single id.
+/// e.g. Read 1 from "_1" is identified by (1,1) and its corresponding pair from "_2" (1,2)
 typedef std::pair<int, int> ReadID; // pair (id, pair 1 or pair 2)
+
+/// \typedef Query
+/// A tuple of QueryID, Ref string, Alt string, Cro String
 typedef std::tuple<uint, std::string, std::string, std::string>  Query;
 
-enum FlagType { ABK = 0x0001, OCK = 0x0002, NUK = 0x0003}; // abundant, overcounted, non-unique
+/// \enum FlagType
+/// bitwise representation of the kmer flag types: Abundant (ABK), Overcounted (OCK), Non-Unique (NUK)
+enum FlagType { ABK = 0x0001, OCK = 0x0002, NUK = 0x0003};
 
 ////////////////////////////////////////////////////////////////////////
 /// \class FTProp
@@ -99,7 +117,7 @@ public:
     void setVerbose(bool verbose);
     void printToStdOut(const std::string outputString) const;
 
-    /// @name IndexInit
+    /// @name Index Init
     /// Load properties from the Index ini file
     /// @{
     /// \public
@@ -158,7 +176,7 @@ public:
     void resetFlagToNotCount(ft::FlagType flag);
     /// @}
 
-    /// @name FlagGetters
+    /// @name Flag Getters
     /// Constant functions to get flag values
     /// @{
     /// \public
@@ -176,7 +194,7 @@ public:
     /// @}
     bool isVerbose() const;
 
-    /// @name FileGetters
+    /// @name File Getters
     /// Constant functions to get file paths
     /// @{
     /// \public
