@@ -53,7 +53,7 @@ To learn more, see the fmformatter directory [here](https://github.com/wasserman
 
 ## Full Documentation
 
-For more information about FlexTyper, please refer to our online documentation on [readthedocs](https://flextyper.readthedocs.io/en/latest/)
+For more information about FlexTyper, please refer to [GitHubPages](https://wassermanlab.github.io/OpenFlexTyper/)
 
 
 ## License
