@@ -22,7 +22,6 @@ public:
     /// \param int  query ID as an integer
     /// \param ft::QueryType    query type {REF, ALT, CRO}
     QueryClass(int queryID, ft::QueryType queryType);
-    /// \overload
     QueryClass();
 
     /// Class Destructor

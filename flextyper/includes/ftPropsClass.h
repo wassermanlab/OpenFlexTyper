@@ -139,8 +139,7 @@ public:
 
     /// \variable
     /// Malliable map containing the paths of indexes to be processed
-    std::map<fs::path, uint> _indexSet; //index path, index offset
-
+    std::map<fs::path, uint> _indexSet; ///< map of index path to index offsets
     /// @name Getters
     /// Constant functions to return properties of the query
     /// @{
@@ -219,7 +218,6 @@ public:
     void setOutputFolder(const fs::path& outputFolder);
 
 private:
-
     /// @name Properties
     /// Fixed Properties set during init
     /// @{
@@ -229,7 +227,7 @@ private:
     std::string _readSetName;
     std::string _indexFileName;
 
-    uint _numOfReads; // total individual reads, note: if countAsPairs, then equal to the number of Pairs of reads.
+    uint _numOfReads; ///< total individual reads, note: if countAsPairs, then equal to the number of Pairs of reads.
     uint _numOfIndexes;
 
     fs::path _pathToQueryFile;
