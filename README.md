@@ -1,6 +1,6 @@
 # FlexTyper
 ![Doxygen Action](https://github.com/wassermanlab/OpenFlexTyper/workflows/Doxygen%20Action/badge.svg?branch=master)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 ## Overview
