@@ -49,8 +49,6 @@ public:
     void setOCC(uint occ) {_occ=occ;};
     /// @}
 
-
-
     /// \name Adders
     /// Non-constant functions to add properties to the kmer class
     /// @{

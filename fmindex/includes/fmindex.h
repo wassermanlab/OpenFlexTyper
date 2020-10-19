@@ -30,34 +30,43 @@ public:
     /// Destructor
     virtual ~FmIndex();
 
-    /// \fn
-    /// \public
+    ///
+    /// \fn Generate FM Index
+    /// \brief Main function to generate the fm index files
     /// Generate the FmIndex for a preprocessed Fasta File
+    /// \public
     /// \param algo::IndexProps Index Properties
     /// \param fs::path filesystem path to the preprocessed Fasta
     /// \return (path to the Index, path to the preprocessed Fasta)
+    ///
     std::pair<fs::path, fs::path> createFMIndex(const algo::IndexProps& _props, const fs::path& preprocessedFasta);
 
-    /// \fn
+    ///
+    /// \fn Load Index
     /// \public
     /// \brief loadIndexFromFile
     /// \param indexname
+    ///
     void loadIndexFromFile(const fs::path& indexname);
 
-    /// \fn
+    ///
+    /// \fn Search
     /// \public
     /// \brief search within an index file for a kmer
     /// \param string Kmer
     /// \param u_int max Occurence, default 200
     /// \return ft::KmerClass
+    ///
     ft::KmerClass search(const std::string& kmer,
                          u_int maxOcc = 200
                          );
 
-    /// \fn
+    ///
+    /// \fn parallel FM Index creation
     /// \public
     /// \brief create all the indexes for an input set
     /// \param algo::IndexProps Index Properties
+    ///
     void parallelFmIndex(algo::IndexProps& _props);
 
 
