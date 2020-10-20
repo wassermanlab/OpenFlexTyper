@@ -27,7 +27,7 @@ const   std::string     CENTERED = "CENTERED";  ///< search type centered approa
 const   std::string     SLIDING  = "SLIDING";   ///< search type sliding approach
 /// @}
 
-/// \name Query Type
+/// \enum QueryType
 /// Enumeration of Query Type: Reference, Alternate, CrossOver
 /// @{
 ///

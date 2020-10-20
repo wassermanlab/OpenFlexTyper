@@ -76,7 +76,6 @@ private:
     /// @name Properties
     /// @{
     /// \private
-    /// \variable
     FTProp  _ftProps;
     std::unordered_map<std::string, ft::KmerClass> _kmerSet;
     std::map<ft::QIdT, ft::QueryClass> _querySet;

@@ -55,7 +55,6 @@ private:
     /// @name Properties
     /// @{
     /// \private
-    /// \variable
     fs::path _readFile;
 
     std::map<std::string, uint> _counter;
