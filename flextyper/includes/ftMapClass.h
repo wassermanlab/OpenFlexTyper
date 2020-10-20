@@ -20,7 +20,6 @@ namespace ft {
 /// \class FTMapClass
 /// \brief A class that contains information for the FlexTyper Instance.
 ////////////////////////////////////////////////////////////////////////
-
 class FTMap
 {
 public:

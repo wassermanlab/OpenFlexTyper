@@ -1,24 +1,15 @@
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2020, Wasserman lab
-////////////////////////////////////////////////////////////////////////
-
 #ifndef __FM_SEARCH_H__
 #define __FM_SEARCH_H__
 
 #include <experimental/filesystem>
 #include <climits>
-
 #include "finder.h"
 #include "ifinder.h"
-
 #include "ftMapClass.h"
-
 #include "utils.h"
 #include "iutils.h"
-
 #include "writerbridge.h"
 #include "iwriterbridge.h"
-
 #include "queryextractor.h"
 #include "iqueryextractor.h"
 
