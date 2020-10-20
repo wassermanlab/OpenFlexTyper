@@ -20,7 +20,7 @@ namespace fs = std::experimental::filesystem;
 /// \enum Orientation
 enum Orientation {FWD = 1, REV}; ///< Match orientation, FWD or Reverse Complement
 
-/// \typedef Search Type
+/// \typedef SearchType
 /// @{
 typedef std::string     SearchType;             ///< SearchType declaration
 const   std::string     CENTERED = "CENTERED";  ///< search type centered approach
@@ -91,7 +91,7 @@ public:
     /// \param fs::path output file name
     /// \param bool ref queries only
     /// \param bool search for the reverse complement of a kmer
-    /// \param SearchType search type: Centered or Sliding
+    /// \param SearchType search type: Centered or Sliding, \see SearchType
     /// \param bool perform multithreaded search, default = false
     /// \param uint overlap between kmers, default = 0
     /// \param bool return only queries that have matching reads, default = false
