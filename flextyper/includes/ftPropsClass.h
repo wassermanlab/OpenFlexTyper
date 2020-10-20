@@ -91,7 +91,7 @@ public:
     /// \param fs::path output file name
     /// \param bool ref queries only
     /// \param bool search for the reverse complement of a kmer
-    /// \param SearchType search type: Centered or Sliding, \see SearchType
+    /// \param SearchType search type: Centered or Sliding
     /// \param bool perform multithreaded search, default = false
     /// \param uint overlap between kmers, default = 0
     /// \param bool return only queries that have matching reads, default = false
@@ -109,6 +109,8 @@ public:
     /// \param uint totalKmers, default = UINT_MAX
     /// \param bool printInputs, default = false
     /// \param bool matchingReads, default = false)
+    /// \see SearchType
+    /// \see IndexProps
     void init(const fs::path& pathToQueryFile       ,
               uint kmerSize                         ,
               uint readLength                       ,
