@@ -1,7 +1,6 @@
 #ifndef DOCUMENTATION_H
 #define DOCUMENTATION_H
 /// \mainpage FlexTyper
-/// \copyright Copyright (c) 2020, Wasserman lab
 /// \section intro_sec Introduction
 /// FlexTyper is a tool which enables the creation of an FM-index of raw, next generation sequencing data to enable rapid and flexible sequence queries.
 /// \section install_sec Installation
@@ -18,4 +17,5 @@
 /// bash install.sh
 /// \endcode
 ///
+/// \copyright Copyright (c) 2020, Wasserman lab
 #endif // DOCUMENTATION_H
