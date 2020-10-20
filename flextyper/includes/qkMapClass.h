@@ -28,12 +28,9 @@ public:
     /// map between queries and sets of kmers
     std::map<ft::QIdT, std::set<std::string>> _map;
 
-
-    ////////////////////////////////////////////////////////////////////////
     /// \fn getQKMap
     /// \brief retrieve the qkmap
     /// \return _map
-    ////////////////////////////////////////////////////////////////////////
     const std::map<ft::QIdT, std::set<std::string>>& getQKMap();
 
     /// \section Access Functions

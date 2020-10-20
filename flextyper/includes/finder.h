@@ -15,21 +15,23 @@ namespace fs = std::experimental::filesystem;
 /// \class Finder
 /// \brief A class that handles the main search functions
 ////////////////////////////////////////////////////////////////////////
-class Finder : public IFinder {
+class Finder : public IFinder
+{
 public:
     /// Constructor
     Finder();
     Finder(const Finder& other) = delete;
+
     /// Destructor
     virtual ~Finder();
     const Finder& operator=(const Finder &other) = delete;
 
-    /// \fn search Indexes
+    /// Search Indexes
     /// \brief Main search function based on the parameters set in FTMap
     /// \param ft::FTMap ftMap containing all the search properties
     void searchIndexes(ft::FTMap &ftMap);
 
-    /// \fn Parallel Search
+    /// Parallel Search
     /// \brief parallelSearch searches kmers in parallel in a single index.
     /// \details parallelSearch will search each kmer in parallel across a single index using asynchronous programming
     /// \param FTMap: The search class containing parameters and results
@@ -39,7 +41,8 @@ public:
     void parallelSearch(FTMap &ftMap,
                         const fs::path &indexPath, long long offset);
 
-    /// \fn Sequential Search
+    /// Sequential Search
+    /// \public
     /// \brief sequentialSearch searches kmers sequentially in a single index.
     /// \param FTMap: The search class containing parameters and results
     /// \param indexPath: the index to search

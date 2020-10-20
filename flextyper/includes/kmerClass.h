@@ -41,15 +41,13 @@ public:
     /// \name Setters
     /// Non-constant functions to update properties of the kmer class
     /// @{
-    /// \publicsection
+    /// \public
     void setKFlags(std::set<ft::FlagType> kFlags);
     void setKPositions(const std::set<long long>& kPositions);
     void adjustPosForOffset(uint offset = 0);
     void setReadIDs(std::set<ft::ReadID> readIDs);
     void setOCC(uint occ) {_occ=occ;};
     /// @}
-
-
 
     /// \name Adders
     /// Non-constant functions to add properties to the kmer class
