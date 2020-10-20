@@ -1,5 +1,5 @@
 # FlexTyper
-![Generate Documentation](https://github.com/wassermanlab/OpenFlexTyper/workflows/Generate%20Documentation/badge.svg?branch=master)
+![Generate Documentation](https://github.com/wassermanlab/OpenFlexTyper/workflows/Generate%20Documentation/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
