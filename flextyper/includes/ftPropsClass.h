@@ -146,7 +146,6 @@ public:
     /// Load properties from the Index ini file
     /// @{
     /// \public
-    /// \fn
     void loadIndexProps(const fs::path& _indexPropsFile, bool printInputs);
     void initIndexProps( const bool pairedReads,
                          const bool revComp,
@@ -168,7 +167,6 @@ public:
     /// Constant functions to return properties of the query
     /// @{
     /// \public
-    /// \fn
     SearchType getSearchType() const;
 
     std::string getReadSetName()const ;
@@ -190,7 +188,6 @@ public:
     /// Functions to add/remove flag properties
     /// @{
     /// \public
-    /// \fn
     const std::bitset<8>& getFlagsToOutput() const;
     const std::bitset<8>& getFlagsToNotCount() const;
     bool countFlag(ft::FlagType flag) const;
@@ -205,7 +202,6 @@ public:
     /// Constant functions to get flag values
     /// @{
     /// \public
-    /// \fn
     bool getMultithreadFlag() const;
     bool getRefOnlyFlag() const;
     bool getMatchesOnlyFlag() const;
@@ -223,7 +219,6 @@ public:
     /// Constant functions to get file paths
     /// @{
     /// \public
-    /// \fn
     const fs::path& getPathToQueryFile() const;
     const fs::path& getIndexDir() const;
     const fs::path& getOutputFolder() const;

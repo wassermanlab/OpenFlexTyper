@@ -37,7 +37,6 @@ public:
     /// @name init
     /// Functions to set up the search
     /// @{
-    /// \fn
     /// \public
     void init(const FTProp& ftProp);
     void printToStdOut(const std::string outputString) const;

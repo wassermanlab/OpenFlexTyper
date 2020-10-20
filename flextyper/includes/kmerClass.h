@@ -29,7 +29,6 @@ public:
     /// Constant functions to return properties of the Kmer
     /// @{
     /// \public
-    /// \fn
     const std::string& getKmer() const;
     const std::bitset<8>& getKFlags()const;
     const std::set<long long>& getKPositions()const;
@@ -52,6 +51,7 @@ public:
     /// \name Adders
     /// Non-constant functions to add properties to the kmer class
     /// @{
+    /// \public
     void addKFlag(const ft::FlagType& kFlag);
     void addKPosition(const size_t& kPosition, const uint& offset = 0);
     void addReadID(const ft::ReadID& readID);
@@ -60,6 +60,7 @@ public:
     /// \name Removers
     /// Non-constant functions to remove properties from the kmer class
     /// @{
+    /// \public
     void removeKFlag(ft::FlagType kFlag);
     void removeKPosition(size_t kPosition, uint offset = 0);
     void removeReadID(ft::ReadID readID);
@@ -68,6 +69,7 @@ public:
     /// \name Checkers
     /// Constant functions to check the properties of the kmer class
     /// @{
+    /// \public
     bool isKmerEqual(const KmerClass& test) const;
     bool hasKmer(const std::string& test) const;
     bool hasFlag(const ft::FlagType& flag);
@@ -78,6 +80,7 @@ public:
     /// \name Manipulation
     /// Functions to convert between index positions, and read IDs
     /// @{
+    /// \public
     void convertPosToReadID(uint readLength, uint numOfReads, bool pairedReads, bool indexRevComp = false);
     bool matchingReadID(const ft::ReadID &a, const ft::ReadID &b) const;
     void adjustPositionsWithOffset(uint offset);

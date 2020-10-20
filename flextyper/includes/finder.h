@@ -51,20 +51,16 @@ public:
     void sequentialSearch(ft::FTMap &ftMap,
                           const fs::path &indexPath,long long offset);
 
-
 private:
 
-    /// \fn
     /// \brief add results from an index to FTMap
     /// \private
     void addResultsFutures(std::map<std::string, ft::KmerClass> & indexResults, ft::KmerClass &tmpResult, uint offset);
 
-    /// \fn
     /// \brief indexParallelSearch searches across all indexes in parallel
     /// \private
     void indexParallelSearch(ft::FTMap &ftMap);
 
-    /// \fn
     /// \brief indexSequentialSearch searches across all indexes sequentially
     /// \private
     void indexSequentialSearch(ft::FTMap &ftMap);
