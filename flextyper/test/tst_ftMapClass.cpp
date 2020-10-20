@@ -294,6 +294,87 @@ TEST_F(TestFTMap, TestAddingReadIDToSet )
     std::cout << readIDs.size() << std::endl;
     EXPECT_EQ(readIDs.size(), 3);
 
+}
+//======================================================================
+TEST_F(TestFTMap, TestRemoveMultiHits )
+{
+    TEST_DESCRIPTION("Remove MultiHits");
+    ft::FTProp _ftProps;
+    _ftProps.initFromQSettings(arg);
+    ft::FTMap ftMap(_ftProps);
+    ft::QIdT q1IDT = std::make_pair(1, ft::QueryType::REF);
+    ft::QIdT q2IDT = std::make_pair(2, ft::QueryType::REF);
+    ftMap.addQuery(1, ft::QueryType::REF);
+    ftMap.addQuery(2, ft::QueryType::REF);
+
+    ft::ReadID a = {1,1};
+    ft::ReadID b = {2,1};
+    ft::ReadID c = {2,2};
+    ft::ReadID d = {3,1};
+    ft::ReadID e = {3,2};
+    std::set<ft::ReadID> readIDsQ1 = {a,b,d,e};
+    std::set<ft::ReadID> readIDsQ2 = {a,c};
+    ftMap.addReadIDsToQuery(q1IDT, readIDsQ1);
+    ftMap.addReadIDsToQuery(q2IDT, readIDsQ2);
+    ft::QueryClass q1 = ftMap.getQuery(q1IDT);
+    ft::QueryClass q2 = ftMap.getQuery(q2IDT);
+    std::set<ft::ReadID> q1out = q1._reads;
+    std::set<ft::ReadID> q2out = q2._reads;
+
+    EXPECT_EQ(q1out, readIDsQ1);
+    EXPECT_EQ(q2out, readIDsQ2);
+
+    ftMap.removeMultiHits();
+    q1 = ftMap.getQuery(q1IDT);
+    q2 = ftMap.getQuery(q2IDT);
+    q1out = q1.getReadIDs();
+    q2out = q2.getReadIDs();
+    std::set<ft::ReadID> q1Expected = {b,d,e};
+    std::set<ft::ReadID> q2Expected = {c};
+
+    EXPECT_EQ(q1out, q1Expected);
+    EXPECT_EQ(q2out, q2Expected);
+
+}
+//======================================================================
+TEST_F(TestFTMap, TestRemoveMultiHitsAsPairs )
+{
+    TEST_DESCRIPTION("Remove MultiHits with Count as Pairs ");
+    ft::FTProp _ftProps;
+    _ftProps.initFromQSettings(arg);
+    ft::FTMap ftMap(_ftProps);
+    ft::QIdT q1IDT = std::make_pair(1, ft::QueryType::REF);
+    ft::QIdT q2IDT = std::make_pair(2, ft::QueryType::REF);
+    ftMap.addQuery(1, ft::QueryType::REF);
+    ftMap.addQuery(2, ft::QueryType::REF);
+
+    ft::ReadID a = {1,1};
+    ft::ReadID b = {2,1};
+    ft::ReadID c = {2,2};
+    ft::ReadID d = {3,1};
+    ft::ReadID e = {3,2};
+    std::set<ft::ReadID> readIDsQ1 = {a,b,d,e};
+    std::set<ft::ReadID> readIDsQ2 = {a,c};
+    ftMap.addReadIDsToQuery(q1IDT, readIDsQ1);
+    ftMap.addReadIDsToQuery(q2IDT, readIDsQ2);
+    ft::QueryClass q1 = ftMap.getQuery(q1IDT);
+    ft::QueryClass q2 = ftMap.getQuery(q2IDT);
+    std::set<ft::ReadID> q1out = q1._reads;
+    std::set<ft::ReadID> q2out = q2._reads;
+
+    EXPECT_EQ(q1out, readIDsQ1);
+    EXPECT_EQ(q2out, readIDsQ2);
+
+    ftMap.removeMultiHitsAsPairs();
+    q1 = ftMap.getQuery(q1IDT);
+    q2 = ftMap.getQuery(q2IDT);
+    q1out = q1._reads;
+    q2out = q2._reads;
+    std::set<ft::ReadID> q1Expected = {d,e};
+    std::set<ft::ReadID> q2Expected = {};
+
+    EXPECT_EQ(q1out, q1Expected);
+    EXPECT_EQ(q2out, q2Expected);
 
 }
 
