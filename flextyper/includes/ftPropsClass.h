@@ -110,7 +110,7 @@ public:
     /// \param bool printInputs, default = false
     /// \param bool matchingReads, default = false)
     /// \see SearchType
-    /// \see IndexProps
+    /// \see algo::IndexProps
     void init(const fs::path& pathToQueryFile       ,
               uint kmerSize                         ,
               uint readLength                       ,
