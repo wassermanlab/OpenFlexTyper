@@ -82,7 +82,32 @@ public:
     /// Initialise the properties from cmd line or settings file
     /// @{
     /// \public
-    /// \fn
+    /// \param fs::path path to query file
+    /// \param uint kmer size
+    /// \param uint read length
+    /// \param fs::path index properties file
+    /// \param fs::path output folder
+    /// \param fs::path output file name
+    /// \param bool ref queries only
+    /// \param bool search for the reverse complement of a kmer
+    /// \param SearchType search type: Centered or Sliding
+    /// \param bool perform multithreaded search, default = false
+    /// \param uint overlap between kmers, default = 0
+    /// \param bool return only queries that have matching reads, default = false
+    /// \param uint stride for the kmers, default = 10
+    /// \param uint maxOccurences, default = 200
+    /// \param uint numOfThreads, default = 1
+    /// \param bool outputNonUniqueKmers, default = false
+    /// \param bool outputOverCountedKmers, default = false
+    /// \param bool ignoreNonUniqueKmers, default = true
+    /// \param bool ignoreOverCountedKmers, default = true
+    /// \param bool countAsPairs, default = false
+    /// \param bool crossover, default = false
+    /// \param bool printSearchTime, default = false
+    /// \param uint maxKmers, default = UINT_MAX
+    /// \param uint totalKmers, default = UINT_MAX
+    /// \param bool printInputs, default = false
+    /// \param bool matchingReads, default = false)
     void init(const fs::path& pathToQueryFile       ,
               uint kmerSize                         ,
               uint readLength                       ,
