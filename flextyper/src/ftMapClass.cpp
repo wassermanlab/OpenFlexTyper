@@ -95,7 +95,7 @@ void FTMap::genQKMap()
                     createKmer(rckmer);
                 }
                 _qkRCMap.addQKPair(it->first, rckmer);
-            }       
+            }
         }
         it++;
     }
@@ -165,7 +165,7 @@ bool FTMap::checkForQIDT(const ft::QIdT& testQIDTObject) const
 const ft::QueryClass& FTMap::getQuery(const ft::QIdT& qIDT) const {
 
     if(_querySet.count(qIDT) == 0){
-        LogClass::ThrowRuntimeError( "FTMap::getQuery can't find (" + 
+        LogClass::ThrowRuntimeError( "FTMap::getQuery can't find (" +
                          std::to_string(qIDT.first) + ", " + ft::QueryClass::queryTypeToString(qIDT.second) + ")");
     }
     return _querySet.find(qIDT)->second;
@@ -175,7 +175,7 @@ void FTMap::addQuery(int queryID, ft::QueryType queryType, const std::string& qu
 {
     ft::QIdT testQIDT = std::make_pair(queryID, queryType);
     if(checkForQIDT(testQIDT)){
-        LogClass::ThrowRuntimeError( "FTMap::addQuery already had entry (" + 
+        LogClass::ThrowRuntimeError( "FTMap::addQuery already had entry (" +
                          std::to_string(queryID) + ", " + ft::QueryClass::queryTypeToString(queryType) + ")");
     }
     ft::QueryClass newquery(queryID, queryType);
@@ -255,6 +255,15 @@ void FTMap::processResults()
         processQueryResults(qIDT);
     }
 
+    if (_ftProps.getUniqueReadsFlag()){
+        if (_ftProps.getCountAsPairsFlag())
+        {
+            removeMultiHitsAsPairs();
+        } else {
+            removeMultiHits();
+        }
+    }
+
     benchmark.now("ProcessResults DONE ");
 }
 
@@ -274,8 +283,10 @@ void FTMap::processQueryResults(const ft::QIdT& qIDT)
         readIds = addKmersToQueryResults(query, rcKmers, readIds);
     }
 
+
     int queryCount = calculateQueryCount(readIds);
     query.setCount(queryCount);
+
     _querySet.find(qIDT)->second = query;
 }
 
@@ -316,6 +327,8 @@ std::set<ft::ReadID> FTMap::addKmersToQueryResults(ft::QueryClass& query, std::s
         if (addToCount == true){
             for ( ft::ReadID readID : fwdKmer->getReadIDs())
             {
+                std::cout << "Read ID to add " << readID.first << std::endl;
+                query.addReadID(readID);
                 readIds.insert(readID);
             }
         }
@@ -323,7 +336,90 @@ std::set<ft::ReadID> FTMap::addKmersToQueryResults(ft::QueryClass& query, std::s
     return readIds;
 }
 
+//======================================================
+void FTMap::removeMultiHits()
+{
+    std::map<ft::ReadID, std::pair<ft::QIdT, bool>> _observedReads; ///< bool = whether its added to adjustment (gets added when its seen for the second time)
+    std::map<ft::QIdT, std::set<ft::ReadID>> _queriesToAdjust; /// query to adjust, amount to adjust count by
+    for (auto querypair : _querySet) /// iterate through and compile a list of multihits
+    {
+        ft::QIdT qIDT = querypair.first;
+        ft::QueryClass query = _querySet.find(qIDT)->second;
+        std::set<ft::ReadID> newReadIDs;
+        for (auto readID : query.getReadIDs())
+        {
+            if (!(_observedReads.count(readID) > 0)){ /// if read hasnt been observed
+                _observedReads[readID] = std::make_pair(qIDT, false); /// add to observed Reads
+                newReadIDs.insert(readID); /// add to new reads
+            } else {
+                if (!_observedReads[readID].second){ /// if query isnt marked for adjustment
+                    _observedReads[readID] = std::make_pair(qIDT, true); /// mark query for adjustment
+                    _queriesToAdjust[qIDT].insert(readID); /// add to list of queries to adjust
+                }
+            }
+        }
+        query._reads = newReadIDs;
+        _querySet.find(qIDT)->second = query;
+    }
 
+    for (auto querypair : _querySet){ ///< iterate through and remove multi hit reads, adjust query counts
+        ft::QIdT qIDT = querypair.first;
+        ft::QueryClass query = querypair.second;
+
+        if (_queriesToAdjust.count(qIDT) > 0){ /// if need to remove multi hit reads
+            for (auto readID : _queriesToAdjust[qIDT]){
+                query.removeReadID(readID);
+            }
+        }
+        int queryCount = calculateQueryCount(query.getReadIDs());
+        query.setCount(queryCount);
+        _querySet.find(qIDT)->second = query;
+
+    }
+}
+//======================================================
+void FTMap::removeMultiHitsAsPairs()
+{
+    std::map<int, std::pair<ft::QIdT, bool>> _observedReads; /// < int = Read ID (ignoring pair)
+    std::map<ft::QIdT, std::set<ft::ReadID>> _queriesToAdjust; /// query to adjust, amount to adjust count by
+    for (auto querypair : _querySet) /// iterate through and compile a list of multihits
+    {
+        ft::QIdT qIDT = querypair.first;
+        ft::QueryClass query = _querySet.find(qIDT)->second;
+        std::set<ft::ReadID> newReadIDs;
+        for (auto readID : query.getReadIDs())
+        {
+            if (!(_observedReads.count(readID.first) > 0)){ /// if read hasnt been observed
+                _observedReads[readID.first] = std::make_pair(qIDT, false); /// add to observed Reads
+                newReadIDs.insert(readID); /// add to new reads
+            } else {
+                if (!_observedReads[readID.first].second){ /// if query isnt marked for adjustment
+                    _observedReads[readID.first] = std::make_pair(qIDT, true); /// mark query for adjustment
+                    _queriesToAdjust[qIDT].insert(readID); /// add to list of queries to adjust
+                }
+            }
+        }
+        query._reads = newReadIDs;
+        _querySet.find(qIDT)->second = query;
+    }
+
+    for (auto querypair : _querySet){ ///< iterate through and remove multi hit reads, adjust query counts
+        ft::QIdT qIDT = querypair.first;
+        ft::QueryClass query = querypair.second;
+
+        if (_queriesToAdjust.count(qIDT) > 0){ /// if need to remove multi hit reads
+            for (auto readID : _queriesToAdjust[qIDT]){
+                query.removeReadID(readID);
+            }
+        }
+        int queryCount = calculateQueryCount(query.getReadIDs());
+        query.setCount(queryCount);
+        _querySet.find(qIDT)->second = query;
+
+    }
+}
+
+//======================================================
 #define INDEXEND }
 bool FTMap::operator()(const ft::QIdT& a, const ft::QIdT& b) const {
     if (a.first != b.first){

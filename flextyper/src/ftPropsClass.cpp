@@ -34,6 +34,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
                   bool ignoreNonUniqueKmers,
                   bool ignoreOverCountedKmers,
                   bool countAsPairs,
+                  bool uniqueReads,
                   bool crossover,
                   bool printSearchTime,
                   uint maxKmersPerQuery,
@@ -56,6 +57,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
     _maxOccurences = maxOccurences;
     _maxThreads = numOfThreads;
     _countAsPairs = countAsPairs;
+    _uniqueReads = uniqueReads;
     _crossover = crossover;
     _printSearchTime = printSearchTime;
     _maxKmersPerQuery = maxKmersPerQuery;
@@ -93,6 +95,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
         std::cout << "ignoreNonUniqueKmers          : " << ignoreNonUniqueKmers << std::endl;
         std::cout << "ignoreOverCountedkmers        : " << ignoreOverCountedKmers << std::endl;
         std::cout << "countAsPairs                  : " << countAsPairs << std::endl;
+        std::cout << "uniqueReads                   : " << uniqueReads << std::endl;
         std::cout << "printSearchTime               : " << printSearchTime << std::endl;
         std::cout << "maxKmersPerQuery              : " << maxKmersPerQuery << std::endl;
         std::cout << "maxTotalKmers                 : " << maxTotalKmers << std::endl;
@@ -120,6 +123,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
         LogClass::Log << "ignoreNonUniqueKmers          : " << ignoreNonUniqueKmers << std::endl;
         LogClass::Log << "ignoreOverCountedkmers        : " << ignoreOverCountedKmers << std::endl;
         LogClass::Log << "countAsPairs                  : " << countAsPairs << std::endl;
+        LogClass::Log << "uniqueReads                   : " << uniqueReads << std::endl;
         LogClass::Log << "printSearchTime               : " << printSearchTime << std::endl;
         LogClass::Log << "maxKmersPerQuery              : " << maxKmersPerQuery << std::endl;
         LogClass::Log << "maxTotalKmers                 : " << maxTotalKmers << std::endl;
@@ -162,6 +166,7 @@ void FTProp::initFromQSettings (FTProp::CmdLineArg& arg){
     bool           ignoreNonUniqueKmers    = settings.value("ignoreNonUniqueKmers").toBool();
     bool           ignoreOverCountedKmers  = settings.value("ignoreOverCountedKmers").toBool();
     bool           countAsPairs            = settings.value("countAsPairs").toBool();
+    bool           uniqueReads             = settings.value("UniqueReads").toBool();
     bool           crossover               = settings.value("crossover").toBool();
     bool           printSearchTime         = settings.value("printSearchTime").toBool();
     uint           maxKmersPerQuery        = settings.value("maxKmersPerQuery").toInt();
@@ -191,7 +196,7 @@ void FTProp::initFromQSettings (FTProp::CmdLineArg& arg){
          searchType, multithread, overlap,
          returnMatchesOnly, stride,
          maxOccurences, numOfThreads, outputNonUniqueKmers, outputOverCountedKmers,
-         ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, crossover, printSearchTime,
+         ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, uniqueReads, crossover, printSearchTime,
          maxKmersPerQuery, maxTotalKmers, arg.verbose, matchingReads);
 
 }
@@ -374,6 +379,7 @@ bool FTProp::getCountAsPairsFlag() const {return _countAsPairs;}
 bool FTProp::getRevCompSearchFlag() const {return _revCompSearch;}
 bool FTProp::getIndexRevCompFlag() const {return _indexRevComp;}
 bool FTProp::getMatchingReadsFlag() const{return _matchingReads;}
+bool FTProp::getUniqueReadsFlag() const {return _uniqueReads;}
 const std::bitset<8>& FTProp::getFlagsToOutput() const {return _flagsToOutput;}
 const std::bitset<8>& FTProp::getFlagsToNotCount() const {return _flagsToNotCount;}
 

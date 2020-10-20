@@ -31,6 +31,7 @@ protected:
         flagOverCountedKmers     = false ;
         ignoreNonUniqueKmers     = true  ;
         countAsPairs             = false ;
+        uniqueReads              = false ;
         crossover                = false ;
         pairedReads = false;
         revComp = false;
@@ -67,6 +68,7 @@ protected:
     bool flagOverCountedKmers;
     bool ignoreNonUniqueKmers;
     bool countAsPairs;
+    bool uniqueReads;
     bool crossover;
     bool pairedReads;
     bool revComp;
@@ -137,7 +139,7 @@ TEST_F(TestFinder, addResultsFutures)
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
-                  ignoreNonUniqueKmers, crossover);
+                  ignoreNonUniqueKmers, countAsPairs, uniqueReads, crossover);
     _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,indexFileName, readSetName,
                              inputFastQ, numOfReads,numOfIndexes);
 
@@ -164,7 +166,7 @@ TEST_F(TestFinder, sequentialSearch)
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
-                  ignoreNonUniqueKmers, crossover);
+                  ignoreNonUniqueKmers, countAsPairs, uniqueReads, crossover);
     _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,indexFileName, readSetName,
                              inputFastQ, numOfReads,numOfIndexes);
     _ftProps.addToIndexSet("testOutput/Index_Test.fm9", 0);
@@ -219,7 +221,7 @@ TEST_F(TestFinder, sequentialSearchLocations)
                   searchType, multithread, overlap,
                   returnMatchesOnly, kmerCounts, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
-                  ignoreNonUniqueKmers, crossover);
+                  ignoreNonUniqueKmers, countAsPairs, uniqueReads, crossover);
     _ftProps.initIndexProps( pairedReads, revComp,buildDir,indexDir,indexFileName, readSetName,
                              inputFastQ, numOfReads,numOfIndexes);
     _ftProps.addToIndexSet("testOutput/Index_Test.fm9", 0);
@@ -243,11 +245,9 @@ TEST_F(TestFinder, sequentialSearchLocations)
     std::map<std::string, ft::KmerClass> result = results.front();
     EXPECT_EQ(result.size(), 3);
 
-
     uint roccs = result[kmer].getKPositions().size();
     uint roccs2 = result[kmer2].getKPositions().size();
     uint roccs3 = result[kmer3].getKPositions().size();
-
 
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _testindex;
     std::cout << fs::current_path() << std::endl;
@@ -285,7 +285,7 @@ TEST_F(TestFinder, sequentialSearchFromIndexProps)
                   searchType, multithread, overlap,
                   returnMatchesOnly, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
-                  ignoreNonUniqueKmers, crossover, false, 3000, 3000000000, true);
+                  ignoreNonUniqueKmers, crossover, false, false, 3000, 3000000000, true);
 
     _ftProps.addToIndexSet("testOutput/Index_Test.fm9", 0);
 
@@ -338,7 +338,7 @@ TEST_F(TestFinder, DISABLED_sequentialSearchMultipleIndex)
                   searchType, multithread, overlap,
                   returnMatchesOnly, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
-                  ignoreNonUniqueKmers, crossover, false, 3000, 3000000000, true);
+                  ignoreNonUniqueKmers, crossover, false, false, 3000, 3000000000, true);
     _ftProps.addToIndexSet("testOutput/Index_Test.fm9", 0);
     _ftProps.addToIndexSet("testOutput/Index_Test.fm9", 11);
     ft::FTMap _ftMap(_ftProps);
@@ -394,7 +394,7 @@ TEST_F(TestFinder, parallelSearch1)
                   searchType, multithread, overlap,
                   returnMatchesOnly, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
-                  ignoreNonUniqueKmers, crossover);
+                  ignoreNonUniqueKmers, countAsPairs, uniqueReads, crossover);
 
     fs::path index = "testOutput/Index_Test.fm9";
     _ftProps.addToIndexSet(index, 0);
@@ -455,7 +455,7 @@ TEST_F(TestFinder, parallelSearch2)
                   searchType, multithread, overlap,
                   returnMatchesOnly, stride,
                   maxOccurences, maxThreads, flagOverCountedKmers,
-                  ignoreNonUniqueKmers, crossover);
+                  ignoreNonUniqueKmers, countAsPairs, uniqueReads, crossover);
 
     _ftProps.addToIndexSet("testOutput/Index_Test.fm9", 0);
 
