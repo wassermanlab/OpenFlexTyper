@@ -17,23 +17,24 @@ namespace ft {
 
 namespace fs = std::experimental::filesystem;
 
-
 /// \enum Orientation
 enum Orientation {FWD = 1, REV}; ///< Match orientation, FWD or Reverse Complement
 
 /// \typedef Search Type
+/// @{
 typedef std::string     SearchType;             ///< SearchType declaration
 const   std::string     CENTERED = "CENTERED";  ///< search type centered approach
 const   std::string     SLIDING  = "SLIDING";   ///< search type sliding approach
+/// @}
 
 /// \name Query Type
 /// Enumeration of Query Type: Reference, Alternate, CrossOver
 /// @{
 ///
 enum QueryType {REF = 1, ALT, CRO};
-const   std::string QUERYTYPE_REF  = "REF"; /// \skip
-const   std::string QUERYTYPE_ALT  = "ALT"; /// \skip
-const   std::string QUERYTYPE_CRO  = "CRO"; /// \skip
+const   std::string QUERYTYPE_REF  = "REF";
+const   std::string QUERYTYPE_ALT  = "ALT";
+const   std::string QUERYTYPE_CRO  = "CRO";
 /// @}
 
 /// \typedef QIdT
@@ -42,7 +43,7 @@ typedef std::pair<int, QueryType>  QIdT; // int is the query ID
 
 /// \typedef ReadID
 /// \brief Pair to create a unique Read ID: (Read Number, Read Pair)
-/// Read Pair is either 1 or 2, so that a Read Pair can be identified by a single id.
+/// \details Read Pair is either 1 or 2, so that a Read Pair can be identified by a single id.
 /// e.g. Read 1 from "_1" is identified by (1,1) and its corresponding pair from "_2" (1,2)
 typedef std::pair<int, int> ReadID; // pair (id, pair 1 or pair 2)
 
