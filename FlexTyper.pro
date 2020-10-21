@@ -82,8 +82,8 @@ DISTFILES += \
     OpenFlexTyper_CondaEnv.yml \
     README.md \
     documentation/documentation.h \
-    documentation/installation.txt \
-    documentation/searchexample.txt \
+    documentation/installation.h \
+    documentation/searchexample.h \
     examples/Example_Settings.ini \
     flextyper/test/testFiles/MixedVirus_100.fasta \
     flextyper/test/testFiles/MixedVirus_100_1.fq.gz \
