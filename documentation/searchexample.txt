@@ -1,9 +1,9 @@
 /////////////////////////////////////////////////////////////////////
 /// \page search Search Example
 /////////////////////////////////////////////////////////////////////
-/*! # Example of FlexTyper
+/// \name Example of FlexTyper
 
-> This directory contains examples of how to run FlexTyper on small datasets.
+This directory contains examples of how to run FlexTyper on small datasets.
 
 These examples will guide the usage of FlexTyper, and can be adapted for larger datasets in an applied setting.
 
