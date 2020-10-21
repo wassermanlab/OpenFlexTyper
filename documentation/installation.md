@@ -13,7 +13,7 @@ module load git
 ## Local Installation using conda environment
 Open a terminal and enter :
 
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~{.sh}
 git clone https://github.com/wassermanlab/OpenFlexTyper.git
 cd OpenFlexTyper
 bash install.sh
