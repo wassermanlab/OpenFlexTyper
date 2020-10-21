@@ -1,39 +1,3 @@
-#ifndef DOCUMENTATION_H
-#define DOCUMENTATION_H
-/// \mainpage FlexTyper
-
-/////////////////////////////////////////////////////////////////////
-/// \section intro_sec Introduction
-/////////////////////////////////////////////////////////////////////
-/*! FlexTyper is a tool which enables the creation of an FM-index of raw, next generation sequencing data to enable rapid and flexible sequence queries.
-
- - \subpage install_page "Installation"
- - \subpage search "Example: Search "
- - \subpage indexing "Example: Index Generation"
-
- */
-
-/// \copyright Copyright (c) 2020, Wasserman lab
-
-/////////////////////////////////////////////////////////////////////
-/// \page install_page Installation
-/////////////////////////////////////////////////////////////////////
-/*!
- OpenFlexTyper is installed with the install.sh script provided in the repository.
- The installation assumes that you have git installed.
- git is by default available on cedar.
-
- On sockeye, you can load git module with
- \code{.sh}
- module load git
- \endcode
- Open a terminal and enter :
- \code{.sh}
- git clone https://github.com/wassermanlab/OpenFlexTyper.git
- cd OpenFlexTyper
- bash install.sh
- \endcode
-*/
 /////////////////////////////////////////////////////////////////////
 /// \page search "Search Example"
 /////////////////////////////////////////////////////////////////////
@@ -110,12 +74,3 @@ FR751031.1 (HPV 68b) | 5200 | 4057
 ## Example 2 - SNV detection
 Under construction
 */
-
-//////////////////////////////////////////////////////////////////
-/// \page indexing "Index Generation Example"
-//////////////////////////////////////////////////////////////////
-/*! Under Construction
- *
- */
-
-#endif // DOCUMENTATION_H
