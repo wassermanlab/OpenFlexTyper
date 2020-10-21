@@ -17,14 +17,14 @@ This dataset includes a pre-made viral query file (pathogen\_query.txt), and pai
 
 It also includes two different execution scripts (ex\_1.sh and ex\_2.sh), which refer to different settings files (settings\_1.ini, settings\_2.ini)
 
- Execution
+### Execution
 
 To execute, simply type:
 ~~~~~~~~~~~~~~~~~~~~~
 sh ex_1.sh
 ~~~~~~~~~~~~~~~~~~~~~
 
- Input files
+### Input files
 
 This script relies upon these input files:
 - Fastq data (in fastq or fastq.gz format)
@@ -32,7 +32,7 @@ This script relies upon these input files:
 - Query file (in .tsv/.txt format)
 - A master script to call the tool, located in scripts/ from main repository
 
- Output files
+### Output files
 
 You will have these output files:
 - Output FM-index of reads: output\_0.fm9
