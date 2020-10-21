@@ -1,6 +1,4 @@
-\page search Search Example
-
-# Example of FlexTyper
+# Example of FlexTyper Search
 
 This directory contains examples of how to run FlexTyper on small datasets.
 
