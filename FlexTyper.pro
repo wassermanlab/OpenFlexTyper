@@ -81,7 +81,7 @@ DISTFILES += \
     LICENSE \
     OpenFlexTyper_CondaEnv.yml \
     README.md \
-    documentation/documentation.txt \
+    documentation/documentation.h \
     documentation/installation.txt \
     documentation/searchexample.txt \
     examples/Example_Settings.ini \
