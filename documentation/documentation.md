@@ -4,7 +4,7 @@
  FlexTyper is a tool which enables the creation of an FM-index of raw, next generation sequencing data to enable rapid and flexible sequence queries.
 
 - \subpage installation "Installation Instructions"
-- \subpage searchexample "Example of FlexTyper Search"
+- \subpage search "How to search with FlexTyper "
 - \subpage indexexample "Example of FlexTyper Index"
 
 ### For detailed code documentation, see: 

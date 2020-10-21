@@ -1,14 +1,5 @@
-\page searchexample
-# Example of FlexTyper Search
-
-This directory contains examples of how to run FlexTyper on small datasets.
-
-These examples will guide the usage of FlexTyper, and can be adapted for larger datasets in an applied setting.
-
-They include Viral\_Example/ and WGS\_Example/.
-
-
-## Example 1 - Viral detection
+\page viralsearchexample
+# Viral Detection with FlexTyper Search
 
 This is an example of ways to detect pathogenic virus reads from raw fastq files.
 
@@ -68,7 +59,4 @@ Virus | Expected Count | Setting1
 HIV-1 | 6100 | 4713
 U21941.1 (HPV 70) | 5200 | 4054
 FR751031.1 (HPV 68b) | 5200 | 4057
-
-## Example 2 - SNV detection
-Under construction
 
