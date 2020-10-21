@@ -6,17 +6,17 @@ git is by default available on cedar.
 
 On sockeye, you can load git module with
 
-'''
+~~~~~~~~~~~~~~~~~~~~~
 module load git
-'''
+~~~~~~~~~~~~~~~~~~~~~
 
 ## Local Installation using conda environment
 Open a terminal and enter :
 
-'''
+~~~~~~~~~~~~~~~~~~~~~
 git clone https://github.com/wassermanlab/OpenFlexTyper.git
 cd OpenFlexTyper
 bash install.sh
-'''
+~~~~~~~~~~~~~~~~~~~~~
 
 

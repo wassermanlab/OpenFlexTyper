@@ -20,9 +20,9 @@ It also includes two different execution scripts (ex\_1.sh and ex\_2.sh), which 
  Execution
 
 To execute, simply type:
-```
+~~~~~~~~~~~~~~~~~~~~~
 sh ex_1.sh
-```
+~~~~~~~~~~~~~~~~~~~~~
 
  Input files
 
@@ -51,15 +51,15 @@ There is another script in this directory, which will run a separate set of inde
 
 Before running, execute the clean-up function
 
-```
+~~~~~~~~~~~~~~~~~~~~~
 sh clean.sh
-```
+~~~~~~~~~~~~~~~~~~~~~
 
 Then run the second script:
 
-```
+~~~~~~~~~~~~~~~~~~~~~
 sh ex_2.sh
-```
+~~~~~~~~~~~~~~~~~~~~~
 
 Expected Counts for the MixedVirus_100.fq set:
 Virus | Expected Count | Setting1
