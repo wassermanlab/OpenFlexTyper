@@ -80,9 +80,9 @@ DISTFILES += \
     LICENSE \
     OpenFlexTyper_CondaEnv.yml \
     README.md \
-    documentation/documentation.txt \
-    documentation/installation.txt \
-    documentation/searchexample.txt \
+    documentation/documentation.md \
+    documentation/installation.md \
+    documentation/searchexample.md \
     examples/Example_Settings.ini \
     flextyper/test/testFiles/MixedVirus_100.fasta \
     flextyper/test/testFiles/MixedVirus_100_1.fq.gz \
