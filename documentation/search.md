@@ -24,7 +24,7 @@ Arguments:
 
 ## Example 1: Viral Detection 
 
-\subpage viralsearchexample
+\subpage viralsearchexample 
 
 ## Example 2: SNV Detection
 
