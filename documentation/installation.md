@@ -1,4 +1,4 @@
-Installation {# Installation}
+Installation {#Installation}
 
 OpenFlexTyper is installed with the install.sh script provided in the repository.
 The installation assumes that you have git installed.
