@@ -9,10 +9,10 @@
 - [Example: Index Generation](indexexample.md)
 
 ### For detailed code documentation, see: 
-- [Namespaces](namespaces)
-- [Classes](annotated)
+- [Namespaces](namespaces.html)
+- [Classes](annotated.html)
 
-### Browse the source code [here](files)
+### Browse the source code [here](files.html)
 
 ---
 
