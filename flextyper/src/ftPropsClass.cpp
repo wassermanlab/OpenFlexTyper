@@ -166,7 +166,7 @@ void FTProp::initFromQSettings (FTProp::CmdLineArg& arg){
     bool           ignoreNonUniqueKmers    = settings.value("ignoreNonUniqueKmers").toBool();
     bool           ignoreOverCountedKmers  = settings.value("ignoreOverCountedKmers").toBool();
     bool           countAsPairs            = settings.value("countAsPairs").toBool();
-    bool           uniqueReads             = settings.value("UniqueReads").toBool();
+    bool           uniqueReads             = settings.value("uniqueReads").toBool();
     bool           crossover               = settings.value("crossover").toBool();
     bool           printSearchTime         = settings.value("printSearchTime").toBool();
     uint           maxKmersPerQuery        = settings.value("maxKmersPerQuery").toInt();
