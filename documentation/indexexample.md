@@ -5,7 +5,11 @@ How to generate the index for a read set.
 
 
 ## Cmd Line: 
+You can display the input options using 
+
 ~~~~~~~~~~~~~~~~~~~~~{.html}
+
+$ ./flextyper index -h
 
 Usage: ./flextyper [options] readFileName
 Description: flextyper enables the user to quickly search for kmers inside the FmIndex
