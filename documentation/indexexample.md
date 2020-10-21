@@ -6,6 +6,7 @@ How to generate the index for a read set.
 
 ## Cmd Line: 
 ~~~~~~~~~~~~~~~~~~~~~{.html}
+
 <pre>Usage: ./flextyper [options] readFileName
 Description: flextyper enables the user to quickly search for kmers inside the FmIndex
 
@@ -28,16 +29,20 @@ Options:
 Arguments:
   readFileName                   		contains the name of the read file
 </pre>
+
 ~~~~~~~~~~~~~~~~~~~~~
 
 To generate the index for the Mixed Virus sample in the Test_Example folder: 
 ~~~~~~~~~~~~~~~~~~~~~
+
 cd Test_Example
 ../build/flextyper index -r MixedVirus_100_1.fq.gz -p MixedVirus_100_2.fq.gz --gz 
+
 ~~~~~~~~~~~~~~~~~~~~~
 
 This will produce something similar to (with file paths adjusted)
 ~~~~~~~~~~~~~~~~~~~~~{.sh}
+
 "./Test_Example"
 build directory "../build"
 preprocessing with: 
@@ -56,6 +61,7 @@ createFasta:  ./tmp_ppf/MixedVirus_100_pair.fasta  created
 processReadFile: output saved to ./tmp_ppf/MixedVirus_100_pair.fasta
 main: preprocessing complete  ./tmp_ppf/MixedVirus_100.fasta
 Running FM Index
+
 ~~~~~~~~~~~~~~~~~~~~~
 
 And generates the following files: 
@@ -65,6 +71,7 @@ This contains the pre processed reads, that have been stripped of everything but
 
 - Index.log    
 ~~~~~~~~~~~~~~~~~~~~~
+
 ======== Wed Oct 21 14:57:00 2020
 Running ../build/flextyper index -r MixedVirus_100_1.fq.gz -p MixedVirus_100_2.fq.gz --gz 
 Build directory ../build
@@ -83,6 +90,7 @@ running preprocess.sh with bash ../build/preprocess.sh -r MixedVirus_100_1.fq.gz
 indexing "tmp_ppf/MixedVirus_100.fasta"
 creating index for MixedVirus_100 at "Index_MixedVirus_100.fm9"
 index created "Index_MixedVirus_100.fm9" with offset 0
+
 ~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -93,6 +101,7 @@ This is the index binary itself.
 - Index_MixedVirus_100_index.ini
 This contains the auto generated properties of the index file and should be kept in the same directory as the index file 
 ~~~~~~~~~~~~~~~~~~~~~
+
 [General]
 R1=MixedVirus_100_1.fq.gz
 R2=MixedVirus_100_2.fq.gz
