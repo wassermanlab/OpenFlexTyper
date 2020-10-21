@@ -1,19 +1,46 @@
 \page viralsearchexample
+
 # Viral Detection with FlexTyper Search
 
 This is an example of ways to detect pathogenic virus reads from raw fastq files.
 
-This dataset includes a pre-made viral query file (pathogen\_query.txt), and paired-end RNA-seq fastq files (Mixed\_virus\_1.fastq and Mixed\_virus\_2.fastq).
+This dataset includes a pre-made viral query file (pathogen\_query.txt), and paired-end RNA-seq fastq files (MixedVirus\_100\_1.fq.gz and MixedVirus\_100\_2.fq.gz).
 
 *To generate your own query file, go to the fmformatter/ directory in the main repository.*
 
-It also includes two different execution scripts (ex\_1.sh and ex\_2.sh), which refer to different settings files (settings\_1.ini, settings\_2.ini)
+### Generate the Index 
 
-### Execution
+Generate the index for the files first by running: 
+
+~~~~~~~~~~~~~~~~~~~~~
+../build/flextyper index -r MixedVirus_100_1.fq.gz -p MixedVirus_100_2.fq.gz --gz 
+~~~~~~~~~~~~~~~~~~~~~
+\see indexexample
+
+### Adjust settings ini file 
+
+The folder contains two settings files that can be used to perform the search. 
+
+Check that the path to the ini file for the index is correct 
+~~~~~~~~~~~~~~~~~~~~~
+# Path to the index Props ini
+Index_MixedVirus_100_index.ini
+~~~~~~~~~~~~~~~~~~~~~
+\see indexexample
+
+Check that the path to the query file is correct 
+~~~~~~~~~~~~~~~~~~~~~
+# Path to the input Query File
+queryFile = "path_query.txt"
+~~~~~~~~~~~~~~~~~~~~~
+
+For a full breakdown of all options \see settingini
+
+### Run the search
 
 To execute, simply type:
 ~~~~~~~~~~~~~~~~~~~~~
-sh ex_1.sh
+../build/flextyper search -c setting_1.ini -u outputFileName
 ~~~~~~~~~~~~~~~~~~~~~
 
 ### Input files

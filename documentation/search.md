@@ -22,6 +22,12 @@ Arguments:
   outputFile              fm9 dataset
 ~~~~~~~~~~~~~~~~~~~~~
 
+## Setting.ini 
+
+The settings file contains all the parameters for the search. 
+
+\subpage settingini "Setting Ini File"
+
 ## Example 1: Viral Detection 
 
 \subpage viralsearchexample 
