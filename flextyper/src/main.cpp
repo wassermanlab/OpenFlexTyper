@@ -21,7 +21,6 @@ static void usage()
                  " flextyper search -h                                \n\n";
 }
 
-/// \mainclass
 int main(int argc, char** argv)
 {
     std::vector<std::string> argList(argv, argv + argc);
