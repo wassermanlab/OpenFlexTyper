@@ -68,7 +68,7 @@ public:
     /// Destructor
     virtual ~FTProp();
 
-    /// \struct
+    /// \struct CmdLineArg
     struct CmdLineArg {
         std::string outputFile;
         std::string iniFile;
