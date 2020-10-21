@@ -39,7 +39,7 @@ cd Test_Example
 
 ~~~~~~~~~~~~~~~~~~~~~
 
-This will produce something similar to (with file paths adjusted)
+This will produce something similar to (with file paths adjusted):
 ~~~~~~~~~~~~~~~~~~~~~{.sh}
 
 "./Test_Example"
@@ -65,10 +65,11 @@ Running FM Index
 
 And generates the following files: 
 
-- tmp_ppf/MixedVirus_100.fasta 
+### tmp_ppf/MixedVirus_100.fasta 
+
 This contains the pre processed reads, that have been stripped of everything but the sequences. 
 
-- Index.log    
+### Index.log    
 ~~~~~~~~~~~~~~~~~~~~~
 
 ======== Wed Oct 21 14:57:00 2020
@@ -93,12 +94,15 @@ index created "Index_MixedVirus_100.fm9" with offset 0
 ~~~~~~~~~~~~~~~~~~~~~
 
 
-- Index_MixedVirus_100.fm9           
+### Index_MixedVirus_100.fm9   
+
 This is the index binary itself. 
 
 
-- Index_MixedVirus_100_index.ini
+### Index_MixedVirus_100_index.ini
+
 This contains the auto generated properties of the index file and should be kept in the same directory as the index file 
+
 ~~~~~~~~~~~~~~~~~~~~~
 
 [General]
