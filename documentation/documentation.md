@@ -11,7 +11,7 @@
 - [Namespaces](namespaces.html)
 - [Classes](annotated.html)
 
-### Browse the source code [here](files.html)
+### Browse the source code [here](@ref files)
 
 ---
 
