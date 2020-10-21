@@ -1,2 +1,2 @@
-\page "Example of FlexTyper Index"
+\page indexexample 
 # Example of FlexTyper Indexing
