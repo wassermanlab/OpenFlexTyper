@@ -8,6 +8,7 @@ This dataset includes a pre-made viral query file (pathogen\_query.txt), and pai
 
 *To generate your own query file, go to the fmformatter/ directory in the main repository.*
 
+______
 ### Generate the Index 
 
 Generate the index for the files first by running: 
@@ -17,6 +18,7 @@ Generate the index for the files first by running:
 ~~~~~~~~~~~~~~~~~~~~~
 \see [Indexing](@ref indexexample)
 
+______
 ### Adjust settings ini file 
 
 The folder contains two settings files that can be used to perform the search. 
@@ -36,6 +38,7 @@ queryFile = "path_query.txt"
 
 \see [Setting Ini File](@ref settingini)
 
+______
 ### Run the search
 
 To execute, simply type:
@@ -43,6 +46,8 @@ To execute, simply type:
 ../build/flextyper search -c setting_1.ini -u outputFileName
 ~~~~~~~~~~~~~~~~~~~~~
 
+______
+### Expected Output 
 
 Expected Counts for the MixedVirus_100.fq set:
 Virus | Expected Count | Setting1
