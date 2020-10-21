@@ -1,8 +1,7 @@
-/////////////////////////////////////////////////////////////////////
-/// \page search Search Example
-/////////////////////////////////////////////////////////////////////
-/// \name Example of FlexTyper
-/*
+\page search Search Example
+
+# Example of FlexTyper
+
 This directory contains examples of how to run FlexTyper on small datasets.
 
 These examples will guide the usage of FlexTyper, and can be adapted for larger datasets in an applied setting.
@@ -71,6 +70,6 @@ HIV-1 | 6100 | 4713
 U21941.1 (HPV 70) | 5200 | 4054
 FR751031.1 (HPV 68b) | 5200 | 4057
 
- Example 2 - SNV detection
+## Example 2 - SNV detection
 Under construction
-*/
+
