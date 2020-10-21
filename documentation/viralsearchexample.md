@@ -15,7 +15,7 @@ Generate the index for the files first by running:
 ~~~~~~~~~~~~~~~~~~~~~
 ../build/flextyper index -r MixedVirus_100_1.fq.gz -p MixedVirus_100_2.fq.gz --gz 
 ~~~~~~~~~~~~~~~~~~~~~
-\see [Indexing](@indexexample)
+\see [Indexing](@ref indexexample)
 
 ### Adjust settings ini file 
 
@@ -26,7 +26,7 @@ Check that the path to the ini file for the index is correct
 # Path to the index Props ini
 Index_MixedVirus_100_index.ini
 ~~~~~~~~~~~~~~~~~~~~~
-\see [Indexing](@indexexample)
+\see [Indexing](@ref indexexample)
 
 Check that the path to the query file is correct 
 ~~~~~~~~~~~~~~~~~~~~~
@@ -34,7 +34,7 @@ Check that the path to the query file is correct
 queryFile = "path_query.txt"
 ~~~~~~~~~~~~~~~~~~~~~
 
-\see [Setting Ini File](@settingini)
+\see [Setting Ini File](@ref settingini)
 
 ### Run the search
 
