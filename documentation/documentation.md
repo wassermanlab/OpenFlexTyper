@@ -1,3 +1,4 @@
+\mainpage 
 # FlexTyper
 
 ## Introduction
