@@ -88,7 +88,7 @@ private:
 
 #define ENABLE_FAST_POSITION  1
 #if ENABLE_FAST_POSITION
-    std::vector<size_t>  positions;
+    std::map<size_t, std::vector<size_t>>  position_block;
     size_t getPosition(size_t i);
 #endif
     int pos_hits = 0;
