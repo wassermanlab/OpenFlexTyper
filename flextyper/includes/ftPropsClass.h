@@ -76,7 +76,7 @@ public:
         uint stride;
         uint maxOccurences;
         bool unique;
-        bool verbose;
+        bool verbose = false;
     };
 
     /// @name Init
@@ -132,7 +132,7 @@ public:
               bool ignoreOverCountedKmers   = true  ,
               bool countAsPairs             = false ,
               bool crossover                = false ,
-              bool printSearchTime          = false ,
+              bool uniqueReads              = false ,
               uint maxKmers                 = UINT_MAX,
               uint totalKmers               = UINT_MAX,
               bool printInputs              = false,
@@ -208,7 +208,6 @@ public:
     bool getRefOnlyFlag() const;
     bool getMatchesOnlyFlag() const;
     bool getCrossoverFlag() const;
-    bool getPrintSearchTimeFlag() const;
     bool getPairedReadFlag() const;
     bool getCountAsPairsFlag() const;
     bool getRevCompSearchFlag() const;
@@ -279,7 +278,6 @@ private:
     bool _refOnly; ///< single sequence for each query
     bool _matchesOnly; //?< only output positive hits
     bool _crossover; //search for crossover counts
-    bool _printSearchTime;
     bool _pairedReads; ///< paired reads
     bool _countAsPairs; ///< only count one hit per read pair
     bool _revCompSearch; ///< generate and search for _qkRCMap
