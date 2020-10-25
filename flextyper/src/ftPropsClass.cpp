@@ -36,7 +36,6 @@ void FTProp::init(const fs::path &pathToQueryFile,
                   bool countAsPairs,
                   bool uniqueReads,
                   bool crossover,
-                  bool printSearchTime,
                   uint maxKmersPerQuery,
                   uint maxTotalKmers,
                   bool printInputs,
@@ -59,19 +58,17 @@ void FTProp::init(const fs::path &pathToQueryFile,
     _countAsPairs = countAsPairs;
     _uniqueReads = uniqueReads;
     _crossover = crossover;
-    _printSearchTime = printSearchTime;
     _maxKmersPerQuery = maxKmersPerQuery;
     _maxTotalKmers = maxTotalKmers;
     _matchingReads = matchingReads;
     _outputFile = outputFile;
+    _verbose = printInputs;
 
     if (outputOverCountedKmers){setFlagToOutput(ft::FlagType::OCK);}
     if (outputNonUniqueKmers){setFlagToOutput(ft::FlagType::NUK);}
 
     if (ignoreOverCountedKmers){setFlagToNotCount(ft::FlagType::OCK);}
     if (ignoreNonUniqueKmers){setFlagToNotCount(ft::FlagType::NUK);}
-
-
 
     if (_searchType == CENTERED && _overlap == 0){ LogClass::ThrowRuntimeError("overlap must be > 0 for centered search");}
 
@@ -96,11 +93,11 @@ void FTProp::init(const fs::path &pathToQueryFile,
         std::cout << "ignoreOverCountedkmers        : " << ignoreOverCountedKmers << std::endl;
         std::cout << "countAsPairs                  : " << countAsPairs << std::endl;
         std::cout << "uniqueReads                   : " << uniqueReads << std::endl;
-        std::cout << "printSearchTime               : " << printSearchTime << std::endl;
         std::cout << "maxKmersPerQuery              : " << maxKmersPerQuery << std::endl;
         std::cout << "maxTotalKmers                 : " << maxTotalKmers << std::endl;
         std::cout << "matchingReads                 : " << matchingReads << std::endl;
         std::cout << "Query search results will be save in " << _outputFile << std::endl;
+        std::cout << "FTProps Class verbose " << _verbose << std::endl;
     }
     if (LogClass::Log.is_open()){
         LogClass::Log << "======== Settings " << "======== " << std::endl;
@@ -124,7 +121,6 @@ void FTProp::init(const fs::path &pathToQueryFile,
         LogClass::Log << "ignoreOverCountedkmers        : " << ignoreOverCountedKmers << std::endl;
         LogClass::Log << "countAsPairs                  : " << countAsPairs << std::endl;
         LogClass::Log << "uniqueReads                   : " << uniqueReads << std::endl;
-        LogClass::Log << "printSearchTime               : " << printSearchTime << std::endl;
         LogClass::Log << "maxKmersPerQuery              : " << maxKmersPerQuery << std::endl;
         LogClass::Log << "maxTotalKmers                 : " << maxTotalKmers << std::endl;
         LogClass::Log << "matchingReads                 : " << matchingReads << std::endl;
@@ -168,7 +164,6 @@ void FTProp::initFromQSettings (FTProp::CmdLineArg& arg){
     bool           countAsPairs            = settings.value("countAsPairs").toBool();
     bool           uniqueReads             = settings.value("uniqueReads").toBool();
     bool           crossover               = settings.value("crossover").toBool();
-    bool           printSearchTime         = settings.value("printSearchTime").toBool();
     uint           maxKmersPerQuery        = settings.value("maxKmersPerQuery").toInt();
     uint           maxTotalKmers           = settings.value("maxTotalKmers").toInt();
 
@@ -196,7 +191,7 @@ void FTProp::initFromQSettings (FTProp::CmdLineArg& arg){
          searchType, multithread, overlap,
          returnMatchesOnly, stride,
          maxOccurences, numOfThreads, outputNonUniqueKmers, outputOverCountedKmers,
-         ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, uniqueReads, crossover, printSearchTime,
+         ignoreNonUniqueKmers, ignoreOverCountedKmers, countAsPairs, uniqueReads, crossover,
          maxKmersPerQuery, maxTotalKmers, arg.verbose, matchingReads);
 
 }
@@ -373,7 +368,6 @@ bool FTProp::getMultithreadFlag() const {return _multithread;}
 bool FTProp::getRefOnlyFlag() const {return _refOnly;}
 bool FTProp::getMatchesOnlyFlag() const {return _matchesOnly;}
 bool FTProp::getCrossoverFlag() const {return _crossover;}
-bool FTProp::getPrintSearchTimeFlag() const {return _matchesOnly;}
 bool FTProp::getPairedReadFlag() const {return _pairedReads;}
 bool FTProp::getCountAsPairsFlag() const {return _countAsPairs;}
 bool FTProp::getRevCompSearchFlag() const {return _revCompSearch;}

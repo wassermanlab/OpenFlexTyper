@@ -102,15 +102,14 @@ std::set<std::string> KmerGenerator::genSearchKmers(const ft::QueryClass& queryO
 {
     std::set<std::string> searchKmers;
     if (_verbose){
-            std::cout << "  " << std::endl;
-            std::cout << "  " << std::endl;
-            std::cout << "Query String " << queryObj._qstring.substr(0,10) <<std::endl;
-            std::cout << "Kmer Size " << _kmerSize << std::endl;
-            std::cout << "Ref Only Flag " << _refOnly << std::endl;
-            std::cout << "Search Type " << _searchType << std::endl;
-            std::cout << "Overlap  " << _overlap << std::endl;
-            std::cout << "Stride " << _stride << std::endl;
-            std::cout << "MaxKmers  " << _maxKmers << std::endl;
+            LogClass::Log << "  " << std::endl;
+            LogClass::Log  << "Query String " << queryObj._qstring.substr(0,10) <<std::endl;
+            LogClass::Log << "Kmer Size " << _kmerSize << std::endl;
+            LogClass::Log << "Ref Only Flag " << _refOnly << std::endl;
+            LogClass::Log << "Search Type " << _searchType << std::endl;
+            LogClass::Log  << "Overlap  " << _overlap << std::endl;
+            LogClass::Log  << "Stride " << _stride << std::endl;
+            LogClass::Log  << "MaxKmers  " << _maxKmers << std::endl;
     }
 
     // generate search queries
@@ -122,13 +121,9 @@ std::set<std::string> KmerGenerator::genSearchKmers(const ft::QueryClass& queryO
     } else {
         LogClass::ThrowRuntimeError("Search Type not recognised");
     }
-    if (_verbose)
-    {
-        std::cout << "length of searchKmers " << searchKmers.size() << std::endl;
-    }
 
     if (searchKmers.empty()) {
-        std::cout << "Error during the ID creation !" << std::endl;
+        LogClass::ThrowRuntimeError("Error during the ID creation !");
     }
 
     return searchKmers;

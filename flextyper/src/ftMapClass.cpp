@@ -1,4 +1,4 @@
-﻿////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 /// \copyright Copyright (c) 2020, Wasserman lab
 ////////////////////////////////////////////////////////////////////////
 
@@ -347,6 +347,7 @@ void FTMap::addReadIDsToQuery(ft::QIdT qIDT, std::set<ft::ReadID> readIds)
 //======================================================
 void FTMap::removeMultiHits()
 {
+    LogClass::Log << "Remove multi hits";
     std::map<ft::ReadID, std::pair<ft::QIdT, bool>> _observedReads; ///< bool = whether its added to adjustment (gets added when its seen for the second time)
     std::map<ft::QIdT, std::set<ft::ReadID>> _queriesToAdjust; /// query to adjust, amount to adjust count by
     for (auto querypair : _querySet) /// iterate through and compile a list of multihits
@@ -389,6 +390,7 @@ void FTMap::removeMultiHits()
 //======================================================
 void FTMap::removeMultiHitsAsPairs()
 {
+    LogClass::Log << "Remove multi hits as pairs";
     std::map<int, std::tuple<ft::ReadID, ft::QIdT, bool>> _observedReads; /// < int = Read ID (ignoring pair)
     std::map<ft::QIdT, std::set<ft::ReadID>> _queriesToAdjust; /// query to adjust, amount to adjust count by
     for (auto querypair : _querySet) /// iterate through and compile a list of multihits
