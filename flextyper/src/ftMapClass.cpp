@@ -356,20 +356,22 @@ void FTMap::removeMultiHits()
         std::set<ft::ReadID> newReadIDs;
         for (auto readID : query.getReadIDs())
         {
-            if (!(_observedReads.count(readID) > 0)){ /// if read hasnt been observed
+            auto search = _observedReads.find(readID);
+            if (search == _observedReads.end()){ /// if read hasnt been observed
                 _observedReads[readID] = std::make_pair(qIDT, false); /// add to observed Reads
                 newReadIDs.insert(readID); /// add to new reads
             } else {
-                if (!_observedReads[readID].second){ /// if query isnt marked for adjustment
-                    ft::QIdT qIDTAdjust =  _observedReads[readID].first;
-                    _observedReads[readID] = std::make_pair(qIDTAdjust, true); /// mark query for adjustment
+                if (!search->second.second){ /// if query isnt marked for adjustment
+                    ft::QIdT qIDTAdjust =  search->second.first;
+                    search->second.second = true;
+                    //_observedReads[readID] = std::make_pair(qIDTAdjust, true); /// mark query for adjustment
                     _queriesToAdjust[qIDTAdjust].insert(readID); /// add to list of queries to adjust
                 }
             }
         }
 
         query._reads = newReadIDs;
-        int queryCount = calculateQueryCount(query.getReadIDs());
+        int queryCount = calculateQueryCount(newReadIDs);
         query.setCount(queryCount);
         _querySet.find(qIDT)->second = query;
     }
@@ -397,13 +399,14 @@ void FTMap::removeMultiHitsAsPairs()
         for (auto readID : query.getReadIDs())
         {
             int rID = readID.first;
-            if (!(_observedReads.count(rID) > 0)){ /// if read hasnt been observed
+            auto search = _observedReads.find(rID);
+            if (search == _observedReads.end()){ /// if read hasnt been observed
                 _observedReads[rID] = std::make_tuple(readID, qIDT, false); /// add to observed Reads
                 newReadIDs.insert(readID); /// add to new reads
             } else {
-                if (!std::get<2>(_observedReads[rID])){ /// if query isnt marked for adjustment
-                    ft::ReadID readIDAdjust= std::get<0>(_observedReads[rID]);
-                    ft::QIdT qIDTAdjust = std::get<1>(_observedReads[rID]);
+                if (!std::get<2>(search->second)){ /// if query isnt marked for adjustment
+                    ft::ReadID readIDAdjust= std::get<0>(search->second);
+                    ft::QIdT qIDTAdjust = std::get<1>(search->second);
                     if (!(qIDTAdjust == qIDT)){
                     _observedReads[rID] = std::make_tuple(readIDAdjust, qIDTAdjust, true); /// mark query for adjustment
                     _queriesToAdjust[qIDTAdjust].insert(readIDAdjust); /// add to list of queries to adjust
@@ -414,7 +417,7 @@ void FTMap::removeMultiHitsAsPairs()
             }
         }
         query._reads = newReadIDs;
-        int queryCount = calculateQueryCount(query.getReadIDs());
+        int queryCount = calculateQueryCount(newReadIDs);
         query.setCount(queryCount);
         _querySet.find(qIDT)->second = query;
     }
