@@ -22,6 +22,9 @@ FmIndex::FmIndex(bool verbose)
 // FmIndex::hits() will show how effective is the pre-fill.
 size_t FmIndex::getPosition(size_t i)
 {
+    if (i >= _index.size())
+        return _index[i];
+
     size_t _i = i;
     if (positions[i] == 0) {
         size_t off = 0;
@@ -39,6 +42,10 @@ size_t FmIndex::getPosition(size_t i)
                 positions[i] = result + off - _index.size();
             }
             i = _index.lf[i];
+
+            if (i >= _index.size())
+                break;  //stop if index is beyond array size
+
         } while (off > 0 && off-- < 4000); //skip loop if 'off' is a large number
     }
     else
