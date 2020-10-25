@@ -16,6 +16,38 @@ FmIndex::FmIndex(bool verbose)
     : _verbose(verbose)
 {}
 
+#if ENABLE_FAST_POSITION
+// _index[] is mapped to csa_wt.hpp operator[]
+// To speed up, other positions are pre-filled.
+// FmIndex::hits() will show how effective is the pre-fill.
+size_t FmIndex::getPosition(size_t i)
+{
+    size_t _i = i;
+    if (positions[i] == 0) {
+        size_t off = 0;
+        while (!_index.sa_sample.is_sampled(i)) {
+            i = _index.lf[i];
+            ++off;
+        }
+        //now pre-fill other positions
+        i = _i;
+        do {
+            size_t result = _index.sa_sample[i];
+            if (result + off < _index.size()) {
+                positions[i] = result + off;
+            } else {
+                positions[i] = result + off - _index.size();
+            }
+            i = _index.lf[i];
+        } while (off > 0 && off-- < 4000); //skip loop if 'off' is a large number
+    }
+    else
+        pos_hits++;
+ 
+    return positions[_i];
+}
+#endif
+
 //======================================================================
 ft::KmerClass FmIndex::search(const std::string& kmer,
                               u_int maxOcc)
@@ -39,11 +71,11 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
         //occ_end is not always correct
         occ_end = occ_begin + occs;
         for (size_t i=occ_begin; i < occ_end; ++i) {
-            if (_indexPosition[i] == 0) {
-                //accessing _index[] will compute for position
-                _indexPosition[i] = _index[i];
-            }
-            kmerResult.addKPosition(_indexPosition[i]);
+#if ENABLE_FAST_POSITION
+            kmerResult.addKPosition(getPosition(i));
+#else
+            kmerResult.addKPosition(_index[i]);
+#endif
         }
     }
     return kmerResult;
@@ -78,9 +110,9 @@ std::pair<fs::path, fs::path> FmIndex::createFMIndex(const algo::IndexProps& _pr
     }
 
     if (!sdsl::load_from_file(_index, outputIndex)) {
-        //make storage for _indexPosition
-        _indexPosition = new long long[_index.size()];
-        memset(_indexPosition, 0, sizeof(long long)*_index.size());
+
+        positions.reserve(_index.size());
+        positions.assign(0, _index.size());
 
         std::ifstream in(preprocessedFasta);
         if (!in) {
@@ -117,11 +149,9 @@ void FmIndex::loadIndexFromFile(const fs::path& indexname)
     if (!sdsl::load_from_file(_index, fs::absolute(indexname).string())) {
         std::runtime_error("Error loading the index, please provide the index file " + indexname.string());
     }
-    //make storage for _indexPosition
-    _indexPosition = new long long[_index.size()];
-    memset(_indexPosition, 0, sizeof(long long)*_index.size());
 
-    std::cout << "Index loaded " << _index.size() << std::endl;
+    positions.reserve(_index.size());
+    positions.assign(0, _index.size());
 }
 //======================================================================
 void FmIndex::parallelFmIndex(algo::IndexProps& _props)
@@ -165,6 +195,5 @@ int FmIndex::indexCount()
 //======================================================================
 FmIndex::~FmIndex()
 {
-    delete [] _indexPosition;
 }
 }

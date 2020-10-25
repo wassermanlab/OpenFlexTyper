@@ -67,6 +67,8 @@ public:
 
     int indexCount();
 
+    //sdo -- show number of hits
+    int hits() {return pos_hits;}
 private:
     ////////////////////////////////////////////////////////////////////////
     /// \brief FmIndex copy constructor
@@ -93,7 +95,13 @@ private:
     ///        https://github.com/simongog/sdsl-lite
     ////////////////////////////////////////////////////////////////////////
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _index;
-    long long *_indexPosition;
+
+#define ENABLE_FAST_POSITION  1
+#if ENABLE_FAST_POSITION
+    std::vector<size_t>  positions;
+    size_t getPosition(size_t i);
+#endif
+    int pos_hits = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief mtx
