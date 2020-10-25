@@ -97,5 +97,4 @@ TEST_F(TestUtils, reverseComplimentWithBadNucleotide)
     EXPECT_EQ(output, expectedOutput);
 }
 
-
 }

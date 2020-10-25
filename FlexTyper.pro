@@ -36,12 +36,12 @@ INCLUDEPATH += flextyper/includes                     \
                fmindex/interfaces                   \
 
 HEADERS    += flextyper/includes/utils.h              \
-    flextyper/includes/LogClass.h \
+              flextyper/includes/LogClass.h \
               flextyper/includes/ftMapClass.h \
               flextyper/includes/ftPropsClass.h \
               flextyper/includes/ftSearch.h \
               flextyper/includes/kmerClass.h \
-    flextyper/includes/qkMapClass.h \
+              flextyper/includes/qkMapClass.h \
               flextyper/includes/queryClass.h \
               flextyper/includes/writerbridge.h       \
               flextyper/includes/kmergenerator.h      \
@@ -75,25 +75,15 @@ SOURCES     +=                \
               fmindex/src/indexPropsClass.cpp
 
 DISTFILES += \
-    docs/FastTyper_Overview.pdf \
-    docs/FlexTyper_test.gif \
-    docs/images/FmTyper_Overview.png \
-    docs/requirements.txt \
-    docs/source/algorithms.rst \
-    docs/source/code_source_documentation.rst \
-    docs/source/conf.py \
-    docs/source/dataClasses.rst \
-    docs/source/fmindex.rst \
-    docs/source/ftPropsClass.rst \
-    docs/source/getting_started.rst \
-    docs/source/index.rst \
-    docs/source/kmerClass.rst \
-    docs/source/make.bat \
-    docs/source/mapClasses.rst \
-    docs/source/openFlexTyper.cfg \
-    docs/source/queryClass.rst \
-    docs/source/quick_start_installation.rst \
-    docs/source/requirements.rst \
+    Doxyfile \
+    Example_Settings.ini \
+    LICENSE \
+    OpenFlexTyper_CondaEnv.yml \
+    README.md \
+    documentation/documentation.md \
+    documentation/installation.md \
+    documentation/searchexample.md \
+    examples/Example_Settings.ini \
     flextyper/test/testFiles/MixedVirus_100.fasta \
     flextyper/test/testFiles/MixedVirus_100_1.fq.gz \
     flextyper/test/testFiles/MixedVirus_100_2.fq.gz \
@@ -108,5 +98,7 @@ DISTFILES += \
     flextyper/test/testFiles/indexProps.ini \
     flextyper/test/testFiles/preprocess.sh \
     install.sh \
+    setup.py \
+    test.sh
 
 

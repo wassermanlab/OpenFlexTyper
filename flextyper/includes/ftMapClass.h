@@ -17,10 +17,9 @@
 namespace ft {
 
 ////////////////////////////////////////////////////////////////////////
-/// \class FTMapClass
+/// \class FTMap
 /// \brief A class that contains information for the FlexTyper Instance.
 ////////////////////////////////////////////////////////////////////////
-
 class FTMap
 {
 public:
@@ -33,7 +32,6 @@ public:
     /// @name init
     /// Functions to set up the FTMap
     /// @{
-    /// \fn
     /// \public
     void addInputQueries(const std::set<Query> &inputQueries);
     void genQKMap();
@@ -44,7 +42,6 @@ public:
     /// Constant functions to return properties of the query
     /// @{
     /// \public
-    /// \fn
     const std::vector<std::map<std::string, ft::KmerClass>>& getResults();
     const FTProp& getFTProps() const;
     const std::unordered_map<std::string, ft::KmerClass>& getKmerSet() const;
@@ -53,7 +50,7 @@ public:
     /// \name Access
     /// Access functions for single kmer and queries
     /// @{
-    /// \publicsection
+    /// \public
     bool checkForKmer(const std::string& testKmer) const;
     void addKmer(const std::string &kmer);
     const ft::KmerClass& getKmer(const std::string& kmer) const;
@@ -82,7 +79,6 @@ private:
     /// @name Properties
     /// @{
     /// \private
-    /// \variable
     FTProp  _ftProps;
     std::unordered_map<std::string, ft::KmerClass> _kmerSet;
     std::map<ft::QIdT, ft::QueryClass> _querySet;

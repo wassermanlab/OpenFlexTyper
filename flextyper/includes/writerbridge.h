@@ -10,7 +10,7 @@
 namespace ft {
 
 ////////////////////////////////////////////////////////////////////////
-/// \class Writer Bridge
+/// \class WriterBridge
 /// \brief A class that handles writing the results to file
 ////////////////////////////////////////////////////////////////////////
 class WriterBridge : public IWriterBridge {
@@ -37,7 +37,6 @@ public:
     /// Constant functions to return properties
     /// @{
     /// \public
-    /// \fn
     bool getRefData();
     bool getAltData();
     bool getCroData();
@@ -46,7 +45,6 @@ public:
     bool getMatchesOnlyFlag();
     std::map<std::string, std::string> getOutputMap();
     /// @}
-
 
 private:
     /// @name Properties

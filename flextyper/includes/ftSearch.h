@@ -1,29 +1,24 @@
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2020, Wasserman lab
-////////////////////////////////////////////////////////////////////////
-
 #ifndef __FM_SEARCH_H__
 #define __FM_SEARCH_H__
 
 #include <experimental/filesystem>
 #include <climits>
-
 #include "finder.h"
 #include "ifinder.h"
-
 #include "ftMapClass.h"
-
 #include "utils.h"
 #include "iutils.h"
-
 #include "writerbridge.h"
 #include "iwriterbridge.h"
-
 #include "queryextractor.h"
 #include "iqueryextractor.h"
 
 namespace fs = std::experimental::filesystem;
 
+////////////////////////////////////////////////////////////////////////
+/// \namespace ft
+/// \brief This namespace contains all the functions to interact with the search.
+////////////////////////////////////////////////////////////////////////
 namespace ft {
 
 ////////////////////////////////////////////////////////////////////////
@@ -42,7 +37,6 @@ public:
     /// @name init
     /// Functions to set up the search
     /// @{
-    /// \fn
     /// \public
     void init(const FTProp& ftProp);
     void printToStdOut(const std::string outputString) const;
@@ -61,7 +55,6 @@ private:
     /// @name Properties
     /// @{
     /// \private
-    /// \variable
     fs::path _readFile;
 
     std::map<std::string, uint> _counter;

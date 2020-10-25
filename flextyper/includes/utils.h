@@ -1,7 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2020, Wasserman lab
-////////////////////////////////////////////////////////////////////////
-
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
@@ -20,36 +16,33 @@ namespace ft {
 
 class Utils : public IUtils {
 public:
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief Utils constructor
-    ////////////////////////////////////////////////////////////////////////
+    /// Constructor
     Utils();
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief Utils destructor
-    ////////////////////////////////////////////////////////////////////////
+    /// Destructor
     virtual ~Utils();
 
 public:
     ////////////////////////////////////////////////////////////////////////
     /// \brief  join
-    /// \param  setOfStr
-    /// \param  delimeter
+    /// \param  std::set<std::string> setOfStr
+    /// \param  std::string delimeter
+    /// \return std::string joined string
     ////////////////////////////////////////////////////////////////////////
     std::string joinString(const std::set<std::string>& setOfStr, std::string delimeter = ", ");
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief  split
-    /// \param  strToSplit
-    /// \param  delimeter
-    /// \return returns tokens obtained from the given string
+    /// \param  std::string strToSplit
+    /// \param  char delimeter
+    /// \return std::set<std::string> returns tokens obtained from the given string
     ////////////////////////////////////////////////////////////////////////
     std::vector<std::string> split(const std::string& strToSplit, char delimeter);
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief  FTSearch::reverseComplement
-    /// \param  inputString
-    /// \return returns the reverse complement sequence
+    /// \param  std::string inputString
+    /// \return std::string returns the reverse complement sequence
     ////////////////////////////////////////////////////////////////////////
     std::string reverseComplement(const std::string& inputString) const;
 

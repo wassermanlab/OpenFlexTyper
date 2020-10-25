@@ -1,7 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2020, Wasserman lab
-////////////////////////////////////////////////////////////////////////
-
 #ifndef PROPERTIESCLASS_H
 #define PROPERTIESCLASS_H
 
@@ -21,23 +17,24 @@ namespace ft {
 
 namespace fs = std::experimental::filesystem;
 
-
 /// \enum Orientation
 enum Orientation {FWD = 1, REV}; ///< Match orientation, FWD or Reverse Complement
 
-/// \typedef Search Type
+/// \typedef SearchType
+/// @{
 typedef std::string     SearchType;             ///< SearchType declaration
 const   std::string     CENTERED = "CENTERED";  ///< search type centered approach
 const   std::string     SLIDING  = "SLIDING";   ///< search type sliding approach
+/// @}
 
-/// \name Query Type
+/// \enum QueryType
 /// Enumeration of Query Type: Reference, Alternate, CrossOver
 /// @{
 ///
 enum QueryType {REF = 1, ALT, CRO};
-const   std::string QUERYTYPE_REF  = "REF"; /// \skip
-const   std::string QUERYTYPE_ALT  = "ALT"; /// \skip
-const   std::string QUERYTYPE_CRO  = "CRO"; /// \skip
+const   std::string QUERYTYPE_REF  = "REF";
+const   std::string QUERYTYPE_ALT  = "ALT";
+const   std::string QUERYTYPE_CRO  = "CRO";
 /// @}
 
 /// \typedef QIdT
@@ -46,7 +43,7 @@ typedef std::pair<int, QueryType>  QIdT; // int is the query ID
 
 /// \typedef ReadID
 /// \brief Pair to create a unique Read ID: (Read Number, Read Pair)
-/// Read Pair is either 1 or 2, so that a Read Pair can be identified by a single id.
+/// \details Read Pair is either 1 or 2, so that a Read Pair can be identified by a single id.
 /// e.g. Read 1 from "_1" is identified by (1,1) and its corresponding pair from "_2" (1,2)
 typedef std::pair<int, int> ReadID; // pair (id, pair 1 or pair 2)
 
@@ -71,7 +68,7 @@ public:
     /// Destructor
     virtual ~FTProp();
 
-    /// \struct
+    /// \struct CmdLineArg
     struct CmdLineArg {
         std::string outputFile;
         std::string iniFile;
@@ -86,7 +83,34 @@ public:
     /// Initialise the properties from cmd line or settings file
     /// @{
     /// \public
-    /// \fn
+    /// \param fs::path path to query file
+    /// \param uint kmer size
+    /// \param uint read length
+    /// \param fs::path index properties file
+    /// \param fs::path output folder
+    /// \param fs::path output file name
+    /// \param bool ref queries only
+    /// \param bool search for the reverse complement of a kmer
+    /// \param SearchType search type: Centered or Sliding
+    /// \param bool perform multithreaded search, default = false
+    /// \param uint overlap between kmers, default = 0
+    /// \param bool return only queries that have matching reads, default = false
+    /// \param uint stride for the kmers, default = 10
+    /// \param uint maxOccurences, default = 200
+    /// \param uint numOfThreads, default = 1
+    /// \param bool outputNonUniqueKmers, default = false
+    /// \param bool outputOverCountedKmers, default = false
+    /// \param bool ignoreNonUniqueKmers, default = true
+    /// \param bool ignoreOverCountedKmers, default = true
+    /// \param bool countAsPairs, default = false
+    /// \param bool crossover, default = false
+    /// \param bool printSearchTime, default = false
+    /// \param uint maxKmers, default = UINT_MAX
+    /// \param uint totalKmers, default = UINT_MAX
+    /// \param bool printInputs, default = false
+    /// \param bool matchingReads, default = false)
+    /// \see SearchType
+    /// \see algo::IndexProps
     void init(const fs::path& pathToQueryFile       ,
               uint kmerSize                         ,
               uint readLength                       ,
@@ -124,7 +148,6 @@ public:
     /// Load properties from the Index ini file
     /// @{
     /// \public
-    /// \fn
     void loadIndexProps(const fs::path& _indexPropsFile, bool printInputs);
     void initIndexProps( const bool pairedReads,
                          const bool revComp,
@@ -146,7 +169,6 @@ public:
     /// Constant functions to return properties of the query
     /// @{
     /// \public
-    /// \fn
     SearchType getSearchType() const;
 
     std::string getReadSetName()const ;
@@ -168,7 +190,6 @@ public:
     /// Functions to add/remove flag properties
     /// @{
     /// \public
-    /// \fn
     const std::bitset<8>& getFlagsToOutput() const;
     const std::bitset<8>& getFlagsToNotCount() const;
     bool countFlag(ft::FlagType flag) const;
@@ -183,7 +204,6 @@ public:
     /// Constant functions to get flag values
     /// @{
     /// \public
-    /// \fn
     bool getMultithreadFlag() const;
     bool getRefOnlyFlag() const;
     bool getMatchesOnlyFlag() const;
@@ -201,7 +221,6 @@ public:
     /// Constant functions to get file paths
     /// @{
     /// \public
-    /// \fn
     const fs::path& getPathToQueryFile() const;
     const fs::path& getIndexDir() const;
     const fs::path& getOutputFolder() const;

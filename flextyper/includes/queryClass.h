@@ -41,7 +41,6 @@ public:
     /// Constant functions to return properties of the query
     /// @{
     /// \public
-    /// \fn
     int getqID() const;
     QueryType getqType() const;
     std::string getQueryString() const;
@@ -55,7 +54,7 @@ public:
     /// \name Setters
     /// Non-constant functions to update properties of the query class
     /// @{
-    /// \publicsection
+    /// \public
     void setQueryString(std::string queryString);
     void setCount(int count);
     void setFlags(const std::map<ft::FlagType, std::set<std::string>>& qFlags);
@@ -64,6 +63,7 @@ public:
     /// \name Adders
     /// Non-constant functions to add properties to the query class
     /// @{
+    /// \public
     void addFlags(const ft::FlagType& flagType, const std::set<std::string>& kmers);
     void addFlag(const ft::FlagType& flagType, const std::string& kmer);
     void addReadID(const ft::ReadID& readID);
@@ -72,6 +72,7 @@ public:
     /// \name Removers
     /// Non-constant functions to remove properties from the query class
     /// @{
+    /// \public
     void removeFlag(ft::FlagType flagType);
     void removeKmerFlag(const ft::FlagType& flagTyper, const std::string& kmers);
     void removeCount();
@@ -81,6 +82,7 @@ public:
     /// \name Checkers
     /// Constant functions to check the properties of the query class
     /// @{
+    /// \public
     bool isQIdTEqual(const ft::QIdT& test) const;
     bool hasQueryID(const int& qid) const;
     bool hasQueryType(const ft::QueryType& qType) const;
@@ -108,8 +110,6 @@ public:
            return QUERYTYPE_CRO;
         }
     };
-
-
 };
 }
 

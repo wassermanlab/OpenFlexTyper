@@ -30,19 +30,16 @@ public:
     /// Destructor
     virtual ~KmerGenerator();
 
-    /// \fn genSlidingSearchStrings
     /// \brief Generate search strings (i.e. kmers) for a sliding search
     /// \param queryString
     /// \return set of kmers
     virtual std::set<std::string> genSlidingSearchStrings(const std::string& queryString);
 
-    /// \fn genCenteredSearchStrings
     /// \brief Generate search strings (i.e. kmers) for a centered search
     /// \param queryString
     /// \return set of kmers
     virtual std::set<std::string> genCenteredSearchStrings(const std::string& queryString);
 
-    /// \fn genSearchKmers
     /// \brief Generate search strings (i.e. kmers)
     /// \param ft::QueryClass query
     /// \return set of kmers
@@ -52,7 +49,6 @@ public:
     /// Constant functions to get properties for Kmer Generation
     /// @{
     /// \public
-    /// \fn
     uint getKmerSize() const;
     bool getRefOnly() const;
     SearchType getSearchType() const;
