@@ -1,7 +1,5 @@
 # FlexTyper
-
-[![CircleCI](https://circleci.com/gh/wassermanlab/OpenFlexTyper.svg?style=svg)](https://circleci.com/gh/wassermanlab/OpenFlexTyper) [![Documentation Status](https://readthedocs.org/projects/openflextyper/badge/?version=latest)](https://openflextyper.readthedocs.io/en/latest/?badge=latest)
-[![GitHub release](https://img.shields.io/github/release/wassermanlab/openflextyper/all?logo=GitHub)](https://github.com/wassermanlab/openflextyper/releases/latest)
+![Generate Documentation](https://github.com/wassermanlab/OpenFlexTyper/workflows/Generate%20Documentation/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
@@ -16,6 +14,9 @@ To learn more about FlexTyper, see our preprint on bioRxiv:
 [Demonstrating the utility of flexible sequence queries against indexed short reads with FlexTyper](https://www.biorxiv.org/content/10.1101/2020.03.02.973750v1)
 
 
+## Full Documentation
+
+For more information about FlexTyper, please refer to [GitHubPages](https://wassermanlab.github.io/OpenFlexTyper/)
 
 ## Quick start installation
 
@@ -47,31 +48,15 @@ The output files from FlexTyper can be formatted into commonly used formats, e.g
 
 To learn more, see the fmformatter directory [here](https://github.com/wassermanlab/OpenFlexTyper/tree/master/fmformatter)
 
-## Demo
-
-![](docs/FlexTyper_test.gif)
-
-
 ## Contributers
-
-[<img alt="tixii" src="https://avatars2.githubusercontent.com/u/7527871?s=460&v=4" width="117">](https://github.com/tixii/) |
-[<img alt="Phil" src="https://avatars1.githubusercontent.com/u/16579982?s=460&v=4" width="117">](https://github.com/Phillip-a-richmond) |
-[<img alt="kounkou" src="https://avatars0.githubusercontent.com/u/2589171?s=460&v=4" width="117">](https://github.com/kounkou) |
-[<img alt="tamario" src="https://avatars2.githubusercontent.com/u/15660317?s=460&v=4" width="117">](https://github.com/tamario) |
-:---: | :---: | :---: | :---: | 
 [Alice Kaye](https://github.com/tixii) | [Phillip Richmond](https://github.com/Phillip-a-richmond) | [Jacques Kounkou](https://github.com/kounkou) | [Tamar Av-Shalom](https://github.com/tamario)
-
-
-## Full Documentation
-
-For more information about FlexTyper, please refer to our online documentation on [readthedocs](https://flextyper.readthedocs.io/en/latest/)
 
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2019, Wasserman lab
+Copyright (c) 2020, Wasserman lab
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

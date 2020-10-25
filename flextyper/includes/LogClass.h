@@ -1,7 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2020, Wasserman lab
-////////////////////////////////////////////////////////////////////////
-
 #include <iostream>
 #include <fstream>
 #include <chrono>
@@ -39,8 +35,9 @@ public:
     }
 
     static void ThrowRuntimeError(const std::string& error) {
+        Log << "(EE) " << error << std::endl;
         std::cout << "(EE) " << error << std::endl;
-        throw std::runtime_error("(EE) " + error);
+        throw std::runtime_error(error);
     }
 
     ////////////////////////////////////////////////////////////////////////

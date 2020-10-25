@@ -1,7 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2020, Wasserman lab
-////////////////////////////////////////////////////////////////////////
-
 #include <QCommandLineParser>
 #include <QSettings>
 #include <iostream>
@@ -56,6 +52,7 @@ int main(int argc, char** argv)
 
     const QString command = args.isEmpty() ? QString() : args.first();
 
+    /// \section Search
     if (command == "search")
     {
         parser.clearPositionalArguments();
@@ -117,6 +114,20 @@ int main(int argc, char** argv)
                   (cmdArg.maxOccurences ? ("m"+parser.value("m").toStdString()):"") +
                   (cmdArg.unique ? "u":"");
         }
+#if 0 //remove after testing
+    for(int i=0 ; i < positionalArguments.length() ; i++) {
+        std::cout << i << ": " << positionalArguments.at(i).toStdString() << std::endl;
+    }
+    std::cout << "verbose: " << parser.isSet("verbose") << std::endl;
+    std::cout << "unique: " << parser.isSet("unique") << std::endl;
+    std::cout << "c: " << parser.isSet("c") << " " << cmdArg.iniFile << std::endl;
+    std::cout << "k: " << parser.isSet("k") << " " << cmdArg.kmerSize << std::endl;
+    std::cout << "s: " << parser.isSet("s") << " " << cmdArg.stride << std::endl;
+    std::cout << "m: " << parser.isSet("m") << " " << cmdArg.maxOccurences << std::endl;
+    std::cout << "LogName : " << logName << std::endl;
+    exit(1);
+#endif
+
 
         ft::LogClass::OpenLog(logName);
 
