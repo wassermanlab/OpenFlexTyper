@@ -325,7 +325,7 @@ std::set<ft::ReadID> FTMap::addKmersToQueryResults(ft::QueryClass& query, std::s
         if (addToCount == true){
             for ( ft::ReadID readID : fwdKmer->getReadIDs())
             {
-                std::cout << "Read ID to add " << readID.first << std::endl;
+                //std::cout << "Read ID to add " << readID.first << std::endl;
                 query.addReadID(readID);
                 readIds.insert(readID);
             }
