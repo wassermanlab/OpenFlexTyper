@@ -22,22 +22,25 @@ FmIndex::FmIndex(bool verbose)
 // FmIndex::hits() will show how effective is the pre-fill.
 size_t FmIndex::getPosition(size_t i)
 {
-    for (auto it = position_block.begin(); it != position_block.end(); it++ ) {
-        if (i >= it->first) {
-            size_t _i = i - it->first;
-            if (_i < it->second.size()) {
+    for (auto const& it: position_block) {
+        if (i < it.first)
+            break;
+        else {
+            size_t _i = i - it.first;
+            if (_i < it.second.size()) {
                 pos_hits++;
-                return it->second[_i];  //found position
+                return it.second[_i];  //found position
             }
         }
     }
+
     size_t _i = i;
     size_t off = 0;
     while (!_index.sa_sample.is_sampled(i)) {
         i = _index.lf[i];
         ++off;
     }
-    if (off > 4000)  //cap the block of positions if it's a crazy number
+    if (off > 4000)  //cap any crazy number
         off = 4000;
 
     auto pair = std::make_pair(_i, std::vector<size_t>()); //new block of positions @ _i
@@ -55,7 +58,7 @@ size_t FmIndex::getPosition(size_t i)
         i = _index.lf[i];
     } while (off-- > 0); //skip loop if 'off' is a large number
 
-    if (position_block.size() > 40) {
+    if (position_block.size() > 200) {
         position_block.clear();  //storing too many, flush everything
     }
 
