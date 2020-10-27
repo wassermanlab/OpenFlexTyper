@@ -11,6 +11,7 @@
 
 ## Non Unique Kmers
 If two query sequences contain an identical kmer, then that kmer is flagged as a ‘non unique kmer’. 
+
 ![non Unique Kmers](nonUniqueKmer.png)
 
 ## Over Counted Kmers 
