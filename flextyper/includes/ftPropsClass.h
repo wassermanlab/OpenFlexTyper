@@ -52,8 +52,8 @@ typedef std::pair<int, int> ReadID; // pair (id, pair 1 or pair 2)
 typedef std::tuple<uint, std::string, std::string, std::string>  Query;
 
 /// \enum FlagType
-/// bitwise representation of the kmer flag types: Abundant (ABK), Overcounted (OCK), Non-Unique (NUK)
-enum FlagType { ABK = 0x0001, OCK = 0x0002, NUK = 0x0003};
+/// bitwise representation of the kmer flag types: Abundant (ABK), Overcounted (OCK), Non-Unique (NUK), MultiHits (MUL)
+enum FlagType { ABK = 0x0001, OCK = 0x0002, NUK = 0x0003, MUL = 0x0004};
 
 ////////////////////////////////////////////////////////////////////////
 /// \class FTProp
@@ -213,6 +213,7 @@ public:
     bool getRevCompSearchFlag() const;
     bool getIndexRevCompFlag() const;
     bool getMatchingReadsFlag() const;
+    bool getUniqueReadsFlag() const;
     /// @}
     bool isVerbose() const;
 
@@ -284,6 +285,7 @@ private:
     bool _indexRevComp; ///< do the index files contain the reverse complement
     bool _matchingReads; ///< create files that contain reads that match to each query
     bool _verbose; ///< print to std::cout
+    bool _uniqueReads; ///< Enforce a unique match between Reads and Queries (i.e. no multi-hits)
     /// @}
 
 };

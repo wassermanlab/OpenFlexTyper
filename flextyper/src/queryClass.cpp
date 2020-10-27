@@ -32,6 +32,7 @@ const std::set<std::string> QueryClass::getFlagKmers(const ft::FlagType flag) co
         return {};
     }
 }
+const std::set<ft::ReadID> QueryClass::getReadIDs() const {return _reads;}
 
 //================== SETTERS ===========================
 
@@ -56,6 +57,10 @@ void QueryClass::addFlag(const ft::FlagType& flagType, const std::string& kmer)
 {
         _qFlags[flagType].insert(kmer);
 }
+void QueryClass::addReadID(const ft::ReadID &readID)
+{
+    _reads.insert(readID);
+}
 //===================== REMOVERS ==========================
 void QueryClass::removeFlag(ft::FlagType flagType){
     _qFlags.erase(flagType);
@@ -65,6 +70,10 @@ void QueryClass::removeKmerFlag(const ft::FlagType& flagType, const std::string&
 }
 void QueryClass::removeCount(){
      setCount(0);
+}
+void QueryClass::removeReadID(const ft::ReadID& readID)
+{
+    _reads.erase(readID);
 }
 
 //==================== CHECKERS =========================
@@ -100,7 +109,10 @@ bool QueryClass::hasNonZeroCount() const
 {
     return this->getCount()>0;
 }
-
+bool QueryClass::hasReadID(const ft::ReadID &readID) const
+{
+    return _reads.count(readID) > 0;
+}
 //===================== OVERLOAD ========================
 bool QueryClass::operator< (const ft::QueryClass &q) const {
     if (_qID != q._qID){
@@ -112,8 +124,6 @@ bool QueryClass::operator< (const ft::QueryClass &q) const {
 
 bool QueryClass::operator== (const ft::QueryClass &q) const {
     return (_qID == q._qID && _qType == q._qType); }
-
-
 
 QueryClass::~QueryClass()
 {

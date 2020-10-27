@@ -34,6 +34,7 @@ public:
     std::string _qstring;
     int _count;
     std::map<ft::FlagType, std::set<std::string>> _qFlags;
+    std::set<ft::ReadID> _reads;
     /// @}
 
     /// @name Getters
@@ -47,6 +48,7 @@ public:
     std::map<ft::FlagType, std::set<std::string>> getQFlags() const;
     ft::QIdT getQIdT() const;
     const std::set<std::string> getFlagKmers(const ft::FlagType flag) const;
+    const std::set<ft::ReadID> getReadIDs() const;
     /// @}
 
     /// \name Setters
@@ -64,6 +66,7 @@ public:
     /// \public
     void addFlags(const ft::FlagType& flagType, const std::set<std::string>& kmers);
     void addFlag(const ft::FlagType& flagType, const std::string& kmer);
+    void addReadID(const ft::ReadID& readID);
     /// @}
 
     /// \name Removers
@@ -73,6 +76,7 @@ public:
     void removeFlag(ft::FlagType flagType);
     void removeKmerFlag(const ft::FlagType& flagTyper, const std::string& kmers);
     void removeCount();
+    void removeReadID(const ft::ReadID& readID);
     /// @}
 
     /// \name Checkers
@@ -85,6 +89,7 @@ public:
     bool hasFlag(const ft::FlagType& flag) const;
     bool hasKmerFlag(const ft::FlagType& flag, const std::string& kmer) const;
     bool hasNonZeroCount() const;
+    bool hasReadID(const ft::ReadID& readID) const;
     /// @}
 
     /// \name Overloaded Operators
