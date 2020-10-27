@@ -42,19 +42,19 @@ Query 2 = [R1, R4]
 <tr><th rowspan="2">                     <th colspan="3" >countAsPairs=True   <th colspan="3" >countAsPairs= False       
 <tr><th> Query <th> Read Hits <th> Count <th> Query <th> Read Hits <th> Count 
 <tr><td rowspan="2">uniqueReads = True<td>1<td>[R5, R6]<td>1<td>1<td>[R3,R5,R6]<td>3  
-                                      <td>2<td>[ ]<td>0<td>2<td>[R4]<td>1  
+                                      <tr><td>2<td>[ ]<td>0<td>2<td>[R4]<td>1  
 <tr><td rowspan="2">uniqueReads = True<td>1<td>[R1, R3, R5, R6]<td>3<td>1<td>[R1,R3,R5,R6]<td>4  
-                                      <td>2<td>[R1, R4]<td>2<td>2<td>[R1,R4]<td>2  
+                                      <tr><td>2<td>[R1, R4]<td>2<td>2<td>[R1,R4]<td>2  
 
 </table>
 
 
 |                   | countAsPairs = True                       | countAsPairs = False                       |
 |                   | Query      | Read Hits       | Count      | Query      | Read Hits        | Count      |
-| ----------------- | ---------- | --------------- | ---------- | ---------- | ---------------- | ---------- |
+  ----------------- | ---------- | --------------- | ---------- | ---------- | ---------------- | ---------- 
 |uniqueReads = True | 1          | [R5, R6]        |1           | 1          | [R3, R5, R6]     | 3          |
 |                   | 2          | [ ]             |0           | 2          | [R4]             | 1          |
-| ----------------- |----------- |---------------- | ---------- | ---------- | ---------------- | ---------- |
+  ----------------- |----------- |---------------- | ---------- | ---------- | ---------------- | ---------- 
 |uniqueReads = False| 1          | [R1, R3, R5, R6]|3           | 1          | [R1, R3, R5, R6] | 4          |
 |                   | 2          | [R1, R4]        |2           | 2          | [R1, R4]         | 2          |
 
