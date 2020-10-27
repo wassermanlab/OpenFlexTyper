@@ -4,10 +4,10 @@
 
 ## Sliding Search Parameters 
 
-\image html slidingsearch.png
+\image html ./slidingsearch.png
 
 ## Centered Search Parameters 
-\image html centerdsearch.png
+\image html ./centerdsearch.png
 
 ## Non Unique Kmers
 If two query sequences contain an identical kmer, then that kmer is flagged as a ‘non unique kmer’. 
@@ -47,16 +47,4 @@ Query 2 = [R1, R4]
                                       <tr><td>2<td>[R1, R4]<td>2<td>2<td>[R1,R4]<td>2  
 
 </table>
-
-
-|                   | countAsPairs = True                       | countAsPairs = False                       |
-|                   | Query      | Read Hits       | Count      | Query      | Read Hits        | Count      |
-  ----------------- | ---------- | --------------- | ---------- | ---------- | ---------------- | ---------- 
-|uniqueReads = True | 1          | [R5, R6]        |1           | 1          | [R3, R5, R6]     | 3          |
-|                   | 2          | [ ]             |0           | 2          | [R4]             | 1          |
-  ----------------- |----------- |---------------- | ---------- | ---------- | ---------------- | ---------- 
-|uniqueReads = False| 1          | [R1, R3, R5, R6]|3           | 1          | [R1, R3, R5, R6] | 4          |
-|                   | 2          | [R1, R4]        |2           | 2          | [R1, R4]         | 2          |
-
-
 
