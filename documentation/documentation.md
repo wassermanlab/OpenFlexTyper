@@ -10,6 +10,7 @@
 - \subpage indexexample "Example of FlexTyper Index"
 
 ### For detailed code documentation, see: 
+- [Parameters](parameters.html)
 - [Namespaces](namespaces.html)
 - [Classes](annotated.html)
 
