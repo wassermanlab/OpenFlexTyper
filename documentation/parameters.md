@@ -4,7 +4,7 @@
 
 ## Sliding Search Parameters 
 
-\image html ./slidingsearch.png
+\image html (https://github.com/wassermanlab/OpenFlexTyper/blob/master/documentation/img/slidingsearch.png
 
 ## Centered Search Parameters 
 \image html ./centerdsearch.png
@@ -18,6 +18,7 @@ If a kmer search returns too many positions, then that kmer is disregarded as un
 
 ## Count As Pairs 
 For paired reads [R1 = <1,1>, R2 = <1,2>]
+
 If countAsPairs = true, then if a query matches R1 and R2, then the query count is only one. 
 
 ## Unique Reads 
@@ -25,6 +26,7 @@ For two queries Q1 and Q2, uniqueReads = true, then if a read, R, matches Q1 and
 
 ## Combining countAsPairs and uniqueReads
 Suppose you have 3 sets of paired reads: 
+
 Pair 1: [R1 = <1,1>, R2 = <1,2>]
 
 Pair 2: [R3 = <2,1>, R4 = <2,2>]
