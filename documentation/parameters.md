@@ -7,6 +7,7 @@
 ![Sliding Search](slidingsearch.png)
 
 ## Centered Search Parameters 
+
 ![Centered Search](centeredsearch.png)
 
 ## Non Unique Kmers
