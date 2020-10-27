@@ -1,6 +1,6 @@
 \page parameters 
 
-# Parameters Used within FlexTyper 
+# Key Parameters Used within FlexTyper 
 
 ## Sliding Search Parameters 
 
@@ -26,7 +26,7 @@ If countAsPairs = true, then if a query matches R1 and R2, then the query count 
 ## Unique Reads 
 For two queries Q1 and Q2, uniqueReads = true, then if a read, R, matches Q1 and Q2, then R will be removed from the set of matching read hits for both Q1 and Q2.
 
-## Combining countAsPairs and uniqueReads
+# Combining countAsPairs and uniqueReads
 Suppose you have 3 sets of paired reads: 
 
 Pair 1: [R1 = <1,1>, R2 = <1,2>]
