@@ -4,7 +4,7 @@
 
 ## Sliding Search Parameters 
 
-![Sliding Search](slidingsearch.png)
+![Sliding Search, width=800px](slidingsearch.png)
 
 ## Centered Search Parameters 
 
