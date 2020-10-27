@@ -29,8 +29,35 @@ void KSearch::init(const ft::KSCmdLineArg& kSProps)
      _indexSet = kSProps.indexFiles;
 
      _verbose = kSProps.verbose;
+     if (_verbose){
+
+             std::cout << "======== Settings " << "======== " << std::endl;
+             std::cout  << "maxOccurences                 : " << _maxOcc << std::endl;
+             std::cout  << "maxThreads                    : " << _maxThreads << std::endl;
+             std::cout  << "readLength                    : " << _readLength <<  std::endl;
+             std::cout  << "numOfReads                    : " << _numOfReads << std::endl;
+             std::cout << "pairedReads                   : " << _pairedReads << std::endl;
+             std::cout  << "indexRevComp                  : " << _indexRevComp << std::endl;
+             std::cout << "countAsPairs                  : " << _countAsPairs << std::endl;
+             std::cout  << "revCompSearch                 : " << _revCompSearch <<  std::endl;
+
+     }
+     if (LogClass::Log.is_open()){
+         LogClass::Log << "======== Settings " << "======== " << std::endl;
+         LogClass::Log << "maxOccurences                 : " << _maxOcc << std::endl;
+         LogClass::Log << "maxThreads                    : " << _maxThreads << std::endl;
+         LogClass::Log << "readLength                    : " << _readLength <<  std::endl;
+         LogClass::Log << "numOfReads                    : " << _numOfReads << std::endl;
+         LogClass::Log << "pairedReads                   : " << _pairedReads << std::endl;
+         LogClass::Log << "indexRevComp                  : " << _indexRevComp << std::endl;
+         LogClass::Log << "countAsPairs                  : " << _countAsPairs << std::endl;
+         LogClass::Log << "revCompSearch                 : " << _revCompSearch <<  std::endl;
+     }
+
 
      loadKmers(_kmerFile);
+
+
 
      std::map<fs::path, uint>::iterator it = _indexSet.begin();
      while ( it != _indexSet.end()) {
@@ -39,13 +66,15 @@ void KSearch::init(const ft::KSCmdLineArg& kSProps)
          parallelSearch(indexPath, offset);
          it++;
      }
+
+    processResults();
     writeOutput();
 
-}
 
+}
+//======================================================================
 void KSearch::loadKmers(const fs::path& kmerFile)
 {
-
     std::cout << "path to kmer file : " <<  kmerFile << std::endl;
     std::ifstream kmerFileStream(kmerFile);
     if (!kmerFileStream.is_open()) {
@@ -129,7 +158,14 @@ void KSearch::processIndexResults(const std::map<std::string, ft::KmerClass>& in
     }
 }
 
-
+//======================================================================
+void KSearch::processResults()
+{
+    for (std::map<std::string, ft::KmerClass> indexResult : _searchResults )
+    {
+       processIndexResults(indexResult);
+    }
+}
 
 //======================================================================
 void KSearch::parallelSearch(const fs::path &indexPath,

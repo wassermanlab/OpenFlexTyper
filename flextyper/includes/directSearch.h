@@ -55,6 +55,7 @@ public:
     void addResultsFutures(std::map<std::string, ft::KmerClass> & indexResults, ft::KmerClass &tmpResult, uint offset);
     void parallelSearch(const fs::path &indexPath, long long offset);
     void processIndexResults(const std::map<std::string, ft::KmerClass>& indexResult);
+    void processResults();
     void writeOutput();
 
     /// \name Access

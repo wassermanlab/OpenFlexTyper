@@ -385,6 +385,9 @@ int main(int argc, char** argv)
             kSProps.indexFiles = indexProps.getIndexSet();
             kSProps.indexSetName = indexProps.getIndexName();
             kSProps.readLength = indexProps.getReadLength();
+            kSProps.numOfReads = indexProps.getNumOfReads();
+            std::cout<< "read length " << kSProps.readLength << std::endl;
+            std::cout << "num of reads " << kSProps.numOfReads << std::endl;
 
         } else {
             kSProps.indexFiles[indexInput] = 0;
