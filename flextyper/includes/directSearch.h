@@ -24,6 +24,7 @@ struct KSCmdLineArg {
     std::string kmerSetName;
     std::string outputFileName;
     uint numOfReads;
+    uint columnNum = 0;
     uint maxOccurences = 100000;
     uint maxThreads = 1;
     uint readLength = 100;
@@ -83,6 +84,7 @@ public:
     uint _readLength;
     uint _maxOcc;
     uint _maxThreads;
+    uint _columnNum;
     bool _verbose;
     bool _pairedReads;
     bool _indexRevComp;

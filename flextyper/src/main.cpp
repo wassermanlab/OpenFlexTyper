@@ -347,6 +347,8 @@ int main(int argc, char** argv)
                                 QCoreApplication::translate("main", "value")},
             {{"l", "readLength"},   QCoreApplication::translate("main", "readLength"),
                                 QCoreApplication::translate("main", "value")},
+          {{"c", "columnNum"},   QCoreApplication::translate("main", "column Number of kmer (0 based)"),
+                              QCoreApplication::translate("main", "value")},
         });
 
         parser.process(aps);
@@ -376,6 +378,8 @@ int main(int argc, char** argv)
             kSProps.readLength = parser.value("p").toUInt();
         if (parser.isSet("r"))
             kSProps.readLength = parser.value("r").toUInt();
+        if (parser.isSet("c"))
+            kSProps.columnNum = parser.value("c").toUInt();
 
 
         if (kSProps.iniFile)

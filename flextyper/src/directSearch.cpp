@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <queue>
 #include "directSearch.h"
+#include "utils.h"
 
 namespace ft {
 
@@ -23,6 +24,7 @@ void KSearch::init(const ft::KSCmdLineArg& kSProps)
      _indexRevComp = kSProps.indexRevComp;
      _countAsPairs = kSProps.countAsPairs;
      _revCompSearch = kSProps.revCompSearch;
+     _columnNum = kSProps.columnNum;
 
      _outputFile = fs::path(kSProps.outputFileName);
      _kmerFile = kSProps.kmerFile;
@@ -40,6 +42,7 @@ void KSearch::init(const ft::KSCmdLineArg& kSProps)
              std::cout  << "indexRevComp                  : " << _indexRevComp << std::endl;
              std::cout << "countAsPairs                  : " << _countAsPairs << std::endl;
              std::cout  << "revCompSearch                 : " << _revCompSearch <<  std::endl;
+             std::cout  << "columnNum                 : " << _columnNum <<  std::endl;
 
      }
      if (LogClass::Log.is_open()){
@@ -52,6 +55,7 @@ void KSearch::init(const ft::KSCmdLineArg& kSProps)
          LogClass::Log << "indexRevComp                  : " << _indexRevComp << std::endl;
          LogClass::Log << "countAsPairs                  : " << _countAsPairs << std::endl;
          LogClass::Log << "revCompSearch                 : " << _revCompSearch <<  std::endl;
+         LogClass::Log << "columnNum                        : " << _columnNum <<  std::endl;
      }
 
 
@@ -75,17 +79,37 @@ void KSearch::init(const ft::KSCmdLineArg& kSProps)
 //======================================================================
 void KSearch::loadKmers(const fs::path& kmerFile)
 {
+    ft::Utils utils;
     std::cout << "path to kmer file : " <<  kmerFile << std::endl;
     std::ifstream kmerFileStream(kmerFile);
     if (!kmerFileStream.is_open()) {
         LogClass::ThrowRuntimeError( "Couldn't open queryFile");
     }
     std::string line;
-
+    std::string kmer;
     while (getline(kmerFileStream, line)) {
         if (line[0] == '#') continue;
-        std::string kmer = line;
-        LogClass::Log << "Kmer added " << kmer << std::endl;
+
+        if (_columnNum > 0)
+        {
+            std::vector<std::string> splitline = utils.split(line, '\t');
+            std::string kmerID = splitline[0];
+             kmer = splitline[_columnNum];
+            //LogClass::Log << "Kmer added " << kmer << std::endl;
+            std::size_t rfound = kmer.find_first_not_of("acgtnACGTN");
+            std::size_t rnfound = kmer.find_first_of("nN");
+            if (rnfound != std::string::npos)
+                {
+                LogClass::Log << "Ref Sequence contains Ns, Kmers generated with N's will be ignored" << std::endl;
+                }
+            if (rfound != std::string::npos)
+                {
+                LogClass::ThrowRuntimeError("invalid query sequences: Ref sequence contains invalid characters ");
+                }
+        } else
+        {
+            kmer = line;
+        }
         ft::KmerClass newkmer(kmer);
         _kmerSet[kmer] = newkmer;
 }
@@ -191,11 +215,11 @@ void KSearch::parallelSearch(const fs::path &indexPath,
     uint elts = 0;
 
     std::unordered_map<std::string, ft::KmerClass>::const_iterator it = kmerMap.begin();
-    std::cout << "parallelSearch " << kmerMap.size() << std::endl;
+    //std::cout << "parallelSearch " << kmerMap.size() << std::endl;
     while (it != kmerMap.end())
     {
         std::string kmer = it->first;
-        LogClass::Log << "searching for kmer " << kmer << std::endl;
+        //LogClass::Log << "searching for kmer " << kmer << std::endl;
         resultsFutures.push_back(std::async(std::launch::async, &algo::FmIndex::search,
                                                 dynamic_cast<algo::FmIndex*>(fmIndex),
                                                 kmer, _maxOcc));
@@ -209,7 +233,7 @@ void KSearch::parallelSearch(const fs::path &indexPath,
             j--;
             ft::KmerClass tmpResult = e.get();
             elts++;
-            LogClass::Log << "number of results for " << tmpResult.getKmer() << " " << tmpResult.getKPositions().size() << std::endl;
+            //LogClass::Log << "number of results for " << tmpResult.getKmer() << " " << tmpResult.getKPositions().size() << std::endl;
             addResultsFutures(indexResults, tmpResult, offset);
         }
         resultsFutures.clear();
@@ -224,6 +248,7 @@ void KSearch::parallelSearch(const fs::path &indexPath,
 //======================================================
 void KSearch::writeOutput()
 {
+    ft::Utils utils;
     std::fstream outputFileStream;
     outputFileStream.open(_outputFile, std::ios::out);
     if (!outputFileStream || !outputFileStream.is_open()) {
@@ -251,8 +276,16 @@ void KSearch::writeOutput()
             outputFileStream << line;
             continue;
         }
-
-        const ft::KmerClass& kmer = getKmer(line);
+        std::string kmerstring;
+        if (_columnNum > 0)
+        {
+            std::vector<std::string> splitline = utils.split(line, '\t');
+            std::string kmerID = splitline[0];
+            kmerstring = splitline[_columnNum];
+        } else {
+            kmerstring = line;
+        }
+        const ft::KmerClass& kmer = getKmer(kmerstring);
         u_int kmercount = calculateKmerCount(kmer);
         std::string outputLine = '\t' + std::to_string(kmercount);
         line.append(outputLine);
