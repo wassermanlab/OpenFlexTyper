@@ -5,14 +5,16 @@
 #include "ftSearch.h"
 #include "fmindex.h"
 #include "indexPropsClass.h"
+#include "directSearch.h"
 
 static void usage()
 {
     std::cout << "\nUsage\n flextyper [feature] [options...]               \n"
                  "                                                         \n"
                  " Features :                                              \n"
-                 "    search   uses the FmIndex to search kmers         \n"
+                 "    search   uses the FmIndex to search queries         \n"
                  "    index   uses a a single or paired fasta/fastq/zipped fq file to produce the FmIndex \n"
+                 "    ksearch searches for a simple kmer set in an index or indexed read set \n "
                  "                                                         \n"
                  " Options  :                                              \n"
                  "    -h, --help  displays this help                       \n"
@@ -43,7 +45,7 @@ int main(int argc, char** argv)
         return 0;
     }
 
-    parser.setApplicationDescription("Description: flextyper enables the user to quickly search for kmers inside the FmIndex");
+    parser.setApplicationDescription("Description: flextyper enables the user to quickly search for sequences inside the FmIndex");
     parser.addPositionalArgument("command", "The command to execute.");
 
     // Call parse() to find out the positional arguments.
@@ -328,7 +330,91 @@ int main(int argc, char** argv)
 
         ft::LogClass::CloseLog();
 
-    }
+    } else if (command == "ksearch")
+    {
+        parser.clearPositionalArguments();
+        parser.addHelpOption();
+        parser.addPositionalArgument("kmerFile", QCoreApplication::translate("main","text file containing 1 kmer per line"));
+        parser.addPositionalArgument("indexFile", QCoreApplication::translate("main","fm9 dataset"));
+        parser.addOptions({
+            {{"s", "indexSettings"},  QCoreApplication::translate("main", "the fm9 dataset is given by an Index Settings.ini file")},
+            {{"v", "verbose"},  QCoreApplication::translate("main", "prints debugging messages")},
+            {{"p", "countAsPairs"},  QCoreApplication::translate("main", "count reads as pairs")},
+            {{"r", "revCompSearch"},  QCoreApplication::translate("main", "search for rev comp of kmers")},
+            {{"m", "maxOcc"},   QCoreApplication::translate("main", "maxOcc"),
+                                QCoreApplication::translate("main", "value")},
+            {{"t", "maxThreads"},   QCoreApplication::translate("main", "maxThreads"),
+                                QCoreApplication::translate("main", "value")},
+            {{"l", "readLength"},   QCoreApplication::translate("main", "readLength"),
+                                QCoreApplication::translate("main", "value")},
+        });
+
+        parser.process(aps);
+        const QStringList positionalArguments = parser.positionalArguments();
+
+        if (positionalArguments.size() != 3 ) {
+            std::cerr << "missing an input file" << std::endl;
+            parser.showHelp();
+            return 1;
+        }
+
+        ft::KSCmdLineArg kSProps;
+
+        //first argument is search
+        kSProps.kmerFile = positionalArguments.at(1).toStdString();
+        kSProps.kmerSetName = kSProps.kmerFile.stem();
+        fs::path indexInput = positionalArguments.at(2).toStdString();
+        kSProps.iniFile = parser.isSet("indexSettings");
+        kSProps.verbose = parser.isSet("verbose");
+        if (parser.isSet("m"))
+            kSProps.maxOccurences = parser.value("m").toUInt();
+        if (parser.isSet("t"))
+            kSProps.maxThreads = parser.value("t").toUInt();
+        if (parser.isSet("l"))
+            kSProps.readLength = parser.value("l").toUInt();
+        if (parser.isSet("p"))
+            kSProps.readLength = parser.value("p").toUInt();
+        if (parser.isSet("r"))
+            kSProps.readLength = parser.value("r").toUInt();
+
+
+        if (kSProps.iniFile)
+        {
+            algo::IndexProps indexProps;
+            indexProps.loadFromIni(indexInput);
+            kSProps.indexFiles = indexProps.getIndexSet();
+            kSProps.indexSetName = indexProps.getIndexName();
+            kSProps.readLength = indexProps.getReadLength();
+
+        } else {
+            kSProps.indexFiles[indexInput] = 0;
+            kSProps.indexSetName = indexInput.stem();
+        }
+
+        kSProps.outputFileName = kSProps.kmerSetName + "_" + kSProps.indexSetName;
+        std::cout << "output file name " << kSProps.outputFileName << std::endl;
+        std::string logName = kSProps.outputFileName + ".log";
+
+        ft::LogClass::OpenLog(logName);
+
+        ft::LogClass::Log << "Running " << cmdline << std::endl;
+
+        ft::KSearch *kmerSearch = new ft::KSearch();
+        try {
+            kmerSearch->init(kSProps);
+        } catch (std::exception& e) {
+            std::cerr << "Error: " << e.what() << std::endl;
+            return 1;
+        }
+        free(kmerSearch);
+
+        ft::LogClass::CloseLog();
+
+
+
+     }
+
+
 
     return 0;
 }

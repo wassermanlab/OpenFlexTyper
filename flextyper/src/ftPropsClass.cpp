@@ -35,6 +35,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
                   bool ignoreOverCountedKmers,
                   bool countAsPairs,
                   bool crossover,
+                  bool uniqueReads,
                   uint maxKmersPerQuery,
                   uint maxTotalKmers,
                   bool printInputs,
@@ -160,6 +161,7 @@ void FTProp::initFromQSettings (FTProp::CmdLineArg& arg){
     bool           ignoreNonUniqueKmers    = settings.value("ignoreNonUniqueKmers").toBool();
     bool           ignoreOverCountedKmers  = settings.value("ignoreOverCountedKmers").toBool();
     bool           countAsPairs            = settings.value("countAsPairs").toBool();
+    bool           uniqueReads             = settings.value("uniqueReads").toBool();
     bool           crossover               = settings.value("crossover").toBool();
     uint           maxKmersPerQuery        = settings.value("maxKmersPerQuery").toInt();
     uint           maxTotalKmers           = settings.value("maxTotalKmers").toInt();
