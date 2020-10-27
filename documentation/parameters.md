@@ -4,10 +4,10 @@
 
 ## Sliding Search Parameters 
 
-\image html https://github.com/wassermanlab/OpenFlexTyper/blob/master/documentation/img/slidingsearch.png
+![Sliding Search](slidingsearch.png)
 
 ## Centered Search Parameters 
-\image html centerdsearch.png
+![Centered Search](centeredsearch.png)
 
 ## Non Unique Kmers
 If two query sequences contain an identical kmer, then that kmer is flagged as a ‘non unique kmer’. 
