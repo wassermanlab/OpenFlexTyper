@@ -4,16 +4,16 @@
 
 ## Sliding Search Parameters 
 
-| \image html slidingsearch.png "Parameters for Sliding Searches" width=800px |
+|\image html slidingsearch.png "Parameters for Sliding Searches" width=800px| 
 
 ## Centered Search Parameters 
 
-| \image html centeredsearch.png "Parameters for Centered Searches" width=800px |
+|\image html centeredsearch.png "Parameters for Centered Searches" width=800px| 
 
 ## Non Unique Kmers
 If two query sequences contain an identical kmer, then that kmer is flagged as a ‘non unique kmer’. 
 
-| \image html nonUniqueKmer.png width=800px |
+|\image html nonUniqueKmer.png width=800px| 
 
 ## Over Counted Kmers 
 If a kmer search returns too many positions, then that kmer is disregarded as uninformative and flagged as an “over counted kmer”. 
