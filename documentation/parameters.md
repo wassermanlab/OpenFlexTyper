@@ -38,7 +38,7 @@ Query 1 = [R1, R3, R5, R6]
 Query 2 = [R1, R4]
 
 <table>
-<caption id="multi_row">Complex table</caption>
+<caption id="multi_row">Expected Results</caption>
 <tr><th rowspan="2">                     <th colspan="3" >countAsPairs=True   <th colspan="3" >countAsPairs= False       
 <tr><th> Query <th> Read Hits <th> Count <th> Query <th> Read Hits <th> Count 
 <tr><td rowspan="2">uniqueReads = True<td>1<td>[R5, R6]<td>1<td>1<td>[R3,R5,R6]<td>3  
