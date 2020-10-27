@@ -326,3 +326,4 @@ SEARCHENGINE         = NO
 
 
 GENERATE_XML = YES
+IMAGE_PATH     = ./documentation/img/
