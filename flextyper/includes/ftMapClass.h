@@ -69,7 +69,7 @@ public:
     void processResults();
     void processIndexResults(const std::map<std::string, ft::KmerClass>& indexResults);
     void processQueryResults(const ft::QIdT& qIDT);
-    void addKmersToQueryResults(ft::QueryClass& query, std::set<std::string> kmers,  std::set<ft::ReadID>& readIds);
+    void addKmersToQueryResults(ft::QueryClass& query, std::set<std::string>& kmers,  std::set<ft::ReadID>& readIds);
     int calculateQueryCount(const std::set<ft::ReadID>& readIds);
     void removeMultiHits();
     void removeMultiHitsAsPairs();
