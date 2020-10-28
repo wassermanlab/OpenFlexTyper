@@ -32,7 +32,7 @@ const std::set<std::string> QueryClass::getFlagKmers(const ft::FlagType flag) co
         return {};
     }
 }
-const std::set<ft::ReadID> QueryClass::getReadIDs() const {return _reads;}
+const std::set<ft::ReadID>& QueryClass::getReadIDs() const {return _reads;}
 
 //================== SETTERS ===========================
 
