@@ -274,13 +274,13 @@ void FTMap::processQueryResults(const ft::QIdT& qIDT)
     // Add results from FWD Search
     std::set<std::string> fwdKmers = _qkMap.retrieveKmers(qIDT);
     std::set<ft::ReadID> readIds;
-    readIds = addKmersToQueryResults(query, fwdKmers,  readIds);
+    addKmersToQueryResults(query, fwdKmers,  readIds);
 
     //Add results from RC Search
 
     if (_ftProps.getRevCompSearchFlag()){
         std::set<std::string> rcKmers = _qkRCMap.retrieveKmers(qIDT);
-        readIds = addKmersToQueryResults(query, rcKmers, readIds);
+        addKmersToQueryResults(query, rcKmers, readIds);
     }
 
     int queryCount = calculateQueryCount(readIds);
@@ -289,7 +289,7 @@ void FTMap::processQueryResults(const ft::QIdT& qIDT)
 }
 
 //======================================================
-int FTMap::calculateQueryCount(std::set<ft::ReadID> readIDs)
+int FTMap::calculateQueryCount(const std::set<ft::ReadID>& readIDs)
 {
     int querycount = 0;
     if (_ftProps.getCountAsPairsFlag()){
@@ -306,7 +306,7 @@ int FTMap::calculateQueryCount(std::set<ft::ReadID> readIDs)
 
 
 //======================================================
-std::set<ft::ReadID> FTMap::addKmersToQueryResults(ft::QueryClass& query, std::set<std::string> kmers,  std::set<ft::ReadID> readIds )
+void FTMap::addKmersToQueryResults(ft::QueryClass& query, std::set<std::string> kmers,  std::set<ft::ReadID>& readIds )
 {
     for ( std::string kmerString : kmers)
     {
@@ -331,10 +331,9 @@ std::set<ft::ReadID> FTMap::addKmersToQueryResults(ft::QueryClass& query, std::s
             }
         }
     }
-    return readIds;
 }
 //======================================================
-void FTMap::addReadIDsToQuery(ft::QIdT qIDT, std::set<ft::ReadID> readIds)
+void FTMap::addReadIDsToQuery(ft::QIdT qIDT, std::set<ft::ReadID>& readIds)
 {
     ft::QueryClass query = _querySet.find(qIDT)->second;
     for (auto readID : readIds)
