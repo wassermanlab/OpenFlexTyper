@@ -6,7 +6,7 @@ build*
 *.o
 Makefile
 .DS_Store
-
+.RProj*
 *.autosave
 
 Example/
