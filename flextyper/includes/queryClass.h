@@ -48,7 +48,7 @@ public:
     std::map<ft::FlagType, std::set<std::string>> getQFlags() const;
     ft::QIdT getQIdT() const;
     const std::set<std::string> getFlagKmers(const ft::FlagType flag) const;
-    const std::set<ft::ReadID> getReadIDs() const;
+    const std::set<ft::ReadID>& getReadIDs() const;
     /// @}
 
     /// \name Setters
