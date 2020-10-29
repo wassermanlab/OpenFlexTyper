@@ -338,17 +338,19 @@ int main(int argc, char** argv)
         parser.addPositionalArgument("indexFile", QCoreApplication::translate("main","fm9 dataset"));
         parser.addOptions({
             {{"s", "indexSettings"},  QCoreApplication::translate("main", "the fm9 dataset is given by an Index Settings.ini file")},
-            {{"v", "verbose"},  QCoreApplication::translate("main", "prints debugging messages")},
-            {{"p", "countAsPairs"},  QCoreApplication::translate("main", "count reads as pairs")},
+            {{"o", "outputFile"},     QCoreApplication::translate("main", " output file name "),
+                                      QCoreApplication::translate("main", "outputFile")},
+            {{"v", "verbose"},        QCoreApplication::translate("main", "prints debugging messages")},
+            {{"p", "countAsPairs"},   QCoreApplication::translate("main", "count reads as pairs")},
             {{"r", "revCompSearch"},  QCoreApplication::translate("main", "search for rev comp of kmers")},
-            {{"m", "maxOcc"},   QCoreApplication::translate("main", "maxOcc"),
-                                QCoreApplication::translate("main", "value")},
-            {{"t", "maxThreads"},   QCoreApplication::translate("main", "maxThreads"),
-                                QCoreApplication::translate("main", "value")},
-            {{"l", "readLength"},   QCoreApplication::translate("main", "readLength"),
-                                QCoreApplication::translate("main", "value")},
-          {{"c", "columnNum"},   QCoreApplication::translate("main", "column Number of kmer (0 based)"),
-                              QCoreApplication::translate("main", "value")},
+            {{"m", "maxOcc"},         QCoreApplication::translate("main", "maxOcc"),
+                                      QCoreApplication::translate("main", "value")},
+            {{"t", "maxThreads"},     QCoreApplication::translate("main", "maxThreads"),
+                                      QCoreApplication::translate("main", "value")},
+            {{"l", "readLength"},     QCoreApplication::translate("main", "readLength"),
+                                      QCoreApplication::translate("main", "value")},
+            {{"c", "columnNum"},      QCoreApplication::translate("main", "column Number of kmer (0 based)"),
+                                      QCoreApplication::translate("main", "value")},
         });
 
         parser.process(aps);
@@ -398,7 +400,13 @@ int main(int argc, char** argv)
             kSProps.indexSetName = indexInput.stem();
         }
 
-        kSProps.outputFileName = kSProps.kmerSetName + "_" + kSProps.indexSetName;
+        if (parser.isSet("o")){
+            kSProps.outputFileName = parser.value("o").toStdString();
+        } else {
+            kSProps.outputFileName = kSProps.kmerSetName + "_" + kSProps.indexSetName;
+        }
+
+
         std::cout << "output file name " << kSProps.outputFileName << std::endl;
         std::string logName = kSProps.outputFileName + ".log";
 

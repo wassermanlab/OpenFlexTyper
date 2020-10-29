@@ -34,6 +34,7 @@ void KSearch::init(const ft::KSCmdLineArg& kSProps)
      if (_verbose){
 
              std::cout << "======== Settings " << "======== " << std::endl;
+             std::cout << "output File Name               : " << _outputFile << std::endl;
              std::cout  << "maxOccurences                 : " << _maxOcc << std::endl;
              std::cout  << "maxThreads                    : " << _maxThreads << std::endl;
              std::cout  << "readLength                    : " << _readLength <<  std::endl;
@@ -47,6 +48,7 @@ void KSearch::init(const ft::KSCmdLineArg& kSProps)
      }
      if (LogClass::Log.is_open()){
          LogClass::Log << "======== Settings " << "======== " << std::endl;
+         LogClass::Log << "output File Name              : " << _outputFile << std::endl;
          LogClass::Log << "maxOccurences                 : " << _maxOcc << std::endl;
          LogClass::Log << "maxThreads                    : " << _maxThreads << std::endl;
          LogClass::Log << "readLength                    : " << _readLength <<  std::endl;
