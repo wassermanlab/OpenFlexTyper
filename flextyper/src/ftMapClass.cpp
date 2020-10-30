@@ -245,6 +245,7 @@ void FTMap::processResults()
 {
     LogClass::Benchmark benchmark;
 
+    showResources();
     for (std::map<std::string, ft::KmerClass>& indexResult : _searchResults )
     {
        processIndexResults(indexResult);
