@@ -157,7 +157,7 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
     LogClass::Log << "(I) sequentialSearch: loaded " << indexPath.string() << std::endl;
 
 
-    LogClass::Log << "(I) Kmer map loaded, beginning search on " << kmerMap.size() << " kmers" << std::endl;
+    //LogClass::Log << "(I) Kmer map loaded, beginning search on " << kmerMap.size() << " kmers" << std::endl;
 
     for (auto &it:ftMap.getKmerSet())
     {
