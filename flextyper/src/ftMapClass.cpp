@@ -248,6 +248,7 @@ void FTMap::processResults()
     for (std::map<std::string, ft::KmerClass>& indexResult : _searchResults )
     {
        processIndexResults(indexResult);
+       indexResult.clear(); //free up memory
     }
 
     for (auto query : _querySet)
@@ -255,6 +256,7 @@ void FTMap::processResults()
         ft::QIdT qIDT = query.first;
         processQueryResults(qIDT);
     }
+    _kmerSet.clear(); //free up memory
 
     showResources();
     if (_ftProps.getUniqueReadsFlag()){
@@ -450,7 +452,7 @@ void FTMap::showResources() const {
     LogClass::Log << "==========================================" << std::endl;
 
     int kmer_count = 0, kmer_positions = 0, kmer_readIDs = 0;
-    for (auto it : _kmerSet) {
+    for (auto& it : _kmerSet) {
         kmer_count++;
         kmer_positions += it.second.getKPositions().size();
         kmer_readIDs += it.second.getReadIDs().size();
@@ -470,7 +472,7 @@ void FTMap::showResources() const {
 
     LogClass::Log << "=== FTMap._querySet ====" << std::endl; 
     LogClass::Log << "\tnum_entries\tentry_size\ttotal(kB)\ttype" << std::endl;
-    for (auto it : _querySet) {
+    for (auto& it : _querySet) {
         LogClass::Log << "\t"
                       << it.second.getReadIDs().size() << std::setw(12) 
                       << sizeof(ft::ReadID) << std::setw(12)
@@ -479,9 +481,9 @@ void FTMap::showResources() const {
                       << ft::QueryClass::queryTypeToString(it.second.getqType())  << std::endl;
     }
 
-    for (const std::map<std::string, ft::KmerClass>& indexResult : _searchResults) {
+    for (auto& indexResult : _searchResults) {
         int kmer_count = 0; kmer_positions = 0; kmer_readIDs = 0;
-        for (auto it2 : indexResult) {
+        for (auto& it2 : indexResult) {
             kmer_count++;
             kmer_positions += it2.second.getKPositions().size();
             kmer_readIDs += it2.second.getReadIDs().size();
