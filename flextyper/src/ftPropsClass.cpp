@@ -34,7 +34,8 @@ void FTProp::init(const fs::path &pathToQueryFile,
                   bool ignoreNonUniqueKmers,
                   bool ignoreOverCountedKmers,
                   bool countAsPairs,
-                  bool crossover,
+                  bool uniqueReads,
+                  bool crossover,                  
                   uint maxKmersPerQuery,
                   uint maxTotalKmers,
                   bool printInputs,
@@ -55,6 +56,7 @@ void FTProp::init(const fs::path &pathToQueryFile,
     _maxOccurences = maxOccurences;
     _maxThreads = numOfThreads;
     _countAsPairs = countAsPairs;
+    _uniqueReads = uniqueReads;
     _crossover = crossover;
     _maxKmersPerQuery = maxKmersPerQuery;
     _maxTotalKmers = maxTotalKmers;
@@ -160,6 +162,7 @@ void FTProp::initFromQSettings (FTProp::CmdLineArg& arg){
     bool           ignoreNonUniqueKmers    = settings.value("ignoreNonUniqueKmers").toBool();
     bool           ignoreOverCountedKmers  = settings.value("ignoreOverCountedKmers").toBool();
     bool           countAsPairs            = settings.value("countAsPairs").toBool();
+    bool           uniqueReads             = settings.value("uniqueReads").toBool();
     bool           crossover               = settings.value("crossover").toBool();
     uint           maxKmersPerQuery        = settings.value("maxKmersPerQuery").toInt();
     uint           maxTotalKmers           = settings.value("maxTotalKmers").toInt();
@@ -370,6 +373,7 @@ bool FTProp::getCountAsPairsFlag() const {return _countAsPairs;}
 bool FTProp::getRevCompSearchFlag() const {return _revCompSearch;}
 bool FTProp::getIndexRevCompFlag() const {return _indexRevComp;}
 bool FTProp::getMatchingReadsFlag() const{return _matchingReads;}
+bool FTProp::getUniqueReadsFlag() const {return _uniqueReads;}
 const std::bitset<8>& FTProp::getFlagsToOutput() const {return _flagsToOutput;}
 const std::bitset<8>& FTProp::getFlagsToNotCount() const {return _flagsToNotCount;}
 

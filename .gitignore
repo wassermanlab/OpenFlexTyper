@@ -6,7 +6,7 @@ build*
 *.o
 Makefile
 .DS_Store
-
+.Rproj.user/*
 *.autosave
 
 Example/
@@ -38,3 +38,7 @@ docs/_build/
 
 
 
+
+.RData
+
+.Rhistory
