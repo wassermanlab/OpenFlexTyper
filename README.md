@@ -1,7 +1,5 @@
 # FlexTyper
-
-[![CircleCI](https://circleci.com/gh/wassermanlab/OpenFlexTyper.svg?style=svg)](https://circleci.com/gh/wassermanlab/OpenFlexTyper) [![Documentation Status](https://readthedocs.org/projects/openflextyper/badge/?version=latest)](https://openflextyper.readthedocs.io/en/latest/?badge=latest)
-[![GitHub release](https://img.shields.io/github/release/wassermanlab/openflextyper/all?logo=GitHub)](https://github.com/wassermanlab/openflextyper/releases/latest)
+![Generate Documentation](https://github.com/wassermanlab/OpenFlexTyper/workflows/Generate%20Documentation/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
@@ -16,6 +14,9 @@ To learn more about FlexTyper, see our preprint on bioRxiv:
 [Demonstrating the utility of flexible sequence queries against indexed short reads with FlexTyper](https://www.biorxiv.org/content/10.1101/2020.03.02.973750v1)
 
 
+## Full Documentation
+
+For more information about FlexTyper, please refer to [GitHubPages](https://wassermanlab.github.io/OpenFlexTyper/)
 
 ## Quick start installation
 
@@ -49,11 +50,6 @@ To learn more, see the fmformatter directory [here](https://github.com/wasserman
 
 ## Contributers
 [Alice Kaye](https://github.com/tixii) | [Phillip Richmond](https://github.com/Phillip-a-richmond) | [Jacques Kounkou](https://github.com/kounkou) | [Tamar Av-Shalom](https://github.com/tamario)
-
-
-## Full Documentation
-
-For more information about FlexTyper, please refer to our online documentation on [readthedocs](https://flextyper.readthedocs.io/en/latest/)
 
 
 ## License

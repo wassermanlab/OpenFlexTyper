@@ -1,7 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2020, Wasserman lab
-////////////////////////////////////////////////////////////////////////
-
 #ifndef __TYPE_DEFS_H__
 #define __TYPE_DEFS_H__
 
@@ -20,35 +16,41 @@
 
 namespace ft {
 
+////////////////////////////////////////////////////////////////////////
+/// \class FTMap
+/// \brief A class that contains information for the FlexTyper Instance.
+////////////////////////////////////////////////////////////////////////
 class FTMap
 {
 public:
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief FTMapClass
-    ////////////////////////////////////////////////////////////////////////
+    /// Constructor
+    /// \param FTProp  FlexTyper Properties for this instance
     FTMap(const FTProp& _ftProps);
-
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief FTMapClass
-    ////////////////////////////////////////////////////////////////////////
+    /// Class Destructor
     virtual ~FTMap();
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief init
-    ////////////////////////////////////////////////////////////////////////
+    /// @name init
+    /// Functions to set up the FTMap
+    /// @{
+    /// \public
     void addInputQueries(const std::set<Query> &inputQueries);
     void genQKMap();
+    /// @}
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief getters
-    ////////////////////////////////////////////////////////////////////////
+
+    /// @name Getters
+    /// Constant functions to return properties of the query
+    /// @{
+    /// \public
     const std::vector<std::map<std::string, ft::KmerClass>>& getResults();
     const FTProp& getFTProps() const;
     const std::unordered_map<std::string, ft::KmerClass>& getKmerSet() const;
+    /// @}
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief Access functions for single kmer and queries
-    ////////////////////////////////////////////////////////////////////////
+    /// \name Access
+    /// Access functions for single kmer and queries
+    /// @{
+    /// \public
     bool checkForKmer(const std::string& testKmer) const;
     void addKmer(const std::string &kmer);
     const ft::KmerClass& getKmer(const std::string& kmer) const;
@@ -56,28 +58,32 @@ public:
     bool checkForQIDT(const ft::QIdT& testQueryObject) const;
     void addQuery(int queryID, ft::QueryType queryType, const std::string& queryString);
     const ft::QueryClass& getQuery(const ft::QIdT& qIDT) const;
+    /// @}
 
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief Functions to process Results
-    ////////////////////////////////////////////////////////////////////////
+    /// \name Results
+    /// Functions to process the results of a search
+    /// @{
     void addIndexResults(const std::map<std::string, ft::KmerClass> & indexResults);
     void addKmerResults(const ft::KmerClass& kmerResult);
     void processResults();
     void processIndexResults(const std::map<std::string, ft::KmerClass>& indexResults);
     void processQueryResults(const ft::QIdT& qIDT);
     std::set<ft::ReadID> addKmersToQueryResults(ft::QueryClass& query, std::set<std::string> kmers,  std::set<ft::ReadID> readIds);
-    int calculateQueryCount(std::set<ft::ReadID> readIds);
+    int calculateQueryCount(std::set<ft::ReadID> readIds);\
+    /// @}
 
 private:
-    ////////////////////////////////////////////////////////////////////////
-    /// \brief properties
-    ////////////////////////////////////////////////////////////////////////
+    /// @name Properties
+    /// @{
+    /// \private
     FTProp  _ftProps;
     std::unordered_map<std::string, ft::KmerClass> _kmerSet;
     std::map<ft::QIdT, ft::QueryClass> _querySet;
     QKMap _qkMap;
     QKMap _qkRCMap;
     std::vector<std::map<std::string, ft::KmerClass>> _searchResults;
+    /// @}
+
 
     void createKmer(const std::string& kmer);
     ft::KmerClass* findKmer(const std::string& kmer);

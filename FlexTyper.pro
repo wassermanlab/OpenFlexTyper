@@ -36,12 +36,12 @@ INCLUDEPATH += flextyper/includes                     \
                fmindex/interfaces                   \
 
 HEADERS    += flextyper/includes/utils.h              \
-    flextyper/includes/LogClass.h \
+              flextyper/includes/LogClass.h \
               flextyper/includes/ftMapClass.h \
               flextyper/includes/ftPropsClass.h \
               flextyper/includes/ftSearch.h \
               flextyper/includes/kmerClass.h \
-    flextyper/includes/qkMapClass.h \
+              flextyper/includes/qkMapClass.h \
               flextyper/includes/queryClass.h \
               flextyper/includes/writerbridge.h       \
               flextyper/includes/kmergenerator.h      \
@@ -75,6 +75,24 @@ SOURCES     +=                \
               fmindex/src/indexPropsClass.cpp
 
 DISTFILES += \
+    Doxyfile \
+    Example_Settings.ini \
+    LICENSE \
+    OpenFlexTyper_CondaEnv.yml \
+    README.md \
+    documentation/centeredsearch.png \
+    documentation/documentation.md \
+    documentation/indexexample.md \
+    documentation/installation.md \
+    documentation/nonUniqueKmer.png \
+    documentation/parameters.md \
+    documentation/search.md \
+    documentation/searchexample.md \
+    documentation/settingini.md \
+    documentation/slidingsearch.png \
+    documentation/snvsearchexample.md \
+    documentation/viralsearchexample.md \
+    examples/Example_Settings.ini \
     flextyper/test/testFiles/MixedVirus_100.fasta \
     flextyper/test/testFiles/MixedVirus_100_1.fq.gz \
     flextyper/test/testFiles/MixedVirus_100_2.fq.gz \
@@ -89,5 +107,7 @@ DISTFILES += \
     flextyper/test/testFiles/indexProps.ini \
     flextyper/test/testFiles/preprocess.sh \
     install.sh \
+    setup.py \
+    test.sh
 
 

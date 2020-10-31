@@ -1,7 +1,3 @@
-////////////////////////////////////////////////////////////////////////
-/// \copyright Copyright (c) 2020, Wasserman lab
-////////////////////////////////////////////////////////////////////////
-
 #include <QCommandLineParser>
 #include <QSettings>
 #include <iostream>
@@ -56,6 +52,7 @@ int main(int argc, char** argv)
 
     const QString command = args.isEmpty() ? QString() : args.first();
 
+    /// \section Search
     if (command == "search")
     {
         parser.clearPositionalArguments();
