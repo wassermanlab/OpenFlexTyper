@@ -144,7 +144,6 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
     const FTProp& ftProps = ftMap.getFTProps();
     uint maxOcc = ftProps.getMaxOcc();
     std::cout << "index " << indexPath << " with offset " << offset << std::endl;
-    const std::unordered_map<std::string, ft::KmerClass>& kmerMap = ftMap.getKmerSet();
 
     algo::IFmIndex* fmIndex = new algo::FmIndex(ftProps.isVerbose());
 
@@ -158,17 +157,15 @@ void Finder::sequentialSearch(ft::FTMap &ftMap,
     LogClass::Log << "(I) sequentialSearch: loaded " << indexPath.string() << std::endl;
 
 
-    std::unordered_map<std::string, ft::KmerClass>::const_iterator it = kmerMap.begin();
-    LogClass::Log << "(I) Kmer map loaded, beginning search on " << kmerMap.size() << " kmers" << std::endl;
+    //LogClass::Log << "(I) Kmer map loaded, beginning search on " << kmerMap.size() << " kmers" << std::endl;
 
-    while (it != kmerMap.end())
+    for (auto &it:ftMap.getKmerSet())
     {
-       std::string kmer = it->first;
+       const std::string& kmer = it.first;
        ft::KmerClass tmpResult = fmIndex->search(kmer, maxOcc);
        //FTProp::Log  << "(I) Kmer Search completed " << kmer << std::endl;
        addResultsFutures(indexResults,tmpResult, offset);
        //LogClass::Log  << "(I) Kmer results added  " << kmer << std::endl;
-       it++;
     }
 
     ftMap.addIndexResults(indexResults);

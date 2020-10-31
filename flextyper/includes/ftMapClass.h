@@ -75,6 +75,7 @@ public:
     void removeMultiHitsAsPairs();
     /// @}
 
+    void showResources() const;
 private:
     /// @name Properties
     /// @{

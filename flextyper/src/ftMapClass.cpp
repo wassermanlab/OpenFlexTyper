@@ -4,6 +4,7 @@
 
 #include <set>
 #include <iostream>
+#include <iomanip>
 #include <unordered_map>
 #include <algorithm>
 #include <queue>
@@ -244,9 +245,11 @@ void FTMap::processResults()
 {
     LogClass::Benchmark benchmark;
 
-    for (std::map<std::string, ft::KmerClass> indexResult : _searchResults )
+    showResources();
+    for (std::map<std::string, ft::KmerClass>& indexResult : _searchResults )
     {
        processIndexResults(indexResult);
+       indexResult.clear(); //free up memory
     }
 
     for (auto query : _querySet)
@@ -254,7 +257,9 @@ void FTMap::processResults()
         ft::QIdT qIDT = query.first;
         processQueryResults(qIDT);
     }
+    _kmerSet.clear(); //free up memory
 
+    showResources();
     if (_ftProps.getUniqueReadsFlag()){
         if (_ftProps.getCountAsPairsFlag())
         {
@@ -262,6 +267,10 @@ void FTMap::processResults()
         } else {
             removeMultiHits();
         }
+    }
+    for (auto query : _querySet)
+    {
+        std::cout << "count " << query.second.getCount() << " readIds " << query.second._reads.size() << std::endl;
     }
 
     benchmark.now("ProcessResults DONE ");
@@ -339,11 +348,6 @@ void FTMap::addReadIDsToQuery(ft::QIdT qIDT, std::set<ft::ReadID>& readIds)
     {
         query.addReadID(readID);
     }
-    if (query.getReadIDs().size() != _querySet.find(qIDT)->second.getReadIDs().size())
-        std::cout << "addReadIDsToQuery does not match" << std::endl;
-    else
-        std::cout << "addReadIDsToQuery matched" << std::endl;
-   // _querySet.find(qIDT)->second = query;
 }
 
 //======================================================
@@ -435,12 +439,70 @@ void FTMap::removeMultiHitsAsPairs()
 
 //======================================================
 #define INDEXEND }
+
 bool FTMap::operator()(const ft::QIdT& a, const ft::QIdT& b) const {
     if (a.first != b.first){
         return a.first < b.first;
     } else {
         return a.second < b.second;
     }
+}
+
+void FTMap::showResources() const {
+    LogClass::Log << "========== Show FTMap Resources ==========" << std::endl;
+    LogClass::Log << "==========================================" << std::endl;
+
+    int kmer_count = 0, kmer_positions = 0, kmer_readIDs = 0;
+    for (auto& it : _kmerSet) {
+        kmer_count++;
+        kmer_positions += it.second.getKPositions().size();
+        kmer_readIDs += it.second.getReadIDs().size();
+    }
+    LogClass::Log << "=== FTMap._kmer[total " << kmer_count << "] ====" << std::endl; 
+    LogClass::Log << "\tnum_entries\tentry_size\ttotal(kB)\ttype" << std::endl;
+    LogClass::Log << "\t"
+                  << kmer_positions << std::setw(12) 
+                  << sizeof(long long) << std::setw(12) 
+                  << (kmer_positions * sizeof(long long))/1000 << std::setw(12)
+                  << "all FTMap._kmerSet::_positions" << std::endl;
+    LogClass::Log << "\t"
+                  << kmer_readIDs << std::setw(12)
+                  << sizeof(ft::ReadID) << std::setw(12)
+                  << (kmer_readIDs * sizeof(ft::ReadID))/1000 << std::setw(12)
+                  << "all FTMap._kmerSet::_readIDs" << std::endl;
+
+    LogClass::Log << "=== FTMap._querySet ====" << std::endl; 
+    LogClass::Log << "\tnum_entries\tentry_size\ttotal(kB)\ttype" << std::endl;
+    for (auto& it : _querySet) {
+        LogClass::Log << "\t"
+                      << it.second.getReadIDs().size() << std::setw(12) 
+                      << sizeof(ft::ReadID) << std::setw(12)
+                      << (it.second.getReadIDs().size() * sizeof(ft::ReadID))/1000 << std::setw(12)
+                      << "FTMap._querySet::_readIDs for type " 
+                      << ft::QueryClass::queryTypeToString(it.second.getqType())  << std::endl;
+    }
+
+    for (auto& indexResult : _searchResults) {
+        int kmer_count = 0; kmer_positions = 0; kmer_readIDs = 0;
+        for (auto& it2 : indexResult) {
+            kmer_count++;
+            kmer_positions += it2.second.getKPositions().size();
+            kmer_readIDs += it2.second.getReadIDs().size();
+        }
+        LogClass::Log << "=== FTMap._searchResults[][total " << kmer_count << "] ====" << std::endl; 
+        LogClass::Log << "\tnum_entries\tentry_size\ttotal(kB)\ttype" << std::endl;
+        LogClass::Log << "\t"
+                  << kmer_positions << std::setw(12) 
+                  << sizeof(long long) << std::setw(12) 
+                  << (kmer_positions * sizeof(long long))/1000 << std::setw(12)
+                  << "all FTMap._kmer::_positions" << std::endl;
+        LogClass::Log << "\t"
+                  << kmer_readIDs << std::setw(12)
+                  << sizeof(ft::ReadID) << std::setw(12)
+                  << (kmer_readIDs * sizeof(ft::ReadID))/1000 << std::setw(12)
+                  << "all FTMap._kmer::_readIDs" << std::endl;
+    }
+
 }
 
 //======================================================
