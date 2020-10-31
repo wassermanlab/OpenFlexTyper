@@ -289,7 +289,7 @@ void IndexProps::loadFromIni(const fs::path inifile){
    std::string _R1 = isettings.value("R1").toString().toStdString();
    std::string _R2 = isettings.value("R2").toString().toStdString();
 
-
+    u_int _readLength = isettings.value("readLength").toUInt();
     u_int _numOfReads = isettings.value("numOfReads").toUInt();
     u_int _numOfIndexes = isettings.value("numOfIndexes").toUInt();
 
