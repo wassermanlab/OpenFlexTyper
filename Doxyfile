@@ -134,14 +134,14 @@ VERBATIM_HEADERS     = YES
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT                = ./flextyper/ ./fmindex/ ./documentation/
+INPUT                = ./flextyper/ ./fmindex/ ./documentation/ ./documentation/img/
 
 # If the value of the INPUT tag contains directories, you can use the 
 # FILE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 
 # and *.h) to filter out the source-files in the directories. If left 
 # blank all files are included.
 
-FILE_PATTERNS        = *.h *.cpp *.cc *.ini *.md
+FILE_PATTERNS        = *.h *.cpp *.cc *.ini *.md *.png
 
 # The RECURSIVE tag can be used to turn specify whether or not subdirectories
 # should be searched for input files as well. Possible values are YES and NO.
@@ -326,3 +326,4 @@ SEARCHENGINE         = NO
 
 
 GENERATE_XML = YES
+IMAGE_PATH     = ./documentation/img/

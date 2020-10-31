@@ -80,9 +80,18 @@ DISTFILES += \
     LICENSE \
     OpenFlexTyper_CondaEnv.yml \
     README.md \
+    documentation/centeredsearch.png \
     documentation/documentation.md \
+    documentation/indexexample.md \
     documentation/installation.md \
+    documentation/nonUniqueKmer.png \
+    documentation/parameters.md \
+    documentation/search.md \
     documentation/searchexample.md \
+    documentation/settingini.md \
+    documentation/slidingsearch.png \
+    documentation/snvsearchexample.md \
+    documentation/viralsearchexample.md \
     examples/Example_Settings.ini \
     flextyper/test/testFiles/MixedVirus_100.fasta \
     flextyper/test/testFiles/MixedVirus_100_1.fq.gz \
