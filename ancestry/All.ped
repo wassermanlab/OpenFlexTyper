@@ -1,0 +1,10 @@
+#Family_ID	Individual_ID	Paternal_ID	Maternal_ID	Sex	Phenotype	ethnicity
+African	AfricanFatherAncestrySites	-9	-9	1	1	AFR
+African	AfricanMotherAncestrySites	-9	-9	2	1	AFR
+African	AfricanKidAncestrySites	AfricanFatherAncestrySites	AfricanMotherAncestrySites	1	1	AFR
+Asian	AsianFatherAncestrySites	-9	-9	1	1	AFR
+Asian	AsianMotherAncestrySites	-9	-9	2	1	AFR
+Asian	AsianKidAncestrySites	AsianFatherAncestrySites	AsianMotherAncestrySites	1	1	AFR
+European	EuropeanFatherAncestrySites	-9	-9	1	1	AFR
+European	EuropeanMotherAncestrySites	-9	-9	2	1	AFR
+European	EuropeanKidAncestrySites	EuropeanFatherAncestrySites	EuropeanMotherAncestrySites	1	1	AFR
