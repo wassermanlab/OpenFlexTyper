@@ -67,6 +67,8 @@ public:
 
     int indexCount();
 
+    //sdo -- show number of hits
+    int hits() {return pos_hits;}
 private:
 
     FmIndex(const FmIndex& other);
@@ -83,7 +85,13 @@ private:
     ///        https://github.com/simongog/sdsl-lite
     ////////////////////////////////////////////////////////////////////////
     csa_wt<wt_huff<rrr_vector<256>>, 512, 1024> _index;
-    long long *_indexPosition;
+
+#define ENABLE_FAST_POSITION  1
+#if ENABLE_FAST_POSITION
+    std::map<size_t, std::vector<size_t>>  position_block;
+    size_t getPosition(size_t i);
+#endif
+    int pos_hits = 0;
 
     ////////////////////////////////////////////////////////////////////////
     /// \brief mutex

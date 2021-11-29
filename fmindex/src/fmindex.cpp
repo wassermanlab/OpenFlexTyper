@@ -16,6 +16,58 @@ FmIndex::FmIndex(bool verbose)
     : _verbose(verbose)
 {}
 
+#if ENABLE_FAST_POSITION
+// _index[] is mapped to csa_wt.hpp operator[]
+// To speed up, block of positions are pre-filled.
+// FmIndex::hits() will show how effective is the pre-fill.
+size_t FmIndex::getPosition(size_t i)
+{
+    for (auto const& it: position_block) {
+        if (i < it.first)
+            break;
+        else {
+            size_t _i = i - it.first;
+            if (_i < it.second.size()) {
+                pos_hits++;
+                return it.second[_i];  //found position
+            }
+        }
+    }
+
+    size_t _i = i;
+    size_t off = 0;
+    while (!_index.sa_sample.is_sampled(i)) {
+        i = _index.lf[i];
+        ++off;
+    }
+    if (off > 4000)  //cap any crazy number
+        off = 4000;
+
+    auto pair = std::make_pair(_i, std::vector<size_t>()); //new block of positions @ _i
+    pair.second.reserve(off);
+
+    //now pre-fill the block of positions
+    i = _i;
+    do {
+        size_t result = _index.sa_sample[i];
+        if (result + off < _index.size()) {
+            pair.second.push_back(result + off);
+        } else {
+            pair.second.push_back(result + off - _index.size());
+        }
+        i = _index.lf[i];
+    } while (off-- > 0); //skip loop if 'off' is a large number
+
+    if (position_block.size() > 200) {
+        position_block.clear();  //storing too many, flush everything
+    }
+
+    position_block.insert(pair);
+
+    return pair.second[0];
+}
+#endif
+
 //======================================================================
 ft::KmerClass FmIndex::search(const std::string& kmer,
                               u_int maxOcc)
@@ -39,12 +91,8 @@ ft::KmerClass FmIndex::search(const std::string& kmer,
         //occ_end is not always correct
         occ_end = occ_begin + occs;
         for (size_t i=occ_begin; i < occ_end; ++i) {
-#if 0
-            if (_indexPosition[i] == 0) {
-                //accessing _index[] will compute for position
-                _indexPosition[i] = _index[i];
-            }
-            kmerResult.addKPosition(_indexPosition[i]);
+#if ENABLE_FAST_POSITION
+            kmerResult.addKPosition(getPosition(i));
 #else
             kmerResult.addKPosition(_index[i]);
 #endif
@@ -82,9 +130,6 @@ std::pair<fs::path, fs::path> FmIndex::createFMIndex(const algo::IndexProps& _pr
     }
 
     if (!sdsl::load_from_file(_index, outputIndex)) {
-        //make storage for _indexPosition
-        //_indexPosition = new long long(_index.size());
-        //std::fill(_indexPosition, _indexPosition+_index.size(), 0);
 
         std::ifstream in(preprocessedFasta);
         if (!in) {
@@ -121,11 +166,6 @@ void FmIndex::loadIndexFromFile(const fs::path& indexname)
     if (!sdsl::load_from_file(_index, fs::absolute(indexname).string())) {
         std::runtime_error("Error loading the index, please provide the index file " + indexname.string());
     }
-    //make storage for _indexPosition
-    //_indexPosition = new long long(_index.size());
-    //std::fill(_indexPosition, _indexPosition+_index.size(), 0);
-
-    std::cout << "Index loaded " << _index.size() << std::endl;
 }
 //======================================================================
 void FmIndex::parallelFmIndex(algo::IndexProps& _props)
@@ -169,6 +209,5 @@ int FmIndex::indexCount()
 //======================================================================
 FmIndex::~FmIndex()
 {
-    //free(_indexPosition);
 }
 }
